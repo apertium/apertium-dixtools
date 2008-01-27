@@ -90,8 +90,7 @@ public class ConstantMap extends HashMap<String, String> {
     /**
          * 
          * @param value
-         * @return
-         */
+         * @return Undefined         */
     public final String getKey(final String value) {
 	final Set keySet = keySet();
 	final Iterator it = keySet.iterator();

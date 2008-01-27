@@ -45,8 +45,7 @@ public class CrossModelReader extends XMLReader {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public CrossModel readCrossModel() {
 	analize();
 	final CrossModel crossModel = new CrossModel();
@@ -67,10 +66,10 @@ public class CrossModelReader extends XMLReader {
     }
 
     /**
-         * 
-         * @param element
-         * @return
-         */
+     * 
+     * @param e
+     * @return Undefined
+     */
     public final CrossAction readCrossAction(final Element e) {
 	final CrossAction crossAction = new CrossAction();
 	final String id = getAttributeValue(e, "id");
@@ -100,8 +99,7 @@ public class CrossModelReader extends XMLReader {
     /**
          * 
          * @param e
-         * @return
-         */
+         * @return Undefined         */
     public final Pattern readPattern(final Element e) {
 	int i = 0;
 	final Pattern pattern = new Pattern();
@@ -125,8 +123,7 @@ public class CrossModelReader extends XMLReader {
     /**
          * 
          * @param e
-         * @return
-         */
+         * @return Undefined         */
     public final ConstantMap readConstants(final Element e) {
 	final ConstantMap constants = new ConstantMap();
 	for (final Element childElement : readChildren(e)) {
@@ -142,8 +139,7 @@ public class CrossModelReader extends XMLReader {
     /**
          * 
          * @param e
-         * @return
-         */
+         * @return Undefined         */
     public final Constant readConstant(final Element e) {
 	final Constant constant = new Constant();
 	final String n = getAttributeValue(e, "n");
@@ -167,8 +163,7 @@ public class CrossModelReader extends XMLReader {
     /**
          * 
          * @param e
-         * @return
-         */
+         * @return Undefined         */
     public final ActionSet readActionSet(final Element e) {
 	final ActionSet actionSet = new ActionSet();
 	for (final Element childElement : readChildren(e)) {
@@ -184,8 +179,7 @@ public class CrossModelReader extends XMLReader {
     /**
          * 
          * @param e
-         * @return
-         */
+         * @return Undefined         */
     public final Action readAction(final Element e) {
 	final Action action = new Action();
 	for (final Element childElement : readChildren(e)) {

@@ -64,8 +64,7 @@ public class ActionList extends HashMap<String, Action> {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public final Action getBestAction() {
 	Action bestAction = null;
 	ArrayList<Action> actionList = new ArrayList<Action>();

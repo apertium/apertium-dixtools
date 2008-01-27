@@ -66,8 +66,7 @@ public class CrossModel {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public CrossActionList getCrossActions() {
 	return crossActions;
     }
@@ -75,8 +74,7 @@ public class CrossModel {
     /**
          * 
          * @param id
-         * @return
-         */
+         * @return Undefined         */
     public final CrossAction getCrossAction(final String id) {
 	for (final CrossAction ca : getCrossActions()) {
 	    if (ca.getId().equals(id)) {

@@ -68,8 +68,7 @@ public class ActionSet extends ArrayList<Action> {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public final int getNumberOfConstants() {
 	/*
          * int n = 0; for (Action action : this) { n +=
@@ -80,8 +79,7 @@ public class ActionSet extends ArrayList<Action> {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public final String getName() {
 	return name;
     }
@@ -135,16 +133,14 @@ public class ActionSet extends ArrayList<Action> {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public final int getPatternLength() {
 	return patternLength;
     }
 
     /**
-         * 
-         * @return
-         */
+     * 
+     */
     public final void calculatePatternLength() {
 	// 3 because of 3 <b> tags
 	// 2 because of 2 restrictions
@@ -153,8 +149,7 @@ public class ActionSet extends ArrayList<Action> {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     private final Integer getNumberOfTails() {
 	int nTails = 0;
 	CrossAction cA = getCrossAction();
@@ -183,8 +178,7 @@ public class ActionSet extends ArrayList<Action> {
     /**
          * 
          * @param list
-         * @return
-         */
+         * @return Undefined         */
     private final boolean containsTail(final SElementList list) {
 	for (SElement s : list) {
 	    if (s.getValue().equals("0")) {
@@ -196,8 +190,7 @@ public class ActionSet extends ArrayList<Action> {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public final int getNumberOfRestrictions() {
 	CrossAction cA = getCrossAction();
 	int nR = 0;

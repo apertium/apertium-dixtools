@@ -96,32 +96,28 @@ public class DicSet {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public DictionaryElement getMon1() {
 	return mon1;
     }
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public DictionaryElement getMon2() {
 	return mon2;
     }
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public DictionaryElement getBil1() {
 	return bil1;
     }
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public DictionaryElement getBil2() {
 	return bil2;
     }

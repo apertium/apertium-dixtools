@@ -69,8 +69,7 @@ public class ActionSetList extends HashMap<String, ActionSet> {
 
     /**
      * 
-     * @return
-     */
+     * @return Undefined     */
     public final ActionSet getBestActionSet() {
         ActionSet defaultActionSet = null;
         ArrayList<ActionSet> actionSetList = new ArrayList<ActionSet>();
@@ -110,8 +109,7 @@ public class ActionSetList extends HashMap<String, ActionSet> {
     /**
      * 
      * @param actionSetList
-     * @return
-     */
+     * @return Undefined     */
     private final ArrayList<ActionSet> getLongestPatterns(ArrayList<ActionSet> actionSetList) {
         int maxLength = 0;
         ArrayList<ActionSet> longestPatterns = new ArrayList<ActionSet>();
@@ -147,8 +145,7 @@ public class ActionSetList extends HashMap<String, ActionSet> {
     
     /**
      * 
-     * @return
-     */
+     * @return Undefined     */
     private final boolean isDefinedBestAction() {
         return this.bestActionSet != null;
     }

@@ -42,8 +42,7 @@ public class DicTools {
     /**
          * 
          * @param value
-         * @return
-         */
+         * @return Undefined         */
     public static String clearTags(String value) {
 	if (value != null) {
 	    value = value.replaceAll("<g>", "");
@@ -58,8 +57,7 @@ public class DicTools {
     /**
          * 
          * @param entries
-         * @return
-         */
+         * @return Undefined         */
     public static final EElementMap buildHash(final ArrayList<EElement> entries) {
 	final EElementMap entriesMap = new EElementMap();
 	for (final EElement e : entries) {
@@ -82,8 +80,7 @@ public class DicTools {
          * 
          * @param entries
          * @param side
-         * @return
-         */
+         * @return Undefined         */
     public static final EElementMap buildHash(
 	    final ArrayList<EElement> entries, final String side) {
 	final EElementMap entriesMap = new EElementMap();
@@ -105,11 +102,10 @@ public class DicTools {
     }
 
     /**
-         * 
-         * @param entries
-         * @param restriction
-         * @return
-         */
+     * 
+     * @param entries
+     * @return Undefined
+     */
     public static final EElementMap buildHashMon(
 	    final ArrayList<EElement> entries) {
 	final EElementMap entriesMap = new EElementMap();
@@ -136,8 +132,7 @@ public class DicTools {
     /**
          * 
          * @param name
-         * @return
-         */
+         * @return Undefined         */
     public static String reverseDicName(final String name) {
 	final String[] st = DicTools.getSourceAndTarget(name);
 	final String newFileName = st[2] + "apertium-" + st[1] + "-" + st[0]
@@ -148,8 +143,7 @@ public class DicTools {
     /**
          * 
          * @param name
-         * @return
-         */
+         * @return Undefined         */
     public static String[] getSourceAndTarget(final String name) {
 	final String[] st = new String[3];
 	final String langCode = "[a-z][a-z]+";
@@ -185,11 +179,10 @@ public class DicTools {
     }
 
     /**
-         * 
-         * @param str
-         * @param ext
-         * @return
-         */
+     * 
+     * @param str
+     * @return Undefined
+     */
     public static final String removeExtension(final String str) {
 	String head = str.replaceAll("\\.dix", "");
 	head = head.replaceAll("\\.metadix", "");
@@ -264,8 +257,7 @@ public class DicTools {
          * @param bilAB
          * @param monA
          * @param monC
-         * @return
-         */
+         * @return Undefined         */
     public static final DicSet makeConsistentBilAndMonols(
 	    final DictionaryElement bilAB, final DictionaryElement monA,
 	    final DictionaryElement monC) {
@@ -286,8 +278,7 @@ public class DicTools {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public static HashMap<String, String> getSdefDescriptions() {
 	final HashMap<String, String> d = new HashMap<String, String>();
 
@@ -363,8 +354,7 @@ public class DicTools {
     /**
          * 
          * @param sMon
-         * @return
-         */
+         * @return Undefined         */
     public static DictionaryElement readMonolingual(final String sMon) {
 	DictionaryReader dicReader = new DictionaryReader(sMon);
 	final DictionaryElement mon = dicReader.readDic();
@@ -377,8 +367,7 @@ public class DicTools {
          * 
          * @param sBil
          * @param reverse
-         * @return
-         */
+         * @return Undefined         */
     public static DictionaryElement readBilingual(final String sBil,
 	    final boolean reverse) {
 	DictionaryReader dicReaderBil = new DictionaryReader(sBil);

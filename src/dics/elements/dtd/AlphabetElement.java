@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dics.elements.dtd;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 /**
  * 
@@ -31,65 +31,73 @@ import java.io.IOException;
 public class AlphabetElement extends Element {
 
     /**
-         * 
-         */
+     * 
+     */
     private String alphabet;
 
     /**
-         * 
-         * 
-         */
+     * 
+     * 
+     */
     public AlphabetElement() {
 
     }
 
     /**
-         * 
-         * @param value
-         */
+     * 
+     * @param value
+     */
     public AlphabetElement(final String value) {
-	alphabet = value;
+        alphabet = value;
     }
 
     /**
-         * 
-         * @param value
-         */
+     * 
+     * @param value
+     */
     public final void setAlphabet(final String value) {
-	alphabet = value;
+        alphabet = value;
     }
 
     /**
-         * 
-         * @return
-         */
+     * 
+     * @return Undefined         */
     public final String getAlphabet() {
-	return alphabet;
+        return alphabet;
     }
 
     /**
-         * 
-         * @return
-         */
+     * 
+     * @return Undefined         */
     public final boolean isEmpty() {
-	if (getAlphabet() == null) {
-	    return true;
-	} else {
-	    return false;
-	}
+        if (getAlphabet() == null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
-         * 
-         * @param dos
-         * @throws IOException
-         */
-    @Override
-    public final void printXML(final DataOutputStream dos) throws IOException {
-	if (isEmpty()) {
-	    setAlphabet("");
-	}
-	dos.writeBytes(tab(1) + "<alphabet>" + getAlphabet() + "</alphabet>\n");
+     * 
+     * @param dos
+     * @throws IOException
+     */
+    public final void printXML_previous(final DataOutputStream dos) throws IOException {
+        if (isEmpty()) {
+            setAlphabet("");
+        }
+        dos.writeBytes(tab(1) + "<alphabet>" + getAlphabet() + "</alphabet>\n");
     }
 
+    /**
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
+    public final void printXML(final OutputStreamWriter dos) throws IOException {
+        if (isEmpty()) {
+            setAlphabet("");
+        }
+        dos.write(tab(1) + "<alphabet>" + getAlphabet() + "</alphabet>\n");
+    }
 }

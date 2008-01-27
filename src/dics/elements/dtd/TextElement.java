@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dics.elements.dtd;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 /**
  * @author Enrique Benimeli Bofarull
@@ -30,44 +30,56 @@ import java.io.IOException;
 public class TextElement extends Element {
 
     /**
-         * 
-         */
+     * 
+     */
     private String value;
 
     /**
-         * 
-         * @param str
-         */
+     * 
+     * @param str
+     */
     public TextElement(final String str) {
-	setTagName("");
-	value = str;
-    }
-
-    @Override
-    public final void printXML(final DataOutputStream dos) throws IOException {
-	dos.writeBytes(value);
+        setTagName("");
+        value = str;
     }
 
     /**
-         * 
-         * @return
-         */
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
+    public final void printXML_previous(final DataOutputStream dos) throws IOException {
+        dos.writeBytes(value);
+    }
+
+    /**
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
+    public final void printXML(final OutputStreamWriter dos) throws IOException {
+        dos.write(value);
+    }
+
+    /**
+     * 
+     * @return Undefined         */
     @Override
     public final String getValue() {
-	return value;
+        return value;
     }
 
     @Override
     public final void setValue(final String v) {
-	value = v;
+        value = v;
     }
 
     /**
-         * 
-         */
+     * 
+     */
     public final String toString() {
-	String str = "";
-	str += getValue();
-	return str;
+        String str = "";
+        str += getValue();
+        return str;
     }
 }

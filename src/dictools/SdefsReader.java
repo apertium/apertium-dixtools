@@ -23,8 +23,7 @@ public class SdefsReader extends XMLReader {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public SdefsElement readSdefs() {
 	analize();
 	Element root = getDocument().getDocumentElement();
@@ -44,8 +43,7 @@ public class SdefsReader extends XMLReader {
     /**
          * 
          * @param e
-         * @return
-         */
+         * @return Undefined         */
     public SdefsElement readSdefs(final Element e) {
 	final SdefsElement sdefsElement = new SdefsElement();
 
@@ -64,8 +62,7 @@ public class SdefsReader extends XMLReader {
     /**
          * 
          * @param e
-         * @return
-         */
+         * @return Undefined         */
     public SdefElement readSdef(final Element e) {
 	final String n = getAttributeValue(e, "n");
 	final String c = getAttributeValue(e, "c");

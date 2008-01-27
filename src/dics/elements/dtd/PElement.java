@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dics.elements.dtd;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 /**
  * 
@@ -31,115 +31,145 @@ import java.io.IOException;
 public class PElement extends Element {
 
     /**
-         * 
-         */
+     * 
+     */
     private LElement l;
-
     /**
-         * 
-         */
+     * 
+     */
     private RElement r;
 
     /**
-         * 
-         * 
-         */
+     * 
+     * 
+     */
     public PElement() {
-	setTagName("p");
+        setTagName("p");
     }
 
     /**
-         * 
-         * @param pE
-         */
+     * 
+     * @param pE
+     */
     public PElement(final PElement pE) {
-	setTagName("p");
-	// l = new LElement(pE.getL());
-	l = (LElement) pE.getL().clone();
-	// r = new RElement(pE.getR());
-	r = (RElement) pE.getR().clone();
+        setTagName("p");
+        // l = new LElement(pE.getL());
+        l = (LElement) pE.getL().clone();
+        // r = new RElement(pE.getR());
+        r = (RElement) pE.getR().clone();
     }
 
     /**
-         * 
-         * @param l
-         */
+     * 
+     * @param l
+     */
     public final void setLElement(final LElement l) {
-	this.l = l;
+        this.l = l;
     }
 
     /**
-         * 
-         * @param r
-         */
+     * 
+     * @param r
+     */
     public final void setRElement(final RElement r) {
-	this.r = r;
+        this.r = r;
     }
 
     /**
-         * 
-         * @return
-         */
+     * 
+     * @return Undefined         */
     public final LElement getL() {
-	return l;
+        return l;
     }
 
     /**
-         * 
-         * @return
-         */
+     * 
+     * @return Undefined         */
     public final RElement getR() {
-	return r;
+        return r;
     }
 
     /**
-         * 
-         * @param value
-         * @param side
-         */
+     * 
+     * @param value
+     * @param side
+     */
     public final void setComments(final String value, final String side) {
-	if (side.equals("L")) {
-	    l.setComments(value);
-	}
-	if (side.equals("R")) {
-	    r.setComments(value);
-	}
+        if (side.equals("L")) {
+            l.setComments(value);
+        }
+        if (side.equals("R")) {
+            r.setComments(value);
+        }
     }
 
     /**
-         * 
-         */
-    @Override
-    public final void printXML(final DataOutputStream dos) throws IOException {
-	dos.writeBytes(tab(3) + "<" + getTagName() + ">\n");
-        if (l!= null)
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
+    public final void printXML_previous(final DataOutputStream dos) throws IOException {
+        dos.writeBytes(tab(3) + "<" + getTagName() + ">\n");
+        if (l != null) {
+            l.printXML_previous(dos);
+        }
+        if (r != null) {
+            r.printXML_previous(dos);
+        }
+        dos.writeBytes(tab(3) + "</" + getTagName() + ">\n");
+    }
+
+    /**
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
+    public final void printXML(final OutputStreamWriter dos) throws IOException {
+        dos.write(tab(3) + "<" + getTagName() + ">\n");
+        if (l != null) {
             l.printXML(dos);
-        if( r!= null)
+        }
+        if (r != null) {
             r.printXML(dos);
-	dos.writeBytes(tab(3) + "</" + getTagName() + ">\n");
+        }
+        dos.write(tab(3) + "</" + getTagName() + ">\n");
     }
 
     /**
-         * 
-         */
-    public final void printXML1Line(final DataOutputStream dos)
-	    throws IOException {
-	dos.writeBytes("<" + getTagName() + ">");
-	l.printXML1Line(dos);
-	r.printXML1Line(dos);
-	dos.writeBytes("</" + getTagName() + ">");
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
+    public final void printXML1Line_previous(final DataOutputStream dos)
+            throws IOException {
+        dos.writeBytes("<" + getTagName() + ">");
+        l.printXML1Line_previous(dos);
+        r.printXML1Line_previous(dos);
+        dos.writeBytes("</" + getTagName() + ">");
     }
 
     /**
-         * 
-         */
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
+    public final void printXML1Line(final OutputStreamWriter dos)
+            throws IOException {
+        dos.write("<" + getTagName() + ">");
+        l.printXML1Line(dos);
+        r.printXML1Line(dos);
+        dos.write("</" + getTagName() + ">");
+    }
+
+    /**
+     * 
+     */
     public final String toString() {
-	String str = "";
+        String str = "";
 
-	str += getL().toString();
-	str += getR().toString();
+        str += getL().toString();
+        str += getR().toString();
 
-	return str;
+        return str;
     }
-
 }

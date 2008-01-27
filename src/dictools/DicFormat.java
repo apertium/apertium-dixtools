@@ -88,8 +88,7 @@ public class DicFormat {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public final DictionaryElement format() {
 	final EHashMap eMap = new EHashMap();
 	for (SectionElement section : dicFormatted.getSections()) {

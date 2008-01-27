@@ -169,8 +169,7 @@ public class DictionaryReader extends XMLReader {
     /**
          * 
          * @param e
-         * @return
-         */
+         * @return Undefined         */
     public AlphabetElement readAlphabet(final Element e) {
 	String alphabet = "";
 	if (e.hasChildNodes()) {
@@ -260,8 +259,7 @@ public class DictionaryReader extends XMLReader {
     /**
          * 
          * @param e
-         * @return
-         */
+         * @return Undefined         */
     public SectionElement readSection(final Element e) {
 	final String id = getAttributeValue(e, "id");
 	final String type = getAttributeValue(e, "type");
@@ -301,8 +299,7 @@ public class DictionaryReader extends XMLReader {
     /**
          * 
          * @param e
-         * @return
-         */
+         * @return Undefined         */
     @Override
     public IElement readIElement(final Element e) {
 	final IElement iElement = new IElement();
@@ -313,8 +310,7 @@ public class DictionaryReader extends XMLReader {
     /**
          * 
          * @param e
-         * @return
-         */
+         * @return Undefined         */
     @Override
     public LElement readLElement(final Element e) {
 	final LElement lElement = new LElement();
@@ -325,8 +321,7 @@ public class DictionaryReader extends XMLReader {
     /**
          * 
          * @param e
-         * @return
-         */
+         * @return Undefined         */
     @Override
     public RElement readRElement(final Element e) {
 	final RElement rElement = new RElement();
@@ -337,8 +332,7 @@ public class DictionaryReader extends XMLReader {
     /**
          * 
          * @param e
-         * @return
-         */
+         * @return Undefined         */
     @Override
     public GElement readGElement(final Element e) {
 	final GElement gElement = new GElement();
@@ -349,8 +343,7 @@ public class DictionaryReader extends XMLReader {
     /**
          * 
          * @param e
-         * @return
-         */
+         * @return Undefined         */
     @Override
     public PElement readPElement(final Element e) {
 	final PElement pElement = new PElement();
@@ -381,8 +374,7 @@ public class DictionaryReader extends XMLReader {
     /**
          * 
          * @param e
-         * @return
-         */
+         * @return Undefined         */
     @Override
     public ParElement readParElement(final Element e) {
 	final String n = getAttributeValue(e, "n");
@@ -393,8 +385,7 @@ public class DictionaryReader extends XMLReader {
     /**
          * 
          * @param e
-         * @return
-         */
+         * @return Undefined         */
     @Override
     public ReElement readReElement(final Element e) {
 	String value = "";

@@ -268,7 +268,7 @@ public class DicConsistent {
 
     /**
          * 
-         * @return
+         * @return Undefined
          */
     public final EElementMap getDifferentA() {
 	return differentA;
@@ -276,14 +276,13 @@ public class DicConsistent {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public final EElementMap getDifferentC() {
 	return differentC;
     }
 
     /**
-         * @return the bil1
+         * @return Undefined Undefined the bil1
          */
     public final DictionaryElement getBil1() {
 	return bil1;
@@ -298,7 +297,7 @@ public class DicConsistent {
     }
 
     /**
-         * @return the bil2
+         * @return Undefined Undefined the bil2
          */
     public final DictionaryElement getBil2() {
 	return bil2;
@@ -374,7 +373,7 @@ public class DicConsistent {
     /**
          * 
          * @param removeNotCommon
-         * @return
+         * @return Undefined
          */
     private final DicConsistent actionConsistent(String removeNotCommon) {
 	final DicConsistent dicConsistent = new DicConsistent(getDicSet());

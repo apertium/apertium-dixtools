@@ -17,13 +17,13 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dics.elements.dtd;
 
 import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 /**
@@ -34,96 +34,145 @@ import java.util.ArrayList;
 public class PardefsElement extends Element {
 
     /**
-         * 
-         */
+     * 
+     */
     private ArrayList<PardefElement> pardefElements;
 
     /**
-         * 
-         * 
-         */
+     * 
+     * 
+     */
     public PardefsElement() {
-	pardefElements = new ArrayList<PardefElement>();
+        pardefElements = new ArrayList<PardefElement>();
     }
 
     /**
-         * 
-         * @param value
-         */
+     * 
+     * @param value
+     */
     public final void addPardefElement(final PardefElement value) {
-	pardefElements.add(value);
+        pardefElements.add(value);
     }
 
     /**
-         * 
-         */
-    @Override
-    public final void printXML(final DataOutputStream dos) throws IOException {
-	dos.writeBytes(tab(1) + "<pardefs>\n");
-	for (final PardefElement e : pardefElements) {
-	    e.printXML(dos);
-	}
-	dos.writeBytes(tab(1) + "</pardefs>\n\n");
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
+    public final void printXML_previous(final DataOutputStream dos) throws IOException {
+        dos.writeBytes(tab(1) + "<pardefs>\n");
+        for (final PardefElement e : pardefElements) {
+            e.printXML_previous(dos);
+        }
+        dos.writeBytes(tab(1) + "</pardefs>\n\n");
     }
 
     /**
-         * 
-         * @param fileName
-         */
-    public void printXML(final String fileName) {
-	BufferedOutputStream bos;
-	FileOutputStream fos;
-	DataOutputStream dos;
-
-	try {
-	    fos = new FileOutputStream(fileName);
-	    bos = new BufferedOutputStream(fos);
-	    dos = new DataOutputStream(bos);
-	    dos.writeBytes("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>\n");
-
-	    dos.writeBytes("<dictionary>\n");
-	    printXML(dos);
-	    dos.writeBytes("</dictionary>\n");
-
-	    fos = null;
-	    bos = null;
-	    dos.close();
-	    dos = null;
-	} catch (final IOException e) {
-	    e.printStackTrace();
-	} catch (final Exception eg) {
-	    eg.printStackTrace();
-	}
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
+    public final void printXML(final OutputStreamWriter dos) throws IOException {
+        dos.write(tab(1) + "<pardefs>\n");
+        for (final PardefElement e : pardefElements) {
+            e.printXML(dos);
+        }
+        dos.write(tab(1) + "</pardefs>\n\n");
     }
 
     /**
-         * 
-         * @param parName
-         * @return
-         */
+     * 
+     * @param fileName
+     */
+    public void printXML_previous(final String fileName) {
+        BufferedOutputStream bos;
+        FileOutputStream fos;
+        DataOutputStream dos;
+
+        try {
+            fos = new FileOutputStream(fileName);
+            bos = new BufferedOutputStream(fos);
+            dos = new DataOutputStream(bos);
+            dos.writeBytes("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>\n");
+
+            dos.writeBytes("<dictionary>\n");
+            printXML_previous(dos);
+            dos.writeBytes("</dictionary>\n");
+
+            fos = null;
+            bos = null;
+            dos.close();
+            dos = null;
+        } catch (final IOException e) {
+            e.printStackTrace();
+        } catch (final Exception eg) {
+            eg.printStackTrace();
+        }
+    }
+
+    /**
+     * 
+     * @param fileName
+     */
+    public final void printXML(final String fileName) {
+        this.printXML(fileName, "UTF-8");
+    }
+
+    /**
+     * 
+     * @param fileName
+     * @param encoding
+     */
+    public void printXML(final String fileName, final String encoding) {
+        BufferedOutputStream bos;
+        FileOutputStream fos;
+        OutputStreamWriter dos;
+
+        try {
+            fos = new FileOutputStream(fileName);
+            bos = new BufferedOutputStream(fos);
+            dos = new OutputStreamWriter(bos, encoding);
+            dos.write("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
+            dos.write("<dictionary>\n");
+            printXML(dos);
+            dos.write("</dictionary>\n");
+
+            fos = null;
+            bos = null;
+            dos.close();
+            dos = null;
+        } catch (final IOException e) {
+            e.printStackTrace();
+        } catch (final Exception eg) {
+            eg.printStackTrace();
+        }
+    }
+
+    /**
+     * 
+     * @param parName
+     * @return Undefined         */
     public final PardefElement getParadigmDefinition(final String parName) {
-	for (final PardefElement pardefE : pardefElements) {
-	    if (pardefE.getName().equals(parName)) {
-		return pardefE;
-	    }
-	}
-	return null;
+        for (final PardefElement pardefE : pardefElements) {
+            if (pardefE.getName().equals(parName)) {
+                return pardefE;
+            }
+        }
+        return null;
     }
 
     /**
-         * 
-         * @return
-         */
+     * 
+     * @return Undefined         */
     public ArrayList<PardefElement> getPardefElements() {
-	return pardefElements;
+        return pardefElements;
     }
 
     /**
-         * 
-         * @param par
-         */
+     * 
+     * @param par
+     */
     public final void remove(PardefElement par) {
-	getPardefElements().remove(par);
+        getPardefElements().remove(par);
     }
-
 }

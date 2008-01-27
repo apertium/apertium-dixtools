@@ -117,10 +117,10 @@ public class DicMerge {
     }
 
     /**
-         * 
-         * @param dic1
-         * @param dic2
-         */
+     * 
+     * @param ds1
+     * @param ds2
+     */
     public DicMerge(final DicSet ds1, final DicSet ds2) {
 	setBilAB1(ds1.getBil1());
 	setMonA1(ds1.getMon1());
@@ -136,10 +136,10 @@ public class DicMerge {
     }
 
     /**
-         * 
-         * @param bilAB1
-         * @param bilAB2
-         */
+     * 
+     * @param bAB1
+     * @param bAB2
+     */
     public final void setBils(final DictionaryElement bAB1,
 	    final DictionaryElement bAB2) {
 	setBilAB1(bAB1);
@@ -185,8 +185,7 @@ public class DicMerge {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     private final DicSet merge() {
 	final DictionaryElement bilAB = mergeBils(getBilAB1(), getBilAB2());
 	String fileName = getBilAB1().getFileName();
@@ -235,8 +234,7 @@ public class DicMerge {
          * 
          * @param bAB1
          * @param bAB2
-         * @return
-         */
+         * @return Undefined         */
     private final DictionaryElement mergeBils(final DictionaryElement bAB1,
 	    final DictionaryElement bAB2) {
 	final DictionaryElement dic = new DictionaryElement();
@@ -264,8 +262,7 @@ public class DicMerge {
          * 
          * @param m1
          * @param m2
-         * @return
-         */
+         * @return Undefined         */
     private final DictionaryElement mergeMonols(final DictionaryElement m1,
 	    final DictionaryElement m2) {
 	final DictionaryElement mon = new DictionaryElement();
@@ -301,8 +298,7 @@ public class DicMerge {
          * 
          * @param sectionE1
          * @param sectionE2
-         * @return
-         */
+         * @return Undefined         */
     private final SectionElement mergeSectionElements(
 	    final SectionElement sectionE1, final SectionElement sectionE2) {
 
@@ -390,8 +386,7 @@ public class DicMerge {
          * 
          * @param sdefs1
          * @param sdefs2
-         * @return
-         */
+         * @return Undefined         */
     private final SdefsElement mergeSdefElements(final SdefsElement sdefs1,
 	    final SdefsElement sdefs2) {
 	final SdefsElement sdefs = new SdefsElement();
@@ -419,8 +414,7 @@ public class DicMerge {
          * 
          * @param alphabet1
          * @param alphabet2
-         * @return
-         */
+         * @return Undefined         */
     private final AlphabetElement mergeAlphabetElement(
 	    final AlphabetElement alphabet1, final AlphabetElement alphabet2) {
 	final AlphabetElement alphabet = new AlphabetElement();
@@ -433,8 +427,7 @@ public class DicMerge {
          * 
          * @param pardefs1
          * @param pardefs2
-         * @return
-         */
+         * @return Undefined         */
     private final PardefsElement mergePardefElements(
 	    final PardefsElement pardefs1, final PardefsElement pardefs2) {
 	final PardefsElement pardefs = new PardefsElement();

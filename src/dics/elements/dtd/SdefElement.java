@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dics.elements.dtd;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 /**
  * 
@@ -31,74 +31,86 @@ import java.io.IOException;
 public class SdefElement extends Element {
 
     /**
-         * 
-         */
+     * 
+     */
     private String n;
-
     /**
-         * 
-         */
+     * 
+     */
     private String comment;
 
     /**
-         * 
-         * @param value
-         */
+     * 
+     * @param value
+     */
     public SdefElement(final String value) {
-	setTagName("sdef");
-	n = value;
+        setTagName("sdef");
+        n = value;
     }
 
     /**
-         * 
-         * @return
-         */
+     * 
+     * @return Undefined         */
     @Override
     public final String getValue() {
-	return n;
+        return n;
     }
 
     /**
-         * 
-         * @param dos
-         * @throws IOException
-         */
-    @Override
-    public final void printXML(final DataOutputStream dos) throws IOException {
-	if (comments == null) {
-	    setComments("");
-	}
-	String comment = "";
-	if (this.comment != null) {
-	    comment = "\tc=\"" + getComment() + "\"";
+     * 
+     * @param dos
+     * @throws IOException
+     */
+    public final void printXML_previous(final DataOutputStream dos) throws IOException {
+        if (comments == null) {
+            setComments("");
+        }
+        String comment = "";
+        if (this.comment != null) {
+            comment = "\tc=\"" + getComment() + "\"";
 
-	}
-	dos.writeBytes(tab(2) + "<" + getTagName() + " n=\"" + getValue()
-		+ "\" " + comment + "/> " + getComments() + "\n");
+        }
+        dos.writeBytes(tab(2) + "<" + getTagName() + " n=\"" + getValue() + "\" " + comment + "/> " + getComments() + "\n");
     }
 
     /**
-         * 
-         */
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
+    public final void printXML(final OutputStreamWriter dos) throws IOException {
+        if (comments == null) {
+            setComments("");
+        }
+        String comment = "";
+        if (this.comment != null) {
+            comment = "\tc=\"" + getComment() + "\"";
+
+        }
+        dos.write(tab(2) + "<" + getTagName() + " n=\"" + getValue() + "\" " + comment + "/> " + getComments() + "\n");
+    }
+
+    /**
+     * 
+     */
     @Override
     public final String toString() {
-	final String str = "<" + getValue() + ">";
-	return str;
+        final String str = "<" + getValue() + ">";
+        return str;
     }
 
     /**
-         * @return the comment
-         */
+     * @return the comment
+     */
     public final String getComment() {
-	return comment;
+        return comment;
     }
 
     /**
-         * @param comment
-         *                the comment to set
-         */
+     * @param comment
+     *                the comment to set
+     */
     public final void setComment(String comment) {
-	this.comment = comment;
+        this.comment = comment;
     }
-
 }

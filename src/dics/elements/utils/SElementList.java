@@ -56,8 +56,7 @@ public class SElementList extends Vector<SElement> {
     /**
          * 
          * @param sEList
-         * @return
-         */
+         * @return Undefined         */
     public final boolean equals(final SElementList sEList) {
 	if (size() != sEList.size()) {
 	    return false;
@@ -88,8 +87,7 @@ public class SElementList extends Vector<SElement> {
     /**
          * 
          * @param sEList2
-         * @return
-         */
+         * @return Undefined         */
     public final boolean matches(final SElementList sEList2) {
 	int i = 0;
 

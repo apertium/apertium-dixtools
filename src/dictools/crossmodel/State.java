@@ -199,8 +199,7 @@ public class State {
          * @param entries
          * @param i
          * @param actionList
-         * @return
-         */
+         * @return Undefined         */
     private final void processRestriction(final String v, final String value,
 	    final Vector<String> values, int i,
 	    HashMap<String, ElementList> tails) {
@@ -290,16 +289,14 @@ public class State {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     private final TransitionSet getTransitions() {
 	return transitions;
     }
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     private final boolean isRestrictionMatched() {
 	return restrictionMatched;
     }
@@ -314,8 +311,7 @@ public class State {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     private final ElementList getEntries() {
 	return entries;
     }
@@ -330,8 +326,7 @@ public class State {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public final ActionSet getActionSet() {
 	return actionSet;
     }
@@ -346,8 +341,7 @@ public class State {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public final ActionSetList getActionSetList() {
 	return actionSetList;
     }

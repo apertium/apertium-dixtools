@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dics.elements.dtd;
 
 import java.io.BufferedOutputStream;
@@ -28,6 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import dictools.DicTools;
+import java.io.OutputStreamWriter;
 
 /**
  * 
@@ -37,112 +37,176 @@ import dictools.DicTools;
 public class SdefsElement extends Element {
 
     /**
-         * 
-         */
+     * 
+     */
     private ArrayList<SdefElement> sdefsElements;
 
     /**
-         * 
-         * 
-         */
+     * 
+     * 
+     */
     public SdefsElement() {
-	setTagName("sdefs");
-	sdefsElements = new ArrayList<SdefElement>();
+        setTagName("sdefs");
+        sdefsElements = new ArrayList<SdefElement>();
     }
 
     /**
-         * 
-         * @param value
-         */
+     * 
+     * @param value
+     */
     public final void addSdefElement(final SdefElement value) {
-	setTagName("sdefs");
-	sdefsElements.add(value);
+        setTagName("sdefs");
+        sdefsElements.add(value);
     }
 
     /**
-         * 
-         * @return
-         */
+     * 
+     * @return Undefined         */
     public final ArrayList<SdefElement> getSdefsElements() {
-	return sdefsElements;
+        return sdefsElements;
     }
 
     /**
-         * 
-         * @param dos
-         * @throws IOException
-         */
-    @Override
-    public final void printXML(final DataOutputStream dos) throws IOException {
-	final HashMap<String, String> descriptions = DicTools
-		.getSdefDescriptions();
+     * 
+     * @param dos
+     * @throws IOException
+     */
+    public final void printXML_previous(final DataOutputStream dos) throws IOException {
+        final HashMap<String, String> descriptions = DicTools.getSdefDescriptions();
 
-	dos.writeBytes(tab(1) + "<" + getTagName() + ">\n");
-	for (final SdefElement e : sdefsElements) {
-	    final String d = descriptions.get(e.getValue());
-	    if (d != null) {
-		// e.setComments("\t<!-- " + d + "-->");
-	    }
-	    e.printXML(dos);
-	}
-	dos.writeBytes(tab(1) + "</" + getTagName() + ">\n");
+        dos.writeBytes(tab(1) + "<" + getTagName() + ">\n");
+        for (final SdefElement e : sdefsElements) {
+            final String d = descriptions.get(e.getValue());
+            if (d != null) {
+            // e.setComments("\t<!-- " + d + "-->");
+            }
+            e.printXML_previous(dos);
+        }
+        dos.writeBytes(tab(1) + "</" + getTagName() + ">\n");
 
-	if (comments != null) {
-	    dos.writeBytes(tab(1) + "<!-- \n");
-	    dos.writeBytes(tab(1) + getComments());
-	    dos.writeBytes(tab(1) + " -->\n");
-	}
-    }
-
-    public void printXML(final String fileName) {
-	BufferedOutputStream bos;
-	FileOutputStream fos;
-	DataOutputStream dos;
-
-	try {
-	    fos = new FileOutputStream(fileName);
-	    bos = new BufferedOutputStream(fos);
-	    dos = new DataOutputStream(bos);
-	    dos.writeBytes("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>\n");
-
-	    dos.writeBytes("<dictionary>\n");
-	    printXML(dos);
-	    dos.writeBytes("</dictionary>\n");
-
-	    fos = null;
-	    bos = null;
-	    dos.close();
-	    dos = null;
-	} catch (final IOException e) {
-	    e.printStackTrace();
-	} catch (final Exception eg) {
-	    eg.printStackTrace();
-	}
+        if (comments != null) {
+            dos.writeBytes(tab(1) + "<!-- \n");
+            dos.writeBytes(tab(1) + getComments());
+            dos.writeBytes(tab(1) + " -->\n");
+        }
     }
 
     /**
-         * 
-         * @return
-         */
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
+    public final void printXML(final OutputStreamWriter dos) throws IOException {
+        final HashMap<String, String> descriptions = DicTools.getSdefDescriptions();
+
+        dos.write(tab(1) + "<" + getTagName() + ">\n");
+        for (final SdefElement e : sdefsElements) {
+            final String d = descriptions.get(e.getValue());
+            if (d != null) {
+            // e.setComments("\t<!-- " + d + "-->");
+            }
+            e.printXML(dos);
+        }
+        dos.write(tab(1) + "</" + getTagName() + ">\n");
+
+        if (comments != null) {
+            dos.write(tab(1) + "<!-- \n");
+            dos.write(tab(1) + getComments());
+            dos.write(tab(1) + " -->\n");
+        }
+    }
+
+    /**
+     * 
+     * @param fileName
+     */
+    public void printXML_previous(final String fileName) {
+        BufferedOutputStream bos;
+        FileOutputStream fos;
+        DataOutputStream dos;
+
+        try {
+            fos = new FileOutputStream(fileName);
+            bos = new BufferedOutputStream(fos);
+            dos = new DataOutputStream(bos);
+            dos.writeBytes("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>\n");
+
+            dos.writeBytes("<dictionary>\n");
+            printXML_previous(dos);
+            dos.writeBytes("</dictionary>\n");
+
+            fos = null;
+            bos = null;
+            dos.close();
+            dos = null;
+        } catch (final IOException e) {
+            e.printStackTrace();
+        } catch (final Exception eg) {
+            eg.printStackTrace();
+        }
+    }
+
+    /**
+     * 
+     * @param fileName
+     */
+    public final void printXML(final String fileName) {
+        this.printXML(fileName, "UTF-8");
+    }
+
+    /**
+     * 
+     * @param fileName
+     * @param encoding
+     */
+    public void printXML(final String fileName, final String encoding) {
+        BufferedOutputStream bos;
+        FileOutputStream fos;
+        //DataOutputStream dos;
+        OutputStreamWriter dos;
+
+        try {
+            fos = new FileOutputStream(fileName);
+            bos = new BufferedOutputStream(fos);
+            //dos = new DataOutputStream(bos);
+            dos = new OutputStreamWriter(bos, encoding);
+            dos.write("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
+            dos.write("<dictionary>\n");
+            printXML(dos);
+            dos.write("</dictionary>\n");
+
+            fos = null;
+            bos = null;
+            dos.close();
+            dos = null;
+        } catch (final IOException e) {
+            e.printStackTrace();
+        } catch (final Exception eg) {
+            eg.printStackTrace();
+        }
+    }
+
+    /**
+     * 
+     * @return Undefined         */
     public final ArrayList<String> getAllCategories() {
-	final ArrayList<String> categories = new ArrayList<String>();
+        final ArrayList<String> categories = new ArrayList<String>();
 
-	for (final SdefElement sdef : getSdefsElements()) {
-	    categories.add(sdef.getValue());
-	}
-	return categories;
+        for (final SdefElement sdef : getSdefsElements()) {
+            categories.add(sdef.getValue());
+        }
+        return categories;
     }
 
     /**
-         * 
-         */
+     * 
+     */
     @Override
     public final String toString() {
-	String str = "";
-	for (final SdefElement sdef : getSdefsElements()) {
-	    str += sdef.toString();
-	}
-	return str;
+        String str = "";
+        for (final SdefElement sdef : getSdefsElements()) {
+            str += sdef.toString();
+        }
+        return str;
     }
-
 }

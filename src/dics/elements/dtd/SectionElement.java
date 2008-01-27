@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dics.elements.dtd;
 
 import java.io.BufferedOutputStream;
@@ -27,6 +26,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import dics.elements.utils.EElementList;
+import java.io.OutputStreamWriter;
 
 /**
  * 
@@ -36,174 +36,228 @@ import dics.elements.utils.EElementList;
 public class SectionElement extends Element {
 
     /**
-         * 
-         */
+     * 
+     */
     private String id;
-
     /**
-         * 
-         */
+     * 
+     */
     private String type;
-
     /**
-         * 
-         */
+     * 
+     */
     private EElementList eElements;
-
     /**
-         * 
-         */
+     * 
+     */
     protected ArrayList<String> includes;
 
     /**
-         * 
-         * 
-         */
+     * 
+     * 
+     */
     public SectionElement() {
-	setTagName("section");
-	eElements = new EElementList();
-	includes = new ArrayList<String>();
+        setTagName("section");
+        eElements = new EElementList();
+        includes = new ArrayList<String>();
     }
 
     /**
-         * 
-         * @param id
-         * @param type
-         */
+     * 
+     * @param id
+     * @param type
+     */
     public SectionElement(final String id, final String type) {
-	setTagName("section");
-	eElements = new EElementList();
-	includes = new ArrayList<String>();
-	this.id = id;
-	this.type = type;
+        setTagName("section");
+        eElements = new EElementList();
+        includes = new ArrayList<String>();
+        this.id = id;
+        this.type = type;
     }
 
     /**
-         * 
-         * @param value
-         */
+     * 
+     * @param value
+     */
     public final void setID(final String value) {
-	id = value;
+        id = value;
     }
 
     /**
-         * 
-         * @return
-         */
+     * 
+     * @return Undefined         */
     public String getID() {
-	return id;
+        return id;
     }
 
     /**
-         * 
-         * @param value
-         */
+     * 
+     * @param value
+     */
     public final void setType(final String value) {
-	type = value;
+        type = value;
     }
 
     /**
-         * 
-         * @return
-         */
+     * 
+     * @return Undefined         */
     public String getType() {
-	return type;
+        return type;
     }
 
     /**
-         * 
-         * @return
-         */
+     * 
+     * @return Undefined         */
     public EElementList getEElements() {
-	return eElements;
+        return eElements;
     }
 
     /**
-         * 
-         * @param value
-         */
+     * 
+     * @param value
+     */
     public void addEElement(final EElement value) {
-	eElements.add(value);
+        eElements.add(value);
     }
 
     /**
-         * 
-         */
-    @Override
-    public final void printXML(final DataOutputStream dos) throws IOException {
-	String attributes = "";
-	if (getID() != null) {
-	    attributes += " id=\"" + getID() + "\"";
-	}
-	if (getType() != null) {
-	    attributes += " type=\"" + getType() + "\"";
-	}
-	dos.writeBytes(tab(1) + "<" + getTagName() + "" + attributes + ">\n");
-	for (final EElement e : eElements) {
-	    e.printXML(dos);
-	}
-	dos.writeBytes(tab(1) + "</" + getTagName() + ">\n");
+     * 
+     */
+    public final void printXML_previous(final DataOutputStream dos) throws IOException {
+        String attributes = "";
+        if (getID() != null) {
+            attributes += " id=\"" + getID() + "\"";
+        }
+        if (getType() != null) {
+            attributes += " type=\"" + getType() + "\"";
+        }
+        dos.writeBytes(tab(1) + "<" + getTagName() + "" + attributes + ">\n");
+        for (final EElement e : eElements) {
+            e.printXML_previous(dos);
+        }
+        dos.writeBytes(tab(1) + "</" + getTagName() + ">\n");
     }
 
     /**
-         * 
-         * @param fileName
-         */
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
+    public final void printXML(final OutputStreamWriter dos) throws IOException {
+        String attributes = "";
+        if (getID() != null) {
+            attributes += " id=\"" + getID() + "\"";
+        }
+        if (getType() != null) {
+            attributes += " type=\"" + getType() + "\"";
+        }
+        dos.write(tab(1) + "<" + getTagName() + "" + attributes + ">\n");
+        for (final EElement e : eElements) {
+            e.printXML(dos);
+        }
+        dos.write(tab(1) + "</" + getTagName() + ">\n");
+    }
+
+    /**
+     * 
+     * @param fileName
+     */
+    public void printXMLXInclude_previous(final String fileName) {
+        BufferedOutputStream bos;
+        FileOutputStream fos;
+        DataOutputStream dos;
+
+        try {
+            fos = new FileOutputStream(fileName);
+            bos = new BufferedOutputStream(fos);
+            dos = new DataOutputStream(bos);
+            dos.writeBytes("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>\n");
+
+            dos.writeBytes("<dictionary>\n");
+            dos.writeBytes("<section>\n");
+            for (final EElement e : eElements) {
+                e.printXML_previous(dos);
+            }
+            dos.writeBytes("</section>\n");
+            dos.writeBytes("</dictionary>\n");
+
+            fos = null;
+            bos = null;
+            dos.close();
+            dos = null;
+        } catch (final IOException e) {
+            e.printStackTrace();
+        } catch (final Exception eg) {
+            eg.printStackTrace();
+        }
+    }
+
+    /**
+     * 
+     * @param fileName
+     */
     public void printXMLXInclude(final String fileName) {
-	BufferedOutputStream bos;
-	FileOutputStream fos;
-	DataOutputStream dos;
+        this.printXMLXInclude(fileName, "UTF-8");        
+    }
+    /**
+     * 
+     * @param fileName
+     * @param encoding
+     */
+    public void printXMLXInclude(final String fileName, final String encoding) {
+        BufferedOutputStream bos;
+        FileOutputStream fos;
+        OutputStreamWriter dos;
 
-	try {
-	    fos = new FileOutputStream(fileName);
-	    bos = new BufferedOutputStream(fos);
-	    dos = new DataOutputStream(bos);
-	    dos.writeBytes("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>\n");
+        try {
+            fos = new FileOutputStream(fileName);
+            bos = new BufferedOutputStream(fos);
+            dos = new OutputStreamWriter(bos, encoding);
+            dos.write("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
 
-	    dos.writeBytes("<dictionary>\n");
-	    dos.writeBytes("<section>\n");
-	    for (final EElement e : eElements) {
-		e.printXML(dos);
-	    }
-	    dos.writeBytes("</section>\n");
-	    dos.writeBytes("</dictionary>\n");
+            dos.write("<dictionary>\n");
+            dos.write("<section>\n");
+            for (final EElement e : eElements) {
+                e.printXML(dos);
+            }
+            dos.write("</section>\n");
+            dos.write("</dictionary>\n");
 
-	    fos = null;
-	    bos = null;
-	    dos.close();
-	    dos = null;
-	} catch (final IOException e) {
-	    e.printStackTrace();
-	} catch (final Exception eg) {
-	    eg.printStackTrace();
-	}
+            fos = null;
+            bos = null;
+            dos.close();
+            dos = null;
+        } catch (final IOException e) {
+            e.printStackTrace();
+        } catch (final Exception eg) {
+            eg.printStackTrace();
+        }
     }
 
     /**
-         * @param elements
-         *                the eElements to set
-         */
+     * @param elements
+     *                the eElements to set
+     */
     public final void setEElements(EElementList elements) {
-	eElements = elements;
+        eElements = elements;
     }
 
     /**
-         * @param includes
-         *                the includes to set
-         */
+     * @param includes
+     *                the includes to set
+     */
     public final void setIncludes(ArrayList<String> includes) {
-	this.includes = includes;
+        this.includes = includes;
     }
 
     public final void addXInclude(String xinclude) {
-	includes.add(xinclude);
+        includes.add(xinclude);
     }
 
     /**
-         * @return the includes
-         */
+     * @return the includes
+     */
     public final ArrayList<String> getIncludes() {
-	return includes;
+        return includes;
     }
-
 }

@@ -62,16 +62,14 @@ public class Pattern {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public EElement getAB() {
 	return e1;
     }
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public EElement getBC() {
 	return e2;
     }
@@ -121,8 +119,8 @@ public class Pattern {
          */
     protected final void printXML(DataOutputStream dos) throws IOException {
 	dos.writeBytes("\t<pattern>\n");
-	e1.printXML(dos);
-	e2.printXML(dos);
+	e1.printXML_previous(dos);
+	e2.printXML_previous(dos);
 	dos.writeBytes("\t</pattern>\n");
     }
 

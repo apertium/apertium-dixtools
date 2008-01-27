@@ -102,8 +102,7 @@ public class CrossAction implements Comparable<CrossAction> {
 
     /**
      * 
-     * @return
-     */
+     * @return Undefined     */
     public final ConstantMap getConstants() {
         return constants;
     }
@@ -118,16 +117,14 @@ public class CrossAction implements Comparable<CrossAction> {
 
     /**
      * 
-     * @return
-     */
+     * @return Undefined     */
     public final Pattern getPattern() {
         return pattern;
     }
 
     /**
      * 
-     * @return
-     */
+     * @return Undefined     */
     public final String getId() {
         return id;
     }
@@ -173,8 +170,7 @@ public class CrossAction implements Comparable<CrossAction> {
 
     /**
      * 
-     * @return
-     */
+     * @return Undefined     */
     public final ElementList processEntries() {
         ElementList eList = new ElementList();
         try {
@@ -231,8 +227,7 @@ public class CrossAction implements Comparable<CrossAction> {
 
     /**
      * 
-     * @return
-     */
+     * @return Undefined     */
     public final ElementList processVars() {
         getActionSet().setNumberOfConstants(0);
 
@@ -344,8 +339,7 @@ public class CrossAction implements Comparable<CrossAction> {
      * @param eList
      * @param j
      * @param hm
-     * @return
-     */
+     * @return Undefined     */
     private final Integer tagAction(ContentElement ce, Integer j,
             HashMap<String, String> hm, final String pref) {
         int p = 1;
@@ -412,8 +406,7 @@ public class CrossAction implements Comparable<CrossAction> {
      * @param eList
      * @param j
      * @param hm
-     * @return
-     */
+     * @return Undefined     */
     private final Integer tagElements(ContentElement ce, ElementList eList,
             Integer j, HashMap<String, String> hm, final String pref) {
         int p = 1;
@@ -450,8 +443,7 @@ public class CrossAction implements Comparable<CrossAction> {
 
     /**
      * 
-     * @return
-     */
+     * @return Undefined     */
     public final ActionSet getActionSet() {
         return actionSet;
     }

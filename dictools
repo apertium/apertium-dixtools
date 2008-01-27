@@ -4,7 +4,8 @@ mainClass="ProcessDics"
 # Minimum and maximum memory for JVM
 defaultMinMem=32
 defaultMaxMem=300
-if [$CROSSDICS_PATH == ""]; then
+if [ $CROSSDICS_PATH="" ];
+then
 	CROSSDICS_PATH="."
 fi
 library="$CROSSDICS_PATH/dist/crossdics.jar"

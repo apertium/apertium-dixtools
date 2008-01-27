@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dics.elements.dtd;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 /**
  * 
@@ -31,174 +31,180 @@ import java.io.IOException;
 public class Element implements Cloneable {
 
     /**
-         * 
-         */
+     * 
+     */
     private String value;
-
     /**
-         * 
-         */
+     * 
+     */
     private String temp;
-
     /**
-         * 
-         */
+     * 
+     */
     private String valueNoTags = "";
-
     /**
-         * 
-         */
+     * 
+     */
     private String TAGNAME;
-
     /**
-         * 
-         */
+     * 
+     */
     protected String comments;
 
     /**
-         * 
-         * @param dos
-         * @throws IOException
-         */
-    protected void printXML(final DataOutputStream dos) throws IOException {
-	dos.writeBytes("<" + getTagName() + "/>");
+     * 
+     * @param dos
+     * @throws IOException
+     */
+    protected void printXML_previous(final DataOutputStream dos) throws IOException {
+        dos.writeBytes("<" + getTagName() + "/>");
     }
 
     /**
-         * 
-         * @param dos
-         * @throws IOException
-         */
-    protected void printXML1Line(final DataOutputStream dos) throws IOException {
-	dos.writeBytes("<" + getTagName() + "/>");
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
+    protected void printXML(final OutputStreamWriter dos) throws IOException {
+        dos.write("<" + getTagName() + "/>");
     }
 
     /**
-         * 
-         * @param nTabs
-         * @return
-         */
+     * 
+     * @param dos
+     * @throws IOException
+     */
+    protected void printXML1Line_previous(final DataOutputStream dos) throws IOException {
+        dos.writeBytes("<" + getTagName() + "/>");
+    }
+
+    /**
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
+    protected void printXML1Line(final OutputStreamWriter dos) throws IOException {
+        dos.write("<" + getTagName() + "/>");
+    }
+
+    /**
+     * 
+     * @param nTabs
+     * @return Undefined         */
     protected String tab(final int nTabs) {
-	String sTabs = "";
-	for (int i = 0; i < nTabs; i++) {
-	    sTabs += "  ";
-	}
-	return sTabs;
+        String sTabs = "";
+        for (int i = 0; i < nTabs; i++) {
+            sTabs += "  ";
+        }
+        return sTabs;
     }
 
     /**
-         * 
-         * @param value
-         */
+     * 
+     * @param value
+     */
     protected void setTagName(final String value) {
-	TAGNAME = value;
+        TAGNAME = value;
     }
 
     /**
-         * 
-         * @return
-         */
+     * 
+     * @return Undefined         */
     protected String getTagName() {
-	return TAGNAME;
+        return TAGNAME;
     }
 
     /**
-         * 
-         * @param value
-         */
+     * 
+     * @param value
+     */
     public void addComments(final String value) {
-	if (comments == null) {
-	    comments = "";
-	}
-	comments += tab(3) + value + "\n";
+        if (comments == null) {
+            comments = "";
+        }
+        comments += tab(3) + value + "\n";
     }
 
     /**
-         * 
-         * @param value
-         * @param side
-         */
+     * 
+     * @param value
+     */
     public void setComments(final String value) {
-	comments = value;
+        comments = value;
     }
 
     /**
-         * 
-         * @return
-         */
+     * 
+     * @return Undefined         */
     public String getComments() {
-	return comments;
+        return comments;
     }
 
     /**
-         * 
-         */
-
+     * 
+     */
     @Override
     public Object clone() {
-	try {
-	    final Element cloned = (Element) super.clone();
-	    return cloned;
-	} catch (final CloneNotSupportedException ex) {
-	    return null;
-	}
+        try {
+            final Element cloned = (Element) super.clone();
+            return cloned;
+        } catch (final CloneNotSupportedException ex) {
+            return null;
+        }
 
     }
 
     /**
-         * 
-         * @return
-         */
+     * 
+     * @return Undefined         */
     public String getValue() {
-	return value;
+        return value;
     }
 
     /**
-         * 
-         * @param value
-         */
+     * 
+     * @param value
+     */
     protected void setValue(String value) {
-	this.value = value;
+        this.value = value;
     }
 
     /**
-         * 
-         * @return
-         */
+     * 
+     * @return Undefined         */
     public String getValueNoTags() {
-	return valueNoTags;
+        return valueNoTags;
     }
 
     /**
-         * 
-         * @param valueNoTags
-         */
+     * 
+     * @param valueNoTags
+     */
     public void setValueNoTags(String valueNoTags) {
-	this.valueNoTags = valueNoTags;
+        this.valueNoTags = valueNoTags;
     }
 
     /**
-         * @return the temp
-         */
+     * @return the temp
+     */
     public final String getTemp() {
-	return temp;
+        return temp;
     }
 
     /**
-         * @param temp
-         *                the temp to set
-         */
+     * @param temp
+     *                the temp to set
+     */
     public final void setTemp(String temp) {
-	this.temp = temp;
+        this.temp = temp;
     }
 
     /**
-         * 
-         */
+     * 
+     */
     public String toString() {
-	String str = "";
-	str += getValue();
-	return str;
+        String str = "";
+        str += getValue();
+        return str;
     }
-
 }

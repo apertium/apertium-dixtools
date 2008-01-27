@@ -103,8 +103,7 @@ public class DicSort {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public final DictionaryElement sort() {
 	DictionaryElement dicSorted = null;
 	if (dicType == DicSort.BIL) {
@@ -281,8 +280,7 @@ public class DicSort {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     private final DictionaryElement sortMon() {
 	int lrs = 0;
 	int rls = 0;

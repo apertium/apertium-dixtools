@@ -47,8 +47,7 @@ public class Constant {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public String getName() {
 	return name;
     }
@@ -63,8 +62,7 @@ public class Constant {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public String getValue() {
 	return value;
     }

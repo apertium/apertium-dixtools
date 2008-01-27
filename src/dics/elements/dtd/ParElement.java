@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dics.elements.dtd;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 /**
  * 
@@ -31,68 +31,82 @@ import java.io.IOException;
 public class ParElement extends Element {
 
     /**
-         * 
-         */
+     * 
+     */
     private String n;
 
     /**
-         * 
-         * 
-         */
+     * 
+     * 
+     */
     public ParElement() {
-	setTagName("par");
+        setTagName("par");
 
     }
 
     /**
-         * 
-         * @param value
-         */
+     * 
+     * @param value
+     */
     public ParElement(final String value) {
-	setTagName("par");
-	n = value;
-    }
-
-    public ParElement(final ParElement pE) {
-	n = new String(pE.getValue());
+        setTagName("par");
+        n = value;
     }
 
     /**
-         * 
-         * @param value
-         */
+     * 
+     * @param pE
+     */
+    public ParElement(final ParElement pE) {
+        n = new String(pE.getValue());
+    }
+
+    /**
+     * 
+     * @param value
+     */
     @Override
     public final void setValue(final String value) {
-	n = value;
+        n = value;
     }
 
     /**
-         * 
-         * @return
-         */
+     * 
+     * @return Undefined         */
     @Override
     public final String getValue() {
-	return n;
+        return n;
     }
 
     /**
-         * 
-         */
-    @Override
-    public final void printXML(final DataOutputStream dos) throws IOException {
-	if (comments == null) {
-	    comments = "";
-	}
-	dos.writeBytes(tab(4) + "<" + getTagName() + " n=\"" + n + "\"/> "
-		+ getComments() + "\n");
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
+    public final void printXML_previous(final DataOutputStream dos) throws IOException {
+        if (comments == null) {
+            comments = "";
+        }
+        dos.writeBytes(tab(4) + "<" + getTagName() + " n=\"" + n + "\"/> " + getComments() + "\n");
     }
 
     /**
-         * 
-         */
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
+    public final void printXML(final OutputStreamWriter dos) throws IOException {
+        if (comments == null) {
+            comments = "";
+        }
+        dos.write(tab(4) + "<" + getTagName() + " n=\"" + n + "\"/> " + getComments() + "\n");
+    }
+
+    /**
+     * 
+     */
     @Override
     public final String toString() {
-	return "<" + getTagName() + " n=\"" + n + "\"/> ";
+        return "<" + getTagName() + " n=\"" + n + "\"/> ";
     }
-
 }

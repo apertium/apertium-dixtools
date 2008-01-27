@@ -184,11 +184,10 @@ public class XMLReader {
     }
 
     /**
-         * 
-         * @param e
-         * @param tagName
-         * @return
-         */
+     * 
+     * @param e
+     * @return Undefined
+     */
     protected ArrayList<org.w3c.dom.Element> readChildren(final Element e) {
 	final ArrayList<org.w3c.dom.Element> eList = new ArrayList<org.w3c.dom.Element>();
 	if (e.hasChildNodes()) {
@@ -214,8 +213,7 @@ public class XMLReader {
     /**
          * 
          * @param e
-         * @return
-         */
+         * @return Undefined         */
     protected EElement readEElement(final Element e) {
 
 	final String r = getAttributeValue(e, "r");
@@ -260,8 +258,7 @@ public class XMLReader {
          * 
          * @param e
          * @param attrName
-         * @return
-         */
+         * @return Undefined         */
     protected String getAttributeValue(final Element e, final String attrName) {
 	String value = "";
 	if (e.hasAttributes()) {
@@ -281,8 +278,7 @@ public class XMLReader {
     /**
          * 
          * @param e
-         * @return
-         */
+         * @return Undefined         */
     protected SElement readSElement(final Element e) {
 	final String n = getAttributeValue(e, "n");
 	return SElement.get(n);
@@ -291,8 +287,7 @@ public class XMLReader {
     /**
          * 
          * @param child
-         * @return
-         */
+         * @return Undefined         */
     protected String loadGElementText(final Node child) {
 	String text = "<g>";
 	if (child.hasChildNodes()) {
@@ -323,8 +318,7 @@ public class XMLReader {
     /**
          * 
          * @param e
-         * @return
-         */
+         * @return Undefined         */
     protected IElement readIElement(final Element e) {
 	final IElement iElement = new IElement();
 	final IElement iE = (IElement) readContentElement(e, iElement);
@@ -334,8 +328,7 @@ public class XMLReader {
     /**
          * 
          * @param e
-         * @return
-         */
+         * @return Undefined         */
     protected ContentElement readContentElement(final Element e,
 	    ContentElement cElement) {
 
@@ -378,8 +371,7 @@ public class XMLReader {
          * 
          * @param tag
          * @param child
-         * @return
-         */
+         * @return Undefined         */
     protected final String processTagText(final String tag, final Node child) {
 	String text = "";
 	/*
@@ -396,8 +388,7 @@ public class XMLReader {
          * 
          * @param tag
          * @param child
-         * @return
-         */
+         * @return Undefined         */
     protected final dics.elements.dtd.Element processTagE(final String tag,
 	    final Node child) {
 	if (tag.equals("s")) {
@@ -428,8 +419,7 @@ public class XMLReader {
     /**
          * 
          * @param e
-         * @return
-         */
+         * @return Undefined         */
     protected LElement readLElement(final Element e) {
 	final LElement lElement = new LElement();
 	final LElement lE = (LElement) readContentElement(e, lElement);
@@ -439,8 +429,7 @@ public class XMLReader {
     /**
          * 
          * @param e
-         * @return
-         */
+         * @return Undefined         */
     protected RElement readRElement(final Element e) {
 	final RElement rElement = new RElement();
 	final RElement rE = (RElement) readContentElement(e, rElement);
@@ -450,8 +439,7 @@ public class XMLReader {
     /**
          * 
          * @param e
-         * @return
-         */
+         * @return Undefined         */
     protected GElement readGElement(final Element e) {
 	GElement gElement = new GElement();
 	GElement gE = (GElement) readContentElement(e, gElement);
@@ -461,8 +449,7 @@ public class XMLReader {
     /**
          * 
          * @param e
-         * @return
-         */
+         * @return Undefined         */
     protected PElement readPElement(final Element e) {
 	final PElement pElement = new PElement();
 
@@ -491,8 +478,7 @@ public class XMLReader {
     /**
          * 
          * @param e
-         * @return
-         */
+         * @return Undefined         */
     protected ParElement readParElement(final Element e) {
 	final String n = getAttributeValue(e, "n");
 	final ParElement parElement = new ParElement(n);
@@ -502,8 +488,7 @@ public class XMLReader {
     /**
          * 
          * @param e
-         * @return
-         */
+         * @return Undefined         */
     protected ReElement readReElement(final Element e) {
 	String value = "";
 

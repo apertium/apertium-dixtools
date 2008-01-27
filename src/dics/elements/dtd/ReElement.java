@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dics.elements.dtd;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 /**
  * 
@@ -31,46 +31,56 @@ import java.io.IOException;
 public class ReElement extends Element {
 
     /**
-         * 
-         */
+     * 
+     */
     private String value;
 
     /**
-         * 
-         * @param value
-         */
+     * 
+     * @param value
+     */
     public ReElement(final String value) {
-	setTagName("re");
-	this.value = value;
+        setTagName("re");
+        this.value = value;
     }
 
     /**
-         * 
-         * @return
-         */
+     * 
+     * @return Undefined         */
     @Override
     public String getValue() {
-	return value;
+        return value;
     }
 
     /**
-         * 
-         */
-    @Override
-    public final void printXML(final DataOutputStream dos) throws IOException {
-	if (value == null) {
-	    value = "";
-	}
-	dos.writeBytes(tab(3) + "<" + getTagName() + ">" + getValue() + "</"
-		+ getTagName() + ">\n");
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
+    public final void printXML_previous(final DataOutputStream dos) throws IOException {
+        if (value == null) {
+            value = "";
+        }
+        dos.writeBytes(tab(3) + "<" + getTagName() + ">" + getValue() + "</" + getTagName() + ">\n");
     }
 
     /**
-         * 
-         */
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
+    public final void printXML(final OutputStreamWriter dos) throws IOException {
+        if (value == null) {
+            value = "";
+        }
+        dos.write(tab(3) + "<" + getTagName() + ">" + getValue() + "</" + getTagName() + ">\n");
+    }
+
+    /**
+     * 
+     */
     @Override
     public final String toString() {
-	return getValue();
+        return getValue();
     }
-
 }

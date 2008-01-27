@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dics.elements.dtd;
 
 import java.io.BufferedOutputStream;
@@ -33,6 +32,7 @@ import dics.elements.utils.EElementMap;
 import dics.elements.utils.ElementList;
 import dictools.DicEquivPar;
 import dictools.DicTools;
+import java.io.OutputStreamWriter;
 
 /**
  *
@@ -104,7 +104,7 @@ public class DictionaryElement extends Element {
     /**
      *
      */
-    private String xmlEncoding = "iso-8859-1";
+    private String xmlEncoding = "UTF-8";
     /**
      *
      */
@@ -193,8 +193,7 @@ public class DictionaryElement extends Element {
 
     /**
      *
-     * @return
-     */
+     * @return Undefined     */
     public final String getType() {
         return type;
     }
@@ -209,8 +208,7 @@ public class DictionaryElement extends Element {
 
     /**
      *
-     * @return
-     */
+     * @return Undefined     */
     public final String getFileName() {
         return fileName;
     }
@@ -239,8 +237,7 @@ public class DictionaryElement extends Element {
 
     /**
      *
-     * @return
-     */
+     * @return Undefined     */
     public final String getLeftLanguage() {
         return leftLanguage;
     }
@@ -255,16 +252,14 @@ public class DictionaryElement extends Element {
 
     /**
      *
-     * @return
-     */
+     * @return Undefined     */
     public final String getRightLanguage() {
         return rightLanguage;
     }
 
     /**
      *
-     * @return
-     */
+     * @return Undefined     */
     public boolean isMonol() {
         if (type != null) {
             if (type.equals("MONOL")) {
@@ -279,8 +274,7 @@ public class DictionaryElement extends Element {
 
     /**
      *
-     * @return
-     */
+     * @return Undefined     */
     public boolean isBil() {
         if (type != null) {
             if (type.equals("BIL")) {
@@ -319,8 +313,7 @@ public class DictionaryElement extends Element {
 
     /**
      *
-     * @return
-     */
+     * @return Undefined     */
     public SdefsElement getSdefs() {
         return sdefs;
     }
@@ -343,8 +336,7 @@ public class DictionaryElement extends Element {
 
     /**
      *
-     * @return
-     */
+     * @return Undefined     */
     public ArrayList<SectionElement> getSections() {
         return sections;
     }
@@ -352,8 +344,7 @@ public class DictionaryElement extends Element {
     /**
      *
      * @param id
-     * @return
-     */
+     * @return Undefined     */
     public SectionElement getSection(final String id) {
         for (final SectionElement section : sections) {
             if (section.getID().equals(id)) {
@@ -364,18 +355,91 @@ public class DictionaryElement extends Element {
     }
 
     /**
-     *
+     * 
      * @param fileName
      */
     public void printXML(final String fileName) {
+        printXML(fileName, this.getXmlEncoding());
+    }
+
+    /**
+     * 
+     * @param fileName
+     * @param encoding
+     */
+    public void printXML(final String fileName, final String encoding) {
         BufferedOutputStream bos;
         FileOutputStream fos;
-        DataOutputStream dos;
-
+        //DataOutputStream dos;
+        OutputStreamWriter dos;
         setFileName(fileName);
         try {
             fos = new FileOutputStream(fileName);
             bos = new BufferedOutputStream(fos);
+            dos = new OutputStreamWriter(bos, encoding);
+            //dos = new DataOutputStream(bos);
+            dos.write("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
+            dos.write("<!--\n\tDictionary:\n");
+            if (sections != null) {
+                if (isBil()) {
+                    dos.write("\tBilingual dictionary: " + getLeftLanguage() + "-" + getRightLanguage() + "\n");
+                }
+                dos.write("\tSections: " + sections.size() + "\n");
+                int ne = 0;
+                for (SectionElement section : sections) {
+                    ne += section.getEElements().size();
+                }
+                dos.write("\tEntries: " + ne);
+            }
+
+            if (sdefs != null) {
+                dos.write("\n\tSdefs: " + sdefs.getSdefsElements().size() + "\n");
+            }
+            if (pardefs != null) {
+                dos.write("\tParadigms: " + pardefs.getPardefElements().size() + "\n");
+            }
+
+            if (comments != null) {
+                dos.write(comments);
+            }
+            dos.write("\n-->\n");
+            dos.write("<dictionary>\n");
+            if (alphabet != null) {
+                alphabet.printXML(dos);
+            }
+            if (sdefs != null) {
+                sdefs.printXML(dos);
+            }
+            if (pardefs != null) {
+                pardefs.printXML(dos);
+            }
+            if (sections != null) {
+                for (final SectionElement s : sections) {
+                    s.printXML(dos);
+                }
+            }
+            dos.write("</dictionary>\n");
+            fos = null;
+            bos = null;
+            dos.close();
+            dos = null;
+        } catch (final IOException e) {
+            e.printStackTrace();
+        } catch (final Exception eg) {
+            eg.printStackTrace();
+        }
+    }
+
+    public void printXML_previous(final String fileName, final String encoding) {
+        BufferedOutputStream bos;
+        FileOutputStream fos;
+        DataOutputStream dos;
+        //OutputStreamWriter dos
+        setFileName(fileName);
+        try {
+            fos = new FileOutputStream(fileName);
+            bos = new BufferedOutputStream(fos);
+            //dos = new OutputStreamWriter(bos, encoding);
             dos = new DataOutputStream(bos);
             dos.writeBytes("<?xml version=\"1.0\" encoding=\"" + getXmlEncoding() + "\"?>\n");
             dos.writeBytes("<!--\n\tDictionary:\n");
@@ -390,7 +454,7 @@ public class DictionaryElement extends Element {
                 }
                 dos.writeBytes("\tEntries: " + ne);
             }
-            
+
             if (sdefs != null) {
                 dos.writeBytes("\n\tSdefs: " + sdefs.getSdefsElements().size() + "\n");
             }
@@ -404,17 +468,17 @@ public class DictionaryElement extends Element {
             dos.writeBytes("\n-->\n");
             dos.writeBytes("<dictionary>\n");
             if (alphabet != null) {
-                alphabet.printXML(dos);
+                alphabet.printXML_previous(dos);
             }
             if (sdefs != null) {
-                sdefs.printXML(dos);
+                sdefs.printXML_previous(dos);
             }
             if (pardefs != null) {
-                pardefs.printXML(dos);
+                pardefs.printXML_previous(dos);
             }
             if (sections != null) {
                 for (final SectionElement s : sections) {
-                    s.printXML(dos);
+                    s.printXML_previous(dos);
                 }
             }
             dos.writeBytes("</dictionary>\n");
@@ -433,7 +497,7 @@ public class DictionaryElement extends Element {
      *
      * @param fileName
      */
-    public void printXMLXInclude(final String fileName) {
+    public void printXMLXInclude_previous(final String fileName) {
         BufferedOutputStream bos;
         FileOutputStream fos;
         DataOutputStream dos;
@@ -464,7 +528,7 @@ public class DictionaryElement extends Element {
             dos.writeBytes("\n-->\n");
             dos.writeBytes("<dictionary>\n");
             if (alphabet != null) {
-                alphabet.printXML(dos);
+                alphabet.printXML_previous(dos);
             }
             String includeStr = "<xi:include xmlns:xi=\"http://www.w3.org/2001/XInclude\"";
             dos.writeBytes("\t" + includeStr + " href=\"" + getFolder() + "/sdefs.dix\"/>\n");
@@ -502,6 +566,86 @@ public class DictionaryElement extends Element {
     }
 
     /**
+     * 
+     * @param fileName
+     */
+    public void printXMLXInclude(final String fileName) {
+        this.printXMLXInclude(fileName, this.getXmlEncoding());
+    }
+
+    /**
+     * 
+     * @param fileName
+     * @param encoding
+     */
+    public void printXMLXInclude(final String fileName, final String encoding) {
+        BufferedOutputStream bos;
+        FileOutputStream fos;
+        OutputStreamWriter dos;
+        setFileName(fileName);
+
+        try {
+            fos = new FileOutputStream(fileName);
+            bos = new BufferedOutputStream(fos);
+            dos = new OutputStreamWriter(bos, encoding);
+            dos.write("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
+            dos.write("<!--\n\tDictionary:\n");
+            if (sections != null) {
+                if (isBil()) {
+                    dos.write("\tBilingual dictionary: " + getLeftLanguage() + "-" + getRightLanguage() + "\n");
+                }
+                dos.write("\tSections: " + sections.size() + "\n");
+                dos.write("\tEntries: " + (sections.get(0)).getEElements().size());
+            }
+            if (sdefs != null) {
+                dos.write("\n\tSdefs: " + sdefs.getSdefsElements().size() + "\n");
+            }
+            dos.write("");
+
+            if (comments != null) {
+                dos.write(comments);
+            }
+            dos.write("\n-->\n");
+            dos.write("<dictionary>\n");
+            if (alphabet != null) {
+                alphabet.printXML(dos);
+            }
+            String includeStr = "<xi:include xmlns:xi=\"http://www.w3.org/2001/XInclude\"";
+            dos.write("\t" + includeStr + " href=\"" + getFolder() + "/sdefs.dix\"/>\n");
+            sdefs.printXML(getFolder() + "/sdefs.dix");
+            dos.write("\t" + includeStr + " href=\"" + getFolder() + "/pardefs.dix\"/>\n");
+            pardefs.printXML(getFolder() + "/pardefs.dix");
+
+            for (SectionElement section : sections) {
+                ArrayList<String> includes = section.getIncludes();
+                String attributes = "";
+                if (section.getID() != null) {
+                    attributes += " id=\"" + section.getID() + "\"";
+                }
+                if (section.getType() != null) {
+                    attributes += " type=\"" + section.getType() + "\"";
+                }
+                dos.write(tab(1) + "<" + section.getTagName() + "" + attributes + ">\n");
+                if (includes != null) {
+                    for (final String s : includes) {
+                        dos.write("\t" + s + "\n");
+                    }
+                }
+                dos.write(tab(1) + "</" + section.getTagName() + ">\n");
+            }
+            dos.write("</dictionary>\n");
+            fos = null;
+            bos = null;
+            dos.close();
+            dos = null;
+        } catch (final IOException e) {
+            e.printStackTrace();
+        } catch (final Exception eg) {
+            eg.printStackTrace();
+        }
+    }
+
+    /**
      *
      * @return The 'e' elements
      */
@@ -516,8 +660,7 @@ public class DictionaryElement extends Element {
 
     /**
      *
-     * @return
-     */
+     * @return Undefined     */
     public EElementList getAllEntries() {
         for (final SectionElement s : sections) {
             return s.getEElements();
@@ -528,8 +671,7 @@ public class DictionaryElement extends Element {
     /**
      *
      * @param sectionID
-     * @return
-     */
+     * @return Undefined     */
     public EElementList getEntries(final String sectionID) {
         for (final SectionElement s : sections) {
             if (s.getID().equals(sectionID)) {
@@ -585,32 +727,28 @@ public class DictionaryElement extends Element {
 
     /**
      *
-     * @return
-     */
+     * @return Undefined     */
     public final int getNForeignEntries() {
         return nForeignEntries;
     }
 
     /**
      *
-     * @return
-     */
+     * @return Undefined     */
     public final int getNEntries() {
         return nEntries;
     }
 
     /**
      *
-     * @return
-     */
+     * @return Undefined     */
     public final int getSharedEntries() {
         return nShared;
     }
 
     /**
      *
-     * @return
-     */
+     * @return Undefined     */
     public final int getDifferentEntries() {
         return nDifferent;
     }
@@ -645,8 +783,7 @@ public class DictionaryElement extends Element {
     /**
      *
      * @param parName
-     * @return
-     */
+     * @return Undefined     */
     public final PardefElement getParadigmDefinition(final String parName) {
         return pardefs.getParadigmDefinition(parName);
     }
@@ -661,15 +798,13 @@ public class DictionaryElement extends Element {
 
     /**
      *
-     * @return
-     */
+     * @return Undefined     */
     public PardefsElement getPardefsElement() {
         return pardefs;
     }
 
     /**
-     *
-     * @return
+     * 
      */
     public final void searchEquivalentParadigms() {
         final DicEquivPar dicEquivPar = new DicEquivPar(this);
@@ -678,8 +813,7 @@ public class DictionaryElement extends Element {
 
     /**
      *
-     * @return
-     */
+     * @return Undefined     */
     public HashMap<String, ArrayList<PardefElement>> getEquivalentParadigms() {
         return equivPar;
     }
@@ -687,8 +821,7 @@ public class DictionaryElement extends Element {
     /**
      *
      * @param entry
-     * @return
-     */
+     * @return Undefined     */
     public final EElement getEElement(String entry) {
         final ArrayList<EElement> elements = getEntries();
 

@@ -99,13 +99,13 @@ public class DicFormatE1Line {
 	    dos.writeBytes("\n-->\n");
 	    dos.writeBytes("<dictionary>\n");
 	    if (dic.getAlphabet() != null) {
-		dic.getAlphabet().printXML(dos);
+		dic.getAlphabet().printXML_previous(dos);
 	    }
 	    if (dic.getSdefs() != null) {
-		dic.getSdefs().printXML(dos);
+		dic.getSdefs().printXML_previous(dos);
 	    }
 	    if (dic.getPardefsElement() != null) {
-		dic.getPardefsElement().printXML(dos);
+		dic.getPardefsElement().printXML_previous(dos);
 	    }
 	    if (dic.getSections() != null) {
 		for (final SectionElement s : dic.getSections()) {
@@ -119,7 +119,7 @@ public class DicFormatE1Line {
 		    dos.writeBytes("  <section " + attributes + ">\n");
 		    for (final EElement e : s.getEElements()) {
 			// e.printXML(dos);
-			e.printXML1Line(dos);
+			e.printXML1Line_previous(dos);
 		    }
 		    dos.writeBytes("  </section>\n");
 		    // s.printXML(dos);

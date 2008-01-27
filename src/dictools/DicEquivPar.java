@@ -97,16 +97,14 @@ public class DicEquivPar {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public HashMap<String, ArrayList<PardefElement>> getEquivalentsA() {
 	return equivA;
     }
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public HashMap<String, ArrayList<PardefElement>> getEquivalentsC() {
 	return equivC;
     }
@@ -162,12 +160,12 @@ public class DicEquivPar {
     }
 
     /**
-         * 
-         * @param lemma
-         * @param equivPar
-         * @param category
-         * @return
-         */
+     * 
+     * @param parName
+     * @param equivPar
+     * @param category
+     * @return Undefined
+     */
     public static PardefElement getEquivalentParadigm(final String parName,
 	    final HashMap<String, ArrayList<PardefElement>> equivPar,
 	    final String category) {

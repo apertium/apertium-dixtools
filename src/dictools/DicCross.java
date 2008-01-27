@@ -244,10 +244,9 @@ public class DicCross {
     }
 
     /**
-     *
-     * @param dic1
-     * @param dic2
-     * @return
+     * 
+     * @param dicSet
+     * @return Undefined
      */
     public DictionaryElement[] crossDictionaries(final DicSet dicSet) {
         final DictionaryElement[] dics = new DictionaryElement[2];
@@ -263,14 +262,6 @@ public class DicCross {
         int nDic2 = dic2.getAllEntries().size();
 
         this.setNMinElements(nDic1 + nDic2);
-
-        /*
-        if (nDic1<nDic2) {
-        this.setNMinElements(nDic1);
-        } else {
-        this.setNMinElements(nDic2);
-        }
-         */
 
         setBilAB(dic1);
         setBilBC(dic2);
@@ -330,8 +321,7 @@ public class DicCross {
      *
      * @param alphabet1
      * @param alphabet2
-     * @return
-     */
+     * @return Undefined     */
     private final AlphabetElement crossAlphabets(final AlphabetElement alphabet1, final AlphabetElement alphabet2) {
         final AlphabetElement alphabet = new AlphabetElement();
 
@@ -364,8 +354,7 @@ public class DicCross {
      *
      * @param sdefs1
      * @param sdefs2
-     * @return
-     */
+     * @return Undefined     */
     private final SdefsElement crossSdefs(final SdefsElement sdefs1, final SdefsElement sdefs2) {
         msg.out("[" + (taskOrder++) + "] Crossing definitions...");
         final SdefsElement sdefs = new SdefsElement();
@@ -415,8 +404,7 @@ public class DicCross {
      *
      * @param section1
      * @param section2
-     * @return
-     */
+     * @return Undefined     */
     private SectionElement[] crossSections(final SectionElement section1, final SectionElement section2, final SdefsElement sdefs) {
 
         msg.out("[" + (taskOrder++) + "] Crossing sections '" + section1.getID() + "' and '" + section2.getID() + "'");
@@ -526,8 +514,7 @@ public class DicCross {
      * @param e1
      * @param e2
      * @param matchCategory
-     * @return
-     */
+     * @return Undefined     */
     private final EElement speculate(EElement e1, EElement e2, boolean matchCategory, int dir) {
         EElement e = null;
         try {
@@ -555,8 +542,7 @@ public class DicCross {
      * @param a
      * @param b
      * @param dir
-     * @return
-     */
+     * @return Undefined     */
     private final EElementList cross(EElement e1, EElement e2, final int dir) {
 
         this.incrementNCrossedElements();
@@ -597,8 +583,7 @@ public class DicCross {
      * @param e2
      * @param actionID
      * @param crossAction
-     * @return
-     */
+     * @return Undefined     */
     private final EElementList applyCrossAction(EElement e1, EElement e2, final String actionID, final CrossAction entries) {
         EElementList elementList = new EElementList();
         final CrossAction cA = getCrossModel().getCrossAction(actionID);
@@ -650,8 +635,7 @@ public class DicCross {
      *
      * @param eAction
      * @param entries
-     * @return
-     */
+     * @return Undefined     */
     private final EElement assignValues(EElement e1, EElement e2, EElement eAction, CrossAction entries, HashMap<String, ElementList> tails) {
         ConstantMap constants = entries.getConstants();
         EElement eCrossed = new EElement();
@@ -783,8 +767,7 @@ public class DicCross {
      *
      * @param e
      * @param hm
-     * @return
-     */
+     * @return Undefined     */
     private final EElementList getPairs(final EElement e, final EElementMap hm) {
         EElementList pairs = null;
         String lemma = e.getValue("L");
@@ -797,8 +780,7 @@ public class DicCross {
      *
      * @param e1
      * @param e2
-     * @return
-     */
+     * @return Undefined     */
     private EElement crossEntries(final EElement e1, final EElement e2) {
         EElement e = null;
         try {
@@ -835,8 +817,7 @@ public class DicCross {
      *
      * @param attr1
      * @param attr2
-     * @return
-     */
+     * @return Undefined     */
     private final String mergeAttributes(final String attr1, final String attr2) {
         String attr = null;
         if ((attr1 != null) && (attr2 != null)) {
@@ -857,8 +838,7 @@ public class DicCross {
      *
      * @param r1
      * @param r2
-     * @return
-     */
+     * @return Undefined     */
     private final int resolveRestriction(final String r1, final String r2) {
         final int c1 = getRestrictionCode(r1);
         final int c2 = getRestrictionCode(r2);
@@ -869,8 +849,7 @@ public class DicCross {
     /**
      *
      * @param r
-     * @return
-     */
+     * @return Undefined     */
     private final int getRestrictionCode(final String r) {
         if (r != null) {
             if (r.equals("LR")) {
@@ -890,8 +869,7 @@ public class DicCross {
     /**
      *
      * @param code
-     * @return
-     */
+     * @return Undefined     */
     private final String getRestrictionString(final int code) {
         switch (code) {
             case LR:
@@ -909,8 +887,7 @@ public class DicCross {
 
     /**
      *
-     * @return
-     */
+     * @return Undefined     */
     private final CrossModel getCrossModel() {
         return crossModel;
     }
@@ -1067,8 +1044,7 @@ public class DicCross {
     }
 
     /**
-     *
-     * @param dicSet
+     * 
      */
     public final void actionCross() {
         DicSet dicSet = getDicSet();
@@ -1192,8 +1168,7 @@ public class DicCross {
      *
      * @param dicSet
      * @param removeNotCommon
-     * @return
-     */
+     * @return Undefined     */
     private final DicConsistent actionConsistent(final DicSet dicSet, final String removeNotCommon) {
         final DicConsistent dicConsistent = new DicConsistent(dicSet);
         dicConsistent.makeConsistentDictionaries(removeNotCommon);

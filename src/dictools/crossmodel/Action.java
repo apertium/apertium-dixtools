@@ -88,7 +88,7 @@ public class Action {
     public final void printXML(DataOutputStream dos) throws IOException {
 	if (e != null) {
 	    dos.writeBytes("\t<action>\n");
-	    getE().printXML(dos);
+	    getE().printXML_previous(dos);
 	    dos.writeBytes("\t</action>\n");
 	}
 
@@ -96,8 +96,7 @@ public class Action {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public EElement getE() {
 	return e;
     }
@@ -135,8 +134,7 @@ public class Action {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public final int getNumberOfConstants() {
 	return numberOfConstants;
     }

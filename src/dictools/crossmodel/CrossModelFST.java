@@ -86,8 +86,7 @@ public class CrossModelFST {
     /**
          * 
          * @param entries
-         * @return
-         */
+         * @return Undefined         */
     public final ActionSet getActionSet(CrossAction entries) {
 	HashMap<String, ElementList> tails = null;
 	ElementList eList = entries.processEntries();
@@ -127,8 +126,7 @@ public class CrossModelFST {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public final ActionSet getActionSet() {
 	return actionSet;
     }

@@ -58,8 +58,7 @@ public class DicReverse {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     public final DictionaryElement reverse() {
 	getDicOrig().reverse();
 	// Collections.sort(getDicOrig().getEntries());
@@ -68,8 +67,7 @@ public class DicReverse {
 
     /**
          * 
-         * @return
-         */
+         * @return Undefined         */
     private final DictionaryElement getDicOrig() {
 	return dicOrig;
     }

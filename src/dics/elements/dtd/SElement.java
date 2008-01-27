@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dics.elements.dtd;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.HashMap;
 
 /**
@@ -32,158 +32,161 @@ import java.util.HashMap;
 public class SElement extends Element {
 
     /**
-         * 
-         */
+     * 
+     */
     private static final HashMap<String, SElement> sElementList = new HashMap<String, SElement>();
-
     /**
-         * 
-         */
+     * 
+     */
     private String n;
 
     /**
-         * 
-         */
+     * 
+     */
     // private String temp;
     /**
-         * 
-         * 
-         */
+     * 
+     * 
+     */
     public SElement() {
-	setTagName("s");
+        setTagName("s");
     }
 
     /**
-         * 
-         * @param value
-         */
+     * 
+     * @param value
+     */
     public SElement(final String value) {
-	setTagName("s");
-	n = value;
+        setTagName("s");
+        n = value;
     }
 
     /*
-         * 
-         */
+     * 
+     */
     public SElement(final SElement sE) {
-	n = sE.getValue();
+        n = sE.getValue();
     }
 
     /**
-         * 
-         * @return
-         */
+     * 
+     * @return Undefined         */
     @Override
     public final String getValue() {
-	return n;
+        return n;
     }
 
     /**
-         * 
-         * @param value
-         */
+     * 
+     * @param value
+     */
     @Override
     public final void setValue(final String value) {
-	n = value;
-    }
-
-    @Override
-    public final void printXML(final DataOutputStream dos) throws IOException {
-	dos.writeBytes("<" + getTagName() + " n=\"" + getValue() + "\"/>");
+        n = value;
     }
 
     /**
-         * 
-         * @return
-         */
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
+    public final void printXML_previous(final DataOutputStream dos) throws IOException {
+        dos.writeBytes("<" + getTagName() + " n=\"" + getValue() + "\"/>");
+    }
+
+    /**
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
+    public final void printXML(final OutputStreamWriter dos) throws IOException {
+        dos.write("<" + getTagName() + " n=\"" + getValue() + "\"/>");
+    }
+
+    /**
+     * 
+     * @return Undefined         */
     public final boolean isAdj() {
-	return is("adj");
+        return is("adj");
     }
 
     /**
-         * 
-         * @return
-         */
+     * 
+     * @return Undefined         */
     public final boolean isN() {
-	return is("n");
+        return is("n");
     }
 
     /**
-         * 
-         * @param value
-         * @return
-         */
+     * 
+     * @param value
+     * @return Undefined         */
     public final boolean is(final String value) {
-	if (n.equals(value)) {
-	    return true;
-	}
-	return false;
+        if (n.equals(value)) {
+            return true;
+        }
+        return false;
     }
 
     /**
-         * 
-         */
+     * 
+     */
     @Override
     public String toString() {
-	return "<" + getValue() + ">";
+        return "<" + getValue() + ">";
     }
 
     /**
-         * 
-         * @param sE
-         * @return
-         */
+     * 
+     * @param sE
+     * @return Undefined         */
     public final boolean equals(final SElement sE) {
-	return (getValue().equals(sE.getValue()));
+        return (getValue().equals(sE.getValue()));
     }
 
     /**
-         * 
-         * @param sE
-         */
+     * 
+     * @param sE
+     */
     public static final void putSElement(final SElement sE) {
-	SElement.sElementList.put(sE.getValue(), sE);
+        SElement.sElementList.put(sE.getValue(), sE);
     }
 
     /**
-         * 
-         * @param str
-         * @return
-         */
+     * 
+     * @param str
+     * @return Undefined         */
     public static final boolean exists(final String str) {
-	return SElement.sElementList.containsKey(str);
+        return SElement.sElementList.containsKey(str);
     }
 
     /**
-         * 
-         * @param str
-         * @return
-         */
+     * 
+     * @param str
+     * @return Undefined         */
     public static final SElement get(final String str) {
-	SElement sE = null;
-	if (SElement.exists(str)) {
-	    sE = SElement.sElementList.get(str);
-	} else {
-	    sE = new SElement(str);
-	    SElement.putSElement(sE);
-	}
-	return sE;
+        SElement sE = null;
+        if (SElement.exists(str)) {
+            sE = SElement.sElementList.get(str);
+        } else {
+            sE = new SElement(str);
+            SElement.putSElement(sE);
+        }
+        return sE;
     }
 
     /*
-         * public final String getTemp() { return temp; }
-         * 
-         * public final void setTemp(String temp) { this.temp = temp; }
-         */
-
+     * public final String getTemp() { return temp; }
+     * 
+     * public final void setTemp(String temp) { this.temp = temp; }
+     */
     @Override
     public Object clone() {
-	try {
-	    final SElement cloned = (SElement) super.clone();
-	    return cloned;
-	} catch (final Exception ex) {
-	    return null;
-	}
+        try {
+            final SElement cloned = (SElement) super.clone();
+            return cloned;
+        } catch (final Exception ex) {
+            return null;
+        }
     }
-
 }
