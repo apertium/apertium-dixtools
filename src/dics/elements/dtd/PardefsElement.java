@@ -59,55 +59,12 @@ public class PardefsElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
-    public final void printXML_previous(final DataOutputStream dos) throws IOException {
-        dos.writeBytes(tab(1) + "<pardefs>\n");
-        for (final PardefElement e : pardefElements) {
-            e.printXML_previous(dos);
-        }
-        dos.writeBytes(tab(1) + "</pardefs>\n\n");
-    }
-
-    /**
-     * 
-     * @param dos
-     * @throws java.io.IOException
-     */
     public final void printXML(final OutputStreamWriter dos) throws IOException {
         dos.write(tab(1) + "<pardefs>\n");
         for (final PardefElement e : pardefElements) {
             e.printXML(dos);
         }
         dos.write(tab(1) + "</pardefs>\n\n");
-    }
-
-    /**
-     * 
-     * @param fileName
-     */
-    public void printXML_previous(final String fileName) {
-        BufferedOutputStream bos;
-        FileOutputStream fos;
-        DataOutputStream dos;
-
-        try {
-            fos = new FileOutputStream(fileName);
-            bos = new BufferedOutputStream(fos);
-            dos = new DataOutputStream(bos);
-            dos.writeBytes("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>\n");
-
-            dos.writeBytes("<dictionary>\n");
-            printXML_previous(dos);
-            dos.writeBytes("</dictionary>\n");
-
-            fos = null;
-            bos = null;
-            dos.close();
-            dos = null;
-        } catch (final IOException e) {
-            e.printStackTrace();
-        } catch (final Exception eg) {
-            eg.printStackTrace();
-        }
     }
 
     /**

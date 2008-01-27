@@ -69,31 +69,6 @@ public class SdefsElement extends Element {
     /**
      * 
      * @param dos
-     * @throws IOException
-     */
-    public final void printXML_previous(final DataOutputStream dos) throws IOException {
-        final HashMap<String, String> descriptions = DicTools.getSdefDescriptions();
-
-        dos.writeBytes(tab(1) + "<" + getTagName() + ">\n");
-        for (final SdefElement e : sdefsElements) {
-            final String d = descriptions.get(e.getValue());
-            if (d != null) {
-            // e.setComments("\t<!-- " + d + "-->");
-            }
-            e.printXML_previous(dos);
-        }
-        dos.writeBytes(tab(1) + "</" + getTagName() + ">\n");
-
-        if (comments != null) {
-            dos.writeBytes(tab(1) + "<!-- \n");
-            dos.writeBytes(tab(1) + getComments());
-            dos.writeBytes(tab(1) + " -->\n");
-        }
-    }
-
-    /**
-     * 
-     * @param dos
      * @throws java.io.IOException
      */
     public final void printXML(final OutputStreamWriter dos) throws IOException {
@@ -113,36 +88,6 @@ public class SdefsElement extends Element {
             dos.write(tab(1) + "<!-- \n");
             dos.write(tab(1) + getComments());
             dos.write(tab(1) + " -->\n");
-        }
-    }
-
-    /**
-     * 
-     * @param fileName
-     */
-    public void printXML_previous(final String fileName) {
-        BufferedOutputStream bos;
-        FileOutputStream fos;
-        DataOutputStream dos;
-
-        try {
-            fos = new FileOutputStream(fileName);
-            bos = new BufferedOutputStream(fos);
-            dos = new DataOutputStream(bos);
-            dos.writeBytes("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>\n");
-
-            dos.writeBytes("<dictionary>\n");
-            printXML_previous(dos);
-            dos.writeBytes("</dictionary>\n");
-
-            fos = null;
-            bos = null;
-            dos.close();
-            dos = null;
-        } catch (final IOException e) {
-            e.printStackTrace();
-        } catch (final Exception eg) {
-            eg.printStackTrace();
         }
     }
 

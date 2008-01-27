@@ -44,35 +44,6 @@ public class GElement extends ContentElement {
      * @param dos
      * @throws java.io.IOException
      */
-    public final void printXML_previous(final DataOutputStream dos) throws IOException {
-        if (getTagName() != null) {
-            dos.writeBytes("<" + getTagName() + ">");
-        } else {
-            dos.writeBytes("<!-- error tagname -->\n");
-        }
-        if (children != null) {
-            for (final Element e : children) {
-                if (e != null) {
-                    e.printXML_previous(dos);
-                }
-            }
-        }
-        String c = "";
-        if (getComments() != null) {
-            c = getComments();
-        }
-        if (getTagName() != null) {
-            dos.writeBytes("</" + getTagName() + ">" + c + "");
-        } else {
-            dos.writeBytes("<!-- error tagname -->\n");
-        }
-    }
-
-    /**
-     * 
-     * @param dos
-     * @throws java.io.IOException
-     */
     public final void printXML(final OutputStreamWriter dos) throws IOException {
         if (getTagName() != null) {
             dos.write("<" + getTagName() + ">");

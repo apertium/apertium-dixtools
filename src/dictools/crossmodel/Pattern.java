@@ -24,6 +24,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import dics.elements.dtd.EElement;
+import java.io.OutputStreamWriter;
 
 /**
  * 
@@ -113,15 +114,11 @@ public class Pattern {
 	return str;
     }
 
-    /**
-         * 
-         * @param dos
-         */
-    protected final void printXML(DataOutputStream dos) throws IOException {
-	dos.writeBytes("\t<pattern>\n");
-	e1.printXML_previous(dos);
-	e2.printXML_previous(dos);
-	dos.writeBytes("\t</pattern>\n");
+        protected final void printXML(OutputStreamWriter dos) throws IOException {
+	dos.write("\t<pattern>\n");
+	e1.printXML(dos);
+	e2.printXML(dos);
+	dos.write("\t</pattern>\n");
     }
 
 }

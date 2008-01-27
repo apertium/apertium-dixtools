@@ -154,35 +154,6 @@ public class ContentElement extends Element implements Cloneable {
      * @param dos
      * @throws java.io.IOException
      */
-    protected void printXML_previous(final DataOutputStream dos) throws IOException {
-        if (getTagName() != null) {
-            dos.writeBytes(tab(4) + "<" + getTagName() + ">");
-        } else {
-            dos.writeBytes("<!-- error tagname -->\n");
-        }
-        if (getChildren() != null) {
-            for (final Element e : getChildren()) {
-                if (e != null) {
-                    e.printXML_previous(dos);
-                }
-            }
-        }
-        String c = "";
-        if (getComments() != null) {
-            c = getComments();
-        }
-        if (getTagName() != null) {
-            dos.writeBytes("</" + getTagName() + "> " + c + "\n");
-        } else {
-            dos.writeBytes("<!-- error tagname -->\n");
-        }
-    }
-
-    /**
-     * 
-     * @param dos
-     * @throws java.io.IOException
-     */
     protected void printXML(final OutputStreamWriter dos) throws IOException {
         if (getTagName() != null) {
             dos.write(tab(4) + "<" + getTagName() + ">");
@@ -204,35 +175,6 @@ public class ContentElement extends Element implements Cloneable {
             dos.write("</" + getTagName() + "> " + c + "\n");
         } else {
             dos.write("<!-- error tagname -->\n");
-        }
-    }
-
-    /**
-     * 
-     * @param dos
-     * @throws java.io.IOException
-     */
-    protected void printXML1Line_previous(final DataOutputStream dos) throws IOException {
-        if (getTagName() != null) {
-            dos.writeBytes("<" + getTagName() + ">");
-        } else {
-            dos.writeBytes("<!-- error tagname -->");
-        }
-        if (getChildren() != null) {
-            for (final Element e : getChildren()) {
-                if (e != null) {
-                    e.printXML_previous(dos);
-                }
-            }
-        }
-        String c = "";
-        if (getComments() != null) {
-            c = getComments();
-        }
-        if (getTagName() != null) {
-            dos.writeBytes("</" + getTagName() + ">" + c + "");
-        } else {
-            dos.writeBytes("<!-- error tagname -->\n");
         }
     }
 

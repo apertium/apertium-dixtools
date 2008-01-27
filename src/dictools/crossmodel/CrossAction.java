@@ -29,6 +29,7 @@ import dics.elements.dtd.Element;
 import dics.elements.dtd.SElement;
 import dics.elements.dtd.TextElement;
 import dics.elements.utils.ElementList;
+import java.io.OutputStreamWriter;
 
 /**
  * 
@@ -157,15 +158,17 @@ public class CrossAction implements Comparable<CrossAction> {
     /**
      * 
      * @param dos
+     * @param id
+     * @throws java.io.IOException
      */
-    public final void printXML(DataOutputStream dos, int id) throws IOException {
-        dos.writeBytes("<cross-action id=\"ND-" + id + "\">\n");
+    public final void printXML(OutputStreamWriter dos, int id) throws IOException {
+        dos.write("<cross-action id=\"ND-" + id + "\">\n");
         getPattern().printXML(dos);
         if (actionSet != null) {
             getActionSet().printXML(dos);
         }
-        dos.writeBytes("</cross-action>\n");
-        dos.writeBytes("<!-- " + getOccurrences() + " entries like this -->\n\n");
+        dos.write("</cross-action>\n");
+        dos.write("<!-- " + getOccurrences() + " entries like this -->\n\n");
     }
 
     /**
@@ -351,7 +354,7 @@ public class CrossAction implements Comparable<CrossAction> {
                 String text = tE.getValue();
                 if (!text.equals("l1") && !text.equals("l4")) {
                 } else {
-                    
+
                 }
             }
 

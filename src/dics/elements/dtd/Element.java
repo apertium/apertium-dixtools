@@ -54,28 +54,10 @@ public class Element implements Cloneable {
     /**
      * 
      * @param dos
-     * @throws IOException
-     */
-    protected void printXML_previous(final DataOutputStream dos) throws IOException {
-        dos.writeBytes("<" + getTagName() + "/>");
-    }
-
-    /**
-     * 
-     * @param dos
      * @throws java.io.IOException
      */
     protected void printXML(final OutputStreamWriter dos) throws IOException {
         dos.write("<" + getTagName() + "/>");
-    }
-
-    /**
-     * 
-     * @param dos
-     * @throws IOException
-     */
-    protected void printXML1Line_previous(final DataOutputStream dos) throws IOException {
-        dos.writeBytes("<" + getTagName() + "/>");
     }
 
     /**

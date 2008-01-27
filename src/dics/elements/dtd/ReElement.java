@@ -57,18 +57,6 @@ public class ReElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
-    public final void printXML_previous(final DataOutputStream dos) throws IOException {
-        if (value == null) {
-            value = "";
-        }
-        dos.writeBytes(tab(3) + "<" + getTagName() + ">" + getValue() + "</" + getTagName() + ">\n");
-    }
-
-    /**
-     * 
-     * @param dos
-     * @throws java.io.IOException
-     */
     public final void printXML(final OutputStreamWriter dos) throws IOException {
         if (value == null) {
             value = "";

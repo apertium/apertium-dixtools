@@ -80,18 +80,6 @@ public class AlphabetElement extends Element {
     /**
      * 
      * @param dos
-     * @throws IOException
-     */
-    public final void printXML_previous(final DataOutputStream dos) throws IOException {
-        if (isEmpty()) {
-            setAlphabet("");
-        }
-        dos.writeBytes(tab(1) + "<alphabet>" + getAlphabet() + "</alphabet>\n");
-    }
-
-    /**
-     * 
-     * @param dos
      * @throws java.io.IOException
      */
     public final void printXML(final OutputStreamWriter dos) throws IOException {

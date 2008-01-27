@@ -17,13 +17,13 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dictools.crossmodel;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 
 import dics.elements.dtd.EElement;
+import java.io.OutputStreamWriter;
 
 /**
  * 
@@ -33,126 +33,122 @@ import dics.elements.dtd.EElement;
 public class Action {
 
     /**
-         * 
-         */
+     * 
+     */
     private EElement e;
-
     /**
-         * 
-         */
+     * 
+     */
     private String name;
-
     /**
-         * 
-         */
+     * 
+     */
     private Integer patternLength;
-
     /**
-         * 
-         */
+     * 
+     */
     private int numberOfConstants = 0;
 
     /**
-         * 
-         * 
-         */
+     * 
+     * 
+     */
     public Action() {
 
     }
 
     /**
-         * 
-         * @param action
-         */
+     * 
+     * @param action
+     */
     public void setAction(final EElement action) {
-	e = action;
+        e = action;
     }
 
     /**
-         * 
-         * 
-         */
+     * 
+     * 
+     */
     public final void print() {
-	if (e != null) {
-	    System.out.println("action:");
-	    getE().print("L");
-	    getE().print("R");
-	}
+        if (e != null) {
+            System.out.println("action:");
+            getE().print("L");
+            getE().print("R");
+        }
     }
 
     /**
-         * 
-         * @param dos
-         * @throws IOException
-         */
-    public final void printXML(DataOutputStream dos) throws IOException {
-	if (e != null) {
-	    dos.writeBytes("\t<action>\n");
-	    getE().printXML_previous(dos);
-	    dos.writeBytes("\t</action>\n");
-	}
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
+    public final void printXML(OutputStreamWriter dos) throws IOException {
+        if (e != null) {
+            dos.write("\t<action>\n");
+            getE().printXML(dos);
+            dos.write("\t</action>\n");
+        }
 
     }
 
     /**
-         * 
-         * @return Undefined         */
+     * 
+     * @return Undefined         */
     public EElement getE() {
-	return e;
+        return e;
     }
 
     /**
-         * 
-         * @param e
-         */
+     * 
+     * @param e
+     */
     public void setE(final EElement e) {
-	this.e = e;
+        this.e = e;
     }
 
     /**
-         * @return the name
-         */
+     * @return the name
+     */
     public final String getName() {
-	return name;
+        return name;
     }
 
     /**
-         * @param name
-         *                the name to set
-         */
+     * @param name
+     *                the name to set
+     */
     public final void setName(String name) {
-	this.name = name;
+        this.name = name;
     }
 
     public final Integer getPatternLength() {
-	return patternLength;
+        return patternLength;
     }
 
     public final void setPatternLength(Integer patternLength) {
-	this.patternLength = patternLength;
+        this.patternLength = patternLength;
     }
 
     /**
-         * 
-         * @return Undefined         */
+     * 
+     * @return Undefined         */
     public final int getNumberOfConstants() {
-	return numberOfConstants;
+        return numberOfConstants;
     }
 
     /**
-         * 
-         * @param numberOfConstants
-         */
+     * 
+     * @param numberOfConstants
+     */
     public final void setNumberOfConstants(int numberOfConstants) {
-	this.numberOfConstants = numberOfConstants;
+        this.numberOfConstants = numberOfConstants;
     }
 
     /**
-         * 
-         * 
-         */
+     * 
+     * 
+     */
     public final void incrementNumberOfConstants() {
-	numberOfConstants++;
+        numberOfConstants++;
     }
-
 }

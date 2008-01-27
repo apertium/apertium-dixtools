@@ -83,18 +83,6 @@ public class ParElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
-    public final void printXML_previous(final DataOutputStream dos) throws IOException {
-        if (comments == null) {
-            comments = "";
-        }
-        dos.writeBytes(tab(4) + "<" + getTagName() + " n=\"" + n + "\"/> " + getComments() + "\n");
-    }
-
-    /**
-     * 
-     * @param dos
-     * @throws java.io.IOException
-     */
     public final void printXML(final OutputStreamWriter dos) throws IOException {
         if (comments == null) {
             comments = "";

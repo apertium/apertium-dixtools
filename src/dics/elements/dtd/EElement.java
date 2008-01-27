@@ -430,46 +430,6 @@ public class EElement extends Element implements Cloneable,
      * @param dos
      * @throws java.io.IOException
      */
-    public final void printXML_previous(final DataOutputStream dos) throws IOException {
-        String attributes = "";
-        if (r != null) {
-            attributes += " r=\"" + r + "\"";
-        }
-        if (lm != null) {
-            attributes += " lm=\"" + lm + "\"";
-        }
-        if (a != null) {
-            attributes += " a=\"" + a + "\"";
-        }
-        if (c != null) {
-            attributes += " c=\"" + c + "\"";
-        }
-        if (aversion != null) {
-            attributes += " aversion=\"" + aversion + "\"";
-        }
-
-        if (comments != null) {
-            dos.writeBytes(tab(2) + "<!-- \n");
-            dos.writeBytes(comments);
-            if (!isCommon()) {
-                dos.writeBytes(tab(2) + "esta entrada no aparece en el otro morfolgico\n");
-            }
-            dos.writeBytes(tab(2) + "-->\n");
-        }
-        dos.writeBytes(tab(2) + "<e" + attributes + ">\n");
-        if (children != null) {
-            for (final Element e : children) {
-                e.printXML_previous(dos);
-            }
-        }
-        dos.writeBytes(tab(2) + "</e>\n\n");
-    }
-
-    /**
-     * 
-     * @param dos
-     * @throws java.io.IOException
-     */
     public final void printXML(final OutputStreamWriter dos) throws IOException {
         String attributes = "";
         if (r != null) {
@@ -503,46 +463,6 @@ public class EElement extends Element implements Cloneable,
             }
         }
         dos.write(tab(2) + "</e>\n\n");
-    }
-
-    /**
-     * 
-     * @param dos
-     * @throws java.io.IOException
-     */
-    public final void printXML1Line_previous(final DataOutputStream dos)
-            throws IOException {
-        String attributes = "";
-        if (r != null) {
-            attributes += " r=\"" + r + "\"";
-        }
-        if (lm != null) {
-            attributes += " lm=\"" + lm + "\"";
-        }
-        if (a != null) {
-            attributes += " a=\"" + a + "\"";
-        }
-        if (c != null) {
-            attributes += " c=\"" + c + "\"";
-        }
-        if (aversion != null) {
-            attributes += " aversion=\"" + aversion + "\"";
-        }
-        if (comments != null) {
-            dos.writeBytes(tab(2) + "<!-- \n");
-            dos.writeBytes(comments);
-            if (!isCommon()) {
-                dos.writeBytes(tab(2) + "esta entrada no aparece en el otro morfolgico\n");
-            }
-            dos.writeBytes(tab(2) + "-->\n");
-        }
-        dos.writeBytes("<e" + attributes + ">");
-        if (children != null) {
-            for (final Element e : children) {
-                e.printXML1Line_previous(dos);
-            }
-        }
-        dos.writeBytes("</e>\n");
     }
 
     /**

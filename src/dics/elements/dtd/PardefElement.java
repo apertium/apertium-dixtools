@@ -88,24 +88,6 @@ public class PardefElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
-    public final void printXML_previous(final DataOutputStream dos) throws IOException {
-        if (comments != null) {
-            dos.writeBytes(tab(2) + "<!--\n");
-            dos.writeBytes(tab(2) + comments);
-            dos.writeBytes(tab(2) + "-->\n");
-        }
-        dos.writeBytes(tab(2) + "<pardef n=\"" + n + "\">\n");
-        for (final EElement e : eElements) {
-            e.printXML_previous(dos);
-        }
-        dos.writeBytes(tab(2) + "</pardef>\n");
-    }
-
-    /**
-     * 
-     * @param dos
-     * @throws java.io.IOException
-     */
     public final void printXML(final OutputStreamWriter dos) throws IOException {
         if (comments != null) {
             dos.write(tab(2) + "<!--\n");

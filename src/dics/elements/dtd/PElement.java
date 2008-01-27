@@ -108,22 +108,6 @@ public class PElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
-    public final void printXML_previous(final DataOutputStream dos) throws IOException {
-        dos.writeBytes(tab(3) + "<" + getTagName() + ">\n");
-        if (l != null) {
-            l.printXML_previous(dos);
-        }
-        if (r != null) {
-            r.printXML_previous(dos);
-        }
-        dos.writeBytes(tab(3) + "</" + getTagName() + ">\n");
-    }
-
-    /**
-     * 
-     * @param dos
-     * @throws java.io.IOException
-     */
     public final void printXML(final OutputStreamWriter dos) throws IOException {
         dos.write(tab(3) + "<" + getTagName() + ">\n");
         if (l != null) {
@@ -133,19 +117,6 @@ public class PElement extends Element {
             r.printXML(dos);
         }
         dos.write(tab(3) + "</" + getTagName() + ">\n");
-    }
-
-    /**
-     * 
-     * @param dos
-     * @throws java.io.IOException
-     */
-    public final void printXML1Line_previous(final DataOutputStream dos)
-            throws IOException {
-        dos.writeBytes("<" + getTagName() + ">");
-        l.printXML1Line_previous(dos);
-        r.printXML1Line_previous(dos);
-        dos.writeBytes("</" + getTagName() + ">");
     }
 
     /**

@@ -122,24 +122,6 @@ public class SectionElement extends Element {
 
     /**
      * 
-     */
-    public final void printXML_previous(final DataOutputStream dos) throws IOException {
-        String attributes = "";
-        if (getID() != null) {
-            attributes += " id=\"" + getID() + "\"";
-        }
-        if (getType() != null) {
-            attributes += " type=\"" + getType() + "\"";
-        }
-        dos.writeBytes(tab(1) + "<" + getTagName() + "" + attributes + ">\n");
-        for (final EElement e : eElements) {
-            e.printXML_previous(dos);
-        }
-        dos.writeBytes(tab(1) + "</" + getTagName() + ">\n");
-    }
-
-    /**
-     * 
      * @param dos
      * @throws java.io.IOException
      */
@@ -156,40 +138,6 @@ public class SectionElement extends Element {
             e.printXML(dos);
         }
         dos.write(tab(1) + "</" + getTagName() + ">\n");
-    }
-
-    /**
-     * 
-     * @param fileName
-     */
-    public void printXMLXInclude_previous(final String fileName) {
-        BufferedOutputStream bos;
-        FileOutputStream fos;
-        DataOutputStream dos;
-
-        try {
-            fos = new FileOutputStream(fileName);
-            bos = new BufferedOutputStream(fos);
-            dos = new DataOutputStream(bos);
-            dos.writeBytes("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>\n");
-
-            dos.writeBytes("<dictionary>\n");
-            dos.writeBytes("<section>\n");
-            for (final EElement e : eElements) {
-                e.printXML_previous(dos);
-            }
-            dos.writeBytes("</section>\n");
-            dos.writeBytes("</dictionary>\n");
-
-            fos = null;
-            bos = null;
-            dos.close();
-            dos = null;
-        } catch (final IOException e) {
-            e.printStackTrace();
-        } catch (final Exception eg) {
-            eg.printStackTrace();
-        }
     }
 
     /**

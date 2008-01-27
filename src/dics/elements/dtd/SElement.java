@@ -90,15 +90,6 @@ public class SElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
-    public final void printXML_previous(final DataOutputStream dos) throws IOException {
-        dos.writeBytes("<" + getTagName() + " n=\"" + getValue() + "\"/>");
-    }
-
-    /**
-     * 
-     * @param dos
-     * @throws java.io.IOException
-     */
     public final void printXML(final OutputStreamWriter dos) throws IOException {
         dos.write("<" + getTagName() + " n=\"" + getValue() + "\"/>");
     }

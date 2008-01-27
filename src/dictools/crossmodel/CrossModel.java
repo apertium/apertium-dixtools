@@ -17,13 +17,13 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dictools.crossmodel;
 
 import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.Collections;
 
 /**
@@ -34,118 +34,147 @@ import java.util.Collections;
 public class CrossModel {
 
     /**
-         * 
-         */
+     * 
+     */
     private CrossActionList crossActions;
-    
     /**
      * 
      */
     private String fileName;
-    
     /**
      * 
      */
     private String filePath;
+    /**
+     * 
+     */
+    private String encoding = "UTF-8";
 
     /**
-         * 
-         * 
-         */
+     * 
+     * 
+     */
     public CrossModel() {
-	crossActions = new CrossActionList();
+        crossActions = new CrossActionList();
     }
 
     /**
-         * 
-         * @param crossAction
-         */
+     * 
+     * @param crossAction
+     */
     public void addCrossAction(final CrossAction crossAction) {
-	crossActions.add(crossAction);
+        crossActions.add(crossAction);
     }
 
     /**
-         * 
-         * @return Undefined         */
+     * 
+     * @return Undefined         */
     public CrossActionList getCrossActions() {
-	return crossActions;
+        return crossActions;
     }
 
     /**
-         * 
-         * @param id
-         * @return Undefined         */
+     * 
+     * @param id
+     * @return Undefined         */
     public final CrossAction getCrossAction(final String id) {
-	for (final CrossAction ca : getCrossActions()) {
-	    if (ca.getId().equals(id)) {
-		return ca;
-	    }
-	}
-	return null;
+        for (final CrossAction ca : getCrossActions()) {
+            if (ca.getId().equals(id)) {
+                return ca;
+            }
+        }
+        return null;
     }
 
     /**
-         * 
-         * @param fileName
-         */
+     * 
+     * @param fileName
+     */
     public void printXML(final String fileName) {
-	BufferedOutputStream bos;
-	FileOutputStream fos;
-	DataOutputStream dos;
-
-	try {
-	    fos = new FileOutputStream(fileName);
-	    bos = new BufferedOutputStream(fos);
-	    dos = new DataOutputStream(bos);
-	    dos.writeBytes("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>\n");
-	    dos.writeBytes("<!-- Examples of patterns not found -->\n");
-	    dos.writeBytes("<cross-model>\n");
-	    int i = 0;
-	    CrossActionList cal = getCrossActions();
-	    Collections.sort(cal);
-	    for (CrossAction crossAction : cal) {
-		crossAction.printXML(dos, i);
-		i++;
-	    }
-	    dos.writeBytes("</cross-model>\n");
-	    dos.writeBytes("<!-- " + i + " cross actions. -->\n");
-
-	    fos = null;
-	    bos = null;
-	    dos.close();
-	    dos = null;
-	} catch (final IOException e) {
-	    e.printStackTrace();
-	} catch (final Exception eg) {
-	    eg.printStackTrace();
-	}
+        this.printXML(fileName, this.getEncoding());
     }
-    
+
+    /**
+     * 
+     * @param fileName
+     * @param encoding
+     */
+    public void printXML(final String fileName, final String encoding) {
+        BufferedOutputStream bos;
+        FileOutputStream fos;
+        //DataOutputStream dos;
+        OutputStreamWriter dos;
+
+        try {
+            fos = new FileOutputStream(fileName);
+            bos = new BufferedOutputStream(fos);
+            //dos = new DataOutputStream(bos);
+            dos = new OutputStreamWriter(bos, encoding);
+            dos.write("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
+            dos.write("<!-- Examples of patterns not found -->\n");
+            dos.write("<cross-model>\n");
+            int i = 0;
+            CrossActionList cal = getCrossActions();
+            Collections.sort(cal);
+            for (CrossAction crossAction : cal) {
+                crossAction.printXML(dos, i);
+                i++;
+            }
+            dos.write("</cross-model>\n");
+            dos.write("<!-- " + i + " cross actions. -->\n");
+
+            fos = null;
+            bos = null;
+            dos.close();
+            dos = null;
+        } catch (final IOException e) {
+            e.printStackTrace();
+        } catch (final Exception eg) {
+            eg.printStackTrace();
+        }
+    }
+
     /**
      * 
      */
     public final String getFileName() {
         return this.fileName;
     }
-    
+
     /**
      * 
      */
     public final void setFileName(final String fileName) {
         this.fileName = fileName;
     }
-    
+
     /**
      * 
      */
     public final String getFilePath() {
         return this.filePath;
     }
-    
+
     /**
      * 
      */
     public final void setFilePath(final String filePath) {
-       this.filePath = filePath; 
+        this.filePath = filePath;
+    }
+
+    /**
+     * 
+     * @return Undefined
+     */
+    public final String getEncoding() {
+        return this.encoding;
+    }
+
+    /**
+     * 
+     * @param encoding
+     */
+    public final void setEncoding(final String encoding) {
+        this.encoding = encoding;
     }
 }
