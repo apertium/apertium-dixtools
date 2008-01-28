@@ -17,13 +17,12 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dictools.crossmodel;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
 
 import dics.elements.dtd.EElement;
+import dics.elements.utils.Msg;
 import java.io.OutputStreamWriter;
 
 /**
@@ -34,91 +33,94 @@ import java.io.OutputStreamWriter;
 public class Pattern {
 
     /**
-         * 
-         */
+     * 
+     */
     private EElement e1;
-
     /**
-         * 
-         */
+     * 
+     */
     private EElement e2;
 
     /**
-         * 
-         * 
-         */
+     * 
+     * 
+     */
     public Pattern() {
 
     }
 
     /**
-         * 
-         * @param ab
-         * @param bc
-         */
+     * 
+     * @param ab
+     * @param bc
+     */
     public Pattern(final EElement ab, final EElement bc) {
-	e1 = ab;
-	e2 = bc;
+        e1 = ab;
+        e2 = bc;
     }
 
     /**
-         * 
-         * @return Undefined         */
+     * 
+     * @return Undefined         */
     public EElement getAB() {
-	return e1;
+        return e1;
     }
 
     /**
-         * 
-         * @return Undefined         */
+     * 
+     * @return Undefined         */
     public EElement getBC() {
-	return e2;
+        return e2;
     }
 
     /**
-         * 
-         * @param ab
-         */
+     * 
+     * @param ab
+     */
     public void setAB(final EElement ab) {
-	e1 = ab;
+        e1 = ab;
     }
 
     /**
-         * 
-         * @param bc
-         */
+     * 
+     * @param bc
+     */
     public void setBC(final EElement bc) {
-	e2 = bc;
+        e2 = bc;
     }
 
     /**
-         * 
-         * 
-         */
-    public final void print() {
-	System.out.println("Pattern:");
-	getAB().print("L");
-	getAB().print("R");
-	getBC().print("L");
-	getBC().print("R");
+     * 
+     * @param msg
+     */
+    public final void print(Msg msg) {
+        msg.log("Pattern:\n");
+        getAB().print("L", msg);
+        getAB().print("R", msg);
+        getBC().print("L", msg);
+        getBC().print("R", msg);
     }
 
     /**
-         * 
-         */
+     * 
+     */
     @Override
     public final String toString() {
-	String e1 = getAB().toString2();
-	String e2 = getBC().toString2();
-	String str = e1 + "/" + e2;
-	return str;
+        String e1 = getAB().toString2();
+        String e2 = getBC().toString2();
+        String str = e1 + "/" + e2;
+        return str;
     }
 
-        protected final void printXML(OutputStreamWriter dos) throws IOException {
-	dos.write("\t<pattern>\n");
-	e1.printXML(dos);
-	e2.printXML(dos);
-	dos.write("\t</pattern>\n");
+    /**
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
+    protected final void printXML(OutputStreamWriter dos) throws IOException {
+        dos.write("\t<pattern>\n");
+        e1.printXML(dos);
+        e2.printXML(dos);
+        dos.write("\t</pattern>\n");
     }
-
 }

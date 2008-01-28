@@ -19,7 +19,6 @@
  */
 package dictools.crossmodel;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -29,6 +28,7 @@ import dics.elements.dtd.Element;
 import dics.elements.dtd.SElement;
 import dics.elements.dtd.TextElement;
 import dics.elements.utils.ElementList;
+import dics.elements.utils.Msg;
 import java.io.OutputStreamWriter;
 
 /**
@@ -142,16 +142,15 @@ public class CrossAction implements Comparable<CrossAction> {
      * 
      * 
      */
-    public final void print() {
-        // System.err.println("CROSS-ACTION:");
+    public final void print(Msg msg) {
         if (pattern != null) {
-            getPattern().print();
+            getPattern().print(msg);
         }
         if (constants != null) {
             getConstants().print();
         }
         if (actionSet != null) {
-            getActionSet().print();
+            getActionSet().print(msg);
         }
     }
 
@@ -178,8 +177,7 @@ public class CrossAction implements Comparable<CrossAction> {
         ElementList eList = new ElementList();
         try {
             HashMap<String, String> hm = new HashMap<String, String>();
-            Pattern pattern = getPattern();
-
+            //Pattern pattern = getPattern();
             Integer j = new Integer(0);
 
             EElement e1 = pattern.getAB();
@@ -236,8 +234,7 @@ public class CrossAction implements Comparable<CrossAction> {
 
         HashMap<String, String> hm = new HashMap<String, String>();
         ElementList eList = new ElementList();
-
-        Pattern pattern = getPattern();
+        //Pattern pattern = getPattern();
 
         Integer j = new Integer(0);
 
@@ -342,7 +339,8 @@ public class CrossAction implements Comparable<CrossAction> {
      * @param eList
      * @param j
      * @param hm
-     * @return Undefined     */
+     * @return Undefined     
+     */
     private final Integer tagAction(ContentElement ce, Integer j,
             HashMap<String, String> hm, final String pref) {
         int p = 1;
@@ -357,8 +355,6 @@ public class CrossAction implements Comparable<CrossAction> {
 
                 }
             }
-
-
             if (e instanceof SElement) {
                 String pos;
                 SElement sElement = (SElement) e.clone();
@@ -372,11 +368,6 @@ public class CrossAction implements Comparable<CrossAction> {
                     hm.put(value, pos);
                 }
 
-                /*
-                 * SElement sElement = (SElement) e.clone();
-                 * ce.getChildren().set(k, sElement); String value =
-                 * sElement.getValue();
-                 */
                 if (Character.isUpperCase(value.charAt(0)) && Character.isDigit(value.charAt(value.length() - 1))) {
                     if (value.charAt(0) == 'S') {
                         String n = new String("0");
@@ -387,12 +378,6 @@ public class CrossAction implements Comparable<CrossAction> {
                         sElement.setValue(n);
                         sElement.setTemp(value);
                     }
-                /*
-                 * String pos; if (hm.containsKey(value)) { pos =
-                 * hm.get(value); } else { pos = pref + "-" + p;
-                 * hm.put(value, pos); p++; } String n = pos.toString();
-                 * sElement.setValue(n); sElement.setTemp(value);
-                 */
                 } else {
                     if (!Character.isDigit(value.charAt(0))) {
                         sElement.setValue(value);
@@ -409,7 +394,8 @@ public class CrossAction implements Comparable<CrossAction> {
      * @param eList
      * @param j
      * @param hm
-     * @return Undefined     */
+     * @return Undefined    
+     */
     private final Integer tagElements(ContentElement ce, ElementList eList,
             Integer j, HashMap<String, String> hm, final String pref) {
         int p = 1;
@@ -420,10 +406,8 @@ public class CrossAction implements Comparable<CrossAction> {
                 // adds lemma to list of elements
                 TextElement tE = (TextElement) e;
                 tE.setTemp(tE.getValue());
-                // System.out.println("..tagging '" + tE.getValue() + "'");
                 eList.add(tE);
             }
-
             if (e instanceof SElement) {
                 String value = e.getValue();
                 String pos;
@@ -488,19 +472,14 @@ public class CrossAction implements Comparable<CrossAction> {
      */
     public int compareTo(final CrossAction anotherEElement)
             throws ClassCastException {
-
         if (anotherEElement == null) {
             return -1;
         }
-
         if (!(anotherEElement instanceof CrossAction)) {
             throw new ClassCastException("A CrossAction object expected.");
         }
-
         final int occ1 = getOccurrences();
-
         final int occ2 = (anotherEElement).getOccurrences();
-
         if (occ1 == occ2) {
             return 0;
         }

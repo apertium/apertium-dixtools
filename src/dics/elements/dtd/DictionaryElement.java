@@ -20,7 +20,6 @@
 package dics.elements.dtd;
 
 import java.io.BufferedOutputStream;
-import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -370,14 +369,12 @@ public class DictionaryElement extends Element {
     public void printXML(final String fileName, final String encoding) {
         BufferedOutputStream bos;
         FileOutputStream fos;
-        //DataOutputStream dos;
         OutputStreamWriter dos;
         setFileName(fileName);
         try {
             fos = new FileOutputStream(fileName);
             bos = new BufferedOutputStream(fos);
             dos = new OutputStreamWriter(bos, encoding);
-            //dos = new DataOutputStream(bos);
             dos.write("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
             dos.write("<!--\n\tDictionary:\n");
             if (sections != null) {

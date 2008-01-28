@@ -19,7 +19,6 @@
  */
 package dics.elements.dtd;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;

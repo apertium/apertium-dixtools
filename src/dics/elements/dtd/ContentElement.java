@@ -19,10 +19,10 @@
  */
 package dics.elements.dtd;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
 
 import dics.elements.utils.ElementList;
+import dics.elements.utils.Msg;
 import dics.elements.utils.SElementList;
 import java.io.OutputStreamWriter;
 
@@ -346,14 +346,10 @@ public class ContentElement extends Element implements Cloneable {
         if (tagName == null) {
             tagName = "";
         }
-
         String sList = getString();
         if (sList == null) {
             sList = "";
         }
-
-        // final String str = "<" + tagName + ">" + "</" + tagName + ">" +
-        // sList;
         final String str = sList;
         return str;
     }
@@ -362,15 +358,15 @@ public class ContentElement extends Element implements Cloneable {
      * 
      * 
      */
-    public final void print() {
-        System.err.print(value + " / ");
+    public final void print(Msg msg) {
+        msg.log(value + " / ");
         final SElementList sList = getSElements();
         if (sList != null) {
             for (final SElement s : getSElements()) {
-                System.err.print(s);
+                msg.log(s.toString());
             }
         }
-        System.err.println("");
+        msg.log("\n");
     }
 
     /**

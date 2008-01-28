@@ -184,7 +184,7 @@ public class DicCross {
      * 
      */
     private String monCCrossed_path;
-
+    
     /**
      *
      *
@@ -202,6 +202,7 @@ public class DicCross {
         usedPatterns = new HashMap<String, Integer>();
         taskOrder = 1;
     }
+   
 
     /**
      *
@@ -209,13 +210,14 @@ public class DicCross {
      */
     private final void readCrossModel() {
         try {
-            System.out.print("[" + (taskOrder++) + "] Reading cross model (" + getCrossModelFileName() + ")");
+            msg.out("[" + (taskOrder++) + "] Reading cross model (" + getCrossModelFileName() + ")");
             final CrossModelReader cmr = new CrossModelReader(getCrossModelFileName());
             CrossModel cm = cmr.readCrossModel();
             msg.out(" (" + cm.getCrossActions().size() + " patterns processed).");
 
             setCrossModel(cm);
             CrossModelFST fst = new CrossModelFST(getCrossModel());
+            fst.setMsg(msg);
             setCrossModelFST(fst);
         } catch (final Exception e) {
             e.printStackTrace();
@@ -553,8 +555,8 @@ public class DicCross {
             e1 = aux;
         }
 
-        msg.log("crossing " + e1.getValue() + " and " + e2.getValue());
-        msg.msg("crossing " + e1.getValue("R") + " and " + e2.getValue("R"));
+        msg.log("crossing " + e1.getValue("R") + " and " + e2.getValue("R") + "\n");
+        msg.msg("crossing " + e1.getValue("R") + " and " + e2.getValue("R") + "\n");
 
         CrossAction crossAction = new CrossAction();
         Pattern entriesPattern = new Pattern(e1.reverse(), e2);
@@ -565,10 +567,10 @@ public class DicCross {
             if (actionID.equals("default")) {
                 insertNDCrossAction(crossAction);
             }
-            e1.print("R");
-            e1.print("L");
-            e2.print("L");
-            e2.print("R");
+            e1.print("R", msg);
+            e1.print("L", msg);
+            e2.print("L", msg);
+            e2.print("R", msg);
 
             EElementList actionEList = applyCrossAction(e1, e2, actionID, crossAction);
             return actionEList;
@@ -617,12 +619,10 @@ public class DicCross {
 
                 actionE.addComments(actionID);
 
-                System.err.println("Pattern (winner): " + actionID);
-
+                msg.log("Pattern (winner): " + actionID + "\n");
                 // Eliminar las siguientes dos líneas
-                actionE.print("L");
-                actionE.print("R");
-
+                actionE.print("L", msg);
+                actionE.print("R", msg);
                 elementList.add(actionE);
             } else {
                 return null;
@@ -648,7 +648,8 @@ public class DicCross {
         LElement lE2 = new LElement();
         RElement rE2 = new RElement();
 
-        System.err.println("Tails:");
+        //System.err.println("Tails:");
+        msg.log("Tails:\n");
         this.printTails(tails);
 
         assignValuesSide(lE2, lE, constants, e1, tails);
@@ -672,12 +673,11 @@ public class DicCross {
             while (it.hasNext()) {
                 String key = (String) it.next();
                 ElementList eList = tails.get(key);
-                System.err.print(key + ": ");
-                eList.printErr();
+                //System.err.print(key + ": ");
+                msg.log(key +  ": ");
+                //eList.printErr();
             }
         }
-
-
     }
 
     private final void assignValuesSide(ContentElement ceWrite, final ContentElement ceRead, final ConstantMap constants, final EElement ei, HashMap<String, ElementList> tails) {
@@ -1120,7 +1120,8 @@ public class DicCross {
         String patterns = "";
         bilCrossed.addComments("");
         bilCrossed.addComments("Patterns applied:");
-        System.err.println("Patterns applied:");
+        //System.err.println("Patterns applied:");
+        msg.log("Patterns applied:");
         for (CrossAction cA : getCrossModel().getCrossActions()) {
             String cAName = cA.getId();
             if (!usedPatterns.containsKey(cAName)) {
@@ -1131,18 +1132,18 @@ public class DicCross {
                 }
                 i++;
             } else {
-                String msg = "\t" + cAName + " (" + usedPatterns.get(cAName) + " times)";
-                System.err.println(msg);
-                bilCrossed.addComments(msg);
+                String mesg = "\t" + cAName + " (" + usedPatterns.get(cAName) + " times)";
+                //System.err.println(mesg);
+                msg.log(mesg);
+                bilCrossed.addComments(mesg);
             }
         }
-        System.err.println("[" + (taskOrder++) + "] Patterns never applied: " + patterns);
-
+        //System.err.println("[" + (taskOrder++) + "] Patterns never applied: " + patterns);
+        msg.log("[" + (taskOrder++) + "] Patterns never applied: " + patterns + "\n");
         msg.out("[" + (taskOrder++) + "] Generating crossed dictionaries ...");
 
         this.bilCrossed_path = this.getOutDir() + "apertium-" + sl + "-" + tl + "." + sl + "-" + tl + "-crossed.dix";
         bilCrossed.printXML(this.bilCrossed_path);
-
 
         // This dictionary is not printed anymore
         // Default cross action in cross model replaces this idea of dic. of
@@ -1197,14 +1198,14 @@ public class DicCross {
                 i++;
                 arg = getArguments()[i];
                 sDicMonA = arg;
-                System.err.println("Monolingual A: '" + sDicMonA + "'");
+                //System.err.println("Monolingual A: '" + sDicMonA + "'");
             }
 
             if (arg.equals("-monC")) {
                 i++;
                 arg = getArguments()[i];
                 sDicMonC = arg;
-                System.err.println("Monolingual C: '" + sDicMonC + "'");
+                //System.err.println("Monolingual C: '" + sDicMonC + "'");
             }
 
             if (arg.equals("-bilAB")) {
@@ -1221,7 +1222,7 @@ public class DicCross {
 
                 arg = getArguments()[i];
                 sDicBilAB = arg;
-                System.err.println("Bilingual A-B: '" + sDicBilAB + "'");
+                //System.err.println("Bilingual A-B: '" + sDicBilAB + "'");
             }
 
             if (arg.equals("-bilBC")) {
@@ -1238,14 +1239,14 @@ public class DicCross {
                 }
                 arg = getArguments()[i];
                 sDicBilBC = arg;
-                System.err.println("Bilingual B-C: '" + sDicBilBC + "'");
+                //System.err.println("Bilingual B-C: '" + sDicBilBC + "'");
             }
 
             if (arg.equals("-cross-model")) {
                 i++;
                 arg = getArguments()[i];
                 setCrossModelFileName(arg);
-                System.err.println("Cross model: " + arg);
+                //System.err.println("Cross model: " + arg);
             }
 
             if (arg.equals("-debug")) {

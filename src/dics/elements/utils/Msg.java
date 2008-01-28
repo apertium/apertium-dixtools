@@ -18,12 +18,17 @@
  * 02111-1307, USA.
  */
 
+
+
 package dics.elements.utils;
+
+//~--- JDK imports ------------------------------------------------------------
 
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
 import javax.swing.JLabel;
 
 /**
@@ -36,37 +41,43 @@ public class Msg {
     /**
      *
      */
-    private boolean debug;
-    /**
-     *
-     */
-    private String logFileName;
-    /**
-     *
-     */
-    private DataOutputStream log;
-    /**
-     *
-     */
-    private JLabel label;
-    /**
-     *
-     */
-    private int type = 0;
+    static final int LABEL = 1;
+
     /**
      *
      */
     static final int NORMAL = 0;
+
     /**
      *
      */
-    static final int LABEL = 1;
+    private int type = 0;
+
+    /**
+     *
+     */
+    private boolean debug;
+
+    /**
+     *
+     */
+    private JLabel label;
+
+    /**
+     *
+     */
+    private DataOutputStream log;
+
+    /**
+     *
+     */
+    private String logFileName;
 
     /**
      *
      *
      */
-    public Msg(final String logFileName) {
+    public Msg() {
         debug = false;
     }
 
@@ -82,8 +93,9 @@ public class Msg {
      *
      *
      */
-    public Msg() {
-        debug = false;
+    public Msg(final String logFileName) {
+        debug            = false;
+        this.logFileName = logFileName;
     }
 
     /**
@@ -92,8 +104,15 @@ public class Msg {
      */
     private final void openLogStream(final String logFileName) {
         try {
-            File file = new File(logFileName);
-            FileOutputStream fos = new FileOutputStream(file);
+
+            // Msg will be change to Logger soon...
+            // boolean append = true;
+            // FileHandler handler = new FileHandler(logFileName, append);
+            // Logger logger = Logger.getLogger("crossdics");
+            // logger.addHandler(handler);
+            File             file = new File(logFileName);
+            FileOutputStream fos  = new FileOutputStream(file);
+
             log = new DataOutputStream(fos);
         } catch (IOException e) {
             e.printStackTrace();
@@ -113,29 +132,33 @@ public class Msg {
      * @param text
      */
     public final void out(final String text) {
-
         switch (this.getType()) {
-            case LABEL:
-                label.setText(text);
-                break;
-            default:
-                System.out.println(text);
-                break;
+        case LABEL :
+            label.setText(text);
+
+            break;
+
+        default :
+            System.out.println(text);
+
+            break;
         }
     }
 
     /**
-     * 
+     *
      */
     public final void msg(final String text) {
 
         // Only for Java components (JLabel, etc)
         switch (this.getType()) {
-            case LABEL:
-                label.setText(text);
-                break;
-            default:
-                break;
+        case LABEL :
+            label.setText(text);
+
+            break;
+
+        default :
+            break;
         }
     }
 
@@ -148,8 +171,9 @@ public class Msg {
             if (log == null) {
                 openLogStream(logFileName);
             }
+
             try {
-                log.writeBytes(text + "\n");
+                log.writeBytes(text);
             } catch (IOException ioe) {
                 System.err.println("Error writing log file " + getLogFileName());
             }
@@ -184,6 +208,7 @@ public class Msg {
      */
     public final void setLogFileName(String logFileName) {
         this.logFileName = logFileName;
+
         if (isDebug()) {
             openLogStream(logFileName);
         }
@@ -208,6 +233,9 @@ public class Msg {
      */
     public final void setLabel(JLabel label) {
         this.label = label;
-        this.type = this.LABEL;
+        this.type  = this.LABEL;
     }
 }
+
+
+//~ Formatted by Jindent --- http://www.jindent.com

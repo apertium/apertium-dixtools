@@ -20,7 +20,6 @@
 package dictools.crossmodel;
 
 import java.io.BufferedOutputStream;
-import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -102,13 +101,11 @@ public class CrossModel {
     public void printXML(final String fileName, final String encoding) {
         BufferedOutputStream bos;
         FileOutputStream fos;
-        //DataOutputStream dos;
         OutputStreamWriter dos;
 
         try {
             fos = new FileOutputStream(fileName);
             bos = new BufferedOutputStream(fos);
-            //dos = new DataOutputStream(bos);
             dos = new OutputStreamWriter(bos, encoding);
             dos.write("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
             dos.write("<!-- Examples of patterns not found -->\n");

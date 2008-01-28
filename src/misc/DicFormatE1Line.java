@@ -20,7 +20,6 @@
 package misc;
 
 import java.io.BufferedOutputStream;
-import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -63,7 +62,6 @@ public class DicFormatE1Line {
     public void printXML(final String fileName, final String encoding) {
         BufferedOutputStream bos;
         FileOutputStream fos;
-        //DataOutputStream dos;
         OutputStreamWriter dos;
 
         dic.setFileName(fileName);

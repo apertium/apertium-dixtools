@@ -19,10 +19,10 @@
  */
 package dictools.crossmodel;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
 
 import dics.elements.dtd.EElement;
+import dics.elements.utils.Msg;
 import java.io.OutputStreamWriter;
 
 /**
@@ -69,11 +69,11 @@ public class Action {
      * 
      * 
      */
-    public final void print() {
+    public final void print(Msg msg) {
         if (e != null) {
-            System.out.println("action:");
-            getE().print("L");
-            getE().print("R");
+            msg.log("action:\n");
+            getE().print("L", msg);
+            getE().print("R", msg);
         }
     }
 

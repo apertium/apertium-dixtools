@@ -17,9 +17,9 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dictools.crossmodel;
 
+import dics.elements.utils.Msg;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -36,11 +36,22 @@ public class ActionSetList extends HashMap<String, ActionSet> {
      * 
      */
     private static final long serialVersionUID = 1L;
-    
     /**
      * 
      */
     private ActionSet bestActionSet;
+    
+    /**
+     * 
+     */
+    private Msg msg;
+    
+    /**
+     * Constructor
+     */
+    public ActionSetList(Msg msg) {
+        this.msg = msg;
+    }
 
     /**
      * 
@@ -52,20 +63,18 @@ public class ActionSetList extends HashMap<String, ActionSet> {
         int max = size();
         int cont = 1;
 
-        System.err.print("{ ");
+        msg.log("{ ");
         while (it.hasNext()) {
             String key = (String) it.next();
             ActionSet actionSet = get(key);
-
-                System.err.print(actionSet.getName() + " (" + actionSet.getPatternLength() + "/" + actionSet.getNumberOfConstants() + ")");
-                if (cont < max) {
-                    System.err.print(", ");
-                    cont++;
-                }
+            msg.log(actionSet.getName() + " (" + actionSet.getPatternLength() + "/" + actionSet.getNumberOfConstants() + ")");
+            if (cont < max) {
+                msg.log(", ");
+                cont++;
+            }
         }
-        System.err.println(" }");
+        msg.log(" }\n");
     }
-
 
     /**
      * 
@@ -99,13 +108,13 @@ public class ActionSetList extends HashMap<String, ActionSet> {
 
         ArrayList<ActionSet> longestPatterns = this.getLongestPatterns(actionSetList);
         this.getMostConcretePatterns(longestPatterns);
-        
+
         if (!isDefinedBestAction() && defaultCanBeApplied) {
             setBestActionSet(defaultActionSet);
         }
         return bestActionSet;
     }
-    
+
     /**
      * 
      * @param actionSetList
@@ -126,7 +135,7 @@ public class ActionSetList extends HashMap<String, ActionSet> {
         }
         return longestPatterns;
     }
-    
+
     /**
      * 
      * @param actionSetList
@@ -142,22 +151,20 @@ public class ActionSetList extends HashMap<String, ActionSet> {
             }
         }
     }
-    
+
     /**
      * 
      * @return Undefined     */
     private final boolean isDefinedBestAction() {
         return this.bestActionSet != null;
     }
-    
+
     /**
      * 
      * @param action
      */
     private final void setBestActionSet(ActionSet action) {
         this.bestActionSet = action;
-        
+
     }
-    
-    
 }

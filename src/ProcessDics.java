@@ -30,6 +30,8 @@ import dictools.DicMerge;
 import dictools.DicReader;
 import dictools.DicReverse;
 import dictools.DicSort;
+import dictools.apertiumizer.Apertiumizer;
+import dictools.dix2trie.Dix2Trie;
 
 /**
  *
@@ -84,174 +86,307 @@ public class ProcessDics {
      */
     public final void checkAction() {
         if (getArguments().length == 0) {
-            msg.err("");
-            msg.err("Usage: java -jar path/to/crossdics.jar <task> [options]");
-            msg.err("");
-            msg.err("where <task> can be:");
-            msg.err("   cross:              crosses a set of dictionaries");
-            msg.err("   dic-reader:         reads elements from a dictionary");
-            msg.err("   equiv-paradigms:    finds equivalent paradigms and updates references");
-            msg.err("   format:             formats a dictionary");
-            msg.err("   get-bil-omegawiki:  gets cheap bilingual dictionaries from Omegawiki.");
-            msg.err("   merge-bil:          merges two bilingual dictionaries");
-            msg.err("   merge-morph:        merges two morphological dictionaries");
-            msg.err("   process-xincludes:  processes and expands all xincludes in the dictionary");
-            msg.err("   reverse-bil:        reverses a bilingual dictionary");
-            msg.err("   sort:               sorts (and groups by category) a dictionary");
-            msg.err("");
-            msg.err("More information: http://xixona.dlsi.ua.es/wiki/index.php/Crossdics");
-            msg.err("");
+            this.show_help();
             System.exit(-1);
         }
         setAction(getArguments()[0]);
 
         if (getAction().equals("consistent")) {
-            if (getArguments().length < 8) {
-                msg.err("Usage: java ProcessDics consistent -bilAB [-r] <bilAB> -bilBC [-r] <bilBC> -monA <mon-A> -monC <monC>");
-                System.exit(-1);
-            } else {
-                DicConsistent dicConsistent = new DicConsistent();
-                dicConsistent.setArguments(getArguments());
-                dicConsistent.doConsistent();
-            }
+            this.process_consistent();
         }
-
         if (getAction().equals("merge")) {
-            if (getArguments().length < 8) {
-                msg.err("Usage: java ProcessDics merge -bilAB [-r] <bilAB> -bilAB2 [-r] <bilAB2> -monA <mon-A> - monA2 <monA2> -monB <monB> -monB2 <monB2>");
-                System.exit(-1);
-            } else {
-                DicMerge dicMerge = new DicMerge();
-                dicMerge.setArguments(getArguments());
-                dicMerge.doMerge();
-            }
+            this.process_merge();
         }
-
         if (getAction().equals("merge-morph")) {
-            if (getArguments().length < 6) {
-                msg.err("Usage: java ProcessDics merge-morph -monA1 monA1.dix -monA2 monA2.dix -out merged.dix");
-                System.exit(-1);
-            } else {
-                DicMerge dicMerge = new DicMerge();
-                dicMerge.setArguments(getArguments());
-                dicMerge.doMergeMorph();
-            }
+            this.process_mergemorph();
         }
-
         if (getAction().equals("merge-bil")) {
-            if (getArguments().length < 6) {
-                msg.err("Usage: java ProcessDics merge-bil -bilAB1 bilAb1.dix -bilAB2 bilAB2.dix -out merged.dix");
-                System.exit(-1);
-            } else {
-                DicMerge dicMerge = new DicMerge();
-                dicMerge.setArguments(getArguments());
-                dicMerge.doMergeBil();
-            }
+            this.process_mergebil();
         }
-
         if (getAction().equals("cross")) {
-            if (getArguments().length < 8) {
-                msg.err("Usage: java ProcessDics cross -bilAB [-r] <bilAB> -bilBC [-r] <bilBC> -monA <mon-A> -monC <monC>");
-                System.exit(-1);
-            } else {
-                DicCross dicCross = new DicCross();
-                dicCross.setArguments(getArguments());
-                dicCross.doCross();
-            }
+            this.process_cross();
         }
-
         if (getAction().equals("reverse")) {
-            if ((getArguments().length > 3) || (getArguments().length < 2)) {
-                msg.err("Usage: java ProcessDics reverse <bil> <bil-reversed>");
-                System.exit(-1);
-            } else {
-                DicReverse dicReverse = new DicReverse();
-                dicReverse.setArguments(arguments);
-                dicReverse.doReverse();
-            }
+            this.process_reverse();
         }
-
         if (getAction().equals("format")) {
-            if (getArguments().length != 4) {
-                msg.err("Usage: java ProcessDics format <-mon|-bil> <dic> <dic-formatted>");
-                System.exit(-1);
-            } else {
-                final DicFormat dicFormat = new DicFormat();
-                dicFormat.setArguments(arguments);
-                dicFormat.doFormat();
-            }
+            this.process_format();
         }
-
         if (getAction().equals("sort")) {
-            if (getArguments().length != 5) {
-                msg.err("Usage: java ProcessDics sort <-mon|-bil> <-xinclude|-same-file> <dic> <dic-sorted>");
-                System.exit(-1);
-            } else {
-                DicSort dicSort = new DicSort();
-                dicSort.setArguments(arguments);
-                dicSort.doSort();
-            }
+            this.process_sort();
         }
-
         if (getAction().equals("gather")) {
-            if (getArguments().length != 3) {
-                msg.err("Usage: java ProcessDics gather <dic> <dic-sorted>");
-                System.exit(-1);
-            } else {
-                DicGather dicGather = new DicGather(arguments[1], arguments[2]);
-                // dicGather.setArguments(arguments);
-                dicGather.doGather();
-            }
+            this.process_gather();
         }
-
         if (getAction().equals("get-bil-omegawiki")) {
-            if (getArguments().length != 4) {
-                msg.err("Usage: java ProcessDics get-bil-omegawiki <source-lang> <target-lang> <dic-out>");
-                System.exit(-1);
-            } else {
-                GetTranslation gt = new GetTranslation(arguments[1], arguments[2]);
-                gt.setOutFileName(arguments[3]);
-                gt.printDictionary();
-            }
+            this.process_getbilomegawiki();
         }
-
         if (getAction().equals("format-1line")) {
-            if (getArguments().length != 3) {
-                msg.err("Usage: java ProcessDics format-1line <dic> <dic-out>");
-                System.exit(-1);
-            } else {
-                DicFormatE1Line dicFormat = new DicFormatE1Line(arguments[1]);
-                dicFormat.printXML(arguments[2]);
-            }
+            this.process_format1line();
         }
-
         if (getAction().equals("dic-reader")) {
-            if (getArguments().length < 3) {
-                msg.err("Usage: java ProcessDics dic-reader <action> [-url] <dic>");
-                System.exit(-1);
-            } else {
-                DicReader dicReader = new DicReader();
-                dicReader.setAction(arguments[1]);
-                if (arguments[2].equals("-url")) {
-                    dicReader.setUrlDic(true);
-                    dicReader.setUrl(arguments[3]);
-                    System.out.println("URL: " + arguments[3]);
-                } else {
-                    dicReader.setDic(arguments[2]);
-                }
-                dicReader.doit();
-            }
+            this.process_dicreader();
+        }
+        if (getAction().equals("equiv-paradigms")) {
+            this.process_equivparadigms();
+        }
+        if (getAction().equals("dix2trie")) {
+            this.process_dix2trie();
+        }
+        if (getAction().equals("apertiumize")) {
+            this.process_apertiumize();
+        }
+    }
+
+    /**
+     * Shows help
+     */
+    private final void show_help() {
+        msg.err("");
+        msg.err("Usage: java -jar path/to/crossdics.jar <task> [options]");
+        msg.err("");
+        msg.err("where <task> can be:");
+        msg.err("   cross:              crosses a set of dictionaries");
+        msg.err("   dic-reader:         reads elements from a dictionary");
+        msg.err("   equiv-paradigms:    finds equivalent paradigms and updates references");
+        msg.err("   format:             formats a dictionary");
+        msg.err("   get-bil-omegawiki:  gets cheap bilingual dictionaries from Omegawiki.");
+        msg.err("   merge-bil:          merges two bilingual dictionaries");
+        msg.err("   merge-morph:        merges two morphological dictionaries");
+        msg.err("   process-xincludes:  processes and expands all xincludes in the dictionary");
+        msg.err("   reverse-bil:        reverses a bilingual dictionary");
+        msg.err("   sort:               sorts (and groups by category) a dictionary");
+        msg.err("");
+        msg.err("More information: http://xixona.dlsi.ua.es/wiki/index.php/Crossdics");
+        msg.err("");
+
+    }
+
+    /**
+     * 
+     */
+    private final void process_consistent() {
+        if (getArguments().length < 8) {
+            msg.err("Usage: java ProcessDics consistent -bilAB [-r] <bilAB> -bilBC [-r] <bilBC> -monA <mon-A> -monC <monC>");
+            System.exit(-1);
+        } else {
+            DicConsistent dicConsistent = new DicConsistent();
+            dicConsistent.setArguments(getArguments());
+            dicConsistent.doConsistent();
         }
 
-        if (getAction().equals("equiv-paradigms")) {
-            if (getArguments().length != 3) {
-                msg.err("Usage: java ProcessDics equiv-paradigms <dic> <dic-out>");
-                System.exit(-1);
+    }
+
+    /**
+     * 
+     */
+    private final void process_merge() {
+        if (getArguments().length < 8) {
+            msg.err("Usage: java ProcessDics merge -bilAB [-r] <bilAB> -bilAB2 [-r] <bilAB2> -monA <mon-A> - monA2 <monA2> -monB <monB> -monB2 <monB2>");
+            System.exit(-1);
+        } else {
+            DicMerge dicMerge = new DicMerge();
+            dicMerge.setArguments(getArguments());
+            dicMerge.doMerge();
+        }
+
+    }
+
+    /**
+     * 
+     */
+    private final void process_mergemorph() {
+        if (getArguments().length < 6) {
+            msg.err("Usage: java ProcessDics merge-morph -monA1 monA1.dix -monA2 monA2.dix -out merged.dix");
+            System.exit(-1);
+        } else {
+            DicMerge dicMerge = new DicMerge();
+            dicMerge.setArguments(getArguments());
+            dicMerge.doMergeMorph();
+        }
+
+    }
+
+    /**
+     * 
+     */
+    private final void process_mergebil() {
+        if (getArguments().length < 6) {
+            msg.err("Usage: java ProcessDics merge-bil -bilAB1 bilAb1.dix -bilAB2 bilAB2.dix -out merged.dix");
+            System.exit(-1);
+        } else {
+            DicMerge dicMerge = new DicMerge();
+            dicMerge.setArguments(getArguments());
+            dicMerge.doMergeBil();
+        }
+
+    }
+
+    /**
+     * 
+     */
+    private final void process_cross() {
+        if (getArguments().length < 8) {
+            msg.err("Usage: java ProcessDics cross -bilAB [-r] <bilAB> -bilBC [-r] <bilBC> -monA <mon-A> -monC <monC>");
+            System.exit(-1);
+        } else {
+            DicCross dicCross = new DicCross();
+            dicCross.setArguments(getArguments());
+            dicCross.doCross();
+        }
+
+    }
+
+    /**
+     * 
+     */
+    private final void process_reverse() {
+        if ((getArguments().length > 3) || (getArguments().length < 2)) {
+            msg.err("Usage: java ProcessDics reverse <bil> <bil-reversed>");
+            System.exit(-1);
+        } else {
+            DicReverse dicReverse = new DicReverse();
+            dicReverse.setArguments(arguments);
+            dicReverse.doReverse();
+        }
+
+    }
+
+    /**
+     * 
+     */
+    private final void process_format() {
+        if (getArguments().length != 4) {
+            msg.err("Usage: java ProcessDics format <-mon|-bil> <dic> <dic-formatted>");
+            System.exit(-1);
+        } else {
+            final DicFormat dicFormat = new DicFormat();
+            dicFormat.setArguments(arguments);
+            dicFormat.doFormat();
+        }
+
+    }
+
+    /**
+     * 
+     */
+    private final void process_sort() {
+        if (getArguments().length != 5) {
+            msg.err("Usage: java ProcessDics sort <-mon|-bil> <-xinclude|-same-file> <dic> <dic-sorted>");
+            System.exit(-1);
+        } else {
+            DicSort dicSort = new DicSort();
+            dicSort.setArguments(arguments);
+            dicSort.doSort();
+        }
+    }
+
+    /**
+     * 
+     */
+    private final void process_gather() {
+        if (getArguments().length != 3) {
+            msg.err("Usage: java ProcessDics gather <dic> <dic-sorted>");
+            System.exit(-1);
+        } else {
+            DicGather dicGather = new DicGather(arguments[1], arguments[2]);
+            // dicGather.setArguments(arguments);
+            dicGather.doGather();
+        }
+
+    }
+
+    /**
+     * 
+     */
+    private final void process_getbilomegawiki() {
+        if (getArguments().length != 4) {
+            msg.err("Usage: java ProcessDics get-bil-omegawiki <source-lang> <target-lang> <dic-out>");
+            System.exit(-1);
+        } else {
+            GetTranslation gt = new GetTranslation(arguments[1], arguments[2]);
+            gt.setOutFileName(arguments[3]);
+            gt.printDictionary();
+        }
+    }
+
+    /**
+     * 
+     */
+    private final void process_format1line() {
+        if (getArguments().length != 3) {
+            msg.err("Usage: java ProcessDics format-1line <dic> <dic-out>");
+            System.exit(-1);
+        } else {
+            DicFormatE1Line dicFormat = new DicFormatE1Line(arguments[1]);
+            dicFormat.printXML(arguments[2]);
+        }
+    }
+
+    /**
+     * 
+     */
+    private final void process_dicreader() {
+        if (getArguments().length < 3) {
+            msg.err("Usage: java ProcessDics dic-reader <action> [-url] <dic>");
+            System.exit(-1);
+        } else {
+            DicReader dicReader = new DicReader();
+            dicReader.setAction(arguments[1]);
+            if (arguments[2].equals("-url")) {
+                dicReader.setUrlDic(true);
+                dicReader.setUrl(arguments[3]);
+                System.out.println("URL: " + arguments[3]);
             } else {
-                DicFindEquivPar finder = new DicFindEquivPar(arguments[1]);
-                finder.setOutFileName(arguments[2]);
-                finder.findEquivalents();
+                dicReader.setDic(arguments[2]);
             }
+            dicReader.doit();
+        }
+
+    }
+
+    /**
+     * 
+     */
+    private final void process_equivparadigms() {
+        if (getArguments().length != 3) {
+            msg.err("Usage: java ProcessDics equiv-paradigms <dic> <dic-out>");
+            System.exit(-1);
+        } else {
+            DicFindEquivPar finder = new DicFindEquivPar(arguments[1]);
+            finder.setOutFileName(arguments[2]);
+            finder.findEquivalents();
+        }
+
+    }
+
+    /**
+     * 
+     */
+    private final void process_dix2trie() {
+        if (getArguments().length < 3) {
+            msg.err("Usage: java ProcessDics dix2trie <dic> <lr|rl> [<out>]");
+            System.exit(-1);
+        } else {
+            Dix2Trie dix2trie = new Dix2Trie(arguments[1], arguments[2]);
+            if (arguments.length == 4) {
+                dix2trie.setOutFileName(arguments[3]);
+            }
+            dix2trie.buildTrie();
+        }
+    }
+
+    /**
+     * 
+     */
+    private final void process_apertiumize() {
+        if (getArguments().length != 3) {
+            msg.err("Usage: java ProcessDics apertiumize <txt> <out>");
+            System.exit(-1);
+        } else {
+            Apertiumizer apertiumizer = new Apertiumizer(arguments[1]);
+            apertiumizer.setOutFileName(arguments[2]);
+            apertiumizer.apertiumize();
         }
     }
 

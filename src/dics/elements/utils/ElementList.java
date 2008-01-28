@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2007 Universitat d'Alacant / Universidad de Alicante
  * Author: Enrique Benimeli Bofarull
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
@@ -18,105 +18,129 @@
  * 02111-1307, USA.
  */
 
+
+
 package dics.elements.utils;
 
-import java.util.ArrayList;
+//~--- non-JDK imports --------------------------------------------------------
 
 import dics.elements.dtd.Element;
 import dics.elements.dtd.SElement;
 
+//~--- JDK imports ------------------------------------------------------------
+
+import java.util.ArrayList;
+
 /**
- * 
+ *
  * @author Enrique Benimeli Bofarull
- * 
+ *
  */
 public class ElementList extends ArrayList<Element> implements Cloneable {
 
     /**
-         * 
-         */
+     *    
+     */
     static final long serialVersionUID = 0;
 
     /**
-         * 
-         * 
-         */
+     *    
+     *    
+     */
     public ElementList() {
-	super();
+        super();
     }
 
     /**
-         * 
-         */
+     *    
+     */
     @Override
     public Object clone() {
-	try {
-	    final ElementList cloned = (ElementList) super.clone();
-	    for (int i = 0; i < size(); i++) {
-		final Element eCloned = (Element) cloned.get(i).clone();
-		cloned.set(i, eCloned);
-	    }
-	    return cloned;
-	} catch (final Exception ex) {
-	    return null;
-	}
+        try {
+            final ElementList cloned = (ElementList) super.clone();
+
+            for (int i = 0; i < size(); i++) {
+                final Element eCloned = (Element) cloned.get(i).clone();
+
+                cloned.set(i, eCloned);
+            }
+
+            return cloned;
+        } catch (final Exception ex) {
+            return null;
+        }
     }
 
     /**
-         * 
-         * 
-         */
+     *    
+     *    
+     */
     public final void print() {
-	if (size() > 0) {
-	    for (Element e : this) {
-		String tmp = "";
-		if (e instanceof SElement) {
-		    tmp = ((SElement) e).getTemp();
-		    if (tmp == null) {
-			tmp = "";
-		    }
-		}
-		System.out.print("<" + e.getValue() + "/" + tmp + ">");
-	    }
-	    System.out.println("");
-	}
+        if (size() > 0) {
+            for (Element e : this) {
+                String tmp = "";
+
+                if (e instanceof SElement) {
+                    tmp = ((SElement) e).getTemp();
+
+                    if (tmp == null) {
+                        tmp = "";
+                    }
+                }
+
+                System.out.print("<" + e.getValue() + "/" + tmp + ">");
+            }
+
+            System.out.println("");
+        }
     }
 
-        public final void printErr() {
-	if (size() > 0) {
-	    for (Element e : this) {
-		String tmp = "";
-		if (e instanceof SElement) {
-		    tmp = ((SElement) e).getTemp();
-		    if (tmp == null) {
-			tmp = "";
-		    }
-		}
-		System.err.print("<" + e.getValue() + "/" + tmp + ">");
-	    }
-	    System.err.println("");
-	}
+    public final void printErr() {
+        if (size() > 0) {
+            for (Element e : this) {
+                String tmp = "";
+
+                if (e instanceof SElement) {
+                    tmp = ((SElement) e).getTemp();
+
+                    if (tmp == null) {
+                        tmp = "";
+                    }
+                }
+
+                System.err.print("<" + e.getValue() + "/" + tmp + ">");
+            }
+
+            System.err.println("");
+        }
     }
 
     /**
-         * 
-         */
+     *    
+     */
     @Override
     public final String toString() {
-	String str = "";
-	if (size() > 0) {
-	    for (Element e : this) {
-		String tmp = "";
-		if (e instanceof SElement) {
-		    tmp = ((SElement) e).getTemp();
-		    if (tmp == null) {
-			tmp = "";
-		    }
-		}
-		str += "<" + e.getValue() + "/" + tmp + ">";
-	    }
-	}
-	return str;
-    }
+        String str = "";
 
+        if (size() > 0) {
+            for (Element e : this) {
+                String tmp = "";
+
+                if (e instanceof SElement) {
+                    tmp = ((SElement) e).getTemp();
+
+                    if (tmp == null) {
+                        tmp = "";
+                    }
+                }
+
+                str += "<" + e.getValue() + "/" + tmp + ">";
+            }
+        }
+
+        return str;
+    }
 }
+
+
+//~ Formatted by Jindent --- http://www.jindent.com

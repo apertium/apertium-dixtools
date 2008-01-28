@@ -19,13 +19,13 @@
  */
 package dictools.crossmodel;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import dics.elements.dtd.SElement;
 import dics.elements.utils.ElementList;
+import dics.elements.utils.Msg;
 import dics.elements.utils.SElementList;
 import java.io.OutputStreamWriter;
 
@@ -63,18 +63,16 @@ public class ActionSet extends ArrayList<Action> {
 
     /**
      * 
-     * @return Undefined         */
+     * @return Undefined         
+     */
     public final int getNumberOfConstants() {
-        /*
-         * int n = 0; for (Action action : this) { n +=
-         * action.getNumberOfConstants(); } return n;
-         */
         return numberOfConstants;
     }
 
     /**
      * 
-     * @return Undefined         */
+     * @return Undefined         
+     */
     public final String getName() {
         return name;
     }
@@ -107,9 +105,9 @@ public class ActionSet extends ArrayList<Action> {
      * 
      * 
      */
-    public final void print() {
+    public final void print(Msg msg) {
         for (Action action : this) {
-            action.print();
+            action.print(msg);
         }
     }
 
@@ -173,7 +171,8 @@ public class ActionSet extends ArrayList<Action> {
     /**
      * 
      * @param list
-     * @return Undefined         */
+     * @return Undefined         
+     */
     private final boolean containsTail(final SElementList list) {
         for (SElement s : list) {
             if (s.getValue().equals("0")) {
@@ -185,7 +184,8 @@ public class ActionSet extends ArrayList<Action> {
 
     /**
      * 
-     * @return Undefined         */
+     * @return Undefined         
+     */
     public final int getNumberOfRestrictions() {
         CrossAction cA = getCrossAction();
         int nR = 0;

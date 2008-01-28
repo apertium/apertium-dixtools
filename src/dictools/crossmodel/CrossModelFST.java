@@ -21,11 +21,10 @@
 package dictools.crossmodel;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
 
 import dics.elements.dtd.Element;
 import dics.elements.utils.ElementList;
+import dics.elements.utils.Msg;
 
 /**
  * 
@@ -43,6 +42,11 @@ public class CrossModelFST {
          * 
          */
     private ActionSet actionSet;
+    
+    /**
+     * 
+     */
+    private Msg msg;
 
     /**
          * 
@@ -56,22 +60,16 @@ public class CrossModelFST {
 	for (CrossAction crossAction : crossModel.getCrossActions()) {
 	    ElementList eList = crossAction.processVars();
 	    str = getElementListString(eList);
-	    System.err.println("pattern: " + str);
 	    if (!patterns.containsKey(str)) {
 		patterns.put(str, crossAction);
-		// System.out.println(crossAction.getId() + ": " + str);
 		ActionSet actionSet = crossAction.getActionSet();
-		// we add a refernce to the crossAction
 		actionSet.setCrossAction(crossAction);
 		add(eList, actionSet);
 	    } else {
 		CrossAction cA = patterns.get(str);
-		System.err.println("Duplicated pattern: '"
-			+ crossAction.getId() + "' is the same as '"
-			+ cA.getId() + "' are the same (will be ignored).");
+		msg.log("Duplicated pattern: '" + crossAction.getId() + "' is the same as '" + cA.getId() + "' are the same (will be ignored).");
 	    }
 	}
-	// System.out.println("States: " + State.getNStates() );
     }
 
     /**
@@ -90,11 +88,11 @@ public class CrossModelFST {
     public final ActionSet getActionSet(CrossAction entries) {
 	HashMap<String, ElementList> tails = null;
 	ElementList eList = entries.processEntries();
-	ActionSetList actionSetList = new ActionSetList();
+	ActionSetList actionSetList = new ActionSetList(msg);
 	initialState.getActionSet(eList, 0, actionSetList, tails);
 	if (actionSetList.size() > 0) {
-            System.err.println("Candidates:");
-            actionSetList.print();
+            msg.log("Candidates:\n");
+            actionSetList.print();            
 	    ActionSet bestActionSet = actionSetList.getBestActionSet();
             setActionSet(bestActionSet);
 	    return bestActionSet;
@@ -137,6 +135,22 @@ public class CrossModelFST {
          */
     public final void setActionSet(ActionSet actionSet) {
 	this.actionSet = actionSet;
+    }
+    
+    /**
+     * 
+     * @param msg
+     */
+    public final void setMsg(Msg msg) {
+        this.msg = msg;
+    }
+    
+    /**
+     * 
+     * @return The msg object
+     */
+    public final Msg getMsg() {
+        return this.msg;
     }
 
 }

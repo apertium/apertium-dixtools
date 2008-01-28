@@ -21,7 +21,6 @@
 package dics.elements.utils;
 
 import dics.elements.dtd.DictionaryElement;
-import dictools.DicTools;
 
 /**
  * 

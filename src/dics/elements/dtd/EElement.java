@@ -19,11 +19,11 @@
  */
 package dics.elements.dtd;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import dics.elements.utils.ElementList;
+import dics.elements.utils.Msg;
 import dics.elements.utils.SElementList;
 import java.io.OutputStreamWriter;
 
@@ -735,7 +735,8 @@ public class EElement extends Element implements Cloneable,
     /**
      * 
      * @param side
-     * @return Undefined         */
+     * @return Undefined         
+     */
     public final SElementList getSElements(final String side) {
         SElementList elementsA = null;
         for (final Element e : children) {
@@ -761,12 +762,13 @@ public class EElement extends Element implements Cloneable,
     /**
      * 
      * @param side
+     * @param msg
      */
-    public final void printSElements(final String side) {
+    public final void printSElements(final String side, Msg msg) {
         final SElementList elements = getSElements(side);
         if (elements != null) {
             for (final SElement s : elements) {
-                System.err.print(s);
+                msg.log(s.toString());
             }
         }
     }
@@ -774,11 +776,12 @@ public class EElement extends Element implements Cloneable,
     /**
      * 
      * @param side
+     * @param msg
      */
-    public final void print(final String side) {
-        System.err.print(getSide(side).getValue() + " / ");
-        printSElements(side);
-        System.err.println("");
+    public final void print(final String side, Msg msg) {
+        msg.log(getSide(side).getValue() + " / ");
+        printSElements(side, msg);
+        msg.log("\n");
     }
 
     /**

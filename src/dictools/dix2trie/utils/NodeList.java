@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2007 Universitat d'Alacant / Universidad de Alicante
  * Author: Enrique Benimeli Bofarull
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
@@ -17,59 +17,31 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-package dics.elements.dtd;
+package dictools.dix2trie.utils;
 
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.util.HashMap;
 
 /**
+ *
  * @author Enrique Benimeli Bofarull
- * 
  */
-public class TextElement extends Element {
+public class NodeList extends HashMap<String, Node> {
 
     /**
      * 
+     * @param node
+     * @return The node
      */
-    private String value;
-
-    /**
-     * 
-     * @param str
-     */
-    public TextElement(final String str) {
-        setTagName("");
-        value = str;
+    public final Node put(final Node node) {
+        return super.put(node.getValue(), node);
     }
 
     /**
      * 
-     * @param dos
-     * @throws java.io.IOException
+     * @param key
+     * @return The key
      */
-    public final void printXML(final OutputStreamWriter dos) throws IOException {
-        dos.write(value);
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    @Override
-    public final String getValue() {
-        return value;
-    }
-
-    @Override
-    public final void setValue(final String v) {
-        value = v;
-    }
-
-    /**
-     * 
-     */
-    public final String toString() {
-        String str = "";
-        str += getValue();
-        return str;
+    public final Node getNode(final String key) {
+        return this.get(key);
     }
 }
