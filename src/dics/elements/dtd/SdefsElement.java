@@ -82,7 +82,6 @@ public class SdefsElement extends Element {
             e.printXML(dos);
         }
         dos.write(tab(1) + "</" + getTagName() + ">\n");
-
         if (comments != null) {
             dos.write(tab(1) + "<!-- \n");
             dos.write(tab(1) + getComments());

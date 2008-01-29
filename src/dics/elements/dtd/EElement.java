@@ -66,6 +66,10 @@ public class EElement extends Element implements Cloneable,
     /**
      * 
      */
+    private String alt;
+    /**
+     * 
+     */
     private boolean shared = false;
     /**
      * 
@@ -430,6 +434,7 @@ public class EElement extends Element implements Cloneable,
      * @param dos
      * @throws java.io.IOException
      */
+    @Override
     public final void printXML(final OutputStreamWriter dos) throws IOException {
         String attributes = "";
         if (r != null) {
@@ -446,6 +451,9 @@ public class EElement extends Element implements Cloneable,
         }
         if (aversion != null) {
             attributes += " aversion=\"" + aversion + "\"";
+        }
+        if (alt != null) {
+            attributes += " alt=\"" + alt + "\"";
         }
 
         if (comments != null) {
@@ -1221,5 +1229,21 @@ public class EElement extends Element implements Cloneable,
      */
     public final void setAversion(String aversion) {
         this.aversion = aversion;
+    }
+
+    /**
+     * 
+     * @return Get attribute 'alt'
+     */
+    public final String getAlt() {
+        return this.alt;
+    }
+
+    /**
+     * 
+     * @param alt
+     */
+    public final void setAlt(final String alt) {
+        this.alt = alt;
     }
 }

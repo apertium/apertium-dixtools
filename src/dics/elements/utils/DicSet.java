@@ -21,13 +21,14 @@
 package dics.elements.utils;
 
 import dics.elements.dtd.DictionaryElement;
+import java.util.ArrayList;
 
 /**
  * 
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class DicSet {
+public class DicSet extends ArrayList<DictionaryElement>{
 
     /**
          * 
@@ -58,6 +59,12 @@ public class DicSet {
          */
     public DicSet(final DictionaryElement mon1, final DictionaryElement bil1,
 	    final DictionaryElement mon2, final DictionaryElement bil2) {
+        
+        this.add(mon1);
+        this.add(mon2);
+        this.add(bil1);
+        this.add(bil2);
+        
 	this.mon1 = mon1;
 	this.mon1.setType("MONOL");
 	this.bil1 = bil1;
@@ -73,6 +80,8 @@ public class DicSet {
          * @param mon1
          */
     public DicSet(final DictionaryElement mon1) {
+        this.add(mon1);
+        
 	this.mon1 = mon1;
 	bil1 = null;
 	mon2 = null;
@@ -87,6 +96,10 @@ public class DicSet {
          */
     public DicSet(final DictionaryElement bilAB, final DictionaryElement monA,
 	    final DictionaryElement monB) {
+        this.add(monA);
+        this.add(monB);
+        this.add(bilAB);
+        
 	mon1 = monA;
 	bil1 = bilAB;
 	mon2 = monB;

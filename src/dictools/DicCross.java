@@ -28,6 +28,7 @@ import dics.elements.dtd.ContentElement;
 import dics.elements.dtd.DictionaryElement;
 import dics.elements.dtd.EElement;
 import dics.elements.dtd.Element;
+import dics.elements.dtd.HeaderElement;
 import dics.elements.dtd.LElement;
 import dics.elements.dtd.PElement;
 import dics.elements.dtd.RElement;
@@ -91,15 +92,11 @@ public class DicCross {
     /**
      *
      */
-    private final boolean MATCH_CATEGORY = true;
+    //private final boolean MATCH_CATEGORY = true;
     /**
      *
      */
     private EHashMap processed;
-    /**
-     *
-     */
-    private EHashMap speculProcessed;
     /**
      *
      */
@@ -112,10 +109,6 @@ public class DicCross {
      *
      */
     private CrossModelFST crossModelFST;
-    /**
-     *
-     */
-    private boolean crossWithPatterns = false;
     /**
      *
      */
@@ -184,7 +177,7 @@ public class DicCross {
      * 
      */
     private String monCCrossed_path;
-    
+
     /**
      *
      *
@@ -195,14 +188,12 @@ public class DicCross {
         rMatrix = new int[3][3];
         fillOutRestrictionMatrix();
         processed = new EHashMap();
-        speculProcessed = new EHashMap();
         regExProcessed = new EHashMap();
         nDCrossActions = new HashMap<String, CrossAction>();
         nDCrossModel = new CrossModel();
         usedPatterns = new HashMap<String, Integer>();
         taskOrder = 1;
     }
-   
 
     /**
      *
@@ -252,10 +243,7 @@ public class DicCross {
      */
     public DictionaryElement[] crossDictionaries(final DicSet dicSet) {
         final DictionaryElement[] dics = new DictionaryElement[2];
-
-        if (isCrossWithPatterns()) {
-            readCrossModel();
-        }
+        readCrossModel();
 
         final DictionaryElement dic1 = dicSet.getBil1();
         final DictionaryElement dic2 = dicSet.getBil2();
@@ -269,7 +257,6 @@ public class DicCross {
         setBilBC(dic2);
 
         final DictionaryElement dic = new DictionaryElement();
-        final DictionaryElement specul = new DictionaryElement();
 
         // encoding
         final String encoding = crossXmlEncodings(dic1.getXmlEncoding(), dic2.getXmlEncoding());
@@ -278,35 +265,24 @@ public class DicCross {
         // alphabet
         final AlphabetElement alphabet = crossAlphabets(dic1.getAlphabet(), dic2.getAlphabet());
         dic.setAlphabet(alphabet);
-        specul.setAlphabet(alphabet);
 
         // sdefs
         final SdefsElement sdefs = crossSdefs(dic1.getSdefs(), dic2.getSdefs());
         dic.setSdefs(sdefs);
-        specul.setSdefs(sdefs);
 
         // sections
         for (final SectionElement section1 : dic1.getSections()) {
             final SectionElement section2 = dic2.getSection(section1.getID());
             final SectionElement[] sections = crossSections(section1, section2, sdefs);
-
             final SectionElement section = sections[0];
             dic.addSection(section);
-
-            final SectionElement speculSection = sections[1];
-            specul.addSection(speculSection);
         }
 
         msg.out("[" + (taskOrder++) + "] Sorting crossed dictionary...");
         Collections.sort(dic.getEntries());
 
-        //if (isCrossWithPatterns()) {
         getNDCrossModel().printXML(this.getOutDir() + "patterns-not-detected.xml");
-        // System.out.println("ND-all: " + this.NDcounter);
-        //}
         dics[0] = dic;
-        dics[1] = specul;
-
         return dics;
     }
 
@@ -316,14 +292,15 @@ public class DicCross {
      * @param encoding2
      */
     private final String crossXmlEncodings(final String encoding1, final String encoding2) {
-        return encoding1;
+        return "UTF-8";
     }
 
     /**
      *
      * @param alphabet1
      * @param alphabet2
-     * @return Undefined     */
+     * @return Undefined     
+     */
     private final AlphabetElement crossAlphabets(final AlphabetElement alphabet1, final AlphabetElement alphabet2) {
         final AlphabetElement alphabet = new AlphabetElement();
 
@@ -356,7 +333,8 @@ public class DicCross {
      *
      * @param sdefs1
      * @param sdefs2
-     * @return Undefined     */
+     * @return Undefined     
+     */
     private final SdefsElement crossSdefs(final SdefsElement sdefs1, final SdefsElement sdefs2) {
         msg.out("[" + (taskOrder++) + "] Crossing definitions...");
         final SdefsElement sdefs = new SdefsElement();
@@ -397,7 +375,6 @@ public class DicCross {
         sdefList = null;
         it = null;
         keys = null;
-
         return sdefs;
     }
 
@@ -413,40 +390,29 @@ public class DicCross {
         final SectionElement[] sections = new SectionElement[2];
 
         final SectionElement section = new SectionElement();
-        final SectionElement speculSection = new SectionElement("main", "standard");
-
         section.setID(section1.getID());
         section.setType(section1.getType());
-
         final EElementList elements1 = section1.getEElements();
         final EElementList elements2 = section2.getEElements();
-
         EElementMap section1Map = DicTools.buildHash(elements1);
         EElementMap section2Map = DicTools.buildHash(elements2);
-
-        crossSectionsAB(elements1, section2Map, section, speculSection, getBilBC(), 0);
+        crossSectionsAB(elements1, section2Map, section, getBilBC(), 0);
         section2Map = null;
-
-        crossSectionsAB(elements2, section1Map, section, speculSection, getBilAB(), 1);
+        crossSectionsAB(elements2, section1Map, section, getBilAB(), 1);
         section1Map = null;
-
         sections[0] = section;
-        sections[1] = speculSection;
-
         return sections;
     }
 
     /**
-     *
+     * 
      * @param elements
      * @param sectionMap
      * @param section
-     * @param speculSection
      * @param bil
      * @param dir
      */
-    private void crossSectionsAB(final EElementList elements, final EElementMap sectionMap, final SectionElement section, final SectionElement speculSection, final DictionaryElement bil, final int dir) {
-
+    private void crossSectionsAB(final EElementList elements, final EElementMap sectionMap, final SectionElement section, final DictionaryElement bil, final int dir) {
         for (final EElement e : elements) {
             if (e.isRegEx()) {
                 final String key = e.getRegEx().getValue();
@@ -456,97 +422,65 @@ public class DicCross {
                 }
             } else {
                 final EElementList candidates = getPairs(e, sectionMap);
-                if (isCrossWithPatterns()) {
-                    crossElementAndPairs(e, candidates, section, speculSection, bil, dir);
+                if (candidates != null) {
+                    crossElementAndPairs(e, candidates, section, dir);
                 }
             }
         }
     }
 
     /**
-     *
+     * 
      * @param e1
      * @param candidates
      * @param section
-     * @param speculProcessed
-     * @param bil
      * @param dir
      */
-    private final void crossElementAndPairs(final EElement e1, final EElementList candidates, final SectionElement section, final SectionElement speculSection, final DictionaryElement bil, final int dir) {
-        if (candidates != null) {
+    private final void crossElementAndPairs(final EElement e1, final EElementList candidates, final SectionElement section, final int dir) {
+        try {
             for (EElement e2 : candidates) {
-                if ((e1 != null) && (e2 != null)) {
-                    EElementList eList = cross(e1, e2, dir);
-                    if (eList != null) {
-                        for (EElement e : eList) {
-                            if (e != null) {
-                                final String str = e.getHash();
-                                if (!getProcessed().containsKey(str)) {
-                                    section.addEElement(e);
-                                    getProcessed().put(str, e);
-                                    String actionID = e.getPatternApplied();
-                                    if (!usedPatterns.containsKey(actionID)) {
-                                        usedPatterns.put(actionID, new Integer(1));
-                                    } else {
-                                        Integer times = usedPatterns.get(actionID);
-                                        int t = times.intValue();
-                                        t++;
-                                        usedPatterns.put(actionID, new Integer(t));
-                                    }
-                                }
-                            }
-                        }
-                    } else {
-                        EElement e = speculate(e1, e2, MATCH_CATEGORY, dir);
-                        if (e != null) {
-                            final String strSpecul = e.getHash();
-                            if (!getSpeculProcessed().containsKey(strSpecul)) {
-                                speculSection.addEElement(e);
-                                getSpeculProcessed().put(strSpecul, e);
-                            }
+                EElementList actionEList = cross(e1, e2, dir);
+                if (!actionEList.isEmpty()) {
+                    for (EElement e : actionEList) {
+                        final String str = e.getHash();
+                        if (!getProcessed().containsKey(str)) {
+                            section.addEElement(e);
+                            getProcessed().put(str, e);
+                            String actionID = e.getPatternApplied();
+                            logUsedPattern(actionID);
                         }
                     }
                 }
             }
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
         }
     }
 
     /**
-     *
+     * 
+     * @param actionID
+     */
+    private final void logUsedPattern(final String actionID) {
+        if (!usedPatterns.containsKey(actionID)) {
+            usedPatterns.put(actionID, new Integer(1));
+        } else {
+            Integer times = usedPatterns.get(actionID);
+            int t = times.intValue();
+            t++;
+            usedPatterns.put(actionID, new Integer(t));
+        }
+    }
+
+    /**
+     * 
      * @param e1
      * @param e2
-     * @param matchCategory
-     * @return Undefined     */
-    private final EElement speculate(EElement e1, EElement e2, boolean matchCategory, int dir) {
-        EElement e = null;
-        try {
-            if (dir != 0) {
-                EElement aux;
-                aux = e2;
-                e2 = e1;
-                e1 = aux;
-            }
-
-            if (matchCategory) {
-                if (e1.getCategory("L").equals(e2.getCategory("L"))) {
-                    e = crossEntries(e1, e2);
-                }
-            } else {
-                e = crossEntries(e1, e2);
-            }
-        } catch (NullPointerException npe) {
-        }
-        return e;
-    }
-
-    /**
-     *
-     * @param a
-     * @param b
      * @param dir
-     * @return Undefined     */
+     * @return
+     */
     private final EElementList cross(EElement e1, EElement e2, final int dir) {
-
+        EElementList actionEList = new EElementList();
         this.incrementNCrossedElements();
         if (dir != 0) {
             EElement aux;
@@ -571,12 +505,9 @@ public class DicCross {
             e1.print("L", msg);
             e2.print("L", msg);
             e2.print("R", msg);
-
-            EElementList actionEList = applyCrossAction(e1, e2, actionID, crossAction);
-            return actionEList;
-        } else {
-            return null;
+            actionEList = applyCrossAction(e1, e2, actionID, crossAction);
         }
+        return actionEList;
     }
 
     /**
@@ -585,7 +516,8 @@ public class DicCross {
      * @param e2
      * @param actionID
      * @param crossAction
-     * @return Undefined     */
+     * @return Undefined     
+     */
     private final EElementList applyCrossAction(EElement e1, EElement e2, final String actionID, final CrossAction entries) {
         EElementList elementList = new EElementList();
         final CrossAction cA = getCrossModel().getCrossAction(actionID);
@@ -611,21 +543,23 @@ public class DicCross {
                     actionE.setRestriction(restriction);
                 }
 
-                // cross comments & author
+                // author attribute
                 final String author = mergeAttributes(e1.getAuthor(), e2.getAuthor());
                 actionE.setAuthor(author);
+
+                // comment attribute
                 final String comment = mergeAttributes(e1.getComment(), e2.getComment());
                 actionE.setComment(comment);
 
-                actionE.addComments(actionID);
+                // alt attribute
+                final String alt = this.mergeAttributes(e1.getAlt(), e2.getAlt());
+                actionE.setAlt(alt);
 
+                actionE.addComments(actionID);
                 msg.log("Pattern (winner): " + actionID + "\n");
-                // Eliminar las siguientes dos líneas
                 actionE.print("L", msg);
                 actionE.print("R", msg);
                 elementList.add(actionE);
-            } else {
-                return null;
             }
         }
         return elementList;
@@ -674,89 +608,50 @@ public class DicCross {
                 String key = (String) it.next();
                 ElementList eList = tails.get(key);
                 //System.err.print(key + ": ");
-                msg.log(key +  ": ");
-                //eList.printErr();
+                msg.log(key + ": ");
+            //eList.printErr();
             }
         }
     }
 
     private final void assignValuesSide(ContentElement ceWrite, final ContentElement ceRead, final ConstantMap constants, final EElement ei, HashMap<String, ElementList> tails) {
-        
+
         for (Element e : ceRead.getChildren()) {
-            
-            if(e instanceof TextElement) {
+
+            if (e instanceof TextElement) {
                 String lemma = e.getValue();
                 if (lemma.equals("l1") || lemma.equals("l4")) {
-                    ceWrite.addChild(new TextElement(ei.getSide("R").getValue()));                    
+                    ceWrite.addChild(new TextElement(ei.getSide("R").getValue()));
                 } else {
                     ceWrite.addChild(new TextElement(lemma));
                 }
             }
-            
-            if(e instanceof SElement) {
-            String v = e.getValue();
 
-            if (!v.equals("0")) {
-                if (!constants.containsKey(e.getValue())) {
-                    ceWrite.addChild(new SElement(e.getValue()));
-                } else {
-                    String value = constants.get(e.getValue());
-                    ceWrite.addChild(new SElement(value));
-                }
-            } else {
-                SElement sE = (SElement) e;
-                if (!tails.containsKey(sE.getTemp())) {
-                // ceWrite.addChild(new SElement(e.getValue()));
-                } else {
-                    ElementList tail = tails.get(sE.getTemp());
-                    for (Element elem : tail) {
-                        if (!constants.containsKey(elem.getValue())) {
-                            ceWrite.addChild(new SElement(elem.getValue()));
-                        } else {
-                            String value = constants.get(elem.getValue());
-                            ceWrite.addChild(new SElement(value));
-                        }
-                    // ceWrite.addChild(elem);
+            if (e instanceof SElement) {
+                String v = e.getValue();
+
+                if (!v.equals("0")) {
+                    if (!constants.containsKey(e.getValue())) {
+                        ceWrite.addChild(new SElement(e.getValue()));
+                    } else {
+                        String value = constants.get(e.getValue());
+                        ceWrite.addChild(new SElement(value));
                     }
-                }
-            }
-            }
-        }
-    }
-
-    /**
-     * 
-     * @param ceWrite
-     * @param ceRead
-     * @param constants
-     * @param ei
-     */
-    private final void assignValuesSideOld(ContentElement ceWrite, final ContentElement ceRead, final ConstantMap constants, final EElement ei, HashMap<String, ElementList> tails) {
-        ceWrite.addChild(new TextElement(ei.getSide("R").getValue()));
-        for (Element e : ceRead.getSElements()) {
-            String v = e.getValue();
-
-            if (!v.equals("0")) {
-                if (!constants.containsKey(e.getValue())) {
-                    ceWrite.addChild(new SElement(e.getValue()));
                 } else {
-                    String value = constants.get(e.getValue());
-                    ceWrite.addChild(new SElement(value));
-                }
-            } else {
-                SElement sE = (SElement) e;
-                if (!tails.containsKey(sE.getTemp())) {
-                // ceWrite.addChild(new SElement(e.getValue()));
-                } else {
-                    ElementList tail = tails.get(sE.getTemp());
-                    for (Element elem : tail) {
-                        if (!constants.containsKey(elem.getValue())) {
-                            ceWrite.addChild(new SElement(elem.getValue()));
-                        } else {
-                            String value = constants.get(elem.getValue());
-                            ceWrite.addChild(new SElement(value));
+                    SElement sE = (SElement) e;
+                    if (!tails.containsKey(sE.getTemp())) {
+                    // ceWrite.addChild(new SElement(e.getValue()));
+                    } else {
+                        ElementList tail = tails.get(sE.getTemp());
+                        for (Element elem : tail) {
+                            if (!constants.containsKey(elem.getValue())) {
+                                ceWrite.addChild(new SElement(elem.getValue()));
+                            } else {
+                                String value = constants.get(elem.getValue());
+                                ceWrite.addChild(new SElement(value));
+                            }
+                        // ceWrite.addChild(elem);
                         }
-                    // ceWrite.addChild(elem);
                     }
                 }
             }
@@ -769,55 +664,18 @@ public class DicCross {
      * @param hm
      * @return Undefined     */
     private final EElementList getPairs(final EElement e, final EElementMap hm) {
-        EElementList pairs = null;
         String lemma = e.getValue("L");
         lemma = DicTools.clearTags(lemma);
-        pairs = hm.get(lemma);
+        EElementList pairs = hm.get(lemma);
         return pairs;
-    }
-
-    /**
-     *
-     * @param e1
-     * @param e2
-     * @return Undefined     */
-    private EElement crossEntries(final EElement e1, final EElement e2) {
-        EElement e = null;
-        try {
-            String r1 = e1.getRestriction();
-            String r2 = e2.getRestriction();
-            final int r = resolveRestriction(r1, r2);
-            if (r == NONE) {
-                return e;
-            } else {
-                e = new EElement();
-                String restriction = getRestrictionString(r);
-                e.setRestriction(restriction);
-                PElement pE = new PElement();
-                e.addChild(pE);
-                LElement lE = new LElement();
-                RElement rE = new RElement();
-                pE.setLElement(lE);
-                pE.setRElement(rE);
-
-                e.getP().getL().setChildren(e1.getChildren("R"));
-                e.getP().getR().setChildren(e2.getChildren("R"));
-                String author = mergeAttributes(e1.getAuthor(), e2.getAuthor());
-                e.setAuthor(author);
-                String comment = mergeAttributes(e1.getComment(), e2.getComment());
-                e.setComment(comment);
-            }
-        } catch (NullPointerException npe) {
-        } catch (Exception exception) {
-        }
-        return e;
     }
 
     /**
      *
      * @param attr1
      * @param attr2
-     * @return Undefined     */
+     * @return Undefined     
+     */
     private final String mergeAttributes(final String attr1, final String attr2) {
         String attr = null;
         if ((attr1 != null) && (attr2 != null)) {
@@ -869,7 +727,8 @@ public class DicCross {
     /**
      *
      * @param code
-     * @return Undefined     */
+     * @return Undefined    
+     */
     private final String getRestrictionString(final int code) {
         switch (code) {
             case LR:
@@ -901,21 +760,6 @@ public class DicCross {
     }
 
     /**
-     * @return the crossWithPatterns
-     */
-    private final boolean isCrossWithPatterns() {
-        return crossWithPatterns;
-    }
-
-    /**
-     * @param crossWithPatterns
-     *                the crossWithPatterns to set
-     */
-    public final void setCrossWithPatterns(final boolean crossWithPatterns) {
-        this.crossWithPatterns = crossWithPatterns;
-    }
-
-    /**
      * @return the processed
      */
     private final EHashMap getProcessed() {
@@ -927,13 +771,6 @@ public class DicCross {
      */
     private final EHashMap getRegExProcessed() {
         return regExProcessed;
-    }
-
-    /**
-     * @return the speculProcessed
-     */
-    private final EHashMap getSpeculProcessed() {
-        return speculProcessed;
     }
 
     /**
@@ -1049,57 +886,33 @@ public class DicCross {
     public final void actionCross() {
         DicSet dicSet = getDicSet();
         actionConsistent(dicSet, "yes");
-
-        setCrossWithPatterns(true);
         setCrossModelFileName(getCrossModelFileName());
 
         final DictionaryElement[] bils = crossDictionaries(dicSet);
-
         final DictionaryElement bilCrossed = bils[0];
-        final DictionaryElement bilSpecul = bils[1];
-
         final String sl = dicSet.getBil1().getRightLanguage();
         final String tl = dicSet.getBil2().getRightLanguage();
         bilCrossed.setType("BIL");
         bilCrossed.setLeftLanguage(sl);
         bilCrossed.setRightLanguage(tl);
-
         msg.out("[" + (taskOrder++) + "] Making morphological dicionaries consistent ...");
 
         final EElementList[] commonCrossedMons = DicTools.makeConsistent(bilCrossed, dicSet.getMon1(), dicSet.getMon2());
         final EElementList crossedMonA = commonCrossedMons[0];
         final EElementList crossedMonB = commonCrossedMons[1];
 
-        final EElementList[] commonSpeculMons = DicTools.makeConsistent(bilSpecul, dicSet.getMon1(), dicSet.getMon2());
-        final EElementList speculMonA = commonSpeculMons[0];
-        final EElementList speculMonB = commonSpeculMons[1];
-
         final DictionaryElement monACrossed = new DictionaryElement(dicSet.getMon1());
         monACrossed.setMainSection(crossedMonA);
-
         final DictionaryElement monBCrossed = new DictionaryElement(dicSet.getMon2());
         monBCrossed.setMainSection(crossedMonB);
 
-        final DictionaryElement monASpecul = new DictionaryElement(dicSet.getMon1());
-        monASpecul.setMainSection(speculMonA);
-
-        final DictionaryElement monBSpecul = new DictionaryElement(dicSet.getMon2());
-        monBSpecul.setMainSection(speculMonB);
-
-        final DictionaryElementList del = new DictionaryElementList();
-        del.add(bilCrossed);
-        del.add(bilSpecul);
-        del.add(monACrossed);
-        del.add(monBCrossed);
-        del.add(monASpecul);
-        del.add(monBSpecul);
-
-        printXMLCrossedAndSpecul(del, sl, tl);
-
+        final DictionaryElementList dicList = new DictionaryElementList();
+        dicList.add(bilCrossed);
+        dicList.add(monACrossed);
+        dicList.add(monBCrossed);
+        printXMLCrossed(dicList, sl, tl);
         msg.out("[" + (taskOrder++) + "] Done!");
-
         this.setCompleted(100);
-
     }
 
     /**
@@ -1108,19 +921,15 @@ public class DicCross {
      * @param sl
      * @param tl
      */
-    private final void printXMLCrossedAndSpecul(final DictionaryElementList del, final String sl, final String tl) {
+    private final void printXMLCrossed(final DictionaryElementList del, final String sl, final String tl) {
         final DictionaryElement bilCrossed = del.get(0);
-        final DictionaryElement bilSpecul = del.get(1);
-        final DictionaryElement monACrossed = del.get(2);
-        final DictionaryElement monBCrossed = del.get(3);
-        final DictionaryElement monASpecul = del.get(4);
-        final DictionaryElement monBSpecul = del.get(5);
+        final DictionaryElement monACrossed = del.get(1);
+        final DictionaryElement monBCrossed = del.get(2);
 
         int i = 0;
         String patterns = "";
         bilCrossed.addComments("");
         bilCrossed.addComments("Patterns applied:");
-        //System.err.println("Patterns applied:");
         msg.log("Patterns applied:");
         for (CrossAction cA : getCrossModel().getCrossActions()) {
             String cAName = cA.getId();
@@ -1133,36 +942,22 @@ public class DicCross {
                 i++;
             } else {
                 String mesg = "\t" + cAName + " (" + usedPatterns.get(cAName) + " times)";
-                //System.err.println(mesg);
                 msg.log(mesg);
                 bilCrossed.addComments(mesg);
             }
         }
-        //System.err.println("[" + (taskOrder++) + "] Patterns never applied: " + patterns);
-        msg.log("[" + (taskOrder++) + "] Patterns never applied: " + patterns + "\n");
-        msg.out("[" + (taskOrder++) + "] Generating crossed dictionaries ...");
+        taskOrder = taskOrder + 1;
+        msg.log("[" + (taskOrder) + "] Patterns never applied: " + patterns + "\n");
+        msg.out("[" + (taskOrder) + "] Generating crossed dictionaries ...");
 
         this.bilCrossed_path = this.getOutDir() + "apertium-" + sl + "-" + tl + "." + sl + "-" + tl + "-crossed.dix";
         bilCrossed.printXML(this.bilCrossed_path);
 
-        // This dictionary is not printed anymore
-        // Default cross action in cross model replaces this idea of dic. of
-        // speculations
-        // bilSpecul.printXML("dix/apertium-" + sl + "-" + tl + "." + sl + "-" +
-        // tl + "-crossed-specul.dix");
         this.monACrossed_path = this.getOutDir() + "apertium-" + sl + "-" + tl + "." + sl + "-crossed.dix";
         monACrossed.printXML(this.monACrossed_path);
 
         this.monCCrossed_path = this.getOutDir() + "apertium-" + sl + "-" + tl + "." + tl + "-crossed.dix";
         monBCrossed.printXML(this.monCCrossed_path);
-
-    // These dictionaries are not printed anymore.
-    // Default cross action in cross model replaces this idea of dic. of
-    // speculations
-    // monASpecul.printXML("dix/apertium-" + sl + "-" + tl + "." + sl +
-    // "-crossed-specul.dix");
-    // monBSpecul.printXML("dix/apertium-" + sl + "-" + tl + "." + tl +
-    // "-crossed-specul.dix");
     }
 
     /**
@@ -1198,14 +993,14 @@ public class DicCross {
                 i++;
                 arg = getArguments()[i];
                 sDicMonA = arg;
-                //System.err.println("Monolingual A: '" + sDicMonA + "'");
+            //System.err.println("Monolingual A: '" + sDicMonA + "'");
             }
 
             if (arg.equals("-monC")) {
                 i++;
                 arg = getArguments()[i];
                 sDicMonC = arg;
-                //System.err.println("Monolingual C: '" + sDicMonC + "'");
+            //System.err.println("Monolingual C: '" + sDicMonC + "'");
             }
 
             if (arg.equals("-bilAB")) {
@@ -1222,7 +1017,7 @@ public class DicCross {
 
                 arg = getArguments()[i];
                 sDicBilAB = arg;
-                //System.err.println("Bilingual A-B: '" + sDicBilAB + "'");
+            //System.err.println("Bilingual A-B: '" + sDicBilAB + "'");
             }
 
             if (arg.equals("-bilBC")) {
@@ -1239,14 +1034,14 @@ public class DicCross {
                 }
                 arg = getArguments()[i];
                 sDicBilBC = arg;
-                //System.err.println("Bilingual B-C: '" + sDicBilBC + "'");
+            //System.err.println("Bilingual B-C: '" + sDicBilBC + "'");
             }
 
             if (arg.equals("-cross-model")) {
                 i++;
                 arg = getArguments()[i];
                 setCrossModelFileName(arg);
-                //System.err.println("Cross model: " + arg);
+            //System.err.println("Cross model: " + arg);
             }
 
             if (arg.equals("-debug")) {
@@ -1397,4 +1192,36 @@ public class DicCross {
     public final String getMonCCrossedPath() {
         return this.monCCrossed_path;
     }
+    
+    /**
+     * 
+     * @param dicSet
+     * @return The common language
+     */
+    public final String getCommonLanguage(final DicSet dicSet) {
+        // Sin tener en cuentra el orden. Se resuelve automáticamente
+        if (isMetaInfoComplete(dicSet)) {
+        HeaderElement d1 = this.dicSet.getMon1().getHeaderElement();
+        HeaderElement d2 = this.dicSet.getMon2().getHeaderElement();
+        HeaderElement d3 = this.dicSet.getBil1().getHeaderElement();
+        HeaderElement d4 = this.dicSet.getBil2().getHeaderElement();      
+        
+        }
+        return null;
+    }
+
+    /**
+     * 
+     * @param dicSet
+     * @return Checks whether the meta info is complete
+     */
+    public final boolean isMetaInfoComplete(final DicSet dicSet) {
+        for(DictionaryElement dic : dicSet) {
+            if(!dic.isHeaderDefined()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
 }

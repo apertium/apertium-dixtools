@@ -41,6 +41,11 @@ import java.io.OutputStreamWriter;
 public class DictionaryElement extends Element {
 
     /**
+     * 
+     */
+    protected HeaderElement header;
+    
+    /**
      *
      */
     protected AlphabetElement alphabet;
@@ -285,7 +290,25 @@ public class DictionaryElement extends Element {
             return false;
         }
     }
+    
+    
 
+    /**
+     * 
+     * @return The header element
+     */
+    public HeaderElement getHeaderElement() {
+        return this.header;
+    }
+    
+    /**
+     * 
+     * @param header
+     */
+    public void setHeaderElement(final HeaderElement header) {
+        this.header = header;
+    }
+    
     /**
      *
      *
@@ -758,19 +781,43 @@ public class DictionaryElement extends Element {
         this.folder = folder;
     }
 
+    /**
+     * 
+     * @return XML encoding
+     */
     public final String getXmlEncoding() {
         return xmlEncoding;
     }
 
+    /**
+     * 
+     * @param xmlEncoding
+     */
     public final void setXmlEncoding(String xmlEncoding) {
         this.xmlEncoding = xmlEncoding;
     }
 
+    /**
+     * 
+     * @return XML version of the document
+     */
     public final String getXmlVersion() {
         return xmlVersion;
     }
 
+    /**
+     * 
+     * @param xmlVersion
+     */
     public final void setXmlVersion(String xmlVersion) {
         this.xmlVersion = xmlVersion;
+    }
+    
+    /**
+     * 
+     * @return Is there a header defined?
+     */
+    public final boolean isHeaderDefined() {
+        return (header != null);
     }
 }

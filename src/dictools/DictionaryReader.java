@@ -31,6 +31,7 @@ import dics.elements.dtd.AlphabetElement;
 import dics.elements.dtd.DictionaryElement;
 import dics.elements.dtd.EElement;
 import dics.elements.dtd.GElement;
+import dics.elements.dtd.HeaderElement;
 import dics.elements.dtd.IElement;
 import dics.elements.dtd.LElement;
 import dics.elements.dtd.PElement;
@@ -87,7 +88,7 @@ public class DictionaryReader extends XMLReader {
 	analize();
 	final DictionaryElement dic = new DictionaryElement();
 	String encoding = getDocument().getInputEncoding();
-	// System.out.println("Encoding: " + encoding);
+        dic.setXmlEncoding(encoding);
 
 	Document doc = getDocument();
 	String xmlEncoding = doc.getXmlEncoding();
@@ -118,6 +119,13 @@ public class DictionaryReader extends XMLReader {
 	    if (child instanceof Element) {
 		final Element childElement = (Element) child;
 		final String childElementName = childElement.getNodeName();
+                
+                // Header with meta info about the dictionary
+		if (childElementName.equals("header")) {
+		    final HeaderElement headerElement = readHeader(childElement);
+		    dic.setHeaderElement(headerElement);
+		}
+                
 		// Alphabet
 		if (childElementName.equals("alphabet")) {
 		    final AlphabetElement alphabetElement = readAlphabet(childElement);
@@ -166,6 +174,29 @@ public class DictionaryReader extends XMLReader {
 	return dic;
     }
 
+    /**
+     * 
+     * @param e
+     * @return The header element
+     */
+    public HeaderElement readHeader(final Element e) {
+        HeaderElement header = new HeaderElement();
+	if (e.hasChildNodes()) {
+	    final NodeList nodeList = e.getChildNodes();
+	    for (int j = 0; j < nodeList.getLength(); j++) {
+		final Node node = nodeList.item(j);
+                if(node.getNodeName().equals("property")) {
+                    Element element = (Element) node;
+                    String name = getAttributeValue(element, "name");
+                    String value = getAttributeValue(element, "value");
+                    header.put(name, value);                    
+                }
+	    }
+	}
+        return header;        
+    }
+    
+    
     /**
          * 
          * @param e
