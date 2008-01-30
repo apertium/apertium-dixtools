@@ -32,6 +32,7 @@ import dictools.DicReverse;
 import dictools.DicSort;
 import dictools.apertiumizer.Apertiumizer;
 import dictools.dix2trie.Dix2Trie;
+import misc.enca.ConvertMF;
 
 /**
  *
@@ -77,7 +78,15 @@ public class ProcessDics {
      *
      */
     public final void go() {
-        checkAction();
+        try {
+            checkAction();
+        } catch (OutOfMemoryError oome) {
+            msg.err("Error occurred during initialization of VM");
+            msg.err("Too small initial heap for new size specified");
+            msg.err("Use, for example:");
+            msg.err("java -Xms64M -Xmx200M -jar path/to/crossdics.jar <task> [options]");
+            System.exit(-1);
+        }
     }
 
     /**
@@ -136,6 +145,10 @@ public class ProcessDics {
         if (getAction().equals("apertiumize")) {
             this.process_apertiumize();
         }
+        if (getAction().equals("convert-mf")) {
+            this.process_convertmf();
+        }
+
     }
 
     /**
@@ -387,6 +400,20 @@ public class ProcessDics {
             Apertiumizer apertiumizer = new Apertiumizer(arguments[1]);
             apertiumizer.setOutFileName(arguments[2]);
             apertiumizer.apertiumize();
+        }
+    }
+
+    /**
+     * 
+     */
+    private final void process_convertmf() {
+        if (getArguments().length != 4) {
+            msg.err("Usage: java ProcessDics convert-mf <morph-dic> <bil-dic> <out>");
+            System.exit(-1);
+        } else {
+            ConvertMF convertMF = new ConvertMF(arguments[1], arguments[2]);
+            convertMF.setOutFileName(arguments[3]);
+            convertMF.convert();
         }
     }
 

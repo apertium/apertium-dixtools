@@ -205,6 +205,8 @@ public class XMLReader {
      * @return Undefined         */
     protected EElement readEElement(final Element e) {
         final String r = getAttributeValue(e, "r");
+        final String slr = getAttributeValue(e, "slr");
+        final String srl = getAttributeValue(e, "srl");
         final String lm = getAttributeValue(e, "lm");
         final String a = getAttributeValue(e, "a");
         final String c = getAttributeValue(e, "c");
@@ -214,6 +216,8 @@ public class XMLReader {
         final EElement eElement = new EElement(r, lm, a, c);
         eElement.setAversion(aversion);
         eElement.setAlt(alt);
+        eElement.setSlr(slr);
+        eElement.setSrl(srl);
 
         if (e.hasChildNodes()) {
             final NodeList children = e.getChildNodes();

@@ -2,8 +2,8 @@
 
 mainClass="ProcessDics"
 # Minimum and maximum memory for JVM
-defaultMinMem=32
-defaultMaxMem=300
+defaultMinMem=500
+defaultMaxMem=1200
 if [ "$CROSSDICS_PATH" = "" ];
 then
 	CROSSDICS_PATH="."
@@ -224,7 +224,22 @@ function apertiumize() {
    else
       echo "Usage: dictools apertiumize <txt> <out>"
       echo "";
-      #echo "More information: http://xixona.dlsi.ua.es/wiki/index.php/Equivalent_paradigms";
+      #echo "More information: http://xixona.dlsi.ua.es/wiki";
+      #echo "";
+   fi
+}
+
+#
+#  convert-mf
+#
+function convert-mf() {
+   if [ $nparams -ge 3 ]
+   then
+      java ${java_options} $task $2 $3 $4
+   else
+      echo "Usage: dictools convert-mf <morph> <bil> <out>"
+      echo "";
+      #echo "More information: http://xixona.dlsi.ua.es/wiki";
       #echo "";
    fi
 }

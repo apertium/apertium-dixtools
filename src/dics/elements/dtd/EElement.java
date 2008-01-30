@@ -47,6 +47,16 @@ public class EElement extends Element implements Cloneable,
      * 
      */
     private String r;
+    
+    /**
+     * 
+     */
+    private String slr;
+    
+    /**
+     * 
+     */
+    private String srl;
     /**
      * 
      */
@@ -173,6 +183,38 @@ public class EElement extends Element implements Cloneable,
      * @return Undefined         */
     public final String getComment() {
         return c;
+    }
+    
+    /**
+     * 
+     * @return The 'slr' attribute
+     */
+    public final String getSlr() {
+        return this.slr;
+    }
+    
+    /**
+     * 
+     * @return The 'srl' attribute
+     */
+    public final String getSrl() {
+        return this.srl;
+    }
+    
+    /**
+     * 
+     * @param slr
+     */
+    public final void setSlr(final String slr) {
+        this.slr = slr;
+    }
+    
+    /**
+     * 
+     * @param srl
+     */
+    public final void setSrl(final String srl) {
+        this.srl = srl;
     }
 
     /**
@@ -440,6 +482,12 @@ public class EElement extends Element implements Cloneable,
         if (r != null) {
             attributes += " r=\"" + r + "\"";
         }
+        if (slr != null) {
+            attributes += " slr=\"" + slr + "\"";
+        }
+        if (srl != null) {
+            attributes += " srl=\"" + srl + "\"";
+        }        
         if (lm != null) {
             attributes += " lm=\"" + lm + "\"";
         }
@@ -478,11 +526,18 @@ public class EElement extends Element implements Cloneable,
      * @param dos
      * @throws java.io.IOException
      */
+    @Override
     public final void printXML1Line(final OutputStreamWriter dos)
             throws IOException {
         String attributes = "";
         if (r != null) {
             attributes += " r=\"" + r + "\"";
+        }
+        if (slr != null) {
+            attributes += " slr=\"" + slr + "\"";
+        }
+        if (srl != null) {
+            attributes += " srl=\"" + srl + "\"";
         }
         if (lm != null) {
             attributes += " lm=\"" + lm + "\"";
@@ -496,6 +551,10 @@ public class EElement extends Element implements Cloneable,
         if (aversion != null) {
             attributes += " aversion=\"" + aversion + "\"";
         }
+        if (alt != null) {
+            attributes += " alt=\"" + alt + "\"";
+        }
+
         if (comments != null) {
             dos.write(tab(2) + "<!-- \n");
             dos.write(comments);
@@ -540,7 +599,7 @@ public class EElement extends Element implements Cloneable,
         categories.add("predet");
         categories.add("ij");
 
-        // Aadir otras categorias que se quieran comprobar
+        // Añadir otras categorias que se quieran comprobar
 
         for (final String s : categories) {
             if (is("L", s)) {

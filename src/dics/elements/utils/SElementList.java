@@ -17,13 +17,9 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
-
-
 package dics.elements.utils;
 
 //~--- non-JDK imports --------------------------------------------------------
-
 import dics.elements.dtd.SElement;
 
 import dictools.crossmodel.ConstantMap;
@@ -162,7 +158,22 @@ public class SElementList extends Vector<SElement> {
 
         return sEList2;
     }
+
+    /**
+     * 
+     * @param value
+     * @return Is s certain value?
+     */
+    public final boolean is(final String value) {
+        for (SElement sE : this) {
+            if (sE.getValue().equals(value)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 
 //~ Formatted by Jindent --- http://www.jindent.com
+
