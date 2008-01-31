@@ -1194,7 +1194,7 @@ public class DicCross {
     }
     
     /**
-     * 
+     * This method is on process
      * @param dicSet
      * @return The common language
      */

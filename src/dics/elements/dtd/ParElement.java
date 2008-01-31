@@ -82,11 +82,25 @@ public class ParElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
+    @Override
     public final void printXML(final OutputStreamWriter dos) throws IOException {
         if (comments == null) {
             comments = "";
         }
         dos.write(tab(4) + "<" + getTagName() + " n=\"" + n + "\"/> " + getComments() + "\n");
+    }
+
+    /**
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
+    @Override
+    public void printXML1Line(final OutputStreamWriter dos) throws IOException {
+        if (comments == null) {
+            comments = "";
+        }
+        dos.write("<" + getTagName() + " n=\"" + n + "\"/>" + getComments());
     }
 
     /**

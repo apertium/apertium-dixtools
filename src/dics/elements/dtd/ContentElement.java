@@ -154,6 +154,7 @@ public class ContentElement extends Element implements Cloneable {
      * @param dos
      * @throws java.io.IOException
      */
+    @Override
     protected void printXML(final OutputStreamWriter dos) throws IOException {
         if (getTagName() != null) {
             dos.write(tab(4) + "<" + getTagName() + ">");
@@ -183,6 +184,7 @@ public class ContentElement extends Element implements Cloneable {
      * @param dos
      * @throws java.io.IOException
      */
+    @Override
     protected void printXML1Line(final OutputStreamWriter dos) throws IOException {
         if (getTagName() != null) {
             dos.write("<" + getTagName() + ">");
@@ -319,6 +321,7 @@ public class ContentElement extends Element implements Cloneable {
     /**
      * 
      */
+    @Override
     public String toString() {
         String str = "";
 

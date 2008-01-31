@@ -107,6 +107,7 @@ public class PElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
+    @Override
     public final void printXML(final OutputStreamWriter dos) throws IOException {
         dos.write(tab(3) + "<" + getTagName() + ">\n");
         if (l != null) {
@@ -123,6 +124,7 @@ public class PElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
+    @Override
     public final void printXML1Line(final OutputStreamWriter dos)
             throws IOException {
         dos.write("<" + getTagName() + ">");
@@ -134,6 +136,7 @@ public class PElement extends Element {
     /**
      * 
      */
+    @Override
     public final String toString() {
         String str = "";
 

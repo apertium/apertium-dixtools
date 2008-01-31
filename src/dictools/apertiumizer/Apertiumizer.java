@@ -71,7 +71,18 @@ public class Apertiumizer {
      * 
      */
     public final void apertiumize() {
-        this.readFormat(0);
+        DictionaryReader encaReader = new DictionaryReader("apertium-en-ca.en-ca.dix");
+        DictionaryElement enca = encaReader.readDic();
+        en = new HashMap<String, String>();
+
+        for (EElement e : enca.getAllEntries()) {
+            LElement l = e.getLeft();
+            String lv = l.getValueNoTags();
+            en.put(lv, lv);
+        }
+
+
+        this.readFormat(2);
     }
 
     /**
@@ -196,6 +207,38 @@ public class Apertiumizer {
         return null;
     }
 
+
+    private final String replacePoS(String str) {
+        //str = str.replaceAll("\"", "\\&quot;");
+        str = str.replaceAll("\'", "");
+        str = str.replaceAll("\"", "");
+        str = str.replaceAll("\\<", "(");
+        str = str.replaceAll("\\>", ")");
+        str = str.replaceAll("\\{vi\\}", "<s n=\"vblex\"/>");
+        str = str.replaceAll("\\{m\\}", "<s n=\"n\"/><s n=\"m\"/>");
+        str = str.replaceAll("\\{f\\}", "<s n=\"n\"/><s n=\"f\"/>");
+        str = str.replaceAll("\\{pl\\}", "<s n=\"n\"/><s n=\"pl\"/>");
+        str = str.replaceAll("\\{adj\\}", "<s n=\"adj\"/>");
+        str = str.replaceAll("\\{num\\}", "<s n=\"num\"/>");
+        str = str.replaceAll("\\{adv\\}", "<s n=\"adv\"/>");
+        str = str.replaceAll("\\{vt\\}", "<s n=\"vblex\"/>");
+        str = str.replaceAll("\\{n\\}", "<s n=\"n\"/>");
+        str = str.replaceAll("\\{m,f\\}", "<s n=\"n\"/><s n=\"mf\"/>");
+        str = str.replaceAll("\\{f,m\\}", "<s n=\"n\"/><s n=\"mf\"/>");
+        str = str.replaceAll("\\{m,n\\}", "<s n=\"n\"/><s n=\"mn\"/>");
+        str = str.replaceAll("\\{f,n\\}", "<s n=\"n\"/><s n=\"f\"/>");
+        str = str.replaceAll("\\{m,f,n\\}", "<s n=\"n\"/><s n=\"mf\"/>");
+        str = str.replaceAll("\\{n,pl\\}", "<s n=\"n\"/><s n=\"pl\"/>");
+        str = str.replaceAll("\\&", "\\&amp;");
+
+        Pattern p = Pattern.compile("\\[[a-zA-ZüÜäÄöÖ.]+\\]");
+        Matcher m = p.matcher(str);
+        str = m.replaceAll("");
+        str = str.replaceAll("\\>[\\s]+", "\\>");
+
+        return str;
+    }
+
     /**
      * 
      * @param strLine
@@ -304,37 +347,6 @@ public class Apertiumizer {
             }
         }
         return eList;
-    }
-
-    private final String replacePoS(String str) {
-        //str = str.replaceAll("\"", "\\&quot;");
-        str = str.replaceAll("\'", "");
-        str = str.replaceAll("\"", "");
-        str = str.replaceAll("\\<", "(");
-        str = str.replaceAll("\\>", ")");
-        str = str.replaceAll("\\{vi\\}", "<s n=\"vblex\"/>");
-        str = str.replaceAll("\\{m\\}", "<s n=\"n\"/><s n=\"m\"/>");
-        str = str.replaceAll("\\{f\\}", "<s n=\"n\"/><s n=\"f\"/>");
-        str = str.replaceAll("\\{pl\\}", "<s n=\"n\"/><s n=\"pl\"/>");
-        str = str.replaceAll("\\{adj\\}", "<s n=\"adj\"/>");
-        str = str.replaceAll("\\{num\\}", "<s n=\"num\"/>");
-        str = str.replaceAll("\\{adv\\}", "<s n=\"adv\"/>");
-        str = str.replaceAll("\\{vt\\}", "<s n=\"vblex\"/>");
-        str = str.replaceAll("\\{n\\}", "<s n=\"n\"/>");
-        str = str.replaceAll("\\{m,f\\}", "<s n=\"n\"/><s n=\"mf\"/>");
-        str = str.replaceAll("\\{f,m\\}", "<s n=\"n\"/><s n=\"mf\"/>");
-        str = str.replaceAll("\\{m,n\\}", "<s n=\"n\"/><s n=\"mn\"/>");
-        str = str.replaceAll("\\{f,n\\}", "<s n=\"n\"/><s n=\"f\"/>");
-        str = str.replaceAll("\\{m,f,n\\}", "<s n=\"n\"/><s n=\"mf\"/>");
-        str = str.replaceAll("\\{n,pl\\}", "<s n=\"n\"/><s n=\"pl\"/>");
-        str = str.replaceAll("\\&", "\\&amp;");
-
-        Pattern p = Pattern.compile("\\[[a-zA-ZüÜäÄöÖ.]+\\]");
-        Matcher m = p.matcher(str);
-        str = m.replaceAll("");
-        str = str.replaceAll("\\>[\\s]+", "\\>");
-
-        return str;
     }
 
     /**

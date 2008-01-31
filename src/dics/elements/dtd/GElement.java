@@ -43,6 +43,7 @@ public class GElement extends ContentElement {
      * @param dos
      * @throws java.io.IOException
      */
+    @Override
     public final void printXML(final OutputStreamWriter dos) throws IOException {
         if (getTagName() != null) {
             dos.write("<" + getTagName() + ">");

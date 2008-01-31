@@ -148,7 +148,6 @@ public class ProcessDics {
         if (getAction().equals("convert-mf")) {
             this.process_convertmf();
         }
-
     }
 
     /**

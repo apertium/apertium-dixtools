@@ -47,6 +47,7 @@ public class TextElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
+    @Override
     public final void printXML(final OutputStreamWriter dos) throws IOException {
         dos.write(value);
     }
@@ -67,6 +68,7 @@ public class TextElement extends Element {
     /**
      * 
      */
+    @Override
     public final String toString() {
         String str = "";
         str += getValue();

@@ -110,7 +110,6 @@ public class DictionaryReader extends XMLReader {
                  */
 
 	    if (child instanceof ProcessingInstruction) {
-		// System.out.println("PI read!");
 		ProcessingInstruction pi = (ProcessingInstruction) child;
 		String data = pi.getData();
 		// System.out.println("Data pi: " + data);
@@ -158,7 +157,7 @@ public class DictionaryReader extends XMLReader {
 			    || fileName.endsWith("symbols.xml")) {
 			SdefsReader sdefsReader = new SdefsReader(fileName);
 			SdefsElement sdefs = sdefsReader.readSdefs();
-			System.out.println("Symbol definitions: " + fileName);
+			//System.out.println("Symbol definitions: " + fileName);
 			dic.setSdefs(sdefs);
 		    }
 		    if (fileName.endsWith("pardefs.dix")) {
