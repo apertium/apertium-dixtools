@@ -124,6 +124,7 @@ public class SectionElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
+    @Override
     public final void printXML(final OutputStreamWriter dos) throws IOException {
         String attributes = "";
         if (getID() != null) {
@@ -144,8 +145,9 @@ public class SectionElement extends Element {
      * @param fileName
      */
     public void printXMLXInclude(final String fileName) {
-        this.printXMLXInclude(fileName, "UTF-8");        
+        this.printXMLXInclude(fileName, "UTF-8");
     }
+
     /**
      * 
      * @param fileName

@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dictools.crossmodel;
 
 import java.util.HashMap;
@@ -34,109 +33,106 @@ import dics.elements.utils.Msg;
 public class CrossModelFST {
 
     /**
-         * 
-         */
+     * 
+     */
     private State initialState;
-
     /**
-         * 
-         */
+     * 
+     */
     private ActionSet actionSet;
-    
     /**
      * 
      */
     private Msg msg;
 
     /**
-         * 
-         * 
-         */
+     * 
+     * 
+     */
     public CrossModelFST(final CrossModel crossModel) {
-	initialState = new State("");
-	String str;
-	HashMap<String, CrossAction> patterns = new HashMap<String, CrossAction>();
+        initialState = new State("");
+        String str;
+        HashMap<String, CrossAction> patterns = new HashMap<String, CrossAction>();
 
-	for (CrossAction crossAction : crossModel.getCrossActions()) {
-	    ElementList eList = crossAction.processVars();
-	    str = getElementListString(eList);
-	    if (!patterns.containsKey(str)) {
-		patterns.put(str, crossAction);
-		ActionSet actionSet = crossAction.getActionSet();
-		actionSet.setCrossAction(crossAction);
-		add(eList, actionSet);
-	    } else {
-		CrossAction cA = patterns.get(str);
-		msg.log("Duplicated pattern: '" + crossAction.getId() + "' is the same as '" + cA.getId() + "' are the same (will be ignored).");
-	    }
-	}
+        for (CrossAction crossAction : crossModel.getCrossActions()) {
+            ElementList eList = crossAction.processVars();
+            str = getElementListString(eList);
+            if (!patterns.containsKey(str)) {
+                patterns.put(str, crossAction);
+                ActionSet actionSet = crossAction.getActionSet();
+                actionSet.setCrossAction(crossAction);
+                add(eList, actionSet);
+            } else {
+                CrossAction cA = patterns.get(str);
+                msg.log("Duplicated pattern: '" + crossAction.getId() + "' is the same as '" + cA.getId() + "' are the same (will be ignored).");
+            }
+        }
     }
 
     /**
-         * 
-         * @param eList
-         * @param action
-         */
+     * 
+     * @param eList
+     * @param action
+     */
     private final void add(final ElementList eList, final ActionSet actionSet) {
-	initialState.add(eList, actionSet, 0);
+        initialState.add(eList, actionSet, 0);
     }
 
     /**
-         * 
-         * @param entries
-         * @return Undefined         */
+     * 
+     * @param entries
+     * @return Undefined         */
     public final ActionSet getActionSet(CrossAction entries) {
-	HashMap<String, ElementList> tails = null;
-	ElementList eList = entries.processEntries();
-	ActionSetList actionSetList = new ActionSetList(msg);
-	initialState.getActionSet(eList, 0, actionSetList, tails);
-	if (actionSetList.size() > 0) {
+        ActionSet bestActionSet = null;
+        HashMap<String, ElementList> tails = null;
+        ElementList eList = entries.processEntries();
+        ActionSetList actionSetList = new ActionSetList(msg);
+        initialState.getActionSet(eList, 0, actionSetList, tails);
+        if (actionSetList.size() > 0) {
             msg.log("Candidates:\n");
-            actionSetList.print();            
-	    ActionSet bestActionSet = actionSetList.getBestActionSet();
+            actionSetList.print();
+            bestActionSet = actionSetList.getBestActionSet();
             setActionSet(bestActionSet);
-	    return bestActionSet;
-	} else {
-	    return null;
-	}
+        }
+        return bestActionSet;
     }
 
     /**
-         * 
-         * @param eList
-         */
+     * 
+     * @param eList
+     */
     private final String getElementListString(ElementList eList) {
-	String str = "";
-	for (Element e : eList) {
-	    // only 's' elements are considered as a pattern
-	    // if (e instanceof SElement) {
-	    // String real = ((SElement) e).getTemp();
-	    String real = e.getTemp();
-	    if (real != null) {
-		str += "<" + e.getValue() + "/" + real + ">";
-	    } else {
-		str += "<" + e.getValue() + ">";
-	    }
-	    // }
-	}
-	return str;
+        String str = "";
+        for (Element e : eList) {
+            // only 's' elements are considered as a pattern
+            // if (e instanceof SElement) {
+            // String real = ((SElement) e).getTemp();
+            String real = e.getTemp();
+            if (real != null) {
+                str += "<" + e.getValue() + "/" + real + ">";
+            } else {
+                str += "<" + e.getValue() + ">";
+            }
+        // }
+        }
+        return str;
     }
 
     /**
-         * 
-         * @return Undefined         */
+     * 
+     * @return Undefined         */
     public final ActionSet getActionSet() {
-	return actionSet;
+        return actionSet;
     }
 
     /**
-         * 
-         * @param actionSet
-         */
+     * 
+     * @param actionSet
+     */
     public final void setActionSet(ActionSet actionSet) {
-	this.actionSet = actionSet;
+        this.actionSet = actionSet;
     }
-    
+
     /**
      * 
      * @param msg
@@ -144,7 +140,7 @@ public class CrossModelFST {
     public final void setMsg(Msg msg) {
         this.msg = msg;
     }
-    
+
     /**
      * 
      * @return The msg object
@@ -152,5 +148,4 @@ public class CrossModelFST {
     public final Msg getMsg() {
         return this.msg;
     }
-
 }

@@ -161,6 +161,9 @@ function format-1line() {
       echo "Dictionary: $3"
    else
       echo "Usage: dictools format-1line <dic> <dic-out>"
+      echo "";
+      echo "More information: http://xixona.dlsi.ua.es/wiki/index.php/Format_dictionaries";
+      echo "";
    fi
 }
 
@@ -256,6 +259,7 @@ function show_help() {
    echo "    dix2trie:           creates a Trie from an existing bilingual dictionary"
    echo "    equiv-paradigms:    finds equivalent paradigms and updates references"
    echo "    format:             formats a dictionary"   
+   echo "    format-1line:       formats a dictionary (1 element per line)"
    echo "    get-bil-omegawiki:  gets cheap bilingual dictionaries from Omegawiki."
    echo "    merge-bil:          merges two bilingual dictionaries"
    echo "    merge-morph:        merges two morphological dictionaries"

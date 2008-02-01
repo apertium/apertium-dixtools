@@ -311,26 +311,39 @@ public class CrossAction implements Comparable<CrossAction> {
                     p++;
                     hm.put(value, pos);
                 }
-                if (Character.isUpperCase(value.charAt(0)) && Character.isDigit(value.charAt(value.length() - 1))) {
-                    if (value.charAt(0) == 'S') {
-                        String n = new String("0");
-                        sElement.setValue(n);
-                        sElement.setTemp(value);
-                    } else {
-                        String n = pos.toString();
-                        sElement.setValue(n);
-                        sElement.setTemp(value);
-                    }
+
+                if (value.charAt(0) == '*' || value.charAt(0) == '?') {
+                    String n = new String("*");
+                    sElement.setValue(n);
+                    sElement.setTemp("*");
                 } else {
-                    if (!Character.isDigit(value.charAt(0))) {
-                        sElement.setValue(value);
-                        getActionSet().incrementNumberOfConstants();
+                    if (this.isVariable(value)) {
+                        // vraiable: S1, X3, etc.
+                        if (value.charAt(0) == 'S') {
+                            String n = new String("0");
+                            sElement.setValue(n);
+                            sElement.setTemp(value);
+                        } else {
+                            String n = pos.toString();
+                            sElement.setValue(n);
+                            sElement.setTemp(value);
+                        }
+                    } else {
+                        // constant: 'mf', 'num', etc.
+                        if (!Character.isDigit(value.charAt(0))) {
+                            sElement.setValue(value);
+                            getActionSet().incrementNumberOfConstants();
+                        }
                     }
                 }
                 eList.add(sElement);
             }
         }
         return j;
+    }
+
+    private final boolean isVariable(final String value) {
+        return Character.isUpperCase(value.charAt(0)) && Character.isDigit(value.charAt(value.length() - 1));
     }
 
     /**

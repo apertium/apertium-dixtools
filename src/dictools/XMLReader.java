@@ -183,13 +183,12 @@ public class XMLReader {
             final NodeList children = e.getChildNodes();
             for (int i = 0; i < children.getLength(); i++) {
                 final Node child = children.item(i);
-
                 /*
-                 * if (child instanceof Comment) { Comment comment =
-                 * (Comment)child; System.out.println("Comment: " +
-                 * comment.getTextContent()); }
-                 */
-
+                if (child instanceof Comment) {
+                    final Element comment = (Element) child;
+                    eList.add(comment);
+                }
+                 * */
                 if (child instanceof Element) {
                     final Element childElement = (Element) child;
                     eList.add(childElement);

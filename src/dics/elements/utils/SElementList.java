@@ -74,7 +74,6 @@ public class SElementList extends Vector<SElement> {
                 }
             }
         }
-
         return true;
     }
 
