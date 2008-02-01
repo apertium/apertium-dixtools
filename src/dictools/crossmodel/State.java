@@ -104,7 +104,7 @@ public class State {
      * @param i
      */
     public final void add(ElementList pattern, ActionSet actionSet, int i) {
-        TransitionSet transitions = getTransitions();
+        //TransitionSet transitions = getTransitions();
         if (i < pattern.size()) {
             final Element e = pattern.get(i);
             State state;
@@ -117,8 +117,8 @@ public class State {
                 state = transitions.get(e.getValue());
             }
             if (state.getValue().equals("j")) {
-                actionSet.setPatternLength(new Integer(i));
-                actionSet.calculatePatternLength();
+                //actionSet.setPatternLength(new Integer(i));
+                //actionSet.calculatePatternLength();
                 state.setActionSet(actionSet);
             } else {
                 state.add(pattern, actionSet, i + 1);
@@ -229,8 +229,7 @@ public class State {
             }
         }
 
-        int index = i;
-
+        final int index = i;
         if (this.getTransitions().containsKey("*")) {
             Element e = entries.get(i);
             while (!e.getValue().equals("b") && !e.getValue().equals("j")) {
@@ -240,13 +239,12 @@ public class State {
             State state = getTransitions().get("*");
             state.getActionSet(getEntries(), i, getActionSetList(), tails);
         }
-
+        
+        i = index;
         if (this.getTransitions().containsKey("?")) {
             State state = getTransitions().get("?");
-            state.getActionSet(getEntries(), i+1, getActionSetList(), tails);
-        }
-
-        
+            state.getActionSet(getEntries(), i + 1, getActionSetList(), tails);
+        }        
 
         i = index;
         // processing tails

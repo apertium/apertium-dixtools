@@ -40,12 +40,11 @@ public class ActionSetList extends HashMap<String, ActionSet> {
      * 
      */
     private ActionSet bestActionSet;
-    
     /**
      * 
      */
     private Msg msg;
-    
+
     /**
      * Constructor
      */
@@ -81,36 +80,31 @@ public class ActionSetList extends HashMap<String, ActionSet> {
      * @return Undefined     */
     public final ActionSet getBestActionSet() {
         ActionSet defaultActionSet = null;
-        ArrayList<ActionSet> actionSetList = new ArrayList<ActionSet>();
-        Set keySet = keySet();
-        Iterator it = keySet.iterator();
-        int maxNConstants = -1;
         boolean defaultCanBeApplied = false;
-
+        ArrayList<ActionSet> actionSetList = new ArrayList<ActionSet>();
+        Iterator it = this.keySet().iterator();
         while (it.hasNext()) {
             String key = (String) it.next();
             ActionSet actionSet = get(key);
-            if (!actionSet.getName().equals("default")) {
-                if (actionSet.getNumberOfConstants() > maxNConstants) {
-                    actionSetList = new ArrayList<ActionSet>();
-                    actionSetList.add(actionSet);
-                    maxNConstants = actionSet.getNumberOfConstants();
-                } else {
-                    if (actionSet.getNumberOfConstants() == maxNConstants) {
-                        actionSetList.add(actionSet);
-                    }
-                }
-            } else {
+            if (actionSet.getName().equals("default")) {
                 defaultCanBeApplied = true;
                 defaultActionSet = actionSet;
+            } else {
+                actionSetList.add(actionSet);
             }
         }
-
+        
         ArrayList<ActionSet> longestPatterns = this.getLongestPatterns(actionSetList);
-        this.getMostConcretePatterns(longestPatterns);
+        ArrayList<ActionSet> mostConcrete = this.getMostConcretePatterns(longestPatterns);
+        ArrayList<ActionSet> finalList = mostConcrete;
 
-        if (!isDefinedBestAction() && defaultCanBeApplied) {
-            setBestActionSet(defaultActionSet);
+        if (finalList.size() > 0) {
+            ActionSet action = finalList.get(0);
+            this.setBestActionSet(action);
+        } else {
+            if (defaultCanBeApplied) {
+                setBestActionSet(defaultActionSet);
+            }
         }
         return bestActionSet;
     }
@@ -123,8 +117,10 @@ public class ActionSetList extends HashMap<String, ActionSet> {
         int maxLength = 0;
         ArrayList<ActionSet> longestPatterns = new ArrayList<ActionSet>();
         for (ActionSet actionSet : actionSetList) {
-            int patternLength = actionSet.getNumberOfConstants();
+            int patternLength = actionSet.getPatternLength();
             if (patternLength > maxLength) {
+                longestPatterns = new ArrayList<ActionSet>();
+                longestPatterns.add(actionSet);
                 this.setBestActionSet(actionSet);
                 maxLength = patternLength;
             } else {
@@ -136,11 +132,30 @@ public class ActionSetList extends HashMap<String, ActionSet> {
         return longestPatterns;
     }
 
+    private final ArrayList<ActionSet> getMostConcretePatterns(final ArrayList<ActionSet> actionSetList) {
+        int maxNConstants = 0;
+        ArrayList<ActionSet> mostConcrete = new ArrayList<ActionSet>();
+        for (ActionSet actionSet : actionSetList) {
+            int nConstants = actionSet.getNumberOfConstants();
+            if (nConstants > maxNConstants) {
+                mostConcrete = new ArrayList<ActionSet>();
+                mostConcrete.add(actionSet);
+                this.setBestActionSet(actionSet);
+                maxNConstants = nConstants;
+            } else {
+                if (nConstants == maxNConstants) {
+                    mostConcrete.add(actionSet);
+                }
+            }
+        }
+        return mostConcrete;
+    }
+
     /**
      * 
      * @param actionSetList
      */
-    private final void getMostConcretePatterns(final ArrayList<ActionSet> actionSetList) {
+    private final void getMostConcretePatternsOld(final ArrayList<ActionSet> actionSetList) {
         if (actionSetList.size() > 1) {
             int maxR = 0;
             for (ActionSet actionSet2 : actionSetList) {

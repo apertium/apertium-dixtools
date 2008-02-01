@@ -21,9 +21,14 @@ package misc.enca;
 
 import dics.elements.dtd.DictionaryElement;
 import dics.elements.dtd.EElement;
+import dics.elements.dtd.IElement;
+import dics.elements.dtd.LElement;
 import dics.elements.dtd.PardefElement;
 import dics.elements.dtd.PardefsElement;
+import dics.elements.dtd.RElement;
 import dics.elements.dtd.SElement;
+import dics.elements.dtd.SectionElement;
+import dics.elements.dtd.TextElement;
 import dics.elements.utils.EElementList;
 import dics.elements.utils.SElementList;
 import dictools.DictionaryReader;
@@ -91,6 +96,9 @@ public class ConvertMF {
      * 
      */
     public final void convert() {
+        //this.generateMon();
+        //this.completeBil();
+        
         DictionaryReader morphReader = new DictionaryReader(this.morphDic);
         DictionaryElement morph = morphReader.readDic();
         findMFParadigms(morph);
@@ -119,6 +127,7 @@ public class ConvertMF {
         this.processAdjs(mfElementsAdjs, bil);
 
         bil.printXML(this.outFileName);
+         
     }
 
     /**
@@ -224,4 +233,49 @@ public class ConvertMF {
             }
         }
     }
+    
+    private final void generateMon() {
+        DictionaryReader bilReader = new DictionaryReader(this.bilDic);
+        DictionaryElement bil = bilReader.readDic();
+
+        DictionaryElement mon = new DictionaryElement();
+        SectionElement section = new SectionElement();
+        section.setID("main");
+        section.setType("standard");
+        mon.addSection(section);
+        
+        for (EElement e1: bil.getAllEntries()) {
+            EElement e = new EElement();
+            e.setLemma(e1.getValue("L"));
+            IElement iE = new IElement();
+            iE.addChild(new TextElement(e1.getValue("L")));
+            e.addChild(iE);
+            section.addEElement(e);            
+        }
+        mon.printXML("apertium-de-en.de.dix");
+    }
+    
+    private final void completeBil() {
+        DictionaryReader bilReader = new DictionaryReader(this.bilDic);
+        DictionaryElement bil = bilReader.readDic();
+
+         for (EElement e1: bil.getAllEntries()) {
+            LElement lE = e1.getLeft();
+            RElement rE = e1.getRight();
+            
+            SElementList attr = lE.getSElements();
+            if(attr.size() > 0) {
+            SElement attr0 = attr.get(0);
+            if( attr0 != null) {
+            String v = attr0.getValue();
+            SElement newSE = new SElement(v);
+            rE.addChild(newSE);          
+            }}
+        }
+        bil.printXML("apertium-de-en.de-en.dix");
+
+        
+    }
+    
+    
 }

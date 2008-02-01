@@ -303,28 +303,30 @@ public class DicCross {
      */
     private final AlphabetElement crossAlphabets(final AlphabetElement alphabet1, final AlphabetElement alphabet2) {
         final AlphabetElement alphabet = new AlphabetElement();
+        if (alphabet2 != null && alphabet2 != null) {
 
-        final String a1 = alphabet1.getAlphabet();
-        final String a2 = alphabet2.getAlphabet();
 
-        final HashMap<Object, Object> a3 = new HashMap<Object, Object>();
+            final String a1 = alphabet1.getAlphabet();
+            final String a2 = alphabet2.getAlphabet();
 
-        int i = 0;
-        for (i = 0; i < a1.length(); i++) {
-            final char c = a1.charAt(i);
-            if (!a3.containsKey(c)) {
-                a3.put(c, null);
+            final HashMap<Object, Object> a3 = new HashMap<Object, Object>();
+
+            int i = 0;
+            for (i = 0; i < a1.length(); i++) {
+                final char c = a1.charAt(i);
+                if (!a3.containsKey(c)) {
+                    a3.put(c, null);
+                }
+            }
+
+            int j = 0;
+            for (j = 0; j < a1.length(); j++) {
+                final char c = a2.charAt(j);
+                if (!a3.containsKey(c)) {
+                    a3.put(c, null);
+                }
             }
         }
-
-        int j = 0;
-        for (j = 0; j < a1.length(); j++) {
-            final char c = a2.charAt(j);
-            if (!a3.containsKey(c)) {
-                a3.put(c, null);
-            }
-        }
-
         return alphabet;
     }
 
@@ -336,45 +338,48 @@ public class DicCross {
      * @return Undefined     
      */
     private final SdefsElement crossSdefs(final SdefsElement sdefs1, final SdefsElement sdefs2) {
-        msg.out("[" + (taskOrder++) + "] Crossing definitions...");
         final SdefsElement sdefs = new SdefsElement();
-        HashMap<String, SdefElement> sdefList = new HashMap<String, SdefElement>();
+        if (sdefs1 != null && sdefs2 != null) {
+            msg.out("[" + (taskOrder++) + "] Crossing definitions...");
 
-        for (final SdefElement sdef1 : sdefs1.getSdefsElements()) {
-            if (!sdefList.containsKey(sdef1.getValue())) {
-                sdefList.put(sdef1.getValue(), sdef1);
-            }
-        }
-        for (final SdefElement sdef2 : sdefs2.getSdefsElements()) {
-            if (!sdefList.containsKey(sdef2.getValue())) {
-                sdefList.put(sdef2.getValue(), sdef2);
-            } else {
-                SdefElement sdef1 = sdefList.get(sdef2.getValue());
+            HashMap<String, SdefElement> sdefList = new HashMap<String, SdefElement>();
 
-                if ((sdef1.getComment() != null) && (sdef2.getComment() == null)) {
-                    sdef2.setComment(sdef1.getComment());
+            for (final SdefElement sdef1 : sdefs1.getSdefsElements()) {
+                if (!sdefList.containsKey(sdef1.getValue())) {
+                    sdefList.put(sdef1.getValue(), sdef1);
                 }
+            }
+            for (final SdefElement sdef2 : sdefs2.getSdefsElements()) {
+                if (!sdefList.containsKey(sdef2.getValue())) {
+                    sdefList.put(sdef2.getValue(), sdef2);
+                } else {
+                    SdefElement sdef1 = sdefList.get(sdef2.getValue());
 
-                if ((sdef1.getComment() != null) && (sdef2.getComment() != null)) {
-                    if (!sdef1.getComment().equals(sdef2.getComment())) {
-                        sdef2.setComment(sdef1.getComment() + "/" + sdef2.getComment());
+                    if ((sdef1.getComment() != null) && (sdef2.getComment() == null)) {
+                        sdef2.setComment(sdef1.getComment());
                     }
+
+                    if ((sdef1.getComment() != null) && (sdef2.getComment() != null)) {
+                        if (!sdef1.getComment().equals(sdef2.getComment())) {
+                            sdef2.setComment(sdef1.getComment() + "/" + sdef2.getComment());
+                        }
+                    }
+                    sdefList.put(sdef2.getValue(), sdef2);
                 }
-                sdefList.put(sdef2.getValue(), sdef2);
             }
-        }
 
-        Set<String> keys = sdefList.keySet();
-        Iterator<String> it = keys.iterator();
+            Set<String> keys = sdefList.keySet();
+            Iterator<String> it = keys.iterator();
 
-        while (it.hasNext()) {
-            final String str = it.next();
-            final SdefElement sdef = sdefList.get(str);
-            sdefs.addSdefElement(sdef);
+            while (it.hasNext()) {
+                final String str = it.next();
+                final SdefElement sdef = sdefList.get(str);
+                sdefs.addSdefElement(sdef);
+            }
+            sdefList = null;
+            it = null;
+            keys = null;
         }
-        sdefList = null;
-        it = null;
-        keys = null;
         return sdefs;
     }
 
@@ -1192,7 +1197,7 @@ public class DicCross {
     public final String getMonCCrossedPath() {
         return this.monCCrossed_path;
     }
-    
+
     /**
      * This method is on process
      * @param dicSet
@@ -1201,11 +1206,11 @@ public class DicCross {
     public final String getCommonLanguage(final DicSet dicSet) {
         // Sin tener en cuentra el orden. Se resuelve automáticamente
         if (isMetaInfoComplete(dicSet)) {
-        HeaderElement d1 = this.dicSet.getMon1().getHeaderElement();
-        HeaderElement d2 = this.dicSet.getMon2().getHeaderElement();
-        HeaderElement d3 = this.dicSet.getBil1().getHeaderElement();
-        HeaderElement d4 = this.dicSet.getBil2().getHeaderElement();      
-        
+            HeaderElement d1 = this.dicSet.getMon1().getHeaderElement();
+            HeaderElement d2 = this.dicSet.getMon2().getHeaderElement();
+            HeaderElement d3 = this.dicSet.getBil1().getHeaderElement();
+            HeaderElement d4 = this.dicSet.getBil2().getHeaderElement();
+
         }
         return null;
     }
@@ -1216,12 +1221,11 @@ public class DicCross {
      * @return Checks whether the meta info is complete
      */
     public final boolean isMetaInfoComplete(final DicSet dicSet) {
-        for(DictionaryElement dic : dicSet) {
-            if(!dic.isHeaderDefined()) {
+        for (DictionaryElement dic : dicSet) {
+            if (!dic.isHeaderDefined()) {
                 return false;
             }
         }
         return true;
     }
-    
 }

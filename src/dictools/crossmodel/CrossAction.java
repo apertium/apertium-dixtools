@@ -230,7 +230,7 @@ public class CrossAction implements Comparable<CrossAction> {
      * 
      * @return Undefined     */
     public final ElementList processVars() {
-        getActionSet().setNumberOfConstants(0);
+        //getActionSet().setNumberOfConstants(0);
 
         HashMap<String, String> hm = new HashMap<String, String>();
         ElementList eList = new ElementList();
@@ -313,9 +313,17 @@ public class CrossAction implements Comparable<CrossAction> {
                 }
 
                 if (value.charAt(0) == '*' || value.charAt(0) == '?') {
-                    String n = new String("*");
+                    char symbol = value.charAt(0);
+                    String n = "";
+                    if (symbol == '*') {
+                        n = new String("*");
+                    }
+                    if (symbol == '?') {
+                        n = new String("?");
+                    }                    
                     sElement.setValue(n);
-                    sElement.setTemp("*");
+                    sElement.setTemp(n);
+                    this.getActionSet().incrementPatternLength();
                 } else {
                     if (this.isVariable(value)) {
                         // vraiable: S1, X3, etc.
@@ -323,10 +331,12 @@ public class CrossAction implements Comparable<CrossAction> {
                             String n = new String("0");
                             sElement.setValue(n);
                             sElement.setTemp(value);
+                            this.getActionSet().incrementPatternLength();
                         } else {
                             String n = pos.toString();
                             sElement.setValue(n);
                             sElement.setTemp(value);
+                            this.getActionSet().incrementPatternLength();
                         }
                     } else {
                         // constant: 'mf', 'num', etc.

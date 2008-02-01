@@ -71,6 +71,7 @@ public class Apertiumizer {
      * 
      */
     public final void apertiumize() {
+        /*
         DictionaryReader encaReader = new DictionaryReader("apertium-en-ca.en-ca.dix");
         DictionaryElement enca = encaReader.readDic();
         en = new HashMap<String, String>();
@@ -80,9 +81,9 @@ public class Apertiumizer {
             String lv = l.getValueNoTags();
             en.put(lv, lv);
         }
-
-
         this.readFormat(2);
+         */
+        this.readFormat(0);
     }
 
     /**
@@ -245,16 +246,7 @@ public class Apertiumizer {
      * @return
      */
     private final EElementList readElementFormat_2(String strLine) {
-        DictionaryReader encaReader = new DictionaryReader("apertium-en-ca.en-ca.dix");
-        DictionaryElement enca = encaReader.readDic();
-        en = new HashMap<String, String>();
-
-        for (EElement e : enca.getAllEntries()) {
-            LElement l = e.getLeft();
-            String lv = l.getValueNoTags();
-            en.put(lv, lv);
-        }
-        
+      
         strLine = strLine.replaceAll("[\\s]+\\{", "\\{");
         strLine = strLine.replaceAll("\\{ ", "\\}");
         strLine = strLine.replaceAll(" ::", "::");
@@ -301,7 +293,7 @@ public class Apertiumizer {
             if (i < rightElements.size()) {
                 r = rightElements.get(i);
             }
-            //System.out.println("<" + l + "> / <" + r + ">");
+            System.out.println("<" + l + "> / <" + r + ">");
 
             StringTokenizer left2Tokenizer = new StringTokenizer(l, ";");
             ArrayList<String> left2Elements = new ArrayList<String>();
@@ -334,14 +326,14 @@ public class Apertiumizer {
                         left.addChild(new TextElement(itemLeft));
                         RElement right = new RElement();
                         itemRight = this.replacePoS(itemRight);
-                        //if (en.containsKey(itemRight)) {
+                        if (en.containsKey(itemRight)) {
                         right.addChild(new TextElement(itemRight));
                         PElement pE = new PElement();
                         pE.setLElement(left);
                         pE.setRElement(right);
                         e.addChild(pE);
                         eList.add(e);
-                    //}
+                    }
                     }
                 }
             }

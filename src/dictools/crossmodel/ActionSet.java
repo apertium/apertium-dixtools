@@ -51,7 +51,7 @@ public class ActionSet extends ArrayList<Action> {
     /**
      * 
      */
-    private Integer patternLength;
+    private Integer patternLength = 0;
     /**
      * 
      */
@@ -98,7 +98,14 @@ public class ActionSet extends ArrayList<Action> {
      * 
      */
     public final void incrementNumberOfConstants() {
-        numberOfConstants++;
+        numberOfConstants += 1;
+    }
+
+    /**
+     * 
+     */
+    public final void incrementPatternLength() {
+        this.patternLength +=1;
     }
 
     /**
