@@ -57,6 +57,16 @@ public class PElement extends Element {
         // r = new RElement(pE.getR());
         r = (RElement) pE.getR().clone();
     }
+    
+    /**
+     * 
+     * @param l
+     * @param r
+     */
+    public PElement(final LElement l, final RElement r) {
+        this.l = l;
+        this.r = r;
+    }
 
     /**
      * 

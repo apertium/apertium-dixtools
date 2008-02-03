@@ -174,4 +174,23 @@ public class CrossModel {
     public final void setEncoding(final String encoding) {
         this.encoding = encoding;
     }
+    
+    /**
+     * 
+     * @param crossActions
+     */
+    public final void setCrossActionList(final CrossActionList crossActions) {
+        this.crossActions = crossActions;
+    }
+    
+   /**
+    * 
+    */
+    public final void rename() {
+        CrossActionList rList = new CrossActionList();
+        for(CrossAction cA: this.getCrossActions()) {
+            rList.add(cA.rename());
+        }
+        this.setCrossActionList(rList);                
+    }
 }

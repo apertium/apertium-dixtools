@@ -22,6 +22,7 @@ package dictools.crossmodel;
 import java.io.IOException;
 
 import dics.elements.dtd.EElement;
+import dics.elements.utils.ElementList;
 import dics.elements.utils.Msg;
 import java.io.OutputStreamWriter;
 
@@ -122,5 +123,18 @@ public class Pattern {
         e1.printXML(dos);
         e2.printXML(dos);
         dos.write("\t</pattern>\n");
+    }
+    
+    /**
+     * 
+     * @return The list of elements
+     */
+    public final ElementList getElementList() {
+        ElementList list = new ElementList();
+        list.add(e1.getLeft());
+        list.add(e1.getRight());
+        list.add(e2.getLeft());
+        list.add(e2.getRight());
+        return list;
     }
 }

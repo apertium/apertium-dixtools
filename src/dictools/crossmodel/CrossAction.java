@@ -25,11 +25,16 @@ import java.util.HashMap;
 import dics.elements.dtd.ContentElement;
 import dics.elements.dtd.EElement;
 import dics.elements.dtd.Element;
+import dics.elements.dtd.LElement;
+import dics.elements.dtd.PElement;
+import dics.elements.dtd.RElement;
 import dics.elements.dtd.SElement;
 import dics.elements.dtd.TextElement;
 import dics.elements.utils.ElementList;
 import dics.elements.utils.Msg;
 import java.io.OutputStreamWriter;
+
+import java.util.regex.*;
 
 /**
  * 
@@ -58,6 +63,8 @@ public class CrossAction implements Comparable<CrossAction> {
      * 
      */
     private int occurrences;
+    private int x = 0;
+    private int s = 0;
 
     /**
      * 
@@ -320,7 +327,7 @@ public class CrossAction implements Comparable<CrossAction> {
                     }
                     if (symbol == '?') {
                         n = new String("?");
-                    }                    
+                    }
                     sElement.setValue(n);
                     sElement.setTemp(n);
                     this.getActionSet().incrementPatternLength();
@@ -510,5 +517,124 @@ public class CrossAction implements Comparable<CrossAction> {
             return -1;
         }
         return 1;
+    }
+
+    /**
+     * 
+     */
+    public final CrossAction rename() {
+        // Renamed objects
+        CrossAction rCrossAction = new CrossAction();
+        rCrossAction.setId(this.getId());
+        Pattern rPattern = new Pattern();
+        ActionSet rActionSet = new ActionSet();
+        rCrossAction.setPattern(rPattern);
+        rCrossAction.setActionSet(rActionSet);
+
+        HashMap<String, String> valueMap = new HashMap<String, String>();
+        ContentElement leftAB = this.getPattern().getAB().getLeft();
+        ContentElement rightAB = this.getPattern().getAB().getRight();
+        ContentElement leftBC = this.getPattern().getBC().getLeft();
+        ContentElement rightBC = this.getPattern().getBC().getRight();
+
+        // Rename patterns
+        ContentElement rLeftAB = this.replaceContentElement(leftAB, valueMap);
+        ContentElement rRightAB = this.replaceContentElement(rightAB, valueMap);
+        EElement rAB = new EElement();
+        rAB.addChild(new PElement(new LElement(rLeftAB), new RElement(rRightAB)));
+        ContentElement rLeftBC = this.replaceContentElement(leftBC, valueMap);
+        ContentElement rRightBC = this.replaceContentElement(rightBC, valueMap);
+        EElement rBC = new EElement();
+        rBC.addChild(new PElement(new LElement(rLeftBC), new RElement(rRightBC)));
+
+        rPattern.setAB(rAB);
+        rPattern.setBC(rBC);
+
+        // Rename actions
+        for (Action a : this.getActionSet()) {
+            ContentElement leftA = a.getE().getLeft();
+            ContentElement rightA = a.getE().getRight();
+            ContentElement rLeftA = this.replaceContentElement(leftA, valueMap);
+            ContentElement rRightA = this.replaceContentElement(rightA, valueMap);
+            EElement rA = new EElement();
+            rA.addChild(new PElement(new LElement(rLeftA),new RElement(rRightA)));
+            rActionSet.add(new Action(rA));
+        }
+        return rCrossAction;
+    }
+
+    /**
+     * 
+     * @param source
+     * @param valueMap
+     * @return A content element (l or r) with renamed variables
+     */
+    private final ContentElement replaceContentElement(final ContentElement source, HashMap<String, String> valueMap) {
+        ContentElement rContentElement = new ContentElement();
+        for (Element e : source.getChildren()) {
+            if (e instanceof TextElement) {
+                rContentElement.addChild(e);
+            }
+            if (e instanceof SElement) {
+                SElement rSE = new SElement();
+                String v = ((SElement) e).getValue();
+                if (valueMap.containsKey(v)) {
+                    rSE.setValue(valueMap.get(v));
+                } else {
+                    String nV = "";
+                    switch (this.getTypeOfVariable(v)) {
+                        case 0:
+                            nV = "X" + x;
+                            x++;
+                            break;
+                        case 1:
+                            nV = "S" + s;
+                            s++;
+                            break;
+                        default:
+                            nV = v;
+                            break;
+                    }
+                    valueMap.put(v, nV);
+                    rSE.setValue(nV);
+                }
+                rContentElement.addChild(rSE);
+            }
+        }
+        return rContentElement;
+    }
+
+    /**
+     * 
+     * @param value
+     * @return
+     */
+    private final int getTypeOfVariable(final String value) {
+        //if (this.stringMatchesPattern(value, "(\\$)[0-9]+")) {
+        if (this.stringMatchesPattern(value, "(\\$)[A-Za-z0-9]+")) {
+            return 0;
+        }
+        if (this.stringMatchesPattern(value, "(\\@)[A-Za-z0-9]+")) {
+            return 1;
+        }
+        if (value.equals("*")) {
+            return 2;
+        }
+        if (value.equals("?")) {
+            return 3;
+        }
+        return -1;
+    }
+
+    /**
+     * 
+     * @param value
+     * @param patternString
+     * @return
+     */
+    private final boolean stringMatchesPattern(final String value, final String patternString) {
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile(patternString);
+        Matcher matcher = p.matcher(value);
+        return (matcher.find());
     }
 }

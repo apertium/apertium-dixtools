@@ -56,6 +56,14 @@ public class Action {
     public Action() {
 
     }
+    
+    /**
+     * 
+     * @param e
+     */
+    public Action(final EElement e) {
+        this.e = e;
+    }
 
     /**
      * 

@@ -251,6 +251,7 @@ function convert-mf() {
 #  show_help
 #
 function show_help() {
+   echo ""
    echo "Usage: dictools [task] ..."
    echo "  Tasks:"
    #echo "    apertiumize:        converts dictionaries from plain text to Apertium format"

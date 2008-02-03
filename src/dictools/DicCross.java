@@ -204,6 +204,9 @@ public class DicCross {
             msg.out("[" + (taskOrder++) + "] Reading cross model (" + getCrossModelFileName() + ")");
             final CrossModelReader cmr = new CrossModelReader(getCrossModelFileName());
             CrossModel cm = cmr.readCrossModel();
+            cm.rename();
+            cm.printXML("cm-renamed.xml");
+            
             msg.out(" (" + cm.getCrossActions().size() + " patterns processed).");
 
             setCrossModel(cm);
