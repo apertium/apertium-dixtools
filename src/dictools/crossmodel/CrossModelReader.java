@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dictools.crossmodel;
 
 import org.w3c.dom.Element;
@@ -36,33 +35,33 @@ import dictools.XMLReader;
 public class CrossModelReader extends XMLReader {
 
     /**
-         * 
-         * @param fileName
-         */
+     * 
+     * @param fileName
+     */
     public CrossModelReader(final String fileName) {
-	super(fileName);
+        super(fileName);
     }
 
     /**
-         * 
-         * @return Undefined         */
+     * 
+     * @return Undefined         */
     public CrossModel readCrossModel() {
-	analize();
-	final CrossModel crossModel = new CrossModel();
+        analize();
+        final CrossModel crossModel = new CrossModel();
 
-	Element root = getDocument().getDocumentElement();
+        Element root = getDocument().getDocumentElement();
 
-	for (final Element childElement : readChildren(root)) {
-	    final String childElementName = childElement.getNodeName();
-	    if (childElementName.equals("cross-action")) {
-		final CrossAction crossAction = readCrossAction(childElement);
-		crossModel.addCrossAction(crossAction);
-	    }
-	}
+        for (final Element childElement : readChildren(root)) {
+            final String childElementName = childElement.getNodeName();
+            if (childElementName.equals("cross-action")) {
+                final CrossAction crossAction = readCrossAction(childElement);
+                crossModel.addCrossAction(crossAction);
+            }
+        }
 
-	root = null;
-	setDocument(null);
-	return crossModel;
+        root = null;
+        setDocument(null);
+        return crossModel;
     }
 
     /**
@@ -71,125 +70,78 @@ public class CrossModelReader extends XMLReader {
      * @return Undefined
      */
     public final CrossAction readCrossAction(final Element e) {
-	final CrossAction crossAction = new CrossAction();
-	final String id = getAttributeValue(e, "id");
-	crossAction.setId(id);
+        final CrossAction crossAction = new CrossAction();
+        final String id = getAttributeValue(e, "id");
+        crossAction.setId(id);
 
-	for (final Element childElement : readChildren(e)) {
-	    final String childElementName = childElement.getNodeName();
-	    if (childElementName.equals("pattern")) {
-		final Pattern pattern = readPattern(childElement);
-		crossAction.setPattern(pattern);
-	    }
+        for (final Element childElement : readChildren(e)) {
+            final String childElementName = childElement.getNodeName();
+            if (childElementName.equals("pattern")) {
+                final Pattern pattern = readPattern(childElement);
+                crossAction.setPattern(pattern);
+            }
+            if (childElementName.equals("action-set")) {
+                final ActionSet actionSet = readActionSet(childElement);
+                crossAction.setActionSet(actionSet);
+            }
 
-	    if (childElementName.equals("constants")) {
-		final ConstantMap constants = readConstants(childElement);
-		crossAction.setConstantMap(constants);
-	    }
-
-	    if (childElementName.equals("action-set")) {
-		final ActionSet actionSet = readActionSet(childElement);
-		crossAction.setActionSet(actionSet);
-	    }
-
-	}
-	return crossAction;
+        }
+        return crossAction;
     }
 
     /**
-         * 
-         * @param e
-         * @return Undefined         */
+     * 
+     * @param e
+     * @return Undefined         */
     public final Pattern readPattern(final Element e) {
-	int i = 0;
-	final Pattern pattern = new Pattern();
+        int i = 0;
+        final Pattern pattern = new Pattern();
 
-	for (final Element childElement : readChildren(e)) {
-	    final String childElementName = childElement.getNodeName();
-	    if (childElementName.equals("e")) {
-		EElement eE = readEElement(childElement);
-		if (i == 0) {
-		    pattern.setAB(eE);
-		}
-		if (i == 1) {
-		    pattern.setBC(eE);
-		}
-		i++;
-	    }
-	}
-	return pattern;
+        for (final Element childElement : readChildren(e)) {
+            final String childElementName = childElement.getNodeName();
+            if (childElementName.equals("e")) {
+                EElement eE = readEElement(childElement);
+                if (i == 0) {
+                    pattern.setAB(eE);
+                }
+                if (i == 1) {
+                    pattern.setBC(eE);
+                }
+                i++;
+            }
+        }
+        return pattern;
     }
 
     /**
-         * 
-         * @param e
-         * @return Undefined         */
-    public final ConstantMap readConstants(final Element e) {
-	final ConstantMap constants = new ConstantMap();
-	for (final Element childElement : readChildren(e)) {
-	    final String childElementName = childElement.getNodeName();
-	    if (childElementName.equals("constant")) {
-		final Constant constant = readConstant(childElement);
-		constants.put(constant.getValue(), constant.getName());
-	    }
-	}
-	return constants;
-    }
-
-    /**
-         * 
-         * @param e
-         * @return Undefined         */
-    public final Constant readConstant(final Element e) {
-	final Constant constant = new Constant();
-	final String n = getAttributeValue(e, "n");
-	constant.setName(n);
-
-	if (e.hasChildNodes()) {
-	    final NodeList children = e.getChildNodes();
-	    for (int i = 0; i < children.getLength(); i++) {
-		final Node child = children.item(i);
-		if (child instanceof Text) {
-		    final Text textNode = (Text) child;
-		    final String str = textNode.getData().trim();
-		    constant.setValue(str);
-		}
-	    }
-	}
-
-	return constant;
-    }
-
-    /**
-         * 
-         * @param e
-         * @return Undefined         */
+     * 
+     * @param e
+     * @return Undefined         */
     public final ActionSet readActionSet(final Element e) {
-	final ActionSet actionSet = new ActionSet();
-	for (final Element childElement : readChildren(e)) {
-	    final String childElementName = childElement.getNodeName();
-	    if (childElementName.equals("action")) {
-		final Action action = readAction(childElement);
-		actionSet.add(action);
-	    }
-	}
-	return actionSet;
+        final ActionSet actionSet = new ActionSet();
+        for (final Element childElement : readChildren(e)) {
+            final String childElementName = childElement.getNodeName();
+            if (childElementName.equals("action")) {
+                final Action action = readAction(childElement);
+                actionSet.add(action);
+            }
+        }
+        return actionSet;
     }
 
     /**
-         * 
-         * @param e
-         * @return Undefined         */
+     * 
+     * @param e
+     * @return Undefined         */
     public final Action readAction(final Element e) {
-	final Action action = new Action();
-	for (final Element childElement : readChildren(e)) {
-	    final String childElementName = childElement.getNodeName();
-	    if (childElementName.equals("e")) {
-		final EElement eE = readEElement(childElement);
-		action.setAction(eE);
-	    }
-	}
-	return action;
+        final Action action = new Action();
+        for (final Element childElement : readChildren(e)) {
+            final String childElementName = childElement.getNodeName();
+            if (childElementName.equals("e")) {
+                final EElement eE = readEElement(childElement);
+                action.setAction(eE);
+            }
+        }
+        return action;
     }
-
 }

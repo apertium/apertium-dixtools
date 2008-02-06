@@ -15,14 +15,14 @@ java_options="-Xms${defaultMinMem}m -Xmx${defaultMaxMem}m -jar ${library}"
 #	cross
 #
 function cross() {
-   crossmodel="$CROSSDICS_PATH/schemas/cross-model-test.xml"
+   crossmodel="$CROSSDICS_PATH/schemas/cross-model.xml"
    if [ $nparams -ge 7 ] && [ $nparams -le 9  ]; then
 	   if [ $nparams -ge 8 ]
    	then
 	   	crossmodel=$8
    	fi
 	   echo "cross model: $crossmodel"
-   	java ${java_options} $task -bilAB $3 $4 -bilBC $5 $6 -monA $2 -monC $7 -cross-model $crossmodel $9 2> $task.err
+   	java ${java_options} $task -bilAB $3 $4 -bilBC $5 $6 -monA $2 -monC $7 -cross-model $crossmodel $9
    else
    	echo "Usage: dictools cross <monA> <-r|-n> <bilAB> <-r|-n> <bilBC> <monC> crossmodel";
    	echo "";

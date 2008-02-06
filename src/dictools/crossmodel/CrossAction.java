@@ -32,6 +32,7 @@ import dics.elements.dtd.SElement;
 import dics.elements.dtd.TextElement;
 import dics.elements.utils.ElementList;
 import dics.elements.utils.Msg;
+import dictools.cmproc.Variables;
 import java.io.OutputStreamWriter;
 
 import java.util.regex.*;
@@ -54,7 +55,7 @@ public class CrossAction implements Comparable<CrossAction> {
     /**
      * 
      */
-    private ConstantMap constants;
+    private Variables vars;
     /**
      * 
      */
@@ -71,25 +72,8 @@ public class CrossAction implements Comparable<CrossAction> {
      * 
      */
     public CrossAction() {
-        constants = new ConstantMap();
         pattern = new Pattern();
         actionSet = new ActionSet();
-    }
-
-    /**
-     * 
-     * @param p
-     * @param cm
-     * @param aSet
-     */
-    public CrossAction(final Pattern p, final ConstantMap cm,
-            final ActionSet aSet) {
-        constants = new ConstantMap();
-        pattern = new Pattern();
-        actionSet = new ActionSet();
-        pattern = p;
-        constants = cm;
-        actionSet = aSet;
     }
 
     /**
@@ -98,29 +82,6 @@ public class CrossAction implements Comparable<CrossAction> {
      */
     public void setPattern(final Pattern p) {
         pattern = p;
-    }
-
-    /**
-     * 
-     * @param cm
-     */
-    public void setConstantMap(final ConstantMap cm) {
-        constants = cm;
-    }
-
-    /**
-     * 
-     * @return Undefined     */
-    public final ConstantMap getConstants() {
-        return constants;
-    }
-
-    /**
-     * 
-     * @param constants
-     */
-    public final void setConstants(final ConstantMap constants) {
-        this.constants = constants;
     }
 
     /**
@@ -153,9 +114,6 @@ public class CrossAction implements Comparable<CrossAction> {
         if (pattern != null) {
             getPattern().print(msg);
         }
-        if (constants != null) {
-            getConstants().print();
-        }
         if (actionSet != null) {
             getActionSet().print(msg);
         }
@@ -175,287 +133,6 @@ public class CrossAction implements Comparable<CrossAction> {
         }
         dos.write("</cross-action>\n");
         dos.write("<!-- " + getOccurrences() + " entries like this -->\n\n");
-    }
-
-    /**
-     * 
-     * @return Undefined     */
-    public final ElementList processEntries() {
-        ElementList eList = new ElementList();
-        try {
-            HashMap<String, String> hm = new HashMap<String, String>();
-            //Pattern pattern = getPattern();
-            Integer j = new Integer(0);
-
-            EElement e1 = pattern.getAB();
-            ContentElement e1L = (ContentElement) e1.getSide("L").clone();
-            ContentElement e1R = (ContentElement) e1.getSide("R").clone();
-            EElement e2 = pattern.getBC();
-            ContentElement e2L = (ContentElement) e2.getSide("L").clone();
-            ContentElement e2R = (ContentElement) e2.getSide("R").clone();
-
-            // e1
-            addRestrictionCode(eList, e1);
-            j = tagElements(e1L, eList, j, hm, "1");
-            eList.add(new SElement("b"));
-
-            j = new Integer(0); // añadido
-            j = tagElements(e1R, eList, j, hm, "2");
-            eList.add(new SElement("b"));
-
-            // e2
-            addRestrictionCode(eList, e2);
-
-            j = new Integer(0); // añadido
-            j = tagElements(e2L, eList, j, hm, "3");
-            eList.add(new SElement("b"));
-            j = new Integer(0); // añadido
-            j = tagElements(e2R, eList, j, hm, "4");
-            eList.add(new SElement("j"));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return eList;
-    }
-
-    /**
-     * 
-     * @param eList
-     * @param e
-     */
-    private final void addRestrictionCode(ElementList eList, final EElement e) {
-        if (e.hasRestriction()) {
-            eList.add(new SElement(e.getRestriction()));
-        } else {
-            eList.add(new SElement("LR-RL"));
-        }
-    }
-
-    /**
-     * 
-     * @return Undefined     */
-    public final ElementList processVars() {
-        //getActionSet().setNumberOfConstants(0);
-
-        HashMap<String, String> hm = new HashMap<String, String>();
-        ElementList eList = new ElementList();
-        //Pattern pattern = getPattern();
-
-        Integer j = new Integer(0);
-
-        EElement e1 = pattern.getAB();
-        ContentElement e1L = e1.getSide("L");
-        ContentElement e1R = e1.getSide("R");
-        EElement e2 = pattern.getBC();
-        ContentElement e2L = e2.getSide("L");
-        ContentElement e2R = e2.getSide("R");
-
-        addRestrictionCode(eList, e1);
-        j = tagPattern(e1L, eList, j, hm, "1");
-        eList.add(new SElement("b"));
-        j = new Integer(0); // añadido
-
-        j = tagPattern(e1R, eList, j, hm, "2");
-        eList.add(new SElement("b"));
-
-        addRestrictionCode(eList, e2);
-
-        j = new Integer(0); // añadido
-        j = tagPattern(e2L, eList, j, hm, "3");
-        eList.add(new SElement("b"));
-
-        j = new Integer(0); // añadido
-        j = tagPattern(e2R, eList, j, hm, "4");
-        eList.add(new SElement("j"));
-
-        ActionSet aSet = getActionSet();
-
-        if (aSet != null) {
-            for (Action a : aSet) {
-                EElement ea = a.getE();
-                j = new Integer(0); // añadido
-                j = tagAction(ea.getSide("L"), j, hm, "5");
-                j = new Integer(0); // añadido
-                j = tagAction(ea.getSide("R"), j, hm, "6");
-            }
-        }
-
-        return eList;
-    }
-
-    /**
-     * 
-     * @param ce
-     * @param eList
-     * @param j
-     * @param hm
-     */
-    private final Integer tagPattern(ContentElement ce, ElementList eList,
-            Integer j, HashMap<String, String> hm, final String pref) {
-        int p = 1;
-        for (int k = 0; k < ce.getChildren().size(); k++) {
-            Element e = ce.getChildren().get(k);
-
-            if (e instanceof TextElement) {
-                // adds lemma to list of elements
-                TextElement tE = (TextElement) e;
-                if (!tE.getValue().equals("l1") && !tE.getValue().equals("l2") && !tE.getValue().equals("l3") && !tE.getValue().equals("l4")) {
-                    eList.add(tE);
-                }
-            }
-
-            if (e instanceof SElement) {
-                String pos;
-                SElement sElement = (SElement) e.clone();
-                ce.getChildren().set(k, sElement);
-                String value = sElement.getValue();
-                if (hm.containsKey(value)) {
-                    pos = hm.get(value);
-                } else {
-                    pos = pref + "-" + p;
-                    p++;
-                    hm.put(value, pos);
-                }
-
-                if (value.charAt(0) == '*' || value.charAt(0) == '?') {
-                    char symbol = value.charAt(0);
-                    String n = "";
-                    if (symbol == '*') {
-                        n = new String("*");
-                    }
-                    if (symbol == '?') {
-                        n = new String("?");
-                    }
-                    sElement.setValue(n);
-                    sElement.setTemp(n);
-                    this.getActionSet().incrementPatternLength();
-                } else {
-                    if (this.isVariable(value)) {
-                        // vraiable: S1, X3, etc.
-                        if (value.charAt(0) == 'S') {
-                            String n = new String("0");
-                            sElement.setValue(n);
-                            sElement.setTemp(value);
-                            this.getActionSet().incrementPatternLength();
-                        } else {
-                            String n = pos.toString();
-                            sElement.setValue(n);
-                            sElement.setTemp(value);
-                            this.getActionSet().incrementPatternLength();
-                        }
-                    } else {
-                        // constant: 'mf', 'num', etc.
-                        if (!Character.isDigit(value.charAt(0))) {
-                            sElement.setValue(value);
-                            getActionSet().incrementNumberOfConstants();
-                        }
-                    }
-                }
-                eList.add(sElement);
-            }
-        }
-        return j;
-    }
-
-    private final boolean isVariable(final String value) {
-        return Character.isUpperCase(value.charAt(0)) && Character.isDigit(value.charAt(value.length() - 1));
-    }
-
-    /**
-     * 
-     * @param ce
-     * @param eList
-     * @param j
-     * @param hm
-     * @return Undefined     
-     */
-    private final Integer tagAction(ContentElement ce, Integer j,
-            HashMap<String, String> hm, final String pref) {
-        int p = 1;
-        for (int k = 0; k < ce.getChildren().size(); k++) {
-            Element e = ce.getChildren().get(k);
-
-            if (e instanceof TextElement) {
-                TextElement tE = (TextElement) e;
-                String text = tE.getValue();
-                if (!text.equals("l1") && !text.equals("l4")) {
-                } else {
-
-                }
-            }
-            if (e instanceof SElement) {
-                String pos;
-                SElement sElement = (SElement) e.clone();
-                ce.getChildren().set(k, sElement);
-                String value = sElement.getValue();
-                if (hm.containsKey(value)) {
-                    pos = hm.get(value);
-                } else {
-                    pos = pref + "-" + p;
-                    p++;
-                    hm.put(value, pos);
-                }
-
-                if (Character.isUpperCase(value.charAt(0)) && Character.isDigit(value.charAt(value.length() - 1))) {
-                    if (value.charAt(0) == 'S') {
-                        String n = new String("0");
-                        sElement.setValue(n);
-                        sElement.setTemp(value);
-                    } else {
-                        String n = pos.toString();
-                        sElement.setValue(n);
-                        sElement.setTemp(value);
-                    }
-                } else {
-                    if (!Character.isDigit(value.charAt(0))) {
-                        sElement.setValue(value);
-                    }
-                }
-            }
-        }
-        return j;
-    }
-
-    /**
-     * 
-     * @param ce
-     * @param eList
-     * @param j
-     * @param hm
-     * @return Undefined    
-     */
-    private final Integer tagElements(ContentElement ce, ElementList eList,
-            Integer j, HashMap<String, String> hm, final String pref) {
-        int p = 1;
-        for (int k = 0; k < ce.getChildren().size(); k++) {
-            Element e = ce.getChildren().get(k);
-
-            if (e instanceof TextElement) {
-                // adds lemma to list of elements
-                TextElement tE = (TextElement) e;
-                tE.setTemp(tE.getValue());
-                eList.add(tE);
-            }
-            if (e instanceof SElement) {
-                String value = e.getValue();
-                String pos;
-                if (hm.containsKey(value)) {
-                    pos = hm.get(value);
-                } else {
-                    pos = pref + "-" + p;
-                    hm.put(value, pos);
-                    getConstants().put(pos.toString(), value);
-                    p++;
-                }
-                SElement sElement = (SElement) e;
-                sElement.setValue(pos.toString());
-                sElement.setTemp(value);
-                eList.add(sElement);
-            }
-        }
-        return j;
     }
 
     /**
@@ -538,13 +215,16 @@ public class CrossAction implements Comparable<CrossAction> {
         ContentElement rightBC = this.getPattern().getBC().getRight();
 
         // Rename patterns
-        ContentElement rLeftAB = this.replaceContentElement(leftAB, valueMap);
-        ContentElement rRightAB = this.replaceContentElement(rightAB, valueMap);
+        ContentElement rLeftAB = this.renameContentElement(leftAB, valueMap);
+        ContentElement rRightAB = this.renameContentElement(rightAB, valueMap);
         EElement rAB = new EElement();
+        rAB.setRestriction(this.getPattern().getAB().getRestriction());
         rAB.addChild(new PElement(new LElement(rLeftAB), new RElement(rRightAB)));
-        ContentElement rLeftBC = this.replaceContentElement(leftBC, valueMap);
-        ContentElement rRightBC = this.replaceContentElement(rightBC, valueMap);
+
+        ContentElement rLeftBC = this.renameContentElement(leftBC, valueMap);
+        ContentElement rRightBC = this.renameContentElement(rightBC, valueMap);
         EElement rBC = new EElement();
+        rBC.setRestriction(this.getPattern().getBC().getRestriction());
         rBC.addChild(new PElement(new LElement(rLeftBC), new RElement(rRightBC)));
 
         rPattern.setAB(rAB);
@@ -554,10 +234,10 @@ public class CrossAction implements Comparable<CrossAction> {
         for (Action a : this.getActionSet()) {
             ContentElement leftA = a.getE().getLeft();
             ContentElement rightA = a.getE().getRight();
-            ContentElement rLeftA = this.replaceContentElement(leftA, valueMap);
-            ContentElement rRightA = this.replaceContentElement(rightA, valueMap);
+            ContentElement rLeftA = this.renameContentElement(leftA, valueMap);
+            ContentElement rRightA = this.renameContentElement(rightA, valueMap);
             EElement rA = new EElement();
-            rA.addChild(new PElement(new LElement(rLeftA),new RElement(rRightA)));
+            rA.addChild(new PElement(new LElement(rLeftA), new RElement(rRightA)));
             rActionSet.add(new Action(rA));
         }
         return rCrossAction;
@@ -569,11 +249,25 @@ public class CrossAction implements Comparable<CrossAction> {
      * @param valueMap
      * @return A content element (l or r) with renamed variables
      */
-    private final ContentElement replaceContentElement(final ContentElement source, HashMap<String, String> valueMap) {
+    private final ContentElement renameContentElement(final ContentElement source, HashMap<String, String> valueMap) {
         ContentElement rContentElement = new ContentElement();
         for (Element e : source.getChildren()) {
             if (e instanceof TextElement) {
-                rContentElement.addChild(e);
+                String v = ((TextElement) e).getValue();
+                TextElement tE = new TextElement("");
+                if (v.startsWith("$")) {
+                    if (valueMap.containsKey(v)) {
+                        tE.setValue(valueMap.get(v));
+                    } else {
+                        String nV = "X" + x;
+                        x++;
+                        valueMap.put(v, nV);
+                        tE = new TextElement(nV);
+                    }
+                } else {
+                    tE = new TextElement(v);
+                }
+                rContentElement.addChild(tE);
             }
             if (e instanceof SElement) {
                 SElement rSE = new SElement();
@@ -610,7 +304,6 @@ public class CrossAction implements Comparable<CrossAction> {
      * @return
      */
     private final int getTypeOfVariable(final String value) {
-        //if (this.stringMatchesPattern(value, "(\\$)[0-9]+")) {
         if (this.stringMatchesPattern(value, "(\\$)[A-Za-z0-9]+")) {
             return 0;
         }
@@ -636,5 +329,21 @@ public class CrossAction implements Comparable<CrossAction> {
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(patternString);
         Matcher matcher = p.matcher(value);
         return (matcher.find());
+    }
+
+    /**
+     * 
+     * @return The variables
+     */
+    public Variables getVars() {
+        return vars;
+    }
+
+    /**
+     * 
+     * @param vars
+     */
+    public void setVars(Variables vars) {
+        this.vars = vars;
     }
 }

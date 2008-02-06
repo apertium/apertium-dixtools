@@ -19,12 +19,7 @@
  */
 package dics.elements.utils;
 
-//~--- non-JDK imports --------------------------------------------------------
 import dics.elements.dtd.SElement;
-
-import dictools.crossmodel.ConstantMap;
-
-//~--- JDK imports ------------------------------------------------------------
 
 import java.util.Vector;
 
@@ -96,6 +91,7 @@ public class SElementList extends Vector<SElement> {
      *     @param sEList2
      *     @return Undefined         
      */
+    /*
     public final boolean matches(final SElementList sEList2) {
         int i = 0;
 
@@ -123,6 +119,7 @@ public class SElementList extends Vector<SElement> {
             return false;
         }
     }
+     */
 
     /**
      *    
@@ -134,28 +131,6 @@ public class SElementList extends Vector<SElement> {
         }
 
         System.err.println("");
-    }
-
-    /**
-     *    
-     *     @param constants
-     */
-    public final ElementList assignValues(final ConstantMap constants, final ConstantMap constants2) {
-        final ElementList sEList2 = new ElementList();
-
-        for (final SElement s : this) {
-            String key = constants.getKey(s.getValue());
-
-            if (key == null) {
-                key = constants2.getKey(s.getValue());
-            }
-
-            final SElement sE2 = SElement.get(key);
-
-            sEList2.add(sE2);
-        }
-
-        return sEList2;
     }
 
     /**
@@ -173,6 +148,4 @@ public class SElementList extends Vector<SElement> {
     }
 }
 
-
-//~ Formatted by Jindent --- http://www.jindent.com
 

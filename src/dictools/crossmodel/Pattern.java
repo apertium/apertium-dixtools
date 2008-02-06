@@ -19,9 +19,14 @@
  */
 package dictools.crossmodel;
 
+import dics.elements.dtd.ContentElement;
 import java.io.IOException;
 
 import dics.elements.dtd.EElement;
+import dics.elements.dtd.LElement;
+import dics.elements.dtd.RElement;
+import dics.elements.dtd.SElement;
+import dics.elements.utils.ElementList;
 import dics.elements.utils.ElementList;
 import dics.elements.utils.Msg;
 import java.io.OutputStreamWriter;
@@ -41,6 +46,11 @@ public class Pattern {
      * 
      */
     private EElement e2;
+    /**
+     * 
+     */
+    private int length = 0;
+    private int nConstants = 0;
 
     /**
      * 
@@ -124,7 +134,7 @@ public class Pattern {
         e2.printXML(dos);
         dos.write("\t</pattern>\n");
     }
-    
+
     /**
      * 
      * @return The list of elements
@@ -136,5 +146,89 @@ public class Pattern {
         list.add(e2.getLeft());
         list.add(e2.getRight());
         return list;
+    }
+
+    /**
+     * 
+     * @return Sequence of elements in pattern
+     */
+    public final ElementList getSequence() {
+        ElementList eList = new ElementList();
+
+        eList = this.getSequenceR(this.getAB(), eList);
+        eList = this.getSequenceCE(this.getAB().getLeft(), eList);
+        eList = this.getSequenceCE(this.getAB().getRight(), eList);
+
+        eList = this.getSequenceR(this.getBC(), eList);
+        eList = this.getSequenceCE(this.getBC().getLeft(), eList);
+        eList = this.getSequenceCE(this.getBC().getRight(), eList);
+        
+        eList.add(new SElement("^end"));
+        return eList;
+    }
+
+    /**
+     * 
+     * @param ee
+     * @param eList
+     */
+    private final ElementList getSequenceR(EElement ee, ElementList eList) {
+        if (ee != null) {
+        if (ee.hasRestriction()) {
+            String r = ee.getRestriction();
+            if (!r.equals("")) {
+                eList.add(new SElement("^" + r));
+            }
+        } else {
+            eList.add(new SElement("^LRRL"));
+        }
+        }
+        return eList;
+     }
+    
+    /**
+     * 
+     * @param ce
+     * @param eList
+     */
+    private final ElementList getSequenceCE(ContentElement ce, ElementList eList) {
+        if (ce != null) {
+            ElementList ceSeq = ce.getSequence();
+            eList = eList.concat(ceSeq);
+        }
+        eList.add(new SElement("^b"));
+        return eList;
+    }
+
+    /**
+     * 
+     * @return The pattern length
+     */
+    public int getLength() {
+        return length;
+    }
+
+    /**
+     * 
+     * @param length
+     */
+    public void setLength(int length) {
+        this.length = length;
+    }
+
+    public final void incrementLength() {
+        this.length++;
+    }
+
+    public int getNConstants() {
+        return nConstants;
+    }
+
+    public void setNConstants(int nConstants) {
+        this.nConstants = nConstants;
+    }
+
+    public final void incrementNConstants() {
+        this.nConstants++;
     }
 }

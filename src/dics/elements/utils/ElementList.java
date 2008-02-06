@@ -22,12 +22,8 @@
 
 package dics.elements.utils;
 
-//~--- non-JDK imports --------------------------------------------------------
-
 import dics.elements.dtd.Element;
 import dics.elements.dtd.SElement;
-
-//~--- JDK imports ------------------------------------------------------------
 
 import java.util.ArrayList;
 
@@ -140,7 +136,34 @@ public class ElementList extends ArrayList<Element> implements Cloneable {
 
         return str;
     }
+    
+    /**
+     * 
+     * @param eList
+     * @return list1 + list2
+     */
+    public final ElementList concat(final ElementList eList) {
+        ElementList cList = new ElementList();
+        for(Element e1: this) {
+            cList.add(e1);
+        }
+        for(Element e2: eList) {
+            cList.add(e2);
+        }
+        return cList;        
+    }
+
+    /**
+     * 
+     */
+    public final void printSequence(Msg msg) {
+        msg.log("[]");
+        for(Element e : this) {
+            msg.log("<" + e.getValue() + "> ");
+        }
+        msg.log("]");
+        
+    }
 }
 
 
-//~ Formatted by Jindent --- http://www.jindent.com

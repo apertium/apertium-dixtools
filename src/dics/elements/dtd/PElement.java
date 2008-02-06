@@ -64,6 +64,7 @@ public class PElement extends Element {
      * @param r
      */
     public PElement(final LElement l, final RElement r) {
+        setTagName("p");
         this.l = l;
         this.r = r;
     }

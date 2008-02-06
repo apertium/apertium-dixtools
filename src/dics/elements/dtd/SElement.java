@@ -64,6 +64,7 @@ public class SElement extends Element {
      * 
      */
     public SElement(final SElement sE) {
+        setTagName("s");
         n = sE.getValue();
     }
 

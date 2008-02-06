@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 import dics.elements.dtd.AlphabetElement;
+import dics.elements.dtd.BElement;
 import dics.elements.dtd.ContentElement;
 import dics.elements.dtd.DictionaryElement;
 import dics.elements.dtd.EElement;
@@ -42,16 +43,16 @@ import dics.elements.utils.DictionaryElementList;
 import dics.elements.utils.EElementList;
 import dics.elements.utils.EElementMap;
 import dics.elements.utils.EHashMap;
-import dics.elements.utils.ElementList;
 import dics.elements.utils.Msg;
+import dics.elements.utils.SElementList;
 import dictools.crossmodel.Action;
-import dictools.crossmodel.ActionSet;
-import dictools.crossmodel.ConstantMap;
 import dictools.crossmodel.CrossAction;
 import dictools.crossmodel.CrossModel;
-import dictools.crossmodel.CrossModelFST;
 import dictools.crossmodel.CrossModelReader;
 import dictools.crossmodel.Pattern;
+import dictools.cmproc.CrossActionData;
+import dictools.cmproc.CrossModelProcessor;
+import dictools.cmproc.Variables;
 import javax.swing.JProgressBar;
 
 /**
@@ -92,10 +93,6 @@ public class DicCross {
     /**
      *
      */
-    //private final boolean MATCH_CATEGORY = true;
-    /**
-     *
-     */
     private EHashMap processed;
     /**
      *
@@ -106,9 +103,9 @@ public class DicCross {
      */
     private CrossModel crossModel;
     /**
-     *
+     * 
      */
-    private CrossModelFST crossModelFST;
+    private CrossModelProcessor crossModelProcessor;
     /**
      *
      */
@@ -201,21 +198,23 @@ public class DicCross {
      */
     private final void readCrossModel() {
         try {
-            msg.out("[" + (taskOrder++) + "] Reading cross model (" + getCrossModelFileName() + ")");
+            msg.out("[" + (taskOrder++) + "] Reading cross model (" + getCrossModelFileName() + ") ... ");
             final CrossModelReader cmr = new CrossModelReader(getCrossModelFileName());
+            if(cmr == null) {
+                System.err.println("cmr es null");
+            }
             CrossModel cm = cmr.readCrossModel();
-            cm.rename();
-            cm.printXML("cm-renamed.xml");
-            
-            msg.out(" (" + cm.getCrossActions().size() + " patterns processed).");
-
-            setCrossModel(cm);
-            CrossModelFST fst = new CrossModelFST(getCrossModel());
-            fst.setMsg(msg);
-            setCrossModelFST(fst);
+            if (cm != null) {
+                cm.rename();
+                //cm.printXML("cm-renamed.xml");
+                setCrossModel(cm);
+                msg.out(" (" + cm.getCrossActions().size() + " patterns processed).\n");
+                CrossModelProcessor cmp = new CrossModelProcessor(this.getCrossModel(), msg);
+                this.setCrossModelProcessor(cmp);
+            }
         } catch (final Exception e) {
             e.printStackTrace();
-            msg.out("Error reading cross model");
+            msg.err("Error reading cross model");
             System.exit(-1);
         }
     }
@@ -281,7 +280,7 @@ public class DicCross {
             dic.addSection(section);
         }
 
-        msg.out("[" + (taskOrder++) + "] Sorting crossed dictionary...");
+        msg.out("[" + (taskOrder++) + "] Sorting crossed dictionary...\n");
         Collections.sort(dic.getEntries());
 
         getNDCrossModel().printXML(this.getOutDir() + "patterns-not-detected.xml");
@@ -343,7 +342,7 @@ public class DicCross {
     private final SdefsElement crossSdefs(final SdefsElement sdefs1, final SdefsElement sdefs2) {
         final SdefsElement sdefs = new SdefsElement();
         if (sdefs1 != null && sdefs2 != null) {
-            msg.out("[" + (taskOrder++) + "] Crossing definitions...");
+            msg.out("[" + (taskOrder++) + "] Crossing definitions...\n");
 
             HashMap<String, SdefElement> sdefList = new HashMap<String, SdefElement>();
 
@@ -394,7 +393,7 @@ public class DicCross {
      * @return Undefined     */
     private SectionElement[] crossSections(final SectionElement section1, final SectionElement section2, final SdefsElement sdefs) {
 
-        msg.out("[" + (taskOrder++) + "] Crossing sections '" + section1.getID() + "' and '" + section2.getID() + "'");
+        msg.out("[" + (taskOrder++) + "] Crossing sections '" + section1.getID() + "' and '" + section2.getID() + "'\n");
         final SectionElement[] sections = new SectionElement[2];
 
         final SectionElement section = new SectionElement();
@@ -503,9 +502,9 @@ public class DicCross {
         CrossAction crossAction = new CrossAction();
         Pattern entriesPattern = new Pattern(e1.reverse(), e2);
         crossAction.setPattern(entriesPattern);
-        ActionSet actionSet = getCrossModelFST().getActionSet(crossAction);
-        if (actionSet != null) {
-            String actionID = actionSet.getName();
+        CrossActionData cad = this.getCrossModelProcessor().getBestActionSet(crossAction);
+        if (cad.getCrossAction() != null) {
+            String actionID = cad.getCrossAction().getId();
             if (actionID.equals("default")) {
                 insertNDCrossAction(crossAction);
             }
@@ -513,23 +512,21 @@ public class DicCross {
             e1.print("L", msg);
             e2.print("L", msg);
             e2.print("R", msg);
-            actionEList = applyCrossAction(e1, e2, actionID, crossAction);
+            actionEList = applyCrossAction(e1, e2, cad);
         }
         return actionEList;
     }
 
     /**
-     *
+     * 
      * @param e1
      * @param e2
-     * @param actionID
-     * @param crossAction
-     * @return Undefined     
+     * @param cad
+     * @return
      */
-    private final EElementList applyCrossAction(EElement e1, EElement e2, final String actionID, final CrossAction entries) {
+    private final EElementList applyCrossAction(EElement e1, EElement e2, final CrossActionData cad) {
         EElementList elementList = new EElementList();
-        final CrossAction cA = getCrossModel().getCrossAction(actionID);
-        HashMap<String, ElementList> tails = cA.getActionSet().getTails();
+        final CrossAction cA = cad.getCrossAction();
 
         for (Action action : cA.getActionSet()) {
 
@@ -539,7 +536,8 @@ public class DicCross {
             if (iR != NONE) {
 
                 final String restriction = getRestrictionString(iR);
-                EElement actionE = assignValues(e1, e2, eAction, entries, tails);
+                EElement actionE = assignValues(e1, e2, eAction, cad.getVars());
+                String actionID = cad.getCrossAction().getId();
                 actionE.setPatternApplied(actionID);
 
                 if (eAction.hasRestriction()) {
@@ -574,12 +572,15 @@ public class DicCross {
     }
 
     /**
-     *
+     * 
+     * @param e1
+     * @param e2
      * @param eAction
-     * @param entries
-     * @return Undefined     */
-    private final EElement assignValues(EElement e1, EElement e2, EElement eAction, CrossAction entries, HashMap<String, ElementList> tails) {
-        ConstantMap constants = entries.getConstants();
+     * @param vars
+     * @return New 'e' element
+     */
+    public final EElement assignValues(final EElement e1, final EElement e2, final EElement eAction, final Variables vars) {
+        //ConstantMap constants = entries.getConstants();
         EElement eCrossed = new EElement();
 
         PElement pE = new PElement();
@@ -590,12 +591,8 @@ public class DicCross {
         LElement lE2 = new LElement();
         RElement rE2 = new RElement();
 
-        //System.err.println("Tails:");
-        msg.log("Tails:\n");
-        this.printTails(tails);
-
-        assignValuesSide(lE2, lE, constants, e1, tails);
-        assignValuesSide(rE2, rE, constants, e2, tails);
+        assignValuesSide(lE2, lE, e1, vars);
+        assignValuesSide(rE2, rE, e2, vars);
 
         pE.setLElement(lE2);
         pE.setRElement(rE2);
@@ -605,63 +602,44 @@ public class DicCross {
 
     /**
      * 
-     * @param tails
+     * @param ceWrite
+     * @param ceRead
+     * @param ei
+     * @param vars
      */
-    private final void printTails(HashMap<String, ElementList> tails) {
-        if (tails != null) {
-            Set keyset = tails.keySet();
-            Iterator it = keyset.iterator();
-
-            while (it.hasNext()) {
-                String key = (String) it.next();
-                ElementList eList = tails.get(key);
-                //System.err.print(key + ": ");
-                msg.log(key + ": ");
-            //eList.printErr();
-            }
-        }
-    }
-
-    private final void assignValuesSide(ContentElement ceWrite, final ContentElement ceRead, final ConstantMap constants, final EElement ei, HashMap<String, ElementList> tails) {
-
+    private final void assignValuesSide(ContentElement ceWrite, final ContentElement ceRead, EElement ei, final Variables vars) {
         for (Element e : ceRead.getChildren()) {
-
             if (e instanceof TextElement) {
-                String lemma = e.getValue();
-                if (lemma.equals("l1") || lemma.equals("l4")) {
-                    ceWrite.addChild(new TextElement(ei.getSide("R").getValue()));
+                String x = e.getValue();
+                if (vars.containsKey(x)) {
+                    String sx = (String) vars.get(x);
+                    ceWrite.addChild(new TextElement(sx));
                 } else {
-                    ceWrite.addChild(new TextElement(lemma));
+                    ceWrite.addChild(new TextElement(x));
                 }
+            }
+            if (e instanceof BElement) {
+                ceWrite.addChild(new BElement());
             }
 
             if (e instanceof SElement) {
-                String v = e.getValue();
+                String x = ((SElement) e).getValue();
+                if (vars.containsKey(x)) {
+                    if (x.startsWith("X")) {
+                        String sx = (String) vars.get(x);
+                        ceWrite.addChild(new SElement(sx));
+                    }
+                    if (x.startsWith("S")) {
+                        SElementList sxlist = (SElementList) vars.get(x);
+                        for (SElement sE : sxlist) {
+                            ceWrite.addChild(new SElement(sE));
+                        }
 
-                if (!v.equals("0")) {
-                    if (!constants.containsKey(e.getValue())) {
-                        ceWrite.addChild(new SElement(e.getValue()));
-                    } else {
-                        String value = constants.get(e.getValue());
-                        ceWrite.addChild(new SElement(value));
                     }
                 } else {
-                    SElement sE = (SElement) e;
-                    if (!tails.containsKey(sE.getTemp())) {
-                    // ceWrite.addChild(new SElement(e.getValue()));
-                    } else {
-                        ElementList tail = tails.get(sE.getTemp());
-                        for (Element elem : tail) {
-                            if (!constants.containsKey(elem.getValue())) {
-                                ceWrite.addChild(new SElement(elem.getValue()));
-                            } else {
-                                String value = constants.get(elem.getValue());
-                                ceWrite.addChild(new SElement(value));
-                            }
-                        // ceWrite.addChild(elem);
-                        }
-                    }
+                    ceWrite.addChild(new SElement(e.getValue()));
                 }
+
             }
         }
     }
@@ -865,21 +843,6 @@ public class DicCross {
     }
 
     /**
-     * @return the crossModelFST
-     */
-    private final CrossModelFST getCrossModelFST() {
-        return crossModelFST;
-    }
-
-    /**
-     * @param crossModelFST
-     *                the crossModelFST to set
-     */
-    private final void setCrossModelFST(CrossModelFST crossModelFST) {
-        this.crossModelFST = crossModelFST;
-    }
-
-    /**
      *
      *
      */
@@ -903,7 +866,7 @@ public class DicCross {
         bilCrossed.setType("BIL");
         bilCrossed.setLeftLanguage(sl);
         bilCrossed.setRightLanguage(tl);
-        msg.out("[" + (taskOrder++) + "] Making morphological dicionaries consistent ...");
+        msg.out("[" + (taskOrder++) + "] Making consistent morphological dicionaries ...\n");
 
         final EElementList[] commonCrossedMons = DicTools.makeConsistent(bilCrossed, dicSet.getMon1(), dicSet.getMon2());
         final EElementList crossedMonA = commonCrossedMons[0];
@@ -919,7 +882,7 @@ public class DicCross {
         dicList.add(monACrossed);
         dicList.add(monBCrossed);
         printXMLCrossed(dicList, sl, tl);
-        msg.out("[" + (taskOrder++) + "] Done!");
+        msg.out("[" + (taskOrder++) + "] Done!\n");
         this.setCompleted(100);
     }
 
@@ -956,7 +919,7 @@ public class DicCross {
         }
         taskOrder = taskOrder + 1;
         msg.log("[" + (taskOrder) + "] Patterns never applied: " + patterns + "\n");
-        msg.out("[" + (taskOrder) + "] Generating crossed dictionaries ...");
+        msg.out("[" + (taskOrder) + "] Generating crossed dictionaries ...\n");
 
         this.bilCrossed_path = this.getOutDir() + "apertium-" + sl + "-" + tl + "." + sl + "-" + tl + "-crossed.dix";
         bilCrossed.printXML(this.bilCrossed_path);
@@ -1055,17 +1018,17 @@ public class DicCross {
             if (arg.equals("-debug")) {
                 i++;
                 msg.setDebug(true);
-                msg.out("debug: on");
+                msg.out("Debug mode on\n");
             }
         }
 
-        msg.out("[" + (taskOrder++) + "] Loading bilingual AB (" + sDicBilAB + ")");
+        msg.out("[" + (taskOrder++) + "] Loading bilingual AB (" + sDicBilAB + ")\n");
         final DictionaryElement bil1 = DicTools.readBilingual(sDicBilAB, bilABReverse);
-        msg.out("[" + (taskOrder++) + "] Loading bilingual BC (" + sDicBilBC + ")");
+        msg.out("[" + (taskOrder++) + "] Loading bilingual BC (" + sDicBilBC + ")\n");
         final DictionaryElement bil2 = DicTools.readBilingual(sDicBilBC, bilBCReverse);
-        msg.out("[" + (taskOrder++) + "] Loading monolingual A (" + sDicMonA + ")");
+        msg.out("[" + (taskOrder++) + "] Loading monolingual A (" + sDicMonA + ")\n");
         final DictionaryElement mon1 = DicTools.readMonolingual(sDicMonA);
-        msg.out("[" + (taskOrder++) + "] Loading monolingual C (" + sDicMonC + ")");
+        msg.out("[" + (taskOrder++) + "] Loading monolingual C (" + sDicMonC + ")\n");
         final DictionaryElement mon2 = DicTools.readMonolingual(sDicMonC);
 
         DicSet dicSet = new DicSet(mon1, bil1, mon2, bil2);
@@ -1230,5 +1193,21 @@ public class DicCross {
             }
         }
         return true;
+    }
+
+    /**
+     * 
+     * @return The cross model processor
+     */
+    public CrossModelProcessor getCrossModelProcessor() {
+        return crossModelProcessor;
+    }
+
+    /**
+     * 
+     * @param crossModelProcessor
+     */
+    public void setCrossModelProcessor(CrossModelProcessor crossModelProcessor) {
+        this.crossModelProcessor = crossModelProcessor;
     }
 }

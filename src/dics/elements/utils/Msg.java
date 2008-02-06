@@ -139,8 +139,7 @@ public class Msg {
             break;
 
         default :
-            System.out.println(text);
-
+            System.out.print(text);
             break;
         }
     }
@@ -154,7 +153,6 @@ public class Msg {
         switch (this.getType()) {
         case LABEL :
             label.setText(text);
-
             break;
 
         default :

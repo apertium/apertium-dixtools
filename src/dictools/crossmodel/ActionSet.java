@@ -105,7 +105,7 @@ public class ActionSet extends ArrayList<Action> {
      * 
      */
     public final void incrementPatternLength() {
-        this.patternLength +=1;
+        this.patternLength += 1;
     }
 
     /**

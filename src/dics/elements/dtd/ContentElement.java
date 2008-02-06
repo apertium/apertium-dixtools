@@ -386,4 +386,43 @@ public class ContentElement extends Element implements Cloneable {
         }
         return cloned;
     }
+
+    /**
+     * 
+     * @return A sequence of elements (text and 's' elements)
+     */
+    public final ElementList getSequence() {
+        ElementList eList = new ElementList();
+        String str = "";
+        boolean hasSElements = false;
+        for (Element e : this.children) {
+            if (e instanceof TextElement) {
+                str += e.getValue();
+            }
+            if (e instanceof BElement) {
+                str += "<b/>";
+            }
+            if (e instanceof SElement) {
+                if (!hasSElements) {
+                    eList.add(new TextElement(str));
+                }
+                str = "";
+                hasSElements = true;
+                String v = ((SElement) e).getValue();
+                if (v.equals("*")) {
+                    eList.add(new SElement("^*"));
+                } else {
+                    if (v.equals("?")) {
+                        eList.add(new SElement("^?"));
+                    } else {
+                        eList.add(new SElement(v));
+                    }
+                }
+            }
+        }
+        if (!hasSElements && !str.equals("")) {
+            eList.add(new TextElement(str));
+        }
+        return eList;
+    }
 }

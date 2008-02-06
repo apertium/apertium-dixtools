@@ -18,61 +18,14 @@
  * 02111-1307, USA.
  */
 
-package dictools.crossmodel;
+package dictools.cmproc;
+
+import java.util.HashMap;
 
 /**
- * 
+ *
  * @author Enrique Benimeli Bofarull
- * 
  */
-public class Constant {
-
-    /**
-         * 
-         */
-    private String name;
-
-    /**
-         * 
-         */
-    private String value;
-
-    /**
-         * 
-         * 
-         */
-    public Constant() {
-
-    }
-
-    /**
-         * 
-         * @return Undefined         */
-    public String getName() {
-	return name;
-    }
-
-    /**
-         * 
-         * @param name
-         */
-    public void setName(final String name) {
-	this.name = name;
-    }
-
-    /**
-         * 
-         * @return Undefined         */
-    public String getValue() {
-	return value;
-    }
-
-    /**
-         * 
-         * @param value
-         */
-    public void setValue(final String value) {
-	this.value = value;
-    }
+public class StateSet extends HashMap<String,State> {
 
 }

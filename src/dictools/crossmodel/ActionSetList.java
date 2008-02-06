@@ -46,6 +46,13 @@ public class ActionSetList extends HashMap<String, ActionSet> {
     private Msg msg;
 
     /**
+     * 
+     */
+   public ActionSetList() {
+
+   }
+
+    /**
      * Constructor
      */
     public ActionSetList(Msg msg) {
