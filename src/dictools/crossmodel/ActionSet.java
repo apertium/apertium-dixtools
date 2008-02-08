@@ -36,210 +36,230 @@ import java.io.OutputStreamWriter;
  */
 public class ActionSet extends ArrayList<Action> {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
-    /**
-     * 
-     */
-    private String name;
-    /**
-     * 
-     */
-    private int numberOfConstants = 0;
-    /**
-     * 
-     */
-    private Integer patternLength = 0;
-    /**
-     * 
-     */
-    private HashMap<String, ElementList> tails;
-    /**
-     * 
-     */
-    private CrossAction crossAction;
+   /**
+    * 
+    */
+   private static final long serialVersionUID = 1L;
+   /**
+    * 
+    */
+   private String name;
+   /**
+    * 
+    */
+   private int numberOfConstants = 0;
+   /**
+    * 
+    */
+   private Integer patternLength = 0;
+   /**
+    * 
+    */
+   private HashMap<String, ElementList> tails;
+   /**
+    * 
+    */
+   private CrossAction crossAction;
 
-    /**
-     * 
-     * @return Undefined         
-     */
-    public final int getNumberOfConstants() {
-        return numberOfConstants;
-    }
+   /**
+    * 
+    * @return Undefined         
+    */
+   public final int getNumberOfConstants() {
+      return numberOfConstants;
+   }
 
-    /**
-     * 
-     * @return Undefined         
-     */
-    public final String getName() {
-        return name;
-    }
+   /**
+    * 
+    * @return Undefined         
+    */
+   public final String getName() {
+      return name;
+   }
 
-    /**
-     * 
-     * @param name
-     */
-    public final void setName(String name) {
-        this.name = name;
-    }
+   /**
+    * 
+    * @param name
+    */
+   public final void setName(String name) {
+      this.name = name;
+   }
 
-    /**
-     * 
-     * @param numberOfConstants
-     */
-    public final void setNumberOfConstants(int numberOfConstants) {
-        this.numberOfConstants = numberOfConstants;
-    }
+   /**
+    * 
+    * @param numberOfConstants
+    */
+   public final void setNumberOfConstants(int numberOfConstants) {
+      this.numberOfConstants = numberOfConstants;
+   }
 
-    /**
-     * 
-     * 
-     */
-    public final void incrementNumberOfConstants() {
-        numberOfConstants += 1;
-    }
+   /**
+    * 
+    * 
+    */
+   public final void incrementNumberOfConstants() {
+      numberOfConstants += 1;
+   }
 
-    /**
-     * 
-     */
-    public final void incrementPatternLength() {
-        this.patternLength += 1;
-    }
+   /**
+    * 
+    */
+   public final void incrementPatternLength() {
+      this.patternLength += 1;
+   }
 
-    /**
-     * 
-     * 
-     */
-    public final void print(Msg msg) {
-        for (Action action : this) {
-            action.print(msg);
-        }
-    }
+   /**
+    * 
+    * 
+    */
+   public final void print(Msg msg) {
+      for (Action action : this) {
+         action.print(msg);
+      }
+   }
 
-    /**
-     * 
-     * @param dos
-     * @throws java.io.IOException
-     */
-    public final void printXML(OutputStreamWriter dos) throws IOException {
-        dos.write("<action-set>\n");
-        for (Action action : this) {
-            action.printXML(dos);
-        }
-        dos.write("</action-set>\n\n");
-    }
+   /**
+    * 
+    * @param dos
+    * @throws java.io.IOException
+    */
+   public final void printXML(OutputStreamWriter dos) throws IOException {
+      dos.write("<action-set>\n");
+      for (Action action : this) {
+         action.printXML(dos);
+      }
+      dos.write("</action-set>\n\n");
+   }
 
-    /**
-     * 
-     * @return Undefined         */
-    public final int getPatternLength() {
-        return patternLength;
-    }
+   /**
+    * 
+    * @return Undefined         */
+   public final int getPatternLength() {
+      return patternLength;
+   }
 
-    /**
-     * 
-     */
-    public final void calculatePatternLength() {
-        // 3 because of 3 <b> tags
-        // 2 because of 2 restrictions
-        patternLength = patternLength - getNumberOfTails() - 2 - 3;
-    }
+   /**
+    * 
+    */
+   public final void calculatePatternLength() {
+      // 3 because of 3 <b> tags
+      // 2 because of 2 restrictions
+      patternLength = patternLength - getNumberOfTails() - 2 - 3;
+   }
 
-    /**
-     * 
-     * @return Undefined         */
-    private final Integer getNumberOfTails() {
-        int nTails = 0;
-        CrossAction cA = getCrossAction();
+   /**
+    * 
+    * @return Undefined         */
+   private final Integer getNumberOfTails() {
+      int nTails = 0;
+      CrossAction cA = getCrossAction();
 
-        SElementList e1L = cA.getPattern().getAB().getSElements("L");
-        SElementList e1R = cA.getPattern().getAB().getSElements("R");
-        SElementList e2L = cA.getPattern().getBC().getSElements("L");
-        SElementList e2R = cA.getPattern().getBC().getSElements("R");
+      SElementList e1L = cA.getPattern().getAB().getSElements("L");
+      SElementList e1R = cA.getPattern().getAB().getSElements("R");
+      SElementList e2L = cA.getPattern().getBC().getSElements("L");
+      SElementList e2R = cA.getPattern().getBC().getSElements("R");
 
-        if (containsTail(e1L)) {
-            nTails++;
-        }
-        if (containsTail(e1R)) {
-            nTails++;
-        }
-        if (containsTail(e2L)) {
-            nTails++;
-        }
-        if (containsTail(e2R)) {
-            nTails++;
-        }
+      if (containsTail(e1L)) {
+         nTails++;
+      }
+      if (containsTail(e1R)) {
+         nTails++;
+      }
+      if (containsTail(e2L)) {
+         nTails++;
+      }
+      if (containsTail(e2R)) {
+         nTails++;
+      }
 
-        return new Integer(nTails);
-    }
+      return new Integer(nTails);
+   }
 
-    /**
-     * 
-     * @param list
-     * @return Undefined         
-     */
-    private final boolean containsTail(final SElementList list) {
-        for (SElement s : list) {
-            if (s.getValue().equals("0")) {
-                return true;
-            }
-        }
-        return false;
-    }
+   /**
+    * 
+    * @param list
+    * @return Undefined         
+    */
+   private final boolean containsTail(final SElementList list) {
+      for (SElement s : list) {
+         if (s.getValue().equals("0")) {
+            return true;
+         }
+      }
+      return false;
+   }
 
-    /**
-     * 
-     * @return Undefined         
-     */
-    public final int getNumberOfRestrictions() {
-        CrossAction cA = getCrossAction();
-        int nR = 0;
-        if (cA.getPattern().getAB().hasRestriction()) {
-            nR++;
-        }
-        if (cA.getPattern().getBC().hasRestriction()) {
-            nR++;
-        }
-        return nR;
-    }
+   /**
+    * 
+    * @return Undefined         
+    */
+   public final int getNumberOfRestrictions() {
+      CrossAction cA = getCrossAction();
+      int nR = 0;
+      if (cA.getPattern().getAB().hasRestriction()) {
+         nR++;
+      }
+      if (cA.getPattern().getBC().hasRestriction()) {
+         nR++;
+      }
+      return nR;
+   }
 
-    /**
-     * 
-     * @param patternLength
-     */
-    public final void setPatternLength(Integer patternLength) {
-        this.patternLength = patternLength;
-    }
+   /**
+    * 
+    * @param patternLength
+    */
+   public final void setPatternLength(Integer patternLength) {
+      this.patternLength = patternLength;
+   }
 
-    /**
-     * @return the tails
-     */
-    public final HashMap<String, ElementList> getTails() {
-        return tails;
-    }
+   /**
+    * @return the tails
+    */
+   public final HashMap<String, ElementList> getTails() {
+      return tails;
+   }
 
-    /**
-     * @param tails
-     *                the tails to set
-     */
-    public final void setTails(HashMap<String, ElementList> tails) {
-        this.tails = tails;
-    }
+   /**
+    * @param tails
+    *                the tails to set
+    */
+   public final void setTails(HashMap<String, ElementList> tails) {
+      this.tails = tails;
+   }
 
-    /**
-     * @return the crossAction
-     */
-    public final CrossAction getCrossAction() {
-        return crossAction;
-    }
+   /**
+    * @return the crossAction
+    */
+   public final CrossAction getCrossAction() {
+      return crossAction;
+   }
 
-    /**
-     * @param crossAction
-     *                the crossAction to set
-     */
-    public final void setCrossAction(CrossAction crossAction) {
-        this.crossAction = crossAction;
-    }
+   /**
+    * @param crossAction
+    *                the crossAction to set
+    */
+   public final void setCrossAction(CrossAction crossAction) {
+      this.crossAction = crossAction;
+   }
+
+   /**
+    * 
+    * @param definedVars
+    * @param patternID
+    * @return true if the action set is valid
+    */
+   public final boolean isValid(final HashMap<String, String> definedVars, final String patternID) {
+      boolean errorsFound = false;
+      for (Action a : this) {
+         if (!a.isValid(definedVars, patternID)) {
+            errorsFound = true;
+         }
+      }
+      if (errorsFound) {
+         return false;
+      } else {
+         return true;
+      }
+   }
 }
