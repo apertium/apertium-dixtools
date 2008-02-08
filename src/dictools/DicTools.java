@@ -144,8 +144,8 @@ public class DicTools {
      * @return Undefined         */
     public static String[] getSourceAndTarget(final String name) {
         final String[] st = new String[3];
-        final String langCode = "[a-z][a-z]+";
-        final String langPair = langCode + "-" + langCode;
+        final String langCode = "[a-z]+";
+        final String langPair = langCode + "\\-" + langCode;
         String str = "";
 
         final String[] parts = name.split("apertium-");
@@ -153,7 +153,8 @@ public class DicTools {
             str = element;
         }
 
-        final String[] paths = name.split("apertium-" + langPair + "." + langPair + ".dix");
+        String txt = "apertium-" + langPair + "." + langPair + ".dix";
+        final String[] paths = str.split(txt);
         st[2] = paths[0];
         int k = 0;
         final String[] parts2 = str.split("[.]");

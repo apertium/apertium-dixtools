@@ -66,4 +66,25 @@
     nbproject/build-impl.xml file. 
 
     -->
+    <target name="install">
+      	<echo message="Installing apertium-crossdics ..."/>
+    	<mkdir dir="/usr/local/apertium-crossdics"/>
+    	<mkdir dir="/usr/local/apertium-crossdics/dist"/>
+    	<mkdir dir="/usr/local/apertium-crossdics/schemas"/>
+
+    	<copy file="dist/crossdics.jar"
+    	todir="/usr/local/apertium-crossdics/dist"
+    	overwrite="true" failonerror="Error: apertium-crossdics couldn't be
+    	installed"/>
+    	<!-- dictools copy -->
+    	<copy file="dictools" todir="/usr/local/bin" overwrite="true" failonerror="Error: apertium-crossdics couldn't be installed" verbose="false"/>
+  	<chmod file="/usr/local/bin/dictools" perm="+x"/>
+  	<!-- apertium-crossdics copy -->
+  	<copy file="apertium-crossdics" todir="/usr/local/bin" overwrite="true"/>
+  	<chmod file="/usr/local/bin/apertium-crossdics" perm="+x"/>
+  	
+    	<copy file="schemas/cross-model.xml"
+      	todir="/usr/local/apertium-crossdics/schemas"/>
+    	<echo message="apertium-crossdics was successfully installed!"/>
+    </target>
 </project>

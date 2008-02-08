@@ -20,9 +20,6 @@
 package dictools.crossmodel;
 
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Text;
 
 import dics.elements.dtd.EElement;
 import dictools.XMLReader;
