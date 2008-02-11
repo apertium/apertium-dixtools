@@ -202,6 +202,22 @@ public class PardefElement extends Element {
     public boolean hasCategory(final String category) {
         return (n.endsWith("__" + category));
     }
+    
+    /**
+     * 
+     * @param def
+     * @return true if the paradigm contains certain definition ('adj', 'm', etc.)
+     */
+    public boolean contains(final String def) {
+       for(final EElement e : eElements) {
+          if (e.contains(def)) {
+             return true;
+          }
+       }       
+       return false;       
+    }
+    
+    
 
     /**
      * 

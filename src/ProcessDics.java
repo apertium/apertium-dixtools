@@ -33,6 +33,7 @@ import dictools.DicSort;
 import dictools.apertiumizer.Apertiumizer;
 import dictools.dix2trie.Dix2Trie;
 import misc.enca.ConvertMF;
+import misc.esca.AddSameGender;
 
 /**
  *
@@ -148,6 +149,11 @@ public class ProcessDics {
         if (getAction().equals("convert-mf")) {
             this.process_convertmf();
         }
+        if (getAction().equals("add-same-gender")) {
+            this.process_addsamegender();
+        }
+        
+        
     }
 
     /**
@@ -413,6 +419,17 @@ public class ProcessDics {
             ConvertMF convertMF = new ConvertMF(arguments[1], arguments[2]);
             convertMF.setOutFileName(arguments[3]);
             convertMF.convert();
+        }
+    }
+
+    private final void process_addsamegender() {
+        if (getArguments().length != 4) {
+            msg.err("Usage: java ProcessDics add-same-gender <morph-dic> <bil-dic> <out>");
+            System.exit(-1);
+        } else {
+            AddSameGender addSameGender = new AddSameGender(arguments[1], arguments[2]);
+            addSameGender.setOutFileName(arguments[3]);
+            addSameGender.addSameGender();
         }
     }
 

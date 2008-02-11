@@ -237,6 +237,9 @@ public class CrossAction implements Comparable<CrossAction> {
          ContentElement rLeftA = this.renameContentElement(leftA, valueMap);
          ContentElement rRightA = this.renameContentElement(rightA, valueMap);
          EElement rA = new EElement();
+         if (a.getE().hasRestriction()) {
+            rA.setRestriction(a.getE().getRestriction());
+         }
          rA.addChild(new PElement(new LElement(rLeftA), new RElement(rRightA)));
          rActionSet.add(new Action(rA));
       }

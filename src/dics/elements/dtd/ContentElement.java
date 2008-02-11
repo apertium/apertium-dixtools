@@ -148,6 +148,20 @@ public class ContentElement extends Element implements Cloneable {
         }
         return false;
     }
+    
+    /**
+     * 
+     * @param def
+     * @return true is the element contains a certain definition ('m', 'adj', etc)
+     */
+    public final boolean contains(final String def) {
+       for(SElement sE : this.getSElements()) {
+          if(sE.getValue().equals(def)) {
+             return true;
+          }
+       }
+       return false;       
+    }
 
     /**
      * 
@@ -402,6 +416,10 @@ public class ContentElement extends Element implements Cloneable {
             if (e instanceof BElement) {
                 str += "<b/>";
             }
+            if (e instanceof GElement) {
+               str += processGElement(e);
+            }
+            
             if (e instanceof SElement) {
                 if (!hasSElements) {
                     eList.add(new TextElement(str));
@@ -424,5 +442,27 @@ public class ContentElement extends Element implements Cloneable {
             eList.add(new TextElement(str));
         }
         return eList;
+    }
+    
+    /**
+     * 
+     * @param e
+     * @return Content of 'g' element (string)
+     */
+    private final String processGElement(Element e) {
+       GElement gE = (GElement)e;
+       String str = "";
+       str += "<g>";
+       for (Element e1 : gE.getChildren()) {
+          if(e1 instanceof TextElement) {
+             TextElement tE = (TextElement)e1;
+             str += tE.getValue();
+          }
+          if(e1 instanceof BElement) {
+             str += "<b/>";
+          }          
+       }       
+       str += "</g>";
+      return str;
     }
 }

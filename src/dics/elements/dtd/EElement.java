@@ -1305,4 +1305,13 @@ public class EElement extends Element implements Cloneable,
     public final void setAlt(final String alt) {
         this.alt = alt;
     }
+    
+    /**
+     * 
+     * @param def
+     * @return true if the element contains certain definition ('adj', 'n', etc.)
+     */
+    public final boolean contains(final String def) {
+       return (getLeft().contains(def) || this.getRight().contains(def));       
+    }
 }

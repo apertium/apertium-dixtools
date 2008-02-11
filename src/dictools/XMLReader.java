@@ -324,9 +324,7 @@ public class XMLReader {
      * @return Undefined         */
     protected ContentElement readContentElement(final Element e,
             ContentElement cElement) {
-
-        String text = "";
-
+        //String text = "";
         try {
             if (e.hasChildNodes()) {
                 final NodeList children = e.getChildNodes();
@@ -335,7 +333,7 @@ public class XMLReader {
                     if (child instanceof Text) {
                         final Text textNode = (Text) child;
                         final String str = textNode.getData().trim();
-                        text += str;
+                        //text += str;
                         //System.err.println("Text: " + text);
                         final TextElement tE = new TextElement(str);
                         cElement.addChild(tE);
@@ -343,14 +341,14 @@ public class XMLReader {
                         if (!(child instanceof Comment)) {
                             final Element childElement = (Element) child;
                             final String tag = childElement.getNodeName();
-                            text += processTagText(tag, child);
+                            //text += processTagText(tag, child);
                             dics.elements.dtd.Element element = processTagE(tag, child);
                             cElement.addChild(element);
                         }
                     }
                 }
             } else {
-                text = "";
+                //text = "";
             }
         } catch (Exception exp) {
             exp.printStackTrace();

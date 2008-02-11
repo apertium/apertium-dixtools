@@ -538,29 +538,16 @@ public class DicCross {
       final CrossAction cA = cad.getCrossAction();
 
       for (Action action : cA.getActionSet()) {
-
          EElement eAction = action.getE();
-
          final int iR = resolveRestriction(e1.getRestriction(), e2.getRestriction());
          if (iR != NONE) {
-
-            final String restriction = getRestrictionString(iR);
             EElement actionE = assignValues(e1, e2, eAction, cad.getVars());
             String actionID = cad.getCrossAction().getId();
             actionE.setPatternApplied(actionID);
 
-            if (eAction.hasRestriction()) {
-               // restriction indicated in cross pattern
-               actionE.setComments("\tforced '" + eAction.getRestriction() + "' restriction\n");
-               actionE.setRestriction(eAction.getRestriction());
-            } else {
-               // automatically resolved restriction
-               actionE.setRestriction(restriction);
-            }
-
             // author attribute
-            final String author = mergeAttributes(e1.getAuthor(), e2.getAuthor());
-            actionE.setAuthor(author);
+            //final String author = mergeAttributes(e1.getAuthor(), e2.getAuthor());
+            //actionE.setAuthor(author);
 
             // comment attribute
             final String comment = mergeAttributes(e1.getComment(), e2.getComment());
@@ -589,8 +576,18 @@ public class DicCross {
     * @return New 'e' element
     */
    public final EElement assignValues(final EElement e1, final EElement e2, final EElement eAction, final Variables vars) {
-      //ConstantMap constants = entries.getConstants();
+      final int iR = resolveRestriction(e1.getRestriction(), e2.getRestriction());
       EElement eCrossed = new EElement();
+
+      if (eAction.hasRestriction()) {
+         // restriction indicated in cross pattern
+         eCrossed.setComments("\tforced '" + eAction.getRestriction() + "' restriction\n");
+         eCrossed.setRestriction(eAction.getRestriction());
+      } else {
+         // automatically resolved restriction
+         final String restriction = getRestrictionString(iR);
+         eCrossed.setRestriction(restriction);
+      }
 
       PElement pE = new PElement();
 
@@ -605,6 +602,7 @@ public class DicCross {
 
       pE.setLElement(lE2);
       pE.setRElement(rE2);
+
       eCrossed.addChild(pE);
       return eCrossed;
    }
