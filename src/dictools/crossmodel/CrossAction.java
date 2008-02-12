@@ -219,12 +219,14 @@ public class CrossAction implements Comparable<CrossAction> {
       ContentElement rRightAB = this.renameContentElement(rightAB, valueMap);
       EElement rAB = new EElement();
       rAB.setRestriction(this.getPattern().getAB().getRestriction());
+
       rAB.addChild(new PElement(new LElement(rLeftAB), new RElement(rRightAB)));
 
       ContentElement rLeftBC = this.renameContentElement(leftBC, valueMap);
       ContentElement rRightBC = this.renameContentElement(rightBC, valueMap);
       EElement rBC = new EElement();
       rBC.setRestriction(this.getPattern().getBC().getRestriction());
+
       rBC.addChild(new PElement(new LElement(rLeftBC), new RElement(rRightBC)));
 
       rPattern.setAB(rAB);
@@ -237,8 +239,12 @@ public class CrossAction implements Comparable<CrossAction> {
          ContentElement rLeftA = this.renameContentElement(leftA, valueMap);
          ContentElement rRightA = this.renameContentElement(rightA, valueMap);
          EElement rA = new EElement();
-         if (a.getE().hasRestriction()) {
-            rA.setRestriction(a.getE().getRestriction());
+         if (a.getE().isRestrictionAuto()) {
+            rA.setRestriction("auto");
+         } else {
+            if (a.getE().hasRestriction()) {
+               rA.setRestriction(a.getE().getRestriction());
+            }
          }
          rA.addChild(new PElement(new LElement(rLeftA), new RElement(rRightA)));
          rActionSet.add(new Action(rA));

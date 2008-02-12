@@ -41,6 +41,7 @@ public class AddSameGender {
     * 
     */
    private HashMap<String, PardefElement> mfPardefsAdjs;
+   private DictionaryElement bil;
 
    /**
     * 
@@ -73,7 +74,17 @@ public class AddSameGender {
     * 
     */
    public final void addSameGender() {
+      DictionaryReader bilReader = new DictionaryReader(this.bilDic);
+      bil = bilReader.readDic();
+      this.process_nouns();
+      this.process_adjs();
+      bil.printXML("dics/apertium-es-ca.es-ca-with-gender.dix");
+   }
 
+   /**
+    * 
+    */
+   private final void process_nouns() {
       DictionaryReader morphReader = new DictionaryReader(this.morphDic);
       DictionaryElement morph = morphReader.readDic();
 
@@ -82,7 +93,8 @@ public class AddSameGender {
       for (PardefElement pfe : morph.getPardefsElement().getPardefElements()) {
          if (pfe.hasCategory("n")) {
             if ((pfe.contains("m") && pfe.contains("f"))) {
-               //parNameGender.put(pfe.getName(), "GD");
+               parNameGender.put(pfe.getName(), "GD");
+            //parNameGender.put(pfe.getName(), "mf");
             } else {
                if (pfe.contains("mf")) {
                   parNameGender.put(pfe.getName(), "mf");
@@ -104,8 +116,6 @@ public class AddSameGender {
          lemmaParName.put(lemma, parName);
       }
 
-      DictionaryReader bilReader = new DictionaryReader(this.bilDic);
-      DictionaryElement bil = bilReader.readDic();
 
       for (EElement ee : bil.getAllEntries()) {
          if (ee.is("L", "n")) {
@@ -125,8 +135,54 @@ public class AddSameGender {
             }
          }
       }
-      
-      bil.printXML("dics/apertium-es-ca.es-ca-with-gender.dix");
+
+
+
+   }
+
+   private final void process_adjs() {
+      DictionaryReader morphReader = new DictionaryReader(this.morphDic);
+      DictionaryElement morph = morphReader.readDic();
+
+      HashMap<String, String> parNameGender = new HashMap<String, String>();
+
+      for (PardefElement pfe : morph.getPardefsElement().getPardefElements()) {
+         if (pfe.hasCategory("adj")) {
+            if (pfe.contains("mf")) {
+               parNameGender.put(pfe.getName(), "mf");
+            }
+         }
+      }
+
+
+      HashMap<String, String> lemmaParName = new HashMap<String, String>();
+      for (EElement ee : morph.getAllEntries()) {
+         String lemma = ee.getLemma();
+         String parName = ee.getParadigmValue();
+         lemmaParName.put(lemma, parName);
+      }
+
+
+      for (EElement ee : bil.getAllEntries()) {
+         if (ee.is("L", "adj")) {
+            String value = ee.getLeft().getValueNoTags();
+            if (ee.getLeft().contains("GD") || ee.getLeft().contains("m") || ee.getLeft().contains("f") || ee.getLeft().contains("mf")) {
+
+            } else {
+               String parValue = lemmaParName.get(value);
+               if (parValue != null) {
+                  //System.out.println("parValue: " +  parValue);
+                  String genderValue = parNameGender.get(parValue);
+                  if (genderValue != null) {
+                     System.out.println(value + " is '" + genderValue + "'");
+                     ee.getChildren("L").add(new SElement(genderValue));
+                  }
+               }
+            }
+         }
+      }
+
+
 
    }
 }

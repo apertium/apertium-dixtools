@@ -458,7 +458,8 @@ public class DicCross {
             EElementList actionEList = cross(e1, e2, dir);
             if (!actionEList.isEmpty()) {
                for (EElement e : actionEList) {
-                  final String str = e.getHash();
+                  String str = e.getHash();
+                  
                   if (!getProcessed().containsKey(str)) {
                      section.addEElement(e);
                      getProcessed().put(str, e);
@@ -576,30 +577,27 @@ public class DicCross {
     * @return New 'e' element
     */
    public final EElement assignValues(final EElement e1, final EElement e2, final EElement eAction, final Variables vars) {
-      final int iR = resolveRestriction(e1.getRestriction(), e2.getRestriction());
       EElement eCrossed = new EElement();
-
-      if (eAction.hasRestriction()) {
+      //if (eAction.hasRestriction()) {
+      if (!eAction.isRestrictionAuto()) {
          // restriction indicated in cross pattern
          eCrossed.setComments("\tforced '" + eAction.getRestriction() + "' restriction\n");
          eCrossed.setRestriction(eAction.getRestriction());
       } else {
          // automatically resolved restriction
+         final int iR = resolveRestriction(e1.getRestriction(), e2.getRestriction());
          final String restriction = getRestrictionString(iR);
          eCrossed.setRestriction(restriction);
       }
 
       PElement pE = new PElement();
-
       ContentElement lE = eAction.getSide("L");
       ContentElement rE = eAction.getSide("R");
-
       LElement lE2 = new LElement();
       RElement rE2 = new RElement();
 
       assignValuesSide(lE2, lE, e1, vars);
       assignValuesSide(rE2, rE, e2, vars);
-
       pE.setLElement(lE2);
       pE.setRElement(rE2);
 

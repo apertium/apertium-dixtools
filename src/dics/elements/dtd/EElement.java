@@ -251,7 +251,11 @@ public class EElement extends Element implements Cloneable,
     /**
      * @return Undefined         */
     public final String getHash() {
-        final String str = getValue("L") + "---" + getSElementsString("L") + "---" + getValue("R") + "---" + getSElementsString("R");
+       String str = "";
+      if (hasRestriction()) {
+         str += str + getRestriction() + "---";
+      }
+      str += getValue("L") + "---" + getSElementsString("L") + "---" + getValue("R") + "---" + getSElementsString("R");
         return str;
     }
 
@@ -714,7 +718,7 @@ public class EElement extends Element implements Cloneable,
      * @param value
      * @return Undefined         */
     public final boolean hasRestriction(final String value) {
-        if (r == null) {
+        if (r == null || this.isRestrictionAuto()) {
             return true;
         } else {
             if (r.equals(value)) {
@@ -730,7 +734,7 @@ public class EElement extends Element implements Cloneable,
      * 
      * @return Undefined         */
     public final boolean hasRestriction() {
-        if (r == null) {
+        if (r == null || this.isRestrictionAuto()) {
             return false;
         } else {
             if (r.equals("LR") || r.equals("RL")) {
@@ -1313,5 +1317,17 @@ public class EElement extends Element implements Cloneable,
      */
     public final boolean contains(final String def) {
        return (getLeft().contains(def) || this.getRight().contains(def));       
+    }
+
+    /**
+     * 
+     * @return True if restriction will be solved automatically
+     */
+    public final boolean isRestrictionAuto() {
+       if ( r == null) {
+          return false;
+       } else {
+         return this.r.equals("auto");
+       }
     }
 }
