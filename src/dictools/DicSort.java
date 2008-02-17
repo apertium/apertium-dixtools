@@ -402,7 +402,7 @@ public class DicSort {
          * @param xinclude
          *                the xinclude to set
          */
-    private final void setXinclude(boolean xinclude) {
+    public final void setXinclude(boolean xinclude) {
 	this.xinclude = xinclude;
     }
 
