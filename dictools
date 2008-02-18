@@ -268,6 +268,51 @@ function add-same-gender() {
 }
 
 #
+#  prepare-dic
+#
+function prepare-dic() {
+   if [ $nparams -ge 2 ]
+   then
+      java ${java_options} $task $2 $3
+   else
+      echo "Usage: dictools prepare-dic <bil> <missing-entries>>"
+      echo "";
+      #echo "More information: http://xixona.dlsi.ua.es/wiki/index.php/Equivalent_paradigms";
+      #echo "";
+   fi
+}
+
+#
+#  complete-translation
+#
+function complete-translation() {
+   if [ $nparams -ge 3 ]
+   then
+      java ${java_options} $task $2 $3 $4
+   else
+      echo "Usage: dictools complete-translation <bil> <src-dot> <trans-dot>"
+      echo "";
+      #echo "More information: http://xixona.dlsi.ua.es/wiki/index.php/Equivalent_paradigms";
+      #echo "";
+   fi
+}
+
+#
+#  misc
+#
+function misc() {
+   if [ $nparams -ge 2 ]
+   then
+      java ${java_options} $task $2 $3
+   else
+      echo "Usage: dictools complete-translation <bil> <morph>"
+      echo "";
+      #echo "More information: http://xixona.dlsi.ua.es/wiki/index.php/Equivalent_paradigms";
+      #echo "";
+   fi
+}
+
+#
 #  show_help
 #
 function show_help() {
