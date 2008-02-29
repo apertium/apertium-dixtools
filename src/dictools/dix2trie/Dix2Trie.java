@@ -98,7 +98,8 @@ public class Dix2Trie {
     private final void addEntry(final Entry entry) {
         int i = 1;
         String key = entry.getKey();
-        if (!key.equals("")) {
+        char c = key.charAt(0);
+        if (!key.equals("") && Character.isLetter(c)) {
             String ptr = key.substring(0, i);
             Node childNode = new Node(ptr);
             root.setValue("@root");

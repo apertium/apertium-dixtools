@@ -22,11 +22,14 @@ package misc;
 import dics.elements.dtd.DictionaryElement;
 import dics.elements.dtd.EElement;
 import dics.elements.dtd.IElement;
+import dics.elements.dtd.LElement;
+import dics.elements.dtd.PElement;
 import dics.elements.dtd.ParElement;
 import dics.elements.dtd.PardefElement;
 import dics.elements.dtd.RElement;
 import dics.elements.dtd.SElement;
 import dics.elements.dtd.SectionElement;
+import dics.elements.dtd.TextElement;
 import dictools.DictionaryReader;
 import java.util.HashMap;
 
@@ -58,24 +61,121 @@ public class Misc {
     * @param dic1FileName
     * @param dic2FileName
     * @param dic3FileName
+    * @param dic4FileName
     */
-   public Misc(final String dic1FileName, final String dic2FileName, final String dic3FileName) {
+   public Misc(final String dic1FileName, final String dic2FileName, final String dic3FileName, final String dic4FileName) {
       DictionaryReader dicReader1 = new DictionaryReader(dic1FileName);
       this.dic1 = dicReader1.readDic();
       System.out.println("dic1.size() = " + dic1.getAllEntries().size());
-
-   /*
-   DictionaryReader dicReader2 = new DictionaryReader(dic2FileName);
-   this.dic2 = dicReader2.readDic();
-   System.out.println("dic2.size() = " + dic2.getAllEntries().size());
-   DictionaryReader dicReader3 = new DictionaryReader(dic3FileName);
-   this.dic3 = dicReader3.readDic();
-   System.out.println("dic3.size() = " + dic3.getAllEntries().size());
-    */
+      DictionaryReader dicReader2 = new DictionaryReader(dic2FileName);
+      this.dic2 = dicReader2.readDic();
+      System.out.println("dic2.size() = " + dic2.getAllEntries().size());
+      DictionaryReader dicReader3 = new DictionaryReader(dic3FileName);
+      this.dic3 = dicReader3.readDic();
+      System.out.println("dic3.size() = " + dic3.getAllEntries().size());
+      DictionaryReader dicReader4 = new DictionaryReader(dic4FileName);
+      this.dic4 = dicReader4.readDic();
+      System.out.println("dic4.size() = " + dic4.getAllEntries().size());
 
    }
 
    public final void doMisc() {
+      DictionaryElement bil_n = this.dic1;
+
+
+      DictionaryElement morph_n_en = new DictionaryElement();
+      SectionElement section = new SectionElement("main", "standard");
+      morph_n_en.addSection(section);
+
+      for (EElement ee : bil_n.getAllEntries()) {
+         EElement ne = new EElement();
+         ne.setLemma(ee.getValue("R"));
+         IElement iE = new IElement();
+         iE.setValue(ee.getValue("R"));
+         ne.addChild(iE);
+         ParElement parE = new ParElement();
+         ne.addChild(parE);
+         section.addEElement(ne);
+      }
+
+      morph_n_en.printXML("new-es-nouns.dix", "UTF-8");
+   }
+
+   /**
+    * 
+    */
+   public final void doMisc7() {
+      System.out.println("Begin");
+      DictionaryElement morph_en_adj = this.dic1;
+      DictionaryElement bil_en_es_adj = this.dic2;
+      DictionaryElement morph_en_n = this.dic3;
+      DictionaryElement bil_en_es_n = this.dic4;
+
+      HashMap<String, PElement> trans_n = new HashMap<String, PElement>();
+      for (EElement ee : bil_en_es_n.getAllEntries()) {
+         String left = ee.getValue("L");
+         LElement lE = ee.getLeft();
+         String right = ee.getValue("R");
+         RElement rE = ee.getRight();
+         PElement pE = new PElement();
+         pE.setLElement(lE);
+         pE.setRElement(rE);
+         trans_n.put(left, pE);
+      }
+
+
+      HashMap<String, EElement> entries = new HashMap<String, EElement>();
+      for (EElement ee : bil_en_es_adj.getAllEntries()) {
+         String value = ee.getValue("L");
+         entries.put(value, ee);
+      }
+
+      DictionaryElement ndic = new DictionaryElement();
+      SectionElement section = new SectionElement();
+      ndic.addSection(section);
+      for (EElement ee : morph_en_adj.getAllEntries()) {
+         String lemma = ee.getLemma();
+         if (!entries.containsKey(lemma)) {
+            System.out.println("Falta " + lemma + " en el bilingüe");
+            PElement p = trans_n.get(lemma);
+            if (p != null) {
+               System.out.println("Nuevo: " + p.getR().getValueNoTags() + " / " + lemma);
+               EElement ne = new EElement();
+               ne.setComment("check");
+               PElement pE = new PElement();
+               ne.addChild(pE);
+
+               RElement rE = new RElement();
+               for (SElement sE : p.getL().getSElements()) {
+                  if (sE.getValue().equals("adj")) {
+                     sE.setValue("n");
+                  }
+               }
+               for (SElement sE : p.getR().getSElements()) {
+                  if (sE.getValue().equals("adj")) {
+                     sE.setValue("n");
+                  }
+               }
+
+               pE.setLElement(p.getL());
+               
+               //rE.addChild(new TextElement(p.getR().getValueNoTags()));
+               //rE.addChild(new SElement("n"));
+               pE.setRElement(p.getR());
+               
+               section.addEElement(ne);
+            }
+         }
+      }
+
+      ndic.printXML("new-en-es-nouns.xml", "UTF-8");
+
+   }
+
+   /**
+    * 
+    */
+   public final void doMisc5() {
       DictionaryElement morph_es = new DictionaryElement();
       SectionElement s1 = new SectionElement("main", "standard");
       morph_es.addSection(s1);
@@ -127,9 +227,9 @@ public class Misc {
                   cat = "appl/y__vblex";
                } else {
                   cat = "accept__vblex";
-               }              
+               }
             }
-         }                
+         }
 
          parEen.setValue(cat);
          en.addChild(parEen);

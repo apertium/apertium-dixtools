@@ -159,13 +159,26 @@ public class Node {
                     word.print(tabs + 1, osw);
                 }
             }
-
             Set keySet = nodeList.keySet();
             Iterator it = keySet.iterator();
             while (it.hasNext()) {
                 String key = (String) it.next();
-                Node node = nodeList.get(key);
+                
+                int l = key.length();
+                boolean validKey = true;
+                /*
+                for(int i=0; i<l; i++) {
+                  Character c = key.charAt(i);
+                   if(!Character.isLetter(c)) {
+                      validKey = false;
+                      System.err.println("Key '" + key + "'contains '" + c + "' character");
+                   }
+                }*/
+                
+                if(validKey) {
+                   Node node = nodeList.get(key);
                 node.print(tabs + 1, osw);
+                }
             }
             if (this.getValue().equals("@root")) {
                 osw.write(sTabs + "</root>\n");

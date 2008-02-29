@@ -128,6 +128,7 @@ public class XMLReader {
         // getFactory().setXIncludeAware(true);
         try {
             setFactory(DocumentBuilderFactory.newInstance());
+            this.factory.setXIncludeAware(true);
             setBuilder(getFactory().newDocumentBuilder());
         } catch (final ParserConfigurationException pce) {
             pce.printStackTrace();

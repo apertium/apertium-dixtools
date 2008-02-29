@@ -148,7 +148,7 @@ public class DicReader {
       }
       msg.err("# " + nLemmas + " entries.");
    }
-   
+
    public final void getListWithDot() {
       DictionaryElement dic = getDic();
 
@@ -163,12 +163,12 @@ public class DicReader {
             msg.out(leftValue + ". ");
 
             //if (!leftValue.equals("") && !rightValue.equals("")) {
-             //  msg.out(leftValue + "/" + rightValue + "\n");
+            //  msg.out(leftValue + "/" + rightValue + "\n");
             //}
             nLemmas++;
          }
       }
-      
+
    }
 
    /**

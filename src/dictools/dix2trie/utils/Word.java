@@ -105,22 +105,28 @@ public class Word {
             for (int i = 0; i < tabs; i++) {
                 sTabs += " ";
             }
+
             osw.write(sTabs + "<w v=\"" + entry.getKey() + "\">\n");
             osw.write(sTabs + "\t<l>");
             osw.write(entry.getKey());
+
+
             for (SElement sE : entry.getKeyAttr()) {
                 osw.write("<s n=\"" + sE.getValue() + "\"/>");
             }
+
             osw.write("</l>\n");
 
             osw.write(sTabs + "\t<r>");
             osw.write(entry.getValue());
+            
             for (SElement sE : entry.getValueAttr()) {
                 osw.write("<s n=\"" + sE.getValue() + "\"/>");
             }
             osw.write("</r>\n");
 
             osw.write(sTabs + "</w>\n");
+            
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }

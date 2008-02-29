@@ -465,11 +465,11 @@ public class ProcessDics {
    }
 
    private final void process_misc() {
-      if (getArguments().length != 4) {
+      if (getArguments().length != 5) {
          msg.err("Usage: java ProcessDics misc <dic1> <dic2> <dic3>");
          System.exit(-1);
       } else {
-         Misc misc = new Misc(arguments[1], arguments[2], arguments[3]);
+         Misc misc = new Misc(arguments[1], arguments[2], arguments[3], arguments[4]);
          misc.doMisc();
       }
    }
