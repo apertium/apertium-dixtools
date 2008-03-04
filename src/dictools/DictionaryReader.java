@@ -78,10 +78,9 @@ public class DictionaryReader extends XMLReader {
 
     }
 
-    /*
-     * (non-Javadoc)
+    /**
      * 
-     * @see dictools.IDicReader#loadDic()
+     * @return
      */
     public DictionaryElement readDic() {
         analize();
@@ -406,7 +405,9 @@ public class DictionaryReader extends XMLReader {
     @Override
     public ParElement readParElement(final Element e) {
         final String n = getAttributeValue(e, "n");
+        final String sa = this.getAttributeValue(e, "sa");
         final ParElement parElement = new ParElement(n);
+        parElement.setSa(sa);
         return parElement;
     }
 

@@ -300,8 +300,8 @@ public class ProcessDics {
     * 
     */
    private final void process_sort() {
-      if (getArguments().length != 5) {
-         msg.err("Usage: java ProcessDics sort <-mon|-bil> <-xinclude|-same-file> <dic> <dic-sorted>");
+      if (getArguments().length != 4) {
+         msg.err("Usage: java ProcessDics sort <-mon|-bil> <dic> <out>");
          System.exit(-1);
       } else {
          DicSort dicSort = new DicSort();

@@ -23,16 +23,16 @@ package dics.elements.dtd;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class BElement extends Element {
+public class PrmElement extends Element {
 
    String value;
 
    /**
     * 
     */
-   public BElement() {
-      setTagName("b");
-      setValue("<b/>");
+   public PrmElement() {
+      setTagName("prm");
+      setValue("<prm/>");
       setValueNoTags(" ");
    }
 }

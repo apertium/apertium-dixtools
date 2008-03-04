@@ -95,17 +95,16 @@ public class DicSort {
 
    /**
     * 
-    * @return Undefined         */
+    * @return Undefined        
+    */
    public final DictionaryElement sort() {
       DictionaryElement dicSorted = null;
       if (dicType == DicSort.BIL) {
          dicSorted = sortBil();
       }
-
       if (dicType == DicSort.MON) {
          dicSorted = sortMon();
       }
-
       return dicSorted;
    }
 
@@ -128,26 +127,33 @@ public class DicSort {
       } else {
          dicType = DicSort.BIL;
       }
+      this.setXinclude(false);
 
+      /*
       if (arguments[2].equals("-xinclude")) {
-         setXinclude(true);
-         System.out.println("xinclude mode");
+      setXinclude(true);
+      System.out.println("xinclude mode");
       } else {
-         setXinclude(false);
+      setXinclude(false);
       }
+       */
 
-      DictionaryReader dicReader = new DictionaryReader(arguments[3]);
+      DictionaryReader dicReader = new DictionaryReader(arguments[2]);
       DictionaryElement dic = dicReader.readDic();
-      dic.setFileName(arguments[3]);
+      dic.setFileName(arguments[2]);
       dicReader = null;
       setDic(dic);
 
-      if (getArguments()[4].equals("out.dix")) {
-         out = DicTools.removeExtension(getArguments()[4]);
-         out = out + "-sorted.dix";
-      } else {
-         out = getArguments()[4];
-      }
+      out = arguments[3];
+
+   /*
+   if (getArguments()[4].equals("out.dix")) {
+   out = DicTools.removeExtension(getArguments()[4]);
+   out = out + "-sorted.dix";
+   } else {
+   out = getArguments()[4];
+   }
+    */
 
    }
 
@@ -165,15 +171,18 @@ public class DicSort {
       if (dicType == DicSort.MON) {
          dicSorted = sortMon();
       }
+      dicSorted.printXML(out);
 
-      if (dicSorted != null) {
-         dicSorted.setFolder(getOut() + "-includes");
-         if (isXinclude()) {
-            dicSorted.printXMLXInclude(out);
-         } else {
-            dicSorted.printXML(out);
-         }
-      }
+   /*
+   if (dicSorted != null) {
+   dicSorted.setFolder(getOut() + "-includes");
+   if (isXinclude()) {
+   dicSorted.printXMLXInclude(out);
+   } else {
+   dicSorted.printXML(out);
+   }
+   }
+    */
    }
 
    /**
@@ -201,7 +210,7 @@ public class DicSort {
 
    /**
     * 
-    * 
+    * @return
     */
    private final DictionaryElement sortBil() {
       int lrs = 0;
@@ -280,88 +289,88 @@ public class DicSort {
       int n = 0;
       for (SectionElement section : dic.getSections()) {
          //if (section.getID().equals("main")) {
-            EElementList eList = section.getEElements();
-            HashMap<String, EElementList> map = new HashMap<String, EElementList>();
+         EElementList eList = section.getEElements();
+         HashMap<String, EElementList> map = new HashMap<String, EElementList>();
 
-            for (EElement e : eList) {
-               n++;
-               String par = e.getParadigmValue();
-               if (e.hasRestriction()) {
-                  String r = e.getRestriction();
-                  if (r.equals("LR")) {
-                     lrs++;
-                  }
-                  if (r.equals("RL")) {
-                     rls++;
-                  }
+         for (EElement e : eList) {
+            n++;
+            String par = e.getParadigmValue();
+            if (e.hasRestriction()) {
+               String r = e.getRestriction();
+               if (r.equals("LR")) {
+                  lrs++;
                }
+               if (r.equals("RL")) {
+                  rls++;
+               }
+            }
 
-               String cat = null;
-               if (par == null) {
-                  cat = "none";
+            String cat = null;
+            if (par == null) {
+               cat = "none";
+            } else {
+               String[] aux = par.split("__");
+               if (aux.length == 2) {
+                  cat = aux[1];
                } else {
-                  String[] aux = par.split("__");
-                  if (aux.length == 2) {
-                     cat = aux[1];
-                  } else {
-                     cat = par;
-                  }
-                  cat = cat.replaceAll("/", "-");
+                  cat = par;
                }
-               if (cat != null) {
-                  EElementList l;
-                  if (map.containsKey(cat)) {
-                     l = map.get(cat);
-                     l.add(e);
-                     map.put(cat, l);
-                  } else {
-                     l = new EElementList();
-                     l.add(e);
-                     map.put(cat, l);
-                  }
-               }
-
+               cat = cat.replaceAll("/", "-");
             }
-            msg.log("lemmas: " + n);
-            msg.log("LR: " + lrs);
-            msg.log("RL: " + rls);
+            if (cat != null) {
+               EElementList l;
+               if (map.containsKey(cat)) {
+                  l = map.get(cat);
+                  l.add(e);
+                  map.put(cat, l);
+               } else {
+                  l = new EElementList();
+                  l.add(e);
+                  map.put(cat, l);
+               }
+            }
 
-            Set keySet = map.keySet();
-            Iterator it = keySet.iterator();
+         }
+         msg.log("lemmas: " + n);
+         msg.log("LR: " + lrs);
+         msg.log("RL: " + rls);
 
-            EElementList listAll = new EElementList();
-            String folder = "";
+         Set keySet = map.keySet();
+         Iterator it = keySet.iterator();
+
+         EElementList listAll = new EElementList();
+         String folder = "";
+         if (isXinclude()) {
+            folder = out + "-includes";
+            boolean status = new File(folder).mkdir();
+         }
+         while (it.hasNext()) {
+            DictionaryElement d = new DictionaryElement();
+            SectionElement sec = new SectionElement();
+            d.addSection(sec);
+
+            String cat = (String) it.next();
+            EElementList list = map.get(cat);
+            msg.log(cat + ": " + list.size());
             if (isXinclude()) {
-               folder = out + "-includes";
-               boolean status = new File(folder).mkdir();
+               section.addXInclude("<xi:include xmlns:xi=\"http://www.w3.org/2001/XInclude\" href=\"" + folder + "/" + cat + ".dix\"/>");
             }
-            while (it.hasNext()) {
-               DictionaryElement d = new DictionaryElement();
-               SectionElement sec = new SectionElement();
-               d.addSection(sec);
-
-               String cat = (String) it.next();
-               EElementList list = map.get(cat);
-               msg.log(cat + ": " + list.size());
-               if (isXinclude()) {
-                  section.addXInclude("<xi:include xmlns:xi=\"http://www.w3.org/2001/XInclude\" href=\"" + folder + "/" + cat + ".dix\"/>");
-               }
-               if (list.size() > 0) {
-                  Collections.sort(list);
-                  EElement eHead = list.get(0);
-                  eHead.addComments("******************************");
-                  eHead.addComments("(" + cat + ") group");
-                  eHead.addComments("******************************");
-                  listAll.addAll(list);
-               }
-               sec.setEElements(list);
-               if (isXinclude()) {
-                  sec.printXMLXInclude(folder + "/" + cat + ".dix");
-               }
-
+            if (list.size() > 0) {
+               Collections.sort(list);
+               EElement eHead = list.get(0);
+               eHead.addComments("******************************");
+               eHead.addComments("(" + cat + ") group");
+               eHead.addComments("******************************");
+               listAll.addAll(list);
             }
-            section.setEElements(listAll);
-         //}
+            sec.setEElements(list);
+            if (isXinclude()) {
+               sec.printXMLXInclude(folder + "/" + cat + ".dix");
+            }
+
+         }
+         section.setEElements(listAll);
+      //}
       }
       return dic;
    }
