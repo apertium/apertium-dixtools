@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dics.elements.utils;
 
 import dics.elements.dtd.DictionaryElement;
@@ -28,148 +27,144 @@ import java.util.ArrayList;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class DicSet extends ArrayList<DictionaryElement>{
+public class DicSet extends ArrayList<DictionaryElement> {
 
-    /**
-         * 
-         */
-    private DictionaryElement mon1;
+   /**
+    * 
+    */
+   private DictionaryElement mon1;
+   /**
+    * 
+    */
+   private DictionaryElement bil1;
+   /**
+    * 
+    */
+   private DictionaryElement mon2;
+   /**
+    * 
+    */
+   private DictionaryElement bil2;
 
-    /**
-         * 
-         */
-    private DictionaryElement bil1;
+   /**
+    * 
+    * @param mon1
+    * @param bil1
+    * @param mon2
+    * @param bil2
+    */
+   public DicSet(final DictionaryElement mon1, final DictionaryElement bil1,
+           final DictionaryElement mon2, final DictionaryElement bil2) {
 
-    /**
-         * 
-         */
-    private DictionaryElement mon2;
+      this.add(mon1);
+      this.add(mon2);
+      this.add(bil1);
+      this.add(bil2);
 
-    /**
-         * 
-         */
-    private DictionaryElement bil2;
+      this.mon1 = mon1;
+      this.mon1.setType("MONOL");
+      this.bil1 = bil1;
+      this.bil1.setType("BIL");
+      this.mon2 = mon2;
+      this.mon2.setType("MONOL");
+      this.bil2 = bil2;
+      this.bil2.setType("BIL");
+   }
 
-    /**
-         * 
-         * @param mon1
-         * @param bil1
-         * @param mon2
-         * @param bil2
-         */
-    public DicSet(final DictionaryElement mon1, final DictionaryElement bil1,
-	    final DictionaryElement mon2, final DictionaryElement bil2) {
-        
-        this.add(mon1);
-        this.add(mon2);
-        this.add(bil1);
-        this.add(bil2);
-        
-	this.mon1 = mon1;
-	this.mon1.setType("MONOL");
-	this.bil1 = bil1;
-	this.bil1.setType("BIL");
-	this.mon2 = mon2;
-	this.mon2.setType("MONOL");
-	this.bil2 = bil2;
-	this.bil2.setType("BIL");
-    }
+   /**
+    * 
+    * @param mon1
+    */
+   public DicSet(final DictionaryElement mon1) {
+      this.add(mon1);
 
-    /**
-         * 
-         * @param mon1
-         */
-    public DicSet(final DictionaryElement mon1) {
-        this.add(mon1);
-        
-	this.mon1 = mon1;
-	bil1 = null;
-	mon2 = null;
-	bil2 = null;
-    }
+      this.mon1 = mon1;
+      bil1 = null;
+      mon2 = null;
+      bil2 = null;
+   }
 
-    /**
-         * 
-         * @param bilAB
-         * @param monA
-         * @param monB
-         */
-    public DicSet(final DictionaryElement bilAB, final DictionaryElement monA,
-	    final DictionaryElement monB) {
-        this.add(monA);
-        this.add(monB);
-        this.add(bilAB);
-        
-	mon1 = monA;
-	bil1 = bilAB;
-	mon2 = monB;
-	bil2 = null;
-    }
+   /**
+    * 
+    * @param bilAB
+    * @param monA
+    * @param monB
+    */
+   public DicSet(final DictionaryElement bilAB, final DictionaryElement monA,
+           final DictionaryElement monB) {
+      this.add(monA);
+      this.add(monB);
+      this.add(bilAB);
 
-    /**
-         * 
-         * @return Undefined         */
-    public DictionaryElement getMon1() {
-	return mon1;
-    }
+      mon1 = monA;
+      bil1 = bilAB;
+      mon2 = monB;
+      bil2 = null;
+   }
 
-    /**
-         * 
-         * @return Undefined         */
-    public DictionaryElement getMon2() {
-	return mon2;
-    }
+   /**
+    * 
+    * @return Undefined         */
+   public DictionaryElement getMon1() {
+      return mon1;
+   }
 
-    /**
-         * 
-         * @return Undefined         */
-    public DictionaryElement getBil1() {
-	return bil1;
-    }
+   /**
+    * 
+    * @return Undefined         */
+   public DictionaryElement getMon2() {
+      return mon2;
+   }
 
-    /**
-         * 
-         * @return Undefined         */
-    public DictionaryElement getBil2() {
-	return bil2;
-    }
+   /**
+    * 
+    * @return Undefined         */
+   public DictionaryElement getBil1() {
+      return bil1;
+   }
 
-    /**
-         * 
-         * 
-         */
-    public final void reportMetrics() {
-	System.err.println("monA");
-	mon1.reportMetrics();
-	System.err.println("monC");
-	mon2.reportMetrics();
-	System.err.println("bilAB");
-	bil1.reportMetrics();
-	System.err.println("bilBC");
-	bil2.reportMetrics();
-    }
+   /**
+    * 
+    * @return Undefined         */
+   public DictionaryElement getBil2() {
+      return bil2;
+   }
 
-    /**
-         * 
-         * @param suffix
-         */
-    public final void printXML(final String suffix) {
-	printMonolXML(suffix);
-	getBil1().printXML(suffix + "-bilAB.dix");
-	//DicTools.removeExtension(getBil1().getFileName()) + "-" + suffix + ".dix");
-	getBil2().printXML(suffix + "-bilBC.dix");
-           //	DicTools.removeExtension(getBil2().getFileName()) + "-" + suffix + ".dix");
-    }
+   /**
+    * 
+    * 
+    */
+   public final void reportMetrics() {
+      System.err.println("monA");
+      mon1.reportMetrics();
+      System.err.println("monC");
+      mon2.reportMetrics();
+      System.err.println("bilAB");
+      bil1.reportMetrics();
+      System.err.println("bilBC");
+      bil2.reportMetrics();
+   }
 
-    /**
-         * 
-         * @param suffix
-         */
-    public final void printMonolXML(final String suffix) {
-	getMon1().printXML(suffix + "-monA.dix");
-		//DicTools.removeExtension(getMon1().getFileName()) + "-"		+ suffix + ".dix");
-	getMon2().printXML(suffix + "-monC.dix");
-		//DicTools.removeExtension(getMon2().getFileName()) + "-"		+ suffix + ".dix");
-    }
+   /**
+    * 
+    * @param suffix
+    */
+   public final void printXML(final String suffix) {
+      printMonolXML(suffix);
+      getBil1().printXML(suffix + "-bilAB.dix");
+      //DicTools.removeExtension(getBil1().getFileName()) + "-" + suffix + ".dix");
+      getBil2().printXML(suffix + "-bilBC.dix");
+   //	DicTools.removeExtension(getBil2().getFileName()) + "-" + suffix + ".dix");
+   }
 
+   /**
+    * 
+    * @param suffix
+    */
+   public final void printMonolXML(final String suffix) {
+      getMon1().printXML(suffix + "-monA.dix");
+      //DicTools.removeExtension(getMon1().getFileName()) + "-"		+ suffix + ".dix");
+      getMon2().printXML(suffix + "-monC.dix");
+   //DicTools.removeExtension(getMon2().getFileName()) + "-"		+ suffix + ".dix");
+   }
 }

@@ -80,7 +80,7 @@ public class DictionaryReader extends XMLReader {
 
     /**
      * 
-     * @return
+     * @return The DictionaryElement object
      */
     public DictionaryElement readDic() {
         analize();

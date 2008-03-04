@@ -412,7 +412,8 @@ public class XMLReader {
    /**
     * 
     * @param e
-    * @return Undefined         */
+    * @return Undefined         
+    */
    protected LElement readLElement(final Element e) {
       final LElement lElement = new LElement();
       final LElement lE = (LElement) readContentElement(e, lElement);
@@ -422,7 +423,8 @@ public class XMLReader {
    /**
     * 
     * @param e
-    * @return Undefined         */
+    * @return Undefined        
+    */
    protected RElement readRElement(final Element e) {
       final RElement rElement = new RElement();
       final RElement rE = (RElement) readContentElement(e, rElement);
@@ -432,7 +434,8 @@ public class XMLReader {
    /**
     * 
     * @param e
-    * @return Undefined         */
+    * @return Undefined         
+    */
    protected GElement readGElement(final Element e) {
       GElement gElement = new GElement();
       GElement gE = (GElement) readContentElement(e, gElement);
@@ -442,7 +445,8 @@ public class XMLReader {
    /**
     * 
     * @param e
-    * @return Undefined         */
+    * @return Undefined         
+    */
    protected PElement readPElement(final Element e) {
       final PElement pElement = new PElement();
 

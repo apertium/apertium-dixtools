@@ -119,6 +119,9 @@ public class ProcessDics {
       if (getAction().equals("cross")) {
          this.process_cross();
       }
+      if (getAction().equals("cross2")) {
+         this.process_cross2();
+      }      
       if (getAction().equals("reverse")) {
          this.process_reverse();
       }
@@ -257,6 +260,7 @@ public class ProcessDics {
    private final void process_cross() {
       if (getArguments().length < 8) {
          msg.err("Usage: java ProcessDics cross -bilAB [-r] <bilAB> -bilBC [-r] <bilBC> -monA <mon-A> -monC <monC>");
+         msg.err("Usage: java ProcessDics cross <-f|-url> <ling-resources.xml>");
          System.exit(-1);
       } else {
          DicCross dicCross = new DicCross();
@@ -264,6 +268,20 @@ public class ProcessDics {
          dicCross.doCross();
       }
 
+   }
+
+   /**
+    * 
+    */
+      private final void process_cross2() {
+      if (getArguments().length < 3) {
+         msg.err("Usage: java ProcessDics cross <-f|-url> <ling-resources.xml> <sl-tl>");
+         System.exit(-1);
+      } else {
+         DicCross dicCross = new DicCross();
+         dicCross.setArguments(getArguments());
+         dicCross.doCross();
+      }
    }
 
    /**

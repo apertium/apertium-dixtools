@@ -53,7 +53,12 @@ import dictools.crossmodel.Pattern;
 import dictools.cmproc.CrossActionData;
 import dictools.cmproc.CrossModelProcessor;
 import dictools.cmproc.Variables;
+import java.util.ArrayList;
+import java.util.Vector;
 import javax.swing.JProgressBar;
+import lingres.LingResources;
+import lingres.LingResourcesReader;
+import lingres.Resource;
 
 /**
  *
@@ -459,7 +464,7 @@ public class DicCross {
             if (!actionEList.isEmpty()) {
                for (EElement e : actionEList) {
                   String str = e.getHash();
-                  
+
                   if (!getProcessed().containsKey(str)) {
                      section.addEElement(e);
                      getProcessed().put(str, e);
@@ -963,8 +968,31 @@ public class DicCross {
       boolean bilBCReverse;
       bilABReverse = bilBCReverse = false;
 
+      String source = "";
+      int type = -1;
+      String sltl = "";
+
       for (int i = 1; i < nArgs; i++) {
          String arg = getArguments()[i];
+
+         if (arg.equals("-f")) {
+            i++;
+            arg = getArguments()[i];
+            source = arg;
+            type = LingResourcesReader.FILE;
+            i++;
+            sltl = getArguments()[i];
+         }
+
+         if (arg.equals("-url")) {
+            i++;
+            arg = getArguments()[i];
+            source = arg;
+            type = LingResourcesReader.URL;
+            i++;
+            sltl = getArguments()[i];
+         }
+
          if (arg.equals("-monA")) {
             i++;
             arg = getArguments()[i];
@@ -1027,17 +1055,98 @@ public class DicCross {
          }
       }
 
-      msg.out("[" + (taskOrder++) + "] Loading bilingual AB (" + sDicBilAB + ")\n");
-      final DictionaryElement bil1 = DicTools.readBilingual(sDicBilAB, bilABReverse);
-      msg.out("[" + (taskOrder++) + "] Loading bilingual BC (" + sDicBilBC + ")\n");
-      final DictionaryElement bil2 = DicTools.readBilingual(sDicBilBC, bilBCReverse);
-      msg.out("[" + (taskOrder++) + "] Loading monolingual A (" + sDicMonA + ")\n");
-      final DictionaryElement mon1 = DicTools.readMonolingual(sDicMonA);
-      msg.out("[" + (taskOrder++) + "] Loading monolingual C (" + sDicMonC + ")\n");
-      final DictionaryElement mon2 = DicTools.readMonolingual(sDicMonC);
+      if (type != -1) {
+         msg.out("[" + (taskOrder++) + "] Reading linguistic resources file (" + source + ")\n");
+         LingResourcesReader lrr = new LingResourcesReader(source, type);
+         LingResources lingRes = lrr.readLingResources();
+         DicSet dicSetC = this.getDicSetForCrossing(lingRes, sltl);
+         this.setDicSet(dicSetC);
+      } else {
+         msg.out("[" + (taskOrder++) + "] Loading bilingual AB (" + sDicBilAB + ")\n");
+         final DictionaryElement bil1 = DicTools.readBilingual(sDicBilAB, bilABReverse);
+         msg.out("[" + (taskOrder++) + "] Loading bilingual BC (" + sDicBilBC + ")\n");
+         final DictionaryElement bil2 = DicTools.readBilingual(sDicBilBC, bilBCReverse);
+         msg.out("[" + (taskOrder++) + "] Loading monolingual A (" + sDicMonA + ")\n");
+         final DictionaryElement mon1 = DicTools.readMonolingual(sDicMonA);
+         msg.out("[" + (taskOrder++) + "] Loading monolingual C (" + sDicMonC + ")\n");
+         final DictionaryElement mon2 = DicTools.readMonolingual(sDicMonC);
+         DicSet dicSet = new DicSet(mon1, bil1, mon2, bil2);
+         setDicSet(dicSet);
+      }
+   }
 
-      DicSet dicSet = new DicSet(mon1, bil1, mon2, bil2);
-      setDicSet(dicSet);
+   /**
+    * 
+    * @param lingRes
+    * @param sltl
+    * @return A set of dictionaries
+    */
+   private final DicSet getDicSetForCrossing(final LingResources lingRes, final String sltl) {
+      String[] pair = sltl.split("-");
+      String sl = pair[0];
+      String tl = pair[1];
+      msg.out("[" + (taskOrder++) + "] New language pair: " + sl + "-" + tl + "\n");
+      ArrayList<Resource> resources = lingRes.getResourceList();
+
+      DictionaryElement mA = null;
+      DictionaryElement mC = null;
+      DictionaryElement bAB = null;
+      DictionaryElement bBC = null;
+
+      for (Resource r : resources) {
+         if (r.isUseForCrossing()) {
+            if (r.isCrossModel() && r.isSL(sl) && r.isTL(tl)) {
+               msg.out("[" + (taskOrder++) + "] Loading cross model (" + r.getSource() + ")\n");
+               this.setCrossModelFileName(r.getSource());
+            }
+            if (r.isMorphological() && r.isSL(sl)) {
+               msg.out("[" + (taskOrder++) + "] Loading monolingual A (" + r.getSource() + ")\n");
+               mA = this.readDic(r.getSource());
+               mA.setLeftLanguage(sl);
+            }
+            if (r.isMorphological() && r.isSL(tl)) {
+               msg.out("[" + (taskOrder++) + "] Loading monolingual C (" + r.getSource() + ")\n");
+               mC = this.readDic(r.getSource());
+               mC.setLeftLanguage(tl);
+            }
+            if (r.isBilingual() && r.isTL(sl)) {
+               msg.out("[" + (taskOrder++) + "] Loading bilingual AB (" + r.getSource() + ")\n");
+               bAB = this.readDic(r.getSource());
+               bAB.setRightLanguage(sl);
+            }
+            if (r.isBilingual() && r.isSL(sl)) {
+               msg.out("[" + (taskOrder++) + "] Loading bilingual AB (" + r.getSource() + ") [reversed]\n");
+               bAB = this.readDic(r.getSource());
+               bAB.reverse();
+               bAB.setRightLanguage(sl);
+            }
+            if (r.isBilingual() && r.isTL(tl)) {
+               msg.out("[" + (taskOrder++) + "] Loading bilingual BC (" + r.getSource() + ")\n");
+               bBC = this.readDic(r.getSource());
+               bBC.setRightLanguage(tl);
+            }
+            if (r.isBilingual() && r.isSL(tl)) {
+               msg.out("[" + (taskOrder++) + "] Loading bilingual BC (" + r.getSource() + ") [reversed]\n");
+               bBC = this.readDic(r.getSource());
+               bBC.reverse();
+               bBC.setRightLanguage(tl);
+            }
+         }
+      }
+      DicSet dicSetC = new DicSet(mA, bAB, mC, bBC);
+      return dicSetC;
+   }
+
+   /**
+    * 
+    * @param source
+    * @return
+    */
+   private final DictionaryElement readDic(final String source) {
+      DictionaryReader dicReader = new DictionaryReader(source);
+      DictionaryElement dic = dicReader.readDic();
+      dic.setFileName(source);
+      return dic;
    }
 
    /**
@@ -1177,11 +1286,11 @@ public class DicCross {
    public final String getCommonLanguage(final DicSet dicSet) {
       // Sin tener en cuentra el orden. Se resuelve automáticamente
       if (isMetaInfoComplete(dicSet)) {
+         Vector<DictionaryElement> dics = new Vector<DictionaryElement>();
          HeaderElement d1 = this.dicSet.getMon1().getHeaderElement();
          HeaderElement d2 = this.dicSet.getMon2().getHeaderElement();
          HeaderElement d3 = this.dicSet.getBil1().getHeaderElement();
          HeaderElement d4 = this.dicSet.getBil2().getHeaderElement();
-
       }
       return null;
    }

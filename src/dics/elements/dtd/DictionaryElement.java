@@ -255,14 +255,16 @@ public class DictionaryElement extends Element {
 
     /**
      *
-     * @return Undefined     */
+     * @return Undefined     
+     */
     public final String getRightLanguage() {
         return rightLanguage;
     }
 
     /**
      *
-     * @return Undefined     */
+     * @return Undefined     
+     */
     public boolean isMonol() {
         if (type != null) {
             if (type.equals("MONOL")) {
@@ -277,7 +279,8 @@ public class DictionaryElement extends Element {
 
     /**
      *
-     * @return Undefined     */
+     * @return Undefined     
+     */
     public boolean isBil() {
         if (type != null) {
             if (type.equals("BIL")) {

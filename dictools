@@ -2,8 +2,8 @@
 
 mainClass="ProcessDics"
 # Minimum and maximum memory for JVM
-defaultMinMem=64
-defaultMaxMem=128
+defaultMinMem=128
+defaultMaxMem=350
 if [ "$CROSSDICS_PATH" = "" ];
 then
 	CROSSDICS_PATH="/usr/local/apertium-crossdics"
@@ -30,6 +30,24 @@ function cross() {
    	java ${java_options} $task -bilAB $3 $4 -bilBC $5 $6 -monA $2 -monC $7 -cross-model $crossmodel $9
    else
    	echo "Usage: dictools cross <monA> <-r|-n> <bilAB> <-r|-n> <bilBC> <monC> crossmodel";
+   	echo "";
+   	echo "More information in http://xixona.dlsi.ua.es/wiki/index.php/Crossdics";
+   	echo "";
+   fi
+}
+
+#
+#	cross2
+#
+function cross2() {
+   if [ $nparams -ge 3 ]; then
+   	if [ ! -d "dix" ]
+     	then
+             mkdir dix
+        fi
+   	java ${java_options} $task $2 $3 $4
+   else
+   	echo "Usage: dictools cross2 <-f|-url> <ling-resources.xml> <sl-tl>";
    	echo "";
    	echo "More information in http://xixona.dlsi.ua.es/wiki/index.php/Crossdics";
    	echo "";
