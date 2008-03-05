@@ -53,6 +53,10 @@ import dictools.crossmodel.Pattern;
 import dictools.cmproc.CrossActionData;
 import dictools.cmproc.CrossModelProcessor;
 import dictools.cmproc.Variables;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JProgressBar;
@@ -1143,9 +1147,28 @@ public class DicCross {
     * @return
     */
    private final DictionaryElement readDic(final String source) {
-      DictionaryReader dicReader = new DictionaryReader(source);
-      DictionaryElement dic = dicReader.readDic();
-      dic.setFileName(source);
+      DictionaryElement dic = null;
+      if (source.startsWith("http://")) {
+         try {
+            URL url = new URL(source);
+            InputStream is = url.openStream();
+            DictionaryReader dicReader = new DictionaryReader();
+            dicReader.setUrlDic(true);
+            dicReader.setIs(is);
+            dic = dicReader.readDic();
+            dic.setFileName(source);
+         } catch (MalformedURLException mfue) {
+            System.err.println("Error: malformed URL exception!");
+            System.exit(-1);
+         } catch (IOException ioe) {
+            System.err.println("Error: I/O exception!");
+            System.exit(-1);
+         }
+      } else {
+         DictionaryReader dicReader = new DictionaryReader(source);
+         dic = dicReader.readDic();
+         dic.setFileName(source);
+      }
       return dic;
    }
 

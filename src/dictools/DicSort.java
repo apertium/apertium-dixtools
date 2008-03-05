@@ -143,7 +143,6 @@ public class DicSort {
       dic.setFileName(arguments[2]);
       dicReader = null;
       setDic(dic);
-
       out = arguments[3];
 
    /*
@@ -248,6 +247,7 @@ public class DicSort {
                } else {
                   l = new EElementList();
                   l.add(e);
+                  System.out.println("category: " + cat);
                   map.put(cat, l);
                }
             }

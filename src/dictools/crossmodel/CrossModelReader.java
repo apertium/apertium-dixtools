@@ -89,7 +89,8 @@ public class CrossModelReader extends XMLReader {
    /**
     * 
     * @param e
-    * @return Undefined         */
+    * @return Undefined         
+    */
    public final Pattern readPattern(final Element e) {
       int i = 0;
       final Pattern pattern = new Pattern();
@@ -113,7 +114,8 @@ public class CrossModelReader extends XMLReader {
    /**
     * 
     * @param e
-    * @return Undefined         */
+    * @return Undefined         
+    */
    public final ActionSet readActionSet(final Element e) {
       final ActionSet actionSet = new ActionSet();
       for (final Element childElement : readChildren(e)) {
@@ -131,7 +133,8 @@ public class CrossModelReader extends XMLReader {
    /**
     * 
     * @param e
-    * @return Undefined         */
+    * @return Undefined        
+    */
    public final Action readAction(final Element e) {
       final Action action = new Action();
       for (final Element childElement : readChildren(e)) {

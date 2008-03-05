@@ -29,8 +29,9 @@ import dics.elements.dtd.LElement;
 import dics.elements.dtd.PElement;
 import dics.elements.dtd.RElement;
 import dics.elements.dtd.SElement;
+import dics.elements.dtd.TElement;
 import dics.elements.dtd.TextElement;
-import dics.elements.utils.ElementList;
+import dics.elements.dtd.VElement;
 import dics.elements.utils.Msg;
 import dictools.cmproc.Variables;
 import java.io.OutputStreamWriter;
@@ -261,6 +262,8 @@ public class CrossAction implements Comparable<CrossAction> {
    private final ContentElement renameContentElement(final ContentElement source, HashMap<String, String> valueMap) {
       ContentElement rContentElement = new ContentElement();
       for (Element e : source.getChildren()) {
+
+         // text element
          if (e instanceof TextElement) {
             String v = ((TextElement) e).getValue();
             TextElement tE = new TextElement("");
@@ -278,6 +281,38 @@ public class CrossAction implements Comparable<CrossAction> {
             }
             rContentElement.addChild(tE);
          }
+
+         // 'v' element
+         if (e instanceof VElement) {
+            SElement rSE = new SElement();
+            String v = ((VElement) e).getValue();
+            if (valueMap.containsKey(v)) {
+               rSE.setValue(valueMap.get(v));
+            } else {
+               String nV = "X" + x;
+               x++;
+               valueMap.put(v, nV);
+               rSE.setValue(nV);
+            }
+            rContentElement.addChild(rSE);
+         }
+
+         // 't' element
+         if (e instanceof TElement) {
+            SElement rSE = new SElement();
+            String v = ((TElement) e).getValue();
+            if (valueMap.containsKey(v)) {
+               rSE.setValue(valueMap.get(v));
+            } else {
+               String nV = "S" + x;
+               s++;
+               valueMap.put(v, nV);
+               rSE.setValue(nV);
+            }
+            rContentElement.addChild(rSE);
+         }
+
+         // 's' element
          if (e instanceof SElement) {
             SElement rSE = new SElement();
             String v = ((SElement) e).getValue();

@@ -51,7 +51,9 @@ import dics.elements.dtd.RElement;
 import dics.elements.dtd.ReElement;
 import dics.elements.dtd.SElement;
 import dics.elements.dtd.SaElement;
+import dics.elements.dtd.TElement;
 import dics.elements.dtd.TextElement;
+import dics.elements.dtd.VElement;
 import org.w3c.dom.Comment;
 
 /**
@@ -219,6 +221,7 @@ public class XMLReader {
       eElement.setAlt(alt);
       eElement.setSlr(slr);
       eElement.setSrl(srl);
+      eElement.setIgnore(ign);
 
       if (e.hasChildNodes()) {
          final NodeList children = e.getChildNodes();
@@ -273,10 +276,33 @@ public class XMLReader {
    /**
     * 
     * @param e
-    * @return Undefined         */
+    * @return Undefined         
+    */
    protected SElement readSElement(final Element e) {
       final String n = getAttributeValue(e, "n");
       return SElement.get(n);
+   }
+
+   /**
+    * 
+    * @param e
+    * @return A 'v' element
+    */
+   protected VElement readVElement(final Element e) {
+      final String n = getAttributeValue(e, "n");
+      VElement vE = new VElement(n);
+      return vE;
+   }
+
+   /**
+    * 
+    * @param e
+    * @return A 't' element
+    */
+   protected TElement readTElement(final Element e) {
+      final String n = getAttributeValue(e, "n");
+      TElement tE = new TElement(n);
+      return tE;
    }
 
    /**
@@ -323,10 +349,10 @@ public class XMLReader {
    /**
     * 
     * @param e
-    * @return Undefined         */
+    * @return Undefined         
+    */
    protected ContentElement readContentElement(final Element e,
            ContentElement cElement) {
-      //String text = "";
       try {
          if (e.hasChildNodes()) {
             final NodeList children = e.getChildNodes();
@@ -335,28 +361,23 @@ public class XMLReader {
                if (child instanceof Text) {
                   final Text textNode = (Text) child;
                   final String str = textNode.getData().trim();
-                  //text += str;
-                  //System.err.println("Text: " + text);
                   final TextElement tE = new TextElement(str);
                   cElement.addChild(tE);
                } else {
                   if (!(child instanceof Comment)) {
                      final Element childElement = (Element) child;
                      final String tag = childElement.getNodeName();
-                     //text += processTagText(tag, child);
                      dics.elements.dtd.Element element = processTagE(tag, child);
                      cElement.addChild(element);
                   }
                }
             }
          } else {
-         //text = "";
          }
       } catch (Exception exp) {
          exp.printStackTrace();
          System.exit(-1);
       }
-      // cElement.setValue(text);
       return cElement;
    }
 
@@ -364,13 +385,10 @@ public class XMLReader {
     * 
     * @param tag
     * @param child
-    * @return Undefined         */
+    * @return Undefined         
+    */
    protected final String processTagText(final String tag, final Node child) {
       String text = "";
-      /*
-       * if (tag.equals("b")) { text = text + "<b/>"; } if (tag.equals("j")) {
-       * text = text + "<j/>"; } if (tag.equals("a")) { text = text + "<a/>"; }
-       */
       if (tag.equals("g")) {
          text = text + loadGElementText(child);
       }
@@ -381,13 +399,24 @@ public class XMLReader {
     * 
     * @param tag
     * @param child
-    * @return Undefined         */
+    * @return Undefined        
+    */
    protected final dics.elements.dtd.Element processTagE(final String tag,
            final Node child) {
       if (tag.equals("s")) {
          final Element childElement = (Element) child;
          final SElement sElement = readSElement(childElement);
          return sElement;
+      }
+      if (tag.equals("v")) {
+         final Element childElement = (Element) child;
+         final VElement vElement = readVElement(childElement);
+         return vElement;
+      }
+      if (tag.equals("t")) {
+         final Element childElement = (Element) child;
+         final TElement tElement = readTElement(childElement);
+         return tElement;
       }
       if (tag.equals("b")) {
          return getBElement();
