@@ -286,13 +286,17 @@ public class CrossAction implements Comparable<CrossAction> {
          if (e instanceof VElement) {
             SElement rSE = new SElement();
             String v = ((VElement) e).getValue();
-            if (valueMap.containsKey(v)) {
-               rSE.setValue(valueMap.get(v));
+            if (v == null) {
+               rSE.setValue("?");
             } else {
-               String nV = "X" + x;
-               x++;
-               valueMap.put(v, nV);
-               rSE.setValue(nV);
+               if (valueMap.containsKey(v)) {
+                  rSE.setValue(valueMap.get(v));
+               } else {
+                  String nV = "X" + x;
+                  x++;
+                  valueMap.put(v, nV);
+                  rSE.setValue(nV);
+               }
             }
             rContentElement.addChild(rSE);
          }
@@ -301,13 +305,17 @@ public class CrossAction implements Comparable<CrossAction> {
          if (e instanceof TElement) {
             SElement rSE = new SElement();
             String v = ((TElement) e).getValue();
-            if (valueMap.containsKey(v)) {
-               rSE.setValue(valueMap.get(v));
+            if (v == null) {
+               rSE.setValue("*");
             } else {
-               String nV = "S" + x;
-               s++;
-               valueMap.put(v, nV);
-               rSE.setValue(nV);
+               if (valueMap.containsKey(v)) {
+                  rSE.setValue(valueMap.get(v));
+               } else {
+                  String nV = "S" + x;
+                  s++;
+                  valueMap.put(v, nV);
+                  rSE.setValue(nV);
+               }
             }
             rContentElement.addChild(rSE);
          }
