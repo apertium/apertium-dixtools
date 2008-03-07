@@ -1001,14 +1001,12 @@ public class DicCross {
             i++;
             arg = getArguments()[i];
             sDicMonA = arg;
-         //System.err.println("Monolingual A: '" + sDicMonA + "'");
          }
 
          if (arg.equals("-monC")) {
             i++;
             arg = getArguments()[i];
             sDicMonC = arg;
-         //System.err.println("Monolingual C: '" + sDicMonC + "'");
          }
 
          if (arg.equals("-bilAB")) {
@@ -1025,7 +1023,6 @@ public class DicCross {
 
             arg = getArguments()[i];
             sDicBilAB = arg;
-         //System.err.println("Bilingual A-B: '" + sDicBilAB + "'");
          }
 
          if (arg.equals("-bilBC")) {
@@ -1042,14 +1039,12 @@ public class DicCross {
             }
             arg = getArguments()[i];
             sDicBilBC = arg;
-         //System.err.println("Bilingual B-C: '" + sDicBilBC + "'");
          }
 
          if (arg.equals("-cross-model")) {
             i++;
             arg = getArguments()[i];
             setCrossModelFileName(arg);
-         //System.err.println("Cross model: " + arg);
          }
 
          if (arg.equals("-debug")) {
@@ -1063,8 +1058,8 @@ public class DicCross {
          msg.out("[" + (taskOrder++) + "] Reading linguistic resources file (" + source + ")\n");
          LingResourcesReader lrr = new LingResourcesReader(source, type);
          LingResources lingRes = lrr.readLingResources();
-         DicSet dicSetC = this.getDicSetForCrossing(lingRes, sltl);
-         this.setDicSet(dicSetC);
+         DicSet theDicSet = this.getDicSetForCrossing(lingRes, sltl);
+         setDicSet(theDicSet);
       } else {
          msg.out("[" + (taskOrder++) + "] Loading bilingual AB (" + sDicBilAB + ")\n");
          final DictionaryElement bil1 = DicTools.readBilingual(sDicBilAB, bilABReverse);
@@ -1074,8 +1069,8 @@ public class DicCross {
          final DictionaryElement mon1 = DicTools.readMonolingual(sDicMonA);
          msg.out("[" + (taskOrder++) + "] Loading monolingual C (" + sDicMonC + ")\n");
          final DictionaryElement mon2 = DicTools.readMonolingual(sDicMonC);
-         DicSet dicSet = new DicSet(mon1, bil1, mon2, bil2);
-         setDicSet(dicSet);
+         DicSet theDicSet = new DicSet(mon1, bil1, mon2, bil2);
+         setDicSet(theDicSet);
       }
    }
 
@@ -1097,45 +1092,121 @@ public class DicCross {
       DictionaryElement bAB = null;
       DictionaryElement bBC = null;
 
+      boolean mAok = false;
+      boolean mCok = false;
+      boolean bABok = false;
+      boolean bBCok = false;
+      boolean CMok = false;
+
+      String clAB = null; // common language AB
+      String clBC = null; // common language BC
+
       for (Resource r : resources) {
          if (r.isUseForCrossing()) {
             if (r.isCrossModel() && r.isSL(sl) && r.isTL(tl)) {
                msg.out("[" + (taskOrder++) + "] Loading cross model (" + r.getSource() + ")\n");
                this.setCrossModelFileName(r.getSource());
+               CMok = true;
             }
             if (r.isMorphological() && r.isSL(sl)) {
-               msg.out("[" + (taskOrder++) + "] Loading monolingual A (" + r.getSource() + ")\n");
-               mA = this.readDic(r.getSource());
-               mA.setLeftLanguage(sl);
+               if (mAok) {
+                  msg.out("[!] Warning: alternative linguistic resource found (" + r.getSource() + ")\n");
+               } else {
+                  msg.out("[" + (taskOrder++) + "] Loading monolingual A (" + r.getSource() + ")\n");
+                  mA = this.readDic(r.getSource());
+                  mA.setLeftLanguage(sl);
+                  mAok = true;
+               }
             }
             if (r.isMorphological() && r.isSL(tl)) {
-               msg.out("[" + (taskOrder++) + "] Loading monolingual C (" + r.getSource() + ")\n");
-               mC = this.readDic(r.getSource());
-               mC.setLeftLanguage(tl);
+               if (mCok) {
+                  msg.out("[!] Warning: alternative linguistic resource found (" + r.getSource() + ")\n");
+               } else {
+                  msg.out("[" + (taskOrder++) + "] Loading monolingual C (" + r.getSource() + ")\n");
+                  mC = this.readDic(r.getSource());
+                  mC.setLeftLanguage(tl);
+                  mCok = true;
+               }
             }
             if (r.isBilingual() && r.isTL(sl)) {
-               msg.out("[" + (taskOrder++) + "] Loading bilingual AB (" + r.getSource() + ")\n");
-               bAB = this.readDic(r.getSource());
-               bAB.setRightLanguage(sl);
+               if (bABok) {
+                  msg.out("[!] Warning: alternative linguistic resource found (" + r.getSource() + ")\n");
+               } else {
+                  msg.out("[" + (taskOrder++) + "] Loading bilingual AB (" + r.getSource() + ")\n");
+                  bAB = this.readDic(r.getSource());
+                  bAB.setRightLanguage(sl);
+                  bABok = true;
+                  if (clAB == null) {
+                     clAB = new String(r.getSL());
+                  }
+               }
             }
             if (r.isBilingual() && r.isSL(sl)) {
-               msg.out("[" + (taskOrder++) + "] Loading bilingual AB (" + r.getSource() + ") [reversed]\n");
-               bAB = this.readDic(r.getSource());
-               bAB.reverse();
-               bAB.setRightLanguage(sl);
+               if (bABok) {
+                  msg.out("[!] Warning: alternative linguistic resource found (" + r.getSource() + ")\n");
+               } else {
+                  msg.out("[" + (taskOrder++) + "] Loading bilingual AB (" + r.getSource() + ") [reversed]\n");
+                  bAB = this.readDic(r.getSource());
+                  bAB.reverse();
+                  bAB.setRightLanguage(sl);
+                  bABok = true;
+                  if (clAB == null) {
+                     clAB = new String(r.getTL());
+                  }
+               }
             }
             if (r.isBilingual() && r.isTL(tl)) {
-               msg.out("[" + (taskOrder++) + "] Loading bilingual BC (" + r.getSource() + ")\n");
-               bBC = this.readDic(r.getSource());
-               bBC.setRightLanguage(tl);
+               if (bBCok) {
+                  msg.out("[!] Warning: alternative linguistic resource found (" + r.getSource() + ")\n");
+               } else {
+                  msg.out("[" + (taskOrder++) + "] Loading bilingual BC (" + r.getSource() + ")\n");
+                  bBC = this.readDic(r.getSource());
+                  bBC.setRightLanguage(tl);
+                  bBCok = true;
+                  if (clBC == null) {
+                     clBC = new String(r.getSL());
+                  }
+               }
             }
             if (r.isBilingual() && r.isSL(tl)) {
-               msg.out("[" + (taskOrder++) + "] Loading bilingual BC (" + r.getSource() + ") [reversed]\n");
-               bBC = this.readDic(r.getSource());
-               bBC.reverse();
-               bBC.setRightLanguage(tl);
+               if (bBCok) {
+                  msg.out("[!] Warning: alternative linguistic resource found (" + r.getSource() + ")\n");
+               } else {
+                  msg.out("[" + (taskOrder++) + "] Loading bilingual BC (" + r.getSource() + ") [reversed]\n");
+                  bBC = this.readDic(r.getSource());
+                  bBC.reverse();
+                  bBC.setRightLanguage(tl);
+                  bBCok = true;
+                  if (clBC == null) {
+                     clBC = new String(r.getTL());
+                  }
+               }
             }
          }
+      }
+      if (!CMok) {
+         System.err.println("Error: could not find a cross model file to get '" + sl + "-" + tl + "'");
+         System.exit(-1);
+      }
+      if (!mAok) {
+         System.err.println("Error: could not find a morphological dictionary for '" + sl + "'");
+         System.exit(-1);
+      }
+      if (!mCok) {
+         System.err.println("Error: could not find a morphological dictionary for '" + tl + "'");
+         System.exit(-1);
+      }
+      if (!bABok) {
+         System.err.println("Error: could not find a bilingual dictionary like '" + sl + "-??' or '??-" + sl + "'");
+         System.exit(-1);
+      }
+      if (!bBCok) {
+         System.err.println("Error: could not find a bilingual dictionary like '??-" + tl + "' or '" + tl + "-??'");
+         System.exit(-1);
+      }
+      if (!clAB.equals(clBC)) {
+         System.err.println("Error: could not find a common language B for " + sl + "-B B-" + tl);
+         System.exit(-1);
       }
       DicSet dicSetC = new DicSet(mA, bAB, mC, bBC);
       return dicSetC;

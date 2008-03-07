@@ -78,7 +78,11 @@
     	installed"/>
     	<!-- dictools copy -->
     	<copy file="dictools" todir="/usr/local/bin" overwrite="true" failonerror="Error: apertium-crossdics couldn't be installed" verbose="false"/>
+    	<copy file="apertium-dictools" todir="/usr/local/bin" overwrite="true" failonerror="Error: apertium-crossdics couldn't be installed" verbose="false"/>
+    	
   	<chmod file="/usr/local/bin/dictools" perm="+x"/>
+  	<chmod file="/usr/local/bin/apertium-dictools" perm="+x"/>
+  	
   	<!-- apertium-crossdics copy -->
   	<copy file="apertium-crossdics" todir="/usr/local/bin" overwrite="true"/>
   	<chmod file="/usr/local/bin/apertium-crossdics" perm="+x"/>

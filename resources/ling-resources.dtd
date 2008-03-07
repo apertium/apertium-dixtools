@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+    TODO define vocabulary identification
+    PUBLIC ID: -//vendor//vocabulary//EN
+    SYSTEM ID: http://server/path/ling-resources.dtd
+
+--><!--
+    An example how to use this DTD from your XML document:
+
+    <?xml version="1.0"?>
+
+    <!DOCTYPE ling-resources SYSTEM "ling-resources.dtd">
+
+    <ling-resources>
+    ...
+    </ling-resources>
+-->
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT ling-resources (resource|resource-set|description|name)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT name (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT description (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT resource-set (resource|description|name)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT resource (property)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT property EMPTY>
+<!ATTLIST property
+    value CDATA #IMPLIED
+    name CDATA #IMPLIED
+  >
