@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dictools.cmproc;
 
 import dictools.crossmodel.CrossAction;
@@ -28,55 +27,54 @@ import dictools.crossmodel.CrossAction;
  */
 public class CrossActionData {
 
-    /**
-     * 
-     */
-    private CrossAction crossAction;
-    
-    /**
-     * 
-     */
-    private Variables vars;
-  
-    /**
-     * 
-     * @param crossAction
-     * @param vars
-     */
-    public CrossActionData(final CrossAction crossAction, final Variables vars) {
-        this.crossAction = crossAction;
-        this.vars = vars;       
-    }
+   /**
+    * 
+    */
+   private CrossAction crossAction;
+   /**
+    * 
+    */
+   private Variables vars;
 
-    /**
-     * 
-     * @return The cross action
-     */
-    public CrossAction getCrossAction() {
-        return crossAction;
-    }
+   /**
+    * 
+    * @param crossAction
+    * @param vars
+    */
+   public CrossActionData(final CrossAction crossAction, final Variables vars) {
+      this.crossAction = crossAction;
+      this.vars = vars;
+   }
 
-    /**
-     * 
-     * @param crossAction
-     */
-    public void setCrossAction(CrossAction crossAction) {
-        this.crossAction = crossAction;
-    }
+   /**
+    * 
+    * @return The cross action
+    */
+   public CrossAction getCrossAction() {
+      return crossAction;
+   }
 
-    /**
-     * 
-     * @return The variables
-     */
-    public Variables getVars() {
-        return vars;
-    }
+   /**
+    * 
+    * @param crossAction
+    */
+   public void setCrossAction(CrossAction crossAction) {
+      this.crossAction = crossAction;
+   }
 
-    /**
-     * 
-     * @param vars
-     */
-    public void setVars(Variables vars) {
-        this.vars = vars;
-    }  
+   /**
+    * 
+    * @return The variables
+    */
+   public Variables getVars() {
+      return vars;
+   }
+
+   /**
+    * 
+    * @param vars
+    */
+   public void setVars(Variables vars) {
+      this.vars = vars;
+   }
 }

@@ -521,8 +521,8 @@ public class DicCross {
       CrossAction crossAction = new CrossAction();
       Pattern entriesPattern = new Pattern(e1.reverse(), e2);
       crossAction.setPattern(entriesPattern);
-      CrossActionData cad = this.getCrossModelProcessor().getBestActionSet(crossAction);
-      if (cad.getCrossAction() != null) {
+      CrossActionData cad = getCrossModelProcessor().getBestActionSet(crossAction);
+      if (cad != null) {
          String actionID = cad.getCrossAction().getId();
          if (actionID.equals("default")) {
             insertNDCrossAction(crossAction);
@@ -564,7 +564,7 @@ public class DicCross {
             actionE.setComment(comment);
 
             // alt attribute
-            final String alt = this.mergeAttributes(e1.getAlt(), e2.getAlt());
+            final String alt = mergeAttributes(e1.getAlt(), e2.getAlt());
             actionE.setAlt(alt);
 
             actionE.addComments(actionID);
@@ -605,11 +605,11 @@ public class DicCross {
       LElement lE2 = new LElement();
       RElement rE2 = new RElement();
 
-      assignValuesSide(lE2, lE, e1, vars);
-      assignValuesSide(rE2, rE, e2, vars);
+      assignValuesSide(lE2, lE, vars);
+      assignValuesSide(rE2, rE, vars);
+
       pE.setLElement(lE2);
       pE.setRElement(rE2);
-
       eCrossed.addChild(pE);
       return eCrossed;
    }
@@ -618,10 +618,9 @@ public class DicCross {
     * 
     * @param ceWrite
     * @param ceRead
-    * @param ei
     * @param vars
     */
-   private final void assignValuesSide(ContentElement ceWrite, final ContentElement ceRead, EElement ei, final Variables vars) {
+   private final void assignValuesSide(ContentElement ceWrite, final ContentElement ceRead, final Variables vars) {
       for (Element e : ceRead.getChildren()) {
          if (e instanceof TextElement) {
             String x = e.getValue();
@@ -662,7 +661,8 @@ public class DicCross {
     *
     * @param e
     * @param hm
-    * @return Undefined     */
+    * @return Undefined     
+    */
    private final EElementList getPairs(final EElement e, final EElementMap hm) {
       String lemma = e.getValue("L");
       lemma = DicTools.clearTags(lemma);

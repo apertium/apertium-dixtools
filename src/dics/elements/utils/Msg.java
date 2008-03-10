@@ -18,11 +18,8 @@
  * 02111-1307, USA.
  */
 
-
-
 package dics.elements.utils;
 
-//~--- JDK imports ------------------------------------------------------------
 
 import java.io.DataOutputStream;
 import java.io.File;
@@ -56,7 +53,7 @@ public class Msg {
     /**
      *
      */
-    private boolean debug;
+    private boolean debug = false;
 
     /**
      *
@@ -78,7 +75,7 @@ public class Msg {
      *
      */
     public Msg() {
-        debug = false;
+        //debug = false;
     }
 
     /**
@@ -94,7 +91,7 @@ public class Msg {
      *
      */
     public Msg(final String logFileName) {
-        debug            = false;
+        //debug            = false;
         this.logFileName = logFileName;
     }
 

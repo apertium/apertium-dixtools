@@ -161,14 +161,14 @@ public class XMLReader {
          System.err.println("Error: could not find '" + getDicFile() + "' file.");
          System.exit(-1);
       } catch (final SAXException saxE) {
-         saxE.printStackTrace();
-         System.err.println("Error: could not parse '" + getDicFile() + "'");
+         System.err.println("Error: could not parse '" + getDicFile() + "'. " + saxE.getMessage());
+         System.exit(-1);         
       } catch (final IOException ioE) {
-         ioE.printStackTrace();
-         System.err.println("I/O error");
+         System.err.println("I/O error (" + getDicFile() + "): " + ioE.getMessage());
+         System.exit(-1);
       } catch (final Exception e) {
-         e.printStackTrace();
-         System.err.println("Error: the XML document is probably not well-formed");
+         System.err.println("Error (" + getDicFile() + "): " + e.getMessage() );
+         System.exit(-1);         
       } finally {
          setBuilder(null);
          setFactory(null);

@@ -32,161 +32,153 @@ import java.util.Set;
  */
 public class ActionSetList extends HashMap<String, ActionSet> {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
-    /**
-     * 
-     */
-    private ActionSet bestActionSet;
-    /**
-     * 
-     */
-    private Msg msg;
+   /**
+    * 
+    */
+   private static final long serialVersionUID = 1L;
+   /**
+    * 
+    */
+   private ActionSet bestActionSet;
+   /**
+    * 
+    */
+   private Msg msg;
 
-    /**
-     * 
-     */
+   /**
+    * 
+    */
    public ActionSetList() {
 
    }
 
-    /**
-     * Constructor
-     */
-    public ActionSetList(Msg msg) {
-        this.msg = msg;
-    }
+   /**
+    * Constructor
+    */
+   public ActionSetList(Msg msg) {
+      this.msg = msg;
+   }
 
-    /**
-     * 
-     * 
-     */
-    public final void print() {
-        Set keySet = keySet();
-        Iterator it = keySet.iterator();
-        int max = size();
-        int cont = 1;
+   /**
+    * 
+    * 
+    */
+   public final void print() {
+      Set keySet = keySet();
+      Iterator it = keySet.iterator();
+      int max = size();
+      int cont = 1;
 
-        msg.log("{ ");
-        while (it.hasNext()) {
-            String key = (String) it.next();
-            ActionSet actionSet = get(key);
-            msg.log(actionSet.getName() + " (" + actionSet.getPatternLength() + "/" + actionSet.getNumberOfConstants() + ")");
-            if (cont < max) {
-                msg.log(", ");
-                cont++;
+      msg.log("{ ");
+      while (it.hasNext()) {
+         String key = (String) it.next();
+         ActionSet actionSet = get(key);
+         msg.log(actionSet.getName() + " (" + actionSet.getPatternLength() + "/" + actionSet.getNumberOfConstants() + ")");
+         if (cont < max) {
+            msg.log(", ");
+            cont++;
+         }
+      }
+      msg.log(" }\n");
+   }
+
+   /**
+    * 
+    * @return Undefined    
+    */
+   public final ActionSet getBestActionSet() {
+      ActionSet defaultActionSet = null;
+      boolean defaultCanBeApplied = false;
+      ArrayList<ActionSet> actionSetList = new ArrayList<ActionSet>();
+      Iterator it = this.keySet().iterator();
+      while (it.hasNext()) {
+         String key = (String) it.next();
+         ActionSet actionSet = get(key);
+         if (actionSet.getName().equals("default")) {
+            defaultCanBeApplied = true;
+            defaultActionSet = actionSet;
+         } else {
+            actionSetList.add(actionSet);
+         }
+      }
+
+      ArrayList<ActionSet> longestPatterns = this.getLongestPatterns(actionSetList);
+      ArrayList<ActionSet> mostConcrete = this.getMostConcretePatterns(longestPatterns);
+      ArrayList<ActionSet> finalList = mostConcrete;
+
+      if (finalList.size() > 0) {
+         ActionSet action = finalList.get(0);
+         this.setBestActionSet(action);
+      } else {
+         if (defaultCanBeApplied) {
+            setBestActionSet(defaultActionSet);
+         }
+      }
+      return bestActionSet;
+   }
+
+   /**
+    * 
+    * @param actionSetList
+    * @return Undefined     
+    */
+   private final ArrayList<ActionSet> getLongestPatterns(ArrayList<ActionSet> actionSetList) {
+      int maxLength = 0;
+      ArrayList<ActionSet> longestPatterns = new ArrayList<ActionSet>();
+      for (ActionSet actionSet : actionSetList) {
+         int patternLength = actionSet.getPatternLength();
+         if (patternLength > maxLength) {
+            longestPatterns = new ArrayList<ActionSet>();
+            longestPatterns.add(actionSet);
+            this.setBestActionSet(actionSet);
+            maxLength = patternLength;
+         } else {
+            if (patternLength == maxLength) {
+               longestPatterns.add(actionSet);
             }
-        }
-        msg.log(" }\n");
-    }
+         }
+      }
+      return longestPatterns;
+   }
 
-    /**
-     * 
-     * @return Undefined     */
-    public final ActionSet getBestActionSet() {
-        ActionSet defaultActionSet = null;
-        boolean defaultCanBeApplied = false;
-        ArrayList<ActionSet> actionSetList = new ArrayList<ActionSet>();
-        Iterator it = this.keySet().iterator();
-        while (it.hasNext()) {
-            String key = (String) it.next();
-            ActionSet actionSet = get(key);
-            if (actionSet.getName().equals("default")) {
-                defaultCanBeApplied = true;
-                defaultActionSet = actionSet;
-            } else {
-                actionSetList.add(actionSet);
+   /**
+    * 
+    * @param actionSetList
+    * @return List of most concrete patterns
+    */
+   private final ArrayList<ActionSet> getMostConcretePatterns(final ArrayList<ActionSet> actionSetList) {
+      int maxNConstants = 0;
+      ArrayList<ActionSet> mostConcrete = new ArrayList<ActionSet>();
+      for (ActionSet actionSet : actionSetList) {
+         int nConstants = actionSet.getNumberOfConstants();
+         if (nConstants > maxNConstants) {
+            mostConcrete = new ArrayList<ActionSet>();
+            mostConcrete.add(actionSet);
+            this.setBestActionSet(actionSet);
+            maxNConstants = nConstants;
+         } else {
+            if (nConstants == maxNConstants) {
+               mostConcrete.add(actionSet);
             }
-        }
-        
-        ArrayList<ActionSet> longestPatterns = this.getLongestPatterns(actionSetList);
-        ArrayList<ActionSet> mostConcrete = this.getMostConcretePatterns(longestPatterns);
-        ArrayList<ActionSet> finalList = mostConcrete;
+         }
+      }
+      return mostConcrete;
+   }
 
-        if (finalList.size() > 0) {
-            ActionSet action = finalList.get(0);
-            this.setBestActionSet(action);
-        } else {
-            if (defaultCanBeApplied) {
-                setBestActionSet(defaultActionSet);
-            }
-        }
-        return bestActionSet;
-    }
+   /**
+    * 
+    * @return Undefined     
+    */
+   private final boolean isDefinedBestAction() {
+      return this.bestActionSet != null;
+   }
 
-    /**
-     * 
-     * @param actionSetList
-     * @return Undefined     */
-    private final ArrayList<ActionSet> getLongestPatterns(ArrayList<ActionSet> actionSetList) {
-        int maxLength = 0;
-        ArrayList<ActionSet> longestPatterns = new ArrayList<ActionSet>();
-        for (ActionSet actionSet : actionSetList) {
-            int patternLength = actionSet.getPatternLength();
-            if (patternLength > maxLength) {
-                longestPatterns = new ArrayList<ActionSet>();
-                longestPatterns.add(actionSet);
-                this.setBestActionSet(actionSet);
-                maxLength = patternLength;
-            } else {
-                if (patternLength == maxLength) {
-                    longestPatterns.add(actionSet);
-                }
-            }
-        }
-        return longestPatterns;
-    }
+   /**
+    * 
+    * @param action
+    */
+   private final void setBestActionSet(ActionSet action) {
+      this.bestActionSet = action;
 
-    private final ArrayList<ActionSet> getMostConcretePatterns(final ArrayList<ActionSet> actionSetList) {
-        int maxNConstants = 0;
-        ArrayList<ActionSet> mostConcrete = new ArrayList<ActionSet>();
-        for (ActionSet actionSet : actionSetList) {
-            int nConstants = actionSet.getNumberOfConstants();
-            if (nConstants > maxNConstants) {
-                mostConcrete = new ArrayList<ActionSet>();
-                mostConcrete.add(actionSet);
-                this.setBestActionSet(actionSet);
-                maxNConstants = nConstants;
-            } else {
-                if (nConstants == maxNConstants) {
-                    mostConcrete.add(actionSet);
-                }
-            }
-        }
-        return mostConcrete;
-    }
-
-    /**
-     * 
-     * @param actionSetList
-     */
-    private final void getMostConcretePatternsOld(final ArrayList<ActionSet> actionSetList) {
-        if (actionSetList.size() > 1) {
-            int maxR = 0;
-            for (ActionSet actionSet2 : actionSetList) {
-                if (actionSet2.getNumberOfRestrictions() > maxR) {
-                    this.setBestActionSet(actionSet2);
-                    maxR = actionSet2.getNumberOfRestrictions();
-                }
-            }
-        }
-    }
-
-    /**
-     * 
-     * @return Undefined     */
-    private final boolean isDefinedBestAction() {
-        return this.bestActionSet != null;
-    }
-
-    /**
-     * 
-     * @param action
-     */
-    private final void setBestActionSet(ActionSet action) {
-        this.bestActionSet = action;
-
-    }
+   }
 }

@@ -65,7 +65,13 @@ public class CrossAction implements Comparable<CrossAction> {
     * 
     */
    private int occurrences;
+   /**
+    * 
+    */
    private int x = 0;
+   /**
+    * 
+    */
    private int s = 0;
 
    /**
@@ -87,14 +93,16 @@ public class CrossAction implements Comparable<CrossAction> {
 
    /**
     * 
-    * @return Undefined     */
+    * @return Undefined     
+    */
    public final Pattern getPattern() {
       return pattern;
    }
 
    /**
     * 
-    * @return Undefined     */
+    * @return Undefined     
+    */
    public final String getId() {
       return id;
    }
