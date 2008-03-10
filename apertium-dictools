@@ -14,7 +14,7 @@ java_options="-Xms${defaultMinMem}m -Xmx${defaultMaxMem}m -jar ${library}"
 #
 #	cross
 #
-function cross() {
+function cross-param() {
    crossmodel="$CROSSDICS_PATH/schemas/cross-model.xml"
    if [ $nparams -ge 7 ] && [ $nparams -le 9  ]; then
 	   if [ $nparams -ge 8 ]
@@ -39,7 +39,7 @@ function cross() {
 #
 #	cross2
 #
-function cross2() {
+function cross() {
    if [ $nparams -ge 4 ]; then
    	if [ ! -d "dix" ]
      	then
@@ -336,7 +336,7 @@ function misc() {
 #
 function show_help() {
    echo ""
-   echo "Usage: dictools [task] ..."
+   echo "Usage: apertium-dictools [task] ..."
    echo "  Tasks:"
    #echo "    apertiumize:        converts dictionaries from plain text to Apertium format"
    echo "    cross:              crosses a set of dictionaries"
