@@ -750,6 +750,26 @@ public class DictionaryElement extends Element {
                     }
                 }
 
+						String currentSlr = null;
+						String currentSrl = null;
+							if(ee.getSlr() != null) {
+								currentSlr = ee.getSlr();
+								ee.setSlr(null);
+							}
+							if(ee.getSrl() != null) {
+								currentSrl = ee.getSrl();
+								ee.setSrl(null);
+							}
+
+							if(currentSlr != null) {
+								ee.setSrl(currentSlr);
+
+							}
+							if(currentSrl != null) {
+								ee.setSlr(currentSrl);
+							}
+
+
                 for (final Element e : children) {
                     if (e instanceof PElement) {
                         LElement lE = ((PElement) e).getL();
@@ -826,4 +846,9 @@ public class DictionaryElement extends Element {
     public final boolean isHeaderDefined() {
         return (header != null);
     }
+
+   public void setSections(ArrayList<SectionElement> sections) {
+      this.sections = sections;
+   }
+
 }

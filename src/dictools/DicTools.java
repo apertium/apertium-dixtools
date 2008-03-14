@@ -112,7 +112,8 @@ public class DicTools {
       for (final EElement e : entries) {
          String lemma = e.getLemma();
          if (lemma == null) {
-            lemma = e.getValueNoTags();
+            //lemma = e.getValueNoTags();
+						lemma = e.getValue("L");
          }
          final String key = DicTools.clearTags(lemma);
          if (entriesMap.containsKey(key)) {
@@ -203,7 +204,11 @@ public class DicTools {
       final EElementMap bilABMapR = DicTools.buildHash(elements, "R");
 
       final EElementMap monAMap = DicTools.buildHashMon(monA.getEntries());
+			System.out.println("monA.getEntries() = " + monA.getEntries().size() );
+			System.out.println("monAMap.size() = " + monAMap.size() );
       final EElementMap monBMap = DicTools.buildHashMon(monB.getEntries());
+			System.out.println("monC.getEntries() = " + monB.getEntries().size() );
+			System.out.println("monCMap.size() = " + monBMap.size() );
 
       final EElementList monAConsistent = DicTools.makeConsistent(bilABMapL,
               "L", monAMap);

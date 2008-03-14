@@ -143,6 +143,13 @@ public class DicConsistent {
          * @param entries2
          */
     private final void compare() {
+	System.out.println("In compare...");
+	System.out.println("getBil1().getEntries().size() = " + getBil1().getEntries().size());
+	System.out.println("getBil2().getEntries().size() = " + getBil2().getEntries().size());
+
+	System.out.println("getMon1().getEntries().size() = " + getMon1().getEntries().size());
+	System.out.println("getMon2().getEntries().size() = " + getMon2().getEntries().size());
+
 	final EElementMap bilAMap = DicTools.buildHash(getBil1().getEntries());
 	final EElementMap bilCMap = DicTools.buildHash(getBil2().getEntries());
 	final EElementMap monAMap = DicTools.buildHashMon(getMon1()

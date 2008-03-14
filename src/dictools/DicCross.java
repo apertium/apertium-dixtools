@@ -870,7 +870,14 @@ public class DicCross {
     */
    public final void actionCross() {
       DicSet dicSet = getDicSet();
+			System.out.println("(antes) dicSet.getMon1().getEntries().size() = " + dicSet.getMon1().getEntries().size());
+			System.out.println("(antes) dicSet.getMon2().getEntries().size() = " + dicSet.getMon2().getEntries().size());
+
       actionConsistent(dicSet, "yes");
+
+			System.out.println("(antes2) dicSet.getMon1().getEntries().size() = " + dicSet.getMon1().getEntries().size());
+			System.out.println("(antes2) dicSet.getMon2().getEntries().size() = " + dicSet.getMon2().getEntries().size());
+
       setCrossModelFileName(getCrossModelFileName());
 
       final DictionaryElement[] bils = crossDictionaries(dicSet);
@@ -881,6 +888,8 @@ public class DicCross {
       bilCrossed.setLeftLanguage(sl);
       bilCrossed.setRightLanguage(tl);
       msg.out("[" + (taskOrder++) + "] Making consistent morphological dicionaries ...\n");
+			System.out.println("dicSet.getMon1().getEntries().size() = " + dicSet.getMon1().getEntries().size());
+			System.out.println("dicSet.getMon2().getEntries().size() = " + dicSet.getMon2().getEntries().size());
 
       final EElementList[] commonCrossedMons = DicTools.makeConsistent(bilCrossed, dicSet.getMon1(), dicSet.getMon2());
       final EElementList crossedMonA = commonCrossedMons[0];
@@ -1113,7 +1122,7 @@ public class DicCross {
                   msg.out("[!] Warning: alternative linguistic resource found (" + r.getSource() + ")\n");
                } else {
                   msg.out("[" + (taskOrder++) + "] Loading monolingual A (" + r.getSource() + ")\n");
-                  mA = this.readDic(r.getSource());
+                  mA = this.readDic(r.getSource(), 0, false);
                   mA.setLeftLanguage(sl);
                   mAok = true;
                }
@@ -1123,7 +1132,7 @@ public class DicCross {
                   msg.out("[!] Warning: alternative linguistic resource found (" + r.getSource() + ")\n");
                } else {
                   msg.out("[" + (taskOrder++) + "] Loading monolingual C (" + r.getSource() + ")\n");
-                  mC = this.readDic(r.getSource());
+                  mC = readDic(r.getSource(), 0, false);
                   mC.setLeftLanguage(tl);
                   mCok = true;
                }
@@ -1133,7 +1142,7 @@ public class DicCross {
                   msg.out("[!] Warning: alternative linguistic resource found (" + r.getSource() + ")\n");
                } else {
                   msg.out("[" + (taskOrder++) + "] Loading bilingual AB (" + r.getSource() + ")\n");
-                  bAB = this.readDic(r.getSource());
+                  bAB = readDic(r.getSource(), 1, false);
                   bAB.setRightLanguage(sl);
                   bABok = true;
                   if (clAB == null) {
@@ -1146,7 +1155,7 @@ public class DicCross {
                   msg.out("[!] Warning: alternative linguistic resource found (" + r.getSource() + ")\n");
                } else {
                   msg.out("[" + (taskOrder++) + "] Loading bilingual AB (" + r.getSource() + ") [reversed]\n");
-                  bAB = this.readDic(r.getSource());
+                  bAB = this.readDic(r.getSource(), 1, true);
                   bAB.reverse();
                   bAB.setRightLanguage(sl);
                   bABok = true;
@@ -1160,7 +1169,7 @@ public class DicCross {
                   msg.out("[!] Warning: alternative linguistic resource found (" + r.getSource() + ")\n");
                } else {
                   msg.out("[" + (taskOrder++) + "] Loading bilingual BC (" + r.getSource() + ")\n");
-                  bBC = this.readDic(r.getSource());
+                  bBC = readDic(r.getSource(), 1, false);
                   bBC.setRightLanguage(tl);
                   bBCok = true;
                   if (clBC == null) {
@@ -1173,7 +1182,7 @@ public class DicCross {
                   msg.out("[!] Warning: alternative linguistic resource found (" + r.getSource() + ")\n");
                } else {
                   msg.out("[" + (taskOrder++) + "] Loading bilingual BC (" + r.getSource() + ") [reversed]\n");
-                  bBC = this.readDic(r.getSource());
+                  bBC = this.readDic(r.getSource(), 1, true);
                   bBC.reverse();
                   bBC.setRightLanguage(tl);
                   bBCok = true;
@@ -1208,8 +1217,75 @@ public class DicCross {
          System.err.println("Error: could not find a common language B for " + sl + "-B B-" + tl);
          System.exit(-1);
       }
-      DicSet dicSetC = new DicSet(mA, bAB, mC, bBC);
+
+      DictionaryElement mAn = getMainSectionDic(mA);
+
+			msg.out("[-] monA: " +  mAn.getEntries().size() + " entries\n");
+			mAn = addMissingLemmas(mAn);
+			mAn.printXML("dix/mAn-main.dix");
+
+      DictionaryElement bABn = getMainSectionDic(bAB);
+			bABn.printXML("dix/bABn-main.dix");
+			msg.out("[-] bilAB: " +  bABn.getEntries().size() + " entries\n");
+      DictionaryElement bBCn = getMainSectionDic(bBC);
+			bBCn.printXML("dix/bBCn-main.dix");
+			msg.out("[-] bilBC: " +  bBCn.getEntries().size() + " entries\n");
+      DictionaryElement mCn = getMainSectionDic(mC);
+			msg.out("[-] monC: " +  mCn.getEntries().size() + " entries\n");
+			mCn = addMissingLemmas(mCn);
+			mCn.printXML("dix/mCn-main.dix");
+
+      DicSet dicSetC = new DicSet(mAn, bABn, mCn, bBCn);
+
       return dicSetC;
+   }
+
+	private final DictionaryElement addMissingLemmas(DictionaryElement dic) {
+			int c = 0;
+      for(SectionElement s : dic.getSections()) {
+			if(s.getType().equals("standard")) {
+         for(EElement ee : s.getEElements()) {
+            if(ee.getLemma() == null) {
+							String v = ee.getValue("L");
+							if(v!= null) {
+							String pv = ee.getParadigmValue();
+							if(pv!= null) {
+							String [] parts = pv.split("/");
+							if(parts.length > 1 ) {
+							String [] parts2 = parts[1].split("__");
+							String suffix = parts2[0];
+							String nLemma = v+suffix;
+						c++;
+							ee.setLemma(nLemma);
+						} else {
+						c++;
+							ee.setLemma(v);
+					}
+					}
+						}
+						}
+         }
+		}
+}
+	System.out.println(c + " missing 'lm' atrributes added.");
+	return dic;
+	}
+
+  private final DictionaryElement getMainSectionDic(final DictionaryElement dic) {
+      ArrayList<SectionElement> sections = new ArrayList<SectionElement>();
+      SectionElement mainSection = new SectionElement("main", "standard");
+      for(SectionElement s : dic.getSections()) {
+			if(s.getType().equals("standard")) {
+         for(EElement ee : s.getEElements()) {
+            mainSection.addEElement(ee);
+         }
+      } else {
+      sections.add(s);
+		}
+	}
+      sections.add(mainSection);
+      dic.setSections(sections);
+      return dic;
    }
 
    /**
@@ -1217,7 +1293,7 @@ public class DicCross {
     * @param source
     * @return
     */
-   private final DictionaryElement readDic(final String source) {
+   private final DictionaryElement readDic(final String source, int type, boolean reverse) {
       DictionaryElement dic = null;
       if (source.startsWith("http://")) {
          try {
@@ -1236,9 +1312,16 @@ public class DicCross {
             System.exit(-1);
          }
       } else {
-         DictionaryReader dicReader = new DictionaryReader(source);
-         dic = dicReader.readDic();
-         dic.setFileName(source);
+				if( type == 0 ) {
+					dic = DicTools.readMonolingual(source);
+				}
+
+				if( type == 1 ) {
+					dic = DicTools.readBilingual(source, reverse);
+				}
+         //DictionaryReader dicReader = new DictionaryReader(source);
+         //dic = dicReader.readDic();
+         //dic.setFileName(source);
       }
       return dic;
    }
