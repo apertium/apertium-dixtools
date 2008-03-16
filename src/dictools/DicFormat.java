@@ -180,6 +180,7 @@ public class DicFormat {
       setDicFormatted(dic);
       this.setOut(arguments[3]);
 
+
    /*
    if (getArguments().length == 4) {
    if (getArguments()[3].equals("out.dix")) {

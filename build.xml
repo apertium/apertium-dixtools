@@ -66,25 +66,25 @@
     nbproject/build-impl.xml file. 
 
     -->
-    <target name="jar">
+    <target name="jar2">
       	<echo message="apertium-crossdics is temporarily unavailable."/>    
       	<echo message="Keep your current version of apertium-crossdics."/>    
       	<echo message="contact: &lt;ebenimeli@dlsi.ua.es>"/>    
     </target>
 
-    <target name="default">
+    <target name="default2">
       	<echo message="apertium-crossdics is temporarily unavailable."/>    
       	<echo message="Keep your current version of apertium-crossdics."/>    
       	<echo message="contact: &lt;ebenimeli@dlsi.ua.es>"/>    
     </target>
 
-    <target name="install">
+    <target name="install2">
       	<echo message="apertium-crossdics is temporarily unavailable."/>    
       	<echo message="Keep your current version of apertium-crossdics."/>    
       	<echo message="contact: &lt;ebenimeli@dlsi.ua.es>"/>    
     </target>
     
-    <target name="install-ok">
+    <target name="install">
       	<echo message="Installing apertium-crossdics ..."/>
     	<mkdir dir="/usr/local/apertium-crossdics"/>
     	<mkdir dir="/usr/local/apertium-crossdics/dist"/>

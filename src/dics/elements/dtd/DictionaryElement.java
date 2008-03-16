@@ -560,6 +560,18 @@ public class DictionaryElement extends Element {
     }
 
     /**
+     * 
+     * @return Number of entries
+     */
+    public int getNumberOfEntries() {
+        int c = 0;
+        for (final SectionElement s : sections) {
+            c += s.getEElements().size();
+        }
+        return c;
+    }
+
+    /**
      *
      * @param sectionID
      * @return Undefined     */
@@ -750,40 +762,36 @@ public class DictionaryElement extends Element {
                     }
                 }
 
-						String currentSlr = null;
-						String currentSrl = null;
-							if(ee.getSlr() != null) {
-								currentSlr = ee.getSlr();
-								ee.setSlr(null);
-							}
-							if(ee.getSrl() != null) {
-								currentSrl = ee.getSrl();
-								ee.setSrl(null);
-							}
+                String currentSlr = null;
+                String currentSrl = null;
+                if (ee.getSlr() != null) {
+                    currentSlr = ee.getSlr();
+                    ee.setSlr(null);
+                }
+                if (ee.getSrl() != null) {
+                    currentSrl = ee.getSrl();
+                    ee.setSrl(null);
+                }
 
-							if(currentSlr != null) {
-								ee.setSrl(currentSlr);
+                if (currentSlr != null) {
+                    ee.setSrl(currentSlr);
 
-							}
-							if(currentSrl != null) {
-								ee.setSlr(currentSrl);
-							}
+                }
+                if (currentSrl != null) {
+                    ee.setSlr(currentSrl);
+                }
 
 
                 for (final Element e : children) {
                     if (e instanceof PElement) {
                         LElement lE = ((PElement) e).getL();
                         RElement rE = ((PElement) e).getR();
-
                         // final String auxValue = lE.getValue();
                         ElementList auxChildren = lE.getChildren();
-
                         // lE.setValue(rE.getValue());
                         lE.setChildren(rE.getChildren());
-
                         // rE.setValue(auxValue);
                         rE.setChildren(auxChildren);
-
                         ((PElement) e).setLElement(lE);
                         ((PElement) e).setRElement(rE);
                     }
@@ -847,8 +855,7 @@ public class DictionaryElement extends Element {
         return (header != null);
     }
 
-   public void setSections(ArrayList<SectionElement> sections) {
-      this.sections = sections;
-   }
-
+    public void setSections(ArrayList<SectionElement> sections) {
+        this.sections = sections;
+    }
 }

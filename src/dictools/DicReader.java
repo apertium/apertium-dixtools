@@ -155,12 +155,13 @@ public class DicReader {
       int nLemmas = 0;
       for (SectionElement section : dic.getSections()) {
          for (EElement element : section.getEElements()) {
-            LElement left = element.getLeft();
-            //RElement right = element.getRight();
+            //LElement left = element.getLeft();
+            RElement right = element.getRight();
 
-            String leftValue = left.getValueNoTags();
-            //String rightValue = right.getValueNoTags();
-            msg.out(leftValue + ". ");
+            //String leftValue = left.getValueNoTags();
+            String rightValue = right.getValueNoTags();
+            //msg.out(leftValue + ". ");
+            msg.out(rightValue + ".\n");
 
             //if (!leftValue.equals("") && !rightValue.equals("")) {
             //  msg.out(leftValue + "/" + rightValue + "\n");

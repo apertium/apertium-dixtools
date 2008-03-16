@@ -103,13 +103,22 @@ public class Apertiumizer {
             SectionElement section = new SectionElement("main", "standard");
             dic.addSection(section);
 
+            int priority = 1;
+            int c = 1;
             while ((strLine = br.readLine()) != null) {
                 //if (!strLine.startsWith("#") && Character.isLetter(strLine.charAt(0))) {
                 if (!strLine.startsWith("#")) {
                     switch (format) {
                         case 0:
                             EElement e = readElementFormat_0(strLine);
-                            section.addEElement(e);
+                            //e.setComment("priority: " + priority);
+                            //System.out.println("Adding: "  + e.getLeft().getValueNoTags());
+                            if( e != null) {
+                                section.addEElement(e);
+                            }
+                            String lm = e.getLeft().getValueNoTags();
+                            String comments = e.getComment();
+                            System.out.println("<e lm=\"" + lm + "\" c=\"" + comments + "\"><i>" + lm + "</i><par n=\"ADN__n\"/></e>");
                             break;
                         case 3:
                             EElement e3 = readElementFormat_3(strLine);
@@ -124,19 +133,20 @@ public class Apertiumizer {
                             }
                             break;
                     }
+                    if(c%150 == 0) {
+                        priority++;
+                    }
+                    c++;
                 }
             }
             in.close();
-            dic.printXML("dic.tmp", "UTF-8");
-
+            
+            dic.printXML(this.getOutFileName(), "UTF-8");
+/*
             DictionaryReader reader = new DictionaryReader("dic.tmp");
             DictionaryElement bil = reader.readDic();
             this.completeDic(bil);
-
-
-
-
-
+             * */
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }
@@ -237,27 +247,38 @@ public class Apertiumizer {
         LElement left = new LElement();
         RElement right = new RElement();
 
-        while (i < 3 && !lastToken && tokenizer.hasMoreTokens()) {
+        String lV = "";
+        while (i < 2 && !lastToken && tokenizer.hasMoreTokens()) {
             String token = tokenizer.nextToken();
             switch (i) {
                 case 0:
-                    left.addChild(new TextElement(token));
-                    System.out.println(left);
+                    //lV = token + "<s n=\"n\"/><s n=\"acr\"/>";
+                    lV = token;
+                    left.addChild(new TextElement(lV));
+                    //System.out.println(lV);
                     break;
                 case 1:
-                    right.addChild(new TextElement(token));
-                    System.out.println(right);
-                    break;
-                case 2:
-                    lastToken = true;
-                    SElement sE = new SElement(token);
-                    left.addChild(sE);
-                    right.addChild(sE);
+                    if(token.equals("?")) {
+                        right.addChild(new TextElement(""));
+                        
+                    } else {
+                    right.addChild(new TextElement(lV));
+                    }
+                    token = token.replaceAll("\"", "'");
+                    e.setComment(token);
+                    //System.out.println(token);
                     PElement pE = new PElement();
                     pE.setLElement(left);
                     pE.setRElement(right);
                     e.addChild(pE);
                     return e;
+                case 2:
+                    lastToken = true;
+                    /*
+                    SElement sE = new SElement(token);
+                    left.addChild(sE);
+                    right.addChild(sE);
+                     */
 
             }
             i++;
