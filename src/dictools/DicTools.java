@@ -132,7 +132,8 @@ public class DicTools {
     /**
      * 
      * @param name
-     * @return Undefined         */
+     * @return Undefined         
+     */
     public static String reverseDicName(final String name) {
         final String[] st = DicTools.getSourceAndTarget(name);
         final String newFileName = st[2] + "apertium-" + st[1] + "-" + st[0] + "." + st[1] + "-" + st[0] + ".dix";
@@ -379,7 +380,7 @@ public class DicTools {
         if (reverse) {
             bil.reverse();
             final String reverseFileName = DicTools.reverseDicName(sBil);
-            bil.printXML(reverseFileName);
+            //bil.printXML(reverseFileName);
             bil.setFileName(reverseFileName);
         }
 
