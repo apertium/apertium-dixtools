@@ -2,8 +2,8 @@
 <!-- You may freely edit this file. See commented blocks below for -->
 <!-- some examples of how to customize the build. -->
 <!-- (If you delete it and reopen the project it will be recreated.) -->
-<project name="apertium-crossdics" default="default" basedir=".">
-    <description>Builds, tests, and runs the project apertium-crossdics.</description>
+<project name="apertium-dixtools" default="default" basedir=".">
+    <description>Builds, tests, and runs the project apertium-dixtools.</description>
     <import file="nbproject/build-impl.xml"/>
     <!--
 
@@ -67,46 +67,43 @@
 
     -->
     <target name="jar2">
-      	<echo message="apertium-crossdics is temporarily unavailable."/>    
-      	<echo message="Keep your current version of apertium-crossdics."/>    
+      	<echo message="apertium-dixtools is temporarily unavailable."/>    
+      	<echo message="Keep your current version of apertium-dixtools."/>    
       	<echo message="contact: &lt;ebenimeli@dlsi.ua.es>"/>    
     </target>
 
     <target name="default2">
-      	<echo message="apertium-crossdics is temporarily unavailable."/>    
-      	<echo message="Keep your current version of apertium-crossdics."/>    
+      	<echo message="apertium-dixtools is temporarily unavailable."/>    
+      	<echo message="Keep your current version of apertium-dixtools."/>    
       	<echo message="contact: &lt;ebenimeli@dlsi.ua.es>"/>    
     </target>
 
     <target name="install2">
-      	<echo message="apertium-crossdics is temporarily unavailable."/>    
-      	<echo message="Keep your current version of apertium-crossdics."/>    
+      	<echo message="apertium-dixtools is temporarily unavailable."/>    
+      	<echo message="Keep your current version of apertium-dixtools."/>    
       	<echo message="contact: &lt;ebenimeli@dlsi.ua.es>"/>    
     </target>
     
     <target name="install">
-      	<echo message="Installing apertium-crossdics ..."/>
-    	<mkdir dir="/usr/local/apertium-crossdics"/>
-    	<mkdir dir="/usr/local/apertium-crossdics/dist"/>
-    	<mkdir dir="/usr/local/apertium-crossdics/schemas"/>
+      	<echo message="Installing apertium-dixtools ..."/>
+    	<mkdir dir="/usr/local/apertium-dixtools"/>
+    	<mkdir dir="/usr/local/apertium-dixtools/dist"/>
+    	<mkdir dir="/usr/local/apertium-dixtools/schemas"/>
 
     	<copy file="dist/crossdics.jar"
-    	todir="/usr/local/apertium-crossdics/dist"
-    	overwrite="true" failonerror="Error: apertium-crossdics couldn't be
+    	todir="/usr/local/apertium-dixtools/dist"
+    	overwrite="true" failonerror="Error: apertium-dixtools couldn't be
     	installed"/>
-    	<!-- dictools copy -->
-    	<copy file="dictools" todir="/usr/local/bin" overwrite="true" failonerror="Error: apertium-crossdics couldn't be installed" verbose="false"/>
-    	<copy file="apertium-dictools" todir="/usr/local/bin" overwrite="true" failonerror="Error: apertium-crossdics couldn't be installed" verbose="false"/>
-    	
-  	<chmod file="/usr/local/bin/dictools" perm="+x"/>
-  	<chmod file="/usr/local/bin/apertium-dictools" perm="+x"/>
+    	<!-- apertium-dixtools copy -->
+    	<copy file="apertium-dixtools" todir="/usr/local/bin" overwrite="true" failonerror="Error: apertium-dixtools couldn't be installed" verbose="false"/>
+  	<chmod file="/usr/local/bin/apertium-dixtools" perm="+x"/>
   	
   	<!-- apertium-crossdics copy -->
   	<copy file="apertium-crossdics" todir="/usr/local/bin" overwrite="true"/>
   	<chmod file="/usr/local/bin/apertium-crossdics" perm="+x"/>
   	
     	<copy file="schemas/cross-model.xml"
-      	todir="/usr/local/apertium-crossdics/schemas"/>
-    	<echo message="apertium-crossdics was successfully installed!"/>
+      	todir="/usr/local/apertium-dixtools/schemas"/>
+    	<echo message="apertium-dixtools was successfully installed!"/>
     </target>
 </project>
