@@ -336,7 +336,7 @@ function misc() {
 #
 function show_help() {
    echo ""
-   echo "Usage: apertium-dictools [task] ..."
+   echo "Usage: apertium-dixtools [task] ..."
    echo "  Tasks:"
    #echo "    apertiumize:        converts dictionaries from plain text to Apertium format"
    echo "    cross:              crosses a set of dictionaries"
