@@ -107,15 +107,26 @@
     	<echo message="apertium-dixtools was successfully installed!"/>
     </target>
 
+    <!-- ant dist -->
     <target name="dist">
+	<property name="default-version" value="0.8"/>
+    	<input message="Please indicate version:" addproperty="version"
+    defaultvalue="${default-version}"/>   
+    	<property name="package-name" value="apertium-dixtools"/>      
       	<echo message="Packing apertium-dixtools ..."/>
 	<mkdir dir="releases"/>
-      	<tar destfile="releases/apertium-dixtools.tar">
-      		<tarfileset dir="src"/>
-                <tarfileset dir="resources"/>
-                <tarfileset dir="schemas"/>
-                <tarfileset dir="nbproject"/>
-                <tarfileset dir="META-INF"/>
+      	<tar destfile="releases/${package-name}-${version}.tar">
+      		<tarfileset dir="src" prefix="${package-name}/src"/>
+                <tarfileset dir="resources" prefix="${package-name}/resources"/>
+                <tarfileset dir="schemas" prefix="${package-name}/schemas"/>
+                <tarfileset dir="nbproject" prefix="${package-name}/nbproject">
+                	<include name="build-impl.xml"/>                
+                	<include name="genfiles.properties"/>                
+                	<include name="project.properties"/>                
+                	<include name="project.xml"/>                
+                </tarfileset>
+                <tarfileset dir="META-INF" prefix="${package-name}/META-INF"/>
+                <tarfileset dir="." prefix="${package-name}">
 		<include name="README.txt"/>
 		<include name="AUTHORS.txt"/>
 		<include name="COPYING.txt"/>
@@ -123,8 +134,9 @@
 		<include name="build.xml"/>
 		<include name="apertium-crossdics"/>
 		<include name="apertium-dixtools"/>
+		</tarfileset>
        </tar>
-	<gzip src="releases/apertium-dixtools.tar" destfile="releases/apertium-dixtools.tar.gz"/>
-	<delete file="releases/apertium-dixtools.tar"/>
+	<gzip src="releases/${package-name}-${version}.tar" destfile="releases/${package-name}-${version}.tar.gz"/>
+	<delete file="releases/${package-name}-${version}.tar"/>
     </target>
 </project>

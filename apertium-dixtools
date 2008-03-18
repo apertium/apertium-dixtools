@@ -345,7 +345,7 @@ function show_help() {
    echo "    equiv-paradigms:    finds equivalent paradigms and updates references"
    echo "    format:             formats a dictionary"   
    echo "    format-1line:       formats a dictionary (1 element per line)"
-   echo "    get-bil-omegawiki:  gets cheap bilingual dictionaries from Omegawiki."
+   #echo "    get-bil-omegawiki:  gets cheap bilingual dictionaries from Omegawiki."
    echo "    merge-bil:          merges two bilingual dictionaries"
    echo "    merge-morph:        merges two morphological dictionaries"
    echo "    process-xincludes:  processes and expands all xincludes in the dictionary"
