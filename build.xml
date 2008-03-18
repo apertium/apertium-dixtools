@@ -106,4 +106,25 @@
       	todir="/usr/local/apertium-dixtools/schemas"/>
     	<echo message="apertium-dixtools was successfully installed!"/>
     </target>
+
+    <target name="dist">
+      	<echo message="Packing apertium-dixtools ..."/>
+	<mkdir dir="releases"/>
+      	<tar destfile="releases/apertium-dixtools.tar">
+      		<tarfileset dir="src"/>
+                <tarfileset dir="resources"/>
+                <tarfileset dir="schemas"/>
+                <tarfileset dir="nbproject"/>
+                <tarfileset dir="META-INF"/>
+		<include name="README.txt"/>
+		<include name="AUTHORS.txt"/>
+		<include name="COPYING.txt"/>
+		<include name="manifest.mf"/>
+		<include name="build.xml"/>
+		<include name="apertium-crossdics"/>
+		<include name="apertium-dixtools"/>
+       </tar>
+	<gzip src="releases/apertium-dixtools.tar" destfile="releases/apertium-dixtools.tar.gz"/>
+	<delete file="releases/apertium-dixtools.tar"/>
+    </target>
 </project>
