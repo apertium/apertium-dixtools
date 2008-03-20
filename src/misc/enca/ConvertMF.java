@@ -98,7 +98,7 @@ public class ConvertMF {
     public final void convert() {
         //this.generateMon();
         //this.completeBil();
-        
+
         DictionaryReader morphReader = new DictionaryReader(this.morphDic);
         DictionaryElement morph = morphReader.readDic();
         findMFParadigms(morph);
@@ -127,7 +127,7 @@ public class ConvertMF {
         this.processAdjs(mfElementsAdjs, bil);
 
         bil.printXML(this.outFileName);
-         
+
     }
 
     /**
@@ -233,7 +233,7 @@ public class ConvertMF {
             }
         }
     }
-    
+
     private final void generateMon() {
         DictionaryReader bilReader = new DictionaryReader(this.bilDic);
         DictionaryElement bil = bilReader.readDic();
@@ -243,39 +243,38 @@ public class ConvertMF {
         section.setID("main");
         section.setType("standard");
         mon.addSection(section);
-        
-        for (EElement e1: bil.getAllEntries()) {
+
+        for (EElement e1 : bil.getAllEntries()) {
             EElement e = new EElement();
             e.setLemma(e1.getValue("L"));
             IElement iE = new IElement();
             iE.addChild(new TextElement(e1.getValue("L")));
             e.addChild(iE);
-            section.addEElement(e);            
+            section.addEElement(e);
         }
         mon.printXML("apertium-de-en.de.dix");
     }
-    
+
     private final void completeBil() {
         DictionaryReader bilReader = new DictionaryReader(this.bilDic);
         DictionaryElement bil = bilReader.readDic();
 
-         for (EElement e1: bil.getAllEntries()) {
+        for (EElement e1 : bil.getAllEntries()) {
             LElement lE = e1.getLeft();
             RElement rE = e1.getRight();
-            
+
             SElementList attr = lE.getSElements();
-            if(attr.size() > 0) {
-            SElement attr0 = attr.get(0);
-            if( attr0 != null) {
-            String v = attr0.getValue();
-            SElement newSE = new SElement(v);
-            rE.addChild(newSE);          
-            }}
+            if (attr.size() > 0) {
+                SElement attr0 = attr.get(0);
+                if (attr0 != null) {
+                    String v = attr0.getValue();
+                    SElement newSE = new SElement(v);
+                    rE.addChild(newSE);
+                }
+            }
         }
         bil.printXML("apertium-de-en.de-en.dix");
 
-        
+
     }
-    
-    
 }

@@ -27,44 +27,44 @@ import java.util.ArrayList;
  */
 public class ResourceSet extends ArrayList<Resource> {
 
-   /**
-    * 
-    */
-   private String name;
-   /**
-    * 
-    */
-   private String description;
+    /**
+     * 
+     */
+    private String name;
+    /**
+     * 
+     */
+    private String description;
 
-   /**
-    * 
-    * @return The name of the resource set
-    */
-   public String getName() {
-      return name;
-   }
+    /**
+     * 
+     * @return The name of the resource set
+     */
+    public String getName() {
+        return name;
+    }
 
-   /**
-    * 
-    * @param name
-    */
-   public void setName(String name) {
-      this.name = name;
-   }
+    /**
+     * 
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-   /**
-    * 
-    * @return The description
-    */
-   public String getDescription() {
-      return description;
-   }
+    /**
+     * 
+     * @return The description
+     */
+    public String getDescription() {
+        return description;
+    }
 
-   /**
-    * 
-    * @param description
-    */
-   public void setDescription(String description) {
-      this.description = description;
-   }
+    /**
+     * 
+     * @param description
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

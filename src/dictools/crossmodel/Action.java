@@ -38,183 +38,183 @@ import java.util.Iterator;
  */
 public class Action {
 
-   /**
-    * 
-    */
-   private EElement e;
-   /**
-    * 
-    */
-   private String name;
-   /**
-    * 
-    */
-   private Integer patternLength;
-   /**
-    * 
-    */
-   private int numberOfConstants = 0;
+    /**
+     * 
+     */
+    private EElement e;
+    /**
+     * 
+     */
+    private String name;
+    /**
+     * 
+     */
+    private Integer patternLength;
+    /**
+     * 
+     */
+    private int numberOfConstants = 0;
 
-   /**
-    * 
-    * 
-    */
-   public Action() {
+    /**
+     * 
+     * 
+     */
+    public Action() {
 
-   }
+    }
 
-   /**
-    * 
-    * @param e
-    */
-   public Action(final EElement e) {
-      this.e = e;
-   }
+    /**
+     * 
+     * @param e
+     */
+    public Action(final EElement e) {
+        this.e = e;
+    }
 
-   /**
-    * 
-    * @param action
-    */
-   public void setAction(final EElement action) {
-      e = action;
-   }
+    /**
+     * 
+     * @param action
+     */
+    public void setAction(final EElement action) {
+        e = action;
+    }
 
-   /**
-    * 
-    * 
-    */
-   public final void print(Msg msg) {
-      if (e != null) {
-         msg.log("action:\n");
-         getE().print("L", msg);
-         getE().print("R", msg);
-      }
-   }
+    /**
+     * 
+     * 
+     */
+    public final void print(Msg msg) {
+        if (e != null) {
+            msg.log("action:\n");
+            getE().print("L", msg);
+            getE().print("R", msg);
+        }
+    }
 
-   /**
-    * 
-    * @param dos
-    * @throws java.io.IOException
-    */
-   public final void printXML(OutputStreamWriter dos) throws IOException {
-      if (e != null) {
-         dos.write("\t<action>\n");
-         getE().printXML(dos);
-         dos.write("\t</action>\n");
-      }
+    /**
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
+    public final void printXML(OutputStreamWriter dos) throws IOException {
+        if (e != null) {
+            dos.write("\t<action>\n");
+            getE().printXML(dos);
+            dos.write("\t</action>\n");
+        }
 
-   }
+    }
 
-   /**
-    * 
-    * @return Undefined         */
-   public EElement getE() {
-      return e;
-   }
+    /**
+     * 
+     * @return Undefined         */
+    public EElement getE() {
+        return e;
+    }
 
-   /**
-    * 
-    * @param e
-    */
-   public void setE(final EElement e) {
-      this.e = e;
-   }
+    /**
+     * 
+     * @param e
+     */
+    public void setE(final EElement e) {
+        this.e = e;
+    }
 
-   /**
-    * @return the name
-    */
-   public final String getName() {
-      return name;
-   }
+    /**
+     * @return the name
+     */
+    public final String getName() {
+        return name;
+    }
 
-   /**
-    * @param name
-    *                the name to set
-    */
-   public final void setName(String name) {
-      this.name = name;
-   }
+    /**
+     * @param name
+     *                the name to set
+     */
+    public final void setName(String name) {
+        this.name = name;
+    }
 
-   public final Integer getPatternLength() {
-      return patternLength;
-   }
+    public final Integer getPatternLength() {
+        return patternLength;
+    }
 
-   public final void setPatternLength(Integer patternLength) {
-      this.patternLength = patternLength;
-   }
+    public final void setPatternLength(Integer patternLength) {
+        this.patternLength = patternLength;
+    }
 
-   /**
-    * 
-    * @return Undefined         */
-   public final int getNumberOfConstants() {
-      return numberOfConstants;
-   }
+    /**
+     * 
+     * @return Undefined         */
+    public final int getNumberOfConstants() {
+        return numberOfConstants;
+    }
 
-   /**
-    * 
-    * @param numberOfConstants
-    */
-   public final void setNumberOfConstants(int numberOfConstants) {
-      this.numberOfConstants = numberOfConstants;
-   }
+    /**
+     * 
+     * @param numberOfConstants
+     */
+    public final void setNumberOfConstants(int numberOfConstants) {
+        this.numberOfConstants = numberOfConstants;
+    }
 
-   /**
-    * 
-    * 
-    */
-   public final void incrementNumberOfConstants() {
-      numberOfConstants++;
-   }
+    /**
+     * 
+     * 
+     */
+    public final void incrementNumberOfConstants() {
+        numberOfConstants++;
+    }
 
-   /**
-    * 
-    * @param definedVars
-    * @param patternID
-    * @return true if the Action is valid
-    */
-   public final boolean isValid(HashMap<String, String> definedVars, final String patternID) {
-      boolean errorsFound = false;
-      HashMap<String, String> definedVarsInAction = new HashMap<String, String>();
+    /**
+     * 
+     * @param definedVars
+     * @param patternID
+     * @return true if the Action is valid
+     */
+    public final boolean isValid(HashMap<String, String> definedVars, final String patternID) {
+        boolean errorsFound = false;
+        HashMap<String, String> definedVarsInAction = new HashMap<String, String>();
 
-      getDefinedVarsElement(getE().getLeft(), definedVarsInAction);
-      getDefinedVarsElement(getE().getRight(), definedVarsInAction);
+        getDefinedVarsElement(getE().getLeft(), definedVarsInAction);
+        getDefinedVarsElement(getE().getRight(), definedVarsInAction);
 
-      Iterator it = definedVarsInAction.keySet().iterator();
-      while (it.hasNext()) {
-         String key = (String) it.next();
-         if (!definedVars.containsKey(key)) {
-            System.err.print("\nError in pattern '" + patternID + "': variable '" + key + "' was not defined in the pattern.");
-            errorsFound = true;
-         }
-      }
-
-      if (errorsFound) {
-         return false;
-      } else {
-         return true;
-      }
-   }
-
-   /**
-    * 
-    * @param ce
-    * @param definedVars
-    */
-   private final void getDefinedVarsElement(ContentElement ce, HashMap<String, String> definedVars) {
-      for (Element e : ce.getChildren()) {
-         if (e instanceof TextElement) {
-            String v = ((TextElement) e).getValue();
-            if (v.startsWith("$") || v.startsWith("@")) {
-               definedVars.put(v, v);
+        Iterator it = definedVarsInAction.keySet().iterator();
+        while (it.hasNext()) {
+            String key = (String) it.next();
+            if (!definedVars.containsKey(key)) {
+                System.err.print("\nError in pattern '" + patternID + "': variable '" + key + "' was not defined in the pattern.");
+                errorsFound = true;
             }
-         }
-         if (e instanceof SElement) {
-            String v = ((SElement) e).getValue();
-            if (v.startsWith("$") || v.startsWith("@")) {
-               definedVars.put(v, v);
-            }
-         }
+        }
 
-      }
-   }
+        if (errorsFound) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * 
+     * @param ce
+     * @param definedVars
+     */
+    private final void getDefinedVarsElement(ContentElement ce, HashMap<String, String> definedVars) {
+        for (Element e : ce.getChildren()) {
+            if (e instanceof TextElement) {
+                String v = ((TextElement) e).getValue();
+                if (v.startsWith("$") || v.startsWith("@")) {
+                    definedVars.put(v, v);
+                }
+            }
+            if (e instanceof SElement) {
+                String v = ((SElement) e).getValue();
+                if (v.startsWith("$") || v.startsWith("@")) {
+                    definedVars.put(v, v);
+                }
+            }
+
+        }
+    }
 }

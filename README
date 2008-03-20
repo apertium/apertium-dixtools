@@ -1,0 +1,46 @@
+apertium-dixtools
+
+QUICKSTART
+
+$ java -jar dist/apertium-dixtools.jar
+
+Find all the information in:
+http://xixona.dlsi.ua.es/wiki/index.php/Apertium-dixtools
+
+Download from SVN
+
+$ svn co https://apertium.svn.sourceforge.net/svnroot/apertium/trunk/apertium-dixtools
+
+Software prerequisites
+
+You will need to install Ant and Java Development Kit 6 (JDK6)
+
+Uncompress the package
+
+$ tar xvfz apertium-dixtools-0.8.tar.gz
+
+COMPILING
+
+$ cd apertium-dixtools
+$ ant jar
+
+INSTALLING
+
+Installing is actually optional. The program can also be execute using only the .jar file:
+
+$ java -jar dist/apertium-dixtools.jar
+
+but if you want to do so, the program will be installed in /usr/local/apertium-dixtools
+
+$ sudo ant install
+
+And there are some scripts you can use:
+
+$ apertium-dixtools
+
+and 
+
+$ apertium-crossdics
+
+which is a shortcut for:
+$ apertium-dixtools cross

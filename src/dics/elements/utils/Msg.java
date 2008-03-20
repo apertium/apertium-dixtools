@@ -17,9 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dics.elements.utils;
-
 
 import java.io.DataOutputStream;
 import java.io.File;
@@ -39,32 +37,26 @@ public class Msg {
      *
      */
     static final int LABEL = 1;
-
     /**
      *
      */
     static final int NORMAL = 0;
-
     /**
      *
      */
     private int type = 0;
-
     /**
      *
      */
     private boolean debug = false;
-
     /**
      *
      */
     private JLabel label;
-
     /**
      *
      */
     private DataOutputStream log;
-
     /**
      *
      */
@@ -75,7 +67,7 @@ public class Msg {
      *
      */
     public Msg() {
-        //debug = false;
+    //debug = false;
     }
 
     /**
@@ -107,8 +99,8 @@ public class Msg {
             // FileHandler handler = new FileHandler(logFileName, append);
             // Logger logger = Logger.getLogger("crossdics");
             // logger.addHandler(handler);
-            File             file = new File(logFileName);
-            FileOutputStream fos  = new FileOutputStream(file);
+            File file = new File(logFileName);
+            FileOutputStream fos = new FileOutputStream(file);
 
             log = new DataOutputStream(fos);
         } catch (IOException e) {
@@ -130,14 +122,14 @@ public class Msg {
      */
     public final void out(final String text) {
         switch (this.getType()) {
-        case LABEL :
-            label.setText(text);
+            case LABEL:
+                label.setText(text);
 
-            break;
+                break;
 
-        default :
-            System.out.print(text);
-            break;
+            default:
+                System.out.print(text);
+                break;
         }
     }
 
@@ -148,12 +140,12 @@ public class Msg {
 
         // Only for Java components (JLabel, etc)
         switch (this.getType()) {
-        case LABEL :
-            label.setText(text);
-            break;
+            case LABEL:
+                label.setText(text);
+                break;
 
-        default :
-            break;
+            default:
+                break;
         }
     }
 
@@ -228,9 +220,8 @@ public class Msg {
      */
     public final void setLabel(JLabel label) {
         this.label = label;
-        this.type  = this.LABEL;
+        this.type = this.LABEL;
     }
 }
-
-
 //~ Formatted by Jindent --- http://www.jindent.com
+

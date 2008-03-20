@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dictools;
 
 import dics.elements.dtd.DictionaryElement;
@@ -30,34 +29,33 @@ import dics.elements.dtd.DictionaryElement;
 public class DicGather {
 
     /**
-         * 
-         */
+     * 
+     */
     private String dic;
-
     /**
-         * 
-         */
+     * 
+     */
     private String out;
 
     /**
-         * 
-         * @param dic
-         * @param out
-         */
+     * 
+     * @param dic
+     * @param out
+     */
     public DicGather(final String dic, final String out) {
-	this.dic = dic;
-	this.out = out;
+        this.dic = dic;
+        this.out = out;
     }
 
     /**
-         * 
-         * 
-         */
+     * 
+     * 
+     */
     public final void doGather() {
-	DictionaryReader reader = new DictionaryReader(dic);
-	DictionaryElement dic = reader.readDic();
-	dic.printXML(out);
+        DictionaryReader reader = new DictionaryReader(dic);
+        DictionaryElement dic = reader.readDic();
+        dic.printXML(out);
 
-	System.out.println("Dictionary in a single file: '" + out + "'");
+        System.out.println("Dictionary in a single file: '" + out + "'");
     }
 }

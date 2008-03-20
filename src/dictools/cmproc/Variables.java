@@ -30,53 +30,53 @@ import java.util.Iterator;
  */
 public class Variables extends HashMap<String, Object> {
 
-   /**
-    * 
-    */
-   public Variables() {
-      super();
-   }
+    /**
+     * 
+     */
+    public Variables() {
+        super();
+    }
 
-   /**
-    * 
-    * @param copy
-    */
-   public Variables(final Variables copy) {
-      super();
-      Iterator it = copy.keySet().iterator();
-      while (it.hasNext()) {
-         String key = (String) it.next();
-         Object obj = copy.get(key);
-         if (obj instanceof String) {
-            put(new String(key), new String((String) obj));
-         }
-         if (obj instanceof SElementList) {
-            SElementList sEList = (SElementList) obj;
-            put(new String(key), new SElementList(sEList));
-         }
-      }
-   }
-
-   /**
-    * 
-    */
-   public final void print() {
-      Iterator it = this.keySet().iterator();
-      System.out.print("{ ");
-      while (it.hasNext()) {
-         String key = (String) it.next();
-         Object obj = this.get(key);
-         if (obj instanceof String) {
-            System.out.println(key + ": " + ((String) obj));
-         }
-         if (obj instanceof SElementList) {
-            System.out.print(key + ": ");
-            for (SElement e : (SElementList) obj) {
-               System.out.print(e.getValue() + ", ");
+    /**
+     * 
+     * @param copy
+     */
+    public Variables(final Variables copy) {
+        super();
+        Iterator it = copy.keySet().iterator();
+        while (it.hasNext()) {
+            String key = (String) it.next();
+            Object obj = copy.get(key);
+            if (obj instanceof String) {
+                put(new String(key), new String((String) obj));
             }
-            System.out.println("");
-         }
-      }
-      System.out.println(" }");
-   }
+            if (obj instanceof SElementList) {
+                SElementList sEList = (SElementList) obj;
+                put(new String(key), new SElementList(sEList));
+            }
+        }
+    }
+
+    /**
+     * 
+     */
+    public final void print() {
+        Iterator it = this.keySet().iterator();
+        System.out.print("{ ");
+        while (it.hasNext()) {
+            String key = (String) it.next();
+            Object obj = this.get(key);
+            if (obj instanceof String) {
+                System.out.println(key + ": " + ((String) obj));
+            }
+            if (obj instanceof SElementList) {
+                System.out.print(key + ": ");
+                for (SElement e : (SElementList) obj) {
+                    System.out.print(e.getValue() + ", ");
+                }
+                System.out.println("");
+            }
+        }
+        System.out.println(" }");
+    }
 }

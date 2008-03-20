@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dics.elements.dtd;
 
 import java.util.Properties;
@@ -27,23 +26,23 @@ import java.util.Properties;
  * @author Enrique Benimeli Bofarull
  */
 public class HeaderElement extends Properties {
-    
+
     /**
      * 
      * @return The type of dictionary: morph or bil
      */
     public final String getDictionaryType() {
-        String type = (String)this.get("type");  
+        String type = (String) this.get("type");
         return type;
     }
-    
+
     /**
      * 
      * @return Is it a bilingual dictionary?
      */
     public boolean isBilingual() {
-        String type = (String)this.get("type");
-        return( type.equals("bil"));
+        String type = (String) this.get("type");
+        return (type.equals("bil"));
     }
 
     /**
@@ -51,8 +50,8 @@ public class HeaderElement extends Properties {
      * @return Is it a morphological dictionary?
      */
     public boolean isMorphological() {
-        String type = (String)this.get("type");
-        return( type.equals("mon"));
+        String type = (String) this.get("type");
+        return (type.equals("mon"));
     }
 
     /**
@@ -60,45 +59,44 @@ public class HeaderElement extends Properties {
      * @return Source language code
      */
     public final String getSL() {
-        String sl = (String)this.get("sl");
+        String sl = (String) this.get("sl");
         return sl;
     }
-    
+
     /**
      * 
      * @return Full name for source language
      */
     public final String getSLFull() {
-        String slFull = (String)this.get("sl-full");
+        String slFull = (String) this.get("sl-full");
         return slFull;
     }
-    
+
     /**
      * 
      * @return Target language code
      */
     public final String getTL() {
-        String tl = (String)this.get("tl");
+        String tl = (String) this.get("tl");
         return tl;
     }
-    
+
     /**
      * Return the full name for target language
      * @return Full name for target language
      */
     public final String getTLFull() {
-        String tlFull = (String)this.get("tl-full");
+        String tlFull = (String) this.get("tl-full");
         return tlFull;
     }
-    
+
     /**
      * 
      * @param i
      * @return Alternative i
      */
     public final String getAlternative(int i) {
-        String alti = (String)this.get("alt" + i);
+        String alti = (String) this.get("alt" + i);
         return alti;
-    }    
-
+    }
 }

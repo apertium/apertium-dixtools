@@ -27,141 +27,141 @@ import java.util.Properties;
  */
 public class Resource extends Properties {
 
-   /**
-    * 
-    * @return The source
-    */
-   public final String getSource() {
-      String source = (String) this.get("src");
-      return source;
-   }
+    /**
+     * 
+     * @return The source
+     */
+    public final String getSource() {
+        String source = (String) this.get("src");
+        return source;
+    }
 
-   /**
-    * 
-    * @return The type of dictionary: morph or bil
-    */
-   public final String getDictionaryType() {
-      String type = (String) this.get("type");
-      return type;
-   }
+    /**
+     * 
+     * @return The type of dictionary: morph or bil
+     */
+    public final String getDictionaryType() {
+        String type = (String) this.get("type");
+        return type;
+    }
 
-   /**
-    * 
-    * @return 'true' if is cross-model
-    */
-   public boolean isCrossModel() {
-      String type = (String) this.get("type");
-      return (type.equals("cross-model"));
-   }
+    /**
+     * 
+     * @return 'true' if is cross-model
+     */
+    public boolean isCrossModel() {
+        String type = (String) this.get("type");
+        return (type.equals("cross-model"));
+    }
 
-   /**
-    * 
-    * @return Is it a bilingual dictionary?
-    */
-   public boolean isBilingual() {
-      String type = (String) this.get("type");
-      return (type.equals("bil"));
-   }
+    /**
+     * 
+     * @return Is it a bilingual dictionary?
+     */
+    public boolean isBilingual() {
+        String type = (String) this.get("type");
+        return (type.equals("bil"));
+    }
 
-   /**
-    * 
-    * @return Is it a morphological dictionary?
-    */
-   public boolean isMorphological() {
-      String type = (String) this.get("type");
-      return (type.equals("mon"));
-   }
+    /**
+     * 
+     * @return Is it a morphological dictionary?
+     */
+    public boolean isMorphological() {
+        String type = (String) this.get("type");
+        return (type.equals("mon"));
+    }
 
-   /**
-    * 
-    * @return Source language code
-    */
-   public final String getSL() {
-      String sl = (String) this.get("sl");
-      return sl;
-   }
+    /**
+     * 
+     * @return Source language code
+     */
+    public final String getSL() {
+        String sl = (String) this.get("sl");
+        return sl;
+    }
 
-   /**
-    * 
-    * @param value
-    * @return 'true' if source language is 'value'
-    */
-   public final boolean isSL(final String value) {
-      String sl = (String) this.get("sl");
-      if (sl.equals(value)) {
-         return true;
-      } else {
-         return false;
-      }
-   }
-
-   /**
-    * 
-    * @param value
-    * @return 'true' if target language is 'value'
-    */
-   public final boolean isTL(final String value) {
-      String sl = (String) this.get("tl");
-      if (sl.equals(value)) {
-         return true;
-      } else {
-         return false;
-      }
-   }
-
-   /**
-    * 
-    * @return Full name for source language
-    */
-   public final String getSLFull() {
-      String slFull = (String) this.get("sl-full");
-      return slFull;
-   }
-
-   /**
-    * 
-    * @return Target language code
-    */
-   public final String getTL() {
-      String tl = (String) this.get("tl");
-      return tl;
-   }
-
-   /**
-    * Return the full name for target language
-    * @return Full name for target language
-    */
-   public final String getTLFull() {
-      String tlFull = (String) this.get("tl-full");
-      return tlFull;
-   }
-
-   /**
-    * 
-    * @param lang
-    * @return 'true' if sl or tl is 'lang'
-    */
-   public final boolean hasLanguage(final String lang) {
-      String sl = (String) this.get("sl");
-      String tl = (String) this.get("tl");
-      if (sl.equals(lang) || tl.equals(lang)) {
-         return true;
-      } else {
-         return false;
-      }
-   }
-
-   /**
-    * 
-    * @return 'true' is this resource can be used for crossing dictionaries
-    */
-   public final boolean isUseForCrossing() {
-      String forcrossing = (String) this.get("for-crossing");
-      if (forcrossing != null) {
-         if (forcrossing.equals("yes")) {
+    /**
+     * 
+     * @param value
+     * @return 'true' if source language is 'value'
+     */
+    public final boolean isSL(final String value) {
+        String sl = (String) this.get("sl");
+        if (sl.equals(value)) {
             return true;
-         }
-      }
-      return false;
-   }
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 
+     * @param value
+     * @return 'true' if target language is 'value'
+     */
+    public final boolean isTL(final String value) {
+        String sl = (String) this.get("tl");
+        if (sl.equals(value)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 
+     * @return Full name for source language
+     */
+    public final String getSLFull() {
+        String slFull = (String) this.get("sl-full");
+        return slFull;
+    }
+
+    /**
+     * 
+     * @return Target language code
+     */
+    public final String getTL() {
+        String tl = (String) this.get("tl");
+        return tl;
+    }
+
+    /**
+     * Return the full name for target language
+     * @return Full name for target language
+     */
+    public final String getTLFull() {
+        String tlFull = (String) this.get("tl-full");
+        return tlFull;
+    }
+
+    /**
+     * 
+     * @param lang
+     * @return 'true' if sl or tl is 'lang'
+     */
+    public final boolean hasLanguage(final String lang) {
+        String sl = (String) this.get("sl");
+        String tl = (String) this.get("tl");
+        if (sl.equals(lang) || tl.equals(lang)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 
+     * @return 'true' is this resource can be used for crossing dictionaries
+     */
+    public final boolean isUseForCrossing() {
+        String forcrossing = (String) this.get("for-crossing");
+        if (forcrossing != null) {
+            if (forcrossing.equals("yes")) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

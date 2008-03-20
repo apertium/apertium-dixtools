@@ -371,7 +371,30 @@ public class EElement extends Element implements Cloneable,
     /**
      * 
      * @param side
-     * @return Undefined         */
+     * @return Value without tags
+     */
+    public final String getValueNoTags(final String side) {
+        for (final Element e : children) {
+            if (e instanceof IElement) {
+                return ((IElement) e).getValueNoTags();
+            }
+            if (e instanceof PElement) {
+                if (side.equals("L")) {
+                    return ((PElement) e).getL().getValueNoTags();
+                }
+                if (side.equals("R")) {
+                    return ((PElement) e).getR().getValueNoTags();
+                }
+            }
+        }
+        return getLemma();
+    }
+
+    /**
+     * 
+     * @param side
+     * @return Undefined         
+     */
     public ContentElement getSide(final String side) {
         for (final Element e : children) {
             if (e instanceof IElement) {
@@ -638,12 +661,13 @@ public class EElement extends Element implements Cloneable,
      * 
      * @param side
      * @param value
-     * @return Undefined         */
+     * @return Undefined         
+     */
     public final boolean is(final String side, final String value) {
         for (final Element e : children) {
             if (e instanceof IElement) {
-                final IElement i = (IElement) e;
-                return i.is(value);
+                final IElement ie = (IElement) e;
+                return ie.is(value);
             }
             if (e instanceof PElement) {
                 final PElement p = (PElement) e;
@@ -1045,7 +1069,8 @@ public class EElement extends Element implements Cloneable,
 
     /**
      * 
-     * @return Undefined         */
+     * @return Undefined         
+     */
     public final String toStringAll() {
         String str = "";
         String r = "";
@@ -1200,6 +1225,9 @@ public class EElement extends Element implements Cloneable,
 
     /**
      * 
+     * @param anotherEElement
+     * @return int value
+     * @throws java.lang.ClassCastException
      */
     public int compareTo(final EElement anotherEElement)
             throws ClassCastException {
@@ -1220,18 +1248,23 @@ public class EElement extends Element implements Cloneable,
 
         final String lemma2 = (anotherEElement).getValue("L");
 
-        if (lemma1.compareTo(lemma2) == 0) {
+        if (lemma1 == null || lemma2 == null) {
             return 0;
+        } else {
+            if (lemma1.compareTo(lemma2) == 0) {
+                return 0;
+            }
+            if (lemma1.compareTo(lemma2) < 0) {
+                return -1;
+            }
         }
-        if (lemma1.compareTo(lemma2) < 0) {
-            return -1;
-        }
-        return 1; //     
+        return 1;
     }
 
     /**
      * 
-     * @return Undefined         */
+     * @return Undefined         
+     */
     public final EElement reverse() {
         // EElement eRev = (EElement) this.clone();
         EElement eRev = new EElement();

@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dics.elements.dtd;
 
 /**
@@ -27,12 +26,11 @@ package dics.elements.dtd;
 public class JElement extends Element {
 
     /**
-         * 
-         * 
-         */
+     * 
+     * 
+     */
     public JElement() {
-	setTagName("j");
-	setValue("<j/>");
+        setTagName("j");
+        setValue("<j/>");
     }
-
 }

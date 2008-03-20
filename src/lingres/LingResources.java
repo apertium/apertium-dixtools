@@ -27,65 +27,64 @@ import java.util.ArrayList;
  */
 public class LingResources extends ArrayList {
 
-   /**
-    * 
-    */
-   private String name;
-   /**
-    * 
-    */
-   private String description;
+    /**
+     * 
+     */
+    private String name;
+    /**
+     * 
+     */
+    private String description;
 
-   /**
-    * 
-    * @return The name
-    */
-   public String getName() {
-      return name;
-   }
+    /**
+     * 
+     * @return The name
+     */
+    public String getName() {
+        return name;
+    }
 
-   /**
-    * 
-    * @param name
-    */
-   public void setName(String name) {
-      this.name = name;
-   }
+    /**
+     * 
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-   /**
-    * 
-    * @return The description
-    */
-   public String getDescription() {
-      return description;
-   }
+    /**
+     * 
+     * @return The description
+     */
+    public String getDescription() {
+        return description;
+    }
 
-   /**
-    * 
-    * @param description
-    */
-   public void setDescription(String description) {
-      this.description = description;
-   }
-   
-   /**
-    * 
-    * @return A list of resources
-    */
-   public final ArrayList<Resource> getResourceList() {
-      ArrayList<Resource> resources = new ArrayList<Resource>();
-      for(Object o : this) {
-         if(o instanceof Resource) {
-            resources.add((Resource)o);
-         }
-         if(o instanceof ResourceSet) {
-            ResourceSet rs = (ResourceSet)o;
-            for(Resource r : rs) {
-               resources.add(r);
+    /**
+     * 
+     * @param description
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * 
+     * @return A list of resources
+     */
+    public final ArrayList<Resource> getResourceList() {
+        ArrayList<Resource> resources = new ArrayList<Resource>();
+        for (Object o : this) {
+            if (o instanceof Resource) {
+                resources.add((Resource) o);
             }
-         }
-      }
-      return resources;      
-   }
-   
+            if (o instanceof ResourceSet) {
+                ResourceSet rs = (ResourceSet) o;
+                for (Resource r : rs) {
+                    resources.add(r);
+                }
+            }
+        }
+        return resources;
+    }
 }

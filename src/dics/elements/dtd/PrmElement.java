@@ -25,14 +25,17 @@ package dics.elements.dtd;
  */
 public class PrmElement extends Element {
 
-   String value;
+    /**
+     * 
+     */
+    String value;
 
-   /**
-    * 
-    */
-   public PrmElement() {
-      setTagName("prm");
-      setValue("<prm/>");
-      setValueNoTags(" ");
-   }
+    /**
+     * 
+     */
+    public PrmElement() {
+        setTagName("prm");
+        setValue("<prm/>");
+        setValueNoTags("");
+    }
 }

@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dictools.cmproc;
 
 import java.util.HashMap;
@@ -26,6 +25,5 @@ import java.util.HashMap;
  *
  * @author Enrique Benimeli Bofarull
  */
-public class StateSet extends HashMap<String,State> {
-
+public class StateSet extends HashMap<String, State> {
 }

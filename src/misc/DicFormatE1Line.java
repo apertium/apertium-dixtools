@@ -51,8 +51,13 @@ public class DicFormatE1Line {
 
     }
 
+    /**
+     * 
+     * @param fileName
+     */
     public void printXML(final String fileName) {
         this.printXML(fileName, "UTF-8");
+        dic.setXmlEncoding("UTF-8");
     }
 
     /**
@@ -69,7 +74,7 @@ public class DicFormatE1Line {
             fos = new FileOutputStream(fileName);
             bos = new BufferedOutputStream(fos);
             dos = new OutputStreamWriter(bos, encoding);
-            dos.write("<?xml version=\"1.0\" encoding=\"" + dic.getXmlEncoding() + "\"?>\n");
+            dos.write("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
             dos.write("<!--\n\tDictionary:\n");
             if (dic.getSections() != null) {
                 if (dic.isBil()) {
@@ -115,11 +120,9 @@ public class DicFormatE1Line {
                     }
                     dos.write("  <section " + attributes + ">\n");
                     for (final EElement e : s.getEElements()) {
-                        // e.printXML(dos);
                         e.printXML1Line(dos);
                     }
                     dos.write("  </section>\n");
-                // s.printXML(dos);
                 }
             }
             dos.write("</dictionary>\n");

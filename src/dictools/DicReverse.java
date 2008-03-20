@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dictools;
 
 import dics.elements.dtd.DictionaryElement;
@@ -30,106 +29,104 @@ import dics.elements.dtd.DictionaryElement;
 public class DicReverse {
 
     /**
-         * 
-         */
+     * 
+     */
     private DictionaryElement dicOrig;
-
     /**
-         * 
-         */
+     * 
+     */
     private String[] arguments;
 
     /**
-         * 
-         * 
-         */
+     * 
+     * 
+     */
     public DicReverse() {
 
     }
 
     /**
-         * 
-         * @param dic
-         */
+     * 
+     * @param dic
+     */
     public DicReverse(final DictionaryElement dic) {
-	dicOrig = dic;
+        dicOrig = dic;
 
     }
 
     /**
-         * 
-         * @return Undefined         */
+     * 
+     * @return Undefined         */
     public final DictionaryElement reverse() {
-	getDicOrig().reverse();
-	// Collections.sort(getDicOrig().getEntries());
-	return getDicOrig();
+        getDicOrig().reverse();
+        // Collections.sort(getDicOrig().getEntries());
+        return getDicOrig();
     }
 
     /**
-         * 
-         * @return Undefined         */
+     * 
+     * @return Undefined         */
     private final DictionaryElement getDicOrig() {
-	return dicOrig;
+        return dicOrig;
     }
 
     /**
-         * 
-         * 
-         */
+     * 
+     * 
+     */
     private void processArguments() {
-	DictionaryReader dicReader = new DictionaryReader(arguments[1]);
-	DictionaryElement bil = dicReader.readDic();
-	dicReader = null;
-	setDicOrig(bil);
+        DictionaryReader dicReader = new DictionaryReader(arguments[1]);
+        DictionaryElement bil = dicReader.readDic();
+        dicReader = null;
+        setDicOrig(bil);
     }
 
     /**
-         * 
-         * 
-         */
+     * 
+     * 
+     */
     public final void doReverse() {
-	processArguments();
-	actionReverse();
+        processArguments();
+        actionReverse();
     }
 
     /**
-         * 
-         * 
-         */
+     * 
+     * 
+     */
     public final void actionReverse() {
-	DictionaryElement bil = reverse();
-	String reverseFileName = "reversed-dic.dix";
-	if (getArguments().length == 3) {
-	    if (getArguments()[2].equals("out.dix")) {
-		reverseFileName = DicTools.reverseDicName(arguments[1]);
-	    } else {
-		reverseFileName = getArguments()[2];
-	    }
-	    bil.printXML(reverseFileName);
-	}
+        DictionaryElement bil = reverse();
+        String reverseFileName = "reversed-dic.dix";
+        if (getArguments().length == 3) {
+            if (getArguments()[2].equals("out.dix")) {
+                reverseFileName = DicTools.reverseDicName(arguments[1]);
+            } else {
+                reverseFileName = getArguments()[2];
+            }
+            bil.printXML(reverseFileName);
+        }
     }
 
     /**
-         * @return the arguments
-         */
+     * @return the arguments
+     */
     public final String[] getArguments() {
-	return arguments;
+        return arguments;
     }
 
     /**
-         * @param arguments
-         *                the arguments to set
-         */
+     * @param arguments
+     *                the arguments to set
+     */
     public final void setArguments(String[] arguments) {
-	this.arguments = arguments;
+        this.arguments = arguments;
     }
 
     /**
-         * @param dicOrig
-         *                the dicOrig to set
-         */
+     * @param dicOrig
+     *                the dicOrig to set
+     */
     private final void setDicOrig(DictionaryElement dicOrig) {
-	this.dicOrig = dicOrig;
+        this.dicOrig = dicOrig;
     }
-
 }

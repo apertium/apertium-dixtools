@@ -33,127 +33,127 @@ import java.util.Iterator;
  */
 public class CrossModelProcessor {
 
-   /**
-    * 
-    */
-   private State startState;
-   /**
-    * 
-    */
-   private CrossActionData bestAction;
-   /**
-    * 
-    */
-   private Msg msg;
+    /**
+     * 
+     */
+    private State startState;
+    /**
+     * 
+     */
+    private CrossActionData bestAction;
+    /**
+     * 
+     */
+    private Msg msg;
 
-   /**
-    * 
-    * @param crossModel
-    */
-   public CrossModelProcessor(final CrossModel crossModel, Msg msg) {
-      this.msg = msg;
-      startState = new State("^start");
-      String str;
-      HashMap<String, CrossAction> patterns = new HashMap<String, CrossAction>();
+    /**
+     * 
+     * @param crossModel
+     */
+    public CrossModelProcessor(final CrossModel crossModel, Msg msg) {
+        this.msg = msg;
+        startState = new State("^start");
+        String str;
+        HashMap<String, CrossAction> patterns = new HashMap<String, CrossAction>();
 
-      for (CrossAction crossAction : crossModel.getCrossActions()) {
-         crossAction.print(msg);
-         ElementList eList = crossAction.getPattern().getSequence();
-         str = getElementListString(eList);
-         if (!patterns.containsKey(str)) {
-            patterns.put(str, crossAction);
-            add(eList, crossAction);
-         } else {
-            CrossAction cA = patterns.get(str);
-            msg.err("Duplicated pattern: '" + crossAction.getId() + "' and '" + cA.getId() + "' are the same (will be ignored).");
-         }
-      }
-   }
+        for (CrossAction crossAction : crossModel.getCrossActions()) {
+            crossAction.print(msg);
+            ElementList eList = crossAction.getPattern().getSequence();
+            str = getElementListString(eList);
+            if (!patterns.containsKey(str)) {
+                patterns.put(str, crossAction);
+                add(eList, crossAction);
+            } else {
+                CrossAction cA = patterns.get(str);
+                msg.err("Duplicated pattern: '" + crossAction.getId() + "' and '" + cA.getId() + "' are the same (will be ignored).");
+            }
+        }
+    }
 
-   /**
-    * 
-    * @param eList
-    * @param crossAction
-    */
-   public final void add(ElementList eList, CrossAction crossAction) {
-      msg.log("Adding pattern '" + crossAction.getId() + "'...");
-      eList.printSequence(msg);
-      this.startState.add(eList, crossAction, 0);
-   }
+    /**
+     * 
+     * @param eList
+     * @param crossAction
+     */
+    public final void add(ElementList eList, CrossAction crossAction) {
+        msg.log("Adding pattern '" + crossAction.getId() + "'...");
+        eList.printSequence(msg);
+        this.startState.add(eList, crossAction, 0);
+    }
 
-   /**
-    * 
-    * @param entries
-    * @return The best action set
-    */
-   public final CrossActionData getBestActionSet(CrossAction entries) {
-      ElementList patternSequence = entries.getPattern().getSequence();
-      //patternSequence.print();
-      Variables vars = new Variables();
-      CrossActionDataList crossActionDataList = new CrossActionDataList();
-      startState.getActionSetList(patternSequence, 0, crossActionDataList, vars);
-      if (crossActionDataList.size() > 0) {
-         entries.getPattern().getSequence().printSequence(msg);
-         msg.log("\n" + crossActionDataList.size() + " candidates: ");
-         Iterator it = crossActionDataList.keySet().iterator();
-         while (it.hasNext()) {
-            String key = (String) it.next();
-            CrossActionData cad = crossActionDataList.get(key);
-            msg.log(cad.getCrossAction().getId() + ",");
-         }
-         msg.log("\n");
+    /**
+     * 
+     * @param entries
+     * @return The best action set
+     */
+    public final CrossActionData getBestActionSet(CrossAction entries) {
+        ElementList patternSequence = entries.getPattern().getSequence();
+        //patternSequence.print();
+        Variables vars = new Variables();
+        CrossActionDataList crossActionDataList = new CrossActionDataList();
+        startState.getActionSetList(patternSequence, 0, crossActionDataList, vars);
+        if (crossActionDataList.size() > 0) {
+            entries.getPattern().getSequence().printSequence(msg);
+            msg.log("\n" + crossActionDataList.size() + " candidates: ");
+            Iterator it = crossActionDataList.keySet().iterator();
+            while (it.hasNext()) {
+                String key = (String) it.next();
+                CrossActionData cad = crossActionDataList.get(key);
+                msg.log(cad.getCrossAction().getId() + ",");
+            }
+            msg.log("\n");
 
-         bestAction = crossActionDataList.getBestActionSet();
-         msg.log("Best action: " + bestAction.getCrossAction().getId() + "\n");
-         this.setBestAction(bestAction);
-         return getBestAction();
-      } else {
-         return null;
-      }
-   }
+            bestAction = crossActionDataList.getBestActionSet();
+            msg.log("Best action: " + bestAction.getCrossAction().getId() + "\n");
+            this.setBestAction(bestAction);
+            return getBestAction();
+        } else {
+            return null;
+        }
+    }
 
-   /**
-    * 
-    * @param eList
-    * @return A string of elements
-    */
-   private final String getElementListString(final ElementList eList) {
-      String str = "";
-      for (Element e : eList) {
-         str += "<" + e.getValue() + ">";
-      }
-      return str;
-   }
+    /**
+     * 
+     * @param eList
+     * @return A string of elements
+     */
+    private final String getElementListString(final ElementList eList) {
+        String str = "";
+        for (Element e : eList) {
+            str += "<" + e.getValue() + ">";
+        }
+        return str;
+    }
 
-   /**
-    * 
-    * @return Undefined
-    */
-   public Msg getMsg() {
-      return msg;
-   }
+    /**
+     * 
+     * @return Undefined
+     */
+    public Msg getMsg() {
+        return msg;
+    }
 
-   /**
-    * 
-    * @param msg
-    */
-   public void setMsg(Msg msg) {
-      this.msg = msg;
-   }
+    /**
+     * 
+     * @param msg
+     */
+    public void setMsg(Msg msg) {
+        this.msg = msg;
+    }
 
-   /**
-    * 
-    * @return Undefined
-    */
-   public CrossActionData getBestAction() {
-      return bestAction;
-   }
+    /**
+     * 
+     * @return Undefined
+     */
+    public CrossActionData getBestAction() {
+        return bestAction;
+    }
 
-   /**
-    * 
-    * @param bestAction
-    */
-   public void setBestAction(CrossActionData bestAction) {
-      this.bestAction = bestAction;
-   }
+    /**
+     * 
+     * @param bestAction
+     */
+    public void setBestAction(CrossActionData bestAction) {
+        this.bestAction = bestAction;
+    }
 }

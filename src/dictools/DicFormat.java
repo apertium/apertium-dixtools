@@ -38,220 +38,200 @@ import dics.elements.utils.Msg;
  */
 public class DicFormat {
 
-   /**
-    * 
-    */
-   private DictionaryElement dicFormatted;
-   /**
-    * 
-    */
-   private String[] arguments;
-   /**
-    * 
-    */
-   public static final int BIL = 0;
-   /**
-    * 
-    */
-   public static final int MON = 1;
-   /**
-    * 
-    */
-   private int dicType;
-   /**
-    * 
-    */
-   private String out;
-   /**
-    * 
-    */
-   private Msg msg;
+    /**
+     * 
+     */
+    private DictionaryElement dicFormatted;
+    /**
+     * 
+     */
+    private String[] arguments;
+    /**
+     * 
+     */
+    public static final int BIL = 0;
+    /**
+     * 
+     */
+    public static final int MON = 1;
+    /**
+     * 
+     */
+    private int dicType;
+    /**
+     * 
+     */
+    private String out;
+    /**
+     * 
+     */
+    private Msg msg;
 
-   /**
-    * 
-    * 
-    */
-   public DicFormat() {
-      msg = new Msg();
-   }
+    /**
+     * 
+     * 
+     */
+    public DicFormat() {
+        msg = new Msg();
+    }
 
-   /**
-    * 
-    * @param dic
-    */
-   public DicFormat(final DictionaryElement dic) {
-      msg = new Msg();
-      dicFormatted = dic;
-   }
+    /**
+     * 
+     * @param dic
+     */
+    public DicFormat(final DictionaryElement dic) {
+        msg = new Msg();
+        dicFormatted = dic;
+    }
 
-   /**
-    * 
-    * @return Undefined         */
-   public final DictionaryElement format() {
-      final EHashMap eMap = new EHashMap();
-      for (SectionElement section : dicFormatted.getSections()) {
-         int duplicated = 0;
-         final EElementList elements = section.getEElements();
-         for (final EElement e : elements) {
-            final String e1Key = e.toString();
-            if (!eMap.containsKey(e1Key)) {
-               eMap.put(e1Key, e);
-               IElement iE = e.getI();
-               if (iE != null) {
-                  for (Element child : e.getI().getChildren()) {
-                     if (child instanceof TextElement) {
-                        TextElement tE = (TextElement) child;
-                        String v = tE.getValue();
-                        v = v.replaceAll("\\s", "<b/>");
-                        tE.setValue(v);
-                     }
-                  }
-               }
-               LElement lE = e.getLeft();
-               if (lE != null) {
-                  for (Element child : e.getLeft().getChildren()) {
-                     if (child instanceof TextElement) {
-                        TextElement tE = (TextElement) child;
-                        String v = tE.getValue();
-                        v = v.replaceAll("\\s", "<b/>");
-                        tE.setValue(v);
-                     }
-                  }
-               }
-               RElement rE = e.getRight();
-               if (rE != null) {
+    /**
+     * 
+     * @return Undefined         
+     */
+    public final DictionaryElement format() {
+        final EHashMap eMap = new EHashMap();
+        for (SectionElement section : dicFormatted.getSections()) {
+            int duplicated = 0;
+            final EElementList elements = section.getEElements();
+            for (final EElement e : elements) {
+                final String e1Key = e.toString();
+                if (!eMap.containsKey(e1Key)) {
+                    eMap.put(e1Key, e);
+                    IElement iE = e.getI();
+                    if (iE != null) {
+                        for (Element child : e.getI().getChildren()) {
+                            if (child instanceof TextElement) {
+                                TextElement tE = (TextElement) child;
+                                String v = tE.getValue();
+                                v = v.replaceAll("\\s", "<b/>");
+                                tE.setValue(v);
+                            }
+                        }
+                    }
+                    LElement lE = e.getLeft();
+                    if (lE != null) {
+                        for (Element child : e.getLeft().getChildren()) {
+                            if (child instanceof TextElement) {
+                                TextElement tE = (TextElement) child;
+                                String v = tE.getValue();
+                                v = v.replaceAll("\\s", "<b/>");
+                                tE.setValue(v);
+                            }
+                        }
+                    }
+                    RElement rE = e.getRight();
+                    if (rE != null) {
 
-                  for (Element child : e.getRight().getChildren()) {
-                     if (child instanceof TextElement) {
-                        TextElement tE = (TextElement) child;
-                        String v = tE.getValue();
-                        v = v.replaceAll("\\s", "<b/>");
-                        tE.setValue(v);
-                     }
-                  }
-               }
+                        for (Element child : e.getRight().getChildren()) {
+                            if (child instanceof TextElement) {
+                                TextElement tE = (TextElement) child;
+                                String v = tE.getValue();
+                                v = v.replaceAll("\\s", "<b/>");
+                                tE.setValue(v);
+                            }
+                        }
+                    }
 
-            } else {
-               // EElement other = (EElement)eMap.get(e1Key);
-               String left = e.getValue("L");
-               String right = e.getValue("R");
-
-               msg.err("Duplicated: " + left + "/" + right);
-               duplicated++;
+                } else {
+                    String left = e.getValue("L");
+                    String right = e.getValue("R");
+                    msg.err("Duplicated: " + left + "/" + right + "\n");
+                    duplicated++;
+                }
             }
-         }
-         String errorMsg = duplicated + " duplicated entries in section '" + section.getID() + "'";
-         msg.err(errorMsg);
-         msg.out(errorMsg);
-      }
+            String errorMsg = duplicated + " duplicated entries in section '" + section.getID() + "'\n";
+            msg.err(errorMsg);
+            msg.out(errorMsg);
+        }
+        dicFormatted.printXML(this.getOut());
+        return dicFormatted;
+    }
 
-      //DicSort dicSort = new DicSort(dicFormatted)
-      /*
-       * dicSort.setDicType(getDicType()); dicSort.setOut(this.getOut());
-       * DictionaryElement formatted = dicSort.sort();
-       * formatted.printXML(getOut()); return formatted;
-       */
-      dicFormatted.printXML(this.getOut());
-      return dicFormatted;
-   }
+    /**
+     * 
+     * 
+     */
+    public final void doFormat() {
+        processArguments();
+        actionFormat();
+    }
 
-   /**
-    * 
-    * 
-    */
-   public final void doFormat() {
-      processArguments();
-      actionFormat();
-   }
+    /**
+     * 
+     * 
+     */
+    private void processArguments() {
+        if (arguments[1].equals("-mon")) {
+            dicType = DicSort.MON;
+        } else {
+            dicType = DicSort.BIL;
+        }
+        DictionaryReader dicReader = new DictionaryReader(arguments[2]);
+        DictionaryElement dic = dicReader.readDic();
+        dicReader = null;
+        setDicFormatted(dic);
+        this.setOut(arguments[3]);
+    }
 
-   /**
-    * 
-    * 
-    */
-   private void processArguments() {
-      if (arguments[1].equals("-mon")) {
-         dicType = DicSort.MON;
-      } else {
-         dicType = DicSort.BIL;
-      }
-      DictionaryReader dicReader = new DictionaryReader(arguments[2]);
-      DictionaryElement dic = dicReader.readDic();
-      dicReader = null;
-      setDicFormatted(dic);
-      this.setOut(arguments[3]);
+    /**
+     * 
+     * 
+     */
+    private final void actionFormat() {
+        final DictionaryElement dicFormatted = format();
+        dicFormatted.printXML(getOut());
+    }
 
+    /**
+     * @param dicFormatted
+     *                the dicFormatted to set
+     */
+    private final void setDicFormatted(DictionaryElement dicFormatted) {
+        this.dicFormatted = dicFormatted;
+    }
 
-   /*
-   if (getArguments().length == 4) {
-   if (getArguments()[3].equals("out.dix")) {
-   out = DicTools.removeExtension(getArguments()[3]);
-   out = out + "-formatted.dix";
-   } else {
-   setOut(getArguments()[3]);
-   }
-   }
-    */
-   }
+    /**
+     * @return the arguments
+     */
+    public final String[] getArguments() {
+        return arguments;
+    }
 
-   /**
-    * 
-    * 
-    */
-   private final void actionFormat() {
-      final DictionaryElement dicFormatted = format();
-      dicFormatted.printXML(getOut());
-   }
+    /**
+     * @param arguments
+     *                the arguments to set
+     */
+    public final void setArguments(String[] arguments) {
+        this.arguments = arguments;
+    }
 
-   /**
-    * @param dicFormatted
-    *                the dicFormatted to set
-    */
-   private final void setDicFormatted(DictionaryElement dicFormatted) {
-      this.dicFormatted = dicFormatted;
-   }
+    /**
+     * @return the dicType
+     */
+    public final int getDicType() {
+        return dicType;
+    }
 
-   /**
-    * @return the arguments
-    */
-   public final String[] getArguments() {
-      return arguments;
-   }
+    /**
+     * @param dicType
+     *                the dicType to set
+     */
+    public final void setDicType(int dicType) {
+        this.dicType = dicType;
+    }
 
-   /**
-    * @param arguments
-    *                the arguments to set
-    */
-   public final void setArguments(String[] arguments) {
-      this.arguments = arguments;
-   }
+    /**
+     * @return the out
+     */
+    public final String getOut() {
+        return out;
+    }
 
-   /**
-    * @return the dicType
-    */
-   public final int getDicType() {
-      return dicType;
-   }
-
-   /**
-    * @param dicType
-    *                the dicType to set
-    */
-   public final void setDicType(int dicType) {
-      this.dicType = dicType;
-   }
-
-   /**
-    * @return the out
-    */
-   public final String getOut() {
-      return out;
-   }
-
-   /**
-    * @param out
-    *                the out to set
-    */
-   public final void setOut(String out) {
-      this.out = out;
-   }
+    /**
+     * @param out
+     *                the out to set
+     */
+    public final void setOut(String out) {
+        this.out = out;
+    }
 }

@@ -1,5 +1,3 @@
-package misc.eues;
-
 /*
  * Copyright (C) 2007 Universitat d'Alacant / Universidad de Alicante
  * Author: Enrique Benimeli Bofarull
@@ -19,6 +17,7 @@ package misc.eues;
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
+package misc.eues;
 
 import java.util.HashMap;
 
@@ -40,132 +39,127 @@ import dictools.DictionaryReader;
 public class AssignParadigm {
 
     /**
-         * 
-         */
+     * 
+     */
     private String[] arguments;
-
     /**
-         * 
-         */
+     * 
+     */
     private String morphDic;
-
     /**
-         * 
-         */
+     * 
+     */
     private String bilDic;
-
     /**
-         * 
-         */
+     * 
+     */
     private String out;
 
     /**
-         * 
-         * 
-         */
+     * 
+     * 
+     */
     public final void processArguments() {
-	morphDic = arguments[1];
-	bilDic = arguments[2];
-	out = arguments[3];
+        morphDic = arguments[1];
+        bilDic = arguments[2];
+        out = arguments[3];
     }
 
     /**
-         * 
-         * 
-         */
+     * 
+     * 
+     */
     public final void doAssignParadigm() {
-	processArguments();
+        processArguments();
 
-	DictionaryReader reader = new DictionaryReader(morphDic);
-	reader.setReadParadigms(false);
-	System.out.println("Reading morphological '" + morphDic + "'");
-	DictionaryElement dic = reader.readDic();
+        DictionaryReader reader = new DictionaryReader(morphDic);
+        reader.setReadParadigms(false);
+        System.out.println("Reading morphological '" + morphDic + "'");
+        DictionaryElement dic = reader.readDic();
 
-	HashMap<String, String> np = new HashMap<String, String>();
+        HashMap<String, String> np = new HashMap<String, String>();
 
-	for (SectionElement section : dic.getSections()) {
-	    for (EElement ee : section.getEElements()) {
-		String parName = ee.getParadigmValue();
-		if (parName != null) {
-		    String right = ee.getSide("R").getValue();
-		    np.put(right, parName);
-		}
-	    }
-	}
+        for (SectionElement section : dic.getSections()) {
+            for (EElement ee : section.getEElements()) {
+                String parName = ee.getParadigmValue();
+                if (parName != null) {
+                    String right = ee.getSide("R").getValue();
+                    np.put(right, parName);
+                }
+            }
+        }
 
-	System.out.println(np.size() + " entries read.");
-	DictionaryReader reader2 = new DictionaryReader(bilDic);
-	DictionaryElement bil = reader2.readDic();
+        System.out.println(np.size() + " entries read.");
+        DictionaryReader reader2 = new DictionaryReader(bilDic);
+        DictionaryElement bil = reader2.readDic();
 
-	for (SectionElement section : bil.getSections()) {
-	    for (EElement ee : section.getEElements()) {
-		if (!ee.isRegEx()) {
-		    String left = ee.getSide("L").getValue();
-		    String right = ee.getSide("R").getValue();
+        for (SectionElement section : bil.getSections()) {
+            for (EElement ee : section.getEElements()) {
+                if (!ee.isRegEx()) {
+                    String left = ee.getSide("L").getValue();
+                    String right = ee.getSide("R").getValue();
 
-		    String leftNoTags = cleanTags(left);
-		    String rightNoTags = cleanTags(right);
-		    String par = np.get(rightNoTags);
+                    String leftNoTags = cleanTags(left);
+                    String rightNoTags = cleanTags(right);
+                    String par = np.get(rightNoTags);
 
-		    EElement e = new EElement();
-		    e.setComment("auto");
+                    EElement e = new EElement();
+                    e.setComment("auto");
 
-		    PElement p = new PElement();
-		    e.addChild(p);
-		    if (par == null) {
-			System.err.println("No paradigm for '" + leftNoTags
-				+ "'");
-			par = "";
-		    }
-		    ParElement parE = new ParElement(par);
-		    e.addChild(parE);
+                    PElement p = new PElement();
+                    e.addChild(p);
+                    if (par == null) {
+                        System.err.println("No paradigm for '" + leftNoTags + "'");
+                        par = "";
+                    }
+                    ParElement parE = new ParElement(par);
+                    e.addChild(parE);
 
-		    LElement l = new LElement();
-		    RElement r = new RElement();
-		    TextElement text = new TextElement(leftNoTags);
-		    r.addChild(text);
-		    p.setLElement(l);
-		    p.setRElement(r);
+                    LElement l = new LElement();
+                    RElement r = new RElement();
+                    TextElement text = new TextElement(leftNoTags);
+                    r.addChild(text);
+                    p.setLElement(l);
+                    p.setRElement(r);
 
-		    dic.addEElement(e);
-		}
-	    }
-	}
-	System.out.println("Updated morphological dictionary: '" + out + "'");
-	dic.printXML(out);
+                    dic.addEElement(e);
+                }
+            }
+        }
+        System.out.println("Updated morphological dictionary: '" + out + "'");
+        dic.printXML(out);
     }
 
     /**
-         * 
-         * @param value
-         * @return
-         */
+     * 
+     * @param value
+     * @return
+     */
     private final String cleanTags(final String value) {
-	String[] vs = value.split("\\[");
-	if (vs == null) {
-	    return value;
-	}
-	if (vs.length > 1) {
-	    return vs[0];
-	} else {
-	    return value;
-	}
+        String[] vs = value.split("\\[");
+        if (vs == null) {
+            return value;
+        }
+        if (vs.length > 1) {
+            return vs[0];
+        } else {
+            return value;
+        }
 
     }
 
     /**
-         * @return the arguments
-         */
+     * @return the arguments
+     */
     public final String[] getArguments() {
-	return arguments;
+        return arguments;
     }
 
     /**
-         * @param arguments
-         *                the arguments to set
-         */
+     * @param arguments
+     *                the arguments to set
+     */
     public final void setArguments(String[] arguments) {
-	this.arguments = arguments;
+        this.arguments = arguments;
     }
-
 }

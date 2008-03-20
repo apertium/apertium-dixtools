@@ -42,351 +42,351 @@ import org.xml.sax.SAXException;
  */
 public class LingResourcesReader {
 
-   /**
-    * 
-    */
-   private DocumentBuilderFactory factory;
-   /**
-    * 
-    */
-   private DocumentBuilder builder;
-   /**
-    * 
-    */
-   private Document document;
-   /**
-    * 
-    */
-   private File dicFile;
-   /**
-    * 
-    */
-   private InputStream is;
-   /**
-    * 
-    */
-   private boolean urlDic = false;
-   /**
-    * 
-    */
-   public static int URL = 0;
-   /**
-    * 
-    */
-   public static int FILE = 1;
-   /**
-    * 
-    */
-   private LingResources lingRes;
+    /**
+     * 
+     */
+    private DocumentBuilderFactory factory;
+    /**
+     * 
+     */
+    private DocumentBuilder builder;
+    /**
+     * 
+     */
+    private Document document;
+    /**
+     * 
+     */
+    private File dicFile;
+    /**
+     * 
+     */
+    private InputStream is;
+    /**
+     * 
+     */
+    private boolean urlDic = false;
+    /**
+     * 
+     */
+    public static int URL = 0;
+    /**
+     * 
+     */
+    public static int FILE = 1;
+    /**
+     * 
+     */
+    private LingResources lingRes;
 
-   /**
-    * 
-    */
-   public LingResourcesReader(final String source, final int type) {
-      if (type == LingResourcesReader.FILE) {
-         setDicFile(new File(source));
-      }
-      if (type == LingResourcesReader.URL) {
-         this.setUrlDic(true);
-         try {
-            URL url = new URL(source);
-            is = url.openStream();
-         } catch (MalformedURLException mfue) {
-            System.err.println("Error: malformed URL exception!");
+    /**
+     * 
+     */
+    public LingResourcesReader(final String source, final int type) {
+        if (type == LingResourcesReader.FILE) {
+            setDicFile(new File(source));
+        }
+        if (type == LingResourcesReader.URL) {
+            this.setUrlDic(true);
+            try {
+                URL url = new URL(source);
+                is = url.openStream();
+            } catch (MalformedURLException mfue) {
+                System.err.println("Error: malformed URL exception!");
+                System.exit(-1);
+            } catch (IOException ioe) {
+                System.err.println("Error: I/O exception!");
+                System.exit(-1);
+            }
+        }
+        init();
+    }
+
+    /**
+     * 
+     */
+    private final void init() {
+        try {
+            setFactory(DocumentBuilderFactory.newInstance());
+            getFactory().setXIncludeAware(true);
+            setBuilder(getFactory().newDocumentBuilder());
+        } catch (final ParserConfigurationException pce) {
+            pce.printStackTrace();
+        } catch (final Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 
+     */
+    public final void analize() {
+        try {
+            if (isUrlDic()) {
+                // case: url
+                setDocument(getBuilder().parse(getIs()));
+                is.close();
+            } else {
+                // case: file
+                setDocument(getBuilder().parse(getDicFile()));
+            }
+        } catch (final FileNotFoundException fnfe) {
+            System.err.println("Error: could not find '" + getDicFile() + "' file.");
             System.exit(-1);
-         } catch (IOException ioe) {
-            System.err.println("Error: I/O exception!");
-            System.exit(-1);
-         }
-      }
-      init();
-   }
+        } catch (final SAXException saxE) {
+            saxE.printStackTrace();
+            System.err.println("Error: could not parse '" + getDicFile() + "'");
+        } catch (final IOException ioE) {
+            ioE.printStackTrace();
+            System.err.println("I/O error");
+        } catch (final Exception e) {
+            e.printStackTrace();
+            System.err.println("Error: the XML document is probably not well-formed");
+        } finally {
+            setBuilder(null);
+            setFactory(null);
+        }
+    }
 
-   /**
-    * 
-    */
-   private final void init() {
-      try {
-         setFactory(DocumentBuilderFactory.newInstance());
-         getFactory().setXIncludeAware(true);
-         setBuilder(getFactory().newDocumentBuilder());
-      } catch (final ParserConfigurationException pce) {
-         pce.printStackTrace();
-      } catch (final Exception e) {
-         e.printStackTrace();
-      }
-   }
+    /**
+     * 
+     * @return Linguistic resources object
+     */
+    public final LingResources readLingResources() {
+        this.lingRes = new LingResources();
+        this.analize();
+        Element root = document.getDocumentElement();
+        final NodeList children = root.getChildNodes();
+        for (int i = 0; i < children.getLength(); i++) {
+            final Node child = children.item(i);
 
-   /**
-    * 
-    */
-   public final void analize() {
-      try {
-         if (isUrlDic()) {
-            // case: url
-            setDocument(getBuilder().parse(getIs()));
-            is.close();
-         } else {
-            // case: file
-            setDocument(getBuilder().parse(getDicFile()));
-         }
-      } catch (final FileNotFoundException fnfe) {
-         System.err.println("Error: could not find '" + getDicFile() + "' file.");
-         System.exit(-1);
-      } catch (final SAXException saxE) {
-         saxE.printStackTrace();
-         System.err.println("Error: could not parse '" + getDicFile() + "'");
-      } catch (final IOException ioE) {
-         ioE.printStackTrace();
-         System.err.println("I/O error");
-      } catch (final Exception e) {
-         e.printStackTrace();
-         System.err.println("Error: the XML document is probably not well-formed");
-      } finally {
-         setBuilder(null);
-         setFactory(null);
-      }
-   }
-
-   /**
-    * 
-    * @return Linguistic resources object
-    */
-   public final LingResources readLingResources() {
-      this.lingRes = new LingResources();
-      this.analize();
-      Element root = document.getDocumentElement();
-      final NodeList children = root.getChildNodes();
-      for (int i = 0; i < children.getLength(); i++) {
-         final Node child = children.item(i);
-
-         if (child instanceof Element) {
-            final Element childElement = (Element) child;
-            final String childElementName = childElement.getNodeName();
-            if (childElementName.equals("name")) {
-               String name = this.readSimpleElement(childElement);
-               lingRes.setName(name);
+            if (child instanceof Element) {
+                final Element childElement = (Element) child;
+                final String childElementName = childElement.getNodeName();
+                if (childElementName.equals("name")) {
+                    String name = this.readSimpleElement(childElement);
+                    lingRes.setName(name);
+                }
+                if (childElementName.equals("description")) {
+                    String description = this.readSimpleElement(childElement);
+                    lingRes.setDescription(description);
+                }
+                if (childElementName.equals("resource")) {
+                    Resource resourceElement = readResourceElement(childElement);
+                    lingRes.add(resourceElement);
+                }
+                if (childElementName.equals("resource-set")) {
+                    ResourceSet resourceSetElement = readResourceSetElement(childElement);
+                    lingRes.add(resourceSetElement);
+                }
             }
-            if (childElementName.equals("description")) {
-               String description = this.readSimpleElement(childElement);
-               lingRes.setDescription(description);
+        }
+        return this.lingRes;
+    }
+
+    /**
+     * 
+     * @param element
+     * @return Simple element
+     */
+    private final String readSimpleElement(Element element) {
+        String text = null;
+        final NodeList children = element.getChildNodes();
+        for (int i = 0; i < children.getLength(); i++) {
+            final Node child = children.item(i);
+            if (child instanceof Text) {
+                final Text textNode = (Text) child;
+                text = textNode.getData().trim();
+                return text;
             }
-            if (childElementName.equals("resource")) {
-               Resource resourceElement = readResourceElement(childElement);
-               lingRes.add(resourceElement);
+        }
+        return text;
+    }
+
+    /**
+     * 
+     * @param element
+     * @return resouce element
+     */
+    private final Resource readResourceElement(Element element) {
+        Resource resourceElement = new Resource();
+        final NodeList children = element.getChildNodes();
+        for (int i = 0; i < children.getLength(); i++) {
+            final Node child = children.item(i);
+            if (child instanceof Element) {
+                final Element childElement = (Element) child;
+                final String childElementName = childElement.getNodeName();
+                if (childElementName.equals("property")) {
+                    String name = this.getAttributeValue(childElement, "name");
+                    String value = this.getAttributeValue(childElement, "value");
+                    //System.out.println("property: (" + name + ", " + value + ")");
+                    resourceElement.put(name, value);
+                }
             }
-            if (childElementName.equals("resource-set")) {
-               ResourceSet resourceSetElement = readResourceSetElement(childElement);
-               lingRes.add(resourceSetElement);
+        }
+        return resourceElement;
+    }
+
+    /**
+     * 
+     * @param element
+     * @return Resource set element
+     */
+    private final ResourceSet readResourceSetElement(Element element) {
+        ResourceSet resourceSetElement = new ResourceSet();
+        final NodeList children = element.getChildNodes();
+        for (int i = 0; i < children.getLength(); i++) {
+            final Node child = children.item(i);
+            if (child instanceof Element) {
+                final Element childElement = (Element) child;
+                final String childElementName = childElement.getNodeName();
+                if (childElementName.equals("name")) {
+                    String name = this.readSimpleElement(childElement);
+                    resourceSetElement.setName(name);
+                }
+                if (childElementName.equals("description")) {
+                    resourceSetElement.setDescription(childElementName);
+                }
+                if (childElementName.equals("resource")) {
+                    Resource resourceElement = this.readResourceElement(childElement);
+                    resourceSetElement.add(resourceElement);
+                }
             }
-         }
-      }
-      return this.lingRes;
-   }
+        }
+        return resourceSetElement;
+    }
 
-   /**
-    * 
-    * @param element
-    * @return Simple element
-    */
-   private final String readSimpleElement(Element element) {
-      String text = null;
-      final NodeList children = element.getChildNodes();
-      for (int i = 0; i < children.getLength(); i++) {
-         final Node child = children.item(i);
-         if (child instanceof Text) {
-            final Text textNode = (Text) child;
-            text = textNode.getData().trim();
-            return text;
-         }
-      }
-      return text;
-   }
+    /**
+     * 
+     * @param e
+     * @param attrName
+     * @return The value of the attribute
+     */
+    private String getAttributeValue(final Element e, final String attrName) {
+        String value = "";
+        if (e.hasAttributes()) {
+            final NamedNodeMap attributes = e.getAttributes();
+            for (int i = 0; i < attributes.getLength(); i++) {
+                final Node attribute = attributes.item(i);
+                final String name = attribute.getNodeName();
+                value = attribute.getNodeValue();
+                if (name.equals(attrName)) {
+                    return value;
+                } // end-if
+            } // end-for
+        } // end-if
+        return null;
+    }
 
-   /**
-    * 
-    * @param element
-    * @return resouce element
-    */
-   private final Resource readResourceElement(Element element) {
-      Resource resourceElement = new Resource();
-      final NodeList children = element.getChildNodes();
-      for (int i = 0; i < children.getLength(); i++) {
-         final Node child = children.item(i);
-         if (child instanceof Element) {
-            final Element childElement = (Element) child;
-            final String childElementName = childElement.getNodeName();
-            if (childElementName.equals("property")) {
-               String name = this.getAttributeValue(childElement, "name");
-               String value = this.getAttributeValue(childElement, "value");
-               //System.out.println("property: (" + name + ", " + value + ")");
-               resourceElement.put(name, value);
-            }
-         }
-      }
-      return resourceElement;
-   }
+    /**
+     * 
+     * @return The document builder factory
+     */
+    public DocumentBuilderFactory getFactory() {
+        return factory;
+    }
 
-   /**
-    * 
-    * @param element
-    * @return Resource set element
-    */
-   private final ResourceSet readResourceSetElement(Element element) {
-      ResourceSet resourceSetElement = new ResourceSet();
-      final NodeList children = element.getChildNodes();
-      for (int i = 0; i < children.getLength(); i++) {
-         final Node child = children.item(i);
-         if (child instanceof Element) {
-            final Element childElement = (Element) child;
-            final String childElementName = childElement.getNodeName();
-            if (childElementName.equals("name")) {
-               String name = this.readSimpleElement(childElement);
-               resourceSetElement.setName(name);
-            }
-            if (childElementName.equals("description")) {
-               resourceSetElement.setDescription(childElementName);
-            }
-            if (childElementName.equals("resource")) {
-               Resource resourceElement = this.readResourceElement(childElement);
-               resourceSetElement.add(resourceElement);
-            }
-         }
-      }
-      return resourceSetElement;
-   }
+    /**
+     * 
+     * @param factory
+     */
+    public void setFactory(DocumentBuilderFactory factory) {
+        this.factory = factory;
+    }
 
-   /**
-    * 
-    * @param e
-    * @param attrName
-    * @return The value of the attribute
-    */
-   private String getAttributeValue(final Element e, final String attrName) {
-      String value = "";
-      if (e.hasAttributes()) {
-         final NamedNodeMap attributes = e.getAttributes();
-         for (int i = 0; i < attributes.getLength(); i++) {
-            final Node attribute = attributes.item(i);
-            final String name = attribute.getNodeName();
-            value = attribute.getNodeValue();
-            if (name.equals(attrName)) {
-               return value;
-            } // end-if
-         } // end-for
-      } // end-if
-      return null;
-   }
+    /**
+     * 
+     * @return The DocumentBuilder object
+     */
+    public DocumentBuilder getBuilder() {
+        return builder;
+    }
 
-   /**
-    * 
-    * @return The document builder factory
-    */
-   public DocumentBuilderFactory getFactory() {
-      return factory;
-   }
+    /**
+     * 
+     * @param builder
+     */
+    public void setBuilder(DocumentBuilder builder) {
+        this.builder = builder;
+    }
 
-   /**
-    * 
-    * @param factory
-    */
-   public void setFactory(DocumentBuilderFactory factory) {
-      this.factory = factory;
-   }
+    /**
+     * 
+     * @return 'true' if source file is URL
+     */
+    public boolean isUrlDic() {
+        return urlDic;
+    }
 
-   /**
-    * 
-    * @return The DocumentBuilder object
-    */
-   public DocumentBuilder getBuilder() {
-      return builder;
-   }
+    /**
+     * 
+     * @param urlDic
+     */
+    public void setUrlDic(boolean urlDic) {
+        this.urlDic = urlDic;
+    }
 
-   /**
-    * 
-    * @param builder
-    */
-   public void setBuilder(DocumentBuilder builder) {
-      this.builder = builder;
-   }
+    /**
+     * 
+     * @return The DictionaryElement object
+     */
+    public File getDicFile() {
+        return dicFile;
+    }
 
-   /**
-    * 
-    * @return 'true' if source file is URL
-    */
-   public boolean isUrlDic() {
-      return urlDic;
-   }
+    /**
+     * 
+     * @param dicFile
+     */
+    public void setDicFile(File dicFile) {
+        this.dicFile = dicFile;
+    }
 
-   /**
-    * 
-    * @param urlDic
-    */
-   public void setUrlDic(boolean urlDic) {
-      this.urlDic = urlDic;
-   }
+    /**
+     * 
+     * @return The InputStream object
+     */
+    public InputStream getIs() {
+        return is;
+    }
 
-   /**
-    * 
-    * @return The DictionaryElement object
-    */
-   public File getDicFile() {
-      return dicFile;
-   }
+    /**
+     * 
+     * @param is
+     */
+    public void setIs(InputStream is) {
+        this.is = is;
+    }
 
-   /**
-    * 
-    * @param dicFile
-    */
-   public void setDicFile(File dicFile) {
-      this.dicFile = dicFile;
-   }
+    /**
+     * 
+     * @return The Document object
+     */
+    public Document getDocument() {
+        return document;
+    }
 
-   /**
-    * 
-    * @return The InputStream object
-    */
-   public InputStream getIs() {
-      return is;
-   }
+    /**
+     * 
+     * @param document
+     */
+    public void setDocument(Document document) {
+        this.document = document;
+    }
 
-   /**
-    * 
-    * @param is
-    */
-   public void setIs(InputStream is) {
-      this.is = is;
-   }
+    /**
+     * 
+     * @return Linguistic resources object
+     */
+    public LingResources getLingRes() {
+        return lingRes;
+    }
 
-   /**
-    * 
-    * @return The Document object
-    */
-   public Document getDocument() {
-      return document;
-   }
-
-   /**
-    * 
-    * @param document
-    */
-   public void setDocument(Document document) {
-      this.document = document;
-   }
-
-   /**
-    * 
-    * @return Linguistic resources object
-    */
-   public LingResources getLingRes() {
-      return lingRes;
-   }
-
-   /**
-    * 
-    * @param lingRes
-    */
-   public void setLingRes(LingResources lingRes) {
-      this.lingRes = lingRes;
-   }
+    /**
+     * 
+     * @param lingRes
+     */
+    public void setLingRes(LingResources lingRes) {
+        this.lingRes = lingRes;
+    }
 }

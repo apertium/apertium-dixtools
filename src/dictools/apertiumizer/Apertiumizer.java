@@ -113,7 +113,7 @@ public class Apertiumizer {
                             EElement e = readElementFormat_0(strLine);
                             //e.setComment("priority: " + priority);
                             //System.out.println("Adding: "  + e.getLeft().getValueNoTags());
-                            if( e != null) {
+                            if (e != null) {
                                 section.addEElement(e);
                             }
                             String lm = e.getLeft().getValueNoTags();
@@ -133,20 +133,20 @@ public class Apertiumizer {
                             }
                             break;
                     }
-                    if(c%150 == 0) {
+                    if (c % 150 == 0) {
                         priority++;
                     }
                     c++;
                 }
             }
             in.close();
-            
+
             dic.printXML(this.getOutFileName(), "UTF-8");
-/*
-            DictionaryReader reader = new DictionaryReader("dic.tmp");
-            DictionaryElement bil = reader.readDic();
-            this.completeDic(bil);
-             * */
+        /*
+        DictionaryReader reader = new DictionaryReader("dic.tmp");
+        DictionaryElement bil = reader.readDic();
+        this.completeDic(bil);
+         * */
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }
@@ -200,7 +200,7 @@ public class Apertiumizer {
 
         String prevCat = "";
         SectionElement sectionElement = null;
-        SectionElement noneSection = new SectionElement("none","standard");
+        SectionElement noneSection = new SectionElement("none", "standard");
         for (SectionElement sec : sorted.getSections()) {
             for (EElement ee : sec.getEElements()) {
                 SElementList slist = ee.getLeft().getSElements();
@@ -222,7 +222,7 @@ public class Apertiumizer {
                 } else {
                     noneSection.addEElement(ee);
                 }
-                
+
             }
         }
         if (sectionElement != null) {
@@ -258,11 +258,11 @@ public class Apertiumizer {
                     //System.out.println(lV);
                     break;
                 case 1:
-                    if(token.equals("?")) {
+                    if (token.equals("?")) {
                         right.addChild(new TextElement(""));
-                        
+
                     } else {
-                    right.addChild(new TextElement(lV));
+                        right.addChild(new TextElement(lV));
                     }
                     token = token.replaceAll("\"", "'");
                     e.setComment(token);
@@ -274,11 +274,11 @@ public class Apertiumizer {
                     return e;
                 case 2:
                     lastToken = true;
-                    /*
-                    SElement sE = new SElement(token);
-                    left.addChild(sE);
-                    right.addChild(sE);
-                     */
+                /*
+                SElement sE = new SElement(token);
+                left.addChild(sE);
+                right.addChild(sE);
+                 */
 
             }
             i++;

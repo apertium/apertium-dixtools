@@ -7,14 +7,14 @@
         <pattern>
             <e>
                 <p>
-                    <l>$lemmaA<s n="$cat"/><s n="@tailA"/></l>
-                    <r>$lemmaB<s n="$cat"/><s n="*"/></r>
+                    <l>$lemmaA<v n="cat"/><t n="tailA"/></l>
+                    <r>$lemmaB<v n="cat"/><t/></r>
                 </p>
             </e>
             <e>
                 <p>
-                    <l>$lemmaB<s n="$cat"/><s n="*"/></l>
-                    <r>$lemmaC<s n="$cat"/><s n="@tailC"/></r>
+                    <l>$lemmaB<v n="cat"/><t/></l>
+                    <r>$lemmaC<v n="cat"/><t n="tailC"/></r>
                 </p>
             </e>
         </pattern>
@@ -22,8 +22,8 @@
             <action>
                 <e>
                     <p>
-                        <l>$lemmaA<s n="$cat"/><s n="@tailA"/></l>
-                        <r>$lemmaC<s n="$cat"/><s n="@tailC"/></r>
+                        <l>$lemmaA<v n="cat"/><t n="tailA"/></l>
+                        <r>$lemmaC<v n="cat"/><t n="tailC"/></r>
                     </p>
                 </e>
             </action>

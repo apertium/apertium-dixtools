@@ -276,7 +276,7 @@ public class DicCross {
         setBilAB(dic1);
         setBilBC(dic2);
 
-        final DictionaryElement dic = new DictionaryElement();
+        DictionaryElement dic = new DictionaryElement();
 
         // encoding
         final String encoding = crossXmlEncodings(dic1.getXmlEncoding(), dic2.getXmlEncoding());
@@ -1227,34 +1227,38 @@ public class DicCross {
     /**
      * 
      * @param dic
-     * @return
+     * @return Dictionary with missing lemmas
      */
     private final DictionaryElement addMissingLemmas(DictionaryElement dic) {
         int c = 0;
-        for (SectionElement s : dic.getSections()) {
-            if (s.getType().equals("standard")) {
-                for (EElement ee : s.getEElements()) {
-                    if (ee.getLemma() == null) {
-                        String v = ee.getValue("L");
-                        if (v != null) {
-                            String pv = ee.getParadigmValue();
-                            if (pv != null) {
-                                String[] parts = pv.split("/");
-                                if (parts.length > 1) {
-                                    String[] parts2 = parts[1].split("__");
-                                    String suffix = parts2[0];
-                                    String nLemma = v + suffix;
-                                    c++;
-                                    ee.setLemma(nLemma);
-                                } else {
-                                    c++;
-                                    ee.setLemma(v);
+        try {
+            for (SectionElement s : dic.getSections()) {
+                if (s.getType().equals("standard")) {
+                    for (EElement ee : s.getEElements()) {
+                        if (ee.getLemma() == null) {
+                            String v = ee.getValueNoTags("L");
+                            if (v != null) {
+                                String pv = ee.getParadigmValue();
+                                if (pv != null) {
+                                    String[] parts = pv.split("/");
+                                    if (parts.length > 1) {
+                                        String[] parts2 = parts[1].split("__");
+                                        String suffix = parts2[0];
+                                        String nLemma = v + suffix;
+                                        c++;
+                                        ee.setLemma(nLemma);
+                                    } else {
+                                        c++;
+                                        ee.setLemma(v);
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
+        } catch (NullPointerException npe) {
+            msg.log(npe.getMessage() + "\n");
         }
         //msg.out("[-] " + c + " missing 'lm' atrributes generated\n");
         return dic;

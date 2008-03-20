@@ -27,54 +27,54 @@ import dictools.crossmodel.CrossAction;
  */
 public class CrossActionData {
 
-   /**
-    * 
-    */
-   private CrossAction crossAction;
-   /**
-    * 
-    */
-   private Variables vars;
+    /**
+     * 
+     */
+    private CrossAction crossAction;
+    /**
+     * 
+     */
+    private Variables vars;
 
-   /**
-    * 
-    * @param crossAction
-    * @param vars
-    */
-   public CrossActionData(final CrossAction crossAction, final Variables vars) {
-      this.crossAction = crossAction;
-      this.vars = vars;
-   }
+    /**
+     * 
+     * @param crossAction
+     * @param vars
+     */
+    public CrossActionData(final CrossAction crossAction, final Variables vars) {
+        this.crossAction = crossAction;
+        this.vars = vars;
+    }
 
-   /**
-    * 
-    * @return The cross action
-    */
-   public CrossAction getCrossAction() {
-      return crossAction;
-   }
+    /**
+     * 
+     * @return The cross action
+     */
+    public CrossAction getCrossAction() {
+        return crossAction;
+    }
 
-   /**
-    * 
-    * @param crossAction
-    */
-   public void setCrossAction(CrossAction crossAction) {
-      this.crossAction = crossAction;
-   }
+    /**
+     * 
+     * @param crossAction
+     */
+    public void setCrossAction(CrossAction crossAction) {
+        this.crossAction = crossAction;
+    }
 
-   /**
-    * 
-    * @return The variables
-    */
-   public Variables getVars() {
-      return vars;
-   }
+    /**
+     * 
+     * @return The variables
+     */
+    public Variables getVars() {
+        return vars;
+    }
 
-   /**
-    * 
-    * @param vars
-    */
-   public void setVars(Variables vars) {
-      this.vars = vars;
-   }
+    /**
+     * 
+     * @param vars
+     */
+    public void setVars(Variables vars) {
+        this.vars = vars;
+    }
 }

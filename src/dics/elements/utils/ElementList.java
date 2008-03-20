@@ -17,9 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
-
-
 package dics.elements.utils;
 
 import dics.elements.dtd.Element;
@@ -136,7 +133,7 @@ public class ElementList extends ArrayList<Element> implements Cloneable {
 
         return str;
     }
-    
+
     /**
      * 
      * @param eList
@@ -144,13 +141,13 @@ public class ElementList extends ArrayList<Element> implements Cloneable {
      */
     public final ElementList concat(final ElementList eList) {
         ElementList cList = new ElementList();
-        for(Element e1: this) {
+        for (Element e1 : this) {
             cList.add(e1);
         }
-        for(Element e2: eList) {
+        for (Element e2 : eList) {
             cList.add(e2);
         }
-        return cList;        
+        return cList;
     }
 
     /**
@@ -158,11 +155,11 @@ public class ElementList extends ArrayList<Element> implements Cloneable {
      */
     public final void printSequence(Msg msg) {
         msg.log("[]");
-        for(Element e : this) {
+        for (Element e : this) {
             msg.log("<" + e.getValue() + "> ");
         }
         msg.log("]");
-        
+
     }
 }
 

@@ -29,95 +29,91 @@ import java.io.OutputStreamWriter;
  */
 public class VElement extends Element {
 
-   /**
-    * 
-    */
-   private String n;
+    /**
+     * 
+     */
+    private String n;
 
-   /**
-    * 
-    */
-   // private String temp;
-   /**
-    * 
-    * 
-    */
-   public VElement() {
-      setTagName("v");
-   }
+    /**
+     * 
+     * 
+     */
+    public VElement() {
+        setTagName("v");
+    }
 
-   /**
-    * 
-    * @param value
-    */
-   public VElement(final String value) {
-      setTagName("v");
-      n = value;
-   }
+    /**
+     * 
+     * @param value
+     */
+    public VElement(final String value) {
+        setTagName("v");
+        n = value;
+    }
 
-   /*
-    * 
-    */
-   public VElement(final VElement vE) {
-      setTagName("v");
-      n = vE.getValue();
-   }
+    /*
+     * 
+     */
+    public VElement(final VElement vE) {
+        setTagName("v");
+        n = vE.getValue();
+    }
 
-   /**
-    * 
-    * @return Undefined         */
-   @Override
-   public final String getValue() {
-      return n;
-   }
+    /**
+     * 
+     * @return Undefined         */
+    @Override
+    public final String getValue() {
+        return n;
+    }
 
-   /**
-    * 
-    * @param value
-    */
-   @Override
-   public final void setValue(final String value) {
-      n = value;
-   }
+    /**
+     * 
+     * @param value
+     */
+    @Override
+    public final void setValue(final String value) {
+        n = value;
+    }
 
-   /**
-    * 
-    * @param dos
-    * @throws java.io.IOException
-    */
-   @Override
-   public final void printXML(final OutputStreamWriter dos) throws IOException {
-      dos.write("<" + getTagName() + " n=\"" + getValue() + "\"/>");
-   }
+    /**
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
+    @Override
+    public final void printXML(final OutputStreamWriter dos) throws IOException {
+        dos.write("<" + getTagName() + " n=\"" + getValue() + "\"/>");
+    }
 
-   /**
-    * 
-    */
-   @Override
-   public String toString() {
-      return "<" + getValue() + ">";
-   }
+    /**
+     * 
+     */
+    @Override
+    public String toString() {
+        return "<" + getValue() + ">";
+    }
 
-   /**
-    * 
-    * @param vE
-    * @return Undefined
-    */
-   public final boolean equals(final VElement vE) {
-      return (getValue().equals(vE.getValue()));
-   }
+    /**
+     * 
+     * @param vE
+     * @return Undefined
+     */
+    public final boolean equals(final VElement vE) {
+        return (getValue().equals(vE.getValue()));
+    }
 
-   /**
-    * 
-    * @return Object
-    */
-   @Override
-   public Object clone() {
-      try {
-         final VElement cloned = (VElement) super.clone();
-         return cloned;
-      } catch (final Exception ex) {
-         return null;
-      }
-   }
+    /**
+     * 
+     * @return Object
+     */
+    @Override
+    public Object clone() {
+        try {
+            final VElement cloned = (VElement) super.clone();
+            return cloned;
+        } catch (final Exception ex) {
+            return null;
+        }
+    }
 }

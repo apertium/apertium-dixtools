@@ -67,76 +67,92 @@
 
     -->
     <target name="jar2">
-      	<echo message="apertium-dixtools is temporarily unavailable."/>    
-      	<echo message="Keep your current version of apertium-dixtools."/>    
-      	<echo message="contact: &lt;ebenimeli@dlsi.ua.es>"/>    
-    </target>
-
-    <target name="default2">
-      	<echo message="apertium-dixtools is temporarily unavailable."/>    
-      	<echo message="Keep your current version of apertium-dixtools."/>    
-      	<echo message="contact: &lt;ebenimeli@dlsi.ua.es>"/>    
-    </target>
-
-    <target name="install2">
-      	<echo message="apertium-dixtools is temporarily unavailable."/>    
-      	<echo message="Keep your current version of apertium-dixtools."/>    
-      	<echo message="contact: &lt;ebenimeli@dlsi.ua.es>"/>    
+        <echo message="apertium-dixtools is temporarily unavailable."/>    
+        <echo message="Keep your current version of apertium-dixtools."/>    
+        <echo message="contact: &lt;ebenimeli@dlsi.ua.es>"/>    
     </target>
     
-    <target name="install">
-      	<echo message="Installing apertium-dixtools ..."/>
-    	<mkdir dir="/usr/local/apertium-dixtools"/>
-    	<mkdir dir="/usr/local/apertium-dixtools/dist"/>
-    	<mkdir dir="/usr/local/apertium-dixtools/schemas"/>
-
-    	<copy file="dist/crossdics.jar"
-    	todir="/usr/local/apertium-dixtools/dist"
-    	overwrite="true" failonerror="Error: apertium-dixtools couldn't be
-    	installed"/>
-    	<!-- apertium-dixtools copy -->
-    	<copy file="apertium-dixtools" todir="/usr/local/bin" overwrite="true" failonerror="Error: apertium-dixtools couldn't be installed" verbose="false"/>
-  	<chmod file="/usr/local/bin/apertium-dixtools" perm="+x"/>
-  	
-  	<!-- apertium-crossdics copy -->
-  	<copy file="apertium-crossdics" todir="/usr/local/bin" overwrite="true"/>
-  	<chmod file="/usr/local/bin/apertium-crossdics" perm="+x"/>
-  	
-    	<copy file="schemas/cross-model.xml"
-      	todir="/usr/local/apertium-dixtools/schemas"/>
-    	<echo message="apertium-dixtools was successfully installed!"/>
+    <target name="default2">
+        <echo message="apertium-dixtools is temporarily unavailable."/>    
+        <echo message="Keep your current version of apertium-dixtools."/>    
+        <echo message="contact: &lt;ebenimeli@dlsi.ua.es>"/>    
     </target>
-
-    <!-- ant dist -->
+    
+    <target name="install2">
+        <echo message="apertium-dixtools is temporarily unavailable."/>    
+        <echo message="Keep your current version of apertium-dixtools."/>    
+        <echo message="contact: &lt;ebenimeli@dlsi.ua.es>"/>    
+    </target>
+    
+    <target name="install" depends="jar">
+        <echo message="Installing apertium-dixtools ..."/>
+        <mkdir dir="/usr/local/apertium-dixtools"/>
+        
+        <!-- apertium-dixtools.jar -->
+        <mkdir dir="/usr/local/apertium-dixtools/dist"/>        
+        <copy file="dist/apertium-dixtools.jar"
+              todir="/usr/local/apertium-dixtools/dist"
+              overwrite="true" failonerror="Error: apertium-dixtools couldn't be
+        installed"/>
+        
+        <!-- apertium-dixtools copy -->
+        <copy file="apertium-dixtools" todir="/usr/local/bin" overwrite="true" failonerror="Error: apertium-dixtools couldn't be installed" verbose="false"/>
+        <chmod file="/usr/local/bin/apertium-dixtools" perm="+x"/>
+        
+        <!-- apertium-crossdics copy -->
+        <copy file="apertium-crossdics" todir="/usr/local/bin" overwrite="true"/>
+        <chmod file="/usr/local/bin/apertium-crossdics" perm="+x"/>
+        
+        <!-- Schemas -->
+        <mkdir dir="/usr/local/apertium-dixtools/schemas"/>
+        <copy file="schemas/cross-model.xml" todir="/usr/local/apertium-dixtools/schemas"/>
+        <copy file="schemas/crossmodel.dtd" todir="/usr/local/apertium-dixtools/schemas"/>
+        <echo message="apertium-dixtools was successfully installed!"/>
+    </target>
+    
+    <!-- dist -->
     <target name="dist">
-	<property name="default-version" value="0.8"/>
-    	<input message="Please indicate version:" addproperty="version"
-    defaultvalue="${default-version}"/>   
-    	<property name="package-name" value="apertium-dixtools"/>      
-      	<echo message="Packing apertium-dixtools ..."/>
-	<mkdir dir="releases"/>
-      	<tar destfile="releases/${package-name}-${version}.tar">
-      		<tarfileset dir="src" prefix="${package-name}/src"/>
-                <tarfileset dir="resources" prefix="${package-name}/resources"/>
-                <tarfileset dir="schemas" prefix="${package-name}/schemas"/>
-                <tarfileset dir="nbproject" prefix="${package-name}/nbproject">
-                	<include name="build-impl.xml"/>                
-                	<include name="genfiles.properties"/>                
-                	<include name="project.properties"/>                
-                	<include name="project.xml"/>                
-                </tarfileset>
-                <tarfileset dir="META-INF" prefix="${package-name}/META-INF"/>
-                <tarfileset dir="." prefix="${package-name}">
-		<include name="README.txt"/>
-		<include name="AUTHORS.txt"/>
-		<include name="COPYING.txt"/>
-		<include name="manifest.mf"/>
-		<include name="build.xml"/>
-		<include name="apertium-crossdics"/>
-		<include name="apertium-dixtools"/>
-		</tarfileset>
-       </tar>
-	<gzip src="releases/${package-name}-${version}.tar" destfile="releases/${package-name}-${version}.tar.gz"/>
-	<delete file="releases/${package-name}-${version}.tar"/>
+        <property name="default-version" value="0.8"/>
+        <input message="Please indicate version:" addproperty="version"
+               defaultvalue="${default-version}"/>   
+        <property name="package-name" value="apertium-dixtools"/>      
+        <echo message="Packing apertium-dixtools ..."/>
+        <mkdir dir="releases"/>
+        <tar destfile="releases/${package-name}-${version}.tar">
+            <tarfileset dir="src" prefix="${package-name}/src"/>
+            <tarfileset dir="resources" prefix="${package-name}/resources"/>
+            <tarfileset dir="schemas" prefix="${package-name}/schemas"/>
+            <tarfileset dir="nbproject" prefix="${package-name}/nbproject">
+                <include name="build-impl.xml"/>                
+                <include name="genfiles.properties"/>                
+                <include name="project.properties"/>                
+                <include name="project.xml"/>                
+            </tarfileset>
+            <tarfileset dir="META-INF" prefix="${package-name}/META-INF"/>
+            <tarfileset dir="." prefix="${package-name}">
+                <include name="README"/>
+                <include name="AUTHORS"/>
+                <include name="COPYING"/>
+                <include name="manifest.mf"/>
+                <include name="build.xml"/>
+            </tarfileset>
+            <!-- scripts -->
+            <tarfileset dir="." prefix="${package-name}" filemode="755">
+                <include name="apertium-crossdics"/>
+                <include name="apertium-dixtools"/>
+            </tarfileset>
+            <!-- jar file -->
+            <tarfileset dir="dist" prefix="${package-name}/dist">
+                <include name="apertium-dixtools.jar"/>              
+            </tarfileset>
+            <!-- examples of resources -->
+            <tarfileset dir="resources" prefix="${package-name}/resources">
+                <include name="ling-resources.xml"/>              
+                <include name="ling-resources.dtd"/>              
+            </tarfileset>  
+            
+        </tar>
+        <gzip src="releases/${package-name}-${version}.tar" destfile="releases/${package-name}-${version}.tar.gz"/>
+        <delete file="releases/${package-name}-${version}.tar"/>
     </target>
 </project>

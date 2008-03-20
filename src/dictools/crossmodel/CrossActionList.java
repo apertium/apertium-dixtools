@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dictools.crossmodel;
 
 import java.util.ArrayList;
@@ -30,8 +29,7 @@ import java.util.ArrayList;
 public class CrossActionList extends ArrayList<CrossAction> {
 
     /**
-         * 
-         */
+     * 
+     */
     static final long serialVersionUID = 0;
-
 }

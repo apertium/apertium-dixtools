@@ -34,12 +34,10 @@ public class Node {
      * List of nodes
      */
     private NodeList nodeList;
-    
     /**
      * List of words
      */
     private WordList wordList;
-    
     /**
      * Node value
      */
@@ -163,21 +161,21 @@ public class Node {
             Iterator it = keySet.iterator();
             while (it.hasNext()) {
                 String key = (String) it.next();
-                
+
                 int l = key.length();
                 boolean validKey = true;
                 /*
                 for(int i=0; i<l; i++) {
-                  Character c = key.charAt(i);
-                   if(!Character.isLetter(c)) {
-                      validKey = false;
-                      System.err.println("Key '" + key + "'contains '" + c + "' character");
-                   }
+                Character c = key.charAt(i);
+                if(!Character.isLetter(c)) {
+                validKey = false;
+                System.err.println("Key '" + key + "'contains '" + c + "' character");
+                }
                 }*/
-                
-                if(validKey) {
-                   Node node = nodeList.get(key);
-                node.print(tabs + 1, osw);
+
+                if (validKey) {
+                    Node node = nodeList.get(key);
+                    node.print(tabs + 1, osw);
                 }
             }
             if (this.getValue().equals("@root")) {

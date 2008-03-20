@@ -43,112 +43,112 @@ import java.util.HashMap;
  */
 public class CompleteTranslation {
 
-   /**
-    * 
-    */
-   private DictionaryElement bil;
-   /**
-    * 
-    */
-   private HashMap<String, String> translations;
+    /**
+     * 
+     */
+    private DictionaryElement bil;
+    /**
+     * 
+     */
+    private HashMap<String, String> translations;
 
-   /**
-    * 
-    * @param dicFileName
-    * @param sourceFileName
-    * @param translationFileName
-    */
-   public CompleteTranslation(final String dicFileName, final String sourceFileName, final String translationFileName) {
-      translations = this.readTranslations(sourceFileName, translationFileName);
-      DictionaryReader dicReader = new DictionaryReader(dicFileName);
-      bil = dicReader.readDic();
-   }
+    /**
+     * 
+     * @param dicFileName
+     * @param sourceFileName
+     * @param translationFileName
+     */
+    public CompleteTranslation(final String dicFileName, final String sourceFileName, final String translationFileName) {
+        translations = this.readTranslations(sourceFileName, translationFileName);
+        DictionaryReader dicReader = new DictionaryReader(dicFileName);
+        bil = dicReader.readDic();
+    }
 
-   /**
-    * 
-    */
-   public final void complete() {
-      for (EElement ee : bil.getAllEntries()) {
-         LElement left = ee.getLeft();
-         if (left != null) {
-            System.out.println("Completing " + left.getValueNoTags());
-            SElementList slist = left.getSElements();
-            String source = left.getValueNoTags();
-            if (source != null) {
-               String translation = translations.get(source);
-               if (translation != null) {
-                  RElement rE = new RElement();
-                  TextElement tE = new TextElement(translation);
-                  rE.addChild(tE);
-                  for (SElement sE : slist) {
-                     rE.addChild(sE);
-                  }
-                  if (ee.getP() != null) {
-                  ee.getP().setRElement(rE);
-                  } else {
-                     PElement pE = new PElement();
-                     pE.setRElement(rE);
-                     pE.setRElement(ee.getRight());
-                     IElement iE = ee.getI();
-                     ee.getChildren().remove(iE);
-                     ee.addChild(pE);                     
-                  }
-               }
-            }
-         }
-
-      }
-      bil.printXML("trans-completed-2.dix");
-   }
-
-   /**
-    * 
-    * @param sfn
-    * @param tfn
-    * @return
-    */
-   private final HashMap<String, String> readTranslations(final String sfn, final String tfn) {
-      HashMap<String, String> map = new HashMap<String, String>();
-      ArrayList<String> srcList = this.buildList(sfn);
-      ArrayList<String> transList = this.buildList(tfn);
-
-      for (int i = 0; i < srcList.size(); i++) {
-         String src = srcList.get(i);
-         String trans = transList.get(i);
-         map.put(src, trans);
-         System.out.println(src + " --> " + trans);
-      }
-      return map;
-   }
-
-   /**
-    * 
-    * @param fileName
-    * @return
-    */
-   private final ArrayList<String> buildList(final String fileName) {
-      ArrayList<String> list = new ArrayList<String>();
-      try {
-         FileInputStream fstream = new FileInputStream(fileName);
-         DataInputStream in = new DataInputStream(fstream);
-         BufferedReader br = new BufferedReader(new InputStreamReader(in, "UTF-8"));
-         StreamTokenizer st = new StreamTokenizer(br);
-         st.quoteChar('.');
-
-         String strLine;
-
-         while ((strLine = br.readLine()) != null) {
-            if (!strLine.equals("")) {
-               //System.err.println("'" + strLine + "'");
-               list.add(strLine);
+    /**
+     * 
+     */
+    public final void complete() {
+        for (EElement ee : bil.getAllEntries()) {
+            LElement left = ee.getLeft();
+            if (left != null) {
+                System.out.println("Completing " + left.getValueNoTags());
+                SElementList slist = left.getSElements();
+                String source = left.getValueNoTags();
+                if (source != null) {
+                    String translation = translations.get(source);
+                    if (translation != null) {
+                        RElement rE = new RElement();
+                        TextElement tE = new TextElement(translation);
+                        rE.addChild(tE);
+                        for (SElement sE : slist) {
+                            rE.addChild(sE);
+                        }
+                        if (ee.getP() != null) {
+                            ee.getP().setRElement(rE);
+                        } else {
+                            PElement pE = new PElement();
+                            pE.setRElement(rE);
+                            pE.setRElement(ee.getRight());
+                            IElement iE = ee.getI();
+                            ee.getChildren().remove(iE);
+                            ee.addChild(pE);
+                        }
+                    }
+                }
             }
 
-         }
-         in.close();
-      } catch (Exception e) {
-         System.err.println("Error: " + e.getMessage());
-      }
-      return list;
+        }
+        bil.printXML("trans-completed-2.dix");
+    }
 
-   }
+    /**
+     * 
+     * @param sfn
+     * @param tfn
+     * @return
+     */
+    private final HashMap<String, String> readTranslations(final String sfn, final String tfn) {
+        HashMap<String, String> map = new HashMap<String, String>();
+        ArrayList<String> srcList = this.buildList(sfn);
+        ArrayList<String> transList = this.buildList(tfn);
+
+        for (int i = 0; i < srcList.size(); i++) {
+            String src = srcList.get(i);
+            String trans = transList.get(i);
+            map.put(src, trans);
+            System.out.println(src + " --> " + trans);
+        }
+        return map;
+    }
+
+    /**
+     * 
+     * @param fileName
+     * @return
+     */
+    private final ArrayList<String> buildList(final String fileName) {
+        ArrayList<String> list = new ArrayList<String>();
+        try {
+            FileInputStream fstream = new FileInputStream(fileName);
+            DataInputStream in = new DataInputStream(fstream);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+            StreamTokenizer st = new StreamTokenizer(br);
+            st.quoteChar('.');
+
+            String strLine;
+
+            while ((strLine = br.readLine()) != null) {
+                if (!strLine.equals("")) {
+                    //System.err.println("'" + strLine + "'");
+                    list.add(strLine);
+                }
+
+            }
+            in.close();
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+        return list;
+
+    }
 }

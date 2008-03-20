@@ -33,12 +33,10 @@ public class Word {
      * 
      */
     private String key;
-    
     /**
      * 
      */
     private String value;
-    
     /**
      * 
      */
@@ -119,14 +117,14 @@ public class Word {
 
             osw.write(sTabs + "\t<r>");
             osw.write(entry.getValue());
-            
+
             for (SElement sE : entry.getValueAttr()) {
                 osw.write("<s n=\"" + sE.getValue() + "\"/>");
             }
             osw.write("</r>\n");
 
             osw.write(sTabs + "</w>\n");
-            
+
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }

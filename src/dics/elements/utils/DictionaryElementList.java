@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dics.elements.utils;
 
 import java.util.ArrayList;
@@ -32,7 +31,7 @@ import dics.elements.dtd.DictionaryElement;
 public class DictionaryElementList extends ArrayList<DictionaryElement> {
 
     /**
-         * 
-         */
+     * 
+     */
     static final long serialVersionUID = 0;
 }

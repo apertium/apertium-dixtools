@@ -1,16 +1,15 @@
 #!/bin/bash
 
 nparams="$#"
-mainClass="ProcessDics"
-# Minimum and maximum memory for JVM
-defaultMinMem=32
+# Heap space memory for JVM
+defaultMinMem=100
 defaultMaxMem=300
 if [ "$CROSSDICS_PATH" = "" ];
 then
-	CROSSDICS_PATH="/usr/local/apertium-crossdics"
+	CROSSDICS_PATH="/usr/local/apertium-dixtools"
 fi
 
-library="$CROSSDICS_PATH/dist/crossdics.jar"
+library="$CROSSDICS_PATH/dist/apertium-dixtools.jar"
 java_options="-Xms${defaultMinMem}m -Xmx${defaultMaxMem}m -jar ${library} cross"
 
 if [ $nparams -ge 3 ]; then
@@ -19,10 +18,9 @@ if [ $nparams -ge 3 ]; then
  fi
   java ${java_options} cross2 $1 $2 $3
 else
-  #echo "Usage: apertium-crossdics <-f|-url> <ling-resources.xml> <sl-tl>";
   echo "Usage: apertium-crossdics -f <ling-resources.xml> <sl-tl>";
   echo "";
-  echo "More information in http://xixona.dlsi.ua.es/wiki/index.php/Crossdics";
+  echo "More information in http://xixona.dlsi.ua.es/wiki/index.php/Apertium-dixtools";
   echo "";
 fi
 

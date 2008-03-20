@@ -35,66 +35,66 @@ import java.util.HashMap;
  */
 public class PrepareDic {
 
-   private DictionaryElement ncBil;
-   private HashMap<String, String> missing;
+    private DictionaryElement ncBil;
+    private HashMap<String, String> missing;
 
-   /**
-    * 
-    */
-   public PrepareDic(final String missingFileName, final String ncBilFileName) {
-      DictionaryReader r1 = new DictionaryReader(ncBilFileName);
-      ncBil = r1.readDic();
-      missing = this.getmap(missingFileName);
-      this.prepare();
-   }
+    /**
+     * 
+     */
+    public PrepareDic(final String missingFileName, final String ncBilFileName) {
+        DictionaryReader r1 = new DictionaryReader(ncBilFileName);
+        ncBil = r1.readDic();
+        missing = this.getmap(missingFileName);
+        this.prepare();
+    }
 
-   /**
-    * 
-    */
-   public final void prepare() {
-      DictionaryElement dic = new DictionaryElement();
-      SectionElement section = new SectionElement("main", "standard");
-      dic.addSection(section);
+    /**
+     * 
+     */
+    public final void prepare() {
+        DictionaryElement dic = new DictionaryElement();
+        SectionElement section = new SectionElement("main", "standard");
+        dic.addSection(section);
 
-      int max = ncBil.getAllEntries().size();
-      for (int i = 0; i < max; i++) {
-         EElement ee = ncBil.getAllEntries().get(i);
-         //String value = ee.getLeft().getValueNoTags();
-         String value = ee.getRight().getValueNoTags();
-         System.out.println("checking " + value + " ...");
-         if (value != null) {
-            if (missing.containsKey(value)) {
-               section.addEElement(ee);
-               System.out.println("adding " + value + " ...");
+        int max = ncBil.getAllEntries().size();
+        for (int i = 0; i < max; i++) {
+            EElement ee = ncBil.getAllEntries().get(i);
+            //String value = ee.getLeft().getValueNoTags();
+            String value = ee.getRight().getValueNoTags();
+            System.out.println("checking " + value + " ...");
+            if (value != null) {
+                if (missing.containsKey(value)) {
+                    section.addEElement(ee);
+                    System.out.println("adding " + value + " ...");
+                }
             }
-         }
-      }
-      dic.printXML("not-common-en-ca-filtered.dix");
-   }
+        }
+        dic.printXML("not-common-en-ca-filtered.dix");
+    }
 
-   /**
-    * 
-    * @param fileName
-    * @return Map with missing entries
-    */
-   private HashMap<String, String> getmap(final String fileName) {
-      HashMap<String, String> map = new HashMap<String, String>();
-      try {
-         FileInputStream fstream = new FileInputStream(fileName);
-         DataInputStream in = new DataInputStream(fstream);
-         BufferedReader br = new BufferedReader(new InputStreamReader(in, "UTF-8"));
-         String strLine;
+    /**
+     * 
+     * @param fileName
+     * @return Map with missing entries
+     */
+    private HashMap<String, String> getmap(final String fileName) {
+        HashMap<String, String> map = new HashMap<String, String>();
+        try {
+            FileInputStream fstream = new FileInputStream(fileName);
+            DataInputStream in = new DataInputStream(fstream);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+            String strLine;
 
-         while ((strLine = br.readLine()) != null) {
-            if (!strLine.equals("")) {
-               map.put(strLine, strLine);
-               //System.err.println("'" + strLine + "'");
+            while ((strLine = br.readLine()) != null) {
+                if (!strLine.equals("")) {
+                    map.put(strLine, strLine);
+                //System.err.println("'" + strLine + "'");
+                }
             }
-         }
-         in.close();
-      } catch (Exception e) {
-         System.err.println("Error: " + e.getMessage());
-      }
-      return map;
-   }
+            in.close();
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+        return map;
+    }
 }

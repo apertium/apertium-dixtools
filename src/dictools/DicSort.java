@@ -39,406 +39,406 @@ import dics.elements.utils.SElementList;
  */
 public class DicSort {
 
-   /**
-    * 
-    */
-   private DictionaryElement dic;
-   /**
-    * 
-    */
-   private String[] arguments;
-   /**
-    * 
-    */
-   public static final int BIL = 0;
-   /**
-    * 
-    */
-   public static final int MON = 1;
-   /**
-    * 
-    */
-   private boolean xinclude;
-   /**
-    * 
-    */
-   private int dicType;
-   /**
-    * 
-    */
-   private String out;
-   /**
-    * 
-    */
-   private Msg msg;
+    /**
+     * 
+     */
+    private DictionaryElement dic;
+    /**
+     * 
+     */
+    private String[] arguments;
+    /**
+     * 
+     */
+    public static final int BIL = 0;
+    /**
+     * 
+     */
+    public static final int MON = 1;
+    /**
+     * 
+     */
+    private boolean xinclude;
+    /**
+     * 
+     */
+    private int dicType;
+    /**
+     * 
+     */
+    private String out;
+    /**
+     * 
+     */
+    private Msg msg;
 
-   /**
-    * 
-    * 
-    */
-   public DicSort() {
-      setXinclude(false);
-      msg = new Msg();
-      msg.setLogFileName("sort.log");
-   }
+    /**
+     * 
+     * 
+     */
+    public DicSort() {
+        setXinclude(false);
+        msg = new Msg();
+        msg.setLogFileName("sort.log");
+    }
 
-   /**
-    * 
-    * @param dic
-    */
-   public DicSort(final DictionaryElement dic) {
-      this.dic = dic;
-      setXinclude(false);
-      msg = new Msg();
-      msg.setLogFileName("sort.log");
-   }
+    /**
+     * 
+     * @param dic
+     */
+    public DicSort(final DictionaryElement dic) {
+        this.dic = dic;
+        setXinclude(false);
+        msg = new Msg();
+        msg.setLogFileName("sort.log");
+    }
 
-   /**
-    * 
-    * @return Undefined        
-    */
-   public final DictionaryElement sort() {
-      DictionaryElement dicSorted = null;
-      if (dicType == DicSort.BIL) {
-         dicSorted = sortBil();
-      }
-      if (dicType == DicSort.MON) {
-         dicSorted = sortMon();
-      }
-      return dicSorted;
-   }
+    /**
+     * 
+     * @return Undefined        
+     */
+    public final DictionaryElement sort() {
+        DictionaryElement dicSorted = null;
+        if (dicType == DicSort.BIL) {
+            dicSorted = sortBil();
+        }
+        if (dicType == DicSort.MON) {
+            dicSorted = sortMon();
+        }
+        return dicSorted;
+    }
 
-   /**
-    * 
-    * 
-    */
-   public final void doSort() {
-      processArguments();
-      actionSort();
-   }
+    /**
+     * 
+     * 
+     */
+    public final void doSort() {
+        processArguments();
+        actionSort();
+    }
 
-   /**
-    * 
-    * 
-    */
-   private void processArguments() {
-      if (arguments[1].equals("-mon")) {
-         dicType = DicSort.MON;
-      } else {
-         dicType = DicSort.BIL;
-      }
-      this.setXinclude(false);
+    /**
+     * 
+     * 
+     */
+    private void processArguments() {
+        if (arguments[1].equals("-mon")) {
+            dicType = DicSort.MON;
+        } else {
+            dicType = DicSort.BIL;
+        }
+        this.setXinclude(false);
 
-      /*
-      if (arguments[2].equals("-xinclude")) {
-      setXinclude(true);
-      System.out.println("xinclude mode");
-      } else {
-      setXinclude(false);
-      }
-       */
+        /*
+        if (arguments[2].equals("-xinclude")) {
+        setXinclude(true);
+        System.out.println("xinclude mode");
+        } else {
+        setXinclude(false);
+        }
+         */
 
-      DictionaryReader dicReader = new DictionaryReader(arguments[2]);
-      DictionaryElement dic = dicReader.readDic();
-      dic.setFileName(arguments[2]);
-      dicReader = null;
-      setDic(dic);
-      out = arguments[3];
+        DictionaryReader dicReader = new DictionaryReader(arguments[2]);
+        DictionaryElement dic = dicReader.readDic();
+        dic.setFileName(arguments[2]);
+        dicReader = null;
+        setDic(dic);
+        out = arguments[3];
 
-   /*
-   if (getArguments()[4].equals("out.dix")) {
-   out = DicTools.removeExtension(getArguments()[4]);
-   out = out + "-sorted.dix";
-   } else {
-   out = getArguments()[4];
-   }
-    */
+    /*
+    if (getArguments()[4].equals("out.dix")) {
+    out = DicTools.removeExtension(getArguments()[4]);
+    out = out + "-sorted.dix";
+    } else {
+    out = getArguments()[4];
+    }
+     */
 
-   }
+    }
 
-   /**
-    * 
-    * 
-    */
-   public final void actionSort() {
-      DictionaryElement dicSorted = null;
-      // System.out.println("Dictype: " + dicType);
-      if (dicType == DicSort.BIL) {
-         dicSorted = sortBil();
-      }
+    /**
+     * 
+     * 
+     */
+    public final void actionSort() {
+        DictionaryElement dicSorted = null;
+        // System.out.println("Dictype: " + dicType);
+        if (dicType == DicSort.BIL) {
+            dicSorted = sortBil();
+        }
 
-      if (dicType == DicSort.MON) {
-         dicSorted = sortMon();
-      }
-      dicSorted.printXML(out);
+        if (dicType == DicSort.MON) {
+            dicSorted = sortMon();
+        }
+        dicSorted.printXML(out);
 
-   /*
-   if (dicSorted != null) {
-   dicSorted.setFolder(getOut() + "-includes");
-   if (isXinclude()) {
-   dicSorted.printXMLXInclude(out);
-   } else {
-   dicSorted.printXML(out);
-   }
-   }
-    */
-   }
+    /*
+    if (dicSorted != null) {
+    dicSorted.setFolder(getOut() + "-includes");
+    if (isXinclude()) {
+    dicSorted.printXMLXInclude(out);
+    } else {
+    dicSorted.printXML(out);
+    }
+    }
+     */
+    }
 
-   /**
-    * @param dicFormatted
-    *                the dicFormatted to set
-    */
-   private final void setDic(DictionaryElement dic) {
-      this.dic = dic;
-   }
+    /**
+     * @param dicFormatted
+     *                the dicFormatted to set
+     */
+    private final void setDic(DictionaryElement dic) {
+        this.dic = dic;
+    }
 
-   /**
-    * @return the arguments
-    */
-   public final String[] getArguments() {
-      return arguments;
-   }
+    /**
+     * @return the arguments
+     */
+    public final String[] getArguments() {
+        return arguments;
+    }
 
-   /**
-    * @param arguments
-    *                the arguments to set
-    */
-   public final void setArguments(String[] arguments) {
-      this.arguments = arguments;
-   }
+    /**
+     * @param arguments
+     *                the arguments to set
+     */
+    public final void setArguments(String[] arguments) {
+        this.arguments = arguments;
+    }
 
-   /**
-    * 
-    * @return
-    */
-   private final DictionaryElement sortBil() {
-      int lrs = 0;
-      int rls = 0;
-      int n = 0;
+    /**
+     * 
+     * @return
+     */
+    private final DictionaryElement sortBil() {
+        int lrs = 0;
+        int rls = 0;
+        int n = 0;
 
-      for (SectionElement section : dic.getSections()) {
-         EElementList eList = section.getEElements();
-         HashMap<String, EElementList> map = new HashMap<String, EElementList>();
+        for (SectionElement section : dic.getSections()) {
+            EElementList eList = section.getEElements();
+            HashMap<String, EElementList> map = new HashMap<String, EElementList>();
 
-         for (EElement e : eList) {
-            n++;
-            SElementList sList = e.getSElements("L");
-            if (e.hasRestriction()) {
-               String r = e.getRestriction();
-               if (r.equals("LR")) {
-                  lrs++;
-               }
-               if (r.equals("RL")) {
-                  rls++;
-               }
+            for (EElement e : eList) {
+                n++;
+                SElementList sList = e.getSElements("L");
+                if (e.hasRestriction()) {
+                    String r = e.getRestriction();
+                    if (r.equals("LR")) {
+                        lrs++;
+                    }
+                    if (r.equals("RL")) {
+                        rls++;
+                    }
+                }
+                String cat;
+                if (sList != null) {
+                    if (sList.size() > 0) {
+                        cat = sList.get(0).getValue();
+                    } else {
+                        cat = "none";
+                    }
+                    EElementList l;
+                    if (map.containsKey(cat)) {
+                        l = map.get(cat);
+                        l.add(e);
+                        map.put(cat, l);
+                    } else {
+                        l = new EElementList();
+                        l.add(e);
+                        //System.out.println("category: " + cat);
+                        map.put(cat, l);
+                    }
+                }
             }
-            String cat;
-            if (sList != null) {
-               if (sList.size() > 0) {
-                  cat = sList.get(0).getValue();
-               } else {
-                  cat = "none";
-               }
-               EElementList l;
-               if (map.containsKey(cat)) {
-                  l = map.get(cat);
-                  l.add(e);
-                  map.put(cat, l);
-               } else {
-                  l = new EElementList();
-                  l.add(e);
-                  System.out.println("category: " + cat);
-                  map.put(cat, l);
-               }
+            msg.log("lemmas: " + n);
+            msg.log("LR: " + lrs);
+            msg.log("RL: " + rls);
+
+            Set keySet = map.keySet();
+            Iterator it = keySet.iterator();
+
+            EElementList listAll = new EElementList();
+            while (it.hasNext()) {
+                String cat = (String) it.next();
+                EElementList list = map.get(cat);
+                msg.log(cat + ": " + list.size());
+                if (list.size() > 0) {
+                    Collections.sort(list);
+                    EElement eHead = list.get(0);
+                    eHead.addComments("******************************");
+                    eHead.addComments("(" + cat + ") group");
+                    eHead.addComments("******************************");
+                    listAll.addAll(list);
+                }
             }
-         }
-         msg.log("lemmas: " + n);
-         msg.log("LR: " + lrs);
-         msg.log("RL: " + rls);
+            section.setEElements(listAll);
+        }
+        return dic;
+    }
 
-         Set keySet = map.keySet();
-         Iterator it = keySet.iterator();
+    /**
+     * 
+     * @return Undefined         
+     */
+    private final DictionaryElement sortMon() {
+        int lrs = 0;
+        int rls = 0;
 
-         EElementList listAll = new EElementList();
-         while (it.hasNext()) {
-            String cat = (String) it.next();
-            EElementList list = map.get(cat);
-            msg.log(cat + ": " + list.size());
-            if (list.size() > 0) {
-               Collections.sort(list);
-               EElement eHead = list.get(0);
-               eHead.addComments("******************************");
-               eHead.addComments("(" + cat + ") group");
-               eHead.addComments("******************************");
-               listAll.addAll(list);
+        int n = 0;
+        for (SectionElement section : dic.getSections()) {
+            //if (section.getID().equals("main")) {
+            EElementList eList = section.getEElements();
+            HashMap<String, EElementList> map = new HashMap<String, EElementList>();
+
+            for (EElement e : eList) {
+                n++;
+                String par = e.getParadigmValue();
+                if (e.hasRestriction()) {
+                    String r = e.getRestriction();
+                    if (r.equals("LR")) {
+                        lrs++;
+                    }
+                    if (r.equals("RL")) {
+                        rls++;
+                    }
+                }
+
+                String cat = null;
+                if (par == null) {
+                    cat = "none";
+                } else {
+                    String[] aux = par.split("__");
+                    if (aux.length == 2) {
+                        cat = aux[1];
+                    } else {
+                        cat = par;
+                    }
+                    cat = cat.replaceAll("/", "-");
+                }
+                if (cat != null) {
+                    EElementList l;
+                    if (map.containsKey(cat)) {
+                        l = map.get(cat);
+                        l.add(e);
+                        map.put(cat, l);
+                    } else {
+                        l = new EElementList();
+                        l.add(e);
+                        map.put(cat, l);
+                    }
+                }
+
             }
-         }
-         section.setEElements(listAll);
+            msg.log("lemmas: " + n);
+            msg.log("LR: " + lrs);
+            msg.log("RL: " + rls);
 
-      }
-      return dic;
-   }
+            Set keySet = map.keySet();
+            Iterator it = keySet.iterator();
 
-   /**
-    * 
-    * @return Undefined         */
-   private final DictionaryElement sortMon() {
-      int lrs = 0;
-      int rls = 0;
-
-      int n = 0;
-      for (SectionElement section : dic.getSections()) {
-         //if (section.getID().equals("main")) {
-         EElementList eList = section.getEElements();
-         HashMap<String, EElementList> map = new HashMap<String, EElementList>();
-
-         for (EElement e : eList) {
-            n++;
-            String par = e.getParadigmValue();
-            if (e.hasRestriction()) {
-               String r = e.getRestriction();
-               if (r.equals("LR")) {
-                  lrs++;
-               }
-               if (r.equals("RL")) {
-                  rls++;
-               }
-            }
-
-            String cat = null;
-            if (par == null) {
-               cat = "none";
-            } else {
-               String[] aux = par.split("__");
-               if (aux.length == 2) {
-                  cat = aux[1];
-               } else {
-                  cat = par;
-               }
-               cat = cat.replaceAll("/", "-");
-            }
-            if (cat != null) {
-               EElementList l;
-               if (map.containsKey(cat)) {
-                  l = map.get(cat);
-                  l.add(e);
-                  map.put(cat, l);
-               } else {
-                  l = new EElementList();
-                  l.add(e);
-                  map.put(cat, l);
-               }
-            }
-
-         }
-         msg.log("lemmas: " + n);
-         msg.log("LR: " + lrs);
-         msg.log("RL: " + rls);
-
-         Set keySet = map.keySet();
-         Iterator it = keySet.iterator();
-
-         EElementList listAll = new EElementList();
-         String folder = "";
-         if (isXinclude()) {
-            folder = out + "-includes";
-            boolean status = new File(folder).mkdir();
-         }
-         while (it.hasNext()) {
-            DictionaryElement d = new DictionaryElement();
-            SectionElement sec = new SectionElement();
-            d.addSection(sec);
-
-            String cat = (String) it.next();
-            EElementList list = map.get(cat);
-            msg.log(cat + ": " + list.size());
+            EElementList listAll = new EElementList();
+            String folder = "";
             if (isXinclude()) {
-               section.addXInclude("<xi:include xmlns:xi=\"http://www.w3.org/2001/XInclude\" href=\"" + folder + "/" + cat + ".dix\"/>");
+                folder = out + "-includes";
+                boolean status = new File(folder).mkdir();
             }
-            if (list.size() > 0) {
-               Collections.sort(list);
-               EElement eHead = list.get(0);
-               eHead.addComments("******************************");
-               eHead.addComments("(" + cat + ") group");
-               eHead.addComments("******************************");
-               listAll.addAll(list);
+            while (it.hasNext()) {
+                DictionaryElement d = new DictionaryElement();
+                SectionElement sec = new SectionElement();
+                d.addSection(sec);
+
+                String cat = (String) it.next();
+                EElementList list = map.get(cat);
+                msg.log(cat + ": " + list.size());
+                if (isXinclude()) {
+                    section.addXInclude("<xi:include xmlns:xi=\"http://www.w3.org/2001/XInclude\" href=\"" + folder + "/" + cat + ".dix\"/>");
+                }
+                if (list.size() > 0) {
+                    Collections.sort(list);
+                    EElement eHead = list.get(0);
+                    eHead.addComments("******************************");
+                    eHead.addComments("(" + cat + ") group");
+                    eHead.addComments("******************************");
+                    listAll.addAll(list);
+                }
+                sec.setEElements(list);
+                if (isXinclude()) {
+                    sec.printXMLXInclude(folder + "/" + cat + ".dix");
+                }
+
             }
-            sec.setEElements(list);
-            if (isXinclude()) {
-               sec.printXMLXInclude(folder + "/" + cat + ".dix");
-            }
+            section.setEElements(listAll);
+        //}
+        }
+        return dic;
+    }
 
-         }
-         section.setEElements(listAll);
-      //}
-      }
-      return dic;
-   }
+    /**
+     * @return the dicType
+     */
+    public final int getDicType() {
+        return dicType;
+    }
 
-   /**
-    * @return the dicType
-    */
-   public final int getDicType() {
-      return dicType;
-   }
+    /**
+     * @param dicType
+     *                the dicType to set
+     */
+    public final void setDicType(int dicType) {
+        this.dicType = dicType;
+    }
 
-   /**
-    * @param dicType
-    *                the dicType to set
-    */
-   public final void setDicType(int dicType) {
-      this.dicType = dicType;
-   }
+    /**
+     * @return the xinclude
+     */
+    private final boolean isXinclude() {
+        return xinclude;
+    }
 
-   /**
-    * @return the xinclude
-    */
-   private final boolean isXinclude() {
-      return xinclude;
-   }
+    /**
+     * @param xinclude
+     *                the xinclude to set
+     */
+    public final void setXinclude(boolean xinclude) {
+        this.xinclude = xinclude;
+    }
 
-   /**
-    * @param xinclude
-    *                the xinclude to set
-    */
-   public final void setXinclude(boolean xinclude) {
-      this.xinclude = xinclude;
-   }
+    /**
+     * @return the out
+     */
+    private final String getOut() {
+        return out;
+    }
 
-   /**
-    * @return the out
-    */
-   private final String getOut() {
-      return out;
-   }
+    /**
+     * @return the dic
+     */
+    public final DictionaryElement getDic() {
+        return dic;
+    }
 
-   /**
-    * @return the dic
-    */
-   public final DictionaryElement getDic() {
-      return dic;
-   }
+    /**
+     * 
+     * @param out
+     */
+    public final void setOut(final String out) {
+        this.out = out;
+    }
 
-   /**
-    * 
-    * @param out
-    */
-   public final void setOut(final String out) {
-      this.out = out;
-   }
+    /**
+     * @return the msg
+     */
+    public final Msg getMsg() {
+        return msg;
+    }
 
-   /**
-    * @return the msg
-    */
-   public final Msg getMsg() {
-      return msg;
-   }
-
-   /**
-    * @param msg
-    *                the msg to set
-    */
-   public final void setMsg(Msg msg) {
-      this.msg = msg;
-   }
+    /**
+     * @param msg
+     *                the msg to set
+     */
+    public final void setMsg(Msg msg) {
+        this.msg = msg;
+    }
 }
