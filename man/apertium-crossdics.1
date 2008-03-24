@@ -1,0 +1,42 @@
+.TH apertium-crossdics 1 2008-03-24 "" ""
+.SH NAME
+apertium-crossdics \- This application is part of (
+.B apertium 
+)
+.PP
+This tool is part of the apertium open-source machine translation
+toolbox: \fBhttp://www.apertium.org\fR.
+.SH SYNOPSIS
+.B apertium-crossdics
+-f ling-resources.xml sl-tl 
+.PP
+.SH DESCRIPTION
+.BR apertium-crossdics 
+is a tool to cross two bilingual dictionaries in Apertium format, to generate
+a new bilingual dictionary; for example, given bilingual dictionaries for
+en-ca (English-Catalan) and ca-es (Catalan-Spanish) apertium-crossdics can
+generate a new dictionary en-es, containing the words held in common 
+between the source dictionaries.
+.SH OPTIONS
+.TP
+.B \-f
+Path to linguistic resources file
+.PP
+.SH SEE ALSO	
+.I apertium\-dixtools\fR(1),
+.I lt-proc\fR(1),
+.I apertium-translator\fR(1),
+.I apertium\fR(1).
+.SH BUGS
+./" None! We write quality software!
+./" We can't be held responsible for low quality users.
+./" (j/k)
+Lots of...lurking in the dark and waiting for you!
+.SH AUTHOR
+Copyright (c) 2007-2008 Enrique Benimeli Bofarull
+
+Copyright (c) 2008 Universitat d'Alacant / Universidad de Alicante.
+
+This is free software.  You may redistribute copies of it under the terms
+of the GNU General Public License <http://www.gnu.org/licenses/gpl.html>.
+

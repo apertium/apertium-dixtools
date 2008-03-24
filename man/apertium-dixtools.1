@@ -1,0 +1,148 @@
+.TH apertium-crossdics 1 2008-03-24 "User Commands" "Apertium"
+.SH NAME
+apertium-dixtools \- This application is part of (
+.B apertium 
+)
+.PP
+This tool is part of the apertium open-source machine translation
+toolbox: \fBhttp://www.apertium.org\fR.
+.SH SYNOPSIS
+.B apertium-dixtools
+{
+[add-same-gender <morph> <bil> <out>] |
+[apertiumize <txt> <out>] |
+[complete-translation <bil> <src-dot> <trans-dot>] |
+[convert-mf <morph> <bil> <out> ] |
+[cross <monA> <-r|-n> <bilAB> <-r|-n> <bilBC> <monC> crossmodel] | 
+[dic-reader [list-paradigms | list-lemmas | list-definitions | list-pairs] dic ] | 
+[dix2trie <dic> <lr|rl> <out>] | 
+[equiv-paradigms <dic> <out>] |
+[format <-mon|-bil> <doc> <out>] |
+[format-1line <-mon|-bil> <doc> <out>] | 
+[get-bil-omegawiki <source-lang> <target-lang> <dic>] |
+[merge-morph <monA> <monB> <merged>] |
+[merge-bil <-r|-n> <bilAB1> <-r|-n> <bilAB2> <merged>] |
+./"[prepare-dic <bil> <missing-entries>] |
+[process-xincludes dic out] |
+[reverse-bil <dic> <out>] | 
+[sort <-bil|-mon> <dic> <out>]
+}
+
+.SH DESCRIPTION
+.BR apertium-dixtools
+is a tool for manipulating dictionaries in Apertium format, both monolingual
+(morphological analysis) and bilingual.
+.PP
+add-same-gender
+.RS 4
+add entries with the same gender
+.RE
+.PP
+apertiumize
+.RS 4
+convert a dictionary from text to apertium format
+.RE
+./".PP
+./"complete-translation
+./".RS 4
+./"
+./".RE
+./".PP
+./"convert-mf
+./".RS 4
+./"
+./".RE
+.PP
+cross
+.RS 4
+crosses a pair of bilingual dictionaries, where one language is common, and 
+outputs a bilingual dictionary of the other two languages
+.RE
+.PP
+dic-reader
+.RS 4
+.B list-paradigms
+.R lists all paradigms in a dictionary
+.PP
+.B list-lemmas 
+.R lists all lemmas in a dictionary
+.PP
+.B list-definitions
+.R list definitions
+.PP
+.B list-pairs
+.R list pairs
+.RE
+.PP
+dix2trie
+.RS 4
+converts a bilingual dictionary to trie format, for use with 
+apertium-diclookup
+.RE
+.PP
+equiv-paradigms
+.RS 4
+checks a dictionary for duplicate paradigms
+.RE
+.PP
+format
+.PP
+format-1line
+.RS 4
+formats the appearance of a dictionary; with entries split over multiple
+lines, or on a single line, respectively.
+.RE
+.PP
+get-bil-omegawiki
+.RS 4
+imports a bilingual dictionary from a local omegawiki installation
+.RE
+.PP
+merge-bil
+.PP
+merge-morph
+.RS 4
+merge dictionaries
+.RE
+.PP
+prepare-dic
+.RS 4
+
+.RE
+./".PP
+./"process-xincludes
+./".RS 4
+./"
+./".RE
+.PP
+reverse-bil
+.RS 4
+reverse the order of a bilingual dictionary, swapping entries from left to
+right and vice-versa
+.RE
+.PP
+sort
+.RS 4
+sorts a dictionary alphabetically
+.RE
+./" FIXME: what do the options do???
+./".SH OPTIONS
+
+.SH SEE ALSO	
+.I apertium\-crossdics\fR(1),
+.I lt-proc\fR(1),
+.I apertium-translator\fR(1),
+.I apertium\fR(1).
+.SH BUGS
+./" None! We write quality software!
+./" We can't be held responsible for low quality users.
+./" (j/k)
+Lots of...lurking in the dark and waiting for you!
+.SH AUTHOR
+Copyright (c) 2007-2008 Enrique Benimeli Bofarull
+
+Copyright (c) 2008 Universitat d'Alacant / Universidad de Alicante.
+
+This is free software.  You may redistribute copies of it under the terms
+of the GNU General Public License <http://www.gnu.org/licenses/gpl.html>.
+
