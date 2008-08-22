@@ -5,7 +5,7 @@ QUICKSTART
 $ java -jar dist/apertium-dixtools.jar
 
 Find all the information in:
-http://xixona.dlsi.ua.es/wiki/index.php/Apertium-dixtools
+http://wiki.apertium.org/wiki/Apertium-dixtools
 
 Download from SVN
 
