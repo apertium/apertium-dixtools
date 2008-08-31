@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Heap space memory for JVM
-defaultMinMem=100
-defaultMaxMem=300
+defaultMinMem=500
+defaultMaxMem=800
 if [ "$CROSSDICS_PATH" = "" ];
 then
 	CROSSDICS_PATH="/usr/local/apertium-dixtools"
@@ -234,6 +234,19 @@ function dix2trie() {
 }
 
 #
+#  dix2cc
+#
+function dix2cc() {
+   if [ $nparams -ge 3 ]
+   then
+      java ${java_options} $task $2 $3
+   else
+      echo "Usage: apertium-dixtools dix2cc <dix> <cc>"
+      echo "";
+   fi
+}
+
+#
 #  apertiumizer
 #
 function apertiumize() {
@@ -245,6 +258,21 @@ function apertiumize() {
       echo "";
    fi
 }
+
+#
+#  filter
+#
+function filter() {
+   if [ $nparams -ge 2 ]
+   then
+      java ${java_options} $task $2 $3
+   else
+      echo "Usage: apertium-dixtools filter <dicA> <dicB>"
+      echo "";
+   fi
+}
+
+
 
 #
 #  convert-mf

@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2007 Universitat d'Alacant / Universidad de Alicante
- * Author: Enrique Benimeli Bofarull
+ * Copyright (C) 2008 Enrique Benimeli Bofarull
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -23,6 +23,7 @@ import misc.GetTranslation;
 import dics.elements.utils.Msg;
 import dictools.DicConsistent;
 import dictools.DicCross;
+import dictools.DicFilter;
 import dictools.DicFindEquivPar;
 import dictools.DicFormat;
 import dictools.DicGather;
@@ -30,6 +31,8 @@ import dictools.DicMerge;
 import dictools.DicReader;
 import dictools.DicReverse;
 import dictools.DicSort;
+import dictools.Dix2CC;
+import dictools.Dix2MDix;
 import dictools.apertiumizer.Apertiumizer;
 import dictools.dix2trie.Dix2Trie;
 import misc.Misc;
@@ -167,6 +170,17 @@ public class ProcessDics {
         if (getAction().equals("misc")) {
             this.process_misc();
         }
+        if (getAction().equals("filter")) {
+            this.process_filter();
+        }
+        if (getAction().equals("dix2mdix")) {
+            this.process_dix2mdix();
+        }
+        if (getAction().equals("dix2cc")) {
+            this.process_dix2cc();
+        }
+
+        
 
     }
 
@@ -460,6 +474,9 @@ public class ProcessDics {
         }
     }
 
+    /**
+     * 
+     */
     private final void process_addsamegender() {
         if (getArguments().length != 4) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar add-same-gender <morph-dic> <bil-dic> <out>");
@@ -471,6 +488,9 @@ public class ProcessDics {
         }
     }
 
+    /**
+     * 
+     */
     private final void process_preparedic() {
         if (getArguments().length != 3) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar preparedic <bil-dic> <missing-entries>");
@@ -481,6 +501,9 @@ public class ProcessDics {
         }
     }
 
+    /**
+     * 
+     */
     private final void process_completetranslation() {
         if (getArguments().length != 4) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar complete-translation <bil> <src-dot> <trans-dot>");
@@ -491,6 +514,9 @@ public class ProcessDics {
         }
     }
 
+    /**
+     * 
+     */
     private final void process_misc() {
         if (getArguments().length != 5) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar misc <dic1> <dic2> <dic3>");
@@ -498,6 +524,49 @@ public class ProcessDics {
         } else {
             Misc misc = new Misc(arguments[1], arguments[2], arguments[3], arguments[4]);
             misc.doMisc();
+        }
+    }
+
+    /**
+     * 
+     */
+    private final void process_filter() {
+        if (getArguments().length != 3) {
+            msg.err("Usage: java -jar path/to/apertium-dixtools.jar filter <dicA> <dicB>");
+            System.exit(-1);
+        } else {
+            DicFilter dicFilter = new DicFilter();
+            dicFilter.setArguments(this.getArguments());
+            dicFilter.doFilter();
+        }
+    }
+    
+    
+    /**
+     * 
+     */
+    private final void process_dix2mdix() {
+        if (getArguments().length < 2) {
+            msg.err("Usage: java -jar path/to/apertium-dixtools.jar dix2mdix [options] <dic1> [<out>]");
+            System.exit(-1);
+        } else {
+            Dix2MDix dix2mdix = new Dix2MDix();
+            dix2mdix.setArguments(this.getArguments());
+            dix2mdix.do_convert();
+        }
+    }
+
+    /**
+     * 
+     */
+    private final void process_dix2cc() {
+        if (getArguments().length < 2) {
+            msg.err("Usage: java -jar path/to/apertium-dixtools.jar dix2cc <dix> [<cc>]");
+            System.exit(-1);
+        } else {
+            Dix2CC dix2cc= new Dix2CC();
+            dix2cc.setArguments(this.getArguments());
+            dix2cc.do_convert();
         }
     }
 

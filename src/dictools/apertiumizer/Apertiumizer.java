@@ -84,7 +84,7 @@ public class Apertiumizer {
         }
         this.readFormat(2);
          */
-        this.readFormat(0);
+        this.readFormat(2);
     }
 
     /**
@@ -142,17 +142,36 @@ public class Apertiumizer {
             in.close();
 
             dic.printXML(this.getOutFileName(), "UTF-8");
-        /*
         DictionaryReader reader = new DictionaryReader("dic.tmp");
         DictionaryElement bil = reader.readDic();
         this.completeDic(bil);
-         * */
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }
 
     }
 
+    
+    private final String removeForms(String strLine) {
+        StringBuffer strBuffer = new StringBuffer(strLine);
+        StringBuffer newStr = new StringBuffer();
+        int lStr = strBuffer.length();
+        boolean isIn = false;
+        for(int i=0; i<lStr; i++) {
+            char c = strBuffer.charAt(i);
+            if(c == '{') {
+                isIn = true;
+            }
+            if(!isIn) {
+                newStr.append(c);
+            }
+
+            if(c == '}') {
+                isIn = false;
+            }
+    }
+     return newStr.toString();   
+    }
     private final void completeDic(DictionaryElement bil) {
 
         for (EElement ee : bil.getAllEntries()) {
@@ -166,7 +185,7 @@ public class Apertiumizer {
                     TextElement tE = (TextElement) e;
                     String v = tE.getValue();
                     //System.out.println(v);
-                    v = v.replaceAll("[ ]", "<b/>");
+                    v = v.replaceAll("[\\s]", "<b/>");
                     v = v.replaceAll("\\&", "\\&amp;");
                     tE.setValue(v);
                 }
@@ -180,22 +199,60 @@ public class Apertiumizer {
                     icat++;
                 }
             }
+            boolean isVerb = false;
             for (Element e : r.getChildren()) {
                 if (e instanceof TextElement) {
                     TextElement tE = (TextElement) e;
                     String v = tE.getValue();
-                    //System.out.println(v);
+                    v = this.removeForms(v);
                     v = v.replaceAll("[ ]", "<b/>");
                     v = v.replaceAll("\\&", "\\&amp;");
+
+                    if(v.startsWith("to<b/>")) {
+                        System.out.println("Verb: " + v);
+                        if(!ee.getLeft().contains("vblex")) {
+                        ee.getLeft().addChild(new SElement("vblex"));
+                        }
+                        isVerb = true;
+                        v = v.replaceAll("to<b/>", "");
+                        
+                        System.out.println("NVerb: " + v);
+                        
+                    }
                     tE.setValue(v);
+                    //System.out.println(v);
+                    //tE.setValue(v);
                 }
             }
             SElement sE = new SElement(cat);
+            if (!sE.getValue().equals("")) {
             r.getChildren().add(sE);
+            }
+            if(isVerb) {
+                if(!ee.getRight().contains("vblex")) {
+                ee.getRight().addChild(new SElement("vblex"));
+                }
+            }
 
         }
 
-        DicSort dicSort = new DicSort(bil);
+        
+        DictionaryElement bilFil = new DictionaryElement();
+        SectionElement sectionFil = new SectionElement();
+        bilFil.addSection(sectionFil);
+                for (SectionElement sec : bil.getSections()) {
+            for (EElement ee : sec.getEElements()) {
+                ///if( ee.contains("f") || ee.contains("pl")) {
+                    
+                //} else {
+                    sectionFil.addEElement(ee);
+                //}
+                
+            }
+                }
+
+        
+        DicSort dicSort = new DicSort(bilFil);
         DictionaryElement sorted = dicSort.sort();
 
         String prevCat = "";
@@ -203,6 +260,7 @@ public class Apertiumizer {
         SectionElement noneSection = new SectionElement("none", "standard");
         for (SectionElement sec : sorted.getSections()) {
             for (EElement ee : sec.getEElements()) {
+
                 SElementList slist = ee.getLeft().getSElements();
 
                 if (slist.size() > 0) {
@@ -370,6 +428,7 @@ public class Apertiumizer {
         str = str.replaceAll("\\{vi\\}", "<s n=\"vblex\"/>");
         str = str.replaceAll("\\{m\\}", "<s n=\"n\"/><s n=\"m\"/>");
         str = str.replaceAll("\\{f\\}", "<s n=\"n\"/><s n=\"f\"/>");
+        str = str.replaceAll("\\{n\\}", "<s n=\"n\"/><s n=\"nt\"/>");
         str = str.replaceAll("\\{pl\\}", "<s n=\"n\"/><s n=\"pl\"/>");
         str = str.replaceAll("\\{adj\\}", "<s n=\"adj\"/>");
         str = str.replaceAll("\\{num\\}", "<s n=\"num\"/>");
@@ -399,6 +458,27 @@ public class Apertiumizer {
      * @return
      */
     private final EElementList readElementFormat_2(String strLine) {
+        StringBuffer strBuffer = new StringBuffer(strLine);
+        int lStr = strBuffer.length();
+        boolean isIn = false;
+        for(int i=0; i<lStr; i++) {
+            
+            char c = strBuffer.charAt(i);
+            
+            if(c == '{') {
+                isIn = true;
+            }
+            if( c== ';' && isIn) {
+                strBuffer.replace(i, i+1, "$");
+           }
+            if(c == '}') {
+                isIn = false;
+            }
+    }
+        strLine = strBuffer.toString();
+        System.out.print(strLine);
+        System.out.println();
+        
         Pattern p = Pattern.compile("\\([^\\(]+\\)");
         Matcher m = p.matcher(strLine);
         strLine = m.replaceAll("");

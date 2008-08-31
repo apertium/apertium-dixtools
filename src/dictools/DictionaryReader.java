@@ -44,6 +44,7 @@ import dics.elements.dtd.SdefElement;
 import dics.elements.dtd.SdefsElement;
 import dics.elements.dtd.SectionElement;
 import dics.elements.utils.EElementList;
+import javax.swing.JProgressBar;
 import org.w3c.dom.Comment;
 
 /**
@@ -61,6 +62,14 @@ public class DictionaryReader extends XMLReader {
      * 
      */
     private boolean readParadigms = true;
+    /**
+     * 
+     */
+    private JProgressBar progressBar;
+    private double nEntries;
+    private double nElements = 0;
+    private int perc = 0;
+    private int oldPerc = 0;
 
     /**
      * 
@@ -186,6 +195,9 @@ public class DictionaryReader extends XMLReader {
                     String name = getAttributeValue(element, "name");
                     String value = getAttributeValue(element, "value");
                     header.put(name, value);
+                    if (name.equals("size")) {
+                        this.setNEntries((new Double(value)).doubleValue());
+                    }
                 }
             }
         }
@@ -300,6 +312,17 @@ public class DictionaryReader extends XMLReader {
                     final Element childElement = (Element) child;
                     final String childElementName = childElement.getNodeName();
                     if (childElementName.equals("e")) {
+                        if (this.progressBar != null) {
+                            this.nElements++;
+                            double compl = ((this.nElements / this.nEntries)) * 100;
+                            perc = (int) compl;
+                            if(perc > oldPerc) {
+                                if(nElements%10 == 0) {
+                            this.progressBar.setValue(perc);
+                                }
+                            oldPerc = perc;
+                            } 
+                        }
                         final EElement eElement = readEElement(childElement);
                         sectionElement.addEElement(eElement);
                     }
@@ -319,6 +342,9 @@ public class DictionaryReader extends XMLReader {
                 // This part is still being developed
                 }
             }
+        }
+        if(this.progressBar!= null) {
+        this.progressBar.setValue(100);
         }
         return sectionElement;
     }
@@ -461,5 +487,21 @@ public class DictionaryReader extends XMLReader {
      */
     public final void setReadParadigms(boolean readParadigms) {
         this.readParadigms = readParadigms;
+    }
+
+    public JProgressBar getProgressBar() {
+        return progressBar;
+    }
+
+    public void setProgressBar(JProgressBar progressBar) {
+        this.progressBar = progressBar;
+    }
+
+    public double getNEntries() {
+        return nEntries;
+    }
+
+    public void setNEntries(double nEntries) {
+        this.nEntries = nEntries;
     }
 }
