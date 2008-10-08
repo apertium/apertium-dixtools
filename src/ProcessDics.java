@@ -205,7 +205,7 @@ public class ProcessDics {
         msg.err("   reverse-bil:        reverses a bilingual dictionary");
         msg.err("   sort:               sorts (and groups by category) a dictionary");
         msg.err("");
-        msg.err("More information: http://xixona.dlsi.ua.es/wiki/index.php/Apertium-dixtools");
+        msg.err("More information: http://wiki.apertium.org/wiki/Apertium-dixtools");
         msg.err("");
 
     }

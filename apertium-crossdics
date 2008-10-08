@@ -20,7 +20,7 @@ if [ $nparams -ge 3 ]; then
 else
   echo "Usage: apertium-crossdics -f <ling-resources.xml> <sl-tl>";
   echo "";
-  echo "More information in http://xixona.dlsi.ua.es/wiki/index.php/Apertium-dixtools";
+  echo "More information in http://wiki.apertium.org/wiki/Apertium-dixtools";
   echo "";
 fi
 

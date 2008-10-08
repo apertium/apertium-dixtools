@@ -360,7 +360,7 @@ function show_help() {
    echo "    reverse-bil:        reverses a bilingual dictionary"
    echo "    sort:               sorts (and groups by category) a dictionary"
    echo ""
-   echo "More info: http://xixona.dlsi.ua.es/wiki/index.php/Apertium-dixtools"
+   echo "More info: http://wiki.apertium.org/wiki/Apertium-dixtools"
    echo ""
    exit 127
 }
