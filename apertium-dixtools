@@ -30,7 +30,7 @@ function cross-param() {
    else
    	echo "Usage: dictools cross <monA> <-r|-n> <bilAB> <-r|-n> <bilBC> <monC> crossmodel";
    	echo "";
-   	echo "More information in http://xixona.dlsi.ua.es/wiki/index.php/Crossdics";
+   	echo "More information in http://wiki.apertium.org/wiki/Crossdics";
    	echo "";
    fi
 }
@@ -48,7 +48,7 @@ function cross() {
    else
    	echo "Usage: dictools cross -f <ling-resources.xml> <sl-tl>";
    	echo "";
-   	echo "More information in http://xixona.dlsi.ua.es/wiki/index.php/Crossdics";
+   	echo "More information in http://wiki.apertium.org/wiki/Crossdics";
    	echo "";
    fi
 }
@@ -66,7 +66,7 @@ function format() {
    else
       echo "Usage: dictools format <-mon|-bil> <dic> <out>"
       echo "";
-      echo "More information: http://xixona.dlsi.ua.es/wiki/index.php/Format_dictionaries";
+      echo "More information: http://wiki.apertium.org/wiki/Format_dictionaries";
       echo "";
    fi
 }
@@ -82,7 +82,7 @@ function merge-morph() {
    else
       echo "Usage: dictools merge-morph <monA1> <monA2> <merged>"
       echo "";
-      echo "More information: http://xixona.dlsi.ua.es/wiki/index.php/Merge_dictionaries";
+      echo "More information: http://wiki.apertium.org/wiki/Merge_dictionaries";
       echo "";
    fi
 }
@@ -115,7 +115,7 @@ function reverse-bil() {
    else
       echo "Usage: dictools reverse-bil <dic> <out>";
       echo "";
-      echo "More information: http://xixona.dlsi.ua.es/wiki/index.php/Reverse_a_dictionary";
+      echo "More information: http://wiki.apertium.org/wiki/Reverse_a_dictionary";
       echo "";
    fi
 }
@@ -132,7 +132,7 @@ function sort() {
    else
       echo "Usage: dictools sort <-bil|-mon> <dic.dix> <out.dix>";
       echo "";
-      echo "More information: http://xixona.dlsi.ua.es/wiki/index.php/Sort_a_dictionary";
+      echo "More information: http://wiki.apertium.org/wiki/Sort_a_dictionary";
       echo "";
    fi
 }
@@ -164,7 +164,7 @@ function get-bil-omegawiki() {
    else
       echo "Usage: dictools get-bil-omegawiki <source-lang> <target-lang> <dic-out>"
       echo "";
-      echo "More information: http://xixona.dlsi.ua.es/wiki/index.php/Getting_bilingual_dictionaries_from_OmegaWiki";
+      echo "More information: http://wiki.apertium.org/wiki/Getting_bilingual_dictionaries_from_OmegaWiki";
       echo "";
    fi
 }
@@ -180,7 +180,7 @@ function format-1line() {
    else
       echo "Usage: dictools format-1line <dic> <dic-out>"
       echo "";
-      echo "More information: http://xixona.dlsi.ua.es/wiki/index.php/Format_dictionaries";
+      echo "More information: http://wiki.apertium.org/wiki/Format_dictionaries";
       echo "";
    fi
 }
@@ -200,7 +200,7 @@ function dic-reader() {
       echo "   list-definitions: list of <sdef> elemenst";
       echo "   list-pairs:       list of pairs (for bilingual dictionaries";
       echo "";
-      echo "More information: http://xixona.dlsi.ua.es/wiki/index.php/Dictionary_reader";
+      echo "More information: http://wiki.apertium.org/wiki/Dictionary_reader";
       echo "";
    fi
 }
@@ -215,7 +215,7 @@ function equiv-paradigms() {
    else
       echo "Usage: dictools equiv-paradigms <dic> <out>"
       echo "";
-      echo "More information: http://xixona.dlsi.ua.es/wiki/index.php/Equivalent_paradigms";
+      echo "More information: http://wiki.apertium.org/wiki/Equivalent_paradigms";
       echo "";
    fi
 }
@@ -310,7 +310,7 @@ function prepare-dic() {
    else
       echo "Usage: dictools prepare-dic <bil> <missing-entries>>"
       echo "";
-      #echo "More information: http://xixona.dlsi.ua.es/wiki/index.php/Equivalent_paradigms";
+      #echo "More information: http://wiki.apertium.org/wiki/Equivalent_paradigms";
       #echo "";
    fi
 }

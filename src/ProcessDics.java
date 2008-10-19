@@ -397,7 +397,7 @@ public class ProcessDics {
             msg.err("   list-definitions: list of <sdef> elemenst");
             msg.err("   list-pairs:       list of pairs (for bilingual dictionaries)");
             msg.err("");
-            msg.err("   More information: http://xixona.dlsi.ua.es/wiki/index.php/Dictionary_reader");
+            msg.err("   More information: http://wiki.apertium.org/wiki/Dictionary_reader");
             msg.err("");
             System.exit(-1);
         } else {
