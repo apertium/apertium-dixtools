@@ -575,15 +575,13 @@ public class EElement extends Element implements Cloneable,
      * @param dos
      * @throws java.io.IOException
      */
-    public final void printNiceXML1Line(final OutputStreamWriter dos, int attrSpaces)
+    public final void printXML1LineEalign(final OutputStreamWriter dos, int attrSpaces)
             throws IOException {
         String attributes = this.getAttrString();
+
+        int addSpace = Math.max(0, Math.min(spaces.length(), attrSpaces-attributes.length()));
         
-        if (attributes.length()<attrSpaces) {
-          int n = Math.min(spaces.length(), attrSpaces-attributes.length());
-          attributes = attributes + spaces.substring(0,n);
-        }
-        
+               
         if (comments != null) {
             dos.write(spaces.substring(0, attrSpaces+4) + "<!-- ");
             dos.write(comments);
@@ -592,7 +590,8 @@ public class EElement extends Element implements Cloneable,
             }
             dos.write( "-->\n");
         }
-        dos.write("<e" + attributes + ">");
+        dos.write("<e" + attributes + spaces.substring(0,addSpace)+ ">");
+        //dos.write(spaces.substring(0,addSpace) + "<e" + attributes + ">");
         if (children != null) {
             for (final Element e : children) {
                 e.printXML1Line(dos);

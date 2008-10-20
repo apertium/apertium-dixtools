@@ -50,7 +50,7 @@ public class SubstractBidix {
         //DictionaryElement dic = new DictionaryReader("../apertium-eo-en/apertium-lille.eo-en.dix").readDic();
         DictionaryElement dic = new DictionaryReader("../apertium-eo-en/apertium-eo-en.eo-en.dix").readDic();
         dic.reportMetrics();
-        new NiceDicFormatE1Line(dic).setAttrSpaces(7).printXML("before-clean.dix");
+        new DicFormatE1LineEalign(dic).setAttrSpaces(7).printXML("before-clean.dix");
 
         HashMap<String, EElement> hmLR = new HashMap<String, EElement>();
         HashMap<String, EElement> hmRL = new HashMap<String, EElement>();
@@ -95,7 +95,7 @@ public class SubstractBidix {
         //System.out.println("Updated morphological dictionary: '" + out + "'");
         //dic.printXML(out);
         
-        new NiceDicFormatE1Line(dic).setAttrSpaces(7).printXML("after-clean.dix");
+        new DicFormatE1LineEalign(dic).setAttrSpaces(7).printXML("after-clean.dix");
         String fn = dic.getFileName()+"-cleaned.dix";        
         System.out.println("fn = " + fn);
         
@@ -133,17 +133,8 @@ public class SubstractBidix {
           }
           ee.setIgnore("yes");
           ee.setRestriction(null);
-          /*
-          ee.setComment("setComment()");
-          ee.setComments("setComments()");
-          ee.setComments("setCommentsR()","R");
-          ee.setComments("setCommentsL()","L");
-           */
-          //eei.remove();
         }
       }
     }
   }
-
-
 }

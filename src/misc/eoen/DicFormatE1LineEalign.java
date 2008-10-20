@@ -35,7 +35,7 @@ import java.io.OutputStreamWriter;
  * @author Enrique Benimeli Bofarull
  * @author Jacob Nordfalk
  */
-public class NiceDicFormatE1Line {
+public class DicFormatE1LineEalign {
 
     /**
      * 
@@ -43,12 +43,12 @@ public class NiceDicFormatE1Line {
     private DictionaryElement dic;
     private int attrSpaces;
 
-  public NiceDicFormatE1Line setAttrSpaces(int attrSpaces) {
+  public DicFormatE1LineEalign setAttrSpaces(int attrSpaces) {
     this.attrSpaces=attrSpaces;
     return this;
   }
 
-  public NiceDicFormatE1Line setDic(DictionaryElement dic) {
+  public DicFormatE1LineEalign setDic(DictionaryElement dic) {
     this.dic=dic;
     return this;
   }
@@ -59,7 +59,7 @@ public class NiceDicFormatE1Line {
      * Initializes and prepares write a DictionaryElement 
      * @param 
      */
-    public NiceDicFormatE1Line(DictionaryElement dic) {
+    public DicFormatE1LineEalign(DictionaryElement dic) {
         this.dic = dic;
     }
 
@@ -133,7 +133,7 @@ public class NiceDicFormatE1Line {
                     dos.write("  <section " + attributes + ">\n");
                     for (final EElement e : s.getEElements()) {
                         //e.printXML1Line(dos);
-                        e.printNiceXML1Line(dos, attrSpaces);
+                        e.printXML1LineEalign(dos, attrSpaces);
                     }
                     dos.write("  </section>\n");
                 }
