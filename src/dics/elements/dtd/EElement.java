@@ -569,6 +569,40 @@ public class EElement extends Element implements Cloneable,
         dos.write("</e>\n");
     }
 
+    final static String spaces = "                      ";
+    /**
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
+    public final void printNiceXML1Line(final OutputStreamWriter dos, int attrSpaces)
+            throws IOException {
+        String attributes = this.getAttrString();
+        
+        if (attributes.length()<attrSpaces) {
+          int n = Math.min(spaces.length(), attrSpaces-attributes.length());
+          attributes = attributes + spaces.substring(0,n);
+        }
+        
+        if (comments != null) {
+            dos.write(spaces.substring(0, attrSpaces+4) + "<!-- ");
+            dos.write(comments);
+            if (!isCommon()) {
+                dos.write(tab(2) + "esta entrada no aparece en el otro morfolgico\n");
+            }
+            dos.write( "-->\n");
+        }
+        dos.write("<e" + attributes + ">");
+        if (children != null) {
+            for (final Element e : children) {
+                e.printXML1Line(dos);
+            }
+        }
+        dos.write("</e>\n");
+    }
+
+
+    
     /**
      * 
      * @return String of attributes
