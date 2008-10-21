@@ -31,24 +31,36 @@ import dictools.DictionaryReader;
 import java.io.OutputStreamWriter;
 
 /**
+ * Prints a dictionaty with elements aligned.
+ * Quick exampled of use:
+ * <pre>
+ * new DicFormatE1LineAligned(dic).setAlignP(11).setAlignR(60).printXML("after-clean.dix");
+ * </pre>
  * 
  * @author Enrique Benimeli Bofarull
  * @author Jacob Nordfalk
  */
-public class DicFormatE1LineEalign {
+public class DicFormatE1LineAligned {
 
     /**
      * 
      */
     private DictionaryElement dic;
-    private int attrSpaces;
+    private int alignP = 10;
 
-  public DicFormatE1LineEalign setAttrSpaces(int attrSpaces) {
-    this.attrSpaces=attrSpaces;
+    private int alignR = 50;
+    
+  public DicFormatE1LineAligned setAlignP(int attrSpaces) {
+    this.alignP=attrSpaces;
     return this;
   }
 
-  public DicFormatE1LineEalign setDic(DictionaryElement dic) {
+  public DicFormatE1LineAligned setAlignR(int spaces) {
+    this.alignR = spaces;
+    return this;
+  }
+
+  public DicFormatE1LineAligned setDic(DictionaryElement dic) {
     this.dic=dic;
     return this;
   }
@@ -59,7 +71,7 @@ public class DicFormatE1LineEalign {
      * Initializes and prepares write a DictionaryElement 
      * @param 
      */
-    public DicFormatE1LineEalign(DictionaryElement dic) {
+    public DicFormatE1LineAligned(DictionaryElement dic) {
         this.dic = dic;
     }
 
@@ -133,7 +145,7 @@ public class DicFormatE1LineEalign {
                     dos.write("  <section " + attributes + ">\n");
                     for (final EElement e : s.getEElements()) {
                         //e.printXML1Line(dos);
-                        e.printXML1LineEalign(dos, attrSpaces);
+                        e.printXML1LineAligned(dos, alignP, alignR);
                     }
                     dos.write("  </section>\n");
                 }

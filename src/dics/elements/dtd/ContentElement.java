@@ -25,6 +25,7 @@ import dics.elements.utils.ElementList;
 import dics.elements.utils.Msg;
 import dics.elements.utils.SElementList;
 import java.io.OutputStreamWriter;
+import java.io.Writer;
 
 /**
  * 
@@ -171,7 +172,9 @@ public class ContentElement extends Element implements Cloneable {
      * @throws java.io.IOException
      */
     @Override
-    protected void printXML(final OutputStreamWriter dos) throws IOException {
+    protected void printXML(final Writer dos) throws IOException {
+        // write blank lines and comments from original file
+        dos.write(prependCharacterData);
         if (getTagName() != null) {
             dos.write(tab(4) + "<" + getTagName() + ">");
         } else {
@@ -201,7 +204,7 @@ public class ContentElement extends Element implements Cloneable {
      * @throws java.io.IOException
      */
     @Override
-    protected void printXML1Line(final OutputStreamWriter dos) throws IOException {
+    protected void printXML1Line(final Writer dos) throws IOException {
         if (getTagName() != null) {
             dos.write("<" + getTagName() + ">");
         } else {

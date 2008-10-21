@@ -44,8 +44,10 @@ import dics.elements.dtd.SdefElement;
 import dics.elements.dtd.SdefsElement;
 import dics.elements.dtd.SectionElement;
 import dics.elements.utils.EElementList;
+import java.util.Arrays;
 import javax.swing.JProgressBar;
 import org.w3c.dom.Comment;
+import org.w3c.dom.CharacterData;
 
 /**
  * 
@@ -120,7 +122,7 @@ public class DictionaryReader extends XMLReader {
                 ProcessingInstruction pi = (ProcessingInstruction) child;
                 String data = pi.getData();
             // System.out.println("Data pi: " + data);
-            }
+            } else
 
             if (child instanceof Element) {
                 final Element childElement = (Element) child;
@@ -130,30 +132,31 @@ public class DictionaryReader extends XMLReader {
                 if (childElementName.equals("header")) {
                     final HeaderElement headerElement = readHeader(childElement);
                     dic.setHeaderElement(headerElement);
-                }
+                } else
 
                 // Alphabet
                 if (childElementName.equals("alphabet")) {
                     final AlphabetElement alphabetElement = readAlphabet(childElement);
                     dic.setAlphabet(alphabetElement);
-                }
+                } else
+                  
                 // Symbol definitions
                 if (childElementName.equals("sdefs")) {
                     final SdefsElement sdefsElement = readSdefs(childElement);
                     dic.setSdefs(sdefsElement);
-                }
+                } else
 
                 if (childElementName.equals("section")) {
                     final SectionElement sectionElement = readSection(childElement);
                     dic.addSection(sectionElement);
-                }
+                } else
 
-                if (isReadParadigms()) {
-                    if (childElementName.equals("pardefs")) {
+                if (childElementName.equals("pardefs")) {
+                    if (isReadParadigms()) {
                         final PardefsElement pardefsElement = readPardefs(childElement);
                         dic.setPardefs(pardefsElement);
                     }
-                }
+                } else
 
                 if (childElementName.equals("xi:include")) {
                     String fileName = getAttributeValue(childElement, "href");
@@ -165,12 +168,15 @@ public class DictionaryReader extends XMLReader {
                         SdefsElement sdefs = sdefsReader.readSdefs();
                         //System.out.println("Symbol definitions: " + fileName);
                         dic.setSdefs(sdefs);
-                    }
+                    } else
                     if (fileName.endsWith("pardefs.dix")) {
                         PardefsElement pardefs = dic2.getPardefsElement();
                         dic.setPardefs(pardefs);
-                    }
-                }
+                    } else
+                    System.err.println("Unknown xi:include href type ignored: " + fileName);
+                } else
+
+                System.err.println("Unknown node ignored: " + childElementName);
             }
         }
         root = null;
@@ -302,6 +308,8 @@ public class DictionaryReader extends XMLReader {
         final String id = getAttributeValue(e, "id");
         final String type = getAttributeValue(e, "type");
         final SectionElement sectionElement = new SectionElement(id, type);
+        
+        StringBuilder prependCharacterData = new StringBuilder();
 
         // Si contiene elementos 'e'
         if (e.hasChildNodes()) {
@@ -324,11 +332,13 @@ public class DictionaryReader extends XMLReader {
                             } 
                         }
                         final EElement eElement = readEElement(childElement);
+                        
+                        prependCharacterData(prependCharacterData, eElement);
+                        
                         sectionElement.addEElement(eElement);
-                    }
+                    } else
                     if (childElementName.equals("xi:include")) {
-                        String fileName = getAttributeValue(childElement,
-                                "href");
+                        String fileName = getAttributeValue(childElement, "href");
                         System.err.println("XInclude (" + fileName + ")");
                         DictionaryReader reader = new DictionaryReader(fileName);
                         DictionaryElement dic = reader.readDic();
@@ -336,11 +346,18 @@ public class DictionaryReader extends XMLReader {
                         for (EElement e2 : eList) {
                             sectionElement.addEElement(e2);
                         }
-                    }
-                }
+                    } else
+                      System.err.println("Unknown childElementName = " + childElementName);
+                } else
                 if (child instanceof Comment) {
-                // This part is still being developed
-                }
+                  prependCharacterData.append("<!--").append(child.getNodeValue()).append("-->");
+                  
+                } else
+                if (child instanceof CharacterData) {
+                  prependCharacterData.append(child.getNodeValue());
+                  
+                } else
+                  System.err.println("Unhandled child = " + child);
             }
         }
         if(this.progressBar!= null) {
@@ -504,4 +521,54 @@ public class DictionaryReader extends XMLReader {
     public void setNEntries(double nEntries) {
         this.nEntries = nEntries;
     }
+
+    /**
+     * Takes all collected character data (comments, newlines, blanks...), chops off the necesarry and stores in the element.
+     * Some warnings will be printed if the exact character data won't (can't) be reproduced when writing the output later on.
+     * 
+     * @param prependCharacterData A StringBuilder with all characters. This will be emptied so its ready to collect for next tag.
+     * @param eElement The element will got set its prependCharacterData.
+     */
+  private static void prependCharacterData(StringBuilder prependCharacterData, final EElement eElement) {
+
+    String txt=prependCharacterData.toString();
+
+    /*
+    int chopFrom = prepend.indexOf('\n');
+    int chopTo = prepend.lastIndexOf('\n');
+    // when printing indenting will be done by the element itself, so chop off all whitespace after the last newline
+    if (chopTo!=-1 && prepend.substring(chopTo).trim().length()==0)
+    prepend = prepend.substring(0,chopTo+1);
+    // when printing a newline will be generated by the previout element, so chop off all whitespace from last tag to the newline
+    if (chopFrom!=-1 && prepend.substring(0,chopFrom).trim().length()==0)
+    prepend = prepend.substring(chopFrom+1);
+     */
+    int chopFrom=0;
+    int chopTo=txt.length();
+
+    // when printing indenting will be done by the element itself, so chop off all whitespace after the last newline
+    char ch;
+    while ((ch=txt.charAt(chopFrom))<=' '&&ch!='\n'&&chopFrom<chopTo) {
+      chopFrom++;
+    }
+    if (chopFrom==chopTo) {
+      System.err.println("Two elements on same line. Element will be moved to next line: "+eElement);
+    } else {
+      if (ch=='\n') {
+        chopFrom++;
+      } else {
+        System.err.println("Comment before element "+eElement+" probably belongs to previous element.");
+      }
+      // when printing a newline will be generated by the previout element, so chop off all whitespace from last tag to the newline
+      while ((ch=txt.charAt(chopTo-1))<=' '&&ch!='\n'&&chopFrom<chopTo) {
+        chopTo--;
+      }
+      if (ch>' ') {
+        System.err.println("Comment before element "+eElement+" will probably disturb indenting.");
+      }
+      //System.err.println("txt.substring(chopFrom, chopTo) = '" + txt.substring(chopFrom, chopTo)+"'");
+      eElement.setPrependCharacterData(txt.substring(chopFrom, chopTo));
+    }
+    prependCharacterData.setLength(0);
+  }
 }

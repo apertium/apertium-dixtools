@@ -27,6 +27,7 @@ import java.util.HashMap;
 
 import dictools.DicTools;
 import java.io.OutputStreamWriter;
+import java.io.Writer;
 
 /**
  * 
@@ -70,7 +71,9 @@ public class SdefsElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
-    public final void printXML(final OutputStreamWriter dos) throws IOException {
+    public final void printXML(final Writer dos) throws IOException {
+        // write blank lines and comments from original file
+        dos.write(prependCharacterData);
         final HashMap<String, String> descriptions = DicTools.getSdefDescriptions();
 
         dos.write(tab(1) + "<" + getTagName() + ">\n");

@@ -50,7 +50,7 @@ public class SubstractBidix {
         //DictionaryElement dic = new DictionaryReader("../apertium-eo-en/apertium-lille.eo-en.dix").readDic();
         DictionaryElement dic = new DictionaryReader("../apertium-eo-en/apertium-eo-en.eo-en.dix").readDic();
         dic.reportMetrics();
-        new DicFormatE1LineEalign(dic).setAttrSpaces(7).printXML("before-clean.dix");
+        new DicFormatE1LineAligned(dic).printXML("before-clean.dix");
 
         HashMap<String, EElement> hmLR = new HashMap<String, EElement>();
         HashMap<String, EElement> hmRL = new HashMap<String, EElement>();
@@ -95,7 +95,9 @@ public class SubstractBidix {
         //System.out.println("Updated morphological dictionary: '" + out + "'");
         //dic.printXML(out);
         
-        new DicFormatE1LineEalign(dic).setAttrSpaces(7).printXML("after-clean.dix");
+        //new DicFormatE1LineAligned(dic).setAlignP(11).setAlignR(60).printXML("after-clean.dix");
+        new DicFormatE1LineAligned(dic).printXML("after-clean.dix");
+        new DicFormatE1LineAligned(dic).setAlignP(11).setAlignR(60).printXML("slet.dix");
         String fn = dic.getFileName()+"-cleaned.dix";        
         System.out.println("fn = " + fn);
         

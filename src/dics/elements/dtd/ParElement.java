@@ -21,6 +21,7 @@ package dics.elements.dtd;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.Writer;
 
 /**
  * 
@@ -103,7 +104,9 @@ public class ParElement extends Element {
      * @throws java.io.IOException
      */
     @Override
-    public final void printXML(final OutputStreamWriter dos) throws IOException {
+    public final void printXML(final Writer dos) throws IOException {
+        // write blank lines and comments from original file
+        dos.write(prependCharacterData);
         String saAttr = "";
         if (comments == null) {
             comments = "";
@@ -120,7 +123,7 @@ public class ParElement extends Element {
      * @throws java.io.IOException
      */
     @Override
-    public void printXML1Line(final OutputStreamWriter dos) throws IOException {
+    public void printXML1Line(final Writer dos) throws IOException {
         String saAttr = "";
         if (comments == null) {
             comments = "";
@@ -128,7 +131,10 @@ public class ParElement extends Element {
         if (this.sa != null) {
             saAttr = " sa=\"" + sa + "\" ";
         }
-        dos.write("<" + getTagName() + " n=\"" + n + "\" " + saAttr + "/> " + getComments());
+        dos.write("<" + getTagName() + " n=\"" + n + "\"" + saAttr + "/>" );
+
+        if (comments.length()>0)
+          dos.write(" " + comments);
     }
 
     /**

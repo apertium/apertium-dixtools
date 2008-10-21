@@ -21,6 +21,8 @@ package dics.elements.dtd;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.StringWriter;
+import java.io.Writer;
 
 /**
  * 
@@ -119,7 +121,9 @@ public class PElement extends Element {
      * @throws java.io.IOException
      */
     @Override
-    public final void printXML(final OutputStreamWriter dos) throws IOException {
+    public final void printXML(final Writer dos) throws IOException {
+        // write blank lines and comments from original file
+        dos.write(prependCharacterData);
         dos.write(tab(3) + "<" + getTagName() + ">\n");
         if (l != null) {
             l.printXML(dos);
@@ -136,14 +140,32 @@ public class PElement extends Element {
      * @throws java.io.IOException
      */
     @Override
-    public final void printXML1Line(final OutputStreamWriter dos)
+    public final void printXML1Line(final Writer dos)
             throws IOException {
         dos.write("<" + getTagName() + ">");
         l.printXML1Line(dos);
         r.printXML1Line(dos);
         dos.write("</" + getTagName() + ">");
     }
+    
 
+    private final static String spaces = "                      ";
+    
+    public final void printXML1LineAligned(final StringWriter dos, int alignR)
+            throws IOException {
+        dos.write("<" + getTagName() + ">");
+
+        l.printXML1Line(dos);
+
+        int neededSpaces = alignR - dos.getBuffer().length();
+        if (neededSpaces>0) {
+          dos.write(spaces.substring(0, Math.min(spaces.length(), neededSpaces)));
+        }
+        r.printXML1Line(dos);
+        dos.write("</" + getTagName() + ">");
+    }
+        
+        
     /**
      * 
      */

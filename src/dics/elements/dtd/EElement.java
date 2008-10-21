@@ -26,6 +26,8 @@ import dics.elements.utils.ElementList;
 import dics.elements.utils.Msg;
 import dics.elements.utils.SElementList;
 import java.io.OutputStreamWriter;
+import java.io.StringWriter;
+import java.io.Writer;
 
 /**
  * 
@@ -524,7 +526,10 @@ public class EElement extends Element implements Cloneable,
      * @throws java.io.IOException
      */
     @Override
-    public final void printXML(final OutputStreamWriter dos) throws IOException {
+    public final void printXML(final Writer dos) throws IOException {
+        // write blank lines and comments from original file
+        dos.write(prependCharacterData);
+
         String attributes = this.getAttrString();
         if (comments != null) {
             dos.write(tab(2) + "<!-- \n");
@@ -549,8 +554,11 @@ public class EElement extends Element implements Cloneable,
      * @throws java.io.IOException
      */
     @Override
-    public final void printXML1Line(final OutputStreamWriter dos)
+    public final void printXML1Line(final Writer dos)
             throws IOException {
+        // write blank lines and comments from original file
+        dos.write(prependCharacterData);
+      
         String attributes = this.getAttrString();
         if (comments != null) {
             dos.write(tab(2) + "<!-- \n");
@@ -569,35 +577,52 @@ public class EElement extends Element implements Cloneable,
         dos.write("</e>\n");
     }
 
-    final static String spaces = "                      ";
+    private final static String spaces = "                      ";
     /**
      * 
      * @param dos
      * @throws java.io.IOException
      */
-    public final void printXML1LineEalign(final OutputStreamWriter dos, int attrSpaces)
+    public final void printXML1LineAligned(final Writer dosx, int alignP, int alignR)
             throws IOException {
-        String attributes = this.getAttrString();
 
-        int addSpace = Math.max(0, Math.min(spaces.length(), attrSpaces-attributes.length()));
-        
+        // write blanks line and comments from original file
+        dosx.write(prependCharacterData);
                
+        // prepend comments added in this run
         if (comments != null) {
-            dos.write(spaces.substring(0, attrSpaces+4) + "<!-- ");
-            dos.write(comments);
+            //dosx.write(spaces.substring(0, alignP));
+            dosx.write("<!-- ");
+            dosx.write(comments);
             if (!isCommon()) {
-                dos.write(tab(2) + "esta entrada no aparece en el otro morfolgico\n");
+                dosx.write(tab(2) + "esta entrada no aparece en el otro morfolgico\n");
             }
-            dos.write( "-->\n");
+            dosx.write( "-->\n");
         }
-        dos.write("<e" + attributes + spaces.substring(0,addSpace)+ ">");
-        //dos.write(spaces.substring(0,addSpace) + "<e" + attributes + ">");
+
+        StringWriter dos = new StringWriter(120);
+
+        String attributes = this.getAttrString();
+        //int addSpace = Math.max(0, Math.min(spaces.length(), alignP-attributes.length()));
+        //dos.write("<e" + attributes + spaces.substring(0,addSpace)+ ">");              
+        //dos.write(spaces.substring(0,addSpace) + "<e" + attributes + ">");        
+        dos.write("<e" + attributes + ">");              
+        int neededSpaces = alignP - dos.getBuffer().length();
+        if (neededSpaces>0) {
+          dos.write(spaces.substring(0, Math.min(spaces.length(), neededSpaces)));
+        }        
+        
         if (children != null) {
-            for (final Element e : children) {
-                e.printXML1Line(dos);
+            for (final Element e : children) {                
+                if (e instanceof PElement) {
+                  ((PElement) e).printXML1LineAligned(dos, alignR);
+                } else {
+                  e.printXML1Line(dos);                
+                }
             }
         }
         dos.write("</e>\n");
+        dosx.write(dos.getBuffer().toString());
     }
 
 

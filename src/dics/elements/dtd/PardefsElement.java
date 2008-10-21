@@ -23,6 +23,7 @@ import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 
 /**
@@ -58,7 +59,9 @@ public class PardefsElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
-    public final void printXML(final OutputStreamWriter dos) throws IOException {
+    public final void printXML(final Writer dos) throws IOException {
+        // write blank lines and comments from original file
+        dos.write(prependCharacterData);
         dos.write(tab(1) + "<pardefs>\n");
         for (final PardefElement e : pardefElements) {
             e.printXML(dos);

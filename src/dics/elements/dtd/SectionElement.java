@@ -26,6 +26,7 @@ import java.util.ArrayList;
 
 import dics.elements.utils.EElementList;
 import java.io.OutputStreamWriter;
+import java.io.Writer;
 
 /**
  * 
@@ -125,7 +126,9 @@ public class SectionElement extends Element {
      * @throws java.io.IOException
      */
     @Override
-    public final void printXML(final OutputStreamWriter dos) throws IOException {
+    public final void printXML(final Writer dos) throws IOException {
+        // write blank lines and comments from original file
+        dos.write(prependCharacterData);
         String attributes = "";
         if (getID() != null) {
             attributes += " id=\"" + getID() + "\"";

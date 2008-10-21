@@ -21,6 +21,7 @@ package dics.elements.dtd;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.Writer;
 
 /**
  * 
@@ -45,17 +46,33 @@ public class Element implements Cloneable {
      * 
      */
     private String TAGNAME;
+    
     /**
-     * 
+     * XML comments originating from the processing if the file. Will be added as <!--   --> just before the XML elemen
      */
     protected String comments;
 
+    /**
+     * blanks, newlines and XML comments originating from a original loaded file. Will be added before the XML elemen (before comments)
+     */
+    protected String prependCharacterData="";
+    
+    /**
+     * XML comments, blanks and newlines originating from a loaded file. Will be added before the XML elemen (before comments)
+     */
+    public void setPrependCharacterData(String prependCharacterData) {
+      this.prependCharacterData = prependCharacterData;
+    }
+    
     /**
      * 
      * @param dos
      * @throws java.io.IOException
      */
-    protected void printXML(final OutputStreamWriter dos) throws IOException {
+    protected void printXML(final Writer dos) throws IOException {
+        // write blank lines and comments from original file
+        dos.write(prependCharacterData);
+        if (comments!=null) dos.write("<!--" + comments + "-->");
         dos.write("<" + getTagName() + "/>");
     }
 
@@ -64,7 +81,10 @@ public class Element implements Cloneable {
      * @param dos
      * @throws java.io.IOException
      */
-    protected void printXML1Line(final OutputStreamWriter dos) throws IOException {
+    protected void printXML1Line(final Writer dos) throws IOException {
+        // write blank lines and comments from original file
+        dos.write(prependCharacterData);
+        if (comments!=null) dos.write("<!--" + comments + "-->");
         dos.write("<" + getTagName() + "/>");
     }
 
@@ -96,7 +116,7 @@ public class Element implements Cloneable {
     }
 
     /**
-     * 
+     * Appends to 
      * @param value
      */
     public void addComments(final String value) {
@@ -107,16 +127,16 @@ public class Element implements Cloneable {
     }
 
     /**
-     * 
-     * @param value
+     * XML comments originating from the processing if the file. Will be added as <!--   --> just before the XML elemen
      */
     public void setComments(final String value) {
         comments = value;
     }
 
+
     /**
-     * 
-     * @return Undefined         */
+     * XML comments originating from the processing if the file. Will be added as <!--   --> just before the XML elemen
+     */
     public String getComments() {
         return comments;
     }
