@@ -173,12 +173,25 @@ function get-bil-omegawiki() {
 #  format-1line
 #
 function format-1line() {
-   if [ $nparams == 3 ]
+   if [ $nparams -ge 3 ]
    then
-      java ${java_options} $task $2 $3
+      java ${java_options} $task $2 $3 $4 $5
       echo "Dictionary: $3"
    else
-      echo "Usage: dictools format-1line <dic> <dic-out>"
+      echo "Usage: dictools format-1line [alignP alignR] <input-dic> <output-dic>"
+      echo "       where alignP / alignR: column to align <p> and <r> entries. 0 = no indent."
+      echo "";
+      echo "Example: ' format-1line old.dix new.dix '   will give indent a la"
+      echo '<e><p><l>dum<s n="cnjadv"/></l><r>whereas<s n="cnjadv"/></r></p></e>'
+      echo "";
+      echo "Example: ' format-1line 10 50 old.dix new.dix '   will give indent a la"
+      echo '<e>       <p><l>dum<s n="cnjadv"/></l>            <r>whereas<s n="cnjadv"/></r></p></e>'
+      echo "";
+      echo "Example: ' format-1line 0 50 old.dix new.dix '   will give indent a la"
+      echo '<e><p><l>dum<s n="cnjadv"/></l>                   <r>whereas<s n="cnjadv"/></r></p></e>'
+      echo "";
+      echo "Example: ' format-1line 10 0 old.dix new.dix '   will give indent a la"
+      echo '<e>       <p><l>dum<s n="cnjadv"/></l><r>whereas<s n="cnjadv"/></r></p></e>'
       echo "";
       echo "More information: http://wiki.apertium.org/wiki/Format_dictionaries";
       echo "";

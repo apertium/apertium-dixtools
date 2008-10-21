@@ -18,6 +18,7 @@
  * 02111-1307, USA.
  */
 
+import dics.elements.dtd.DictionaryElement;
 import misc.DicFormatE1Line;
 import misc.GetTranslation;
 import dics.elements.utils.Msg;
@@ -31,6 +32,7 @@ import dictools.DicMerge;
 import dictools.DicReader;
 import dictools.DicReverse;
 import dictools.DicSort;
+import dictools.DictionaryReader;
 import dictools.Dix2CC;
 import dictools.Dix2MDix;
 import dictools.apertiumizer.Apertiumizer;
@@ -39,6 +41,7 @@ import misc.Misc;
 import misc.enca.ConvertMF;
 import misc.enes.CompleteTranslation;
 import misc.enes.PrepareDic;
+import misc.eoen.DicFormatE1LineAligned;
 import misc.esca.AddSameGender;
 
 /**
@@ -376,12 +379,38 @@ public class ProcessDics {
      * 
      */
     private final void process_format1line() {
-        if (getArguments().length != 3) {
-            msg.err("Usage: java -jar path/to/apertium-dixtools.jar format-1line <dic> <dic-out>");
-            System.exit(-1);
-        } else {
+        if (getArguments().length == 3) {
             DicFormatE1Line dicFormat = new DicFormatE1Line(arguments[1]);
             dicFormat.printXML(arguments[2]);
+        } else try {
+            if (arguments.length<4) throw new IllegalArgumentException("Not enough arguments.");
+            DictionaryElement dic = new DictionaryReader(arguments[3]).readDic();
+            DicFormatE1LineAligned dicFormat = new DicFormatE1LineAligned(dic);
+            dicFormat.setAlignP( Integer.parseInt(arguments[1]) );
+            dicFormat.setAlignR( Integer.parseInt(arguments[2]) );
+            dicFormat.printXML(arguments[4]);            
+        } catch (Exception e) {
+            if (e instanceof NumberFormatException)
+              msg.err("Error "+e.getLocalizedMessage()+" should be a number.");
+            else
+              msg.err(e.getLocalizedMessage());
+            
+            msg.err("");
+            msg.err("Usage: format-1line [alignP alignR] <input-dic> <output-dic>");
+            msg.err("       where alignP / alignR: column to align <p> and <r> entries. 0 = no indent.");
+            msg.err("");
+            msg.err("Example: ' format-1line old.dix new.dix '   will give indent a la");
+            msg.err("<e><p><l>dum<s n=\"cnjadv\"/></l><r>whereas<s n=\"cnjadv\"/></r></p></e>");
+            msg.err("");
+            msg.err("Example: ' format-1line 10 50 old.dix new.dix '   will give indent a la");
+            msg.err("<e>       <p><l>dum<s n=\"cnjadv\"/></l>            <r>whereas<s n=\"cnjadv\"/></r></p></e>");
+            msg.err("");
+            msg.err("Example: ' format-1line 0 50 old.dix new.dix '   will give indent a la");
+            msg.err("<e><p><l>dum<s n=\"cnjadv\"/></l>                   <r>whereas<s n=\"cnjadv\"/></r></p></e>");
+            msg.err("");
+            msg.err("Example: ' format-1line 10 0 old.dix new.dix '   will give indent a la");
+            msg.err("<e>       <p><l>dum<s n=\"cnjadv\"/></l><r>whereas<s n=\"cnjadv\"/></r></p></e>");
+            System.exit(-1);
         }
     }
 
