@@ -71,6 +71,24 @@ public class SubstractBidix {
                 }
             }
 
+            
+
+            for (EElement ee : hmLR.values()) {
+              if (isRestricted("LR", ee)) {
+                System.out.println("LR restic can be lifted "+ee);                
+                removeRestriction("LR", ee);
+              }
+            }
+
+            for (EElement ee : hmRL.values()) {
+              if (isRestricted("RL", ee)) {
+                System.out.println("RL restic can be lifted "+ee);                
+                removeRestriction("RL", ee);
+              }
+            }
+            
+            
+            
             // Transfer reasons from temp to comment
             Iterator<EElement> eei = section.getEElements().iterator();
             while (eei.hasNext()) {
@@ -95,47 +113,75 @@ public class SubstractBidix {
         //System.out.println("Updated morphological dictionary: '" + out + "'");
         //dic.printXML(out);
         
-        //new DicFormatE1LineAligned(dic).setAlignP(11).setAlignR(60).printXML("after-clean.dix");
-        new DicFormatE1LineAligned(dic).printXML("after-clean.dix");
-        new DicFormatE1LineAligned(dic).setAlignP(11).setAlignR(60).printXML("slet.dix");
-        String fn = dic.getFileName()+"-cleaned.dix";        
-        System.out.println("fn = " + fn);
-        
+        new DicFormatE1LineAligned(dic).setAlignP(10).setAlignR(55).printXML("after-clean.dix");
+        //new DicFormatE1LineAligned(dic).printXML("after-clean.dix");
+        //new DicFormatE1LineAligned(dic).setAlignP(10).setAlignR(60).printXML("slet.dix");        
       }
 
-  static void checkEarlierAndRestrict(String dir, ContentElement l, HashMap<String, EElement> hmLR, EElement ee) {
-    if ("yes".equals(ee.getIgnore())) return;
-    String restric = ee.getRestriction();
+  static boolean isRestricted(String direction, EElement ee) {
+    if ("yes".equals(ee.getIgnore())) return true;
+    String restric = ee.getRestriction();    
+    if (restric==null ||restric.equals(direction)) return false;
+    return true;
+  }
+
+  
+  static void removeRestriction(String direction, EElement ee) {
+    boolean i = "yes".equals(ee.getIgnore());
+    String restric = ee.getRestriction();    
+
+    if (i) {
+       if (restric!=null) throw new IllegalStateException(restric);
+       ee.setRestriction(direction.equals("RL")?"LR":"RL");
+       ee.setIgnore(null);
+       return;
+    }
+
+    if (direction.equals(restric)) {
+       ee.setRestriction(null);
+       return;
+    }
 
     
-    if (restric==null ||restric.equals(dir)) {
-      String key=l.toString();
-      EElement existingEe=hmLR.get(key);
-      if (existingEe==null) {
-        hmLR.put(key, ee);
+    System.out.println("HM!removeRestriction(" + direction+"    "+ee);
+    //throw new IllegalStateException(restric);
+  }
+
+  
+      
+  static void checkEarlierAndRestrict(String direction, ContentElement l, HashMap<String, EElement> hmLR, EElement ee) {
+    //if (isRestricted(direction, ee)) return;
+    
+    String key=l.toString();
+    EElement existingEe=hmLR.get(key);
+    if (existingEe==null) {
+      hmLR.put(key, ee);
+      if (isRestricted(direction, ee)) return;
+    } else if (isRestricted(direction, existingEe) && !isRestricted(direction, ee)) {
+      hmLR.put(key, ee);
+    } else {
+      if (isRestricted(direction, ee)) return;
+      String oldReasonOfRestriction=ee.getTemp();
+      String existingEeStr=existingEe.toString();
+      //System.out.println("LR: Dobbelt indgang "+existingEe+"   "+ee);
+      if (ee.getRestriction() ==null) {
+        assert (oldReasonOfRestriction==null);
+        ee.setTemp(existingEeStr);
+        ee.setRestriction(direction.equals("RL")?"LR":"RL");
       } else {
-        String oldReasonOfRestriction=ee.getTemp();
-        String existingEeStr=existingEe.toString();
-        //System.out.println("LR: Dobbelt indgang "+existingEe+"   "+ee);
-        if (restric==null) {
-          assert (oldReasonOfRestriction==null);
-          ee.setTemp(existingEeStr);
-          ee.setRestriction("RL");
-        } else {
-          if (oldReasonOfRestriction == null || existingEeStr.equals(oldReasonOfRestriction)) {
-            if (existingEeStr.equals(oldReasonOfRestriction)) {
-              // Exactly the same entry has been before. Just delete
-              ee.setTemp("DELETE");
-            }
-            //ee.setComments("Already is "+existingEeStr);
-            ee.setTemp(existingEeStr);
-          } else {
-            //ee.setComments("Already are "+existingEeStr+" "+oldReasonOfRestriction);
-            ee.setTemp(existingEeStr+" "+oldReasonOfRestriction);
+        if (oldReasonOfRestriction == null || existingEeStr.equals(oldReasonOfRestriction)) {
+          if (existingEeStr.equals(oldReasonOfRestriction)) {
+            // Exactly the same entry has been before. Just delete
+            ee.setTemp("DELETE");
           }
-          ee.setIgnore("yes");
-          ee.setRestriction(null);
+          //ee.setComments("Already is "+existingEeStr);
+          ee.setTemp(existingEeStr);
+        } else {
+          //ee.setComments("Already are "+existingEeStr+" "+oldReasonOfRestriction);
+          ee.setTemp(existingEeStr+" "+oldReasonOfRestriction);
         }
+        ee.setIgnore("yes");
+        ee.setRestriction(null);
       }
     }
   }

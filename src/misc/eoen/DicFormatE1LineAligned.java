@@ -48,7 +48,7 @@ public class DicFormatE1LineAligned {
     private DictionaryElement dic;
     private int alignP = 10;
 
-    private int alignR = 50;
+    private int alignR = 55;
     
   public DicFormatE1LineAligned setAlignP(int attrSpaces) {
     this.alignP=attrSpaces;
