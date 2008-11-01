@@ -1091,38 +1091,41 @@ public class EElement extends Element implements Cloneable,
      */
     @Override
     public final String toString() {
-        String str = "";
-        String r = "";
-        if (this.hasRestriction()) {
-            r = " r=\"" + getRestriction() + "\"";
+        StringBuilder str = new StringBuilder(50);
+        str.append("<e");
+        if (this.i != null) {
+            str.append(" i=\"" + i + "\"");
         }
-        str += "<e" + r + ">";
+        if (this.hasRestriction()) {
+            str.append(" r=\"" + getRestriction() + "\"");
+        }
+        str.append(">");
         for (final Element e : children) {
             if (e instanceof IElement) {
                 final IElement i = (IElement) e;
-                str += i.toString();
+                str.append(i.toString());
             }
             if (e instanceof PElement) {
                 final PElement p = (PElement) e;
 
                 final LElement lE = p.getL();
-                str += lE.toString();
+                str.append(lE.toString());
 
                 final RElement rE = p.getR();
-                str += rE.toString();
+                str.append(rE.toString());
             }
             if (e instanceof ParElement) {
                 final ParElement par = (ParElement) e;
-                str += par.toString();
+                str.append(par.toString());
             }
             if (e instanceof ReElement) {
                 final ReElement re = (ReElement) e;
-                str += re.toString();
+                str.append(re.toString());
             }
 
         }
-        str += "</e>";
-        return str;
+        str.append("</e>");
+        return str.toString();
     }
 
     /**
