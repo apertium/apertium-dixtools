@@ -393,9 +393,15 @@ public class EElement extends Element implements Cloneable,
     }
 
     /**
-     * 
-     * @param side
-     * @return Undefined         
+     * Returns the first part of the left or right side of an entry (or the first invariant section).
+     * Examples:
+     * <pre>
+     * <e><i>Ameriko</i><par n="Barcelono__np"/> </e>   gives 'Ameriko'
+     * <e><i>Al</i><par n="ĝ"/> <i>erio</i><par n="Barcelono__np"/> </e> gives just 'Al'
+     * <e><l>mi</l><r>mi<prn><ref><p1><mf><sg></r></e> give 'mi'
+     * </pre>
+     * @param side can be R or L
+     * @return 
      */
     public ContentElement getSide(final String side) {
         for (final Element e : children) {
