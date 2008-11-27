@@ -39,6 +39,8 @@ public class ParElement extends Element {
      */
     private String sa;
 
+    private String[] prm;
+
     /**
      * 
      * 
@@ -107,14 +109,18 @@ public class ParElement extends Element {
     public final void printXML(final Writer dos) throws IOException {
         // write blank lines and comments from original file
         dos.write(prependCharacterData);
-        String saAttr = "";
         if (comments == null) {
             comments = "";
         }
+        String prms = "";
+        if (prm != null) {
+            for (int i=0;i<prm.length; i++) if (prm[i]!=null) prms+=" prm"+(i==0?"":i)+"=\"" + prm[i] + "\"";
+        }
+        String saAttr = "";
         if (this.sa != null) {
             saAttr = " sa=\"" + sa + "\" ";
         }
-        dos.write(tab(4) + "<" + getTagName() + " n=\"" + n + "\" " + saAttr + "/> " + getComments() + "\n");
+        dos.write(tab(4) + "<" + getTagName() + " n=\"" + n + "\"" +prms + saAttr + "/> " + getComments() + "\n");
     }
 
     /**
@@ -124,14 +130,18 @@ public class ParElement extends Element {
      */
     @Override
     public void printXML1Line(final Writer dos) throws IOException {
-        String saAttr = "";
         if (comments == null) {
             comments = "";
         }
+        String prms = "";
+        if (prm != null) {
+            for (int i=0;i<prm.length; i++) if (prm[i]!=null) prms+=" prm"+(i==0?"":i)+"=\"" + prm[i] + "\"";
+        }
+        String saAttr = "";
         if (this.sa != null) {
             saAttr = " sa=\"" + sa + "\" ";
         }
-        dos.write("<" + getTagName() + " n=\"" + n + "\"" + saAttr + "/>" );
+        dos.write("<" + getTagName() + " n=\"" + n + "\"" + prms + saAttr + "/>" );
 
         if (comments.length()>0)
           dos.write(" " + comments);
@@ -144,4 +154,17 @@ public class ParElement extends Element {
     public final String toString() {
         return "<" + getTagName() + " n=\"" + n + "\"/> ";
     }
+
+  public String[] getPrm() {
+    return prm;
+  }
+
+
+  public void setPrm(int n, String v) {
+    
+    System.err.println("setPrm( = "+n +" "+v );
+    if (prm==null) prm=new String[10];
+    prm[n] = v;
+  }
+
 }

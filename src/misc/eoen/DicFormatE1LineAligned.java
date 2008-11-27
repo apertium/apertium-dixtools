@@ -122,7 +122,7 @@ public class DicFormatE1LineAligned {
             if (dic.getComments() != null) {
                 dos.write(dic.getComments());
             }
-            dos.write("\n-->\n");
+            dos.write("-->\n");
             dos.write("<dictionary>\n");
             if (dic.getAlphabet() != null) {
                 dic.getAlphabet().printXML(dos);
@@ -144,7 +144,6 @@ public class DicFormatE1LineAligned {
                     }
                     dos.write("  <section " + attributes + ">\n");
                     for (final EElement e : s.getEElements()) {
-                        //e.printXML1Line(dos);
                         e.printXML1LineAligned(dos, alignP, alignR);
                     }
                     dos.write("  </section>\n");

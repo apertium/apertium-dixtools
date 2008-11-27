@@ -444,6 +444,10 @@ public class XMLReader {
         if (tag.equals("prm")) {
             return getPrmElement();
         }
+        if (tag.startsWith("prm") && '0'<=tag.charAt(3)  && tag.charAt(3)<='9') {
+            // We can't use the singleton here, so make a new element
+            return new PrmElement(tag.substring(3));
+        }
         System.err.println("processTagE(): Unknown tag "+tag+" ignored in: " + child);
 
         return null;

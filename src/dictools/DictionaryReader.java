@@ -48,6 +48,7 @@ import java.util.Arrays;
 import javax.swing.JProgressBar;
 import org.w3c.dom.Comment;
 import org.w3c.dom.CharacterData;
+import org.w3c.dom.NamedNodeMap;
 
 /**
  * 
@@ -349,7 +350,7 @@ public class DictionaryReader extends XMLReader {
                             sectionElement.addEElement(e2);
                         }
                     } else
-                      System.err.println("Unknown childElementName = " + childElementName);
+                      System.err.println("readSection(): Unknown childElementName = " + childElementName);
                 } else
                 if (child instanceof Comment) {
                   prependCharacterData.append("<!--").append(child.getNodeValue()).append("-->");
@@ -449,10 +450,29 @@ public class DictionaryReader extends XMLReader {
      * @return Undefined         */
     @Override
     public ParElement readParElement(final Element e) {
+      
         final String n = getAttributeValue(e, "n");
         final String sa = this.getAttributeValue(e, "sa");
         final ParElement parElement = new ParElement(n);
         parElement.setSa(sa);
+
+        if (e.hasAttributes()) {
+            final NamedNodeMap attributes = e.getAttributes();
+            for (int i = 0; i < attributes.getLength(); i++) {
+                Node attribute = attributes.item(i);
+                String name = attribute.getNodeName();
+                String value = attribute.getNodeValue();
+                if (name.startsWith("prm")) {
+                  int parn=0;
+                  if (name.length()==4 && '0'<=name.charAt(3) && name.charAt(3)<='9') {
+                    parn = name.charAt(3)-'0';
+                  }
+                  parElement.setPrm(parn, value);
+                } // end-if
+            } // end-for
+        } // end-if
+        
+        
         return parElement;
     }
 

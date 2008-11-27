@@ -38,4 +38,13 @@ public class PrmElement extends Element {
         setValue("<prm/>");
         setValueNoTags("");
     }
+
+    /**
+     * Used for tags like prn0, prn1, prn2,... prn 9
+     */
+    public PrmElement(String number) {
+        setTagName("prm"+number);
+        setValue("<prm"+number+"/>");
+        setValueNoTags("");
+    }
 }

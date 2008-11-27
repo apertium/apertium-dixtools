@@ -1,155 +1,198 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dictionary>
-<alphabet>·ÀÁÂÄÇÈÉÊËÌÍÎÏÑÒÓÔÖÙÚÛÜàáâäçèéêëìíîïñòóôöùúûüABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</alphabet>
-<sdefs>
-<sdef n="aa"/>
-<sdef n="acr"/>
-<sdef n="adj"/>
-<sdef n="adv"/>
-<sdef n="al"/>
-<sdef n="an"/>
-<sdef n="ant"/>
-<sdef n="atn"/>
-<sdef n="cm"/>
-<sdef n="cni"/>
-<sdef n="cnjadv"/>
-<sdef n="cnjcoo"/>
-<sdef n="cnjsub"/>
-<sdef n="def"/>
-<sdef n="dem"/>
-<sdef n="det"/>
-<sdef n="detnt"/>
-<sdef n="enc"/>
-<sdef n="f"/>
-<sdef n="fti"/>
-<sdef n="fts"/>
-<sdef n="gen"/>
-<sdef n="ger"/>
-<sdef n="ifi"/>
-<sdef n="ij"/>
-<sdef n="imp"/>
-<sdef n="ind"/>
-<sdef n="inf"/>
-<sdef n="itg"/>
-<sdef n="loc"/>
-<sdef n="lpar"/>
-<sdef n="lquest"/>
-<sdef n="m"/>
-<sdef n="mf"/>
-<sdef n="n"/>
-<sdef n="nn"/>
-<sdef n="nom"/>
-<sdef n="np"/>
-<sdef n="nt"/>
-<sdef n="num"/>
-<sdef n="p1"/>
-<sdef n="p2"/>
-<sdef n="p3"/>
-<sdef n="percent"/>
-<sdef n="pii"/>
-<sdef n="pis"/>
-<sdef n="pl"/>
-<sdef n="pos"/>
-<sdef n="pp"/>
-<sdef n="ppres"/>
-<sdef n="pr"/>
-<sdef n="preadv"/>
-<sdef n="predet"/>
-<sdef n="pri"/>
-<sdef n="prn"/>
-<sdef n="pro"/>
-<sdef n="prs"/>
-<sdef n="ref"/>
-<sdef n="rel"/>
-<sdef n="rpar"/>
-<sdef n="sent"/>
-<sdef n="sg"/>
-<sdef n="sp"/>
-<sdef n="sup"/>
-<sdef n="tn"/>
-<sdef n="vaux"/>
-<sdef n="vbhaver"/>
-<sdef n="vblex"/>
-<sdef n="vbmod"/>
-<sdef n="vbser"/>
-<sdef n="ND"/>
-</sdefs>
-<pardefs>
-
-<pardef n="S__encimp">
-<e><p><l>-en</l><r>en<s n="prn"/><s n="enc"/><s n="adv"/></r></p></e>
-<e><p><l>-la</l><r>le<s n="prn"/><s n="enc"/><s n="p3"/><s n="f"/><s n="sg"/></r></p></e>
-<!--
+  <alphabet>·ÀÁÂÄÇÈÉÊËÌÍÎÏÑÒÓÔÖÙÚÛÜàáâäçèéêëìíîïñòóôöùúûüABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</alphabet>
+  <sdefs>
+    <sdef n="aa"/>
+    <sdef n="acr"/>
+    <sdef n="adj"/>
+    <sdef n="adv"/>
+    <sdef n="al"/>
+    <sdef n="an"/>
+    <sdef n="ant"/>
+    <sdef n="atn"/>
+    <sdef n="cm"/>
+    <sdef n="cni"/>
+    <sdef n="cnjadv"/>
+    <sdef n="cnjcoo"/>
+    <sdef n="cnjsub"/>
+    <sdef n="def"/>
+    <sdef n="dem"/>
+    <sdef n="det"/>
+    <sdef n="detnt"/>
+    <sdef n="enc"/>
+    <sdef n="f"/>
+    <sdef n="fti"/>
+    <sdef n="fts"/>
+    <sdef n="gen"/>
+    <sdef n="ger"/>
+    <sdef n="ifi"/>
+    <sdef n="ij"/>
+    <sdef n="imp"/>
+    <sdef n="ind"/>
+    <sdef n="inf"/>
+    <sdef n="itg"/>
+    <sdef n="loc"/>
+    <sdef n="lpar"/>
+    <sdef n="lquest"/>
+    <sdef n="m"/>
+    <sdef n="mf"/>
+    <sdef n="n"/>
+    <sdef n="nn"/>
+    <sdef n="nom"/>
+    <sdef n="np"/>
+    <sdef n="nt"/>
+    <sdef n="num"/>
+    <sdef n="p1"/>
+    <sdef n="p2"/>
+    <sdef n="p3"/>
+    <sdef n="percent"/>
+    <sdef n="pii"/>
+    <sdef n="pis"/>
+    <sdef n="pl"/>
+    <sdef n="pos"/>
+    <sdef n="pp"/>
+    <sdef n="ppres"/>
+    <sdef n="pr"/>
+    <sdef n="preadv"/>
+    <sdef n="predet"/>
+    <sdef n="pri"/>
+    <sdef n="prn"/>
+    <sdef n="pro"/>
+    <sdef n="prs"/>
+    <sdef n="ref"/>
+    <sdef n="rel"/>
+    <sdef n="rpar"/>
+    <sdef n="sent"/>
+    <sdef n="sg"/>
+    <sdef n="sp"/>
+    <sdef n="sup"/>
+    <sdef n="tn"/>
+    <sdef n="vaux"/>
+    <sdef n="vbhaver"/>
+    <sdef n="vblex"/>
+    <sdef n="vbmod"/>
+    <sdef n="vbser"/>
+    <sdef n="ND"/>
+  </sdefs>
+  <pardefs>
+    <pardef n="S__encimp">
+    <e>
+      <p>
+        <l>-en</l>
+        <r>en<s n="prn"/><s n="enc"/><s n="adv"/></r>
+      </p>
+    </e>
+    <e>
+      <p>
+        <l>-la</l>
+        <r>le<s n="prn"/><s n="enc"/><s n="p3"/><s n="f"/><s n="sg"/></r>
+      </p>
+    </e>
+    <!--
 <e><p><l>-soi</l><r>se<s n="prn"/><s n="enc"/><s n="ref"/><s n="p3"/><s n="mf"/><s n="sp"/></r></p></e> -->
-</pardef>
-
-
-<pardef n="achèt/e__vblex">
-<e><p><l>e</l><r>er<s n="vblex"/><s n="imp"/><s n="p2"/><s n="sg"/></r></p></e>
-<e><p><l>e</l><r>er<s n="vblex"/><s n="imp"/><s n="p2"/><s n="sg"/><j/></r></p><par n="S__encimp"/></e>
-</pardef>
-
-<pardef n="achet/er__vblex">
-<e><p><l>a</l><r>er<s n="vblex"/><s n="ifi"/><s n="p3"/><s n="sg"/></r></p></e>
-<e><p><l>ai</l><r>er<s n="vblex"/><s n="ifi"/><s n="p1"/><s n="sg"/></r></p></e>
-</pardef>
-
-
-<pardef n="luî/mes__vblex">
-        <e r="LR"><p><l>mes</l><r>re<s n="vblex"/><s n="ifi"/><s n="p1"/><s n="pl"/></r></p></e>
-        <e r="LR"><p><l>tes</l><r>re<s n="vblex"/><s n="ifi"/><s n="p2"/><s n="pl"/></r></p></e>
-</pardef>
-
-<pardef n="lui/re__vblex">
-        <e r="LR"><p><l>rent</l><r>re<s n="vblex"/><s n="ifi"/><s n="p3"/><s n="pl"/></r></p></e>
-        <e r="LR"><p><l>s</l><r>re<s n="vblex"/><s n="ifi"/><s n="p1"/><s n="sg"/></r></p></e>
-        <e r="LR"><p><l>s</l><r>re<s n="vblex"/><s n="ifi"/><s n="p2"/><s n="sg"/></r></p></e>
-        <e><p><l>s</l><r>re<s n="vblex"/><s n="imp"/><s n="p2"/><s n="sg"/><j/></r></p><par n="S__encimp"/></e>
-</pardef>
-
-
-<pardef n="ach/e[T]er__vblex">
-<e>
- <p>
-   <l><prm/>è</l>
-   <r>e<prm/></r>
- </p>
- <par n="achèt/e__vblex"/>
-</e>
-
-<e>
- <i>e<prm/></i>
-  <par n="achet/er__vblex"/>
-</e>
-</pardef>
-
-
-<pardef n="lu/i[]re__vblex">
-
-<e>
- <p>
-   <l><prm1/>î</l>
-   <r>i<prm2/></r>
- </p>
- <i><prm/></i>
- <par n="luî/mes__vblex"/>
-</e>
-
-<e>
- <i>i<prm3/></i>
- <par n="lui/re__vblex"/>
-</e>
-</pardef>
-
-
-</pardefs>
-
-<section id="main" type="standard">
-
-    <e lm="détruire"><i>détru</i><par n="lu/i[]re__vblex" prm="" prm1="A" prm2="B" prm3="C"/></e>
-    <e lm="enlever"><i>enl</i><par n="ach/e[T]er__vblex" prm="v"/></e>
-    <e lm="acheter"><i>ach</i><par n="ach/e[T]er__vblex" prm="t"/></e>
-    <e lm="amener"><i>am</i><par n="ach/e[T]er__vblex" prm="n"/></e>
-
-</section>
+    </pardef>
+    <pardef n="achèt/e__vblex">
+    <e>
+      <p>
+        <l>e</l>
+        <r>er<s n="vblex"/><s n="imp"/><s n="p2"/><s n="sg"/></r>
+      </p>
+    </e>
+    <e>
+      <p>
+        <l>e</l>
+        <r>er<s n="vblex"/><s n="imp"/><s n="p2"/><s n="sg"/><j/></r>
+      </p>
+      <par n="S__encimp"/>
+    </e>
+    </pardef>
+    <pardef n="achet/er__vblex">
+    <e>
+      <p>
+        <l>a</l>
+        <r>er<s n="vblex"/><s n="ifi"/><s n="p3"/><s n="sg"/></r>
+      </p>
+    </e>
+    <e>
+      <p>
+        <l>ai</l>
+        <r>er<s n="vblex"/><s n="ifi"/><s n="p1"/><s n="sg"/></r>
+      </p>
+    </e>
+    </pardef>
+    <pardef n="luî/mes__vblex">
+    <e r="LR">
+      <p>
+        <l>mes</l>
+        <r>re<s n="vblex"/><s n="ifi"/><s n="p1"/><s n="pl"/></r>
+      </p>
+    </e>
+    <e r="LR">
+      <p>
+        <l>tes</l>
+        <r>re<s n="vblex"/><s n="ifi"/><s n="p2"/><s n="pl"/></r>
+      </p>
+    </e>
+    </pardef>
+    <pardef n="lui/re__vblex">
+    <e r="LR">
+      <p>
+        <l>rent</l>
+        <r>re<s n="vblex"/><s n="ifi"/><s n="p3"/><s n="pl"/></r>
+      </p>
+    </e>
+    <e r="LR">
+      <p>
+        <l>s</l>
+        <r>re<s n="vblex"/><s n="ifi"/><s n="p1"/><s n="sg"/></r>
+      </p>
+    </e>
+    <e r="LR">
+      <p>
+        <l>s</l>
+        <r>re<s n="vblex"/><s n="ifi"/><s n="p2"/><s n="sg"/></r>
+      </p>
+    </e>
+    <e>
+      <p>
+        <l>s</l>
+        <r>re<s n="vblex"/><s n="imp"/><s n="p2"/><s n="sg"/><j/></r>
+      </p>
+      <par n="S__encimp"/>
+    </e>
+    </pardef>
+    <pardef n="ach/e[T]er__vblex">
+    <e>
+      <p>
+        <l><prm/>è</l>
+        <r>e<prm/></r>
+      </p>
+      <par n="achèt/e__vblex"/>
+    </e>
+    <e>
+      <i>e<prm/></i>
+      <par n="achet/er__vblex"/>
+    </e>
+    </pardef>
+    <pardef n="lu/i[]re__vblex">
+    <e>
+      <p>
+        <l><prm1/>î</l>
+        <r>i<prm2/></r>
+      </p>
+      <i><prm/></i>
+      <par n="luî/mes__vblex"/>
+    </e>
+    <e>
+      <i>i<prm3/></i>
+      <par n="lui/re__vblex"/>
+    </e>
+    </pardef>
+  </pardefs>
+  <section id="main" type="standard">
+<e lm="détruire"><i>détru</i><par n="lu/i[]re__vblex" prm="" prm2="A" prm3="B" prm4="C"/></e>
+<e lm="enlever"><i>enl</i><par n="ach/e[T]er__vblex" prm="v"/></e>
+<e lm="acheter"><i>ach</i><par n="ach/e[T]er__vblex" prm="t"/></e>
+<e lm="amener"><i>am</i><par n="ach/e[T]er__vblex" prm="n"/></e>
+  </section>
 </dictionary>
