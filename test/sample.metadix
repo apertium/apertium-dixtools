@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+        Dictionary:
+        Sections: 1
+        Entries: 4
+        Sdefs: 71
+        Paradigms: 7
+-->
 <dictionary>
   <alphabet>·ÀÁÂÄÇÈÉÊËÌÍÎÏÑÒÓÔÖÙÚÛÜàáâäçèéêëìíîïñòóôöùúûüABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</alphabet>
   <sdefs>
@@ -88,8 +95,7 @@
         <r>le<s n="prn"/><s n="enc"/><s n="p3"/><s n="f"/><s n="sg"/></r>
       </p>
     </e>
-    <!--
-<e><p><l>-soi</l><r>se<s n="prn"/><s n="enc"/><s n="ref"/><s n="p3"/><s n="mf"/><s n="sp"/></r></p></e> -->
+    
     </pardef>
     <pardef n="achèt/e__vblex">
     <e>
