@@ -275,6 +275,7 @@ public class DictionaryReader extends XMLReader {
                 final PardefElement pardefElement = readPardef(childElement);
                 pardefsElement.addPardefElement(pardefElement);
             }
+            else System.err.println("readPardefs(): Unknown node ignored: " + childElementName);
         }
 
         return pardefsElement;
@@ -295,6 +296,7 @@ public class DictionaryReader extends XMLReader {
                 final EElement eElement = readEElement(childElement);
                 pardefElement.addEElement(eElement);
             }
+            else System.err.println("readPardef(): Unknown node ignored: " + childElementName);
         }
 
         return pardefElement;

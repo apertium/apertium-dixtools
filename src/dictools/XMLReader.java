@@ -47,6 +47,7 @@ import dics.elements.dtd.JElement;
 import dics.elements.dtd.LElement;
 import dics.elements.dtd.PElement;
 import dics.elements.dtd.ParElement;
+import dics.elements.dtd.PrmElement;
 import dics.elements.dtd.RElement;
 import dics.elements.dtd.ReElement;
 import dics.elements.dtd.SElement;
@@ -104,7 +105,10 @@ public class XMLReader {
      * 
      */
     protected SaElement saElement;
+    protected PrmElement prmElement;
 
+    
+    
     /**
      * 
      * 
@@ -141,6 +145,7 @@ public class XMLReader {
         aElement = new AElement();
         jElement = new JElement();
         saElement = new SaElement();
+        prmElement = new PrmElement();
     }
 
     /**
@@ -233,19 +238,20 @@ public class XMLReader {
                     if (childElementName.equals("i")) {
                         final IElement iElement = readIElement(childElement);
                         eElement.addChild(iElement);
-                    }
+                    } else
                     if (childElementName.equals("p")) {
                         final PElement pElement = readPElement(childElement);
                         eElement.addChild(pElement);
-                    }
+                    } else
                     if (childElementName.equals("par")) {
                         final ParElement parElement = readParElement(childElement);
                         eElement.addChild(parElement);
-                    }
+                    } else
                     if (childElementName.equals("re")) {
                         final ReElement reElement = readReElement(childElement);
                         eElement.addChild(reElement);
-                    }
+                    } else
+                    System.err.println("readEElement(): Unknown node ignored: " + childElementName);
                 }
             }
         }
@@ -435,6 +441,11 @@ public class XMLReader {
             final GElement gElement = readGElement(childElement);
             return gElement;
         }
+        if (tag.equals("prm")) {
+            return getPrmElement();
+        }
+        System.err.println("processTagE(): Unknown tag "+tag+" ignored in: " + child);
+
         return null;
     }
 
@@ -489,11 +500,12 @@ public class XMLReader {
                     if (childElementName.equals("l")) {
                         final LElement lElement = readLElement(childElement);
                         pElement.setLElement(lElement);
-                    }
+                    } else
                     if (childElementName.equals("r")) {
                         final RElement rElement = readRElement(childElement);
                         pElement.setRElement(rElement);
-                    }
+                    } else
+                    System.err.println("readPElement(): Unknown node ignored: " + childElementName);
 
                 }
             }
@@ -649,6 +661,14 @@ public class XMLReader {
         return saElement;
     }
 
+    /**
+     * @return the saElement
+     */
+    public final PrmElement getPrmElement() {
+        return prmElement;
+    }
+    
+    
     /**
      * @param saElement
      *                the saElement to set

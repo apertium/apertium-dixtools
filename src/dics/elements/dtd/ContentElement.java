@@ -351,6 +351,7 @@ public class ContentElement extends Element implements Cloneable {
 
         str += "<" + tagName + ">";
         for (Element e : getChildren()) {
+          if (e==null) continue;
             String v = e.toString();
             str += v;
         }
