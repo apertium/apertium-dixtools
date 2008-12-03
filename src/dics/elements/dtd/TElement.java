@@ -94,6 +94,17 @@ public class TElement extends Element {
     }
 
     /**
+ * 
+ * @param dos
+ ** @throws java.io.IOException
+ **/
+    @Override
+    public final void printXML(final OutputStreamWriter dos) throws IOException {
+        dos.write("<" + getTagName() + " n=\"" + getValue() + "\"/>");
+    }
+
+
+    /**
      * 
      */
     @Override

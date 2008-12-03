@@ -70,4 +70,35 @@ public class GElement extends ContentElement {
             dos.write("<!-- error tagname -->\n");
         }
     }
+
+    /**
+ ** 
+ ** @param dos
+ ** @throws java.io.IOException
+ **/
+    @Override
+    public final void printXML(final OutputStreamWriter dos) throws IOException {
+        if (getTagName() != null) {
+            dos.write("<" + getTagName() + ">");
+        } else {
+            dos.write("<!-- error tagname -->\n");
+        }
+        if (children != null) {
+            for (final Element e : children) {
+                if (e != null) {
+                    e.printXML(dos);
+                }
+            }
+        }
+        String c = "";
+        if (getComments() != null) {
+            c = getComments();
+        }
+        if (getTagName() != null) {
+            dos.write("</" + getTagName() + ">" + c + "");
+        } else {
+            dos.write("<!-- error tagname -->\n");
+        }
+    }
+
 }

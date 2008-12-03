@@ -81,6 +81,33 @@ public class ReElement extends Element {
     }
 
     /**
+ ** 
+ ** @param dos
+ ** @throws java.io.IOException
+ **/
+    @Override
+    public final void printXML(final OutputStreamWriter dos) throws IOException {
+        if (value == null) {
+            value = "";
+        }
+        dos.write(tab(3) + "<" + getTagName() + ">" + getValue() + "</" + getTagName() + ">\n");
+    }
+
+    /**
+ ** 
+ ** @param dos
+ ** @throws java.io.IOException
+ **/
+    @Override
+    public final void printXML1Line(final OutputStreamWriter dos) throws IOException {
+        if (value == null) {
+            value = "";
+        }
+        dos.write("<" + getTagName() + ">" + getValue() + "</" + getTagName() + ">");
+    }
+
+
+    /**
      * 
      */
     @Override

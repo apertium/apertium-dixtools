@@ -98,6 +98,17 @@ public class SElement extends Element {
     }
 
     /**
+ ** 
+ ** @param dos
+ ** @throws java.io.IOException
+ **/
+    public final void printXML(final OutputStreamWriter dos) throws IOException {
+        dos.write("<" + getTagName() + " n=\"" + getValue() + "\"/>");
+    }
+
+
+
+    /**
      * 
      * @return Undefined         */
     public final boolean isAdj() {

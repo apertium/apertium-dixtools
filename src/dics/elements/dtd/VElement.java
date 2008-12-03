@@ -89,6 +89,17 @@ public class VElement extends Element {
         dos.write("<" + getTagName() + " n=\"" + getValue() + "\"/>");
     }
 
+   /**
+ ** 
+ ** @param dos
+ ** @throws java.io.IOException
+ **/
+    @Override
+    public final void printXML(final OutputStreamWriter dos) throws IOException {
+        dos.write("<" + getTagName() + " n=\"" + getValue() + "\"/>");
+    }
+
+
     /**
      * 
      */

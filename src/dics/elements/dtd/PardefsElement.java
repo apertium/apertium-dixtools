@@ -70,6 +70,20 @@ public class PardefsElement extends Element {
     }
 
     /**
+ ** 
+ ** @param dos
+ ** @throws java.io.IOException
+ **/
+    public final void printXML(final OutputStreamWriter dos) throws IOException {
+        dos.write(tab(1) + "<pardefs>\n");
+        for (final PardefElement e : pardefElements) {
+            e.printXML(dos);
+        }
+        dos.write(tab(1) + "</pardefs>\n\n");
+    }
+
+
+    /**
      * 
      * @param fileName
      */
