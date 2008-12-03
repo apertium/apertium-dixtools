@@ -167,68 +167,6 @@ public class ContentElement extends Element implements Cloneable {
     }
 
     /**
- ** 
- ** @param dos
- ** @throws java.io.IOException
- **/
-    @Override
-    protected void printXML(final OutputStreamWriter dos) throws IOException {
-        if (getTagName() != null) {
-            dos.write(tab(4) + "<" + getTagName() + ">");
-        } else {
-            dos.write("<!-- error tagname -->\n");
-        }
-        if (getChildren() != null) {
-            for (final Element e : getChildren()) {
-                if (e != null) {
-                    e.printXML(dos);
-                }
-            }
-        }
-        String c = "";
-        if (getComments() != null) {
-            c = getComments();
-        }
-        if (getTagName() != null) {
-            dos.write("</" + getTagName() + "> " + c + "\n");
-        } else {
-            dos.write("<!-- error tagname -->\n");
-        }
-    }
-
-    /**
- ** 
- ** @param dos
- ** @throws java.io.IOException
- **/
-
-    @Override
-    protected void printXML1Line(final OutputStreamWriter dos) throws IOException {
-        if (getTagName() != null) {
-            dos.write("<" + getTagName() + ">");
-        } else {
-            dos.write("<!-- error tagname -->");
-        }
-        if (getChildren() != null) {
-            for (final Element e : getChildren()) {
-                if (e != null) {
-                    e.printXML(dos);
-                }
-            }
-        }
-        String c = "";
-        if (getComments() != null) {
-            c = getComments();
-        }
-        if (getTagName() != null) {
-            dos.write("</" + getTagName() + ">" + c + "");
-        } else {
-            dos.write("<!-- error tagname -->\n");
-        }
-    }
-
-
-    /**
      * 
      * @param dos
      * @throws java.io.IOException

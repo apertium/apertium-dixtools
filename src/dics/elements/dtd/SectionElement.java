@@ -192,34 +192,6 @@ public class SectionElement extends Element {
     }
 
     /**
- ** 
- ** @param dos
- ** @throws java.io.IOException
- **/
-    @Override
-    public final void printXML(final OutputStreamWriter dos) throws IOException {
-        String attributes = "";
-        if (getID() != null) {
-            attributes += " id=\"" + getID() + "\"";
-        }
-        if (getType() != null) {
-            attributes += " type=\"" + getType() + "\"";
-        }
-
-        dos.write(tab(1) + "<" + getTagName() + "" + attributes + ">\n");
-
-        if (eElements != null) {
-            for (final EElement e : eElements) {
-                e.printXML(dos);
-            }
-        }
-
-        dos.write(tab(1) + "</" + getTagName() + ">\n");
-    }
-
-
-
-    /**
      * @param elements
      *                the eElements to set
      */

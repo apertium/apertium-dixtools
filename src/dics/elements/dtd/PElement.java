@@ -164,40 +164,6 @@ public class PElement extends Element {
         r.printXML1Line(dos);
         dos.write("</" + getTagName() + ">");
     }
-
-
-    /**
- ** 
- ** @param dos
- ** @throws java.io.IOException
- **/
-    @Override
-    public final void printXML(final OutputStreamWriter dos) throws IOException {
-        dos.write(tab(3) + "<" + getTagName() + ">\n");
-        if (l != null) {
-            l.printXML(dos);
-        }
-        if (r != null) {
-            r.printXML(dos);
-        }
-        dos.write(tab(3) + "</" + getTagName() + ">\n");
-    }
-
-    /**
- ** 
- ** @param dos
- ** @throws java.io.IOException
- **/
-    @Override
-    public final void printXML1Line(final OutputStreamWriter dos)
-            throws IOException {
-        dos.write("<" + getTagName() + ">");
-        l.printXML1Line(dos);
-        r.printXML1Line(dos);
-        dos.write("</" + getTagName() + ">");
-    }
-
-
         
         
     /**

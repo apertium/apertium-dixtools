@@ -131,31 +131,6 @@ public class SdefsElement extends Element {
     }
 
     /**
- ** 
- ** @param dos
- ** @throws java.io.IOException
- **/
-    public final void printXML(final OutputStreamWriter dos) throws IOException {
-        final HashMap<String, String> descriptions = DicTools.getSdefDescriptions();
-
-        dos.write(tab(1) + "<" + getTagName() + ">\n");
-        for (final SdefElement e : sdefsElements) {
-            final String d = descriptions.get(e.getValue());
-            if (d != null) {
-           // e.setComments("\t<!-- " + d + "-->");
-            }
-            e.printXML(dos);
-        }
-        dos.write(tab(1) + "</" + getTagName() + ">\n");
-        if (comments != null) {
-            dos.write(tab(1) + "<!-- \n");
-            dos.write(tab(1) + getComments());
-            dos.write(tab(1) + " -->\n");
-        }
-    }
-
-
-    /**
      * 
      * @return Undefined         */
     public final ArrayList<String> getAllCategories() {

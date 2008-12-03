@@ -76,24 +76,6 @@ public class SdefElement extends Element {
     }
 
     /**
- ** 
- ** @param dos
- ** @throws java.io.IOException
- **/
-    public final void printXML(final OutputStreamWriter dos) throws IOException {
-        if (comments == null) {
-            setComments("");
-        }
-        String comment = "";
-        if (this.comment != null) {
-            comment = "\tc=\"" + getComment() + "\"";
-
-        }
-        dos.write(tab(2) + "<" + getTagName() + " n=\"" + getValue() + "\" " + comment + "/> " + getComments() + "\n");
-    }
-
-
-    /**
      * 
      */
     @Override

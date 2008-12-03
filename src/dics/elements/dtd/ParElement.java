@@ -148,42 +148,6 @@ public class ParElement extends Element {
     }
 
     /**
- ** 
- ** @param dos
- ** @throws java.io.IOException
- **/
-    @Override
-    public final void printXML(final OutputStreamWriter dos) throws IOException {
-        String saAttr = "";
-        if (comments == null) {
-            comments = "";
-        }
-        if (this.sa != null) {
-            saAttr = " sa=\"" + sa + "\" ";
-        }
-        dos.write(tab(4) + "<" + getTagName() + " n=\"" + n + "\" " + saAttr + "/> " + getComments() + "\n");
-    }
-
-    /**
- ** 
- ** @param dos
- ** @throws java.io.IOException
- **/
-    @Override
-    public void printXML1Line(final OutputStreamWriter dos) throws IOException {
-        String saAttr = "";
-        if (comments == null) {
-            comments = "";
-        }
-        if (this.sa != null) {
-            saAttr = " sa=\"" + sa + "\" ";
-        }
-        dos.write("<" + getTagName() + " n=\"" + n + "\" " + saAttr + "/> " + getComments());
-    }
-
-
-
-    /**
      * 
      */
     @Override
@@ -198,7 +162,7 @@ public class ParElement extends Element {
 
   public void setPrm(int n, String v) {
     
-    System.err.println("setPrm( = "+n +" "+v );
+    //System.err.println("setPrm( = "+n +" "+v );
     if (prm==null) prm=new String[10];
     prm[n] = v;
   }
