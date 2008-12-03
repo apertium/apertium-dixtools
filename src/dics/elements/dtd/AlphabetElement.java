@@ -82,6 +82,19 @@ public class AlphabetElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
+    public final void printXML(final OutputStreamWriter dos) throws IOException {
+        if (isEmpty()) {
+            setAlphabet("");
+        }
+        dos.write(tab(1) + "<alphabet>" + getAlphabet() + "</alphabet>\n");
+    }
+
+
+    /**
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
     public final void printXML(final Writer dos) throws IOException {
         // write blank lines and comments from original file
         dos.write(prependCharacterData);
