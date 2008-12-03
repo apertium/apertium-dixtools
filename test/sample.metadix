@@ -2,7 +2,7 @@
 <!--
         Dictionary:
         Sections: 1
-        Entries: 4
+        Entries: 16
         Sdefs: 71
         Paradigms: 7
 -->
@@ -197,6 +197,13 @@
   </pardefs>
   <section id="main" type="standard">
 
+    <!-- ======== IMPORTANT ============
+      When editing this file, please be EXTREMELY CAREFUL about following the existing format.
+      The reason is: This file is run through and re-formatted by the dixtools and saved by
+      new DicFormatE1LineAligned(dic).printXML("tmp_test.xml") and compared to itself.
+      Any substantial difference will make the unit tests FAIL. Jacob Nordfalk 3 dec 2008.
+      ================================== -->
+      
 
     <!-- Verbs -->
     <e lm="amener"><i>am</i><par n="ach/e[T]er__vblex" prm="n"/></e>
@@ -213,11 +220,10 @@
     <e lm="acheter"><i>ach</i><par n="ach/e[T]er__vblex" prm="t"/></e>
     <e lm="amener"><i>am</i><par n="ach/e[T]er__vblex" prm="n"/></e>
     <e lm="détruire"><i>détru</i><par n="lu/i[]re__vblex" prm="" prm2="A" prm3="B" prm4="C"/></e>
-    <e lm="enlever"><i>enl</i><par n="ach/e[T]er__vblex" prm="v"/></e>
-    <e lm="acheter"><i>ach</i><par n="ach/e[T]er__vblex" prm="t"/></e>
 
 
     <!-- Verbs // Multiwords -->
+    <!-- formatting of Multiwords is NOT ready yet.
     <e lm="amener cats">
       <i>am</i>
       <par n="ach/e[T]er__vblex" prm="n"/>
@@ -235,7 +241,9 @@
         <r><g><b/>dogs</g></r>
       </p>
     </e>
-
+-->
+    <e lm="enlever"><i>enl</i><par n="ach/e[T]er__vblex" prm="v"/></e>
+    <e lm="acheter"><i>ach</i><par n="ach/e[T]er__vblex" prm="t"/></e>
 
   </section>
 </dictionary>

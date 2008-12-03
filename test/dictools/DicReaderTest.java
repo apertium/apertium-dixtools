@@ -75,18 +75,24 @@ public class DicReaderTest {
     System.out.println("getDic");
     DictionaryElement dic = new DictionaryReader("test/sample.metadix").readDic();
     
+    /*
     for (PardefElement pe : dic.getPardefsElement().getPardefElements()) {
       System.err.println("pe = " + pe);
-    }
+    }*/
+
+    String pe = dic.getPardefsElement().getPardefElements().get(0).toString();
+    Assert.assertEquals("<S__encimp><e><l>-en</l><r>en<prn><enc><adv></r></e><e><l>-la</l><r>le<prn><enc><p3><f><sg></r></e>", pe);
     
-    
+    /*
     for (SectionElement section : dic.getSections()) {
       for (EElement ee : section.getEElements()) {
         System.err.println("ee = " + ee);
       }
-    }
-
+    }*/
+    String ee = dic.getSections().get(0).getEElements().get(0).toString();
+    Assert.assertEquals("<e><i>am</i><par n=\"ach/e[T]er__vblex\"/> </e>", ee);
  
+
     new DicFormatE1LineAligned(dic).printXML("tmp_test.xml");
     String cmd = "diff -bBiw test/sample.metadix tmp_test.xml";
     Process p = Runtime.getRuntime().exec(cmd);
