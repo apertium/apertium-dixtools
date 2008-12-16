@@ -86,7 +86,6 @@ public class Dix2MDix {
      */
     public Dix2MDix() {
         files = new Vector<String>();
-
     }
 
     /**
@@ -98,6 +97,7 @@ public class Dix2MDix {
         metaInf = new Vector<String>();
         files.add("meta.inf");
 
+
         String slCode = sltlCode.split("-")[0];
         String tlCode = sltlCode.split("-")[1];
         String slFull = sltlFull.split("-")[0];
@@ -108,24 +108,29 @@ public class Dix2MDix {
         metaInf.add("@sl-full:" + slFull + "$");
         metaInf.add("@tl-full:" + tlFull + "$");
 
+        System.out.println("Processing bilingual dictionary: " + dic.getFileName());
+
         this.outFileName = "sltl";
-        this.processDic(dic);
+        this.processDic(dic, "left to right");
         dic.reverse();
         this.outFileName = "tlsl";
-        this.processDic(dic);
+        this.processDic(dic, "right to left");
 
         this.printMetaInfFile(metaInf);
 
         String zipFileName = sltlCode + "-data.zip";
+        System.out.println("Building " + zipFileName + " for apertium-tinylex...");
         ZipIt zipIt = new ZipIt(files, zipFileName);
         zipIt.zip();
+        System.out.println("Done!");
+
     }
 
     /**
      * 
      * @param dic
      */
-    private final void processDic(DictionaryElement dic) {
+    private final void processDic(DictionaryElement dic, final String dir) {
         hm = new HashMap();
         Vector values = null;
 
@@ -154,7 +159,7 @@ public class Dix2MDix {
             }
         }
 
-        System.out.println("Lemmas: " + hm.size());
+        System.out.println(dir + ": " + hm.size() + " lemmas.");
         Vector<Entry> vector = this.map2vector(hm);
         Collections.sort(vector);
         this.print(vector);
@@ -264,7 +269,7 @@ public class Dix2MDix {
             }
 
         } catch (IOException ioe) {
-
+            System.err.println("Error writing files.");
         }
 
 
@@ -279,8 +284,6 @@ public class Dix2MDix {
         FileOutputStream fos;
         OutputStreamWriter dos = null;
 
-
-
         String fileName = "meta.inf";
         try {
             fos = new FileOutputStream(fileName);
@@ -293,7 +296,6 @@ public class Dix2MDix {
             bos.close();
             fos.close();
         } catch (IOException ioe) {
-
         }
     }
 
@@ -304,6 +306,7 @@ public class Dix2MDix {
         String fileName = this.arguments[1];
         DictionaryReader dicReader = new DictionaryReader(fileName);
         dic = dicReader.readDic();
+        dic.setFileName(fileName);
         //dic.reverse();
         this.sltlCode = this.arguments[2];
         this.sltlFull = this.arguments[3];
@@ -333,46 +336,6 @@ public class Dix2MDix {
         this.outFileName = outFileName;
     }
 
-    private final void print() {
-        BufferedOutputStream bos;
-        FileOutputStream fos;
-        OutputStreamWriter dos;
-
-        Set keySet = hm.keySet();
-        Iterator it = keySet.iterator();
-        int size = hm.size();
-
-
-        System.out.println("@sl-code:$");
-        System.out.println("@tl-code:$");
-        System.out.println("@sl-full:$");
-        System.out.println("@tl-full:$");
-        System.out.println("@size:" + size + "$");
-
-        while (it.hasNext()) {
-            String key = (String) it.next();
-            Vector<EElement> v = (Vector) hm.get(key);
-            System.out.print("[" + key + "]");
-            for (EElement ee : v) {
-                String slLemma = ee.getValueNoTags("L");
-                SElementList slPoS = ee.getSElements("L");
-                System.out.print(slLemma + ":");
-                for (SElement sE : slPoS) {
-                    System.out.print(sE.getValue() + ".");
-                }
-                System.out.print("?");
-                String tlLemma = ee.getValueNoTags("R");
-                SElementList tlPoS = ee.getSElements("R");
-                System.out.print(tlLemma + ":");
-                for (SElement sE : tlPoS) {
-                    System.out.print(sE.getValue() + ".");
-                }
-                System.out.print(";");
-            }
-            System.out.print("$\n");
-        }
-    }
-
     /**
      * 
      * @param hm
@@ -383,7 +346,6 @@ public class Dix2MDix {
 
         Set keySet = hm.keySet();
         Iterator it = keySet.iterator();
-        //int size = hm.size();
 
         while (it.hasNext()) {
             Entry entry = new Entry();
@@ -433,7 +395,6 @@ public class Dix2MDix {
          * 
          */
         public Entry() {
-
         }
 
         /**
@@ -481,6 +442,9 @@ public class Dix2MDix {
         }
     }
 
+    /**
+     *
+     */
     public class ZipIt {
 
         private String zipFileName;
@@ -493,23 +457,18 @@ public class Dix2MDix {
 
         public final void zip() {
             try {
-                /*
-                if (args.length < 2) {
-                System.err.println("usage: java ZipIt Zip.zip file1 file2 file3");
-                System.exit(-1);
-                }
-                 */
+ 
                 File zipFile = new File(this.zipFileName);
                 if (zipFile.exists()) {
-                    System.err.println("Zip file already exists, please try another");
-                    System.exit(-2);
+                    this.deleteFile(this.zipFileName);
+
                 }
                 FileOutputStream fos = new FileOutputStream(zipFile);
                 ZipOutputStream zos = new ZipOutputStream(fos);
                 int bytesRead;
                 byte[] buffer = new byte[1024];
                 CRC32 crc = new CRC32();
-                for (int i = 0,  n = files.size(); i < n; i++) {
+                for (int i = 0, n = files.size(); i < n; i++) {
                     String name = files.elementAt(i);
                     //System.out.println("adding " + name);
                     File file = new File(name);
@@ -540,8 +499,44 @@ public class Dix2MDix {
                 }
                 zos.close();
             } catch (IOException ioe) {
-
+            } finally {
+                this.clean();
             }
+        }
+
+        private final void clean() {
+            for (int i = 0, n = files.size(); i < n; i++) {
+                String name = files.elementAt(i);
+                this.deleteFile(name);
+            }
+        }
+
+        private final void deleteFile(final String fileName) {
+           File f = new File(fileName);
+
+            if (!f.exists()) {
+                throw new IllegalArgumentException(
+                        "Delete: no such file or directory: " + fileName);
+            }
+
+            if (!f.canWrite()) {
+                throw new IllegalArgumentException("Delete: write protected: " + fileName);
+            }
+
+            if (f.isDirectory()) {
+                String[] theFiles = f.list();
+                if (theFiles.length > 0) {
+                    throw new IllegalArgumentException(
+                            "Delete: directory not empty: " + fileName);
+                }
+            }
+
+            boolean success = f.delete();
+
+            if (!success) {
+                throw new IllegalArgumentException("Delete: deletion failed");
+            }
+
         }
     }
 }
