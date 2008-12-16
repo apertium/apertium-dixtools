@@ -69,7 +69,7 @@ public class DicFormatE1LineAligned {
     
     /**
      * Initializes and prepares write a DictionaryElement 
-     * @param 
+     * @param dic The dictionary element
      */
     public DicFormatE1LineAligned(DictionaryElement dic) {
         this.dic = dic;

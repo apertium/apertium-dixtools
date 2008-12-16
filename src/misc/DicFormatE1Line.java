@@ -54,7 +54,7 @@ public class DicFormatE1Line {
     
     /**
      * Initializes and prepares write a DictionaryElement 
-     * @param 
+     * @param dic The dictionary element
      */
     public DicFormatE1Line(DictionaryElement dic) {
         this.dic = dic;

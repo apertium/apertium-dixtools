@@ -41,6 +41,18 @@ public class Dix2CC {
      */
     private DictionaryElement dic;
     /**
+     *
+     */
+    private String bilFileName;
+    /**
+     *
+     */
+    private String sltlCode;
+    /**
+     *
+     */
+    private String sltlFull;
+    /**
      * 
      */
     private String[] arguments;
@@ -53,8 +65,6 @@ public class Dix2CC {
      * 
      */
     public Dix2CC() {
-
-
     }
 
     /**
@@ -63,6 +73,7 @@ public class Dix2CC {
     public final void do_convert() {
         this.processArguments();
         this.processDic();
+        System.out.println("Done");
 
     }
 
@@ -71,6 +82,7 @@ public class Dix2CC {
      * @param dic
      */
     private final void processDic() {
+        System.out.println("Building " + this.outFileName + " for Palm...");
         Vector<String> lines = new Vector<String>();
 
         for (SectionElement section : dic.getSections()) {
@@ -120,7 +132,6 @@ public class Dix2CC {
 
             }
         } catch (IOException ioe) {
-
         }
     }
 
@@ -128,10 +139,18 @@ public class Dix2CC {
      * 
      */
     private void processArguments() {
-        String fileName = this.arguments[1];
-        DictionaryReader dicReader = new DictionaryReader(fileName);
-        dic = dicReader.readDic();
-        this.outFileName = this.arguments[2];
+        if (arguments != null) {
+            String fileName = this.arguments[1];
+            this.setBilFileName(fileName);
+            this.outFileName = this.arguments[2];
+        }
+        if (this.bilFileName != null) {
+            DictionaryReader dicReader = new DictionaryReader(this.bilFileName);
+            System.out.println("Processing bilingual dictionary: " + this.bilFileName);
+            dic = dicReader.readDic();
+        }
+
+
     //dic.reverse();
     }
 
@@ -165,6 +184,48 @@ public class Dix2CC {
      */
     public void setOutFileName(String outFileName) {
         this.outFileName = outFileName;
+    }
+
+    /**
+     * @return the bilFileName
+     */
+    public String getBilFileName() {
+        return bilFileName;
+    }
+
+    /**
+     * @param bilFileName the bilFileName to set
+     */
+    public void setBilFileName(String bilFileName) {
+        this.bilFileName = bilFileName;
+    }
+
+    /**
+     * @return the sltlCode
+     */
+    public String getSltlCode() {
+        return sltlCode;
+    }
+
+    /**
+     * @param sltlCode the sltlCode to set
+     */
+    public void setSltlCode(String sltlCode) {
+        this.sltlCode = sltlCode;
+    }
+
+    /**
+     * @return the sltlFull
+     */
+    public String getSltlFull() {
+        return sltlFull;
+    }
+
+    /**
+     * @param sltlFull the sltlFull to set
+     */
+    public void setSltlFull(String sltlFull) {
+        this.sltlFull = sltlFull;
     }
 }
 

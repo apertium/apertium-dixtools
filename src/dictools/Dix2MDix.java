@@ -55,6 +55,10 @@ public class Dix2MDix {
     /**
      * 
      */
+    private String bilFileName;
+    /**
+     * 
+     */
     private String[] arguments;
     /**
      * 
@@ -98,10 +102,10 @@ public class Dix2MDix {
         files.add("meta.inf");
 
 
-        String slCode = sltlCode.split("-")[0];
-        String tlCode = sltlCode.split("-")[1];
-        String slFull = sltlFull.split("-")[0];
-        String tlFull = sltlFull.split("-")[1];
+        String slCode = getSltlCode().split("-")[0];
+        String tlCode = getSltlCode().split("-")[1];
+        String slFull = getSltlFull().split("-")[0];
+        String tlFull = getSltlFull().split("-")[1];
 
         metaInf.add("@sl-code:" + slCode + "$");
         metaInf.add("@tl-code:" + tlCode + "$");
@@ -118,7 +122,7 @@ public class Dix2MDix {
 
         this.printMetaInfFile(metaInf);
 
-        String zipFileName = sltlCode + "-data.zip";
+        String zipFileName = getSltlCode() + "-data.zip";
         System.out.println("Building " + zipFileName + " for apertium-tinylex...");
         ZipIt zipIt = new ZipIt(files, zipFileName);
         zipIt.zip();
@@ -303,13 +307,16 @@ public class Dix2MDix {
      * 
      */
     private void processArguments() {
-        String fileName = this.arguments[1];
-        DictionaryReader dicReader = new DictionaryReader(fileName);
+        if (arguments != null) {
+            String fileName = this.arguments[1];
+            this.setBilFileName(fileName);
+            //dic.reverse();
+            this.setSltlCode(this.arguments[2]);
+            this.setSltlFull(this.arguments[3]);
+        }
+        DictionaryReader dicReader = new DictionaryReader(this.bilFileName);
         dic = dicReader.readDic();
-        dic.setFileName(fileName);
-        //dic.reverse();
-        this.sltlCode = this.arguments[2];
-        this.sltlFull = this.arguments[3];
+        dic.setFileName(this.bilFileName);
     }
 
     /**
@@ -375,6 +382,48 @@ public class Dix2MDix {
             vector.add(entry);
         }
         return vector;
+    }
+
+    /**
+     * @return the bilFileName
+     */
+    public String getBilFileName() {
+        return bilFileName;
+    }
+
+    /**
+     * @param bilFileName the bilFileName to set
+     */
+    public void setBilFileName(String bilFileName) {
+        this.bilFileName = bilFileName;
+    }
+
+    /**
+     * @return the sltlCode
+     */
+    public String getSltlCode() {
+        return sltlCode;
+    }
+
+    /**
+     * @param sltlCode the sltlCode to set
+     */
+    public void setSltlCode(String sltlCode) {
+        this.sltlCode = sltlCode;
+    }
+
+    /**
+     * @return the sltlFull
+     */
+    public String getSltlFull() {
+        return sltlFull;
+    }
+
+    /**
+     * @param sltlFull the sltlFull to set
+     */
+    public void setSltlFull(String sltlFull) {
+        this.sltlFull = sltlFull;
     }
 
     /**
@@ -457,7 +506,7 @@ public class Dix2MDix {
 
         public final void zip() {
             try {
- 
+
                 File zipFile = new File(this.zipFileName);
                 if (zipFile.exists()) {
                     this.deleteFile(this.zipFileName);
@@ -512,7 +561,7 @@ public class Dix2MDix {
         }
 
         private final void deleteFile(final String fileName) {
-           File f = new File(fileName);
+            File f = new File(fileName);
 
             if (!f.exists()) {
                 throw new IllegalArgumentException(

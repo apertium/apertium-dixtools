@@ -260,6 +260,24 @@ function dix2cc() {
 }
 
 #
+#  dix2tiny
+#
+function dix2tiny() {
+   if [ $nparams -eq 5 ]
+   then
+      java ${java_options} $task $2 $3 $4 $5
+   else
+      echo ""
+      echo "Usage: apertium-dixtools dix2tiny <dix> <lang-pair> <lang-pair-text> <platform>"
+      echo "Options:"
+      echo "  platforms: j2me, palm, all"
+      echo "Example:"
+      echo "   apertium-dixtools dix2tiny apertium-es-ca.es-ca.dix es-ca Spanish-Catalan j2me"
+      echo ""
+   fi
+}
+
+#
 #  apertiumizer
 #
 function apertiumize() {
@@ -363,6 +381,7 @@ function show_help() {
    echo "  Tasks:"
    echo "    cross:              crosses a set of dictionaries"
    echo "    dic-reader:         reads elements from a dictionary"
+   echo "    dix2tiny:           generates linguistic data for mobile platforms (j2me, palm)"
    echo "    dix2trie:           creates a Trie from an existing bilingual dictionary"
    #echo "    equiv-paradigms:    finds equivalent paradigms and updates references"
    echo "    format:             formats a dictionary"   

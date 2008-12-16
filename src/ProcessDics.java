@@ -35,6 +35,7 @@ import dictools.DicSort;
 import dictools.DictionaryReader;
 import dictools.Dix2CC;
 import dictools.Dix2MDix;
+import dictools.Dix2Tiny;
 import dictools.apertiumizer.Apertiumizer;
 import dictools.dix2trie.Dix2Trie;
 import java.util.Arrays;
@@ -184,8 +185,11 @@ public class ProcessDics {
         if (getAction().equals("dix2cc")) {
             this.process_dix2cc();
         }
+        if (getAction().equals("dix2tiny")) {
+            this.process_dix2tiny();
+        }
 
-        
+
 
     }
 
@@ -384,35 +388,40 @@ public class ProcessDics {
         if (getArguments().length == 3) {
             DicFormatE1Line dicFormat = new DicFormatE1Line(arguments[1]);
             dicFormat.printXML(arguments[2]);
-        } else try {
-            if (arguments.length<4) throw new IllegalArgumentException("Not enough arguments.");
-            DictionaryElement dic = new DictionaryReader(arguments[3]).readDic();
-            DicFormatE1LineAligned dicFormat = new DicFormatE1LineAligned(dic);
-            dicFormat.setAlignP( Integer.parseInt(arguments[1]) );
-            dicFormat.setAlignR( Integer.parseInt(arguments[2]) );
-            dicFormat.printXML(arguments[4]);            
-        } catch (Exception e) {
-            if (e instanceof NumberFormatException)
-              msg.err("Error "+e.getLocalizedMessage()+" should be a number.");
-            else
-              msg.err(e.getLocalizedMessage());
-            
-            msg.err("");
-            msg.err("Usage: format-1line [alignP alignR] <input-dic> <output-dic>");
-            msg.err("       where alignP / alignR: column to align <p> and <r> entries. 0 = no indent.");
-            msg.err("");
-            msg.err("Example: ' format-1line old.dix new.dix '   will give indent a la");
-            msg.err("<e><p><l>dum<s n=\"cnjadv\"/></l><r>whereas<s n=\"cnjadv\"/></r></p></e>");
-            msg.err("");
-            msg.err("Example: ' format-1line 10 50 old.dix new.dix '   will give indent a la");
-            msg.err("<e>       <p><l>dum<s n=\"cnjadv\"/></l>            <r>whereas<s n=\"cnjadv\"/></r></p></e>");
-            msg.err("");
-            msg.err("Example: ' format-1line 0 50 old.dix new.dix '   will give indent a la");
-            msg.err("<e><p><l>dum<s n=\"cnjadv\"/></l>                   <r>whereas<s n=\"cnjadv\"/></r></p></e>");
-            msg.err("");
-            msg.err("Example: ' format-1line 10 0 old.dix new.dix '   will give indent a la");
-            msg.err("<e>       <p><l>dum<s n=\"cnjadv\"/></l><r>whereas<s n=\"cnjadv\"/></r></p></e>");
-            System.exit(-1);
+        } else {
+            try {
+                if (arguments.length < 4) {
+                    throw new IllegalArgumentException("Not enough arguments.");
+                }
+                DictionaryElement dic = new DictionaryReader(arguments[3]).readDic();
+                DicFormatE1LineAligned dicFormat = new DicFormatE1LineAligned(dic);
+                dicFormat.setAlignP(Integer.parseInt(arguments[1]));
+                dicFormat.setAlignR(Integer.parseInt(arguments[2]));
+                dicFormat.printXML(arguments[4]);
+            } catch (Exception e) {
+                if (e instanceof NumberFormatException) {
+                    msg.err("Error " + e.getLocalizedMessage() + " should be a number.");
+                } else {
+                    msg.err(e.getLocalizedMessage());
+                }
+
+                msg.err("");
+                msg.err("Usage: format-1line [alignP alignR] <input-dic> <output-dic>");
+                msg.err("       where alignP / alignR: column to align <p> and <r> entries. 0 = no indent.");
+                msg.err("");
+                msg.err("Example: ' format-1line old.dix new.dix '   will give indent a la");
+                msg.err("<e><p><l>dum<s n=\"cnjadv\"/></l><r>whereas<s n=\"cnjadv\"/></r></p></e>");
+                msg.err("");
+                msg.err("Example: ' format-1line 10 50 old.dix new.dix '   will give indent a la");
+                msg.err("<e>       <p><l>dum<s n=\"cnjadv\"/></l>            <r>whereas<s n=\"cnjadv\"/></r></p></e>");
+                msg.err("");
+                msg.err("Example: ' format-1line 0 50 old.dix new.dix '   will give indent a la");
+                msg.err("<e><p><l>dum<s n=\"cnjadv\"/></l>                   <r>whereas<s n=\"cnjadv\"/></r></p></e>");
+                msg.err("");
+                msg.err("Example: ' format-1line 10 0 old.dix new.dix '   will give indent a la");
+                msg.err("<e>       <p><l>dum<s n=\"cnjadv\"/></l><r>whereas<s n=\"cnjadv\"/></r></p></e>");
+                System.exit(-1);
+            }
         }
     }
 
@@ -571,8 +580,7 @@ public class ProcessDics {
             dicFilter.doFilter();
         }
     }
-    
-    
+
     /**
      * 
      */
@@ -595,9 +603,22 @@ public class ProcessDics {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar dix2cc <dix> [<cc>]");
             System.exit(-1);
         } else {
-            Dix2CC dix2cc= new Dix2CC();
+            Dix2CC dix2cc = new Dix2CC();
             dix2cc.setArguments(this.getArguments());
             dix2cc.do_convert();
+        }
+    }
+
+    private final void process_dix2tiny() {
+        if (getArguments().length < 5) {
+            msg.err("Usage: java -jar path/to/apertium-dixtools.jar dix2tiny <dix> <lang-pair> <lang-pair-text> <platform>");
+            msg.err("For example:");
+            msg.err("   java -jar path/to/apertium-dixtools.jar dix2tiny apertium-es-ca.es-ca.dix es-ca Spanish-Catalan j2me");
+            System.exit(-1);
+        } else {
+            Dix2Tiny dix2tiny = new Dix2Tiny();
+            dix2tiny.setArguments(this.getArguments());
+            dix2tiny.do_tiny();
         }
     }
 

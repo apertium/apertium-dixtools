@@ -401,7 +401,7 @@ public class EElement extends Element implements Cloneable,
      * <e><l>mi</l><r>mi<prn><ref><p1><mf><sg></r></e> give 'mi'
      * </pre>
      * @param side can be R or L
-     * @return 
+     * @return A ContentElement object
      */
     public ContentElement getSide(final String side) {
         for (final Element e : children) {
@@ -586,7 +586,7 @@ public class EElement extends Element implements Cloneable,
     private final static String spaces = "                      ";
     /**
      * 
-     * @param dos
+     * @param dosx A Writer object
      * @throws java.io.IOException
      */
     public final void printXML1LineAligned(final Writer dosx, int alignP, int alignR)
