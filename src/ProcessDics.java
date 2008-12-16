@@ -37,6 +37,7 @@ import dictools.Dix2CC;
 import dictools.Dix2MDix;
 import dictools.apertiumizer.Apertiumizer;
 import dictools.dix2trie.Dix2Trie;
+import java.util.Arrays;
 import misc.Misc;
 import misc.enca.ConvertMF;
 import misc.enes.CompleteTranslation;
@@ -70,6 +71,7 @@ public class ProcessDics {
      * @param args
      */
     public static void main(final String[] args) {
+        //System.err.println("Java args = " + Arrays.toString(args).replaceAll(", ", " "));
         final ProcessDics ps = new ProcessDics(args);
         ps.go();
     }

@@ -156,10 +156,19 @@ public class DicTools {
         }
 
         String txt = "apertium-" + langPair + "." + langPair + ".dix";
+        
+        
         final String[] paths = str.split(txt);
+        
         st[2] = paths[0];
         int k = 0;
         final String[] parts2 = str.split("[.]");
+
+        if (paths.length < parts2.length-1 && parts2.length-1>0) {
+          System.err.println("WARNING, the file name "+str+" does not match the pattern " + txt);
+        }
+
+        
         for (int i = 0; i < (parts2.length - 1); i++) {
             k = 0;
             str = parts2[i];
