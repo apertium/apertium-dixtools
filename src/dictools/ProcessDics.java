@@ -39,6 +39,7 @@ import dictools.Dix2CC;
 import dictools.Dix2MDix;
 import dictools.Dix2Tiny;
 import dictools.apertiumizer.Apertiumizer;
+import dictools.cmproc.State;
 import dictools.dix2trie.Dix2Trie;
 import java.util.Arrays;
 import misc.Misc;
@@ -79,6 +80,7 @@ public class ProcessDics {
         
         final ProcessDics ps = new ProcessDics(args);
         ps.go();
+       //System.err.println(Arrays.toString(State.freq));
     }
 
     /**

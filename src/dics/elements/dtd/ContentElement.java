@@ -175,11 +175,15 @@ public class ContentElement extends Element implements Cloneable {
     protected void printXML(final Writer dos) throws IOException {
         // write blank lines and comments from original file
         dos.write(prependCharacterData);
-        if (getTagName() != null) {
-            dos.write(tab(4) + "<" + getTagName() + ">");
-        } else {
-            dos.write("<!-- error tagname -->\n");
+        String tagName = getTagName();
+        
+        if (tagName==null) {
+          tagName = "<!-- error tagname -->\n";
         }
+        
+        dos.write(tab(4) + "<" + tagName + ">");
+        //dos.write(tab(4)); dos.write("<"); dos.write(tagName); dos.write(">");
+
         if (getChildren() != null) {
             for (final Element e : getChildren()) {
                 if (e != null) {
@@ -191,11 +195,9 @@ public class ContentElement extends Element implements Cloneable {
         if (getComments() != null) {
             c = getComments();
         }
-        if (getTagName() != null) {
-            dos.write("</" + getTagName() + "> " + c + "\n");
-        } else {
-            dos.write("<!-- error tagname -->\n");
-        }
+
+        dos.write("</" + tagName + "> " + c + "\n");    
+        //dos.write("</"); dos.write(tagName); dos.write(">"); dos.write(c); dos.write("\n");
     }
 
     /**

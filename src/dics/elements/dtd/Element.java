@@ -93,11 +93,14 @@ public class Element implements Cloneable {
      * @param nTabs
      * @return Undefined         */
     protected String tab(final int nTabs) {
+        /*
         String sTabs = "";
         for (int i = 0; i < nTabs; i++) {
             sTabs += "  ";
         }
         return sTabs;
+         */
+        return "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t".substring(0,nTabs);
     }
 
     /**
@@ -111,7 +114,7 @@ public class Element implements Cloneable {
     /**
      * 
      * @return Undefined         */
-    protected String getTagName() {
+    protected final String getTagName() {
         return TAGNAME;
     }
 

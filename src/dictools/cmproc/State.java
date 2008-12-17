@@ -137,6 +137,12 @@ public class State {
         return (matcher.find());
     }
 
+    //public static int freq[] = new int[20];
+    // Typical run gives [10278, 10818, 1090, 1104, 18580, 92474, 20438, 61534, 20658, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+   //                                0           1         2         3        4         5         6          7            8
+    // Therefore the if statement have beeen reorded accordingly
+    
+    
     /**
      * 
      * @param patternSequence
@@ -150,12 +156,96 @@ public class State {
             String v = ((Element) patternSequence.get(i)).getValue();
             String state_v = getValue();
 
-            if (state_v.equals("^start")) {
+
+            
+            //if (state_v.equals("^?") || state_v.equals("^b")) {
+            if (state_v == "^?" || state_v=="^b") { // == is OK, state_v is an interned string
                 vars = new Variables(varsSrc);
-                continue_processing(patternSequence, i - 1, cadl, vars);
+                continue_processing(patternSequence, i, cadl, vars);
+                //freq[7]++; // happens 61534 times
+                return;
             }
 
-            if (state_v.equals("^end")) {
+            
+            
+            if (state_v.startsWith("X")) { //superflous: && !v.startsWith("^")) {
+                vars = new Variables(varsSrc);
+                if (process_X(state_v, v, vars)) {
+                    continue_processing(patternSequence, i, cadl, vars);
+                }
+                //freq[5]++; // happens 92474 times
+                return;
+            }
+
+            
+            //if (state_v.equals("^*")) {
+            if (state_v == "^*") {  // == is OK, state_v is an interned string
+                vars = new Variables(varsSrc);
+                Element e = patternSequence.get(i);
+                while (!e.getValue().equals("^b")) {
+                    i++;
+                    e = patternSequence.get(i);
+                }
+                continue_processing(patternSequence, i - 1, cadl, vars);
+                //freq[8]++; // happens 20658 times
+                return;
+            }
+
+/*
+            if (state_v.equals("^LRRL") && v.equals("^LR")) {
+                vars = new Variables(varsSrc);
+                continue_processing(patternSequence, i, cadl, vars);
+                //freq[2]++; ; // happens 1090 times
+                return;
+            }
+
+            if (state_v.equals("^LRRL") && v.equals("^RL")) {
+                vars = new Variables(varsSrc);
+                continue_processing(patternSequence, i, cadl, vars);
+                //freq[3]++; // happens 1104 times
+                return;
+            }
+
+            if (state_v.equals("^LRRL") && v.equals("^LRRL")) {
+                vars = new Variables(varsSrc);
+                continue_processing(patternSequence, i, cadl, vars);
+                //freq[4]++;  // happens 18580 times
+                return;
+            }
+*/
+
+            
+            //if (state_v.equals("^LRRL") && (v.equals("^LRRL") || v.equals("^LR") || v.equals("^RL"))) {
+            // == is OK, state_v is an interned string
+            if (state_v == "^LRRL" && (v.equals("^LRRL") || v.equals("^LR") || v.equals("^RL"))) {
+                vars = new Variables(varsSrc);
+                continue_processing(patternSequence, i, cadl, vars);
+                //freq[4]++;  // happens apporx 20000 times
+                return;
+            }
+            
+            
+            if (state_v.startsWith("S")) {
+                vars = new Variables(varsSrc);
+                continue_processing(patternSequence, i, cadl, vars);
+                int j = process_S(state_v, v, vars, patternSequence, i);
+                if (j != -1) {
+                    continue_processing(patternSequence, j, cadl, vars);
+                }
+                //freq[6]++; // happens 20438 times
+                return;
+            }
+            
+            // == is OK, state_v is an interned string
+            if (state_v == "^start") {
+                vars = new Variables(varsSrc);
+                continue_processing(patternSequence, i - 1, cadl, vars);
+                //freq[0]++; // happens 10278 times
+                return;
+            }
+
+            // == is OK, state_v is an interned string
+            if (state_v == "^end") {
                 vars = new Variables(varsSrc);
                 CrossAction ca = getCrossAction();
                 if (ca != null) {
@@ -164,53 +254,18 @@ public class State {
                 //System.out.println("Patrón aceptado! : " + ca.getId());
                 //vars.print();
                 }
+                //freq[1]++; // happens 10818 times
+                return;
             }
 
-            if (v.equals("^LR") && state_v.equals("^LRRL")) {
+            
+            if (state_v.equals(v)) {
                 vars = new Variables(varsSrc);
                 continue_processing(patternSequence, i, cadl, vars);
+                //freq[9]++; // happens 0 times in test!
+                return;
             }
-
-            if (v.equals("^RL") && state_v.equals("^LRRL")) {
-                vars = new Variables(varsSrc);
-                continue_processing(patternSequence, i, cadl, vars);
-            }
-
-            if (v.equals("^LRRL") && state_v.equals("^LRRL")) {
-                vars = new Variables(varsSrc);
-                continue_processing(patternSequence, i, cadl, vars);
-            }
-
-            if (!v.startsWith("^") && state_v.startsWith("X")) {
-                vars = new Variables(varsSrc);
-                if (process_X(state_v, v, vars)) {
-                    continue_processing(patternSequence, i, cadl, vars);
-                }
-            }
-
-            if (state_v.startsWith("S")) {
-                vars = new Variables(varsSrc);
-                continue_processing(patternSequence, i, cadl, vars);
-                int j = process_S(state_v, v, vars, patternSequence, i);
-                if (j != -1) {
-                    continue_processing(patternSequence, j, cadl, vars);
-                }
-            }
-
-            if (state_v.equals("^?") || state_v.equals(v) || state_v.equals("^b")) {
-                vars = new Variables(varsSrc);
-                continue_processing(patternSequence, i, cadl, vars);
-            }
-
-            if (state_v.equals("^*")) {
-                vars = new Variables(varsSrc);
-                Element e = patternSequence.get(i);
-                while (!e.getValue().equals("^b")) {
-                    i++;
-                    e = patternSequence.get(i);
-                }
-                continue_processing(patternSequence, i - 1, cadl, vars);
-            }
+           
         }
     }
 
@@ -301,6 +356,7 @@ public class State {
      * @param value
      */
     public void setValue(String value) {
+      if (value!=null) value = value.intern(); // interning for optimization
         this.value = value;
     }
 
