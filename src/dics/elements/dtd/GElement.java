@@ -19,6 +19,7 @@
  */
 package dics.elements.dtd;
 
+import dics.elements.utils.DicOpts;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -45,18 +46,18 @@ public class GElement extends ContentElement {
      * @throws java.io.IOException
      */
     @Override
-    public final void printXML(final Writer dos) throws IOException {
+    public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
         // write blank lines and comments from original file
-        dos.write(prependCharacterData);
+        dos.append(prependCharacterData);
         if (getTagName() != null) {
-            dos.write("<" + getTagName() + ">");
+            dos.append("<" + getTagName() + ">");
         } else {
-            dos.write("<!-- error tagname -->\n");
+            dos.append("<!-- error tagname -->\n");
         }
         if (children != null) {
             for (final Element e : children) {
                 if (e != null) {
-                    e.printXML(dos);
+                    e.printXML(dos, opt);
                 }
             }
         }
@@ -65,9 +66,9 @@ public class GElement extends ContentElement {
             c = getComments();
         }
         if (getTagName() != null) {
-            dos.write("</" + getTagName() + ">" + c + "");
+            dos.append("</" + getTagName() + ">" + c + "");
         } else {
-            dos.write("<!-- error tagname -->\n");
+            dos.append("<!-- error tagname -->\n");
         }
     }
 }

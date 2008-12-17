@@ -36,7 +36,7 @@ import dics.elements.utils.Msg;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class DicFormat {
+public class DicFormat  extends AbstractDictTool{
 
     /**
      * 
@@ -143,7 +143,7 @@ public class DicFormat {
             msg.err(errorMsg);
             msg.out(errorMsg);
         }
-        dicFormatted.printXML(this.getOut());
+        dicFormatted.printXML(this.getOut(), opt);
         return dicFormatted;
     }
 
@@ -179,7 +179,7 @@ public class DicFormat {
      */
     private final void actionFormat() {
         final DictionaryElement dicFormatted = format();
-        dicFormatted.printXML(getOut());
+        dicFormatted.printXML(getOut(), opt);
     }
 
     /**

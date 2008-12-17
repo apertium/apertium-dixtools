@@ -19,6 +19,7 @@
  */
 package dics.elements.dtd;
 
+import dics.elements.utils.DicOpts;
 import java.io.IOException;
 
 import dics.elements.utils.ElementList;
@@ -172,22 +173,22 @@ public class ContentElement extends Element implements Cloneable {
      * @throws java.io.IOException
      */
     @Override
-    protected void printXML(final Writer dos) throws IOException {
+    protected void printXML(final Appendable dos, final DicOpts opt) throws IOException {
         // write blank lines and comments from original file
-        dos.write(prependCharacterData);
+        dos.append(prependCharacterData);
         String tagName = getTagName();
         
         if (tagName==null) {
           tagName = "<!-- error tagname -->\n";
         }
         
-        dos.write(tab(4) + "<" + tagName + ">");
-        //dos.write(tab(4)); dos.write("<"); dos.write(tagName); dos.write(">");
+        dos.append(tab(4) + "<" + tagName + ">");
+        //dos.append(tab(4)); dos.append("<"); dos.append(tagName); dos.append(">");
 
         if (getChildren() != null) {
             for (final Element e : getChildren()) {
                 if (e != null) {
-                    e.printXML(dos);
+                    e.printXML(dos, opt);
                 }
             }
         }
@@ -196,8 +197,8 @@ public class ContentElement extends Element implements Cloneable {
             c = getComments();
         }
 
-        dos.write("</" + tagName + "> " + c + "\n");    
-        //dos.write("</"); dos.write(tagName); dos.write(">"); dos.write(c); dos.write("\n");
+        dos.append("</" + tagName + "> " + c + "\n");    
+        //dos.append("</"); dos.append(tagName); dos.append(">"); dos.append(c); dos.append("\n");
     }
 
     /**
@@ -208,14 +209,14 @@ public class ContentElement extends Element implements Cloneable {
     @Override
     protected void printXML1Line(final Writer dos) throws IOException {
         if (getTagName() != null) {
-            dos.write("<" + getTagName() + ">");
+            dos.append("<" + getTagName() + ">");
         } else {
-            dos.write("<!-- error tagname -->");
+            dos.append("<!-- error tagname -->");
         }
         if (getChildren() != null) {
             for (final Element e : getChildren()) {
                 if (e != null) {
-                    e.printXML(dos);
+                    e.printXML(dos, DicOpts.std);
                 }
             }
         }
@@ -224,9 +225,9 @@ public class ContentElement extends Element implements Cloneable {
             c = getComments();
         }
         if (getTagName() != null) {
-            dos.write("</" + getTagName() + ">" + c + "");
+            dos.append("</" + getTagName() + ">" + c + "");
         } else {
-            dos.write("<!-- error tagname -->\n");
+            dos.append("<!-- error tagname -->\n");
         }
     }
 

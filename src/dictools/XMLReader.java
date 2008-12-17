@@ -273,11 +273,6 @@ public class XMLReader {
       String value1 = null;
       if (e.hasAttribute(attrName)) value1 = e.getAttribute(attrName);
       return value1;
-*/
-/*      
-      String value1 = null;
-      if (e.hasAttribute(attrName)) value1 = e.getAttribute(attrName);
-      return value1;
 */       
  /*       
         String value = "";

@@ -26,7 +26,7 @@ import dics.elements.dtd.DictionaryElement;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class DicGather {
+public class DicGather  extends AbstractDictTool {
 
     /**
      * 
@@ -54,7 +54,7 @@ public class DicGather {
     public final void doGather() {
         DictionaryReader reader = new DictionaryReader(dic);
         DictionaryElement dic = reader.readDic();
-        dic.printXML(out);
+        dic.printXML(out, opt);
 
         System.out.println("Dictionary in a single file: '" + out + "'");
     }

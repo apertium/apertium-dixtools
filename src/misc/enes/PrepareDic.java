@@ -69,7 +69,7 @@ public class PrepareDic {
                 }
             }
         }
-        dic.printXML("not-common-en-ca-filtered.dix");
+        dic.printXML("not-common-en-ca-filtered.dix", dics.elements.utils.DicOpts.std);
     }
 
     /**

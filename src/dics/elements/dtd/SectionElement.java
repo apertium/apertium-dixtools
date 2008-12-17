@@ -19,6 +19,7 @@
  */
 package dics.elements.dtd;
 
+import dics.elements.utils.DicOpts;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -126,9 +127,9 @@ public class SectionElement extends Element {
      * @throws java.io.IOException
      */
     @Override
-    public final void printXML(final Writer dos) throws IOException {
+    public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
         // write blank lines and comments from original file
-        dos.write(prependCharacterData);
+        dos.append(prependCharacterData);
         String attributes = "";
         if (getID() != null) {
             attributes += " id=\"" + getID() + "\"";
@@ -137,23 +138,23 @@ public class SectionElement extends Element {
             attributes += " type=\"" + getType() + "\"";
         }
 
-        dos.write(tab(1) + "<" + getTagName() + "" + attributes + ">\n");
+        dos.append(tab(1) + "<" + getTagName() + "" + attributes + ">\n");
 
         if (eElements != null) {
             for (final EElement e : eElements) {
-                e.printXML(dos);
+                e.printXML(dos, opt);
             }
         }
 
-        dos.write(tab(1) + "</" + getTagName() + ">\n");
+        dos.append(tab(1) + "</" + getTagName() + ">\n");
     }
 
     /**
      * 
      * @param fileName
      */
-    public void printXMLXInclude(final String fileName) {
-        this.printXMLXInclude(fileName, "UTF-8");
+    public void printXMLXInclude(final String fileName, DicOpts opt) {
+        this.printXMLXInclude(fileName, "UTF-8", opt);
     }
 
     /**
@@ -161,7 +162,7 @@ public class SectionElement extends Element {
      * @param fileName
      * @param encoding
      */
-    public void printXMLXInclude(final String fileName, final String encoding) {
+    public void printXMLXInclude(final String fileName, final String encoding, DicOpts opt) {
         BufferedOutputStream bos;
         FileOutputStream fos;
         OutputStreamWriter dos;
@@ -170,15 +171,15 @@ public class SectionElement extends Element {
             fos = new FileOutputStream(fileName);
             bos = new BufferedOutputStream(fos);
             dos = new OutputStreamWriter(bos, encoding);
-            dos.write("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
+            dos.append("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
 
-            dos.write("<dictionary>\n");
-            dos.write("<section>\n");
+            dos.append("<dictionary>\n");
+            dos.append("<section>\n");
             for (final EElement e : eElements) {
-                e.printXML(dos);
+                e.printXML(dos, opt);
             }
-            dos.write("</section>\n");
-            dos.write("</dictionary>\n");
+            dos.append("</section>\n");
+            dos.append("</dictionary>\n");
 
             fos = null;
             bos = null;

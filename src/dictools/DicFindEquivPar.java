@@ -39,7 +39,7 @@ import dics.elements.utils.Msg;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class DicFindEquivPar {
+public class DicFindEquivPar  extends AbstractDictTool{
 
     /**
      * 
@@ -108,7 +108,7 @@ public class DicFindEquivPar {
             pardefs1.remove(par);
         }
         replaceParadigm(equivalents);
-        dic.printXML(getOutFileName());
+        dic.printXML(getOutFileName(), opt);
     }
 
     /**

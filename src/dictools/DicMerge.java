@@ -39,7 +39,7 @@ import dics.elements.utils.Msg;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class DicMerge {
+public class DicMerge  extends AbstractDictTool{
 
     /**
      * 
@@ -553,9 +553,9 @@ public class DicMerge {
         final DictionaryElement monA = dicSet.getMon1();
         final DictionaryElement monB = dicSet.getMon2();
 
-        bil.printXML(bil.getFileName());
-        monA.printXML(monA.getFileName());
-        monB.printXML(monB.getFileName());
+        bil.printXML(bil.getFileName(), opt);
+        monA.printXML(monA.getFileName(), opt);
+        monB.printXML(monB.getFileName(), opt);
     }
 
     /**
@@ -853,7 +853,7 @@ public class DicMerge {
         dicSort.getMsg().setDebug(false);
         dicSort.setDicType(DicSort.MON);
         DictionaryElement sorted = dicSort.sort();
-        sorted.printXML(getSOut());
+        sorted.printXML(getSOut(), opt);
     }
 
     /**
@@ -865,7 +865,7 @@ public class DicMerge {
         DicSort dicSort = new DicSort(bil);
         dicSort.setDicType(DicSort.BIL);
         DictionaryElement sorted = dicSort.sort();
-        sorted.printXML(getSOut());
+        sorted.printXML(getSOut(), opt);
     }
 
     /**

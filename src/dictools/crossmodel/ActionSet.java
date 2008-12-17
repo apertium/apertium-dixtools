@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import dics.elements.dtd.SElement;
+import dics.elements.utils.DicOpts;
 import dics.elements.utils.ElementList;
 import dics.elements.utils.Msg;
 import dics.elements.utils.SElementList;
@@ -123,12 +124,12 @@ public class ActionSet extends ArrayList<Action> {
      * @param dos
      * @throws java.io.IOException
      */
-    public final void printXML(OutputStreamWriter dos) throws IOException {
-        dos.write("<action-set>\n");
+    public final void printXML(Appendable dos, DicOpts opt) throws IOException {
+        dos.append("<action-set>\n");
         for (Action action : this) {
-            action.printXML(dos);
+            action.printXML(dos, opt);
         }
-        dos.write("</action-set>\n\n");
+        dos.append("</action-set>\n\n");
     }
 
     /**

@@ -32,6 +32,7 @@ import dics.elements.dtd.SElement;
 import dics.elements.dtd.TElement;
 import dics.elements.dtd.TextElement;
 import dics.elements.dtd.VElement;
+import dics.elements.utils.DicOpts;
 import dics.elements.utils.Msg;
 import dictools.cmproc.Variables;
 import java.io.OutputStreamWriter;
@@ -134,14 +135,14 @@ public class CrossAction implements Comparable<CrossAction> {
      * @param id
      * @throws java.io.IOException
      */
-    public final void printXML(OutputStreamWriter dos, int id) throws IOException {
-        dos.write("<cross-action id=\"ND-" + id + "\">\n");
-        getPattern().printXML(dos);
+    public final void printXML(OutputStreamWriter dos, int id, DicOpts opt) throws IOException {
+        dos.append("<cross-action id=\"ND-" + id + "\">\n");
+        getPattern().printXML(dos, opt);
         if (actionSet != null) {
-            getActionSet().printXML(dos);
+            getActionSet().printXML(dos, opt);
         }
-        dos.write("</cross-action>\n");
-        dos.write("<!-- " + getOccurrences() + " entries like this -->\n\n");
+        dos.append("</cross-action>\n");
+        dos.append("<!-- " + getOccurrences() + " entries like this -->\n\n");
     }
 
     /**

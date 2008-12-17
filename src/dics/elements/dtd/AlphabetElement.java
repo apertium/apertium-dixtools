@@ -19,6 +19,7 @@
  */
 package dics.elements.dtd;
 
+import dics.elements.utils.DicOpts;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -82,12 +83,12 @@ public class AlphabetElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
-    public final void printXML(final Writer dos) throws IOException {
+    public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
         // write blank lines and comments from original file
-        dos.write(prependCharacterData);
+        dos.append(prependCharacterData);
         if (isEmpty()) {
             setAlphabet("");
         }
-        dos.write(tab(1) + "<alphabet>" + getAlphabet() + "</alphabet>\n");
+        dos.append(tab(1) + "<alphabet>" + getAlphabet() + "</alphabet>\n");
     }
 }

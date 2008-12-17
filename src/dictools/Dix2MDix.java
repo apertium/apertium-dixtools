@@ -235,9 +235,9 @@ public class Dix2MDix {
 
                     content = first + "." + last + ".";
                     fileInfo.add(new String("@" + fileName + ":" + content + "$"));
-                    dos.write("@size:" + n + "$\n");
+                    dos.append("@size:" + n + "$\n");
                     for (Entry pe : partial) {
-                        dos.write(pe.getValue());
+                        dos.append(pe.getValue());
                     }
                     dos.flush();
                     dos.close();
@@ -255,9 +255,9 @@ public class Dix2MDix {
                     n = 0;
                 }
             }
-            dos.write("@size:" + n + "$\n");
+            dos.append("@size:" + n + "$\n");
             for (Entry pe : partial) {
-                dos.write(pe.getValue());
+                dos.append(pe.getValue());
             }
             dos.flush();
             dos.close();
@@ -294,7 +294,7 @@ public class Dix2MDix {
             bos = new BufferedOutputStream(fos);
             dos = new OutputStreamWriter(bos, "UTF-8");
             for (String c : metaInf) {
-                dos.write(c + "\n");
+                dos.append(c + "\n");
             }
             dos.close();
             bos.close();

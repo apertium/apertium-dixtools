@@ -149,11 +149,11 @@ public class DicSet extends ArrayList<DictionaryElement> {
      * 
      * @param suffix
      */
-    public final void printXML(final String suffix) {
-        printMonolXML(suffix);
-        getBil1().printXML(suffix + "-bilAB.dix");
+    public final void printXML(final String suffix, DicOpts opt) {
+        printMonolXML(suffix, opt);
+        getBil1().printXML(suffix + "-bilAB.dix", opt);
         //DicTools.removeExtension(getBil1().getFileName()) + "-" + suffix + ".dix");
-        getBil2().printXML(suffix + "-bilBC.dix");
+        getBil2().printXML(suffix + "-bilBC.dix", opt);
     //	DicTools.removeExtension(getBil2().getFileName()) + "-" + suffix + ".dix");
     }
 
@@ -161,10 +161,10 @@ public class DicSet extends ArrayList<DictionaryElement> {
      * 
      * @param suffix
      */
-    public final void printMonolXML(final String suffix) {
-        getMon1().printXML(suffix + "-monA.dix");
+    public final void printMonolXML(final String suffix, DicOpts opt) {
+        getMon1().printXML(suffix + "-monA.dix", opt);
         //DicTools.removeExtension(getMon1().getFileName()) + "-"		+ suffix + ".dix");
-        getMon2().printXML(suffix + "-monC.dix");
+        getMon2().printXML(suffix + "-monC.dix", opt);
     //DicTools.removeExtension(getMon2().getFileName()) + "-"		+ suffix + ".dix");
     }
 }

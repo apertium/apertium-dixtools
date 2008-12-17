@@ -19,6 +19,7 @@
  */
 package dics.elements.dtd;
 
+import dics.elements.utils.DicOpts;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -69,11 +70,11 @@ public class Element implements Cloneable {
      * @param dos
      * @throws java.io.IOException
      */
-    protected void printXML(final Writer dos) throws IOException {
+    protected void printXML(final Appendable dos, final DicOpts opt) throws IOException {
         // write blank lines and comments from original file
-        dos.write(prependCharacterData);
-        if (comments!=null) dos.write("<!--" + comments + "-->");
-        dos.write("<" + getTagName() + "/>");
+        dos.append(prependCharacterData);
+        if (comments!=null) dos.append("<!--" + comments + "-->");
+        dos.append("<" + getTagName() + "/>");
     }
 
     /**
@@ -83,9 +84,9 @@ public class Element implements Cloneable {
      */
     protected void printXML1Line(final Writer dos) throws IOException {
         // write blank lines and comments from original file
-        dos.write(prependCharacterData);
-        if (comments!=null) dos.write("<!--" + comments + "-->");
-        dos.write("<" + getTagName() + "/>");
+        dos.append(prependCharacterData);
+        if (comments!=null) dos.append("<!--" + comments + "-->");
+        dos.append("<" + getTagName() + "/>");
     }
 
     /**

@@ -19,6 +19,7 @@
  */
 package dics.elements.dtd;
 
+import dics.elements.utils.DicOpts;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -380,8 +381,8 @@ public class DictionaryElement extends Element {
      * 
      * @param fileName
      */
-    public void printXML(final String fileName) {
-        printXML(fileName, this.getXmlEncoding());
+    public void printXML(final String fileName, DicOpts opt) {
+        printXML(fileName, this.getXmlEncoding(), opt);
     }
 
     /**
@@ -389,7 +390,7 @@ public class DictionaryElement extends Element {
      * @param fileName
      * @param encoding
      */
-    public void printXML(final String fileName, final String encoding) {
+    public void printXML(final String fileName, final String encoding, DicOpts opt) {
         BufferedOutputStream bos;
         FileOutputStream fos;
         OutputStreamWriter dos;
@@ -398,47 +399,47 @@ public class DictionaryElement extends Element {
             fos = new FileOutputStream(fileName);
             bos = new BufferedOutputStream(fos);
             dos = new OutputStreamWriter(bos, encoding);
-            dos.write("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
-            dos.write("<!--\n\tDictionary:\n");
+            dos.append("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
+            dos.append("<!--\n\tDictionary:\n");
             if (sections != null) {
                 if (isBil()) {
-                    dos.write("\tBilingual dictionary: " + getLeftLanguage() + "-" + getRightLanguage() + "\n");
+                    dos.append("\tBilingual dictionary: " + getLeftLanguage() + "-" + getRightLanguage() + "\n");
                 }
-                dos.write("\tSections: " + sections.size() + "\n");
+                dos.append("\tSections: " + sections.size() + "\n");
                 int ne = 0;
                 for (SectionElement section : sections) {
                     ne += section.getEElements().size();
                 }
-                dos.write("\tEntries: " + ne);
+                dos.append("\tEntries: " + ne);
             }
 
             if (sdefs != null) {
-                dos.write("\n\tSdefs: " + sdefs.getSdefsElements().size() + "\n");
+                dos.append("\n\tSdefs: " + sdefs.getSdefsElements().size() + "\n");
             }
             if (pardefs != null) {
-                dos.write("\tParadigms: " + pardefs.getPardefElements().size() + "\n");
+                dos.append("\tParadigms: " + pardefs.getPardefElements().size() + "\n");
             }
 
             if (comments != null) {
-                dos.write(comments);
+                dos.append(comments);
             }
-            dos.write("\n-->\n");
-            dos.write("<dictionary>\n");
+            dos.append("\n-->\n");
+            dos.append("<dictionary>\n");
             if (alphabet != null) {
-                alphabet.printXML(dos);
+                alphabet.printXML(dos, opt);
             }
             if (sdefs != null) {
-                sdefs.printXML(dos);
+                sdefs.printXML(dos, opt);
             }
             if (pardefs != null) {
-                pardefs.printXML(dos);
+                pardefs.printXML(dos, opt);
             }
             if (sections != null) {
                 for (final SectionElement s : sections) {
-                    s.printXML(dos);
+                    s.printXML(dos, opt);
                 }
             }
-            dos.write("</dictionary>\n");
+            dos.append("</dictionary>\n");
             fos = null;
             bos = null;
             dos.close();
@@ -454,8 +455,8 @@ public class DictionaryElement extends Element {
      * 
      * @param fileName
      */
-    public void printXMLXInclude(final String fileName) {
-        this.printXMLXInclude(fileName, this.getXmlEncoding());
+    public void printXMLXInclude(final String fileName, DicOpts opt) {
+        this.printXMLXInclude(fileName, this.getXmlEncoding(), opt);
     }
 
     /**
@@ -463,7 +464,7 @@ public class DictionaryElement extends Element {
      * @param fileName
      * @param encoding
      */
-    public void printXMLXInclude(final String fileName, final String encoding) {
+    public void printXMLXInclude(final String fileName, final String encoding, DicOpts opt) {
         BufferedOutputStream bos;
         FileOutputStream fos;
         OutputStreamWriter dos;
@@ -473,37 +474,37 @@ public class DictionaryElement extends Element {
             fos = new FileOutputStream(fileName);
             bos = new BufferedOutputStream(fos);
             dos = new OutputStreamWriter(bos, encoding);
-            dos.write("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
-            dos.write("<!--\n\tDictionary:\n");
+            dos.append("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
+            dos.append("<!--\n\tDictionary:\n");
             if (sections != null) {
                 if (isBil()) {
-                    dos.write("\tBilingual dictionary: " + getLeftLanguage() + "-" + getRightLanguage() + "\n");
+                    dos.append("\tBilingual dictionary: " + getLeftLanguage() + "-" + getRightLanguage() + "\n");
                 }
-                dos.write("\tSections: " + sections.size() + "\n");
-                dos.write("\tEntries: " + (sections.get(0)).getEElements().size());
+                dos.append("\tSections: " + sections.size() + "\n");
+                dos.append("\tEntries: " + (sections.get(0)).getEElements().size());
             }
             if (sdefs != null) {
-                dos.write("\n\tSdefs: " + sdefs.getSdefsElements().size() + "\n");
+                dos.append("\n\tSdefs: " + sdefs.getSdefsElements().size() + "\n");
             }
-            dos.write("");
+            dos.append("");
 
             if (comments != null) {
-                dos.write(comments);
+                dos.append(comments);
             }
-            dos.write("\n-->\n");
-            dos.write("<dictionary>\n");
+            dos.append("\n-->\n");
+            dos.append("<dictionary>\n");
             if (alphabet != null) {
-                alphabet.printXML(dos);
+                alphabet.printXML(dos, opt);
             }
             String includeStr = "<xi:include xmlns:xi=\"http://www.w3.org/2001/XInclude\"";
             if (sdefs != null) {
-                dos.write("\t" + includeStr + " href=\"" + getFolder() + "/sdefs.dix\"/>\n");
+                dos.append("\t" + includeStr + " href=\"" + getFolder() + "/sdefs.dix\"/>\n");
 
-                sdefs.printXML(getFolder() + "/sdefs.dix");
+                sdefs.printXML(getFolder() + "/sdefs.dix", opt);
             }
             if (pardefs != null) {
-                dos.write("\t" + includeStr + " href=\"" + getFolder() + "/pardefs.dix\"/>\n");
-                pardefs.printXML(getFolder() + "/pardefs.dix");
+                dos.append("\t" + includeStr + " href=\"" + getFolder() + "/pardefs.dix\"/>\n");
+                pardefs.printXML(getFolder() + "/pardefs.dix", opt);
             }
 
             for (SectionElement section : sections) {
@@ -516,15 +517,15 @@ public class DictionaryElement extends Element {
                 if (section.getType() != null) {
                     attributes += " type=\"" + section.getType() + "\"";
                 }
-                dos.write(tab(1) + "<" + section.getTagName() + "" + attributes + ">\n");
+                dos.append(tab(1) + "<" + section.getTagName() + "" + attributes + ">\n");
                 if (includes != null) {
                     for (final String s : includes) {
-                        dos.write("\t" + s + "\n");
+                        dos.append("\t" + s + "\n");
                     }
                 }
-                dos.write(tab(1) + "</" + section.getTagName() + ">\n");
+                dos.append(tab(1) + "</" + section.getTagName() + ">\n");
             }
-            dos.write("</dictionary>\n");
+            dos.append("</dictionary>\n");
             fos = null;
             bos = null;
             dos.close();

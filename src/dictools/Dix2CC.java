@@ -128,7 +128,7 @@ public class Dix2CC {
             dos = new OutputStreamWriter(bos, "UTF-8");
 
             for (String line : lines) {
-                dos.write(line);
+                dos.append(line);
 
             }
         } catch (IOException ioe) {

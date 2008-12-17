@@ -24,6 +24,7 @@ import java.util.Set;
 
 import dics.elements.dtd.DictionaryElement;
 import dics.elements.dtd.EElement;
+import dics.elements.utils.DicOpts;
 import dics.elements.utils.DicSet;
 import dics.elements.utils.EElementList;
 import dics.elements.utils.EElementMap;
@@ -35,7 +36,7 @@ import java.io.File;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class DicConsistent {
+public class DicConsistent extends AbstractDictTool{
 
     /**
      * 
@@ -142,17 +143,17 @@ public class DicConsistent {
      * 
      */
     private final void buildNotCommonDictionaries() {
-        buildNotCommonDictionary(getBil1());
-        buildNotCommonDictionary(getBil2());
-        buildNotCommonDictionary(getMon1());
-        buildNotCommonDictionary(getMon2());
+        buildNotCommonDictionary(getBil1(), opt);
+        buildNotCommonDictionary(getBil2(), opt);
+        buildNotCommonDictionary(getMon1(), opt);
+        buildNotCommonDictionary(getMon2(), opt);
     }
 
     /**
      * 
      * @param dic
      */
-    private final void buildNotCommonDictionary(final DictionaryElement dic) {
+    private final void buildNotCommonDictionary(final DictionaryElement dic, DicOpts opt) {
         DictionaryElement dicNotCommon = new DictionaryElement(dic);
         String fnDic = dic.getFileName();
 
@@ -165,7 +166,7 @@ public class DicConsistent {
         fnDic = fnDic.replaceAll("/dics/", "/dix/");
 
         //dicNotCommon.printXML(fnDic + getNotCommonSuffix());
-        dicNotCommon.printXML(this.getOutDir() + getNotCommonSuffix() + fileName);
+        dicNotCommon.printXML(this.getOutDir() + getNotCommonSuffix() + fileName, opt);
         dicNotCommon = null;
 
     }
@@ -356,7 +357,7 @@ public class DicConsistent {
     private final DicConsistent actionConsistent(String removeNotCommon) {
         final DicConsistent dicConsistent = new DicConsistent(getDicSet());
         dicConsistent.makeConsistentDictionaries(removeNotCommon);
-        dicSet.printXML("consistent");
+        dicSet.printXML("consistent", opt);
         return dicConsistent;
     }
 

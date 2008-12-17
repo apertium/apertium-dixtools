@@ -19,6 +19,7 @@
  */
 package dics.elements.dtd;
 
+import dics.elements.utils.DicOpts;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
@@ -121,17 +122,17 @@ public class PElement extends Element {
      * @throws java.io.IOException
      */
     @Override
-    public final void printXML(final Writer dos) throws IOException {
+    public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
         // write blank lines and comments from original file
-        dos.write(prependCharacterData);
-        dos.write(tab(3) + "<" + getTagName() + ">\n");
+        dos.append(prependCharacterData);
+        dos.append(tab(3) + "<" + getTagName() + ">\n");
         if (l != null) {
-            l.printXML(dos);
+            l.printXML(dos, opt);
         }
         if (r != null) {
-            r.printXML(dos);
+            r.printXML(dos, opt);
         }
-        dos.write(tab(3) + "</" + getTagName() + ">\n");
+        dos.append(tab(3) + "</" + getTagName() + ">\n");
     }
 
     /**
@@ -142,10 +143,10 @@ public class PElement extends Element {
     @Override
     public final void printXML1Line(final Writer dos)
             throws IOException {
-        dos.write("<" + getTagName() + ">");
+        dos.append("<" + getTagName() + ">");
         l.printXML1Line(dos);
         r.printXML1Line(dos);
-        dos.write("</" + getTagName() + ">");
+        dos.append("</" + getTagName() + ">");
     }
     
 
@@ -153,16 +154,16 @@ public class PElement extends Element {
     
     public final void printXML1LineAligned(final StringWriter dos, int alignR)
             throws IOException {
-        dos.write("<" + getTagName() + ">");
+        dos.append("<" + getTagName() + ">");
 
         l.printXML1Line(dos);
 
         int neededSpaces = alignR - dos.getBuffer().length();
         if (neededSpaces>0) {
-          dos.write(spaces.substring(0, Math.min(spaces.length(), neededSpaces)));
+          dos.append(spaces.substring(0, Math.min(spaces.length(), neededSpaces)));
         }
         r.printXML1Line(dos);
-        dos.write("</" + getTagName() + ">");
+        dos.append("</" + getTagName() + ">");
     }
         
         

@@ -36,13 +36,14 @@ import dics.elements.dtd.SElement;
 import dics.elements.dtd.SectionElement;
 import dics.elements.dtd.TextElement;
 import dics.elements.utils.Msg;
+import dictools.AbstractDictTool;
 
 /**
  * 
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class GetTranslation {
+public class GetTranslation  extends AbstractDictTool {
 
     /**
      * 
@@ -248,7 +249,7 @@ public class GetTranslation {
             }
         }
         // dic.printXML("apertium-" + sl + "-" + tl + ".dix");
-        dic.printXML(getOutFileName());
+        dic.printXML(getOutFileName(), opt);
     }
 
     /**

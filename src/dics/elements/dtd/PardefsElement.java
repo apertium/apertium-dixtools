@@ -19,6 +19,7 @@
  */
 package dics.elements.dtd;
 
+import dics.elements.utils.DicOpts;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -59,22 +60,22 @@ public class PardefsElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
-    public final void printXML(final Writer dos) throws IOException {
+    public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
         // write blank lines and comments from original file
-        dos.write(prependCharacterData);
-        dos.write(tab(1) + "<pardefs>\n");
+        dos.append(prependCharacterData);
+        dos.append(tab(1) + "<pardefs>\n");
         for (final PardefElement e : pardefElements) {
-            e.printXML(dos);
+            e.printXML(dos, opt);
         }
-        dos.write(tab(1) + "</pardefs>\n\n");
+        dos.append(tab(1) + "</pardefs>\n\n");
     }
 
     /**
      * 
      * @param fileName
      */
-    public final void printXML(final String fileName) {
-        this.printXML(fileName, "UTF-8");
+    public final void printXML(final String fileName, DicOpts opt) {
+        this.printXML(fileName, "UTF-8", opt);
     }
 
     /**
@@ -82,7 +83,7 @@ public class PardefsElement extends Element {
      * @param fileName
      * @param encoding
      */
-    public void printXML(final String fileName, final String encoding) {
+    public void printXML(final String fileName, final String encoding, DicOpts opt) {
         BufferedOutputStream bos;
         FileOutputStream fos;
         OutputStreamWriter dos;
@@ -91,10 +92,10 @@ public class PardefsElement extends Element {
             fos = new FileOutputStream(fileName);
             bos = new BufferedOutputStream(fos);
             dos = new OutputStreamWriter(bos, encoding);
-            dos.write("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
-            dos.write("<dictionary>\n");
-            printXML(dos);
-            dos.write("</dictionary>\n");
+            dos.append("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
+            dos.append("<dictionary>\n");
+            printXML(dos, opt);
+            dos.append("</dictionary>\n");
 
             fos = null;
             bos = null;

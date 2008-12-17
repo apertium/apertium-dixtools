@@ -30,6 +30,7 @@ import dics.elements.dtd.SectionElement;
 import dics.elements.dtd.TextElement;
 import dics.elements.utils.EElementList;
 import dics.elements.utils.SElementList;
+import dictools.AbstractDictTool;
 import dictools.DicSort;
 import dictools.DictionaryReader;
 import java.io.BufferedReader;
@@ -46,7 +47,7 @@ import java.util.regex.Pattern;
  *
  * @author Enrique Benimeli Bofarull
  */
-public class Apertiumizer {
+public class Apertiumizer extends AbstractDictTool {
 
     /**
      * 
@@ -141,7 +142,7 @@ public class Apertiumizer {
             }
             in.close();
 
-            dic.printXML(this.getOutFileName(), "UTF-8");
+            dic.printXML(this.getOutFileName(), "UTF-8", opt);
         DictionaryReader reader = new DictionaryReader("dic.tmp");
         DictionaryElement bil = reader.readDic();
         this.completeDic(bil);
@@ -270,7 +271,7 @@ public class Apertiumizer {
                         sectionElement.addEElement(ee);
                     } else {
                         if (sectionElement != null) {
-                            sectionElement.printXMLXInclude(prevCat, "UTF-8");
+                            sectionElement.printXMLXInclude(prevCat, "UTF-8", opt);
                         }
                         prevCat = currentCat;
                         sectionElement = new SectionElement();
@@ -284,11 +285,11 @@ public class Apertiumizer {
             }
         }
         if (sectionElement != null) {
-            sectionElement.printXMLXInclude(prevCat, "UTF-8");
+            sectionElement.printXMLXInclude(prevCat, "UTF-8", opt);
         }
-        noneSection.printXMLXInclude("none.xml", "UTF-8");
+        noneSection.printXMLXInclude("none.xml", "UTF-8", opt);
 
-        sorted.printXML(this.getOutFileName(), "UTF-8");
+        sorted.printXML(this.getOutFileName(), "UTF-8", opt);
 
     }
 

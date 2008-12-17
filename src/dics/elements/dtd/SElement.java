@@ -19,6 +19,7 @@
  */
 package dics.elements.dtd;
 
+import dics.elements.utils.DicOpts;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -91,10 +92,10 @@ public class SElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
-    public final void printXML(final Writer dos) throws IOException {
+    public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
         // write blank lines and comments from original file
-        dos.write(prependCharacterData);
-        dos.write("<" + getTagName() + " n=\"" + getValue() + "\"/>");
+        dos.append(prependCharacterData);
+        dos.append("<" + getTagName() + " n=\"" + getValue() + "\"/>");
     }
 
     /**

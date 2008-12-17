@@ -26,6 +26,7 @@ import java.io.IOException;
 import dics.elements.dtd.DictionaryElement;
 import dics.elements.dtd.EElement;
 import dics.elements.dtd.SectionElement;
+import dics.elements.utils.DicOpts;
 import dictools.DictionaryReader;
 import java.io.OutputStreamWriter;
 
@@ -64,8 +65,8 @@ public class DicFormatE1Line {
      * 
      * @param fileName
      */
-    public void printXML(final String fileName) {
-        this.printXML(fileName, "UTF-8");
+    public void printXML(final String fileName, DicOpts opt) {
+        this.printXML(fileName, "UTF-8", opt);
         dic.setXmlEncoding("UTF-8");
     }
 
@@ -73,7 +74,7 @@ public class DicFormatE1Line {
      * 
      * @param fileName
      */
-    public void printXML(final String fileName, final String encoding) {
+    public void printXML(final String fileName, final String encoding, DicOpts opt) {
         BufferedOutputStream bos;
         FileOutputStream fos;
         OutputStreamWriter dos;
@@ -83,40 +84,40 @@ public class DicFormatE1Line {
             fos = new FileOutputStream(fileName);
             bos = new BufferedOutputStream(fos);
             dos = new OutputStreamWriter(bos, encoding);
-            dos.write("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
-            dos.write("<!--\n\tDictionary:\n");
+            dos.append("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
+            dos.append("<!--\n\tDictionary:\n");
             if (dic.getSections() != null) {
                 if (dic.isBil()) {
-                    dos.write("\tBilingual dictionary: " + dic.getLeftLanguage() + "-" + dic.getRightLanguage() + "\n");
+                    dos.append("\tBilingual dictionary: " + dic.getLeftLanguage() + "-" + dic.getRightLanguage() + "\n");
                 }
-                dos.write("\tSections: " + dic.getSections().size() + "\n");
+                dos.append("\tSections: " + dic.getSections().size() + "\n");
                 int ne = 0;
                 for (SectionElement section : dic.getSections()) {
                     ne += section.getEElements().size();
                 }
-                dos.write("\tEntries: " + ne);
+                dos.append("\tEntries: " + ne);
             }
 
             if (dic.getSdefs() != null) {
-                dos.write("\n\tSdefs: " + dic.getSdefs().getSdefsElements().size() + "\n");
+                dos.append("\n\tSdefs: " + dic.getSdefs().getSdefsElements().size() + "\n");
             }
             if (dic.getPardefsElement() != null) {
-                dos.write("\tParadigms: " + dic.getPardefsElement().getPardefElements().size() + "\n");
+                dos.append("\tParadigms: " + dic.getPardefsElement().getPardefElements().size() + "\n");
             }
 
             if (dic.getComments() != null) {
-                dos.write(dic.getComments());
+                dos.append(dic.getComments());
             }
-            dos.write("\n-->\n");
-            dos.write("<dictionary>\n");
+            dos.append("\n-->\n");
+            dos.append("<dictionary>\n");
             if (dic.getAlphabet() != null) {
-                dic.getAlphabet().printXML(dos);
+                dic.getAlphabet().printXML(dos, opt);
             }
             if (dic.getSdefs() != null) {
-                dic.getSdefs().printXML(dos);
+                dic.getSdefs().printXML(dos, opt);
             }
             if (dic.getPardefsElement() != null) {
-                dic.getPardefsElement().printXML(dos);
+                dic.getPardefsElement().printXML(dos, opt);
             }
             if (dic.getSections() != null) {
                 for (final SectionElement s : dic.getSections()) {
@@ -127,14 +128,14 @@ public class DicFormatE1Line {
                     if (s.getType() != null) {
                         attributes += " type=\"" + s.getType() + "\"";
                     }
-                    dos.write("  <section " + attributes + ">\n");
+                    dos.append("  <section " + attributes + ">\n");
                     for (final EElement e : s.getEElements()) {
                         e.printXML1Line(dos);
                     }
-                    dos.write("  </section>\n");
+                    dos.append("  </section>\n");
                 }
             }
-            dos.write("</dictionary>\n");
+            dos.append("</dictionary>\n");
             fos = null;
             bos = null;
             dos.close();

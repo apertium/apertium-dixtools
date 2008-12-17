@@ -29,7 +29,7 @@ import java.util.HashMap;
  *
  * @author Enrique Benimeli Bofarull
  */
-public class DicFilter {
+public class DicFilter  extends AbstractDictTool{
 
     /**
      * 
@@ -86,7 +86,7 @@ public class DicFilter {
             }            
         }
         
-        dicFilt.printXML("apertium-de-en.de-en-basic.dix");
+        dicFilt.printXML("apertium-de-en.de-en-basic.dix", opt);
         
         
     }

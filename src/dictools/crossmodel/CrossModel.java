@@ -19,6 +19,7 @@
  */
 package dictools.crossmodel;
 
+import dics.elements.utils.DicOpts;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -89,8 +90,8 @@ public class CrossModel {
      * 
      * @param fileName
      */
-    public void printXML(final String fileName) {
-        this.printXML(fileName, this.getEncoding());
+    public void printXML(final String fileName, DicOpts opt) {
+        this.printXML(fileName, this.getEncoding(), opt);
     }
 
     /**
@@ -98,7 +99,7 @@ public class CrossModel {
      * @param fileName
      * @param encoding
      */
-    public void printXML(final String fileName, final String encoding) {
+    public void printXML(final String fileName, final String encoding, DicOpts opt) {
         BufferedOutputStream bos;
         FileOutputStream fos;
         OutputStreamWriter dos;
@@ -107,18 +108,18 @@ public class CrossModel {
             fos = new FileOutputStream(fileName);
             bos = new BufferedOutputStream(fos);
             dos = new OutputStreamWriter(bos, encoding);
-            dos.write("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
-            dos.write("<!-- Examples of patterns not found -->\n");
-            dos.write("<cross-model>\n");
+            dos.append("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
+            dos.append("<!-- Examples of patterns not found -->\n");
+            dos.append("<cross-model>\n");
             int i = 0;
             CrossActionList cal = getCrossActions();
             Collections.sort(cal);
             for (CrossAction crossAction : cal) {
-                crossAction.printXML(dos, i);
+                crossAction.printXML(dos, i, opt);
                 i++;
             }
-            dos.write("</cross-model>\n");
-            dos.write("<!-- " + i + " cross actions. -->\n");
+            dos.append("</cross-model>\n");
+            dos.append("<!-- " + i + " cross actions. -->\n");
 
             fos = null;
             bos = null;

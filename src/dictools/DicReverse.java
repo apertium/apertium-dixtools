@@ -26,7 +26,7 @@ import dics.elements.dtd.DictionaryElement;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class DicReverse {
+public class DicReverse  extends AbstractDictTool {
 
     /**
      * 
@@ -103,7 +103,7 @@ public class DicReverse {
             } else {
                 reverseFileName = getArguments()[2];
             }
-            bil.printXML(reverseFileName);
+            bil.printXML(reverseFileName, opt);
         }
     }
 

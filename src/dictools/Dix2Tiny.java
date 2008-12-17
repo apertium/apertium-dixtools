@@ -23,7 +23,7 @@ package dictools;
  *
  * @author Enrique Benimeli Bofarull
  */
-public class Dix2Tiny {
+public class Dix2Tiny  extends AbstractDictTool{
 
     private String[] arguments;
     private String bilFileName;

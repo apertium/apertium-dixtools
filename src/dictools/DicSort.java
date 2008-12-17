@@ -37,7 +37,7 @@ import dics.elements.utils.SElementList;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class DicSort {
+public class DicSort  extends AbstractDictTool {
 
     /**
      * 
@@ -170,7 +170,7 @@ public class DicSort {
         if (dicType == DicSort.MON) {
             dicSorted = sortMon();
         }
-        dicSorted.printXML(out);
+        dicSorted.printXML(out, opt);
 
     /*
     if (dicSorted != null) {
@@ -365,7 +365,7 @@ public class DicSort {
                 }
                 sec.setEElements(list);
                 if (isXinclude()) {
-                    sec.printXMLXInclude(folder + "/" + cat + ".dix");
+                    sec.printXMLXInclude(folder + "/" + cat + ".dix", opt);
                 }
 
             }

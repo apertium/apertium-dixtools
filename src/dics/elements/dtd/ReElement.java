@@ -19,6 +19,7 @@
  */
 package dics.elements.dtd;
 
+import dics.elements.utils.DicOpts;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -58,13 +59,13 @@ public class ReElement extends Element {
      * @throws java.io.IOException
      */
     @Override
-    public final void printXML(final Writer dos) throws IOException {
+    public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
         // write blank lines and comments from original file
-        dos.write(prependCharacterData);
+        dos.append(prependCharacterData);
         if (value == null) {
             value = "";
         }
-        dos.write(tab(3) + "<" + getTagName() + ">" + getValue() + "</" + getTagName() + ">\n");
+        dos.append(tab(3) + "<" + getTagName() + ">" + getValue() + "</" + getTagName() + ">\n");
     }
 
     /**
@@ -77,7 +78,7 @@ public class ReElement extends Element {
         if (value == null) {
             value = "";
         }
-        dos.write("<" + getTagName() + ">" + getValue() + "</" + getTagName() + ">");
+        dos.append("<" + getTagName() + ">" + getValue() + "</" + getTagName() + ">");
     }
 
     /**

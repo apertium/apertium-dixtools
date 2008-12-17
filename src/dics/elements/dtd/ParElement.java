@@ -19,6 +19,7 @@
  */
 package dics.elements.dtd;
 
+import dics.elements.utils.DicOpts;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -106,9 +107,9 @@ public class ParElement extends Element {
      * @throws java.io.IOException
      */
     @Override
-    public final void printXML(final Writer dos) throws IOException {
+    public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
         // write blank lines and comments from original file
-        dos.write(prependCharacterData);
+        dos.append(prependCharacterData);
         if (comments == null) {
             comments = "";
         }
@@ -120,7 +121,7 @@ public class ParElement extends Element {
         if (this.sa != null) {
             saAttr = " sa=\"" + sa + "\" ";
         }
-        dos.write(tab(4) + "<" + getTagName() + " n=\"" + n + "\"" +prms + saAttr + "/> " + getComments() + "\n");
+        dos.append(tab(4) + "<" + getTagName() + " n=\"" + n + "\"" +prms + saAttr + "/> " + getComments() + "\n");
     }
 
     /**
@@ -141,10 +142,10 @@ public class ParElement extends Element {
         if (this.sa != null) {
             saAttr = " sa=\"" + sa + "\" ";
         }
-        dos.write("<" + getTagName() + " n=\"" + n + "\"" + prms + saAttr + "/>" );
+        dos.append("<" + getTagName() + " n=\"" + n + "\"" + prms + saAttr + "/>" );
 
         if (comments.length()>0)
-          dos.write(" " + comments);
+          dos.append(" " + comments);
     }
 
     /**

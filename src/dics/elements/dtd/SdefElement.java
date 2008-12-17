@@ -19,6 +19,7 @@
  */
 package dics.elements.dtd;
 
+import dics.elements.utils.DicOpts;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -61,9 +62,9 @@ public class SdefElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
-    public final void printXML(final Writer dos) throws IOException {
+    public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
         // write blank lines and comments from original file
-        dos.write(prependCharacterData);
+        dos.append(prependCharacterData);
         if (comments == null) {
             setComments("");
         }
@@ -72,7 +73,7 @@ public class SdefElement extends Element {
             comment = "\tc=\"" + getComment() + "\"";
 
         }
-        dos.write(tab(2) + "<" + getTagName() + " n=\"" + getValue() + "\" " + comment + "/> " + getComments() + "\n");
+        dos.append(tab(2) + "<" + getTagName() + " n=\"" + getValue() + "\" " + comment + "/> " + getComments() + "\n");
     }
 
     /**

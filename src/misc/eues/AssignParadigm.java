@@ -127,7 +127,7 @@ public class AssignParadigm {
             }
         }
         System.out.println("Updated morphological dictionary: '" + out + "'");
-        dic.printXML(out);
+        dic.printXML(out, dics.elements.utils.DicOpts.std);
     }
 
     /**

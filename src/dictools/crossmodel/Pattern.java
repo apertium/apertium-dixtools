@@ -26,6 +26,7 @@ import dics.elements.dtd.EElement;
 import dics.elements.dtd.Element;
 import dics.elements.dtd.SElement;
 import dics.elements.dtd.TextElement;
+import dics.elements.utils.DicOpts;
 import dics.elements.utils.ElementList;
 import dics.elements.utils.ElementList;
 import dics.elements.utils.Msg;
@@ -129,11 +130,11 @@ public class Pattern {
      * @param dos
      * @throws java.io.IOException
      */
-    protected final void printXML(OutputStreamWriter dos) throws IOException {
-        dos.write("\t<pattern>\n");
-        e1.printXML(dos);
-        e2.printXML(dos);
-        dos.write("\t</pattern>\n");
+    protected final void printXML(Appendable dos, DicOpts opt) throws IOException {
+        dos.append("\t<pattern>\n");
+        e1.printXML(dos, opt);
+        e2.printXML(dos, opt);
+        dos.append("\t</pattern>\n");
     }
 
     /**

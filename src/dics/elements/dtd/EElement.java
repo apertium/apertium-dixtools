@@ -19,6 +19,7 @@
  */
 package dics.elements.dtd;
 
+import dics.elements.utils.DicOpts;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -532,26 +533,26 @@ public class EElement extends Element implements Cloneable,
      * @throws java.io.IOException
      */
     @Override
-    public final void printXML(final Writer dos) throws IOException {
+    public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
         // write blank lines and comments from original file
-        dos.write(prependCharacterData);
+        dos.append(prependCharacterData);
 
         String attributes = this.getAttrString();
         if (comments != null) {
-            dos.write(tab(2) + "<!-- \n");
-            dos.write(comments);
+            dos.append(tab(2) + "<!-- \n");
+            dos.append(comments);
             if (!isCommon()) {
-                dos.write(tab(2) + "esta entrada no aparece en el otro morfolgico\n");
+                dos.append(tab(2) + "esta entrada no aparece en el otro morfolgico\n");
             }
-            dos.write(tab(2) + "-->\n");
+            dos.append(tab(2) + "-->\n");
         }
-        dos.write(tab(2) + "<e" + attributes + ">\n");
+        dos.append(tab(2) + "<e" + attributes + ">\n");
         if (children != null) {
             for (final Element e : children) {
-                e.printXML(dos);
+                e.printXML(dos, opt);
             }
         }
-        dos.write(tab(2) + "</e>\n\n");
+        dos.append(tab(2) + "</e>\n\n");
     }
 
     /**
@@ -563,24 +564,24 @@ public class EElement extends Element implements Cloneable,
     public final void printXML1Line(final Writer dos)
             throws IOException {
         // write blank lines and comments from original file
-        dos.write(prependCharacterData);
+        dos.append(prependCharacterData);
       
         String attributes = this.getAttrString();
         if (comments != null) {
-            dos.write(tab(2) + "<!-- \n");
-            dos.write(comments);
+            dos.append(tab(2) + "<!-- \n");
+            dos.append(comments);
             if (!isCommon()) {
-                dos.write(tab(2) + "esta entrada no aparece en el otro morfolgico\n");
+                dos.append(tab(2) + "esta entrada no aparece en el otro morfolgico\n");
             }
-            dos.write(tab(2) + "-->\n");
+            dos.append(tab(2) + "-->\n");
         }
-        dos.write("<e" + attributes + ">");
+        dos.append("<e" + attributes + ">");
         if (children != null) {
             for (final Element e : children) {
                 e.printXML1Line(dos);
             }
         }
-        dos.write("</e>\n");
+        dos.append("</e>\n");
     }
 
     private final static String spaces = "                      ";
@@ -610,12 +611,12 @@ public class EElement extends Element implements Cloneable,
 
         String attributes = this.getAttrString();
         //int addSpace = Math.max(0, Math.min(spaces.length(), alignP-attributes.length()));
-        //dos.write("<e" + attributes + spaces.substring(0,addSpace)+ ">");              
-        //dos.write(spaces.substring(0,addSpace) + "<e" + attributes + ">");        
-        dos.write("<e" + attributes + ">");              
+        //dos.append("<e" + attributes + spaces.substring(0,addSpace)+ ">");              
+        //dos.append(spaces.substring(0,addSpace) + "<e" + attributes + ">");        
+        dos.append("<e" + attributes + ">");              
         int neededSpaces = alignP - dos.getBuffer().length();
         if (neededSpaces>0) {
-          dos.write(spaces.substring(0, Math.min(spaces.length(), neededSpaces)));
+          dos.append(spaces.substring(0, Math.min(spaces.length(), neededSpaces)));
         }        
         
         if (children != null) {
@@ -627,7 +628,7 @@ public class EElement extends Element implements Cloneable,
                 }
             }
         }
-        dos.write("</e>\n");
+        dos.append("</e>\n");
         dosx.write(dos.getBuffer().toString());
     }
 

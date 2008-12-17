@@ -38,6 +38,7 @@ import dics.elements.dtd.SdefElement;
 import dics.elements.dtd.SdefsElement;
 import dics.elements.dtd.SectionElement;
 import dics.elements.dtd.TextElement;
+import dics.elements.utils.DicOpts;
 import dics.elements.utils.DicSet;
 import dics.elements.utils.DictionaryElementList;
 import dics.elements.utils.EElementList;
@@ -69,7 +70,7 @@ import lingres.Resource;
  * @author Enrique Benimeli Bofarull
  *
  */
-public class DicCross {
+public class DicCross  extends AbstractDictTool{
 
     /**
      * Restrictions for crossing
@@ -301,7 +302,7 @@ public class DicCross {
         msg.out("[" + (taskOrder++) + "] Sorting crossed dictionary...\n");
         Collections.sort(dic.getEntries());
 
-        getNDCrossModel().printXML(this.getOutDir() + "patterns-not-detected.xml");
+        getNDCrossModel().printXML(this.getOutDir() + "patterns-not-detected.xml", opt);
         dics[0] = dic;
         return dics;
     }
@@ -895,7 +896,7 @@ public class DicCross {
         dicList.add(bilCrossed);
         dicList.add(monACrossed);
         dicList.add(monBCrossed);
-        printXMLCrossed(dicList, sl, tl);
+        printXMLCrossed(dicList, sl, tl, opt);
         msg.out("[" + (taskOrder++) + "] Done!\n");
         this.setCompleted(100);
     }
@@ -906,7 +907,7 @@ public class DicCross {
      * @param sl
      * @param tl
      */
-    private final void printXMLCrossed(final DictionaryElementList del, final String sl, final String tl) {
+    private final void printXMLCrossed(final DictionaryElementList del, final String sl, final String tl, DicOpts opt) {
         final DictionaryElement bilCrossed = del.get(0);
         final DictionaryElement monACrossed = del.get(1);
         final DictionaryElement monBCrossed = del.get(2);
@@ -936,13 +937,13 @@ public class DicCross {
         msg.out("[" + (taskOrder) + "] Generating crossed dictionaries ...\n");
         taskOrder = taskOrder + 1;
         this.bilCrossed_path = this.getOutDir() + "apertium-" + sl + "-" + tl + "." + sl + "-" + tl + "-crossed.dix";
-        bilCrossed.printXML(this.bilCrossed_path);
+        bilCrossed.printXML(this.bilCrossed_path, opt);
 
         this.monACrossed_path = this.getOutDir() + "apertium-" + sl + "-" + tl + "." + sl + "-crossed.dix";
-        monACrossed.printXML(this.monACrossed_path);
+        monACrossed.printXML(this.monACrossed_path, opt);
 
         this.monCCrossed_path = this.getOutDir() + "apertium-" + sl + "-" + tl + "." + tl + "-crossed.dix";
-        monBCrossed.printXML(this.monCCrossed_path);
+        monBCrossed.printXML(this.monCCrossed_path, opt);
     }
 
     /**
@@ -953,7 +954,7 @@ public class DicCross {
     private final DicConsistent actionConsistent(final DicSet dicSet, final String removeNotCommon) {
         final DicConsistent dicConsistent = new DicConsistent(dicSet);
         dicConsistent.makeConsistentDictionaries(removeNotCommon);
-        dicSet.printXML(this.getOutDir() + "consistent");
+        dicSet.printXML(this.getOutDir() + "consistent", opt);
         return dicConsistent;
     }
 

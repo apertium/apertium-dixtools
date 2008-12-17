@@ -26,6 +26,7 @@ import dics.elements.dtd.EElement;
 import dics.elements.dtd.Element;
 import dics.elements.dtd.SElement;
 import dics.elements.dtd.TextElement;
+import dics.elements.utils.DicOpts;
 import dics.elements.utils.Msg;
 import java.io.OutputStreamWriter;
 import java.util.HashMap;
@@ -96,11 +97,11 @@ public class Action {
      * @param dos
      * @throws java.io.IOException
      */
-    public final void printXML(OutputStreamWriter dos) throws IOException {
+    public final void printXML(Appendable dos, DicOpts opt) throws IOException {
         if (e != null) {
-            dos.write("\t<action>\n");
-            getE().printXML(dos);
-            dos.write("\t</action>\n");
+            dos.append("\t<action>\n");
+            getE().printXML(dos, opt);
+            dos.append("\t</action>\n");
         }
 
     }
