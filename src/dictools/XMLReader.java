@@ -55,6 +55,7 @@ import dics.elements.dtd.SaElement;
 import dics.elements.dtd.TElement;
 import dics.elements.dtd.TextElement;
 import dics.elements.dtd.VElement;
+import org.w3c.dom.Attr;
 import org.w3c.dom.Comment;
 
 /**
@@ -264,6 +265,21 @@ public class XMLReader {
      * @param attrName
      * @return Undefined         */
     protected String getAttributeValue(final Element e, final String attrName) {
+      
+      Attr attr = e.getAttributeNode(attrName);
+      if (attr==null) return null;
+      return attr.getValue();
+/*      
+      String value1 = null;
+      if (e.hasAttribute(attrName)) value1 = e.getAttribute(attrName);
+      return value1;
+*/
+/*      
+      String value1 = null;
+      if (e.hasAttribute(attrName)) value1 = e.getAttribute(attrName);
+      return value1;
+*/       
+ /*       
         String value = "";
         if (e.hasAttributes()) {
             final NamedNodeMap attributes = e.getAttributes();
@@ -277,6 +293,7 @@ public class XMLReader {
             } // end-for
         } // end-if
         return null;
+  */
     }
 
     /**
