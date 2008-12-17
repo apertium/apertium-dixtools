@@ -165,7 +165,7 @@ public class DicTools {
         final String[] parts2 = str.split("[.]");
 
         if (paths.length < parts2.length-1 && parts2.length-1>0) {
-          System.err.println("WARNING, the file name "+str+" does not match the pattern " + txt);
+          System.err.println("WARNING: file name "+str+" does not match the pattern " + txt);
         }
 
         

@@ -1,3 +1,5 @@
+#!/bin/sh
+
 #Here goes the command line
 
 rm -rf dix

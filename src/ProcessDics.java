@@ -72,7 +72,9 @@ public class ProcessDics {
      * @param args
      */
     public static void main(final String[] args) {
-        //System.err.println("Java args = " + Arrays.toString(args).replaceAll(", ", " "));
+        
+        System.err.println(ProcessDics.class.getName()+".main(\"" + Arrays.toString(args).replaceAll(", ", "\", \"")+"\");");
+        
         final ProcessDics ps = new ProcessDics(args);
         ps.go();
     }
