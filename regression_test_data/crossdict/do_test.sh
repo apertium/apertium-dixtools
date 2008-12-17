@@ -5,7 +5,9 @@ cd input
 rm -rf dix
 # apertium-dixtools cross-param apertium-cy-en.cy.dix -r apertium-cy-en.cy-en.dix -r apertium-eo-en.eo-en.dix apertium-eo-en.eo.dix
 #apertium-dixtools cross-param apertium-es-ca.es.dix -r bil-es-ca-per-creuar.dix -r apertium-en-ca.en-ca.dix apertium-en-ca.en.metadix
-apertium-dixtools cross-param apertium-es-ca.es.dix -r apertium-es-ca.es-ca.dix -r apertium-en-ca.en-ca.dix apertium-en-ca.en.metadix
+export CROSSDICS_PATH=../../../../apertium-dixtools 
+
+../../../apertium-dixtools cross-param apertium-es-ca.es.dix -r apertium-es-ca.es-ca.dix -r apertium-en-ca.en-ca.dix apertium-en-ca.en.metadix
 rm -rf ../actual_output
 mv dix ../actual_output
 cd ..
@@ -13,7 +15,7 @@ cd ..
 
 echo -------------------------------
 res=FAILED
-diff expected_output actual_output && res=SUCCESS
+diff -bBw -x .svn expected_output actual_output && res=SUCCESS
 
 echo test $res
 
