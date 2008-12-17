@@ -1,0 +1,379 @@
+<!--
+<!DOCTYPE cross-model SYSTEM "crossmodel.dtd">
+-->
+<cross-model>
+    <cross-action id="default" a="ebenimeli">
+        <description>Default pattern</description>
+        <pattern>
+            <e>
+                <p>
+                    <l>$lemmaA<v n="cat"/><t/></l>
+                    <r>$lemmaB<v n="cat"/><t/></r>
+                </p>
+            </e>
+            <e>
+                <p>
+                    <l>$lemmaB<v n="cat"/><t n="tailB"/><t/></l>
+                    <r>$lemmaC<v n="cat"/><t n="tailC"/></r>
+                </p>
+            </e>
+        </pattern>
+        <action-set>
+            <action>
+                <e>
+                    <p>
+                        <l>$lemmaA<v n="cat"/><t n="tailB"/></l>
+                        <r>$lemmaC<v n="cat"/><t n="tailC"/></r>
+                    </p>
+                </e>
+            </action>
+        </action-set>
+    </cross-action>
+
+
+  <cross-action id="gender1" a="ebenimeli">
+        <description>add gender</description>
+        <pattern>
+            <e>
+                <p>
+                    <l>$lemmaA<v n="cat"/><t/></l>
+                    <r>$lemmaB<v n="cat"/><t/></r>
+                </p>
+            </e>
+            <e>
+                <p>
+                    <l>$lemmaB<v n="cat"/><t/><s n="m"/><t/></l>
+                    <r>$lemmaC<v n="cat"/><t/></r>
+                </p>
+            </e>
+        </pattern>
+        <action-set>
+            <action>
+                <e>
+                    <p>
+                        <l>$lemmaA<v n="cat"/><t/><s n="m"/></l>
+                        <r>$lemmaC<v n="cat"/><t/></r>
+                    </p>
+                </e>
+            </action>
+        </action-set>
+    </cross-action>
+
+  <cross-action id="gender1LR" a="ebenimeli">
+        <description>add gender</description>
+        <pattern>
+            <e>
+                <p>
+                    <l>$lemmaA<v n="cat"/><t/></l>
+                    <r>$lemmaB<v n="cat"/><t/></r>
+                </p>
+            </e>
+            <e r="LR">
+                <p>
+                    <l>$lemmaB<v n="cat"/><t/><s n="m"/><t/></l>
+                    <r>$lemmaC<v n="cat"/><t/></r>
+                </p>
+            </e>
+        </pattern>
+        <action-set>
+            <action>
+                <e r="LR">
+                    <p>
+                        <l>$lemmaA<v n="cat"/><t/><s n="m"/></l>
+                        <r>$lemmaC<v n="cat"/><t/></r>
+                    </p>
+                </e>
+            </action>
+        </action-set>
+    </cross-action>
+
+<cross-action id="gender1RL" a="ebenimeli">
+        <description>add gender</description>
+        <pattern>
+            <e>
+                <p>
+                    <l>$lemmaA<v n="cat"/><t/></l>
+                    <r>$lemmaB<v n="cat"/><t/></r>
+                </p>
+            </e>
+            <e r="RL">
+                <p>
+                    <l>$lemmaB<v n="cat"/><t/><s n="m"/><t/></l>
+                    <r>$lemmaC<v n="cat"/><t/></r>
+                </p>
+            </e>
+        </pattern>
+        <action-set>
+            <action>
+                <e r="RL">
+                    <p>
+                        <l>$lemmaA<v n="cat"/><t/><s n="m"/></l>
+                        <r>$lemmaC<v n="cat"/><t/></r>
+                    </p>
+                </e>
+            </action>
+        </action-set>
+    </cross-action>
+
+<cross-action id="gender2" a="ebenimeli">
+        <description>add gender</description>
+        <pattern>
+            <e>
+                <p>
+                    <l>$lemmaA<v n="cat"/><t/></l>
+                    <r>$lemmaB<v n="cat"/><t/></r>
+                </p>
+            </e>
+            <e>
+                <p>
+                    <l>$lemmaB<v n="cat"/><t/><s n="f"/><t/></l>
+                    <r>$lemmaC<v n="cat"/><t/></r>
+                </p>
+            </e>
+        </pattern>
+        <action-set>
+            <action>
+                <e>
+                    <p>
+                        <l>$lemmaA<v n="cat"/><t/><s n="f"/></l>
+                        <r>$lemmaC<v n="cat"/><t/></r>
+                    </p>
+                </e>
+            </action>
+        </action-set>
+    </cross-action>
+
+
+<cross-action id="gender2LR" a="ebenimeli">
+        <description>add gender</description>
+        <pattern>
+            <e>
+                <p>
+                    <l>$lemmaA<v n="cat"/><t/></l>
+                    <r>$lemmaB<v n="cat"/><t/></r>
+                </p>
+            </e>
+            <e r="LR">
+                <p>
+                    <l>$lemmaB<v n="cat"/><t/><s n="f"/><t/></l>
+                    <r>$lemmaC<v n="cat"/><t/></r>
+                </p>
+            </e>
+        </pattern>
+        <action-set>
+            <action>
+                <e r="LR">
+                    <p>
+                        <l>$lemmaA<v n="cat"/><t/><s n="f"/></l>
+                        <r>$lemmaC<v n="cat"/><t/></r>
+                    </p>
+                </e>
+            </action>
+        </action-set>
+    </cross-action>
+
+
+<cross-action id="gender2RL" a="ebenimeli">
+        <description>add gender</description>
+        <pattern>
+            <e>
+                <p>
+                    <l>$lemmaA<v n="cat"/><t/></l>
+                    <r>$lemmaB<v n="cat"/><t/></r>
+                </p>
+            </e>
+            <e r="RL">
+                <p>
+                    <l>$lemmaB<v n="cat"/><t/><s n="f"/><t/></l>
+                    <r>$lemmaC<v n="cat"/><t/></r>
+                </p>
+            </e>
+        </pattern>
+        <action-set>
+            <action>
+                <e r="RL">
+                    <p>
+                        <l>$lemmaA<v n="cat"/><t/><s n="f"/></l>
+                        <r>$lemmaC<v n="cat"/><t/></r>
+                    </p>
+                </e>
+            </action>
+        </action-set>
+    </cross-action>
+
+<cross-action id="gender3" a="ebenimeli">
+        <description>add gender</description>
+        <pattern>
+            <e>
+                <p>
+                    <l>$lemmaA<v n="cat"/><t/></l>
+                    <r>$lemmaB<v n="cat"/><t/></r>
+                </p>
+            </e>
+            <e>
+                <p>
+                    <l>$lemmaB<v n="cat"/><t/><s n="mf"/><t/></l>
+                    <r>$lemmaC<v n="cat"/><t/></r>
+                </p>
+            </e>
+        </pattern>
+        <action-set>
+            <action>
+                <e>
+                    <p>
+                        <l>$lemmaA<v n="cat"/><t/><s n="mf"/></l>
+                        <r>$lemmaC<v n="cat"/><t/></r>
+                    </p>
+                </e>
+            </action>
+        </action-set>
+    </cross-action>
+
+
+<cross-action id="gender3LR" a="ebenimeli">
+        <description>add gender</description>
+        <pattern>
+            <e>
+                <p>
+                    <l>$lemmaA<v n="cat"/><t/></l>
+                    <r>$lemmaB<v n="cat"/><t/></r>
+                </p>
+            </e>
+            <e r="LR">
+                <p>
+                    <l>$lemmaB<v n="cat"/><t/><s n="mf"/><t/></l>
+                    <r>$lemmaC<v n="cat"/><t/></r>
+                </p>
+            </e>
+        </pattern>
+        <action-set>
+            <action>
+                <e r="LR">
+                    <p>
+                        <l>$lemmaA<v n="cat"/><t/><s n="mf"/></l>
+                        <r>$lemmaC<v n="cat"/><t/></r>
+                    </p>
+                </e>
+            </action>
+        </action-set>
+    </cross-action>
+
+
+
+<cross-action id="gender3RL" a="ebenimeli">
+        <description>add gender</description>
+        <pattern>
+            <e>
+                <p>
+                    <l>$lemmaA<v n="cat"/><t/></l>
+                    <r>$lemmaB<v n="cat"/><t/></r>
+                </p>
+            </e>
+            <e r="RL">
+                <p>
+                    <l>$lemmaB<v n="cat"/><t/><s n="mf"/><t/></l>
+                    <r>$lemmaC<v n="cat"/><t/></r>
+                </p>
+            </e>
+        </pattern>
+        <action-set>
+            <action>
+                <e r="RL">
+                    <p>
+                        <l>$lemmaA<v n="cat"/><t/><s n="mf"/></l>
+                        <r>$lemmaC<v n="cat"/><t/></r>
+                    </p>
+                </e>
+            </action>
+        </action-set>
+    </cross-action>
+
+<cross-action id="np" a="ebenimeli">
+        <description>np</description>
+        <pattern>
+            <e>
+                <p>
+                    <l>$lemmaA<v n="np"/><t/></l>
+                    <r>$lemmaB<v n="np"/><t/></r>
+                </p>
+            </e>
+            <e>
+                <p>
+                    <l>$lemmaB<v n="np"/><t n="colaB"/><t/></l>
+                    <r>$lemmaC<v n="np"/><t n="colaC"/></r>
+                </p>
+            </e>
+        </pattern>
+        <action-set>
+            <action>
+                <e>
+                    <p>
+                        <l>$lemmaA<v n="np"/><t n="colaB"/></l>
+                        <r>$lemmaC<v n="np"/><t n="colaC"/></r>
+                    </p>
+                </e>
+            </action>
+        </action-set>
+    </cross-action>
+
+
+<cross-action id="defaultLR" a="ebenimeli">
+        <description>Default pattern LR</description>
+        <pattern>
+            <e>
+                <p>
+                    <l>$lemmaA<v n="cat"/><t/></l>
+                    <r>$lemmaB<v n="cat"/><t/></r>
+                </p>
+            </e>
+            <e r="LR">
+                <p>
+                    <l>$lemmaB<v n="cat"/><t n="tailB"/><t/></l>
+                    <r>$lemmaC<v n="cat"/><t n="tailC"/></r>
+                </p>
+            </e>
+        </pattern>
+        <action-set>
+            <action>
+                <e r="LR">
+                    <p>
+                        <l>$lemmaA<v n="cat"/><t n="tailB"/></l>
+                        <r>$lemmaC<v n="cat"/><t n="tailC"/></r>
+                    </p>
+                </e>
+            </action>
+        </action-set>
+    </cross-action>
+
+
+<cross-action id="defaultRL" a="ebenimeli">
+        <description>Default pattern RL</description>
+        <pattern>
+            <e>
+                <p>
+                    <l>$lemmaA<v n="cat"/><t/></l>
+                    <r>$lemmaB<v n="cat"/><t/></r>
+                </p>
+            </e>
+            <e r="RL">
+                <p>
+                    <l>$lemmaB<v n="cat"/><t n="tailB"/><t/></l>
+                    <r>$lemmaC<v n="cat"/><t n="tailC"/></r>
+                </p>
+            </e>
+        </pattern>
+        <action-set>
+            <action>
+                <e r="RL">
+                    <p>
+                        <l>$lemmaA<v n="cat"/><t n="tailB"/></l>
+                        <r>$lemmaC<v n="cat"/><t n="tailC"/></r>
+                    </p>
+                </e>
+            </action>
+        </action-set>
+    </cross-action>
+
+
+</cross-model>
+
