@@ -540,7 +540,7 @@ public class EElement extends Element implements Cloneable,
 
         // prepend comments added in this run
         if (comments != null) {
-            if (opt.nowAlign) dos.append("<!-- "); 
+            if (opt.now1line) dos.append("<!-- "); 
             else dos.append(tab(2) + "<!-- \n");
             
             dos.append(comments);
@@ -548,7 +548,7 @@ public class EElement extends Element implements Cloneable,
                 dos.append(tab(2) + "esta entrada no aparece en el otro morfolgico\n");
             }
             
-            if (opt.nowAlign) dos.append("-->\n");
+            if (opt.now1line) dos.append("-->\n");
             else dos.append(tab(2) + "-->\n");
         }
 
