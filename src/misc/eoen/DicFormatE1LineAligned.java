@@ -89,6 +89,9 @@ public class DicFormatE1LineAligned extends AbstractDictTool {
      * @param fileName
      */
     public void printXML(final String fileName, final String encoding) {
+        dic.setFileName(fileName);
+        dic.printXML(fileName, opt);
+/*
         BufferedOutputStream bos;
         FileOutputStream fos;
         OutputStreamWriter dos;
@@ -159,5 +162,6 @@ public class DicFormatE1LineAligned extends AbstractDictTool {
         } catch (final Exception eg) {
             eg.printStackTrace();
         }
+ */
     }
 }

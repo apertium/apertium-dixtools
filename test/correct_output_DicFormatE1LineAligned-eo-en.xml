@@ -5,6 +5,7 @@
 	Entries: 42
 	Sdefs: 4
 	Paradigms: 1
+
 -->
 <dictionary>
 	<alphabet></alphabet>
@@ -40,7 +41,7 @@
 		</pardef>
 	</pardefs>
 
-  <section  id="main" type="standard">
+	<section id="main" type="standard">
 
     <!-- Numerals -->
 <e>       <p><l>nulo<s n="num"/></l>                   <r>zero<s n="num"/></r> </p></e>
@@ -101,5 +102,5 @@
 <!-- Already is <e><l>ĉiaokaze<adv></l><r>regardless<adv></r></e>-->
 <e r="LR" c="añadir también 'regardless of' como 'a pesar de'"><p><l>ĉiakoste<s n="adv"/></l> <r>regardless<s n="adv"/></r> </p></e>
 <e>       <p><l>ĉiusemajne<s n="adv"/></l>             <r>weekly<s n="adv"/></r> </p></e>
-  </section>
+	</section>
 </dictionary>

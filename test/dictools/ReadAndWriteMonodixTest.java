@@ -69,15 +69,15 @@ public class ReadAndWriteMonodixTest {
   
   public static String exec(String cmd) throws IOException, InterruptedException {
     Process p=Runtime.getRuntime().exec(cmd);
-    BufferedReader br=new BufferedReader(new InputStreamReader(p.getInputStream()));
-    String diff="";
+    String output="";
     String s;
-    while ((s=br.readLine())!=null) {
-      diff=diff+s+"\n";
-    }
-    p.waitFor();
-    if (p.exitValue()!=0) Assert.fail(cmd+" reported an error");
-    return diff;
+    BufferedReader br=new BufferedReader(new InputStreamReader(p.getInputStream()));
+    while ((s=br.readLine())!=null)  output=output+s+"\n";
+    br=new BufferedReader(new InputStreamReader(p.getErrorStream()));
+    while ((s=br.readLine())!=null)  output=output+s+"\n";    
+    //p.waitFor();
+    //if (p.exitValue()!=0) Assert.fail(cmd+" reported an error");
+    return output;
   }
 
 
