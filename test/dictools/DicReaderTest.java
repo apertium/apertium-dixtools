@@ -127,8 +127,9 @@ public class DicReaderTest {
     String outfile = rm("tmp_testDicFormat.xml");
 
     DicFormat df = new DicFormat(dic);
+    df.setOut(outfile);
     DictionaryElement dicFormatted = df.format();
-    dicFormatted.printXML(outfile,df.getOpt());
+    //dicFormatted.printXML(outfile,df.getOpt());
     String diff=exec( "diff test/correct_output_DicFormat.xml "+outfile);    
     Assert.assertEquals("Difference", "", diff);
     rm(outfile);
@@ -144,26 +145,29 @@ public class DicReaderTest {
    }
   
  
-/*
 
   @Test
   public void testDicFormatE1Line() throws IOException, InterruptedException {
     String outfile = rm("tmp_testDicFormatE1Line.xml");
     new DicFormatE1Line(dic).printXML(outfile);
-    String diff=exec( "diff test/sample.metadix "+outfile);
+    String diff=exec( "diff test/correct_output_DicFormatE1Line.xml "+outfile);
     Assert.assertEquals("Difference", "", diff);
     rm(outfile);
   }
 
-  
   @Test
   public void testprintXML_std1line() throws IOException, InterruptedException {
     String outfile = rm("tmp_testprintXML_std1line.xml");
     dic.printXML(outfile, dics.elements.utils.DicOpts.std1line);
-    String diff=exec( "diff test/sample.metadix "+outfile);
+    String diff=exec( "diff -b test/correct_output_DicFormatE1Line.xml "+outfile);
     Assert.assertEquals("Difference", "", diff);
     rm(outfile);
    }
+
+  
+  /*
+
+  
 
   @Test
   public void testprintXML_stdaligned1line() throws IOException, InterruptedException {

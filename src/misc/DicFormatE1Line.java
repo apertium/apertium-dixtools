@@ -122,6 +122,7 @@ public class DicFormatE1Line extends AbstractDictTool {
                 dic.getPardefsElement().printXML(dos,getOpt());
             }
             if (dic.getSections() != null) {
+                DicOpts optNow = opt.copy().setNow1line(true);
                 for (final SectionElement s : dic.getSections()) {
                     String attributes = "";
                     if (s.getID() != null) {
@@ -132,7 +133,7 @@ public class DicFormatE1Line extends AbstractDictTool {
                     }
                     dos.append("  <section " + attributes + ">\n");
                     for (final EElement e : s.getEElements()) {
-                         e. printXML(dos, DicOpts.stdnow1line);
+                         e. printXML(dos, optNow);
                     }
                     dos.append("  </section>\n");
                 }

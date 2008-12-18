@@ -554,8 +554,8 @@ public class EElement extends Element implements Cloneable,
 
         String attributes = this.getAttrString();
         if (!opt.nowAlign) {
-            if (!opt.now1line) dos.append(tab(2));
-            dos.append( "<e" + attributes + ">\n");
+            if (!opt.now1line) dos.append(tab(2) + "<e" + attributes + ">\n");
+            else dos.append( "<e" + attributes + ">");
 
             if (children != null) {
                 for (final Element e : children) {
@@ -578,7 +578,7 @@ public class EElement extends Element implements Cloneable,
                     if (e instanceof PElement) {
                       ((PElement) e).printXML1LineAligned(dosy, opt.alignR);
                     } else {
-                      e.printXML(dosy, DicOpts.stdnow1line);
+                      e.printXML(dosy, opt);
                     }
                 }
             }

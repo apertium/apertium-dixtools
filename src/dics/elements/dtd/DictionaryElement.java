@@ -432,11 +432,13 @@ public class DictionaryElement extends Element {
                 sdefs.printXML(dos, opt);
             }
             if (pardefs != null) {
-                pardefs.printXML(dos, opt);
+                DicOpts optNow = opt.copy().setNow1line(opt.pardefElementsOn1line);
+                pardefs.printXML(dos, optNow);
             }
             if (sections != null) {
+                DicOpts optNow = opt.copy().setNow1line(opt.sectionElementsOn1line);
                 for (final SectionElement s : sections) {
-                    s.printXML(dos, opt);
+                    s.printXML(dos, optNow);
                 }
             }
             dos.append("</dictionary>\n");

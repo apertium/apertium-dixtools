@@ -40,8 +40,8 @@ public class DicOpts implements Cloneable {
     /**
      * Settings from user choice
      */
-    public boolean pardef1line = false;
-    public boolean entries1line = false;
+    public boolean pardefElementsOn1line = false;
+    public boolean sectionElementsOn1line = false;
     public int alignP = 10;
     public int alignR = 55;
 
@@ -56,8 +56,8 @@ public class DicOpts implements Cloneable {
   }
   
   private DicOpts(boolean pardef1line, boolean entries1line) {
-    this.pardef1line = pardef1line;
-    this.entries1line = entries1line;
+    this.pardefElementsOn1line = pardef1line;
+    this.sectionElementsOn1line = entries1line;
   }
 
   private DicOpts(boolean pardef1line, boolean entries1line, int alignP, int alignR) {
