@@ -48,7 +48,7 @@ public class SubstractBidix {
         //DictionaryElement dic = new DictionaryReader("../apertium-eo-en/apertium-lille.eo-en.dix").readDic();
         DictionaryElement dic = new DictionaryReader("../apertium-eo-en/apertium-eo-en.eo-en.dix").readDic();
         dic.reportMetrics();
-        new DicFormatE1LineAligned(dic).printXML("before-clean.dix", dics.elements.utils.DicOpts.std);
+        new DicFormatE1LineAligned(dic).printXML("before-clean.dix");
         
         boolean verbose = false;
         boolean liftUnneededRestrictions = true;
@@ -60,7 +60,7 @@ public class SubstractBidix {
         //System.out.println("Updated morphological dictionary: '" + out + "'");
         //dic.printXML(out);
         
-        new DicFormatE1LineAligned(dic).setAlignP(10).setAlignR(55).printXML("after-clean.dix", dics.elements.utils.DicOpts.std);
+        new DicFormatE1LineAligned(dic).setAlignP(10).setAlignR(55).printXML("after-clean.dix");
         //new DicFormatE1LineAligned(dic).printXML("after-clean.dix");
         //new DicFormatE1LineAligned(dic).setAlignP(10).setAlignR(60).printXML("slet.dix");        
       }

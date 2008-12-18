@@ -108,7 +108,7 @@ public class DicFindEquivPar  extends AbstractDictTool{
             pardefs1.remove(par);
         }
         replaceParadigm(equivalents);
-        dic.printXML(getOutFileName(), opt);
+        dic.printXML(getOutFileName(),getOpt());
     }
 
     /**

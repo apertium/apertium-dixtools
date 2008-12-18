@@ -28,6 +28,7 @@ import dics.elements.dtd.DictionaryElement;
 import dics.elements.dtd.EElement;
 import dics.elements.dtd.SectionElement;
 import dics.elements.utils.DicOpts;
+import dictools.AbstractDictTool;
 import dictools.DictionaryReader;
 import java.io.OutputStreamWriter;
 
@@ -41,23 +42,20 @@ import java.io.OutputStreamWriter;
  * @author Enrique Benimeli Bofarull
  * @author Jacob Nordfalk
  */
-public class DicFormatE1LineAligned {
+public class DicFormatE1LineAligned extends AbstractDictTool {
 
     /**
      * 
      */
     private DictionaryElement dic;
-    private int alignP = 10;
-
-    private int alignR = 55;
     
   public DicFormatE1LineAligned setAlignP(int attrSpaces) {
-    this.alignP=attrSpaces;
+    opt.alignP=attrSpaces;
     return this;
   }
 
   public DicFormatE1LineAligned setAlignR(int spaces) {
-    this.alignR = spaces;
+    opt.alignR = spaces;
     return this;
   }
 
@@ -74,14 +72,15 @@ public class DicFormatE1LineAligned {
      */
     public DicFormatE1LineAligned(DictionaryElement dic) {
         this.dic = dic;
+        setOpt(dics.elements.utils.DicOpts.stdaligned1line);
     }
 
     /**
      * 
      * @param fileName
      */
-    public void printXML(final String fileName, DicOpts opt) {
-        this.printXML(fileName, "UTF-8", opt);
+    public void printXML(final String fileName) {
+        this.printXML(fileName, "UTF-8");
         dic.setXmlEncoding("UTF-8");
     }
 
@@ -89,13 +88,10 @@ public class DicFormatE1LineAligned {
      * 
      * @param fileName
      */
-    public void printXML(final String fileName, final String encoding, DicOpts opt2) {
+    public void printXML(final String fileName, final String encoding) {
         BufferedOutputStream bos;
         FileOutputStream fos;
         OutputStreamWriter dos;
-
-        
-        DicOpts opt = opt2.copy();
        
         dic.setFileName(fileName);
         try {
@@ -148,7 +144,7 @@ public class DicFormatE1LineAligned {
                     }
                     dos.append("  <section " + attributes + ">\n");
                     for (final EElement e : s.getEElements()) {
-                        e.printXML1LineAligned(dos, alignP, alignR);
+                        e.printXML1LineAligned(dos, opt.alignP, opt.alignR);
                     }
                     dos.append("  </section>\n");
                 }

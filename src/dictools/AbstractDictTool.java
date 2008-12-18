@@ -27,5 +27,15 @@ import dics.elements.utils.DicOpts;
  * @author j
  */
 public class AbstractDictTool {
-   public static final DicOpts opt =  DicOpts.std;
+   protected DicOpts opt =  DicOpts.std;
+
+  public DicOpts getOpt() {
+    return opt;
+  }
+
+  public void setOpt(DicOpts opt) {
+    this.opt=opt;
+  }
+   
+   
 }

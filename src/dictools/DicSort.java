@@ -170,7 +170,7 @@ public class DicSort  extends AbstractDictTool {
         if (dicType == DicSort.MON) {
             dicSorted = sortMon();
         }
-        dicSorted.printXML(out, opt);
+        dicSorted.printXML(out,getOpt());
 
     /*
     if (dicSorted != null) {
@@ -365,7 +365,7 @@ public class DicSort  extends AbstractDictTool {
                 }
                 sec.setEElements(list);
                 if (isXinclude()) {
-                    sec.printXMLXInclude(folder + "/" + cat + ".dix", opt);
+                    sec.printXMLXInclude(folder + "/" + cat + ".dix",getOpt());
                 }
 
             }

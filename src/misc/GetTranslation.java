@@ -249,7 +249,7 @@ public class GetTranslation  extends AbstractDictTool {
             }
         }
         // dic.printXML("apertium-" + sl + "-" + tl + ".dix");
-        dic.printXML(getOutFileName(), opt);
+        dic.printXML(getOutFileName(),getOpt());
     }
 
     /**

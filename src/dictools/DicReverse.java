@@ -103,7 +103,7 @@ public class DicReverse  extends AbstractDictTool {
             } else {
                 reverseFileName = getArguments()[2];
             }
-            bil.printXML(reverseFileName, opt);
+            bil.printXML(reverseFileName,getOpt());
         }
     }
 

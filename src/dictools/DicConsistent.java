@@ -143,10 +143,10 @@ public class DicConsistent extends AbstractDictTool{
      * 
      */
     private final void buildNotCommonDictionaries() {
-        buildNotCommonDictionary(getBil1(), opt);
-        buildNotCommonDictionary(getBil2(), opt);
-        buildNotCommonDictionary(getMon1(), opt);
-        buildNotCommonDictionary(getMon2(), opt);
+        buildNotCommonDictionary(getBil1(),getOpt());
+        buildNotCommonDictionary(getBil2(),getOpt());
+        buildNotCommonDictionary(getMon1(),getOpt());
+        buildNotCommonDictionary(getMon2(),getOpt());
     }
 
     /**
@@ -357,7 +357,7 @@ public class DicConsistent extends AbstractDictTool{
     private final DicConsistent actionConsistent(String removeNotCommon) {
         final DicConsistent dicConsistent = new DicConsistent(getDicSet());
         dicConsistent.makeConsistentDictionaries(removeNotCommon);
-        dicSet.printXML("consistent", opt);
+        dicSet.printXML("consistent",getOpt());
         return dicConsistent;
     }
 

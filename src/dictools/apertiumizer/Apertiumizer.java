@@ -142,7 +142,7 @@ public class Apertiumizer extends AbstractDictTool {
             }
             in.close();
 
-            dic.printXML(this.getOutFileName(), "UTF-8", opt);
+            dic.printXML(this.getOutFileName(), "UTF-8",getOpt());
         DictionaryReader reader = new DictionaryReader("dic.tmp");
         DictionaryElement bil = reader.readDic();
         this.completeDic(bil);
@@ -271,7 +271,7 @@ public class Apertiumizer extends AbstractDictTool {
                         sectionElement.addEElement(ee);
                     } else {
                         if (sectionElement != null) {
-                            sectionElement.printXMLXInclude(prevCat, "UTF-8", opt);
+                            sectionElement.printXMLXInclude(prevCat, "UTF-8",getOpt());
                         }
                         prevCat = currentCat;
                         sectionElement = new SectionElement();
@@ -285,11 +285,11 @@ public class Apertiumizer extends AbstractDictTool {
             }
         }
         if (sectionElement != null) {
-            sectionElement.printXMLXInclude(prevCat, "UTF-8", opt);
+            sectionElement.printXMLXInclude(prevCat, "UTF-8",getOpt());
         }
-        noneSection.printXMLXInclude("none.xml", "UTF-8", opt);
+        noneSection.printXMLXInclude("none.xml", "UTF-8",getOpt());
 
-        sorted.printXML(this.getOutFileName(), "UTF-8", opt);
+        sorted.printXML(this.getOutFileName(), "UTF-8",getOpt());
 
     }
 

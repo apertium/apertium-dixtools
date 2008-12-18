@@ -393,7 +393,7 @@ public class ProcessDics {
     private final void process_format1line() {
         if (getArguments().length == 3) {
             DicFormatE1Line dicFormat = new DicFormatE1Line(arguments[1]);
-            dicFormat.printXML(arguments[2], dics.elements.utils.DicOpts.std);
+            dicFormat.printXML(arguments[2]);
         } else {
             try {
                 if (arguments.length < 4) {
@@ -403,7 +403,7 @@ public class ProcessDics {
                 DicFormatE1LineAligned dicFormat = new DicFormatE1LineAligned(dic);
                 dicFormat.setAlignP(Integer.parseInt(arguments[1]));
                 dicFormat.setAlignR(Integer.parseInt(arguments[2]));
-                dicFormat.printXML(arguments[4], dics.elements.utils.DicOpts.std);
+                dicFormat.printXML(arguments[4]);
             } catch (Exception e) {
                 if (e instanceof NumberFormatException) {
                     msg.err("Error " + e.getLocalizedMessage() + " should be a number.");

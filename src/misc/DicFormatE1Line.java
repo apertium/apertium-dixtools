@@ -27,6 +27,7 @@ import dics.elements.dtd.DictionaryElement;
 import dics.elements.dtd.EElement;
 import dics.elements.dtd.SectionElement;
 import dics.elements.utils.DicOpts;
+import dictools.AbstractDictTool;
 import dictools.DictionaryReader;
 import java.io.OutputStreamWriter;
 
@@ -35,7 +36,7 @@ import java.io.OutputStreamWriter;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class DicFormatE1Line {
+public class DicFormatE1Line extends AbstractDictTool {
 
     /**
      * 
@@ -49,7 +50,7 @@ public class DicFormatE1Line {
     public DicFormatE1Line(String dicFileName) {
         DictionaryReader dicReader = new DictionaryReader(dicFileName);
         dic = dicReader.readDic();
-
+        setOpt(dics.elements.utils.DicOpts.std1line);
     }
 
     
@@ -59,14 +60,15 @@ public class DicFormatE1Line {
      */
     public DicFormatE1Line(DictionaryElement dic) {
         this.dic = dic;
+        setOpt(dics.elements.utils.DicOpts.std1line);
     }
 
     /**
      * 
      * @param fileName
      */
-    public void printXML(final String fileName, DicOpts opt) {
-        this.printXML(fileName, "UTF-8", opt);
+    public void printXML(final String fileName) {
+        this.printXML(fileName, "UTF-8");
         dic.setXmlEncoding("UTF-8");
     }
 
@@ -74,7 +76,7 @@ public class DicFormatE1Line {
      * 
      * @param fileName
      */
-    public void printXML(final String fileName, final String encoding, DicOpts opt) {
+    public void printXML(final String fileName, final String encoding) {
         BufferedOutputStream bos;
         FileOutputStream fos;
         OutputStreamWriter dos;
@@ -111,13 +113,13 @@ public class DicFormatE1Line {
             dos.append("\n-->\n");
             dos.append("<dictionary>\n");
             if (dic.getAlphabet() != null) {
-                dic.getAlphabet().printXML(dos, opt);
+                dic.getAlphabet().printXML(dos,getOpt());
             }
             if (dic.getSdefs() != null) {
-                dic.getSdefs().printXML(dos, opt);
+                dic.getSdefs().printXML(dos,getOpt());
             }
             if (dic.getPardefsElement() != null) {
-                dic.getPardefsElement().printXML(dos, opt);
+                dic.getPardefsElement().printXML(dos,getOpt());
             }
             if (dic.getSections() != null) {
                 for (final SectionElement s : dic.getSections()) {

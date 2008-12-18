@@ -302,7 +302,7 @@ public class DicCross  extends AbstractDictTool{
         msg.out("[" + (taskOrder++) + "] Sorting crossed dictionary...\n");
         Collections.sort(dic.getEntries());
 
-        getNDCrossModel().printXML(this.getOutDir() + "patterns-not-detected.xml", opt);
+        getNDCrossModel().printXML(this.getOutDir() + "patterns-not-detected.xml",getOpt());
         dics[0] = dic;
         return dics;
     }
@@ -896,7 +896,7 @@ public class DicCross  extends AbstractDictTool{
         dicList.add(bilCrossed);
         dicList.add(monACrossed);
         dicList.add(monBCrossed);
-        printXMLCrossed(dicList, sl, tl, opt);
+        printXMLCrossed(dicList, sl, tl,getOpt());
         msg.out("[" + (taskOrder++) + "] Done!\n");
         this.setCompleted(100);
     }
@@ -954,7 +954,7 @@ public class DicCross  extends AbstractDictTool{
     private final DicConsistent actionConsistent(final DicSet dicSet, final String removeNotCommon) {
         final DicConsistent dicConsistent = new DicConsistent(dicSet);
         dicConsistent.makeConsistentDictionaries(removeNotCommon);
-        dicSet.printXML(this.getOutDir() + "consistent", opt);
+        dicSet.printXML(this.getOutDir() + "consistent",getOpt());
         return dicConsistent;
     }
 

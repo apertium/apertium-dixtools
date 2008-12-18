@@ -553,9 +553,9 @@ public class DicMerge  extends AbstractDictTool{
         final DictionaryElement monA = dicSet.getMon1();
         final DictionaryElement monB = dicSet.getMon2();
 
-        bil.printXML(bil.getFileName(), opt);
-        monA.printXML(monA.getFileName(), opt);
-        monB.printXML(monB.getFileName(), opt);
+        bil.printXML(bil.getFileName(),getOpt());
+        monA.printXML(monA.getFileName(),getOpt());
+        monB.printXML(monB.getFileName(),getOpt());
     }
 
     /**
@@ -853,7 +853,7 @@ public class DicMerge  extends AbstractDictTool{
         dicSort.getMsg().setDebug(false);
         dicSort.setDicType(DicSort.MON);
         DictionaryElement sorted = dicSort.sort();
-        sorted.printXML(getSOut(), opt);
+        sorted.printXML(getSOut(),getOpt());
     }
 
     /**
@@ -865,7 +865,7 @@ public class DicMerge  extends AbstractDictTool{
         DicSort dicSort = new DicSort(bil);
         dicSort.setDicType(DicSort.BIL);
         DictionaryElement sorted = dicSort.sort();
-        sorted.printXML(getSOut(), opt);
+        sorted.printXML(getSOut(),getOpt());
     }
 
     /**

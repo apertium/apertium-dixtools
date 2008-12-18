@@ -36,6 +36,7 @@ import dics.elements.dtd.SectionElement;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import junit.framework.Assert;
+import misc.DicFormatE1Line;
 import misc.eoen.DicFormatE1LineAligned;
 
 
@@ -48,15 +49,29 @@ public class DicReaderTest {
     public DicReaderTest() {
     }
 
+      static DictionaryElement dic;
+    
   @BeforeClass
   public static void setUpClass() throws Exception {
-    
+    dic = new DictionaryReader("test/sample.metadix").readDic();
 
   }
 
   @AfterClass
   public static void tearDownClass() throws Exception {
   }
+
+  public String exec(String cmd) throws IOException {
+    Process p=Runtime.getRuntime().exec(cmd);
+    BufferedReader br=new BufferedReader(new InputStreamReader(p.getInputStream()));
+    String diff="";
+    String s;
+    while ((s=br.readLine())!=null) {
+      diff=diff+s+"\n";
+    }
+    return diff;
+  }
+
 
     @Before
     public void setUp() {
@@ -72,8 +87,6 @@ public class DicReaderTest {
    */
   @Test
   public void testGetDic() throws IOException, InterruptedException {
-    System.out.println("getDic");
-    DictionaryElement dic = new DictionaryReader("test/sample.metadix").readDic();
     
     /*
     for (PardefElement pe : dic.getPardefsElement().getPardefElements()) {
@@ -91,22 +104,34 @@ public class DicReaderTest {
     }*/
     String ee = dic.getSections().get(0).getEElements().get(0).toString();
     Assert.assertEquals("<e><i>am</i><par n=\"ach/e[T]er__vblex\"/> </e>", ee);
- 
+  } 
 
-    new DicFormatE1LineAligned(dic).printXML("tmp_test.xml", dics.elements.utils.DicOpts.std1line);
-    String cmd = "diff -bBiw test/sample.metadix tmp_test.xml";
-    Process p = Runtime.getRuntime().exec(cmd);
-    BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
-    String diff = "";
-    String s;
-    while ((s=br.readLine())!=null) diff = diff + s + "\n";
+  @Test
+  public void testDicFormatE1LineAligned() throws IOException, InterruptedException {
+      
+    new DicFormatE1LineAligned(dic).printXML("tmp_test.xml");
+    String diff=exec( "diff -bBiw test/sample.metadix tmp_test.xml");
     Assert.assertEquals("Difference", "", diff);
-    //DicFormat df = new DicFormat(dic);
-    //df.format().printXML("tmp_test.xml");
-    //DicFormatE1LineAligned df = new DicFormat(dic);
-    //df.format().printXML("tmp_test.xml");
-
   }
 
+/*
+  @Test
+  public void testDicFormatE1Line() throws IOException, InterruptedException {
+    new DicFormatE1Line(dic).printXML("tmp_test.xml");
+    String diff=exec( "diff -bBiw test/sample.metadix tmp_test.xml");
+    Assert.assertEquals("Difference", "", diff);
+  }
+
+
+  @Test
+  public void testDicFormat() throws IOException, InterruptedException {
+    DicFormat df = new DicFormat(dic);
+    df.setOut("tmp_test.xml");
+    df.doFormat();
+    new DicFormat(dic).printXML("tmp_test.xml");
+    String diff=exec( "diff -bBiw test/sample.metadix tmp_test.xml");
+    Assert.assertEquals("Difference", "", diff);
+  }
+*/
 
 }

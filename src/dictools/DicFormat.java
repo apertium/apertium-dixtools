@@ -49,18 +49,6 @@ public class DicFormat  extends AbstractDictTool{
     /**
      * 
      */
-    public static final int BIL = 0;
-    /**
-     * 
-     */
-    public static final int MON = 1;
-    /**
-     * 
-     */
-    private int dicType;
-    /**
-     * 
-     */
     private String out;
     /**
      * 
@@ -143,7 +131,7 @@ public class DicFormat  extends AbstractDictTool{
             msg.err(errorMsg);
             msg.out(errorMsg);
         }
-        dicFormatted.printXML(this.getOut(), opt);
+        dicFormatted.printXML(this.getOut(),getOpt());
         return dicFormatted;
     }
 
@@ -161,11 +149,13 @@ public class DicFormat  extends AbstractDictTool{
      * 
      */
     private void processArguments() {
+      /*
         if (arguments[1].equals("-mon")) {
             dicType = DicSort.MON;
         } else {
             dicType = DicSort.BIL;
         }
+       */
         DictionaryReader dicReader = new DictionaryReader(arguments[2]);
         DictionaryElement dic = dicReader.readDic();
         dicReader = null;
@@ -179,7 +169,7 @@ public class DicFormat  extends AbstractDictTool{
      */
     private final void actionFormat() {
         final DictionaryElement dicFormatted = format();
-        dicFormatted.printXML(getOut(), opt);
+        dicFormatted.printXML(getOut(),getOpt());
     }
 
     /**
@@ -203,21 +193,6 @@ public class DicFormat  extends AbstractDictTool{
      */
     public final void setArguments(String[] arguments) {
         this.arguments = arguments;
-    }
-
-    /**
-     * @return the dicType
-     */
-    public final int getDicType() {
-        return dicType;
-    }
-
-    /**
-     * @param dicType
-     *                the dicType to set
-     */
-    public final void setDicType(int dicType) {
-        this.dicType = dicType;
     }
 
     /**
