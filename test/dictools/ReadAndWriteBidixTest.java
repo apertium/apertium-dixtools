@@ -34,6 +34,7 @@ import dics.elements.dtd.EElement;
 import dics.elements.dtd.Element;
 import dics.elements.dtd.PardefElement;
 import dics.elements.dtd.SectionElement;
+import dics.elements.utils.DicOpts;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
@@ -129,4 +130,16 @@ public class ReadAndWriteBidixTest {
     rm(outfile);
    }  
 
+  
+
+  @Test
+  public void testprintXML_aligned20_80_also_pardefs() throws IOException, InterruptedException {
+    String outfile = rm("tmp_aligned20_80_also_pardefs.xml");
+    DicOpts opt = new DicOpts(true, true, 20, 80);
+    dic.printXML(outfile, opt);
+    String diff=exec( "diff test/correct_output_aligned20_80_also_pardefs.xml "+outfile);
+    Assert.assertEquals("Difference", "", diff);
+    rm(outfile);
+   }  
+  
 }

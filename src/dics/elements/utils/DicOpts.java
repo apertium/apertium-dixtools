@@ -54,17 +54,19 @@ public class DicOpts implements Cloneable {
   public static final DicOpts stdaligned1line = new DicOpts(false, true, 10, 55);
   public static final DicOpts stdnow1line = std1line.copy().setNow1line(true);
   
-  private DicOpts() {
+  public  DicOpts() {
   }
   
-  private DicOpts(boolean pardef1line, boolean entries1line) {
+  public DicOpts(boolean pardef1line, boolean entries1line) {
     this.pardefElementsOn1line = pardef1line;
     this.sectionElementsOn1line = entries1line;
   }
 
-  private DicOpts(boolean pardef1line, boolean entries1line, int alignP, int alignR) {
-    this(pardef1line, entries1line);
-    this.sectionElementsAligned = true;
+  public DicOpts(boolean pardef1line, boolean entries1line, int alignP, int alignR) {
+    this.pardefElementsAligned = pardef1line;
+    this.sectionElementsAligned = entries1line;
+    this.pardefElementsOn1line = pardef1line;
+    this.sectionElementsOn1line = entries1line;
     this.alignP = alignP;
     this.alignR = alignR;
   }

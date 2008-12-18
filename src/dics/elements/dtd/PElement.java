@@ -138,7 +138,7 @@ public class PElement extends Element {
     }
 
 
-    private final static String spaces = "                      ";
+    private final static String spaces = "                                                                                            ";
     
     public final void printXML1LineAligned(final StringBuilder dos, int alignR) throws IOException {
       /*
