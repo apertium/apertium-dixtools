@@ -130,7 +130,7 @@ public class DicFormatE1Line {
                     }
                     dos.append("  <section " + attributes + ">\n");
                     for (final EElement e : s.getEElements()) {
-                        e.printXML1Line(dos);
+                         e. printXML(dos, DicOpts.stdnow1line);
                     }
                     dos.append("  </section>\n");
                 }

@@ -578,7 +578,7 @@ public class EElement extends Element implements Cloneable,
                     if (e instanceof PElement) {
                       ((PElement) e).printXML1LineAligned(dosy, opt.alignR);
                     } else {
-                      e.printXML1Line(dosy);                
+                      e.printXML(dosy, DicOpts.stdnow1line);
                     }
                 }
             }
@@ -595,7 +595,6 @@ public class EElement extends Element implements Cloneable,
         opt.nowAlign = true;
         printXML(dos, opt);
     }
-
 
     
     /**

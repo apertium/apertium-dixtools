@@ -79,15 +79,6 @@ public class Element implements Cloneable {
 
     /**
      * 
-     * @param dos
-     * @throws java.io.IOException
-     */
-    public void printXML1Line(final Appendable dos) throws IOException {
-      printXML(dos, DicOpts.stdnow1line);
-    }
-
-    /**
-     * 
      * @param nTabs
      * @return Undefined         */
     protected String tab(final int nTabs) {

@@ -141,17 +141,23 @@ public class PElement extends Element {
     private final static String spaces = "                      ";
     
     public final void printXML1LineAligned(final StringBuilder dos, int alignR) throws IOException {
+      /*
+      DicOpts opt = DicOpts.stdnow1line.copy();
+      opt.nowAlign = true;
+      opt.alignR = alignR;
+      printXML(dos, opt);
+       */
         // write blank lines and comments from original file
         dos.append(prependCharacterData);
         dos.append("<" + getTagName() + ">");
 
-        l.printXML1Line(dos);
+        l.printXML(dos, DicOpts.stdnow1line);
 
         int neededSpaces = alignR - dos.length();
         if (neededSpaces>0) {
           dos.append(spaces.substring(0, Math.min(spaces.length(), neededSpaces)));
         }
-        r.printXML1Line(dos);
+        r.printXML(dos, DicOpts.stdnow1line);
         dos.append("</" + getTagName() + ">");
     }
         

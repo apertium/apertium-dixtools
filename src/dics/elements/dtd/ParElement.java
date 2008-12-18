@@ -131,15 +131,6 @@ public class ParElement extends Element {
         }
     }
 
-    /**
-     * 
-     * @param dos
-     * @throws java.io.IOException
-     */
-    @Override
-    public void printXML1Line(final Appendable dos) throws IOException {
-        printXML(dos, DicOpts.stdnow1line);
-    }
 
     /**
      * 

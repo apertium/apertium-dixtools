@@ -62,24 +62,10 @@ public class ReElement extends Element {
     public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
         // write blank lines and comments from original file
         dos.append(prependCharacterData);
-        if (value == null) {
-            value = "";
-        }
-        dos.append(tab(3) + "<" + getTagName() + ">" + getValue() + "</" + getTagName() + ">\n");
-    }
+        
+        value = maskNull(value);
 
-    /**
-     * 
-     * @param dos
-     * @throws java.io.IOException
-     */
-    @Override
-    public final void printXML1Line(final Appendable dos) throws IOException {
-        dos.append(prependCharacterData);
-        if (value == null) {
-            value = "";
-        }
-        dos.append("<" + getTagName() + ">" + getValue() + "</" + getTagName() + ">");
+        dos.append( (opt.now1line?"":tab(3)) + "<" + getTagName() + ">" + getValue() + "</" + getTagName() + (opt.now1line?">":">\n"));
     }
 
     /**
