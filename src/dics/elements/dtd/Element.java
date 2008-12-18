@@ -83,10 +83,7 @@ public class Element implements Cloneable {
      * @throws java.io.IOException
      */
     protected void printXML1Line(final Writer dos) throws IOException {
-        // write blank lines and comments from original file
-        dos.append(prependCharacterData);
-        if (comments!=null) dos.append("<!--" + comments + "-->");
-        dos.append("<" + getTagName() + "/>");
+      printXML(dos, DicOpts.std1line);
     }
 
     /**

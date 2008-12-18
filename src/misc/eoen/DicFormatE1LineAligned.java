@@ -89,11 +89,14 @@ public class DicFormatE1LineAligned {
      * 
      * @param fileName
      */
-    public void printXML(final String fileName, final String encoding, DicOpts opt) {
+    public void printXML(final String fileName, final String encoding, DicOpts opt2) {
         BufferedOutputStream bos;
         FileOutputStream fos;
         OutputStreamWriter dos;
 
+        
+        DicOpts opt = opt2.copy();
+       
         dic.setFileName(fileName);
         try {
             fos = new FileOutputStream(fileName);
