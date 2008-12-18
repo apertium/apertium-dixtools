@@ -116,14 +116,22 @@ public class Element implements Cloneable {
         return TAGNAME;
     }
 
+  /**
+   * Utility method for masking a null string
+   * @param str
+   * @return "" if str==null, else the str itself
+   */  
+  public static final String maskNull(String str) {
+        return (str == null?"":str);
+  }
+    
     /**
      * Appends to 
      * @param value
      */
     public void addComments(final String value) {
-        if (comments == null) {
-            comments = "";
-        }
+        comments = maskNull(comments);
+
         comments += tab(3) + value + "\n";
     }
 

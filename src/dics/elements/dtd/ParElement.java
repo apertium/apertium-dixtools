@@ -65,7 +65,7 @@ public class ParElement extends Element {
      * @param pE
      */
     public ParElement(final ParElement pE) {
-        n = new String(pE.getValue());
+        n = pE.getValue();
     }
 
     /**
@@ -110,21 +110,22 @@ public class ParElement extends Element {
     public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
         // write blank lines and comments from original file
         dos.append(prependCharacterData);
-        if (comments == null) {
-            comments = "";
-        }
+        
+        comments = maskNull(comments);
+
         String prms = "";
         if (prm != null) {
             for (int i=0;i<prm.length; i++) if (prm[i]!=null) prms+=" prm"+(i==0?"":i)+"=\"" + prm[i] + "\"";
         }
+
         String saAttr = "";
         if (this.sa != null) {
             saAttr = " sa=\"" + sa + "\" ";
         }
+
         if (opt.now1line) {
           dos.append("<" + getTagName() + " n=\"" + n + "\"" + prms + saAttr + "/>" );
-        if (comments.length()>0)
-          dos.append(" " + comments);
+          if (comments.length()>0) dos.append(" " + comments);
         } else {
           dos.append(tab(4) + "<" + getTagName() + " n=\"" + n + "\"" +prms + saAttr + "/> " + getComments() + "\n");
         }
@@ -138,25 +139,6 @@ public class ParElement extends Element {
     @Override
     public void printXML1Line(final Appendable dos) throws IOException {
         printXML(dos, DicOpts.stdnow1line);
-/*
-        // write blank lines and comments from original file
-        dos.append(prependCharacterData);
-        if (comments == null) {
-            comments = "";
-        }
-        String prms = "";
-        if (prm != null) {
-            for (int i=0;i<prm.length; i++) if (prm[i]!=null) prms+=" prm"+(i==0?"":i)+"=\"" + prm[i] + "\"";
-        }
-        String saAttr = "";
-        if (this.sa != null) {
-            saAttr = " sa=\"" + sa + "\" ";
-        }
-        dos.append("<" + getTagName() + " n=\"" + n + "\"" + prms + saAttr + "/>" );
-
-        if (comments.length()>0)
-          dos.append(" " + comments);
- */ 
     }
 
     /**
@@ -173,8 +155,6 @@ public class ParElement extends Element {
 
 
   public void setPrm(int n, String v) {
-    
-    //System.err.println("setPrm( = "+n +" "+v );
     if (prm==null) prm=new String[10];
     prm[n] = v;
   }

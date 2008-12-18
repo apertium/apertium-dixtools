@@ -125,35 +125,24 @@ public class PElement extends Element {
     public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
         // write blank lines and comments from original file
         dos.append(prependCharacterData);
-        dos.append(tab(3) + "<" + getTagName() + ">\n");
+        String tab3 = opt.now1line?"":tab(3);
+
+        dos.append(tab3 + "<" + getTagName() + ">\n");
         if (l != null) {
             l.printXML(dos, opt);
         }
         if (r != null) {
             r.printXML(dos, opt);
         }
-        dos.append(tab(3) + "</" + getTagName() + ">\n");
+        dos.append(tab3 + "</" + getTagName() + ">\n");
     }
 
-    /**
-     * 
-     * @param dos
-     * @throws java.io.IOException
-     */
-    @Override
-    public final void printXML1Line(final Appendable dos) throws IOException {
-        // write blank lines and comments from original file
-        dos.append(prependCharacterData);
-        dos.append("<" + getTagName() + ">");
-        l.printXML1Line(dos);
-        r.printXML1Line(dos);
-        dos.append("</" + getTagName() + ">");
-    }
-    
 
     private final static String spaces = "                      ";
     
     public final void printXML1LineAligned(final StringBuilder dos, int alignR) throws IOException {
+        // write blank lines and comments from original file
+        dos.append(prependCharacterData);
         dos.append("<" + getTagName() + ">");
 
         l.printXML1Line(dos);
