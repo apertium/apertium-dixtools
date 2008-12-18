@@ -52,7 +52,7 @@ public class CrossDictTest {
   
   @Test
   public void testBigCrossingFromCommandline() throws IOException, InterruptedException {
-    //if (2>1) return;
+    if (2>1) return;
 //    ProcessDics.main("[cross-param", "-bilAB", "-r", "apertium-es-ca.es-ca.dix", "-bilBC", "-r", "apertium-en-ca.en-ca.dix", "-monA", "apertium-es-ca.es.dix", "-monC", "apertium-en-ca.en.metadix", "-cross-model", "../../../../apertium-dixtools/schemas/cross-model.xml]");
     
     String cmd = "./do_test.sh";

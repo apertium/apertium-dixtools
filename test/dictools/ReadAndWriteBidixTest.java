@@ -20,6 +20,7 @@
 
 package dictools;
 
+
 import java.io.IOException;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -40,21 +41,16 @@ import junit.framework.Assert;
 import misc.DicFormatE1Line;
 import misc.eoen.DicFormatE1LineAligned;
 
-
 /**
  *
  * @author j
  */
-public class DicReaderTest {
-
-    public DicReaderTest() {
-    }
-
-      static DictionaryElement dic;
+public class ReadAndWriteBidixTest {
+    static DictionaryElement dic;
     
   @BeforeClass
   public static void setUpClass() throws Exception {
-    dic = new DictionaryReader("test/sample.metadix").readDic();
+    dic = new DictionaryReader("test/sample.eo-en.dix").readDic();
 
   }
 
@@ -62,84 +58,33 @@ public class DicReaderTest {
   public static void tearDownClass() throws Exception {
   }
 
-  private String rm(String filename) {
+  private static String rm(String filename) {
     new File(filename).delete();
     return filename;
   }
   
-  public String exec(String cmd) throws IOException {
-    Process p=Runtime.getRuntime().exec(cmd);
-    BufferedReader br=new BufferedReader(new InputStreamReader(p.getInputStream()));
-    String diff="";
-    String s;
-    while ((s=br.readLine())!=null) {
-      diff=diff+s+"\n";
-    }
-    return diff;
+  public static String exec(String cmd) throws IOException, InterruptedException {
+    return ReadAndWriteMonodixTest.exec(cmd);
   }
-
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
-
-
-    /**
-   * Test of getDic method, of class DicReader.
-   */
-  @Test
-  public void testGetDic() throws IOException, InterruptedException {
-    
-    /*
-    for (PardefElement pe : dic.getPardefsElement().getPardefElements()) {
-      System.err.println("pe = " + pe);
-    }*/
-
-    String pe = dic.getPardefsElement().getPardefElements().get(0).toString();
-    Assert.assertEquals("<S__encimp><e><l>-en</l><r>en<prn><enc><adv></r></e><e><l>-la</l><r>le<prn><enc><p3><f><sg></r></e>", pe);
-    
-    /*
-    for (SectionElement section : dic.getSections()) {
-      for (EElement ee : section.getEElements()) {
-        System.err.println("ee = " + ee);
-      }
-    }*/
-    String ee = dic.getSections().get(0).getEElements().get(0).toString();
-    Assert.assertEquals("<e><i>am</i><par n=\"ach/e[T]er__vblex\"/> </e>", ee);
-  } 
-
-  @Test
-  public void testDicFormatE1LineAligned() throws IOException, InterruptedException {
-    String outfile = rm("tmp_testDicFormatE1LineAligned.xml");
-    new DicFormatE1LineAligned(dic).printXML(outfile);
-    String diff=exec( "diff -bBiw test/sample.metadix "+outfile);
-    Assert.assertEquals("Difference", "", diff);
-    rm(outfile);
-  }
-
   
   @Test
   public void testDicFormat() throws IOException, InterruptedException {
-    String outfile = rm("tmp_testDicFormat.xml");
+    String outfile = rm("tmp_testDicFormat-eo-en.xml");
 
     DicFormat df = new DicFormat(dic);
     df.setOut(outfile);
     DictionaryElement dicFormatted = df.format();
     //dicFormatted.printXML(outfile,df.getOpt());
-    String diff=exec( "diff test/correct_output_DicFormat.xml "+outfile);    
+    String diff=exec( "diff test/correct_output_DicFormat-eo-en.xml "+outfile);    
     Assert.assertEquals("Difference", "", diff);
     rm(outfile);
    }
 
   @Test
   public void testprintXML_std() throws IOException, InterruptedException {
-    String outfile = rm("tmp_testprintXML_std.xml");
+    String outfile = rm("tmp_testprintXML_std-eo-en.xml");
     dic.printXML(outfile, dics.elements.utils.DicOpts.std);
-    String diff=exec( "diff test/correct_output_DicFormat.xml "+outfile);
+    String diff=exec( "diff test/correct_output_DicFormat-eo-en.xml "+outfile);
     Assert.assertEquals("Difference", "", diff);
     rm(outfile);
    }
@@ -148,34 +93,40 @@ public class DicReaderTest {
 
   @Test
   public void testDicFormatE1Line() throws IOException, InterruptedException {
-    String outfile = rm("tmp_testDicFormatE1Line.xml");
+    String outfile = rm("tmp_testDicFormatE1Line-eo-en.xml");
     new DicFormatE1Line(dic).printXML(outfile);
-    String diff=exec( "diff -b test/correct_output_DicFormatE1Line.xml "+outfile);
+    String diff=exec( "diff -b test/correct_output_DicFormatE1Line-eo-en.xml "+outfile);
     Assert.assertEquals("Difference", "", diff);
     rm(outfile);
   }
 
   @Test
   public void testprintXML_std1line() throws IOException, InterruptedException {
-    String outfile = rm("tmp_testprintXML_std1line.xml");
+    String outfile = rm("tmp_testprintXML_std1line-eo-en.xml");
     dic.printXML(outfile, dics.elements.utils.DicOpts.std1line);
-    String diff=exec( "diff -b test/correct_output_DicFormatE1Line.xml "+outfile);
+    String diff=exec( "diff test/correct_output_DicFormatE1Line-eo-en.xml "+outfile);
     Assert.assertEquals("Difference", "", diff);
     rm(outfile);
    }
 
   
-  /*
+  @Test
+  public void testDicFormatE1LineAligned() throws IOException, InterruptedException {
+    String outfile = rm("tmp_testDicFormatE1LineAligned-eo-en.xml");
+    new DicFormatE1LineAligned(dic).printXML(outfile);
+    String diff=exec( "diff test/correct_output_DicFormatE1LineAligned-eo-en.xml "+outfile);
+    Assert.assertEquals("Difference", "", diff);
+    rm(outfile);
+  }
 
-  
-
+/* TODO
   @Test
   public void testprintXML_stdaligned1line() throws IOException, InterruptedException {
-    String outfile = rm("tmp_testprintXML_stdaligned1line.xml");
+    String outfile = rm("tmp_testprintXML_stdaligned1line-eo-en.xml");
     dic.printXML(outfile, dics.elements.utils.DicOpts.stdaligned1line);
-    String diff=exec( "diff test/sample.metadix "+outfile);
+    String diff=exec( "diff test/correct_output_testDicFormatE1LineAligned-eo-en.xml "+outfile);
     Assert.assertEquals("Difference", "", diff);
     rm(outfile);
    }  
- */
+*/
 }

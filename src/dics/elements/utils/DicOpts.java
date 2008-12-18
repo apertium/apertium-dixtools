@@ -42,6 +42,8 @@ public class DicOpts implements Cloneable {
      */
     public boolean pardefElementsOn1line = false;
     public boolean sectionElementsOn1line = false;
+    public boolean sectionElementsAligned = false;
+    public boolean pardefElementsAligned = false;
     public int alignP = 10;
     public int alignR = 55;
 
@@ -62,6 +64,7 @@ public class DicOpts implements Cloneable {
 
   private DicOpts(boolean pardef1line, boolean entries1line, int alignP, int alignR) {
     this(pardef1line, entries1line);
+    this.sectionElementsAligned = true;
     this.alignP = alignP;
     this.alignR = alignR;
   }
@@ -78,6 +81,11 @@ public class DicOpts implements Cloneable {
 
   public DicOpts setNow1line(boolean b) {
     now1line = b;
+    return this;
+  }
+
+  public DicOpts setNowAlign(boolean b) {
+    nowAlign = b;
     return this;
   }
 

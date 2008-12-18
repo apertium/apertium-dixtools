@@ -28,8 +28,8 @@ import org.junit.runners.Suite;
  * @author j
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({dictools.CrossDictTest.class,dictools.DicReaderTest.class, misc.eoen.SubstractBidixTest.class})
-//@Suite.SuiteClasses({dictools.DicReaderTest.class})
+@Suite.SuiteClasses({dictools.CrossDictTest.class,dictools.ReadAndWriteMonodixTest.class, misc.eoen.SubstractBidixTest.class})
+//@Suite.SuiteClasses({dictools.ReadAndWriteMonodixTest.class})
 public class DixtoolsTestSuite {
 
 }
