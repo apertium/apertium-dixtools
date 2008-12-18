@@ -130,7 +130,7 @@ public class ParElement extends Element {
      * @throws java.io.IOException
      */
     @Override
-    public void printXML1Line(final Writer dos) throws IOException {
+    public void printXML1Line(final Appendable dos) throws IOException {
         if (comments == null) {
             comments = "";
         }

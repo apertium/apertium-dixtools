@@ -74,7 +74,7 @@ public class ReElement extends Element {
      * @throws java.io.IOException
      */
     @Override
-    public final void printXML1Line(final Writer dos) throws IOException {
+    public final void printXML1Line(final Appendable dos) throws IOException {
         if (value == null) {
             value = "";
         }

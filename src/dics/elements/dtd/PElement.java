@@ -141,7 +141,7 @@ public class PElement extends Element {
      * @throws java.io.IOException
      */
     @Override
-    public final void printXML1Line(final Writer dos)
+    public final void printXML1Line(final Appendable dos)
             throws IOException {
         dos.append("<" + getTagName() + ">");
         l.printXML1Line(dos);
@@ -152,13 +152,13 @@ public class PElement extends Element {
 
     private final static String spaces = "                      ";
     
-    public final void printXML1LineAligned(final StringWriter dos, int alignR)
+    public final void printXML1LineAligned(final StringBuilder dos, int alignR)
             throws IOException {
         dos.append("<" + getTagName() + ">");
 
         l.printXML1Line(dos);
 
-        int neededSpaces = alignR - dos.getBuffer().length();
+        int neededSpaces = alignR - dos.length();
         if (neededSpaces>0) {
           dos.append(spaces.substring(0, Math.min(spaces.length(), neededSpaces)));
         }

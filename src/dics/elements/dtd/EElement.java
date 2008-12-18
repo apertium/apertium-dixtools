@@ -554,74 +554,41 @@ public class EElement extends Element implements Cloneable,
 
         String attributes = this.getAttrString();
         if (!opt.nowAlign) {
-        if (!opt.now1line) dos.append(tab(2));
-        dos.append( "<e" + attributes + ">\n");
-        
-        if (children != null) {
-            for (final Element e : children) {
-                e.printXML(dos, opt);
-            }
-        }
+            if (!opt.now1line) dos.append(tab(2));
+            dos.append( "<e" + attributes + ">\n");
 
-        if (opt.now1line) dos.append("</e>\n");
-        else dos.append(tab(2) + "</e>\n\n");
-        } else { 
-        StringWriter dosy = new StringWriter(120);
-        dosy.append("<e" + attributes + ">");              
-        int neededSpaces = opt.alignP - dosy.getBuffer().length();
-        if (neededSpaces>0) {
-          dosy.append(spaces.substring(0, Math.min(spaces.length(), neededSpaces)));
-        }        
-        
-        if (children != null) {
-            for (final Element e : children) {                
-                if (e instanceof PElement) {
-                  ((PElement) e).printXML1LineAligned(dosy, opt.alignR);
-                } else {
-                  e.printXML1Line(dosy);                
+            if (children != null) {
+                for (final Element e : children) {
+                    e.printXML(dos, opt);
                 }
             }
-        }
-        dosy.append("</e>\n");
-        dos.append(dosy.getBuffer().toString());
+
+            if (opt.now1line) dos.append("</e>\n");
+            else dos.append(tab(2) + "</e>\n\n");
+        } else { 
+            StringBuilder dosy = new StringBuilder(120);
+            dosy.append("<e" + attributes + ">");
+            int neededSpaces = opt.alignP - dosy.length();
+            if (neededSpaces>0) {
+              dosy.append(spaces.substring(0, Math.min(spaces.length(), neededSpaces)));
+            }        
+
+            if (children != null) {
+                for (final Element e : children) {                
+                    if (e instanceof PElement) {
+                      ((PElement) e).printXML1LineAligned(dosy, opt.alignR);
+                    } else {
+                      e.printXML1Line(dosy);                
+                    }
+                }
+            }
+            dosy.append("</e>\n");
+            dos.append(dosy.toString());
         }
     }
 
     public final void printXML1LineAligned(final Writer dos, int alignP, int alignR) throws IOException {
-/*
-        // write blanks line and comments from original file
-        dos.write(prependCharacterData);
-               
-        // prepend comments added in this run
-        if (comments != null) {
-            
-            dos.write(comments);
-            if (!isCommon()) {
-                dos.write(tab(2) + "esta entrada no aparece en el otro morfolgico\n");
-            }
-            dos.write( "-->\n");
-        }
 
-        StringWriter dosy = new StringWriter(120);
-        String attributes = this.getAttrString();
-        dosy.append("<e" + attributes + ">");              
-        int neededSpaces = alignP - dosy.getBuffer().length();
-        if (neededSpaces>0) {
-          dosy.append(spaces.substring(0, Math.min(spaces.length(), neededSpaces)));
-        }        
-        
-        if (children != null) {
-            for (final Element e : children) {                
-                if (e instanceof PElement) {
-                  ((PElement) e).printXML1LineAligned(dosy, alignR);
-                } else {
-                  e.printXML1Line(dosy);                
-                }
-            }
-        }
-        dosy.append("</e>\n");
-        dos.write(dosy.getBuffer().toString());
-*/
         DicOpts opt = DicOpts.stdnow1line.copy();
         opt.alignP = alignP;
         opt.alignR = alignR;
