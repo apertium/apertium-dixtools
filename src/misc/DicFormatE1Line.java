@@ -77,76 +77,7 @@ public class DicFormatE1Line extends AbstractDictTool {
      * @param fileName
      */
     public void printXML(final String fileName, final String encoding) {
-        BufferedOutputStream bos;
-        FileOutputStream fos;
-        OutputStreamWriter dos;
-
         dic.setFileName(fileName);
-        try {
-            fos = new FileOutputStream(fileName);
-            bos = new BufferedOutputStream(fos);
-            dos = new OutputStreamWriter(bos, encoding);
-            dos.append("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
-            dos.append("<!--\n\tDictionary:\n");
-            if (dic.getSections() != null) {
-                if (dic.isBil()) {
-                    dos.append("\tBilingual dictionary: " + dic.getLeftLanguage() + "-" + dic.getRightLanguage() + "\n");
-                }
-                dos.append("\tSections: " + dic.getSections().size() + "\n");
-                int ne = 0;
-                for (SectionElement section : dic.getSections()) {
-                    ne += section.getEElements().size();
-                }
-                dos.append("\tEntries: " + ne);
-            }
-
-            if (dic.getSdefs() != null) {
-                dos.append("\n\tSdefs: " + dic.getSdefs().getSdefsElements().size() + "\n");
-            }
-            if (dic.getPardefsElement() != null) {
-                dos.append("\tParadigms: " + dic.getPardefsElement().getPardefElements().size() + "\n");
-            }
-
-            if (dic.getComments() != null) {
-                dos.append(dic.getComments());
-            }
-            dos.append("\n-->\n");
-            dos.append("<dictionary>\n");
-            if (dic.getAlphabet() != null) {
-                dic.getAlphabet().printXML(dos,getOpt());
-            }
-            if (dic.getSdefs() != null) {
-                dic.getSdefs().printXML(dos,getOpt());
-            }
-            if (dic.getPardefsElement() != null) {
-                dic.getPardefsElement().printXML(dos,getOpt());
-            }
-            if (dic.getSections() != null) {
-                DicOpts optNow = opt.copy().setNow1line(true);
-                for (final SectionElement s : dic.getSections()) {
-                    String attributes = "";
-                    if (s.getID() != null) {
-                        attributes += " id=\"" + s.getID() + "\"";
-                    }
-                    if (s.getType() != null) {
-                        attributes += " type=\"" + s.getType() + "\"";
-                    }
-                    dos.append("  <section " + attributes + ">\n");
-                    for (final EElement e : s.getEElements()) {
-                         e. printXML(dos, optNow);
-                    }
-                    dos.append("  </section>\n");
-                }
-            }
-            dos.append("</dictionary>\n");
-            fos = null;
-            bos = null;
-            dos.close();
-            dos = null;
-        } catch (final IOException e) {
-            e.printStackTrace();
-        } catch (final Exception eg) {
-            eg.printStackTrace();
-        }
-    }
-}
+        dic.printXML(fileName, opt);
+   }
+ }

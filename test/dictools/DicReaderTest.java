@@ -150,7 +150,7 @@ public class DicReaderTest {
   public void testDicFormatE1Line() throws IOException, InterruptedException {
     String outfile = rm("tmp_testDicFormatE1Line.xml");
     new DicFormatE1Line(dic).printXML(outfile);
-    String diff=exec( "diff test/correct_output_DicFormatE1Line.xml "+outfile);
+    String diff=exec( "diff -b test/correct_output_DicFormatE1Line.xml "+outfile);
     Assert.assertEquals("Difference", "", diff);
     rm(outfile);
   }
