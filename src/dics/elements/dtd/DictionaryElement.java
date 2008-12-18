@@ -130,7 +130,6 @@ public class DictionaryElement extends Element {
         sections = new ArrayList<SectionElement>();
         final SectionElement sectionElement = new SectionElement("main", "standard");
         addSection(sectionElement);
-
         setAlphabet(dic.getAlphabet());
         setSdefs(dic.getSdefs());
 

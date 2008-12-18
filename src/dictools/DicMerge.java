@@ -68,10 +68,6 @@ public class DicMerge  extends AbstractDictTool{
     /**
      * 
      */
-    private String[] arguments;
-    /**
-     * 
-     */
     private DicSet dicSet1;
     /**
      * 
@@ -783,20 +779,6 @@ public class DicMerge  extends AbstractDictTool{
 
     }
 
-    /**
-     * @return the arguments
-     */
-    private final String[] getArguments() {
-        return arguments;
-    }
-
-    /**
-     * @param arguments
-     *                the arguments to set
-     */
-    public final void setArguments(String[] arguments) {
-        this.arguments = arguments;
-    }
 
     /**
      * @return the dicSet1

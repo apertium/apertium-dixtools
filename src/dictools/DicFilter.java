@@ -40,10 +40,6 @@ public class DicFilter  extends AbstractDictTool{
      */
     private DictionaryElement dicB;
     
-    /**
-     * 
-     */
-    private String[] arguments;
     
     /**
      * 
@@ -108,21 +104,6 @@ public class DicFilter  extends AbstractDictTool{
         
     }
 
-    /**
-     * 
-     * @return the arguments
-     */
-    public String[] getArguments() {
-        return arguments;
-    }
-
-    /**
-     * 
-     * @param arguments
-     */
-    public void setArguments(String[] arguments) {
-        this.arguments = arguments;
-    }
 
     public String getOutFileName() {
         return outFileName;

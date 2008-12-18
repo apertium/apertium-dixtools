@@ -37,5 +37,25 @@ public class AbstractDictTool {
     this.opt=opt;
   }
    
+    /**
+     * 
+     */
+    protected String[] arguments;
+    
+    /**
+     * @return the arguments
+     */
+    public final String[] getArguments() {
+        return arguments;
+    }
+
+    /**
+     * @param arguments
+     *                the arguments to set
+     */
+    public final void setArguments(String[] arguments) {
+        this.arguments = arguments;
+    }
+
    
 }

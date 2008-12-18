@@ -46,10 +46,6 @@ public class DicSort  extends AbstractDictTool {
     /**
      * 
      */
-    private String[] arguments;
-    /**
-     * 
-     */
     public static final int BIL = 0;
     /**
      * 
@@ -190,21 +186,6 @@ public class DicSort  extends AbstractDictTool {
      */
     private final void setDic(DictionaryElement dic) {
         this.dic = dic;
-    }
-
-    /**
-     * @return the arguments
-     */
-    public final String[] getArguments() {
-        return arguments;
-    }
-
-    /**
-     * @param arguments
-     *                the arguments to set
-     */
-    public final void setArguments(String[] arguments) {
-        this.arguments = arguments;
     }
 
     /**

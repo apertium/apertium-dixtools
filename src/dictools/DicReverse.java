@@ -32,10 +32,6 @@ public class DicReverse  extends AbstractDictTool {
      * 
      */
     private DictionaryElement dicOrig;
-    /**
-     * 
-     */
-    private String[] arguments;
 
     /**
      * 
@@ -107,20 +103,6 @@ public class DicReverse  extends AbstractDictTool {
         }
     }
 
-    /**
-     * @return the arguments
-     */
-    public final String[] getArguments() {
-        return arguments;
-    }
-
-    /**
-     * @param arguments
-     *                the arguments to set
-     */
-    public final void setArguments(String[] arguments) {
-        this.arguments = arguments;
-    }
 
     /**
      * @param dicOrig

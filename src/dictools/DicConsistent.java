@@ -36,7 +36,7 @@ import java.io.File;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class DicConsistent extends AbstractDictTool{
+public class DicConsistent extends AbstractDictTool {
 
     /**
      * 
@@ -74,10 +74,6 @@ public class DicConsistent extends AbstractDictTool{
      * 
      */
     private String notCommonSuffix;
-    /**
-     * 
-     */
-    private String[] arguments;
     /**
      * 
      */
@@ -424,30 +420,13 @@ public class DicConsistent extends AbstractDictTool{
 
         }
 
-        final DictionaryElement bil1 = DicTools.readBilingual(sDicBilAB,
-                bilABReverse);
-        final DictionaryElement bil2 = DicTools.readBilingual(sDicBilBC,
-                bilBCReverse);
+        final DictionaryElement bil1 = DicTools.readBilingual(sDicBilAB, bilABReverse);
+        final DictionaryElement bil2 = DicTools.readBilingual(sDicBilBC, bilBCReverse);
         final DictionaryElement mon1 = DicTools.readMonolingual(sDicMonA);
         final DictionaryElement mon2 = DicTools.readMonolingual(sDicMonC);
 
         DicSet dicSet = new DicSet(mon1, bil1, mon2, bil2);
         setDicSet(dicSet);
-    }
-
-    /**
-     * @return the arguments
-     */
-    private final String[] getArguments() {
-        return arguments;
-    }
-
-    /**
-     * @param arguments
-     *                the arguments to set
-     */
-    public final void setArguments(String[] arguments) {
-        this.arguments = arguments;
     }
 
     /**

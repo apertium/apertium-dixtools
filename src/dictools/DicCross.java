@@ -131,10 +131,6 @@ public class DicCross  extends AbstractDictTool{
     /**
      *
      */
-    private String[] arguments;
-    /**
-     *
-     */
     private DicSet dicSet;
     /**
      *
@@ -1325,20 +1321,6 @@ public class DicCross  extends AbstractDictTool{
         return dic;
     }
 
-    /**
-     * @return the arguments
-     */
-    public final String[] getArguments() {
-        return arguments;
-    }
-
-    /**
-     * @param arguments
-     *                the arguments to set
-     */
-    public final void setArguments(String[] arguments) {
-        this.arguments = arguments;
-    }
 
     /**
      * @return the dicSet

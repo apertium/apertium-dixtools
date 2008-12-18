@@ -25,7 +25,6 @@ package dictools;
  */
 public class Dix2Tiny  extends AbstractDictTool{
 
-    private String[] arguments;
     private String bilFileName;
     private String sltlCode;
     private String sltlFull;
@@ -85,17 +84,4 @@ public class Dix2Tiny  extends AbstractDictTool{
         }
     }
 
-    /**
-     * @return the arguments
-     */
-    public String[] getArguments() {
-        return arguments;
-    }
-
-    /**
-     * @param arguments the arguments to set
-     */
-    public void setArguments(String[] arguments) {
-        this.arguments = arguments;
-    }
 }

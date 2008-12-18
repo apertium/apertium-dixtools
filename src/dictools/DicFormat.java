@@ -45,10 +45,6 @@ public class DicFormat  extends AbstractDictTool{
     /**
      * 
      */
-    private String[] arguments;
-    /**
-     * 
-     */
     private String out;
     /**
      * 
@@ -178,21 +174,6 @@ public class DicFormat  extends AbstractDictTool{
      */
     private final void setDicFormatted(DictionaryElement dicFormatted) {
         this.dicFormatted = dicFormatted;
-    }
-
-    /**
-     * @return the arguments
-     */
-    public final String[] getArguments() {
-        return arguments;
-    }
-
-    /**
-     * @param arguments
-     *                the arguments to set
-     */
-    public final void setArguments(String[] arguments) {
-        this.arguments = arguments;
     }
 
     /**

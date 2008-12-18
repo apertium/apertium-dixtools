@@ -587,15 +587,6 @@ public class EElement extends Element implements Cloneable,
         }
     }
 
-    public final void printXML1LineAligned(final Writer dos, int alignP, int alignR) throws IOException {
-
-        DicOpts opt = DicOpts.stdnow1line.copy();
-        opt.alignP = alignP;
-        opt.alignR = alignR;
-        opt.nowAlign = true;
-        printXML(dos, opt);
-    }
-
     
     /**
      * 

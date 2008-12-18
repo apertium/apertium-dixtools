@@ -29,6 +29,7 @@ import dics.elements.dtd.ParElement;
 import dics.elements.dtd.RElement;
 import dics.elements.dtd.SectionElement;
 import dics.elements.dtd.TextElement;
+import dictools.AbstractDictTool;
 import dictools.DictionaryReader;
 
 /**
@@ -36,12 +37,8 @@ import dictools.DictionaryReader;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class AssignParadigm {
+public class AssignParadigm extends AbstractDictTool {
 
-    /**
-     * 
-     */
-    private String[] arguments;
     /**
      * 
      */
@@ -148,18 +145,4 @@ public class AssignParadigm {
 
     }
 
-    /**
-     * @return the arguments
-     */
-    public final String[] getArguments() {
-        return arguments;
-    }
-
-    /**
-     * @param arguments
-     *                the arguments to set
-     */
-    public final void setArguments(String[] arguments) {
-        this.arguments = arguments;
-    }
 }

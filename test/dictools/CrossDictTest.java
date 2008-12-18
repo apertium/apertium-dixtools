@@ -57,9 +57,6 @@ public class CrossDictTest {
     
     String cmd = "./do_test.sh";
     File wd = new File("regression_test_data/crossdict");
-
-
-    System.err.println("wd = " + wd.exists());
     
     Process p = Runtime.getRuntime().exec(cmd, null, wd);
     
