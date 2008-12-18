@@ -82,8 +82,8 @@ public class Element implements Cloneable {
      * @param dos
      * @throws java.io.IOException
      */
-    protected void printXML1Line(final Writer dos) throws IOException {
-      printXML(dos, DicOpts.std1line);
+    public void printXML1Line(final Writer dos) throws IOException {
+      printXML(dos, DicOpts.stdnow1line);
     }
 
     /**

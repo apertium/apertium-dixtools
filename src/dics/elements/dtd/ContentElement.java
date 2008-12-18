@@ -179,9 +179,14 @@ public class ContentElement extends Element implements Cloneable {
           tagName = "<!-- error tagname -->";
         }
 
-        // write blank lines and comments from original file
-        dos.append(prependCharacterData);
-        dos.append(tab(4) + "<" + tagName + ">");
+        if (!opt.now1line) {
+                // write blank lines and comments from original file
+                dos.append(prependCharacterData);
+                dos.append(tab(4) + "<" + tagName + ">");  
+        } else {
+                dos.append(prependCharacterData.trim()); 
+                dos.append("<" + tagName + ">");          
+        }  
 
         if (getChildren() != null) {
             for (final Element e : getChildren()) {
@@ -195,38 +200,10 @@ public class ContentElement extends Element implements Cloneable {
             c = getComments();
         }
 
-        dos.append("</" + tagName + "> " + c + "\n");    
-        //dos.append("</"); dos.append(tagName); dos.append(">"); dos.append(c); dos.append("\n");
-    }
+        dos.append("</" + tagName + "> " + c + (opt.now1line?"":"\n"));    
 
-    /**
-     * 
-     * @param dos
-     * @throws java.io.IOException
-     */
-    @Override
-    protected void printXML1Line(final Writer dos) throws IOException {
-        if (getTagName() != null) {
-            dos.append("<" + getTagName() + ">");
-        } else {
-            dos.append("<!-- error tagname -->");
-        }
-        if (getChildren() != null) {
-            for (final Element e : getChildren()) {
-                if (e != null) {
-                    e.printXML(dos, DicOpts.std);
-                }
-            }
-        }
-        String c = "";
-        if (getComments() != null) {
-            c = getComments();
-        }
-        if (getTagName() != null) {
-            dos.append("</" + getTagName() + ">" + c + "");
-        } else {
-            dos.append("<!-- error tagname -->\n");
-        }
+        
+        //dos.append("</"); dos.append(tagName); dos.append(">"); dos.append(c); dos.append("\n");
     }
 
     /**

@@ -546,90 +546,64 @@ public class EElement extends Element implements Cloneable,
             }
             dos.append(tab(2) + "-->\n");
         }
-        dos.append(tab(2) + "<e" + attributes + ">\n");
+
+        if (!opt.now1line) dos.append(tab(2));
+        dos.append( "<e" + attributes + ">\n");
+        
         if (children != null) {
             for (final Element e : children) {
                 e.printXML(dos, opt);
             }
         }
-        dos.append(tab(2) + "</e>\n\n");
+
+        if (opt.now1line) dos.append("</e>\n");
+        else dos.append(tab(2) + "</e>\n\n");
     }
 
-    /**
-     * 
-     * @param dos
-     * @throws java.io.IOException
-     */
-    @Override
-    public final void printXML1Line(final Writer dos)
-            throws IOException {
-        // write blank lines and comments from original file
-        dos.append(prependCharacterData);
-      
-        String attributes = this.getAttrString();
-        if (comments != null) {
-            dos.append(tab(2) + "<!-- \n");
-            dos.append(comments);
-            if (!isCommon()) {
-                dos.append(tab(2) + "esta entrada no aparece en el otro morfolgico\n");
-            }
-            dos.append(tab(2) + "-->\n");
-        }
-        dos.append("<e" + attributes + ">");
-        if (children != null) {
-            for (final Element e : children) {
-                e.printXML1Line(dos);
-            }
-        }
-        dos.append("</e>\n");
-    }
 
     private final static String spaces = "                      ";
-    /**
-     * 
-     * @param dosx A Writer object
-     * @throws java.io.IOException
-     */
-    public final void printXML1LineAligned(final Writer dosx, int alignP, int alignR)
-            throws IOException {
 
+    public final void printXML1LineAligned(final Writer dos, int alignP, int alignR) throws IOException {
+      /*
+        DicOpts opt = DicOpts.stdnow1line.copy();
+        opt.alignP = alignP;
+        opt.alignR = alignR;
+        opt.nowAlign = true;
+        printXML(dos, opt);
+    */
         // write blanks line and comments from original file
-        dosx.write(prependCharacterData);
+        dos.write(prependCharacterData);
                
         // prepend comments added in this run
         if (comments != null) {
-            //dosx.write(spaces.substring(0, alignP));
-            dosx.write("<!-- ");
-            dosx.write(comments);
+            dos.write("<!-- ");
+            dos.write(comments);
             if (!isCommon()) {
-                dosx.write(tab(2) + "esta entrada no aparece en el otro morfolgico\n");
+                dos.write(tab(2) + "esta entrada no aparece en el otro morfolgico\n");
             }
-            dosx.write( "-->\n");
+            dos.write( "-->\n");
         }
 
-        StringWriter dos = new StringWriter(120);
+        StringWriter dosy = new StringWriter(120);
 
         String attributes = this.getAttrString();
-        //int addSpace = Math.max(0, Math.min(spaces.length(), alignP-attributes.length()));
-        //dos.append("<e" + attributes + spaces.substring(0,addSpace)+ ">");              
-        //dos.append(spaces.substring(0,addSpace) + "<e" + attributes + ">");        
-        dos.append("<e" + attributes + ">");              
-        int neededSpaces = alignP - dos.getBuffer().length();
+        dosy.append("<e" + attributes + ">");              
+        int neededSpaces = alignP - dosy.getBuffer().length();
         if (neededSpaces>0) {
-          dos.append(spaces.substring(0, Math.min(spaces.length(), neededSpaces)));
+          dosy.append(spaces.substring(0, Math.min(spaces.length(), neededSpaces)));
         }        
         
         if (children != null) {
             for (final Element e : children) {                
                 if (e instanceof PElement) {
-                  ((PElement) e).printXML1LineAligned(dos, alignR);
+                  ((PElement) e).printXML1LineAligned(dosy, alignR);
                 } else {
-                  e.printXML1Line(dos);                
+                  e.printXML1Line(dosy);                
                 }
             }
         }
-        dos.append("</e>\n");
-        dosx.write(dos.getBuffer().toString());
+        dosy.append("</e>\n");
+        dos.write(dosy.getBuffer().toString());
     }
 
 

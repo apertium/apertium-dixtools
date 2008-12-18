@@ -29,6 +29,17 @@ import java.util.logging.Logger;
  * @author j
  */
 public class DicOpts implements Cloneable {
+   
+    /**
+     * Current (volatile) settings while traversiong a data structure.
+     */
+    public boolean now1line = false;
+    public boolean nowAlign = false;
+  
+    
+    /**
+     * Settings from user choice
+     */
     public boolean pardef1line = false;
     public boolean entries1line = false;
     public int alignP = 10;
@@ -38,8 +49,9 @@ public class DicOpts implements Cloneable {
   
   public static final DicOpts std = new DicOpts();
   public static final DicOpts std1line = new DicOpts(false, true, 0, 0);
-  public static final DicOpts aligned1line = new DicOpts(false, true);
-
+  public static final DicOpts stdaligned1line = new DicOpts(false, true);
+  public static final DicOpts stdnow1line = std1line.copy().setNow1line(true);
+  
   private DicOpts() {
   }
   
@@ -62,6 +74,11 @@ public class DicOpts implements Cloneable {
       Logger.getLogger(DicOpts.class.getName()).log(Level.SEVERE, null, ex);
       return null;
     }
+  }
+
+  public DicOpts setNow1line(boolean b) {
+    now1line = b;
+    return this;
   }
 
 }
