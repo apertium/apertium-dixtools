@@ -174,16 +174,14 @@ public class ContentElement extends Element implements Cloneable {
      */
     @Override
     protected void printXML(final Appendable dos, final DicOpts opt) throws IOException {
+        String tagName = getTagName();        
+        if (tagName==null) {
+          tagName = "<!-- error tagname -->";
+        }
+
         // write blank lines and comments from original file
         dos.append(prependCharacterData);
-        String tagName = getTagName();
-        
-        if (tagName==null) {
-          tagName = "<!-- error tagname -->\n";
-        }
-        
         dos.append(tab(4) + "<" + tagName + ">");
-        //dos.append(tab(4)); dos.append("<"); dos.append(tagName); dos.append(">");
 
         if (getChildren() != null) {
             for (final Element e : getChildren()) {

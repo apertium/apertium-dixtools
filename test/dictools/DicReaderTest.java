@@ -93,7 +93,7 @@ public class DicReaderTest {
     Assert.assertEquals("<e><i>am</i><par n=\"ach/e[T]er__vblex\"/> </e>", ee);
  
 
-    new DicFormatE1LineAligned(dic).printXML("tmp_test.xml", dics.elements.utils.DicOpts.std);
+    new DicFormatE1LineAligned(dic).printXML("tmp_test.xml", dics.elements.utils.DicOpts.std1line);
     String cmd = "diff -bBiw test/sample.metadix tmp_test.xml";
     Process p = Runtime.getRuntime().exec(cmd);
     BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
