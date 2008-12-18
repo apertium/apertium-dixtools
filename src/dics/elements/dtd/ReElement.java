@@ -75,6 +75,7 @@ public class ReElement extends Element {
      */
     @Override
     public final void printXML1Line(final Appendable dos) throws IOException {
+        dos.append(prependCharacterData);
         if (value == null) {
             value = "";
         }

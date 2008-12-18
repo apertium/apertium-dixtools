@@ -121,7 +121,13 @@ public class ParElement extends Element {
         if (this.sa != null) {
             saAttr = " sa=\"" + sa + "\" ";
         }
-        dos.append(tab(4) + "<" + getTagName() + " n=\"" + n + "\"" +prms + saAttr + "/> " + getComments() + "\n");
+        if (opt.now1line) {
+          dos.append("<" + getTagName() + " n=\"" + n + "\"" + prms + saAttr + "/>" );
+        if (comments.length()>0)
+          dos.append(" " + comments);
+        } else {
+          dos.append(tab(4) + "<" + getTagName() + " n=\"" + n + "\"" +prms + saAttr + "/> " + getComments() + "\n");
+        }
     }
 
     /**
@@ -131,6 +137,10 @@ public class ParElement extends Element {
      */
     @Override
     public void printXML1Line(final Appendable dos) throws IOException {
+        printXML(dos, DicOpts.stdnow1line);
+/*
+        // write blank lines and comments from original file
+        dos.append(prependCharacterData);
         if (comments == null) {
             comments = "";
         }
@@ -146,6 +156,7 @@ public class ParElement extends Element {
 
         if (comments.length()>0)
           dos.append(" " + comments);
+ */ 
     }
 
     /**
