@@ -527,6 +527,7 @@ public class EElement extends Element implements Cloneable,
         return false;
     }
 
+    private final static String spaces = "                      ";
     /**
      * 
      * @param dos
@@ -537,16 +538,22 @@ public class EElement extends Element implements Cloneable,
         // write blank lines and comments from original file
         dos.append(prependCharacterData);
 
-        String attributes = this.getAttrString();
+        // prepend comments added in this run
         if (comments != null) {
-            dos.append(tab(2) + "<!-- \n");
+            if (opt.nowAlign) dos.append("<!-- "); 
+            else dos.append(tab(2) + "<!-- \n");
+            
             dos.append(comments);
             if (!isCommon()) {
                 dos.append(tab(2) + "esta entrada no aparece en el otro morfolgico\n");
             }
-            dos.append(tab(2) + "-->\n");
+            
+            if (opt.nowAlign) dos.append("-->\n");
+            else dos.append(tab(2) + "-->\n");
         }
 
+        String attributes = this.getAttrString();
+        if (!opt.nowAlign) {
         if (!opt.now1line) dos.append(tab(2));
         dos.append( "<e" + attributes + ">\n");
         
@@ -558,25 +565,36 @@ public class EElement extends Element implements Cloneable,
 
         if (opt.now1line) dos.append("</e>\n");
         else dos.append(tab(2) + "</e>\n\n");
+        } else { 
+        StringWriter dosy = new StringWriter(120);
+        dosy.append("<e" + attributes + ">");              
+        int neededSpaces = opt.alignP - dosy.getBuffer().length();
+        if (neededSpaces>0) {
+          dosy.append(spaces.substring(0, Math.min(spaces.length(), neededSpaces)));
+        }        
+        
+        if (children != null) {
+            for (final Element e : children) {                
+                if (e instanceof PElement) {
+                  ((PElement) e).printXML1LineAligned(dosy, opt.alignR);
+                } else {
+                  e.printXML1Line(dosy);                
+                }
+            }
+        }
+        dosy.append("</e>\n");
+        dos.append(dosy.getBuffer().toString());
+        }
     }
 
-
-    private final static String spaces = "                      ";
-
     public final void printXML1LineAligned(final Writer dos, int alignP, int alignR) throws IOException {
-      /*
-        DicOpts opt = DicOpts.stdnow1line.copy();
-        opt.alignP = alignP;
-        opt.alignR = alignR;
-        opt.nowAlign = true;
-        printXML(dos, opt);
-    */
+/*
         // write blanks line and comments from original file
         dos.write(prependCharacterData);
                
         // prepend comments added in this run
         if (comments != null) {
-            dos.write("<!-- ");
+            
             dos.write(comments);
             if (!isCommon()) {
                 dos.write(tab(2) + "esta entrada no aparece en el otro morfolgico\n");
@@ -585,7 +603,6 @@ public class EElement extends Element implements Cloneable,
         }
 
         StringWriter dosy = new StringWriter(120);
-
         String attributes = this.getAttrString();
         dosy.append("<e" + attributes + ">");              
         int neededSpaces = alignP - dosy.getBuffer().length();
@@ -604,6 +621,12 @@ public class EElement extends Element implements Cloneable,
         }
         dosy.append("</e>\n");
         dos.write(dosy.getBuffer().toString());
+*/
+        DicOpts opt = DicOpts.stdnow1line.copy();
+        opt.alignP = alignP;
+        opt.alignR = alignR;
+        opt.nowAlign = true;
+        printXML(dos, opt);
     }
 
 
