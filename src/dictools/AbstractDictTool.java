@@ -21,6 +21,8 @@
 package dictools;
 
 import dics.elements.utils.DicOpts;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -55,7 +57,30 @@ public class AbstractDictTool {
      */
     public final void setArguments(String[] arguments) {
         this.arguments = arguments;
-    }
+        /*
+        ArrayList<String> unprocessed = new ArrayList<String>();
 
-   
+        for (int i = 1; i < arguments.length; i++) {
+            String arg = arguments[i];
+
+            if (arg.equals("-f")) {
+                i++;
+                arg = getArguments()[i];
+                source = arg;
+                type = LingResourcesReader.FILE;
+                i++;
+                sltl = getArguments()[i];
+            }
+        }
+*/
+    }
+/*
+    opt.alignP
+   -1line
+   -alignP 10
+   -alignR 55
+   -align 10 55
+   -pardef
+ */        
+        
 }
