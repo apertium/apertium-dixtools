@@ -54,16 +54,12 @@ import misc.esca.AddSameGender;
  * @author Enrique Benimeli Bofarull
  *
  */
-public class ProcessDics {
+public class ProcessDics extends AbstractDictTool {
 
     /**
      *
      */
     private String action;
-    /**
-     *
-     */
-    private String[] arguments;
     /**
      *
      */
@@ -641,20 +637,5 @@ public class ProcessDics {
      */
     private final void setAction(final String action) {
         this.action = action;
-    }
-
-    /**
-     * @return the arguments
-     */
-    private final String[] getArguments() {
-        return arguments;
-    }
-
-    /**
-     * @param arguments
-     *                the arguments to set
-     */
-    private final void setArguments(final String[] arguments) {
-        this.arguments = arguments;
     }
 }

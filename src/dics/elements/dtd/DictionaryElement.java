@@ -390,14 +390,11 @@ public class DictionaryElement extends Element {
      * @param encoding
      */
     public void printXML(final String fileName, final String encoding, DicOpts opt) {
-        BufferedOutputStream bos;
-        FileOutputStream fos;
-        OutputStreamWriter dos;
         setFileName(fileName);
         try {
-            fos = new FileOutputStream(fileName);
-            bos = new BufferedOutputStream(fos);
-            dos = new OutputStreamWriter(bos, encoding);
+            FileOutputStream fos = new FileOutputStream(fileName);
+            BufferedOutputStream bos = new BufferedOutputStream(fos);
+            OutputStreamWriter dos = new OutputStreamWriter(bos, encoding);
             dos.append("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
             dos.append("<!--\n\tDictionary:\n");
             if (sections != null) {
@@ -411,14 +408,12 @@ public class DictionaryElement extends Element {
                 }
                 dos.append("\tEntries: " + ne);
             }
-
             if (sdefs != null) {
                 dos.append("\n\tSdefs: " + sdefs.getSdefsElements().size() + "\n");
             }
             if (pardefs != null) {
                 dos.append("\tParadigms: " + pardefs.getPardefElements().size() + "\n");
             }
-
             if (comments != null) {
                 dos.append(comments);
             }
@@ -445,8 +440,6 @@ public class DictionaryElement extends Element {
             bos = null;
             dos.close();
             dos = null;
-        } catch (final IOException e) {
-            e.printStackTrace();
         } catch (final Exception eg) {
             eg.printStackTrace();
         }

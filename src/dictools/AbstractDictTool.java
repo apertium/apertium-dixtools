@@ -57,15 +57,15 @@ public class AbstractDictTool {
      */
     public final void setArguments(String[] arguments) {
         this.arguments = arguments;
-        /*
         ArrayList<String> unprocessed = new ArrayList<String>();
-
-        for (int i = 1; i < arguments.length; i++) {
+/*
+        for (int i = 0; i < arguments.length; i++) {
             String arg = arguments[i];
 
-            if (arg.equals("-f")) {
+            if (arg.equals("-align")) {
                 i++;
-                arg = getArguments()[i];
+                opt.
+                arg = arguments[i];
                 source = arg;
                 type = LingResourcesReader.FILE;
                 i++;
@@ -73,12 +73,9 @@ public class AbstractDictTool {
             }
         }
 */
+    //opt.alignP
     }
 /*
-    opt.alignP
-   -1line
-   -alignP 10
-   -alignR 55
    -align 10 55
    -pardef
  */        

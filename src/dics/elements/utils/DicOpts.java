@@ -42,6 +42,7 @@ public class DicOpts implements Cloneable {
      */
     public boolean pardefElementsOn1line = false;
     public boolean sectionElementsOn1line = false;
+
     public boolean sectionElementsAligned = false;
     public boolean pardefElementsAligned = false;
     public int alignP = 10;
