@@ -37,21 +37,24 @@
     <sdef n="ND"/>
   </sdefs>
   <pardefs>
+    <!-- comment before pardef -->
     <pardef n="S__encimp">
+    <!-- comment before e -->
     <e>
+    <!-- comment before p -->
       <p>
         <l>-en</l>
         <r>en<s n="prn"/><s n="enc"/><s n="adv"/></r>
       </p>
-    </e>
+    </e><!-- comment after e -->   
     <e>
       <p>
         <l>-la</l>
         <r>le<s n="prn"/><s n="enc"/><s n="p3"/><s n="f"/><s n="sg"/></r>
       </p>
-    </e>
-    
+    </e>    
     </pardef>
+
     <pardef n="achèt/e__vblex">
     <e>
       <p>
@@ -172,8 +175,8 @@
     <e lm="amener"><i>am</i><par n="ach/e[T]er__vblex" prm="n"/></e>
     <e lm="détruire"><i>détru</i><par n="lu/i[]re__vblex" prm="" prm2="A" prm3="B" prm4="C"/></e>
     <e lm="enlever"><i>enl</i><par n="ach/e[T]er__vblex" prm="v"/></e>
-    <e lm="acheter"><i>ach</i><par n="ach/e[T]er__vblex" prm="t"/></e>
-    <e lm="amener"><i>am</i><par n="ach/e[T]er__vblex" prm="n"/></e>
+    <e lm="comment"><i>ach</i><par n="comach/e[T]er__vblex" prm="t"/></e><!-- bla bla -->
+    <e lm="noncomment"><i>am</i><par n="noncomach/e[T]er__vblex" prm="n"/></e>
     <e lm="détruire"><i>détru</i><par n="lu/i[]re__vblex" prm="" prm2="A" prm3="B" prm4="C"/></e>
 
 

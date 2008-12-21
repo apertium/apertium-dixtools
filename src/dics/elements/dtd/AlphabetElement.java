@@ -89,6 +89,6 @@ public class AlphabetElement extends Element {
         if (isEmpty()) {
             setAlphabet("");
         }
-        dos.append(tab(1) + "<alphabet>" + getAlphabet() + "</alphabet>\n");
+        dos.append(tab(1) + "<alphabet>" + getAlphabet() + "</alphabet>"+appendCharacterData.trim()+"\n");
     }
 }

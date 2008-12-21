@@ -73,7 +73,7 @@ public class SdefElement extends Element {
             comment = "\tc=\"" + getComment() + "\"";
 
         }
-        dos.append(tab(2) + "<" + getTagName() + " n=\"" + getValue() + "\" " + comment + "/> " + getComments() + "\n");
+        dos.append(tab(2) + "<" + getTagName() + " n=\"" + getValue() + "\" " + comment + "/> " + getComments() +appendCharacterData.trim()+"\n");
     }
 
     /**

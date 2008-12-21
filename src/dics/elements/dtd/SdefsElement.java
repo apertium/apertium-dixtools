@@ -91,6 +91,7 @@ public class SdefsElement extends Element {
             dos.append(tab(1) + getComments());
             dos.append(tab(1) + " -->\n");
         }
+        dos.append(appendCharacterData.trim());
     }
 
     /**

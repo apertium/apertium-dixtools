@@ -134,7 +134,7 @@ public class PElement extends Element {
         if (r != null) {
             r.printXML(dos, opt);
         }
-        dos.append(tab3 + "</" + getTagName() + ">\n");
+        dos.append(tab3 + "</" + getTagName() + ">"+appendCharacterData.trim()+"\n");
     }
 
 
@@ -158,7 +158,7 @@ public class PElement extends Element {
           dos.append(spaces.substring(0, Math.min(spaces.length(), neededSpaces)));
         }
         r.printXML(dos, DicOpts.stdnow1line);
-        dos.append("</" + getTagName() + ">");
+        dos.append("</" + getTagName() + ">"+appendCharacterData.trim());
     }
         
         

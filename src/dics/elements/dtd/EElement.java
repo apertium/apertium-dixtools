@@ -563,8 +563,8 @@ public class EElement extends Element implements Cloneable,
                 }
             }
 
-            if (opt.now1line) dos.append("</e>\n");
-            else dos.append(tab(2) + "</e>\n\n");
+            if (opt.now1line) dos.append("</e>"+appendCharacterData+"\n");
+            else dos.append(tab(2) + "</e>"+appendCharacterData+"\n\n");
         } else { 
             StringBuilder dosy = new StringBuilder(120);
             dosy.append("<e" + attributes + ">");
@@ -582,7 +582,7 @@ public class EElement extends Element implements Cloneable,
                     }
                 }
             }
-            dosy.append("</e>\n");
+            dosy.append("</e>"+appendCharacterData.trim()+"\n");
             dos.append(dosy.toString());
         }
     }

@@ -55,7 +55,6 @@ public class ReadAndWriteMonodixTest {
   @BeforeClass
   public static void setUpClass() throws Exception {
     dic = new DictionaryReader("test/sample.metadix").readDic();
-
   }
 
   @AfterClass
@@ -67,7 +66,7 @@ public class ReadAndWriteMonodixTest {
     return filename;
   }
   
-  public static String exec(String cmd) throws IOException, InterruptedException {
+  public static String exec(String cmd) throws IOException, InterruptedException {    
     Process p=Runtime.getRuntime().exec(cmd);
     String output="";
     String s;
@@ -77,6 +76,11 @@ public class ReadAndWriteMonodixTest {
     while ((s=br.readLine())!=null)  output=output+s+"\n";    
     //p.waitFor();
     //if (p.exitValue()!=0) Assert.fail(cmd+" reported an error");
+    if (output.length()>0) {
+      System.out.println("exec: " + cmd);
+      System.out.println("output: " + output); 
+      return cmd+"\n"+output;
+    }
     return output;
   }
 
@@ -114,6 +118,17 @@ public class ReadAndWriteMonodixTest {
     Assert.assertEquals("<e><i>am</i><par n=\"ach/e[T]er__vblex\"/> </e>", ee);
   } 
 
+/*   
+  @Test
+  public void testDicFormatE1LineAligned() throws IOException, InterruptedException {
+    //new DicFormatE1LineAligned(dic).printXML("tmp_test.xml") 
+    String outfile = rm("tmp_testDicFormatE1LineAligned.xml");
+    new DicFormatE1LineAligned(dic).printXML(outfile);
+    String diff=exec( "diff -wbB test/sample.metadix "+outfile);
+    Assert.assertTrue("Difference: "+diff, diff.isEmpty());
+    rm(outfile);
+  }
+*/  
   
   @Test
   public void testDicFormat() throws IOException, InterruptedException {
@@ -124,7 +139,7 @@ public class ReadAndWriteMonodixTest {
     DictionaryElement dicFormatted = df.format();
     //dicFormatted.printXML(outfile,df.getOpt());
     String diff=exec( "diff test/correct_output_DicFormat.xml "+outfile);    
-    Assert.assertEquals("Difference", "", diff);
+    Assert.assertTrue("Difference: "+diff, diff.isEmpty());
     rm(outfile);
    }
 
@@ -133,18 +148,16 @@ public class ReadAndWriteMonodixTest {
     String outfile = rm("tmp_testprintXML_std.xml");
     dic.printXML(outfile, dics.elements.utils.DicOpts.std);
     String diff=exec( "diff test/correct_output_DicFormat.xml "+outfile);
-    Assert.assertEquals("Difference", "", diff);
+    Assert.assertTrue("Difference: "+diff, diff.isEmpty());
     rm(outfile);
    }
   
- 
-
   @Test
   public void testDicFormatE1Line() throws IOException, InterruptedException {
     String outfile = rm("tmp_testDicFormatE1Line.xml");
     new DicFormatE1Line(dic).printXML(outfile);
     String diff=exec( "diff -b test/correct_output_DicFormatE1Line.xml "+outfile);
-    Assert.assertEquals("Difference", "", diff);
+    Assert.assertTrue("Difference: "+diff, diff.isEmpty());
     rm(outfile);
   }
 
@@ -153,7 +166,7 @@ public class ReadAndWriteMonodixTest {
     String outfile = rm("tmp_testprintXML_std1line.xml");
     dic.printXML(outfile, dics.elements.utils.DicOpts.std1line);
     String diff=exec( "diff -b test/correct_output_DicFormatE1Line.xml "+outfile);
-    Assert.assertEquals("Difference", "", diff);
+    Assert.assertTrue("Difference: "+diff, diff.isEmpty());
     rm(outfile);
    }
 

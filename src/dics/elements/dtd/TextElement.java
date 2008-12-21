@@ -54,6 +54,7 @@ public class TextElement extends Element {
         // write blank lines and comments from original file
         dos.append(prependCharacterData);
         dos.append(value);
+        dos.append(appendCharacterData);
     }
 
     /**

@@ -270,15 +270,35 @@ public class DictionaryReader extends XMLReader {
     public PardefsElement readPardefs(final Element e) {
         final PardefsElement pardefsElement = new PardefsElement();
 
-        for (final Element childElement : readChildren(e)) {
-            final String childElementName = childElement.getNodeName();
-            if (childElementName.equals("pardef")) {
-                final PardefElement pardefElement = readPardef(childElement);
-                pardefsElement.addPardefElement(pardefElement);
+        StringBuilder characterData = new StringBuilder();
+        dics.elements.dtd.Element previousElement = null;
+        
+        if (e.hasChildNodes()) {
+            final NodeList children = e.getChildNodes();
+            for (int i = 0; i < children.getLength(); i++) {
+                final Node child = children.item(i);
+                final String childElementName = child.getNodeName();
+                if (child instanceof Element) {
+                    final Element childElement = (Element) child;
+                    if (childElementName.equals("pardef")) {
+                        final PardefElement pardefElement = readPardef(childElement);
+                        pardefsElement.addPardefElement(pardefElement);
+                        prependOrAppendCharacterData(characterData, pardefElement, previousElement);
+                        previousElement = pardefElement;
+                    }
+                    else System.err.println("readPardefs(): Unknown node ignored: " + childElementName);
+                } else
+                if (child instanceof Comment) {
+                  characterData.append("<!--").append(child.getNodeValue()).append("-->");
+                } else
+                if (child instanceof CharacterData) {
+                  characterData.append(child.getNodeValue());              
+                } else
+                  System.err.println("Unhandled child = " + child);
             }
-            else System.err.println("readPardefs(): Unknown node ignored: " + childElementName);
         }
 
+        prependOrAppendCharacterData(characterData, null, previousElement);
         return pardefsElement;
 
     }
@@ -291,14 +311,35 @@ public class DictionaryReader extends XMLReader {
         final String n = getAttributeValue(e, "n");
         final PardefElement pardefElement = new PardefElement(n);
 
-        for (final Element childElement : readChildren(e)) {
-            final String childElementName = childElement.getNodeName();
-            if (childElementName.equals("e")) {
-                final EElement eElement = readEElement(childElement);
-                pardefElement.addEElement(eElement);
+        StringBuilder characterData = new StringBuilder();
+        dics.elements.dtd.Element previousElement = null;
+
+        if (e.hasChildNodes()) {
+            final NodeList children = e.getChildNodes();
+            for (int i = 0; i < children.getLength(); i++) {
+                final Node child = children.item(i);
+                final String childElementName = child.getNodeName();
+                if (child instanceof Element) {
+                    final Element childElement = (Element) child;
+                    if (childElementName.equals("e")) {
+                        final EElement eElement = readEElement(childElement);
+                        pardefElement.addEElement(eElement);
+                        prependOrAppendCharacterData(characterData, eElement, previousElement);
+                        previousElement = eElement;
+                  } else
+                    System.err.println("Unhandled child = " + child);
+                } else
+                if (child instanceof Comment) {
+                  characterData.append("<!--").append(child.getNodeValue()).append("-->");
+
+                } else
+                if (child instanceof CharacterData) {
+                  characterData.append(child.getNodeValue());              
+                } else
+                  System.err.println("Unhandled child = " + child);
             }
-            else System.err.println("readPardef(): Unknown node ignored: " + childElementName);
         }
+        prependOrAppendCharacterData(characterData, null, previousElement);
 
         return pardefElement;
     }
@@ -312,7 +353,8 @@ public class DictionaryReader extends XMLReader {
         final String type = getAttributeValue(e, "type");
         final SectionElement sectionElement = new SectionElement(id, type);
         
-        StringBuilder prependCharacterData = new StringBuilder();
+        StringBuilder characterData = new StringBuilder();
+        dics.elements.dtd.Element previousElement = null;
 
         // Si contiene elementos 'e'
         if (e.hasChildNodes()) {
@@ -335,10 +377,11 @@ public class DictionaryReader extends XMLReader {
                             } 
                         }
                         final EElement eElement = readEElement(childElement);
-                        
-                        prependCharacterData(prependCharacterData, eElement);
-                        
                         sectionElement.addEElement(eElement);
+                        
+                        prependOrAppendCharacterData(characterData, eElement, previousElement);
+                        previousElement = eElement;
+                        
                     } else
                     if (childElementName.equals("xi:include")) {
                         String fileName = getAttributeValue(childElement, "href");
@@ -353,15 +396,16 @@ public class DictionaryReader extends XMLReader {
                       System.err.println("readSection(): Unknown childElementName = " + childElementName);
                 } else
                 if (child instanceof Comment) {
-                  prependCharacterData.append("<!--").append(child.getNodeValue()).append("-->");
+                  characterData.append("<!--").append(child.getNodeValue()).append("-->");
                   
                 } else
                 if (child instanceof CharacterData) {
-                  prependCharacterData.append(child.getNodeValue());
-                  
+                  characterData.append(child.getNodeValue());              
                 } else
                   System.err.println("Unhandled child = " + child);
             }
+
+            prependOrAppendCharacterData(characterData, null, previousElement);
         }
         if(this.progressBar!= null) {
         this.progressBar.setValue(100);
@@ -369,6 +413,12 @@ public class DictionaryReader extends XMLReader {
         return sectionElement;
     }
 
+    
+
+    
+    
+       
+    
     /**
      * 
      * @param e
@@ -543,47 +593,4 @@ public class DictionaryReader extends XMLReader {
     public void setNEntries(double nEntries) {
         this.nEntries = nEntries;
     }
-
-    /**
-     * Takes all collected character data (comments, newlines, blanks...), chops off the necesarry and stores in the element.
-     * Some warnings will be printed if the exact character data won't (can't) be reproduced when writing the output later on.
-     * 
-     * @param prependCharacterData A StringBuilder with all characters. This will be emptied so its ready to collect for next tag.
-     * @param eElement The element will got set its prependCharacterData.
-     */
-  private static void prependCharacterData(StringBuilder prependCharacterData, final EElement eElement) {
-
-    String txt=prependCharacterData.toString();
-
-    int chopFrom=0;
-    int chopTo=txt.length();
-
-    // when printing indenting will be done by the element itself, so chop off all whitespace after the last newline
-    char ch=0;
-    while (chopFrom < chopTo && (ch = txt.charAt(chopFrom)) <= ' ' && ch != '\n') {
-      chopFrom++;
-    }
-    
-    if (chopFrom==chopTo) {
-      System.err.println("Two elements on same line. Element will be moved to next line: "+eElement);
-    } else {
-      if (ch=='\n') {
-        chopFrom++;
-      } else {
-        System.err.println("Comment before element "+eElement+" probably belongs to previous element.");
-      }
-      // when printing a newline will be generated by the previout element, so chop off all whitespace from last tag to the newline
-    if(chopFrom > 0) {
-      while ((ch=txt.charAt(chopTo-1))<=' '&&ch!='\n'&&chopFrom<chopTo) {
-        chopTo--;
-      }
-    }
-      if (ch>' ') {
-        System.err.println("Comment before element "+eElement+" will probably disturb indenting.");
-      }
-      //System.err.println("txt.substring(chopFrom, chopTo) = '" + txt.substring(chopFrom, chopTo)+"'");
-      eElement.setPrependCharacterData(txt.substring(chopFrom, chopTo));
-    }
-    prependCharacterData.setLength(0);
-  }
 }

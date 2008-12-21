@@ -70,5 +70,6 @@ public class GElement extends ContentElement {
         } else {
             dos.append("<!-- error tagname -->\n");
         }
+        dos.append(appendCharacterData);
     }
 }

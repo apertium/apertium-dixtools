@@ -110,12 +110,14 @@
 			</p>
 		</e>
 
+
 		<e r="RL">
 			<p>
 				<l><s n="num"/></l> 
 				<r><s n="num"/><s n="f"/></r> 
 			</p>
 		</e>
+
 
 		<e r="LR">
 			<p>
@@ -124,12 +126,14 @@
 			</p>
 		</e>
 
+
 		<e r="RL">
 			<p>
 				<l><b/>hundred<s n="num"/></l> 
 				<r>-cent<s n="num"/><s n="m"/></r> 
 			</p>
 		</e>
+
 
 		<e r="RL">
 			<p>
@@ -138,12 +142,14 @@
 			</p>
 		</e>
 
+
 		<e r="LR">
 			<p>
 				<l><b/>hundred<s n="num"/></l> 
 				<r>-cent<s n="num"/><s n="GD"/></r> 
 			</p>
 		</e>
+
 
 		<e r="RL">
 			<p>
@@ -152,6 +158,7 @@
 			</p>
 		</e>
 
+
 		<e r="RL">
 			<p>
 				<l><b/>thousand<s n="num"/></l> 
@@ -159,12 +166,14 @@
 			</p>
 		</e>
 
+
 		<e r="LR">
 			<p>
 				<l><b/>thousand<s n="num"/></l> 
 				<r><b/>mil<s n="num"/><s n="GD"/></r> 
 			</p>
 		</e>
+
 
 		</pardef>
 		<pardef n="two(1)__num">
@@ -175,12 +184,14 @@
 			</p>
 		</e>
 
+
 		<e r="RL">
 			<p>
 				<l><s n="num"/></l> 
 				<r><s n="num"/><s n="f"/></r> 
 			</p>
 		</e>
+
 
 		<e r="LR">
 			<p>
@@ -189,12 +200,14 @@
 			</p>
 		</e>
 
+
 		<e r="RL">
 			<p>
 				<l><b/>thousand<s n="num"/></l> 
 				<r><b/>mil<s n="num"/><s n="m"/></r> 
 			</p>
 		</e>
+
 
 		<e r="RL">
 			<p>
@@ -203,12 +216,14 @@
 			</p>
 		</e>
 
+
 		<e r="LR">
 			<p>
 				<l><b/>thousand<s n="num"/></l> 
 				<r><b/>mil<s n="num"/><s n="GD"/></r> 
 			</p>
 		</e>
+
 
 		</pardef>
 		<pardef n="three__num">
@@ -219,12 +234,14 @@
 			</p>
 		</e>
 
+
 		<e r="RL">
 			<p>
 				<l><b/>hundred<s n="num"/></l> 
 				<r>-cent<s n="num"/><s n="m"/></r> 
 			</p>
 		</e>
+
 
 		<e r="RL">
 			<p>
@@ -233,6 +250,7 @@
 			</p>
 		</e>
 
+
 		<e r="LR">
 			<p>
 				<l><b/>hundred<s n="num"/></l> 
@@ -240,12 +258,14 @@
 			</p>
 		</e>
 
+
 		<e>
 			<p>
 				<l><b/>thousand<s n="num"/></l> 
 				<r><b/>mil<s n="num"/><s n="mf"/></r> 
 			</p>
 		</e>
+
 
 		</pardef>
 		<pardef n="three(1)__num">
@@ -256,12 +276,14 @@
 			</p>
 		</e>
 
+
 		<e>
 			<p>
 				<l><b/>thousand<s n="num"/></l> 
 				<r><b/>mil<s n="num"/><s n="mf"/></r> 
 			</p>
 		</e>
+
 
 		</pardef>
 		<pardef n="twenty__num">
@@ -273,6 +295,7 @@
 				<par n="three(1)__num"/> 
 		</e>
 
+
 		<e>
 			<p>
 				<l>-one</l> 
@@ -280,6 +303,7 @@
 			</p>
 				<par n="two(1)__num"/> 
 		</e>
+
 
 		<e>
 			<p>
@@ -289,6 +313,7 @@
 				<par n="two(1)__num"/> 
 		</e>
 
+
 		<e>
 			<p>
 				<l>-three</l> 
@@ -296,6 +321,7 @@
 			</p>
 				<par n="three(1)__num"/> 
 		</e>
+
 
 		<e>
 			<p>
@@ -305,6 +331,7 @@
 				<par n="three(1)__num"/> 
 		</e>
 
+
 		<e>
 			<p>
 				<l>-five</l> 
@@ -312,6 +339,7 @@
 			</p>
 				<par n="three(1)__num"/> 
 		</e>
+
 
 		<e>
 			<p>
@@ -321,6 +349,7 @@
 				<par n="three(1)__num"/> 
 		</e>
 
+
 		<e>
 			<p>
 				<l>-seven</l> 
@@ -328,6 +357,7 @@
 			</p>
 				<par n="three(1)__num"/> 
 		</e>
+
 
 		<e>
 			<p>
@@ -337,6 +367,7 @@
 				<par n="three(1)__num"/> 
 		</e>
 
+
 		<e>
 			<p>
 				<l>-nine</l> 
@@ -344,6 +375,7 @@
 			</p>
 				<par n="three(1)__num"/> 
 		</e>
+
 
 		</pardef>
 		<pardef n="one__num">
@@ -354,12 +386,14 @@
 			</p>
 		</e>
 
+
 		<e>
 			<p>
 				<l><b/>thousand<s n="num"/></l> 
 				<r>mil<s n="num"/><s n="mf"/></r> 
 			</p>
 		</e>
+
 
 		</pardef>
 		<pardef n="twenty_hundred__num">
@@ -370,12 +404,14 @@
 			</p>
 		</e>
 
+
 		<e>
 			<p>
 				<l>-one<b/>hundred<s n="num"/></l> 
 				<r><b/>mil<b/>cent<s n="num"/><s n="GD"/></r> 
 			</p>
 		</e>
+
 
 		<e>
 			<p>
@@ -384,12 +420,14 @@
 			</p>
 		</e>
 
+
 		<e>
 			<p>
 				<l>-three<b/>hundred<s n="num"/></l> 
 				<r><b/>mil<b/>tres-cents<s n="num"/><s n="GD"/></r> 
 			</p>
 		</e>
+
 
 		<e>
 			<p>
@@ -398,12 +436,14 @@
 			</p>
 		</e>
 
+
 		<e>
 			<p>
 				<l>-five<b/>hundred<s n="num"/></l> 
 				<r><b/>mil<b/>cinc-cents<s n="num"/><s n="GD"/></r> 
 			</p>
 		</e>
+
 
 		<e>
 			<p>
@@ -412,12 +452,14 @@
 			</p>
 		</e>
 
+
 		<e>
 			<p>
 				<l>-seven<b/>hundred<s n="num"/></l> 
 				<r><b/>mil<b/>set-cents<s n="num"/><s n="GD"/></r> 
 			</p>
 		</e>
+
 
 		<e>
 			<p>
@@ -426,12 +468,14 @@
 			</p>
 		</e>
 
+
 		<e>
 			<p>
 				<l>-nine<b/>hundred<s n="num"/></l> 
 				<r><b/>mil<b/>nou-cents<s n="num"/><s n="GD"/></r> 
 			</p>
 		</e>
+
 
 		</pardef>
 		<pardef n="thirty_hundred__num">
@@ -442,12 +486,14 @@
 			</p>
 		</e>
 
+
 		<e>
 			<p>
 				<l>-one<b/>hundred<s n="num"/></l> 
 				<r><b/>mil<b/>cent<s n="num"/><s n="mf"/></r> 
 			</p>
 		</e>
+
 
 		<e>
 			<p>
@@ -456,12 +502,14 @@
 			</p>
 		</e>
 
+
 		<e>
 			<p>
 				<l>-three<b/>hundred<s n="num"/></l> 
 				<r><b/>mil<b/>tres-cents<s n="num"/><s n="GD"/></r> 
 			</p>
 		</e>
+
 
 		<e>
 			<p>
@@ -470,12 +518,14 @@
 			</p>
 		</e>
 
+
 		<e>
 			<p>
 				<l>-five<b/>hundred<s n="num"/></l> 
 				<r><b/>mil<b/>cinc-cents<s n="num"/><s n="GD"/></r> 
 			</p>
 		</e>
+
 
 		<e>
 			<p>
@@ -484,12 +534,14 @@
 			</p>
 		</e>
 
+
 		<e>
 			<p>
 				<l>-seven<b/>hundred<s n="num"/></l> 
 				<r><b/>mil<b/>set-cents<s n="num"/><s n="GD"/></r> 
 			</p>
 		</e>
+
 
 		<e>
 			<p>
@@ -498,12 +550,14 @@
 			</p>
 		</e>
 
+
 		<e>
 			<p>
 				<l>-nine<b/>hundred<s n="num"/></l> 
 				<r><b/>mil<b/>nou-cents<s n="num"/><s n="GD"/></r> 
 			</p>
 		</e>
+
 
 		</pardef>
 	</pardefs>

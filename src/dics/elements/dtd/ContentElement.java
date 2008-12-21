@@ -202,6 +202,13 @@ public class ContentElement extends Element implements Cloneable {
 
         dos.append("</" + tagName + "> " + c + (opt.now1line?"":"\n"));    
 
+        if (!opt.now1line) {
+                // write blank lines and comments from original file
+                dos.append(appendCharacterData);
+        } else {
+                dos.append(appendCharacterData.trim()); 
+        }  
+
         
         //dos.append("</"); dos.append(tagName); dos.append(">"); dos.append(c); dos.append("\n");
     }

@@ -52,7 +52,6 @@ public class ReadAndWriteBidixTest {
   @BeforeClass
   public static void setUpClass() throws Exception {
     dic = new DictionaryReader("test/sample.eo-en.dix").readDic();
-
   }
 
   @AfterClass

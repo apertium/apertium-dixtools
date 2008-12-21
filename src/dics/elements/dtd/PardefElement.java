@@ -101,7 +101,7 @@ public class PardefElement extends Element {
         for (final EElement e : eElements) {
             e.printXML(dos, opt);
         }
-        dos.append(tab(2) + "</pardef>\n");
+        dos.append(tab(2) + "</pardef>"+appendCharacterData.trim()+"\n");
     }
 
     /**

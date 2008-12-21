@@ -88,6 +88,7 @@ public class VElement extends Element {
         // write blank lines and comments from original file
         dos.append(prependCharacterData);
         dos.append("<" + getTagName() + " n=\"" + getValue() + "\"/>");
+        dos.append(appendCharacterData);
     }
 
     /**

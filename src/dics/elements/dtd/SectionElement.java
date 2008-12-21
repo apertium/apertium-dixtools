@@ -146,7 +146,7 @@ public class SectionElement extends Element {
             }
         }
 
-        dos.append(tab(1) + "</" + getTagName() + ">\n");
+        dos.append(tab(1) + "</" + getTagName() + ">"+appendCharacterData.trim()+"\n");
     }
 
     /**

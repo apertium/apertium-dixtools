@@ -66,6 +66,20 @@ public class Element implements Cloneable {
     }
     
     /**
+     * blanks, newlines and XML comments originating from a original loaded file. Will be added after the XML elemen (before comments)
+     */
+    protected String appendCharacterData="";
+    
+    /**
+     * XML comments, blanks and newlines originating from a loaded file. Will be added after the XML elemen (before comments)
+     */
+    public void setAppendCharacterData(String appendCharacterData) {
+      this.appendCharacterData = appendCharacterData;
+    }
+
+    
+   
+    /**
      * 
      * @param dos
      * @throws java.io.IOException
@@ -75,6 +89,7 @@ public class Element implements Cloneable {
         dos.append(prependCharacterData);
         if (comments!=null) dos.append("<!--" + comments + "-->");
         dos.append("<" + getTagName() + "/>");
+        dos.append(appendCharacterData);
     }
 
     /**
@@ -115,7 +130,10 @@ public class Element implements Cloneable {
   public static final String maskNull(String str) {
         return (str == null?"":str);
   }
-    
+
+  
+  
+  
     /**
      * Appends to 
      * @param value

@@ -18,7 +18,9 @@
 	<pardefs>
 		<pardef n="MF_GD">
 <e r="RL">          <p><l><s n="GD"/></l>                                       <r></r> </p></e>
+
 <e r="LR">          <p><l><s n="f"/></l>                                        <r></r> </p></e>
+
 <e r="LR">          <p><l><s n="m"/></l>                                        <r></r> </p></e>
 		</pardef>
 	</pardefs>
