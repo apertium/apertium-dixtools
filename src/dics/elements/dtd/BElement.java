@@ -25,8 +25,6 @@ package dics.elements.dtd;
  */
 public class BElement extends Element {
 
-    String value;
-
     /**
      * 
      */

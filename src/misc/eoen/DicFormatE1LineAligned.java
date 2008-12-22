@@ -29,7 +29,7 @@ import dics.elements.dtd.EElement;
 import dics.elements.dtd.SectionElement;
 import dics.elements.utils.DicOpts;
 import dictools.AbstractDictTool;
-import dictools.DictionaryReader;
+import dictools.xml.DictionaryReader;
 import java.io.OutputStreamWriter;
 
 /**

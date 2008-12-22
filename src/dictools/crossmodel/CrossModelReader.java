@@ -22,7 +22,7 @@ package dictools.crossmodel;
 import org.w3c.dom.Element;
 
 import dics.elements.dtd.EElement;
-import dictools.XMLReader;
+import dictools.xml.XMLReader;
 
 /**
  * 

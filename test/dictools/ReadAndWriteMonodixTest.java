@@ -20,6 +20,7 @@
 
 package dictools;
 
+import dictools.xml.DictionaryReader;
 import java.io.IOException;
 import org.junit.After;
 import org.junit.AfterClass;

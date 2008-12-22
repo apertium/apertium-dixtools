@@ -19,6 +19,7 @@
  */
 package dictools;
 
+import dictools.xml.DictionaryReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;

@@ -17,7 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-package dictools;
+package dictools.xml;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -52,6 +52,8 @@ import dics.elements.dtd.RElement;
 import dics.elements.dtd.ReElement;
 import dics.elements.dtd.SElement;
 import dics.elements.dtd.SaElement;
+import dics.elements.dtd.SdefElement;
+import dics.elements.dtd.SdefsElement;
 import dics.elements.dtd.TElement;
 import dics.elements.dtd.TextElement;
 import dics.elements.dtd.VElement;
@@ -91,23 +93,13 @@ public class XMLReader {
      */
     protected boolean urlDic;
 
-    /*
-     * 
-     */
-    protected BElement bElement;
-    /**
-     * 
-     */
-    protected AElement aElement;
-    /**
-     * 
-     */
-    protected JElement jElement;
-    /**
-     * 
-     */
-    protected SaElement saElement;
-    protected PrmElement prmElement;
+
+    // These tags have no internal data and can therefore be re-used
+    protected static final BElement bElementConstant  = new BElement();
+    protected static final AElement aElementConstant = new AElement();
+    protected static final JElement jElementConstant = new JElement();
+    protected static final SaElement saElementConstant = new SaElement();
+    protected static final PrmElement prmElementNonumberConstant = new PrmElement();
 
     
     
@@ -143,11 +135,6 @@ public class XMLReader {
         } catch (final Exception e) {
             e.printStackTrace();
         }
-        bElement = new BElement();
-        aElement = new AElement();
-        jElement = new JElement();
-        saElement = new SaElement();
-        prmElement = new PrmElement();
     }
 
     /**
@@ -163,6 +150,7 @@ public class XMLReader {
             } else {
                 // case: file
                 setDocument(getBuilder().parse(getDicFile()));
+                
             }
         } catch (final FileNotFoundException fnfe) {
             System.err.println("Error: could not find '" + getDicFile() + "' file.");
@@ -187,7 +175,7 @@ public class XMLReader {
      * @param e
      * @return Undefined
      */
-    protected ArrayList<org.w3c.dom.Element> readChildren(final Element e) {
+    protected static ArrayList<org.w3c.dom.Element> readChildren(final Element e) {
         final ArrayList<org.w3c.dom.Element> eList = new ArrayList<org.w3c.dom.Element>();
         if (e.hasChildNodes()) {
             final NodeList children = e.getChildNodes();
@@ -213,7 +201,7 @@ public class XMLReader {
      * @param e
      * @param attrName
      * @return Undefined         */
-    protected String getAttributeValue(final Element e, final String attrName) {
+    protected static String getAttributeValue(final Element e, final String attrName) {
       
       Attr attr = e.getAttributeNode(attrName);
       if (attr==null) return null;
@@ -240,12 +228,45 @@ public class XMLReader {
   */
     }
 
+    
+    /**
+     * 
+     * @param e
+     */
+    public static SdefsElement readSdefs(final Element e) {
+        final SdefsElement sdefsElement = new SdefsElement();
+
+        for (final Element childElement : readChildren(e)) {
+            final String childElementName = childElement.getNodeName();
+            if (childElementName.equals("sdef")) {
+                final SdefElement sdefElement = readSdef(childElement);
+                final SElement sE = SElement.get(sdefElement.getValue());
+                sdefsElement.addSdefElement(sdefElement);
+            }
+        }
+
+        return sdefsElement;
+    }
+
+    /**
+     * 
+     * @param e
+     */
+    public static SdefElement readSdef(final Element e) {
+        final String n = getAttributeValue(e, "n");
+        final String c = getAttributeValue(e, "c");
+        final SdefElement sdefElement = new SdefElement(n);
+        sdefElement.setComment(c);
+        return sdefElement;
+    }
+    
+    
     /**
      * 
      * @param e
      * @return Undefined         
      */
-    protected SElement readSElement(final Element e) {
+    protected static SElement readSElement(final Element e) {
         final String n = getAttributeValue(e, "n");
         return SElement.get(n);
     }
@@ -255,7 +276,7 @@ public class XMLReader {
      * @param e
      * @return A 'v' element
      */
-    protected VElement readVElement(final Element e) {
+    protected static VElement readVElement(final Element e) {
         final String n = getAttributeValue(e, "n");
         VElement vE = new VElement(n);
         return vE;
@@ -266,7 +287,7 @@ public class XMLReader {
      * @param e
      * @return A 't' element
      */
-    protected TElement readTElement(final Element e) {
+    protected static TElement readTElement(final Element e) {
         final String n = getAttributeValue(e, "n");
         TElement tE = new TElement(n);
         return tE;
@@ -276,7 +297,7 @@ public class XMLReader {
      * 
      * @param child
      * @return Undefined         */
-    protected String loadGElementText(final Node child) {
+    protected static String loadGElementText(final Node child) {
         String text = "<g>";
         if (child.hasChildNodes()) {
             final NodeList children = child.getChildNodes();
@@ -307,7 +328,7 @@ public class XMLReader {
      * 
      * @param e
      * @return Undefined         */
-    protected IElement readIElement(final Element e) {
+    protected static IElement readIElement(final Element e) {
         final IElement iElement = new IElement();
         final IElement iE = (IElement) readContentElement(e, iElement);
         return iE;
@@ -318,7 +339,7 @@ public class XMLReader {
      * @param e
      * @return Undefined         
      */
-    protected ContentElement readContentElement(final Element e,
+    protected static ContentElement readContentElement(final Element e,
             ContentElement cElement) {
         try {
             if (e.hasChildNodes()) {
@@ -354,7 +375,7 @@ public class XMLReader {
      * @param child
      * @return Undefined         
      */
-    protected final String processTagText(final String tag, final Node child) {
+    protected static final String processTagText(final String tag, final Node child) {
         String text = "";
         if (tag.equals("g")) {
             text = text + loadGElementText(child);
@@ -368,8 +389,7 @@ public class XMLReader {
      * @param child
      * @return Undefined        
      */
-    protected final dics.elements.dtd.Element processTagE(final String tag,
-            final Node child) {
+    protected static final dics.elements.dtd.Element processTagE(final String tag, final Node child) {
         if (tag.equals("s")) {
             final Element childElement = (Element) child;
             final SElement sElement = readSElement(childElement);
@@ -386,16 +406,16 @@ public class XMLReader {
             return tElement;
         }
         if (tag.equals("b")) {
-            return getBElement();
+            return bElementConstant;
         }
         if (tag.equals("j")) {
-            return getJElement();
+            return jElementConstant;
         }
         if (tag.equals("a")) {
-            return getAElement();
+            return aElementConstant;
         }
         if (tag.equals("sa")) {
-            return getSaElement();
+            return saElementConstant;
         }
         if (tag.equals("g")) {
             final Element childElement = (Element) child;
@@ -403,7 +423,7 @@ public class XMLReader {
             return gElement;
         }
         if (tag.equals("prm")) {
-            return getPrmElement();
+            return prmElementNonumberConstant;
         }
         if (tag.startsWith("prm") && '0'<=tag.charAt(3)  && tag.charAt(3)<='9') {
             // We can't use the singleton here, so make a new element
@@ -490,7 +510,7 @@ public class XMLReader {
      * 
      * @param e
      * @return Undefined         */
-    protected EElement readEElement(final Element e) {
+    protected static EElement readEElement(final Element e) {
         final String a = getAttributeValue(e, "a");
         final String c = getAttributeValue(e, "c");
         final String ign = getAttributeValue(e, "i");
@@ -577,7 +597,7 @@ public class XMLReader {
      * @param e
      * @return Undefined         
      */
-    protected LElement readLElement(final Element e) {
+    protected static LElement readLElement(final Element e) {
         final LElement lElement = new LElement();
         final LElement lE = (LElement) readContentElement(e, lElement);
         return lE;
@@ -588,7 +608,7 @@ public class XMLReader {
      * @param e
      * @return Undefined        
      */
-    protected RElement readRElement(final Element e) {
+    protected static RElement readRElement(final Element e) {
         final RElement rElement = new RElement();
         final RElement rE = (RElement) readContentElement(e, rElement);
         return rE;
@@ -599,7 +619,7 @@ public class XMLReader {
      * @param e
      * @return Undefined         
      */
-    protected GElement readGElement(final Element e) {
+    protected static GElement readGElement(final Element e) {
         GElement gElement = new GElement();
         GElement gE = (GElement) readContentElement(e, gElement);
         return gE;
@@ -610,7 +630,7 @@ public class XMLReader {
      * @param e
      * @return Undefined         
      */
-    protected PElement readPElement(final Element e) {
+    protected static PElement readPElement(final Element e) {
         final PElement pElement = new PElement();
 
         if (e.hasChildNodes()) {
@@ -641,12 +661,30 @@ public class XMLReader {
      * @param e
      * @return Undefined        
      */
-    protected ParElement readParElement(final Element e) {
+    public static ParElement readParElement(final Element e) {
+      
         final String n = getAttributeValue(e, "n");
         final String sa = getAttributeValue(e, "sa");
-        System.out.println("sa = " + sa);
         final ParElement parElement = new ParElement(n);
         parElement.setSa(sa);
+
+        if (e.hasAttributes()) {
+            final NamedNodeMap attributes = e.getAttributes();
+            for (int i = 0; i < attributes.getLength(); i++) {
+                Node attribute = attributes.item(i);
+                String name = attribute.getNodeName();
+                String value = attribute.getNodeValue();
+                if (name.startsWith("prm")) {
+                  int parn=0;
+                  if (name.length()==4 && '0'<=name.charAt(3) && name.charAt(3)<='9') {
+                    parn = name.charAt(3)-'0';
+                  }
+                  parElement.setPrm(parn, value);
+                } // end-if
+            } // end-for
+        } // end-if
+        
+        
         return parElement;
     }
 
@@ -655,7 +693,7 @@ public class XMLReader {
      * @param e
      * @return Undefined
      */
-    protected ReElement readReElement(final Element e) {
+    protected static ReElement readReElement(final Element e) {
         String value = "";
 
         if (e.hasChildNodes()) {
@@ -671,37 +709,8 @@ public class XMLReader {
         final ReElement reElement = new ReElement(value);
         return reElement;
     }
-
-    /**
-     * @return the aElement
-     */
-    protected final AElement getAElement() {
-        return aElement;
-    }
-
-    /**
-     * @param element
-     *                the aElement to set
-     */
-    protected final void setAElement(final AElement element) {
-        aElement = element;
-    }
-
-    /**
-     * @return the bElement
-     */
-    protected final BElement getBElement() {
-        return bElement;
-    }
-
-    /**
-     * @param element
-     *                the bElement to set
-     */
-    protected final void setBElement(final BElement element) {
-        bElement = element;
-    }
-
+    
+    
     /**
      * @return the builder
      */
@@ -760,44 +769,6 @@ public class XMLReader {
      */
     protected final void setFactory(final DocumentBuilderFactory factory) {
         this.factory = factory;
-    }
-
-    /**
-     * @return the jElement
-     */
-    protected final JElement getJElement() {
-        return jElement;
-    }
-
-    /**
-     * @param element
-     *                the jElement to set
-     */
-    protected final void setJElement(final JElement element) {
-        jElement = element;
-    }
-
-    /**
-     * @return the saElement
-     */
-    public final SaElement getSaElement() {
-        return saElement;
-    }
-
-    /**
-     * @return the saElement
-     */
-    public final PrmElement getPrmElement() {
-        return prmElement;
-    }
-    
-    
-    /**
-     * @param saElement
-     *                the saElement to set
-     */
-    public final void setSaElement(SaElement saElement) {
-        this.saElement = saElement;
     }
 
     /**

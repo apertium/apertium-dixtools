@@ -33,7 +33,7 @@ import dics.elements.dtd.ParElement;
 import dics.elements.dtd.RElement;
 import dics.elements.dtd.SectionElement;
 import dics.elements.dtd.TextElement;
-import dictools.DictionaryReader;
+import dictools.xml.DictionaryReader;
 import java.util.HashSet;
 import java.util.Iterator;
 import misc.DicFormatE1Line;

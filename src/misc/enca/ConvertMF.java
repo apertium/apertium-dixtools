@@ -31,7 +31,7 @@ import dics.elements.dtd.SectionElement;
 import dics.elements.dtd.TextElement;
 import dics.elements.utils.EElementList;
 import dics.elements.utils.SElementList;
-import dictools.DictionaryReader;
+import dictools.xml.DictionaryReader;
 import java.util.HashMap;
 
 /**

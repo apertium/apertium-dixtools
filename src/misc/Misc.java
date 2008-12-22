@@ -30,7 +30,7 @@ import dics.elements.dtd.RElement;
 import dics.elements.dtd.SElement;
 import dics.elements.dtd.SectionElement;
 import dics.elements.dtd.TextElement;
-import dictools.DictionaryReader;
+import dictools.xml.DictionaryReader;
 import java.util.HashMap;
 
 /**

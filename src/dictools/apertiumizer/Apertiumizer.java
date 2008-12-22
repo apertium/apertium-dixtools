@@ -32,7 +32,7 @@ import dics.elements.utils.EElementList;
 import dics.elements.utils.SElementList;
 import dictools.AbstractDictTool;
 import dictools.DicSort;
-import dictools.DictionaryReader;
+import dictools.xml.DictionaryReader;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;

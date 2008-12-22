@@ -30,7 +30,7 @@ import dics.elements.dtd.RElement;
 import dics.elements.dtd.SectionElement;
 import dics.elements.dtd.TextElement;
 import dictools.AbstractDictTool;
-import dictools.DictionaryReader;
+import dictools.xml.DictionaryReader;
 
 /**
  * 

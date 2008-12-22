@@ -25,7 +25,7 @@ import dics.elements.dtd.LElement;
 import dics.elements.dtd.RElement;
 import dics.elements.dtd.SectionElement;
 import dics.elements.utils.SElementList;
-import dictools.DictionaryReader;
+import dictools.xml.DictionaryReader;
 import dictools.dix2trie.utils.Entry;
 import dictools.dix2trie.utils.EntryList;
 import dictools.dix2trie.utils.Node;

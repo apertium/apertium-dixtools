@@ -23,7 +23,7 @@ import dics.elements.dtd.DictionaryElement;
 import dics.elements.dtd.EElement;
 import dics.elements.dtd.PardefElement;
 import dics.elements.dtd.SElement;
-import dictools.DictionaryReader;
+import dictools.xml.DictionaryReader;
 import java.util.HashMap;
 
 /**

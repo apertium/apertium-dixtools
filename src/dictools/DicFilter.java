@@ -20,6 +20,7 @@
 
 package dictools;
 
+import dictools.xml.DictionaryReader;
 import dics.elements.dtd.DictionaryElement;
 import dics.elements.dtd.EElement;
 import dics.elements.dtd.SectionElement;

@@ -33,7 +33,7 @@ import dics.elements.dtd.SElement;
 import dics.elements.dtd.SdefElement;
 import dics.elements.dtd.SdefsElement;
 import dics.elements.dtd.SectionElement;
-import dictools.DictionaryReader;
+import dictools.xml.DictionaryReader;
 
 /**
  * 

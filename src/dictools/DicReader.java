@@ -19,6 +19,7 @@
  */
 package dictools;
 
+import dictools.xml.DictionaryReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;

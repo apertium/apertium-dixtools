@@ -17,8 +17,10 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-package dictools;
+package dictools.xml;
 
+import dictools.*;
+import dictools.xml.XMLReader;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -215,7 +217,7 @@ public class DictionaryReader extends XMLReader {
      * 
      * @param e
      * @return Undefined         */
-    public AlphabetElement readAlphabet(final Element e) {
+    public static AlphabetElement readAlphabet(final Element e) {
         String alphabet = "";
         if (e.hasChildNodes()) {
             final NodeList nodeList = e.getChildNodes();
@@ -232,42 +234,12 @@ public class DictionaryReader extends XMLReader {
         return alphabetElement;
     }
 
-    /**
-     * 
-     * @param e
-     */
-    public SdefsElement readSdefs(final Element e) {
-        final SdefsElement sdefsElement = new SdefsElement();
-
-        for (final Element childElement : readChildren(e)) {
-            final String childElementName = childElement.getNodeName();
-            if (childElementName.equals("sdef")) {
-                final SdefElement sdefElement = readSdef(childElement);
-                final SElement sE = SElement.get(sdefElement.getValue());
-                sdefsElement.addSdefElement(sdefElement);
-            }
-        }
-
-        return sdefsElement;
-    }
 
     /**
      * 
      * @param e
      */
-    public SdefElement readSdef(final Element e) {
-        final String n = getAttributeValue(e, "n");
-        final String c = getAttributeValue(e, "c");
-        final SdefElement sdefElement = new SdefElement(n);
-        sdefElement.setComment(c);
-        return sdefElement;
-    }
-
-    /**
-     * 
-     * @param e
-     */
-    public PardefsElement readPardefs(final Element e) {
+    public static PardefsElement readPardefs(final Element e) {
         final PardefsElement pardefsElement = new PardefsElement();
 
         StringBuilder characterData = new StringBuilder();
@@ -307,7 +279,7 @@ public class DictionaryReader extends XMLReader {
      * 
      * @param e
      */
-    public PardefElement readPardef(final Element e) {
+    public static PardefElement readPardef(final Element e) {
         final String n = getAttributeValue(e, "n");
         final PardefElement pardefElement = new PardefElement(n);
 
@@ -418,135 +390,13 @@ public class DictionaryReader extends XMLReader {
     
     
        
-    
-    /**
-     * 
-     * @param e
-     * @return Undefined         */
-    @Override
-    public IElement readIElement(final Element e) {
-        final IElement iElement = new IElement();
-        final IElement iE = (IElement) readContentElement(e, iElement);
-        return iE;
-    }
 
     /**
      * 
      * @param e
      * @return Undefined         */
-    @Override
-    public LElement readLElement(final Element e) {
-        final LElement lElement = new LElement();
-        final LElement lE = (LElement) readContentElement(e, lElement);
-        return lE;
-    }
 
-    /**
-     * 
-     * @param e
-     * @return Undefined         */
-    @Override
-    public RElement readRElement(final Element e) {
-        final RElement rElement = new RElement();
-        final RElement rE = (RElement) readContentElement(e, rElement);
-        return rE;
-    }
 
-    /**
-     * 
-     * @param e
-     * @return Undefined         */
-    @Override
-    public GElement readGElement(final Element e) {
-        final GElement gElement = new GElement();
-        final GElement gE = (GElement) readContentElement(e, gElement);
-        return gE;
-    }
-
-    /**
-     * 
-     * @param e
-     * @return Undefined         */
-    @Override
-    public PElement readPElement(final Element e) {
-        final PElement pElement = new PElement();
-
-        // Si contiene elementos 'e'
-        if (e.hasChildNodes()) {
-            final NodeList children = e.getChildNodes();
-            for (int i = 0; i < children.getLength(); i++) {
-                final Node child = children.item(i);
-                if (child instanceof Element) {
-                    final Element childElement = (Element) child;
-                    final String childElementName = childElement.getNodeName();
-                    if (childElementName.equals("l")) {
-                        final LElement lElement = readLElement(childElement);
-                        pElement.setLElement(lElement);
-                    }
-                    if (childElementName.equals("r")) {
-                        final RElement rElement = readRElement(childElement);
-                        pElement.setRElement(rElement);
-                    }
-
-                }
-            }
-        }
-        return pElement;
-    }
-
-    /**
-     * 
-     * @param e
-     * @return Undefined         */
-    @Override
-    public ParElement readParElement(final Element e) {
-      
-        final String n = getAttributeValue(e, "n");
-        final String sa = this.getAttributeValue(e, "sa");
-        final ParElement parElement = new ParElement(n);
-        parElement.setSa(sa);
-
-        if (e.hasAttributes()) {
-            final NamedNodeMap attributes = e.getAttributes();
-            for (int i = 0; i < attributes.getLength(); i++) {
-                Node attribute = attributes.item(i);
-                String name = attribute.getNodeName();
-                String value = attribute.getNodeValue();
-                if (name.startsWith("prm")) {
-                  int parn=0;
-                  if (name.length()==4 && '0'<=name.charAt(3) && name.charAt(3)<='9') {
-                    parn = name.charAt(3)-'0';
-                  }
-                  parElement.setPrm(parn, value);
-                } // end-if
-            } // end-for
-        } // end-if
-        
-        
-        return parElement;
-    }
-
-    /**
-     * 
-     * @param e
-     * @return Undefined         */
-    @Override
-    public ReElement readReElement(final Element e) {
-        String value = "";
-        // Si contiene elementos 'e'
-        if (e.hasChildNodes()) {
-            final NodeList children = e.getChildNodes();
-            for (int i = 0; i < children.getLength(); i++) {
-                final Node child = children.item(i);
-                if (child instanceof Text) {
-                    final Text textNode = (Text) child;
-                    value += textNode.getData().trim();
-                }
-            }
-        }
-        final ReElement reElement = new ReElement(value);
-        return reElement;
-    }
 
     /**
      * @return the dic

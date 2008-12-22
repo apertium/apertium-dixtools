@@ -34,7 +34,7 @@ import dictools.DicMerge;
 import dictools.DicReader;
 import dictools.DicReverse;
 import dictools.DicSort;
-import dictools.DictionaryReader;
+import dictools.xml.DictionaryReader;
 import dictools.Dix2CC;
 import dictools.Dix2MDix;
 import dictools.Dix2Tiny;

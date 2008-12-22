@@ -19,6 +19,7 @@
  */
 package dictools;
 
+import dictools.xml.DictionaryReader;
 import java.util.HashMap;
 
 import dics.elements.dtd.AlphabetElement;

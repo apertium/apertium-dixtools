@@ -28,7 +28,7 @@ import dics.elements.dtd.RElement;
 import dics.elements.dtd.SElement;
 import dics.elements.dtd.TextElement;
 import dics.elements.utils.SElementList;
-import dictools.DictionaryReader;
+import dictools.xml.DictionaryReader;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
