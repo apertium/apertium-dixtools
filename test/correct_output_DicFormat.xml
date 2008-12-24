@@ -223,17 +223,17 @@
 				<par n="ach/e[T]er__vblex" prm="t"/> 
 		</e>
 
-		<e lm="amener">
+		<e lm="amener" alt="val">
 				<i>am</i> 
 				<par n="ach/e[T]er__vblex" prm="n"/> 
 		</e>
 
-		<e lm="détruire">
+		<e lm="détruire" alt="val">
 				<i>détru</i> 
 				<par n="lu/i[]re__vblex" prm="" prm2="A" prm3="B" prm4="C"/> 
 		</e>
 
-		<e lm="enlever">
+		<e lm="enlever" alt="val">
 				<i>enl</i> 
 				<par n="ach/e[T]er__vblex" prm="v"/> 
 		</e>

@@ -108,11 +108,10 @@ public class ParElement extends Element {
      */
     @Override
     public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
-        // write blank lines and comments from original file
+        // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
+        dos.append(makeCommentIfData(processingComments));
         
-        comments = maskNull(comments);
-
         String prms = "";
         if (prm != null) {
             for (int i=0;i<prm.length; i++) if (prm[i]!=null) prms+=" prm"+(i==0?"":i)+"=\"" + prm[i] + "\"";
@@ -125,9 +124,8 @@ public class ParElement extends Element {
 
         if (opt.now1line) {
           dos.append("<" + getTagName() + " n=\"" + n + "\"" + prms + saAttr + "/>" );
-          if (comments.length()>0) dos.append(" " + comments);
         } else {
-          dos.append(tab(4) + "<" + getTagName() + " n=\"" + n + "\"" +prms + saAttr + "/> " + getComments() + "\n");
+          dos.append(tab(4) + "<" + getTagName() + " n=\"" + n + "\"" +prms + saAttr + "/> "  + "\n");
         }
     }
 
@@ -149,5 +147,6 @@ public class ParElement extends Element {
     if (prm==null) prm=new String[10];
     prm[n] = v;
   }
+
 
 }

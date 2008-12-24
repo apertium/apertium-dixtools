@@ -180,8 +180,8 @@ public class DicMerge  extends AbstractDictTool{
         bilAB.countEntries();
         getBilAB1().countEntries();
         getBilAB2().countEntries();
-        bilAB.addComments("\n\tResult of merging 2 dictionaries:");
-        bilAB.addComments("\t" + bilAB.getNEntries() + " entries (" + getBilAB1().getNEntries() + " U " + getBilAB2().getNEntries() + ")");
+        bilAB.addProcessingComment("\n\tResult of merging 2 dictionaries:");
+        bilAB.addProcessingComment("\t" + bilAB.getNEntries() + " entries (" + getBilAB1().getNEntries() + " U " + getBilAB2().getNEntries() + ")");
 
         final DictionaryElement monA = mergeMonols(getMonA1(), getMonA2());
         String monAfn = getMonA1().getFileName();
@@ -191,8 +191,8 @@ public class DicMerge  extends AbstractDictTool{
         monA.countEntries();
         getMonA1().countEntries();
         getMonA2().countEntries();
-        monA.addComments("\n\tResult of merging 2 dictionaries:");
-        monA.addComments("\t" + monA.getNEntries() + " entries (" + getMonA1().getNEntries() + " U " + getMonA2().getNEntries() + ")");
+        monA.addProcessingComment("\n\tResult of merging 2 dictionaries:");
+        monA.addProcessingComment("\t" + monA.getNEntries() + " entries (" + getMonA1().getNEntries() + " U " + getMonA2().getNEntries() + ")");
 
         final DictionaryElement monB = mergeMonols(getMonB1(), getMonB2());
         String monBfn = getMonB1().getFileName();
@@ -202,8 +202,8 @@ public class DicMerge  extends AbstractDictTool{
         monB.countEntries();
         getMonB1().countEntries();
         getMonB2().countEntries();
-        monB.addComments("\n\tResult of merging 2 dictionaries:");
-        monB.addComments("\t" + monB.getNEntries() + " entries (" + getMonB1().getNEntries() + " U " + getMonB2().getNEntries() + ")");
+        monB.addProcessingComment("\n\tResult of merging 2 dictionaries:");
+        monB.addProcessingComment("\t" + monB.getNEntries() + " entries (" + getMonB1().getNEntries() + " U " + getMonB2().getNEntries() + ")");
 
         final DicSet dicSet = new DicSet(bilAB, monA, monB);
         return dicSet;
@@ -332,7 +332,7 @@ public class DicMerge  extends AbstractDictTool{
                     if (!parName1.equals(parName2)) {
                         msg.log("Paradigms for <" + e1.getLemma() + "> : (" + parName1 + ", " + parName2 + ")");
                         // addParadigmToRemove(parName2);
-                        e1.getParadigm().addComments(
+                        e1.getParadigm().addProcessingComment(
                                 "\n\t<!-- also paradigm '" + parName2 + "' -->");
                     } else {
                     // System.out.println("Paradigms are the same");

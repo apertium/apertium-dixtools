@@ -180,7 +180,7 @@ public class ContentElement extends Element implements Cloneable {
         }
 
         if (!opt.now1line) {
-                // write blank lines and comments from original file
+                // write blank lines and processingComments from original file
                 dos.append(prependCharacterData);
                 dos.append(tab(4) + "<" + tagName + ">");  
         } else {
@@ -196,14 +196,14 @@ public class ContentElement extends Element implements Cloneable {
             }
         }
         String c = "";
-        if (getComments() != null) {
-            c = getComments();
+        if (getProcessingComments() != null) {
+            c = getProcessingComments();
         }
 
         dos.append("</" + tagName + "> " + c + (opt.now1line?"":"\n"));    
 
         if (!opt.now1line) {
-                // write blank lines and comments from original file
+                // write blank lines and processingComments from original file
                 dos.append(appendCharacterData);
         } else {
                 dos.append(appendCharacterData.trim()); 

@@ -565,7 +565,7 @@ public class DicCross  extends AbstractDictTool{
                 final String alt = mergeAttributes(e1.getAlt(), e2.getAlt());
                 actionE.setAlt(alt);
 
-                actionE.addComments(actionID);
+                actionE.addProcessingComment(actionID);
                 msg.log("Pattern (winner): " + actionID + "\n");
                 actionE.print("L", msg);
                 actionE.print("R", msg);
@@ -588,7 +588,7 @@ public class DicCross  extends AbstractDictTool{
         //if (eAction.hasRestriction()) {
         if (!eAction.isRestrictionAuto()) {
             // restriction indicated in cross pattern
-            eCrossed.setComments("\tforced '" + eAction.getRestriction() + "' restriction\n");
+            eCrossed.setProcessingComments("\tforced '" + eAction.getRestriction() + "' restriction\n");
             eCrossed.setRestriction(eAction.getRestriction());
         } else {
             // automatically resolved restriction
@@ -911,8 +911,8 @@ public class DicCross  extends AbstractDictTool{
 
         int i = 0;
         String patterns = "";
-        bilCrossed.addComments("");
-        bilCrossed.addComments("Patterns applied:");
+        bilCrossed.addProcessingComment("");
+        bilCrossed.addProcessingComment("Patterns applied:");
         msg.log("Patterns applied:");
         for (CrossAction cA : getCrossModel().getCrossActions()) {
             String cAName = cA.getId();
@@ -926,7 +926,7 @@ public class DicCross  extends AbstractDictTool{
             } else {
                 String mesg = "\t" + cAName + " (" + usedPatterns.get(cAName) + " times)";
                 msg.log(mesg);
-                bilCrossed.addComments(mesg);
+                bilCrossed.addProcessingComment(mesg);
             }
         }
         taskOrder = taskOrder + 1;

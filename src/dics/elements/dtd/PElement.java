@@ -107,12 +107,12 @@ public class PElement extends Element {
      * @param value
      * @param side
      */
-    public final void setComments(final String value, final String side) {
+    public final void setProcessingComments(final String value, final String side) {
         if (side.equals("L")) {
-            l.setComments(value);
+            l.setProcessingComments(value);
         }
         if (side.equals("R")) {
-            r.setComments(value);
+            r.setProcessingComments(value);
         }
     }
 
@@ -123,7 +123,7 @@ public class PElement extends Element {
      */
     @Override
     public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
-        // write blank lines and comments from original file
+        // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
         String tab3 = opt.now1line?"":tab(3);
 
@@ -147,7 +147,7 @@ public class PElement extends Element {
       opt.alignR = alignR;
       printXML(dos, opt);
        */
-        // write blank lines and comments from original file
+        // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
         dos.append("<" + getTagName() + ">");
 

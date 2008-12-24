@@ -414,9 +414,8 @@ public class DictionaryElement extends Element {
             if (pardefs != null) {
                 dos.append("\tParadigms: " + pardefs.getPardefElements().size() + "\n");
             }
-            if (comments != null) {
-                dos.append(comments);
-            }
+            dos.append(processingComments);
+
             dos.append("\n-->\n");
             dos.append("<dictionary>\n");
             if (alphabet != null) {
@@ -482,9 +481,8 @@ public class DictionaryElement extends Element {
             }
             dos.append("");
 
-            if (comments != null) {
-                dos.append(comments);
-            }
+            dos.append(processingComments);
+
             dos.append("\n-->\n");
             dos.append("<dictionary>\n");
             if (alphabet != null) {

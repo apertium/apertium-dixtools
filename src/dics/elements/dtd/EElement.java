@@ -119,8 +119,7 @@ public class EElement extends Element implements Cloneable,
      * @param a
      * @param c
      */
-    public EElement(final String r, final String lm, final String a,
-            final String c) {
+    public EElement(final String r, final String lm, final String a,  final String c) {
         children = new ElementList();
         this.r = r;
         this.lm = lm;
@@ -227,13 +226,13 @@ public class EElement extends Element implements Cloneable,
      * @param value
      * @param side
      */
-    public final void setComments(final String value, final String side) {
+    public final void setProcessingComments(final String value, final String side) {
         for (final Element e : children) {
             if (e instanceof IElement) {
-                ((IElement) e).setComments(value);
+                ((IElement) e).setProcessingComments(value);
             }
             if (e instanceof PElement) {
-                ((PElement) e).setComments(value, side);
+                ((PElement) e).setProcessingComments(value, side);
             }
         }
     }
@@ -535,22 +534,16 @@ public class EElement extends Element implements Cloneable,
      */
     @Override
     public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
-        // write blank lines and comments from original file
+        // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
 
-        // prepend comments added in this run
-        if (comments != null) {
-            if (opt.now1line) dos.append("<!-- "); 
-            else dos.append(tab(2) + "<!-- \n");
-            
-            dos.append(comments);
-            if (!isCommon()) {
-                dos.append(tab(2) + "esta entrada no aparece en el otro morfolgico\n");
-            }
-            
-            if (opt.now1line) dos.append("-->\n");
-            else dos.append(tab(2) + "-->\n");
+        // prepend processingComments added in this run
+
+        String pc = processingComments;
+        if (!isCommon()) {
+            pc = pc + tab(2) + "esta entrada no aparece en el otro morfolgico\n";
         }
+        dos.append(makeCommentIfData(pc));
 
         String attributes = this.getAttrString();
         if (!opt.nowAlign) {

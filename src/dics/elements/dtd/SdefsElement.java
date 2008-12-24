@@ -73,24 +73,26 @@ public class SdefsElement extends Element {
      * @throws java.io.IOException
      */
     public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
-        // write blank lines and comments from original file
+        // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
-        final HashMap<String, String> descriptions = DicTools.getSdefDescriptions();
-
+        dos.append(makeCommentIfData(processingComments));
         dos.append(tab(1) + "<" + getTagName() + ">\n");
+
+        final HashMap<String, String> descriptions = DicTools.getSdefDescriptions();
         for (final SdefElement e : sdefsElements) {
             final String d = descriptions.get(e.getValue());
             if (d != null) {
-            // e.setComments("\t<!-- " + d + "-->");
+            // e.setProcessingComments("\t<!-- " + d + "-->");
             }
             e.printXML(dos, opt);
         }
         dos.append(tab(1) + "</" + getTagName() + ">\n");
-        if (comments != null) {
+        /*
+        if (processingComments != null  && !processingComments.isEmpty()) {
             dos.append(tab(1) + "<!-- \n");
-            dos.append(tab(1) + getComments());
+            dos.append(tab(1) + getProcessingComments());
             dos.append(tab(1) + " -->\n");
-        }
+        }*/
         dos.append(appendCharacterData.trim());
     }
 

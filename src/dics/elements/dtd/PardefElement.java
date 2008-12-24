@@ -90,13 +90,9 @@ public class PardefElement extends Element {
      * @throws java.io.IOException
      */
     public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
-        // write blank lines and comments from original file
+        // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
-        if (comments != null) {
-            dos.append(tab(2) + "<!--\n");
-            dos.append(tab(2) + comments);
-            dos.append(tab(2) + "-->\n");
-        }
+        dos.append(makeCommentIfData(processingComments));
         dos.append(tab(2) + "<pardef n=\"" + n + "\">\n");
         for (final EElement e : eElements) {
             e.printXML(dos, opt);
@@ -244,7 +240,7 @@ public class PardefElement extends Element {
         if (parDefInMon == null) {
             final PardefElement pardefE = mon.getParadigmDefinition(paradigmValue);
             dupPardefE = new PardefElement(pardefE, dupParadigmValue);
-            dupPardefE.addComments("equivalent to '" + paradigmValue + "'");
+            dupPardefE.addProcessingComment("equivalent to '" + paradigmValue + "'");
             dupPardefE.changeCategory(category);
         } else {
             parDefInMon.changeCategory(category);

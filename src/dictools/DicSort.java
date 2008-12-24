@@ -249,9 +249,9 @@ public class DicSort  extends AbstractDictTool {
                 if (list.size() > 0) {
                     Collections.sort(list);
                     EElement eHead = list.get(0);
-                    eHead.addComments("******************************");
-                    eHead.addComments("(" + cat + ") group");
-                    eHead.addComments("******************************");
+                    eHead.addProcessingComment("******************************");
+                    eHead.addProcessingComment("(" + cat + ") group");
+                    eHead.addProcessingComment("******************************");
                     listAll.addAll(list);
                 }
             }
@@ -340,9 +340,9 @@ public class DicSort  extends AbstractDictTool {
                 if (list.size() > 0) {
                     Collections.sort(list);
                     EElement eHead = list.get(0);
-                    eHead.addComments("******************************");
-                    eHead.addComments("(" + cat + ") group");
-                    eHead.addComments("******************************");
+                    eHead.addProcessingComment("******************************");
+                    eHead.addProcessingComment("(" + cat + ") group");
+                    eHead.addProcessingComment("******************************");
                     listAll.addAll(list);
                 }
                 sec.setEElements(list);

@@ -89,7 +89,7 @@ public class TElement extends Element {
      */
     @Override
     public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
-        // write blank lines and comments from original file
+        // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
         dos.append("<" + getTagName() + " n=\"" + getValue() + "\"/>");
         dos.append(appendCharacterData);

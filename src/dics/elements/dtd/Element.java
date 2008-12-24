@@ -49,29 +49,29 @@ public class Element implements Cloneable {
     private String TAGNAME;
     
     /**
-     * XML comments originating from the processing if the file. Will be added as <!--   --> just before the XML elemen
+     * XML processingComments originating from the processing if the file. Will be added as <!--   --> just before the XML elemen
      */
-    protected String comments;
+    protected String processingComments="";
 
     /**
-     * blanks, newlines and XML comments originating from a original loaded file. Will be added before the XML elemen (before comments)
+     * blanks, newlines and XML processingComments originating from a original loaded file. Will be added before the XML elemen (before processingComments)
      */
     protected String prependCharacterData="";
     
     /**
-     * XML comments, blanks and newlines originating from a loaded file. Will be added before the XML elemen (before comments)
+     * XML processingComments, blanks and newlines originating from a loaded file. Will be added before the XML elemen (before processingComments)
      */
     public void setPrependCharacterData(String prependCharacterData) {
       this.prependCharacterData = prependCharacterData;
     }
     
     /**
-     * blanks, newlines and XML comments originating from a original loaded file. Will be added after the XML elemen (before comments)
+     * blanks, newlines and XML processingComments originating from a original loaded file. Will be added after the XML elemen (before processingComments)
      */
     protected String appendCharacterData="";
     
     /**
-     * XML comments, blanks and newlines originating from a loaded file. Will be added after the XML elemen (before comments)
+     * XML processingComments, blanks and newlines originating from a loaded file. Will be added after the XML elemen (before processingComments)
      */
     public void setAppendCharacterData(String appendCharacterData) {
       this.appendCharacterData = appendCharacterData;
@@ -85,9 +85,9 @@ public class Element implements Cloneable {
      * @throws java.io.IOException
      */
     protected void printXML(final Appendable dos, final DicOpts opt) throws IOException {
-        // write blank lines and comments from original file
+        // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
-        if (comments!=null) dos.append("<!--" + comments + "-->");
+        dos.append(makeCommentIfData(processingComments));
         dos.append("<" + getTagName() + "/>");
         dos.append(appendCharacterData);
     }
@@ -96,7 +96,7 @@ public class Element implements Cloneable {
      * 
      * @param nTabs
      * @return Undefined         */
-    protected String tab(final int nTabs) {
+    protected static String tab(final int nTabs) {
         /*
         String sTabs = "";
         for (int i = 0; i < nTabs; i++) {
@@ -107,6 +107,12 @@ public class Element implements Cloneable {
         return "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t".substring(0,nTabs);
     }
 
+    public static final String makeCommentIfData(String commentContent) {
+    if (commentContent.isEmpty()) return "";
+    return tab(2)+"<!-- "+commentContent.trim()+" -->\n";
+  }
+
+    
     /**
      * 
      * @param value
@@ -138,25 +144,23 @@ public class Element implements Cloneable {
      * Appends to 
      * @param value
      */
-    public void addComments(final String value) {
-        comments = maskNull(comments);
-
-        comments += tab(3) + value + "\n";
+    public void addProcessingComment(final String value) {
+        processingComments += tab(3) + value + "\n";
     }
 
     /**
-     * XML comments originating from the processing if the file. Will be added as <!--   --> just before the XML elemen
+     * XML processingComments originating from the processing if the file. Will be added as <!--   --> just before the XML elemen
      */
-    public void setComments(final String value) {
-        comments = value;
+    public void setProcessingComments(final String value) {
+        processingComments = value;
     }
 
 
     /**
-     * XML comments originating from the processing if the file. Will be added as <!--   --> just before the XML elemen
+     * XML processingComments originating from the processing if the file. Will be added as <!--   --> just before the XML elemen
      */
-    public String getComments() {
-        return comments;
+    public String getProcessingComments() {
+        return processingComments;
     }
 
     /**
@@ -200,7 +204,7 @@ public class Element implements Cloneable {
      * 
      * @param valueNoTags
      */
-    public void setValueNoTags(String valueNoTags) {
+    void setValueNoTags(String valueNoTags) {
         this.valueNoTags = valueNoTags;
     }
 

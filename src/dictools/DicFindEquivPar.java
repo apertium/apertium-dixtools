@@ -161,7 +161,7 @@ public class DicFindEquivPar  extends AbstractDictTool{
                     if (equivalents.containsKey(parE.getValue())) {
                         incrementReplacementCounter(counter, parE.getValue());
                         parE.setValue(equivalents.get(parE.getValue()));
-                        parE.addComments("<!-- '" + prevParName + "' was replaced -->");
+                        parE.addProcessingComment(prevParName + "' was replaced");
                     }
                 }
             }

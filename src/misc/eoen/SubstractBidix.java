@@ -122,10 +122,10 @@ public class SubstractBidix {
               eei.remove();
             } else {
               String c="Already is "+reasonOfRestriction;
-              if (ee.getComments()!=null) {
-                c+=c+" ; "+ee.getComments();
+              if (ee.getProcessingComments()!=null) {
+                c+=c+" ; "+ee.getProcessingComments();
               }
-              ee.setComments(c);
+              ee.setProcessingComments(c);
             }
           }
         }
@@ -213,7 +213,7 @@ public class SubstractBidix {
       //ee.setRestriction(reverseDir(direction));
     } else {
       if (oldReasonOfRestriction == null) {
-        //ee.setComments("Already is "+existingEeStr);
+        //ee.setProcessingComments("Already is "+existingEeStr);
         ee.setTemp(existingEeStr);
         
       } else {
@@ -228,7 +228,7 @@ public class SubstractBidix {
           // Exactly the same entry has been before. Just delete
           ee.setTemp("DELETE");
         } else {
-          //ee.setComments("Already are "+existingEeStr+" "+oldReasonOfRestriction);
+          //ee.setProcessingComments("Already are "+existingEeStr+" "+oldReasonOfRestriction);
           ee.setTemp(existingEeStr+" "+oldReasonOfRestriction);
         }
       }          
