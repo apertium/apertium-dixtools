@@ -70,7 +70,7 @@ public class ConvertMF {
      * @param morphDic
      * @param bilDic
      */
-    public ConvertMF(final String morphDic, final String bilDic) {
+    public ConvertMF(String morphDic, String bilDic) {
         this.morphDic = morphDic;
         this.bilDic = bilDic;
 
@@ -79,7 +79,7 @@ public class ConvertMF {
     /**
      * 
      */
-    public final void processArguments() {
+    public void processArguments() {
         morphDic = arguments[1];
         bilDic = arguments[2];
     }
@@ -88,14 +88,14 @@ public class ConvertMF {
      * 
      * @param outFileName
      */
-    public final void setOutFileName(final String outFileName) {
+    public void setOutFileName(String outFileName) {
         this.outFileName = outFileName;
     }
 
     /**
      * 
      */
-    public final void convert() {
+    public void convert() {
         //this.generateMon();
         //this.completeBil();
 
@@ -135,7 +135,7 @@ public class ConvertMF {
      * @param mfElementsNouns
      * @param bil
      */
-    private final void processNouns(HashMap<String, EElement> mfElementsNouns, DictionaryElement bil) {
+    private void processNouns(HashMap<String, EElement> mfElementsNouns, DictionaryElement bil) {
         boolean isF, isM, isNoun;
         EElementList toRemove = new EElementList();
         for (EElement e : bil.getAllEntries()) {
@@ -188,7 +188,7 @@ public class ConvertMF {
      * @param mfElementsAdjs
      * @param bil
      */
-    private final void processAdjs(final HashMap<String, EElement> mfElementsAdjs, DictionaryElement bil) {
+    private void processAdjs(HashMap<String, EElement> mfElementsAdjs, DictionaryElement bil) {
         for (EElement e : bil.getAllEntries()) {
             if (mfElementsAdjs.containsKey(e.getValue("R"))) {
                 SElementList attributes = e.getRight().getSElements();
@@ -204,7 +204,7 @@ public class ConvertMF {
      * @param morph
      * @return
      */
-    private final void findMFParadigms(DictionaryElement morph) {
+    private void findMFParadigms(DictionaryElement morph) {
         mfPardefsNouns = new HashMap<String, PardefElement>();
         mfPardefsAdjs = new HashMap<String, PardefElement>();
         PardefsElement pardefs = morph.getPardefsElement();
@@ -234,7 +234,7 @@ public class ConvertMF {
         }
     }
 
-    private final void generateMon() {
+    private void generateMon() {
         DictionaryReader bilReader = new DictionaryReader(this.bilDic);
         DictionaryElement bil = bilReader.readDic();
 
@@ -255,7 +255,7 @@ public class ConvertMF {
         mon.printXML("apertium-de-en.de.dix", dics.elements.utils.DicOpts.std);
     }
 
-    private final void completeBil() {
+    private void completeBil() {
         DictionaryReader bilReader = new DictionaryReader(this.bilDic);
         DictionaryElement bil = bilReader.readDic();
 

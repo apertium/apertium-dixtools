@@ -41,7 +41,7 @@ public class CrossActionData {
      * @param crossAction
      * @param vars
      */
-    public CrossActionData(final CrossAction crossAction, final Variables vars) {
+    public CrossActionData(CrossAction crossAction, Variables vars) {
         this.crossAction = crossAction;
         this.vars = vars;
     }

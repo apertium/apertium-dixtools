@@ -45,7 +45,7 @@ public class CrossActionDataList extends HashMap<String, CrossActionData> {
      * 
      * @return Cross action data
      */
-    public final CrossActionData getBestActionSet() {
+    public CrossActionData getBestActionSet() {
         CrossActionData defaultCAD = null;
         boolean defaultCanBeApplied = false;
         ArrayList<CrossActionData> actionList = new ArrayList<CrossActionData>();
@@ -83,7 +83,7 @@ public class CrossActionDataList extends HashMap<String, CrossActionData> {
      * @param actionList
      * @return Undefined
      */
-    private final ArrayList<CrossActionData> getLongestPatterns(ArrayList<CrossActionData> actionList) {
+    private ArrayList<CrossActionData> getLongestPatterns(ArrayList<CrossActionData> actionList) {
         int maxLength = 0;
         ArrayList<CrossActionData> longestPatterns = new ArrayList<CrossActionData>();
         for (CrossActionData cad : actionList) {
@@ -107,7 +107,7 @@ public class CrossActionDataList extends HashMap<String, CrossActionData> {
      * @param actionSetList
      * @return Undefined
      */
-    private final ArrayList<CrossActionData> getMostConcretePatterns(final ArrayList<CrossActionData> actionList) {
+    private ArrayList<CrossActionData> getMostConcretePatterns(ArrayList<CrossActionData> actionList) {
         int maxNConstants = 0;
         ArrayList<CrossActionData> mostConcrete = new ArrayList<CrossActionData>();
         for (CrossActionData cad : actionList) {

@@ -63,7 +63,7 @@ public class Misc {
      * @param dic3FileName
      * @param dic4FileName
      */
-    public Misc(final String dic1FileName, final String dic2FileName, final String dic3FileName, final String dic4FileName) {
+    public Misc(String dic1FileName, String dic2FileName, String dic3FileName, String dic4FileName) {
         DictionaryReader dicReader1 = new DictionaryReader(dic1FileName);
         this.dic1 = dicReader1.readDic();
         System.out.println("dic1.size() = " + dic1.getAllEntries().size());
@@ -79,7 +79,7 @@ public class Misc {
 
     }
 
-    public final void doMisc() {
+    public void doMisc() {
         DictionaryElement bil_n = this.dic1;
 
 
@@ -104,7 +104,7 @@ public class Misc {
     /**
      * 
      */
-    public final void doMisc7() {
+    public void doMisc7() {
         System.out.println("Begin");
         DictionaryElement morph_en_adj = this.dic1;
         DictionaryElement bil_en_es_adj = this.dic2;
@@ -175,7 +175,7 @@ public class Misc {
     /**
      * 
      */
-    public final void doMisc5() {
+    public void doMisc5() {
         DictionaryElement morph_es = new DictionaryElement();
         SectionElement s1 = new SectionElement("main", "standard");
         morph_es.addSection(s1);
@@ -244,7 +244,7 @@ public class Misc {
     /**
      * 
      */
-    public final void doMisc4() {
+    public void doMisc4() {
         DictionaryElement es_pardefs = dic1;
         DictionaryElement es_adjs = dic2;
         DictionaryElement en_es_adjs = dic3;
@@ -294,7 +294,7 @@ public class Misc {
     /**
      * 
      */
-    public final void doMisc3() {
+    public void doMisc3() {
         DictionaryElement ca_morph = dic1;
         DictionaryElement es_morph = dic2;
         //DictionaryElement en_es_bil = dic3;      
@@ -331,7 +331,7 @@ public class Misc {
     /**
      * 
      */
-    public final void doMisc2() {
+    public void doMisc2() {
         HashMap<String, String> nps = new HashMap<String, String>();
         for (EElement ee : dic1.getAllEntries()) {
             RElement re = ee.getRight();

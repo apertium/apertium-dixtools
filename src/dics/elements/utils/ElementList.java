@@ -50,16 +50,16 @@ public class ElementList extends ArrayList<Element> implements Cloneable {
     @Override
     public Object clone() {
         try {
-            final ElementList cloned = (ElementList) super.clone();
+            ElementList cloned = (ElementList) super.clone();
 
             for (int i = 0; i < size(); i++) {
-                final Element eCloned = (Element) cloned.get(i).clone();
+                Element eCloned = (Element) cloned.get(i).clone();
 
                 cloned.set(i, eCloned);
             }
 
             return cloned;
-        } catch (final Exception ex) {
+        } catch (Exception ex) {
             return null;
         }
     }
@@ -68,7 +68,7 @@ public class ElementList extends ArrayList<Element> implements Cloneable {
      *    
      */
     @Override
-    public final String toString() {
+    public String toString() {
         String str = "";
 
         if (size() > 0) {
@@ -95,7 +95,7 @@ public class ElementList extends ArrayList<Element> implements Cloneable {
      * @param eList
      * @return list1 + list2
      */
-    public final ElementList concat(final ElementList eList) {
+    public ElementList concat(ElementList eList) {
         ElementList cList = new ElementList();
         for (Element e1 : this) {
             cList.add(e1);
@@ -109,7 +109,7 @@ public class ElementList extends ArrayList<Element> implements Cloneable {
     /**
      * 
      */
-    public final void printSequence(Msg msg) {
+    public void printSequence(Msg msg) {
         msg.log("[]");
         for (Element e : this) {
             msg.log("<" + e.getValue() + "> ");

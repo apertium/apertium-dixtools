@@ -95,7 +95,7 @@ public class DicConsistent extends AbstractDictTool {
      * 
      * 
      */
-    public DicConsistent(final DicSet dicset) {
+    public DicConsistent(DicSet dicset) {
         setMon1(dicset.getMon1());
         setMon2(dicset.getMon2());
         setBil1(dicset.getBil1());
@@ -111,7 +111,7 @@ public class DicConsistent extends AbstractDictTool {
      * 
      * 
      */
-    public final void doConsistent() {
+    public void doConsistent() {
         processArguments();
         actionConsistent("yes");
     }
@@ -121,11 +121,11 @@ public class DicConsistent extends AbstractDictTool {
      * @param entries1
      * @param entries2
      */
-    private final void compare() {
-        final EElementMap bilABMap = DicTools.buildHash(getBil1().getEntries());
-        final EElementMap bilBCMap = DicTools.buildHash(getBil2().getEntries());
-        final EElementMap monAMap = DicTools.buildHashMon(getMon1().getEntries());
-        final EElementMap monCMap = DicTools.buildHashMon(getMon2().getEntries());
+    private void compare() {
+        EElementMap bilABMap = DicTools.buildHash(getBil1().getEntries());
+        EElementMap bilBCMap = DicTools.buildHash(getBil2().getEntries());
+        EElementMap monAMap = DicTools.buildHashMon(getMon1().getEntries());
+        EElementMap monCMap = DicTools.buildHashMon(getMon2().getEntries());
         markCommonEntries(bilABMap, bilBCMap, monAMap, getCommonA(), getDifferentA());
         markCommonEntries(bilBCMap, bilABMap, monCMap, getCommonC(), getDifferentC());
     }
@@ -133,7 +133,7 @@ public class DicConsistent extends AbstractDictTool {
     /**
      * 
      */
-    private final void buildNotCommonDictionaries() {
+    private void buildNotCommonDictionaries() {
         buildNotCommonDictionary(getBil1(),getOpt());
         buildNotCommonDictionary(getBil2(),getOpt());
         buildNotCommonDictionary(getMon1(),getOpt());
@@ -144,7 +144,7 @@ public class DicConsistent extends AbstractDictTool {
      * 
      * @param dic
      */
-    private final void buildNotCommonDictionary(final DictionaryElement dic, DicOpts opt) {
+    private void buildNotCommonDictionary(DictionaryElement dic, DicOpts opt) {
         DictionaryElement dicNotCommon = new DictionaryElement(dic);
         String fnDic = dic.getFileName();
 
@@ -171,16 +171,16 @@ public class DicConsistent extends AbstractDictTool {
      * @param different
      * @param comm
      */
-    private final void markCommonEntries(final EElementMap bilABMap,
-            final EElementMap bilBCMap, final EElementMap monAMap,
-            final EElementMap commonA, final EElementMap differentA) {
+    private void markCommonEntries(EElementMap bilABMap,
+            EElementMap bilBCMap, EElementMap monAMap,
+            EElementMap commonA, EElementMap differentA) {
 
-        final Set<String> keysBilAB = bilABMap.keySet();
-        final Iterator<String> itBilAB = keysBilAB.iterator();
+        Set<String> keysBilAB = bilABMap.keySet();
+        Iterator<String> itBilAB = keysBilAB.iterator();
 
         while (itBilAB.hasNext()) {
-            final String str = itBilAB.next();
-            final EElementList eList = bilABMap.get(str);
+            String str = itBilAB.next();
+            EElementList eList = bilABMap.get(str);
             if (bilBCMap.containsKey(str)) {
                 commonA.put(str, eList);
                 markShared(commonA, str, monAMap);
@@ -196,17 +196,17 @@ public class DicConsistent extends AbstractDictTool {
      * @param str
      * @param monA
      */
-    private final void markShared(final EElementMap common, final String str,
-            final EElementMap mon) {
-        final String k = DicTools.clearTags(str);
-        final EElementList list = common.get(k);
-        for (final EElement e : list) {
+    private void markShared(EElementMap common, String str,
+            EElementMap mon) {
+        String k = DicTools.clearTags(str);
+        EElementList list = common.get(k);
+        for (EElement e : list) {
             e.setShared(true);
-            final String trad = e.getValue("R");
-            final String key = DicTools.clearTags(trad);
-            final EElementList monAList = mon.get(key);
+            String trad = e.getValue("R");
+            String key = DicTools.clearTags(trad);
+            EElementList monAList = mon.get(key);
             if (monAList != null) {
-                for (final EElement eMon : monAList) {
+                for (EElement eMon : monAList) {
                     eMon.setShared(true);
                 }
             }
@@ -217,7 +217,7 @@ public class DicConsistent extends AbstractDictTool {
      * 
      * @param removeNotShared
      */
-    public final void makeConsistentDictionaries(final String removeNotShared) {
+    public void makeConsistentDictionaries(String removeNotShared) {
         compare();
         buildNotCommonDictionaries();
         if (removeNotShared.equals("yes")) {
@@ -229,7 +229,7 @@ public class DicConsistent extends AbstractDictTool {
      * 
      * 
      */
-    private final void removeNotShared() {
+    private void removeNotShared() {
         getMon1().removeNotCommon();
         getMon2().removeNotCommon();
         getBil1().removeNotCommon();
@@ -240,21 +240,21 @@ public class DicConsistent extends AbstractDictTool {
      * 
      * @return Undefined
      */
-    public final EElementMap getDifferentA() {
+    public EElementMap getDifferentA() {
         return differentA;
     }
 
     /**
      * 
      * @return Undefined         */
-    public final EElementMap getDifferentC() {
+    public EElementMap getDifferentC() {
         return differentC;
     }
 
     /**
      * @return Undefined Undefined the bil1
      */
-    public final DictionaryElement getBil1() {
+    public DictionaryElement getBil1() {
         return bil1;
     }
 
@@ -262,14 +262,14 @@ public class DicConsistent extends AbstractDictTool {
      * @param bil1
      *                the bil1 to set
      */
-    public final void setBil1(final DictionaryElement bil1) {
+    public void setBil1(DictionaryElement bil1) {
         this.bil1 = bil1;
     }
 
     /**
      * @return Undefined Undefined the bil2
      */
-    public final DictionaryElement getBil2() {
+    public DictionaryElement getBil2() {
         return bil2;
     }
 
@@ -277,14 +277,14 @@ public class DicConsistent extends AbstractDictTool {
      * @param bil2
      *                the bil2 to set
      */
-    public final void setBil2(final DictionaryElement bil2) {
+    public void setBil2(DictionaryElement bil2) {
         this.bil2 = bil2;
     }
 
     /**
      * @return the mon1
      */
-    public final DictionaryElement getMon1() {
+    public DictionaryElement getMon1() {
         return mon1;
     }
 
@@ -292,14 +292,14 @@ public class DicConsistent extends AbstractDictTool {
      * @param mon1
      *                the mon1 to set
      */
-    private final void setMon1(final DictionaryElement mon1) {
+    private void setMon1(DictionaryElement mon1) {
         this.mon1 = mon1;
     }
 
     /**
      * @return the mon2
      */
-    public final DictionaryElement getMon2() {
+    public DictionaryElement getMon2() {
         return mon2;
     }
 
@@ -307,28 +307,28 @@ public class DicConsistent extends AbstractDictTool {
      * @param mon2
      *                the mon2 to set
      */
-    private final void setMon2(final DictionaryElement mon2) {
+    private void setMon2(DictionaryElement mon2) {
         this.mon2 = mon2;
     }
 
     /**
      * @return the commonA
      */
-    public final EElementMap getCommonA() {
+    public EElementMap getCommonA() {
         return commonA;
     }
 
     /**
      * @return the commonC
      */
-    public final EElementMap getCommonC() {
+    public EElementMap getCommonC() {
         return commonC;
     }
 
     /**
      * @return the notCommonSuffix
      */
-    public final String getNotCommonSuffix() {
+    public String getNotCommonSuffix() {
         return notCommonSuffix;
     }
 
@@ -336,7 +336,7 @@ public class DicConsistent extends AbstractDictTool {
      * @param notCommonSuffix
      *                the notCommonSuffix to set
      */
-    private final void setNotCommonSuffix(final String notCommonSuffix) {
+    private void setNotCommonSuffix(String notCommonSuffix) {
         this.notCommonSuffix = notCommonSuffix;
     }
 
@@ -345,8 +345,8 @@ public class DicConsistent extends AbstractDictTool {
      * @param removeNotCommon
      * @return Undefined
      */
-    private final DicConsistent actionConsistent(String removeNotCommon) {
-        final DicConsistent dicConsistent = new DicConsistent(getDicSet());
+    private DicConsistent actionConsistent(String removeNotCommon) {
+        DicConsistent dicConsistent = new DicConsistent(getDicSet());
         dicConsistent.makeConsistentDictionaries(removeNotCommon);
         dicSet.printXML("consistent",getOpt());
         return dicConsistent;
@@ -357,7 +357,7 @@ public class DicConsistent extends AbstractDictTool {
      * 
      */
     private void processArguments() {
-        final int nArgs = getArguments().length;
+        int nArgs = getArguments().length;
         String sDicMonA, sDicMonC, sDicBilAB, sDicBilBC;
         sDicMonA = sDicMonC = sDicBilAB = sDicBilBC = null;
         boolean bilABReverse, bilBCReverse;
@@ -415,10 +415,10 @@ public class DicConsistent extends AbstractDictTool {
 
         }
 
-        final DictionaryElement bil1 = DicTools.readBilingual(sDicBilAB, bilABReverse);
-        final DictionaryElement bil2 = DicTools.readBilingual(sDicBilBC, bilBCReverse);
-        final DictionaryElement mon1 = DicTools.readMonolingual(sDicMonA);
-        final DictionaryElement mon2 = DicTools.readMonolingual(sDicMonC);
+        DictionaryElement bil1 = DicTools.readBilingual(sDicBilAB, bilABReverse);
+        DictionaryElement bil2 = DicTools.readBilingual(sDicBilBC, bilBCReverse);
+        DictionaryElement mon1 = DicTools.readMonolingual(sDicMonA);
+        DictionaryElement mon2 = DicTools.readMonolingual(sDicMonC);
 
         DicSet dicSet = new DicSet(mon1, bil1, mon2, bil2);
         setDicSet(dicSet);
@@ -427,7 +427,7 @@ public class DicConsistent extends AbstractDictTool {
     /**
      * @return the dicSet
      */
-    private final DicSet getDicSet() {
+    private DicSet getDicSet() {
         return dicSet;
     }
 
@@ -435,21 +435,21 @@ public class DicConsistent extends AbstractDictTool {
      * @param dicSet
      *                the dicSet to set
      */
-    private final void setDicSet(DicSet dicSet) {
+    private void setDicSet(DicSet dicSet) {
         this.dicSet = dicSet;
     }
 
     /**
      * 
      */
-    public final void setOutDir(final String path) {
+    public void setOutDir(String path) {
         this.outDir = path;
     }
 
     /**
      * 
      */
-    public final String getOutDir() {
+    public String getOutDir() {
         return this.outDir;
     }
 }

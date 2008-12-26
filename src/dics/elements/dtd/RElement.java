@@ -39,7 +39,7 @@ public class RElement extends ContentElement {
      * 
      * @param cE
      */
-    public RElement(final ContentElement cE) {
+    public RElement(ContentElement cE) {
         super(cE);
         setTagName("r");
     }

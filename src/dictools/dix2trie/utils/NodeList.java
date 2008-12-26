@@ -32,7 +32,7 @@ public class NodeList extends HashMap<String, Node> {
      * @param node
      * @return The node
      */
-    public final Node put(final Node node) {
+    public Node put(Node node) {
         return super.put(node.getValue(), node);
     }
 
@@ -41,7 +41,7 @@ public class NodeList extends HashMap<String, Node> {
      * @param key
      * @return The key
      */
-    public final Node getNode(final String key) {
+    public Node getNode(String key) {
         return this.get(key);
     }
 }

@@ -58,17 +58,17 @@ public class DicTools {
      * 
      * @param entries
      * @return Undefined         */
-    public static final EElementMap buildHash(final ArrayList<EElement> entries) {
-        final EElementMap entriesMap = new EElementMap();
-        for (final EElement e : entries) {
-            final String value = e.getValue("L");
-            final String key = DicTools.clearTags(value);
+    public static EElementMap buildHash(ArrayList<EElement> entries) {
+        EElementMap entriesMap = new EElementMap();
+        for (EElement e : entries) {
+            String value = e.getValue("L");
+            String key = DicTools.clearTags(value);
             if (entriesMap.containsKey(key)) {
-                final EElementList eList = entriesMap.get(key);
+                EElementList eList = entriesMap.get(key);
                 eList.add(e);
                 entriesMap.put(key, eList);
             } else {
-                final EElementList eList = new EElementList();
+                EElementList eList = new EElementList();
                 eList.add(e);
                 entriesMap.put(key, eList);
             }
@@ -81,18 +81,18 @@ public class DicTools {
      * @param entries
      * @param side
      * @return Undefined         */
-    public static final EElementMap buildHash(ArrayList<EElement> entries, String side) {
+    public static EElementMap buildHash(ArrayList<EElement> entries, String side) {
         EElementMap entriesMap = new EElementMap();
-        for (final EElement e : entries) {
-            final String value = e.getValue(side);
-            final String key = DicTools.clearTags(value);
+        for (EElement e : entries) {
+            String value = e.getValue(side);
+            String key = DicTools.clearTags(value);
 
             if (entriesMap.containsKey(key)) {
-                final EElementList eList = entriesMap.get(key);
+                EElementList eList = entriesMap.get(key);
                 eList.add(e);
                 entriesMap.put(key, eList);
             } else {
-                final EElementList eList = new EElementList();
+                EElementList eList = new EElementList();
                 eList.add(e);
                 entriesMap.put(key, eList);
             }
@@ -105,22 +105,22 @@ public class DicTools {
      * @param entries
      * @return Undefined
      */
-    public static final EElementMap buildHashMon(ArrayList<EElement> entries) {
-        final EElementMap entriesMap = new EElementMap();
+    public static EElementMap buildHashMon(ArrayList<EElement> entries) {
+        EElementMap entriesMap = new EElementMap();
 
-        for (final EElement e : entries) {
+        for (EElement e : entries) {
             String lemma = e.getLemma();
             if (lemma == null) {
                 //lemma = e.getValueNoTags();
                 lemma = e.getValue("L");
             }
-            final String key = DicTools.clearTags(lemma);
+            String key = DicTools.clearTags(lemma);
             if (entriesMap.containsKey(key)) {
-                final EElementList eList = entriesMap.get(key);
+                EElementList eList = entriesMap.get(key);
                 eList.add(e);
                 entriesMap.put(key, eList);
             } else {
-                final EElementList eList = new EElementList();
+                EElementList eList = new EElementList();
                 eList.add(e);
                 entriesMap.put(key, eList);
             }
@@ -133,9 +133,9 @@ public class DicTools {
      * @param name
      * @return Undefined         
      */
-    public static String reverseDicName(final String name) {
-        final String[] st = DicTools.getSourceAndTarget(name);
-        final String newFileName = st[2] + "apertium-" + st[1] + "-" + st[0] + "." + st[1] + "-" + st[0] + ".dix";
+    public static String reverseDicName(String name) {
+        String[] st = DicTools.getSourceAndTarget(name);
+        String newFileName = st[2] + "apertium-" + st[1] + "-" + st[0] + "." + st[1] + "-" + st[0] + ".dix";
         return newFileName;
     }
 
@@ -143,25 +143,25 @@ public class DicTools {
      * 
      * @param name
      * @return Undefined         */
-    public static String[] getSourceAndTarget(final String name) {
-        final String[] st = new String[3];
-        final String langCode = "[a-z]+";
-        final String langPair = langCode + "\\-" + langCode;
+    public static String[] getSourceAndTarget(String name) {
+        String[] st = new String[3];
+        String langCode = "[a-z]+";
+        String langPair = langCode + "\\-" + langCode;
         String str = "";
 
-        final String[] parts = name.split("apertium-");
-        for (final String element : parts) {
+        String[] parts = name.split("apertium-");
+        for (String element : parts) {
             str = element;
         }
 
         String txt = "apertium-" + langPair + "." + langPair + ".dix";
         
         
-        final String[] paths = str.split(txt);
+        String[] paths = str.split(txt);
         
         st[2] = paths[0];
         int k = 0;
-        final String[] parts2 = str.split("[.]");
+        String[] parts2 = str.split("[.]");
 
         if (paths.length < parts2.length-1 && parts2.length-1>0) {
           System.err.println("WARNING: file name "+str+" does not match the pattern " + txt);
@@ -171,8 +171,8 @@ public class DicTools {
         for (int i = 0; i < (parts2.length - 1); i++) {
             k = 0;
             str = parts2[i];
-            final String[] parts3 = str.split("-");
-            for (final String element : parts3) {
+            String[] parts3 = str.split("-");
+            for (String element : parts3) {
                 str = parts[i];
                 if (k == 0) {
                     st[0] = element;
@@ -191,7 +191,7 @@ public class DicTools {
      * @param str
      * @return Undefined
      */
-    public static final String removeExtension(final String str) {
+    public static String removeExtension(String str) {
         String head = str.replaceAll("\\.dix", "");
         head = head.replaceAll("\\.metadix", "");
         head = head.replaceAll("/dics/", "/dix/");
@@ -204,21 +204,21 @@ public class DicTools {
      * @param monA
      * @param monB
      */
-    public static EElementList[] makeConsistent(final DictionaryElement bilAB,
-            final DictionaryElement monA, final DictionaryElement monB) {
-        final EElementList[] consistentMons = new EElementList[2];
-        final ArrayList<EElement> elements = bilAB.getEntries();
+    public static EElementList[] makeConsistent(DictionaryElement bilAB,
+            DictionaryElement monA, DictionaryElement monB) {
+        EElementList[] consistentMons = new EElementList[2];
+        ArrayList<EElement> elements = bilAB.getEntries();
 
-        final EElementMap bilABMapL = DicTools.buildHash(elements, "L");
-        final EElementMap bilABMapR = DicTools.buildHash(elements, "R");
+        EElementMap bilABMapL = DicTools.buildHash(elements, "L");
+        EElementMap bilABMapR = DicTools.buildHash(elements, "R");
 
-        final EElementMap monAMap = DicTools.buildHashMon(monA.getEntries());
-        final EElementMap monBMap = DicTools.buildHashMon(monB.getEntries());
+        EElementMap monAMap = DicTools.buildHashMon(monA.getEntries());
+        EElementMap monBMap = DicTools.buildHashMon(monB.getEntries());
 
-        final EElementList monAConsistent = DicTools.makeConsistent(bilABMapL,
+        EElementList monAConsistent = DicTools.makeConsistent(bilABMapL,
                 "L", monAMap);
 
-        final EElementList monBConsistent = DicTools.makeConsistent(bilABMapR,
+        EElementList monBConsistent = DicTools.makeConsistent(bilABMapR,
                 "R", monBMap);
 
         Collections.sort(monAConsistent);
@@ -235,16 +235,16 @@ public class DicTools {
      * @param side
      * @param monMap
      */
-    private static EElementList makeConsistent(final EElementMap bilABMap,
-            final String side, final EElementMap monMap) {
-        final EElementList consistentMon = new EElementList();
-        final Set<String> keySet = monMap.keySet();
-        final Iterator<String> it = keySet.iterator();
+    private static EElementList makeConsistent(EElementMap bilABMap,
+            String side, EElementMap monMap) {
+        EElementList consistentMon = new EElementList();
+        Set<String> keySet = monMap.keySet();
+        Iterator<String> it = keySet.iterator();
 
         while (it.hasNext()) {
-            final String key = it.next();
-            final EElementList eList = monMap.get(key);
-            for (final EElement e : eList) {
+            String key = it.next();
+            EElementList eList = monMap.get(key);
+            for (EElement e : eList) {
                 String lemma = e.getLemma();
                 // in case no lemma is defined
                 if (lemma == null) {
@@ -267,21 +267,21 @@ public class DicTools {
      * @param monC
      * @return Undefined         
      */
-    public static final DicSet makeConsistentBilAndMonols(
-            final DictionaryElement bilAB, final DictionaryElement monA,
-            final DictionaryElement monC) {
-        final EElementList[] commonCrossedMons = DicTools.makeConsistent(bilAB,
+    public static DicSet makeConsistentBilAndMonols(
+            DictionaryElement bilAB, DictionaryElement monA,
+            DictionaryElement monC) {
+        EElementList[] commonCrossedMons = DicTools.makeConsistent(bilAB,
                 monA, monC);
-        final EElementList crossedMonA = commonCrossedMons[0];
-        final EElementList crossedMonB = commonCrossedMons[1];
+        EElementList crossedMonA = commonCrossedMons[0];
+        EElementList crossedMonB = commonCrossedMons[1];
 
-        final DictionaryElement monACrossed = new DictionaryElement(monA);
+        DictionaryElement monACrossed = new DictionaryElement(monA);
         monACrossed.setMainSection(crossedMonA);
 
-        final DictionaryElement monBCrossed = new DictionaryElement(monC);
+        DictionaryElement monBCrossed = new DictionaryElement(monC);
         monBCrossed.setMainSection(crossedMonB);
 
-        final DicSet dicSet = new DicSet(bilAB, monACrossed, monBCrossed);
+        DicSet dicSet = new DicSet(bilAB, monACrossed, monBCrossed);
         return dicSet;
     }
 
@@ -290,7 +290,7 @@ public class DicTools {
      * @return Undefined         
      */
     public static HashMap<String, String> getSdefDescriptions() {
-        final HashMap<String, String> d = new HashMap<String, String>();
+        HashMap<String, String> d = new HashMap<String, String>();
 
         d.put("aa", "adjective-adjective");
         d.put("acr", "acronym");
@@ -367,7 +367,7 @@ public class DicTools {
      * @return Undefined         */
     public static DictionaryElement readMonolingual(String sMonFilename) {
         DictionaryReader dicReader = new DictionaryReader(sMonFilename);
-        final DictionaryElement mon = dicReader.readDic();
+        DictionaryElement mon = dicReader.readDic();
         mon.setFileName(sMonFilename);
         dicReader = null;
         return mon;
@@ -380,18 +380,18 @@ public class DicTools {
      * @return Undefined         */
     public static DictionaryElement readBilingual(String sBilFilename,  boolean reverse) {
         DictionaryReader dicReaderBil = new DictionaryReader(sBilFilename);
-        final DictionaryElement bil = dicReaderBil.readDic();
+        DictionaryElement bil = dicReaderBil.readDic();
         bil.setFileName(sBilFilename);
         bil.setType("BIL");
 
         if (reverse) {
             bil.reverse();
-            final String reverseFileName = DicTools.reverseDicName(sBilFilename);
+            String reverseFileName = DicTools.reverseDicName(sBilFilename);
             //bil.printXML(reverseFileName);
             bil.setFileName(reverseFileName);
         }
 
-        final String[] st = DicTools.getSourceAndTarget(bil.getFileName());
+        String[] st = DicTools.getSourceAndTarget(bil.getFileName());
         bil.setLeftLanguage(st[0]);
         bil.setRightLanguage(st[1]);
         dicReaderBil = null;

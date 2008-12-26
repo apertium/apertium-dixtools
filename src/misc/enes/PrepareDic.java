@@ -41,7 +41,7 @@ public class PrepareDic {
     /**
      * 
      */
-    public PrepareDic(final String missingFileName, final String ncBilFileName) {
+    public PrepareDic(String missingFileName, String ncBilFileName) {
         DictionaryReader r1 = new DictionaryReader(ncBilFileName);
         ncBil = r1.readDic();
         missing = this.getmap(missingFileName);
@@ -51,7 +51,7 @@ public class PrepareDic {
     /**
      * 
      */
-    public final void prepare() {
+    public void prepare() {
         DictionaryElement dic = new DictionaryElement();
         SectionElement section = new SectionElement("main", "standard");
         dic.addSection(section);
@@ -77,7 +77,7 @@ public class PrepareDic {
      * @param fileName
      * @return Map with missing entries
      */
-    private HashMap<String, String> getmap(final String fileName) {
+    private HashMap<String, String> getmap(String fileName) {
         HashMap<String, String> map = new HashMap<String, String>();
         try {
             FileInputStream fstream = new FileInputStream(fileName);

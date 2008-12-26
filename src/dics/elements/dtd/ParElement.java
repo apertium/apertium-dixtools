@@ -55,7 +55,7 @@ public class ParElement extends Element {
      * 
      * @param value
      */
-    public ParElement(final String value) {
+    public ParElement(String value) {
         setTagName("par");
         n = value;
     }
@@ -64,7 +64,7 @@ public class ParElement extends Element {
      * 
      * @param pE
      */
-    public ParElement(final ParElement pE) {
+    public ParElement(ParElement pE) {
         n = pE.getValue();
     }
 
@@ -73,7 +73,7 @@ public class ParElement extends Element {
      * @param value
      */
     @Override
-    public final void setValue(final String value) {
+    public void setValue(String value) {
         n = value;
     }
 
@@ -81,7 +81,7 @@ public class ParElement extends Element {
      * 
      * @return Undefined         */
     @Override
-    public final String getValue() {
+    public String getValue() {
         return n;
     }
 
@@ -89,7 +89,7 @@ public class ParElement extends Element {
      * 
      * @param sa
      */
-    public final void setSa(final String sa) {
+    public void setSa(String sa) {
         this.sa = sa;
     }
 
@@ -97,7 +97,7 @@ public class ParElement extends Element {
      * 
      * @return 'sa' attribute
      */
-    public final String getSa() {
+    public String getSa() {
         return this.sa;
     }
 
@@ -107,7 +107,7 @@ public class ParElement extends Element {
      * @throws java.io.IOException
      */
     @Override
-    public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
+    public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
         dos.append(makeCommentIfData(processingComments));
@@ -134,7 +134,7 @@ public class ParElement extends Element {
      * 
      */
     @Override
-    public final String toString() {
+    public String toString() {
         return "<" + getTagName() + " n=\"" + n + "\"/> ";
     }
 

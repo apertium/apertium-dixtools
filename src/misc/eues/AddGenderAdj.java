@@ -62,7 +62,7 @@ public class AddGenderAdj {
      * 
      * 
      */
-    public final void processArguments() {
+    public void processArguments() {
         morphDic = arguments[1];
         bilDic = arguments[2];
         out = arguments[3];
@@ -72,7 +72,7 @@ public class AddGenderAdj {
      * 
      * 
      */
-    public final void doAddGender() {
+    public void doAddGender() {
         processArguments();
 
         DictionaryReader reader = new DictionaryReader(morphDic);
@@ -184,7 +184,7 @@ public class AddGenderAdj {
     /**
      * @return the arguments
      */
-    public final String[] getArguments() {
+    public String[] getArguments() {
         return arguments;
     }
 
@@ -192,7 +192,7 @@ public class AddGenderAdj {
      * @param arguments
      *                the arguments to set
      */
-    public final void setArguments(String[] arguments) {
+    public void setArguments(String[] arguments) {
         this.arguments = arguments;
     }
 }

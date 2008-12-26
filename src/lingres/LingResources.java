@@ -72,7 +72,7 @@ public class LingResources extends ArrayList {
      * 
      * @return A list of resources
      */
-    public final ArrayList<Resource> getResourceList() {
+    public ArrayList<Resource> getResourceList() {
         ArrayList<Resource> resources = new ArrayList<Resource>();
         for (Object o : this) {
             if (o instanceof Resource) {

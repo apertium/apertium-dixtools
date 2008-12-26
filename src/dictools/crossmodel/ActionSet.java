@@ -66,7 +66,7 @@ public class ActionSet extends ArrayList<Action> {
      * 
      * @return Undefined         
      */
-    public final int getNumberOfConstants() {
+    public int getNumberOfConstants() {
         return numberOfConstants;
     }
 
@@ -74,7 +74,7 @@ public class ActionSet extends ArrayList<Action> {
      * 
      * @return Undefined         
      */
-    public final String getName() {
+    public String getName() {
         return name;
     }
 
@@ -82,7 +82,7 @@ public class ActionSet extends ArrayList<Action> {
      * 
      * @param name
      */
-    public final void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -90,7 +90,7 @@ public class ActionSet extends ArrayList<Action> {
      * 
      * @param numberOfConstants
      */
-    public final void setNumberOfConstants(int numberOfConstants) {
+    public void setNumberOfConstants(int numberOfConstants) {
         this.numberOfConstants = numberOfConstants;
     }
 
@@ -98,14 +98,14 @@ public class ActionSet extends ArrayList<Action> {
      * 
      * 
      */
-    public final void incrementNumberOfConstants() {
+    public void incrementNumberOfConstants() {
         numberOfConstants += 1;
     }
 
     /**
      * 
      */
-    public final void incrementPatternLength() {
+    public void incrementPatternLength() {
         this.patternLength += 1;
     }
 
@@ -113,7 +113,7 @@ public class ActionSet extends ArrayList<Action> {
      * 
      * 
      */
-    public final void print(Msg msg) {
+    public void print(Msg msg) {
         for (Action action : this) {
             action.print(msg);
         }
@@ -124,7 +124,7 @@ public class ActionSet extends ArrayList<Action> {
      * @param dos
      * @throws java.io.IOException
      */
-    public final void printXML(Appendable dos, DicOpts opt) throws IOException {
+    public void printXML(Appendable dos, DicOpts opt) throws IOException {
         dos.append("<action-set>\n");
         for (Action action : this) {
             action.printXML(dos, opt);
@@ -135,14 +135,14 @@ public class ActionSet extends ArrayList<Action> {
     /**
      * 
      * @return Undefined         */
-    public final int getPatternLength() {
+    public int getPatternLength() {
         return patternLength;
     }
 
     /**
      * 
      */
-    public final void calculatePatternLength() {
+    public void calculatePatternLength() {
         // 3 because of 3 <b> tags
         // 2 because of 2 restrictions
         patternLength = patternLength - getNumberOfTails() - 2 - 3;
@@ -151,7 +151,7 @@ public class ActionSet extends ArrayList<Action> {
     /**
      * 
      * @return Undefined         */
-    private final Integer getNumberOfTails() {
+    private Integer getNumberOfTails() {
         int nTails = 0;
         CrossAction cA = getCrossAction();
 
@@ -181,7 +181,7 @@ public class ActionSet extends ArrayList<Action> {
      * @param list
      * @return Undefined         
      */
-    private final boolean containsTail(final SElementList list) {
+    private boolean containsTail(SElementList list) {
         for (SElement s : list) {
             if (s.getValue().equals("0")) {
                 return true;
@@ -194,7 +194,7 @@ public class ActionSet extends ArrayList<Action> {
      * 
      * @return Undefined         
      */
-    public final int getNumberOfRestrictions() {
+    public int getNumberOfRestrictions() {
         CrossAction cA = getCrossAction();
         int nR = 0;
         if (cA.getPattern().getAB().hasRestriction()) {
@@ -210,14 +210,14 @@ public class ActionSet extends ArrayList<Action> {
      * 
      * @param patternLength
      */
-    public final void setPatternLength(Integer patternLength) {
+    public void setPatternLength(Integer patternLength) {
         this.patternLength = patternLength;
     }
 
     /**
      * @return the tails
      */
-    public final HashMap<String, ElementList> getTails() {
+    public HashMap<String, ElementList> getTails() {
         return tails;
     }
 
@@ -225,14 +225,14 @@ public class ActionSet extends ArrayList<Action> {
      * @param tails
      *                the tails to set
      */
-    public final void setTails(HashMap<String, ElementList> tails) {
+    public void setTails(HashMap<String, ElementList> tails) {
         this.tails = tails;
     }
 
     /**
      * @return the crossAction
      */
-    public final CrossAction getCrossAction() {
+    public CrossAction getCrossAction() {
         return crossAction;
     }
 
@@ -240,7 +240,7 @@ public class ActionSet extends ArrayList<Action> {
      * @param crossAction
      *                the crossAction to set
      */
-    public final void setCrossAction(CrossAction crossAction) {
+    public void setCrossAction(CrossAction crossAction) {
         this.crossAction = crossAction;
     }
 
@@ -250,7 +250,7 @@ public class ActionSet extends ArrayList<Action> {
      * @param patternID
      * @return true if the action set is valid
      */
-    public final boolean isValid(final HashMap<String, String> definedVars, final String patternID) {
+    public boolean isValid(HashMap<String, String> definedVars, String patternID) {
         boolean errorsFound = false;
         for (Action a : this) {
             if (!a.isValid(definedVars, patternID)) {

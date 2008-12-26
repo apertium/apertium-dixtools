@@ -35,7 +35,7 @@ public class ActionSetList extends HashMap<String, ActionSet> {
     /**
      * 
      */
-    private static final long serialVersionUID = 1L;
+    private static long serialVersionUID = 1L;
     /**
      * 
      */
@@ -63,7 +63,7 @@ public class ActionSetList extends HashMap<String, ActionSet> {
      * 
      * 
      */
-    public final void print() {
+    public void print() {
         Set keySet = keySet();
         Iterator it = keySet.iterator();
         int max = size();
@@ -86,7 +86,7 @@ public class ActionSetList extends HashMap<String, ActionSet> {
      * 
      * @return Undefined    
      */
-    public final ActionSet getBestActionSet() {
+    public ActionSet getBestActionSet() {
         ActionSet defaultActionSet = null;
         boolean defaultCanBeApplied = false;
         ArrayList<ActionSet> actionSetList = new ArrayList<ActionSet>();
@@ -122,7 +122,7 @@ public class ActionSetList extends HashMap<String, ActionSet> {
      * @param actionSetList
      * @return Undefined     
      */
-    private final ArrayList<ActionSet> getLongestPatterns(ArrayList<ActionSet> actionSetList) {
+    private ArrayList<ActionSet> getLongestPatterns(ArrayList<ActionSet> actionSetList) {
         int maxLength = 0;
         ArrayList<ActionSet> longestPatterns = new ArrayList<ActionSet>();
         for (ActionSet actionSet : actionSetList) {
@@ -146,7 +146,7 @@ public class ActionSetList extends HashMap<String, ActionSet> {
      * @param actionSetList
      * @return List of most concrete patterns
      */
-    private final ArrayList<ActionSet> getMostConcretePatterns(final ArrayList<ActionSet> actionSetList) {
+    private ArrayList<ActionSet> getMostConcretePatterns(ArrayList<ActionSet> actionSetList) {
         int maxNConstants = 0;
         ArrayList<ActionSet> mostConcrete = new ArrayList<ActionSet>();
         for (ActionSet actionSet : actionSetList) {
@@ -169,7 +169,7 @@ public class ActionSetList extends HashMap<String, ActionSet> {
      * 
      * @return Undefined     
      */
-    private final boolean isDefinedBestAction() {
+    private boolean isDefinedBestAction() {
         return this.bestActionSet != null;
     }
 
@@ -177,7 +177,7 @@ public class ActionSetList extends HashMap<String, ActionSet> {
      * 
      * @param action
      */
-    private final void setBestActionSet(ActionSet action) {
+    private void setBestActionSet(ActionSet action) {
         this.bestActionSet = action;
 
     }

@@ -39,7 +39,7 @@ public class TextElement extends Element {
      * 
      * @param str
      */
-    public TextElement(final String str) {
+    public TextElement(String str) {
         setTagName("");
         value = str;
     }
@@ -50,7 +50,7 @@ public class TextElement extends Element {
      * @throws java.io.IOException
      */
     @Override
-    public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
+    public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
         dos.append(value);
@@ -61,12 +61,12 @@ public class TextElement extends Element {
      * 
      * @return Undefined         */
     @Override
-    public final String getValue() {
+    public String getValue() {
         return value;
     }
 
     @Override
-    public final void setValue(final String v) {
+    public void setValue(String v) {
         value = v;
     }
 
@@ -74,7 +74,7 @@ public class TextElement extends Element {
      * 
      */
     @Override
-    public final String toString() {
+    public String toString() {
         String str = "";
         str += getValue();
         return str;

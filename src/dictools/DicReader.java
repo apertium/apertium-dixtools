@@ -66,7 +66,7 @@ public class DicReader {
      * 
      * 
      */
-    public DicReader(final String fileName) {
+    public DicReader(String fileName) {
         DictionaryReader dicReader = new DictionaryReader(fileName);
         DictionaryElement d = dicReader.readDic();
         setDic(d);
@@ -111,7 +111,7 @@ public class DicReader {
      * 
      * 
      */
-    public final void getDefinitions() {
+    public void getDefinitions() {
         DictionaryElement dic = getDic();
 
         SdefsElement sdefs = dic.getSdefs();
@@ -125,7 +125,7 @@ public class DicReader {
      * 
      * 
      */
-    public final void getPairs() {
+    public void getPairs() {
         DictionaryElement dic = getDic();
 
         int nLemmas = 0;
@@ -149,7 +149,7 @@ public class DicReader {
     /**
      * 
      */
-    public final void getListWithDot() {
+    public void getListWithDot() {
         DictionaryElement dic = getDic();
 
         int nLemmas = 0;
@@ -168,7 +168,7 @@ public class DicReader {
      * 
      * 
      */
-    public final void doit() {
+    public void doit() {
         if (getAction().equals("list-paradigms")) {
             getListOfParadigms();
         }
@@ -189,7 +189,7 @@ public class DicReader {
     /**
      * @return the dic
      */
-    public final DictionaryElement getDic() {
+    public DictionaryElement getDic() {
         return dic;
     }
 
@@ -197,7 +197,7 @@ public class DicReader {
      * @param dic
      *                the dic to set
      */
-    public final void setDic(DictionaryElement dic) {
+    public void setDic(DictionaryElement dic) {
         this.dic = dic;
     }
 
@@ -205,7 +205,7 @@ public class DicReader {
      * 
      * @param fileName
      */
-    public final void setDic(final String fileName) {
+    public void setDic(String fileName) {
         DictionaryReader dicReader = new DictionaryReader(fileName);
         DictionaryElement dic = dicReader.readDic();
         setDic(dic);
@@ -214,7 +214,7 @@ public class DicReader {
     /**
      * @return the action
      */
-    public final String getAction() {
+    public String getAction() {
         return action;
     }
 
@@ -222,14 +222,14 @@ public class DicReader {
      * @param action
      *                the action to set
      */
-    public final void setAction(String action) {
+    public void setAction(String action) {
         this.action = action;
     }
 
     /**
      * @return the urlDic
      */
-    public final boolean isUrlDic() {
+    public boolean isUrlDic() {
         return urlDic;
     }
 
@@ -237,14 +237,14 @@ public class DicReader {
      * @param urlDic
      *                the urlDic to set
      */
-    public final void setUrlDic(boolean urlDic) {
+    public void setUrlDic(boolean urlDic) {
         this.urlDic = urlDic;
     }
 
     /**
      * @return the url
      */
-    public final String getUrl() {
+    public String getUrl() {
         return url;
     }
 
@@ -252,7 +252,7 @@ public class DicReader {
      * @param url
      *                the url to set
      */
-    public final void setUrl(String url) {
+    public void setUrl(String url) {
         this.url = url;
         try {
             URL theUrl = new URL(url);

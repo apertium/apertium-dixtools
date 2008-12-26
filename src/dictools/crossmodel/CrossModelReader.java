@@ -35,7 +35,7 @@ public class CrossModelReader extends XMLReader {
      * 
      * @param fileName
      */
-    public CrossModelReader(final String fileName) {
+    public CrossModelReader(String fileName) {
         super(fileName);
     }
 
@@ -44,12 +44,12 @@ public class CrossModelReader extends XMLReader {
      * @return Undefined         */
     public CrossModel readCrossModel() {
         analize();
-        final CrossModel crossModel = new CrossModel();
+        CrossModel crossModel = new CrossModel();
         Element root = getDocument().getDocumentElement();
-        for (final Element childElement : readChildren(root)) {
-            final String childElementName = childElement.getNodeName();
+        for (Element childElement : readChildren(root)) {
+            String childElementName = childElement.getNodeName();
             if (childElementName.equals("cross-action")) {
-                final CrossAction crossAction = readCrossAction(childElement);
+                CrossAction crossAction = readCrossAction(childElement);
                 crossModel.addCrossAction(crossAction);
             }
         }
@@ -63,19 +63,19 @@ public class CrossModelReader extends XMLReader {
      * @param e
      * @return Undefined
      */
-    public final CrossAction readCrossAction(final Element e) {
-        final CrossAction crossAction = new CrossAction();
-        final String id = getAttributeValue(e, "id");
+    public CrossAction readCrossAction(Element e) {
+        CrossAction crossAction = new CrossAction();
+        String id = getAttributeValue(e, "id");
         crossAction.setId(id);
 
-        for (final Element childElement : readChildren(e)) {
-            final String childElementName = childElement.getNodeName();
+        for (Element childElement : readChildren(e)) {
+            String childElementName = childElement.getNodeName();
             if (childElementName.equals("pattern")) {
-                final Pattern pattern = readPattern(childElement);
+                Pattern pattern = readPattern(childElement);
                 crossAction.setPattern(pattern);
             }
             if (childElementName.equals("action-set")) {
-                final ActionSet actionSet = readActionSet(childElement);
+                ActionSet actionSet = readActionSet(childElement);
                 crossAction.setActionSet(actionSet);
             }
 
@@ -88,12 +88,12 @@ public class CrossModelReader extends XMLReader {
      * @param e
      * @return Undefined         
      */
-    public final Pattern readPattern(final Element e) {
+    public Pattern readPattern(Element e) {
         int i = 0;
-        final Pattern pattern = new Pattern();
+        Pattern pattern = new Pattern();
 
-        for (final Element childElement : readChildren(e)) {
-            final String childElementName = childElement.getNodeName();
+        for (Element childElement : readChildren(e)) {
+            String childElementName = childElement.getNodeName();
             if (childElementName.equals("e")) {
                 EElement eE = readEElement(childElement);
                 if (i == 0) {
@@ -113,12 +113,12 @@ public class CrossModelReader extends XMLReader {
      * @param e
      * @return Undefined         
      */
-    public final ActionSet readActionSet(final Element e) {
-        final ActionSet actionSet = new ActionSet();
-        for (final Element childElement : readChildren(e)) {
-            final String childElementName = childElement.getNodeName();
+    public ActionSet readActionSet(Element e) {
+        ActionSet actionSet = new ActionSet();
+        for (Element childElement : readChildren(e)) {
+            String childElementName = childElement.getNodeName();
             if (childElementName.equals("action")) {
-                final Action action = readAction(childElement);
+                Action action = readAction(childElement);
                 if (action.getE().hasRestriction()) {
                 }
                 actionSet.add(action);
@@ -132,12 +132,12 @@ public class CrossModelReader extends XMLReader {
      * @param e
      * @return Undefined        
      */
-    public final Action readAction(final Element e) {
-        final Action action = new Action();
-        for (final Element childElement : readChildren(e)) {
-            final String childElementName = childElement.getNodeName();
+    public Action readAction(Element e) {
+        Action action = new Action();
+        for (Element childElement : readChildren(e)) {
+            String childElementName = childElement.getNodeName();
             if (childElementName.equals("e")) {
-                final EElement eE = readEElement(childElement);
+                EElement eE = readEElement(childElement);
                 action.setAction(eE);
             }
         }

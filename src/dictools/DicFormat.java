@@ -58,7 +58,7 @@ public class DicFormat  extends AbstractDictTool{
      * 
      * @param dic
      */
-    public DicFormat(final DictionaryElement dic) {
+    public DicFormat(DictionaryElement dic) {
         dicFormatted = dic;
     }
 
@@ -66,13 +66,13 @@ public class DicFormat  extends AbstractDictTool{
      * 
      * @return Undefined         
      */
-    public final DictionaryElement format() {
-        final EHashMap eMap = new EHashMap();
+    public DictionaryElement format() {
+        EHashMap eMap = new EHashMap();
         for (SectionElement section : dicFormatted.getSections()) {
             int duplicated = 0;
-            final EElementList elements = section.getEElements();
-            for (final EElement e : elements) {
-                final String e1Key = e.toString();
+            EElementList elements = section.getEElements();
+            for (EElement e : elements) {
+                String e1Key = e.toString();
                 if (!eMap.containsKey(e1Key)) {
                     eMap.put(e1Key, e);
                     IElement iE = e.getI();
@@ -129,7 +129,7 @@ public class DicFormat  extends AbstractDictTool{
      * 
      * 
      */
-    public final void doFormat() {
+    public void doFormat() {
         processArguments();
         actionFormat();
     }
@@ -157,8 +157,8 @@ public class DicFormat  extends AbstractDictTool{
      * 
      * 
      */
-    private final void actionFormat() {
-        final DictionaryElement dicFormatted = format();
+    private void actionFormat() {
+        DictionaryElement dicFormatted = format();
         dicFormatted.printXML(getOut(),getOpt());
     }
 
@@ -166,14 +166,14 @@ public class DicFormat  extends AbstractDictTool{
      * @param dicFormatted
      *                the dicFormatted to set
      */
-    private final void setDicFormatted(DictionaryElement dicFormatted) {
+    private void setDicFormatted(DictionaryElement dicFormatted) {
         this.dicFormatted = dicFormatted;
     }
 
     /**
      * @return the out
      */
-    public final String getOut() {
+    public String getOut() {
         return out;
     }
 
@@ -181,7 +181,7 @@ public class DicFormat  extends AbstractDictTool{
      * @param out
      *                the out to set
      */
-    public final void setOut(String out) {
+    public void setOut(String out) {
         this.out = out;
     }
 }

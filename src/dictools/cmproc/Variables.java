@@ -41,7 +41,7 @@ public class Variables extends HashMap<String, Object> {
      * 
      * @param copy
      */
-    public Variables(final Variables copy) {
+    public Variables(Variables copy) {
         super();
         Iterator it = copy.keySet().iterator();
         while (it.hasNext()) {
@@ -60,7 +60,7 @@ public class Variables extends HashMap<String, Object> {
     /**
      * 
      */
-    public final void print() {
+    public void print() {
         Iterator it = this.keySet().iterator();
         System.out.print("{ ");
         while (it.hasNext()) {

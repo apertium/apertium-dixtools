@@ -71,7 +71,7 @@ public class Dix2CC {
     /**
      * 
      */
-    public final void do_convert() {
+    public void do_convert() {
         this.processArguments();
         this.processDic();
         System.out.println("Done");
@@ -82,7 +82,7 @@ public class Dix2CC {
      * 
      * @param dic
      */
-    private final void processDic() {
+    private void processDic() {
         System.out.println("Building " + this.outFileName + " for Palm...");
         Vector<String> lines = new Vector<String>();
 
@@ -118,7 +118,7 @@ public class Dix2CC {
      * 
      * @param vector
      */
-    private final void print(Vector<String> lines) {
+    private void print(Vector<String> lines) {
         try {
             BufferedOutputStream bos;
             FileOutputStream fos;

@@ -51,7 +51,7 @@ public class PardefsElement extends Element {
      * 
      * @param value
      */
-    public final void addPardefElement(final PardefElement value) {
+    public void addPardefElement(PardefElement value) {
         pardefElements.add(value);
     }
 
@@ -60,11 +60,11 @@ public class PardefsElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
-    public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
+    public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
         dos.append(tab(1) + "<pardefs>\n");
-        for (final PardefElement e : pardefElements) {
+        for (PardefElement e : pardefElements) {
             e.printXML(dos, opt);
         }
         dos.append(tab(1) + "</pardefs>"+appendCharacterData.trim()+"\n\n");
@@ -74,7 +74,7 @@ public class PardefsElement extends Element {
      * 
      * @param fileName
      */
-    public final void printXML(final String fileName, DicOpts opt) {
+    public void printXML(String fileName, DicOpts opt) {
         this.printXML(fileName, "UTF-8", opt);
     }
 
@@ -83,7 +83,7 @@ public class PardefsElement extends Element {
      * @param fileName
      * @param encoding
      */
-    public void printXML(final String fileName, final String encoding, DicOpts opt) {
+    public void printXML(String fileName, String encoding, DicOpts opt) {
         BufferedOutputStream bos;
         FileOutputStream fos;
         OutputStreamWriter dos;
@@ -101,9 +101,9 @@ public class PardefsElement extends Element {
             bos = null;
             dos.close();
             dos = null;
-        } catch (final IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
-        } catch (final Exception eg) {
+        } catch (Exception eg) {
             eg.printStackTrace();
         }
     }
@@ -112,8 +112,8 @@ public class PardefsElement extends Element {
      * 
      * @param parName
      * @return Undefined         */
-    public final PardefElement getParadigmDefinition(final String parName) {
-        for (final PardefElement pardefE : pardefElements) {
+    public PardefElement getParadigmDefinition(String parName) {
+        for (PardefElement pardefE : pardefElements) {
             if (pardefE.getName().equals(parName)) {
                 return pardefE;
             }
@@ -132,7 +132,7 @@ public class PardefsElement extends Element {
      * 
      * @param par
      */
-    public final void remove(PardefElement par) {
+    public void remove(PardefElement par) {
         getPardefElements().remove(par);
     }
 }

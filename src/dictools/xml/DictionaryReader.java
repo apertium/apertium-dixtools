@@ -80,7 +80,7 @@ public class DictionaryReader extends XMLReader {
      * 
      * @param fileName
      */
-    public DictionaryReader(final String fileName) {
+    public DictionaryReader(String fileName) {
         super(fileName);
     }
 
@@ -98,7 +98,7 @@ public class DictionaryReader extends XMLReader {
      */
     public DictionaryElement readDic() {
         analize();
-        final DictionaryElement dic = new DictionaryElement();
+        DictionaryElement dic = new DictionaryElement();
         String encoding = getDocument().getInputEncoding();
         dic.setXmlEncoding(encoding);
 
@@ -111,9 +111,9 @@ public class DictionaryReader extends XMLReader {
 
         Element root = doc.getDocumentElement();
 
-        final NodeList children = root.getChildNodes();
+        NodeList children = root.getChildNodes();
         for (int i = 0; i < children.getLength(); i++) {
-            final Node child = children.item(i);
+            Node child = children.item(i);
 
             /*
              * if (child instanceof Comment) { Comment comment =
@@ -128,35 +128,35 @@ public class DictionaryReader extends XMLReader {
             } else
 
             if (child instanceof Element) {
-                final Element childElement = (Element) child;
-                final String childElementName = childElement.getNodeName();
+                Element childElement = (Element) child;
+                String childElementName = childElement.getNodeName();
 
                 // Header with meta info about the dictionary
                 if (childElementName.equals("header")) {
-                    final HeaderElement headerElement = readHeader(childElement);
+                    HeaderElement headerElement = readHeader(childElement);
                     dic.setHeaderElement(headerElement);
                 } else
 
                 // Alphabet
                 if (childElementName.equals("alphabet")) {
-                    final AlphabetElement alphabetElement = readAlphabet(childElement);
+                    AlphabetElement alphabetElement = readAlphabet(childElement);
                     dic.setAlphabet(alphabetElement);
                 } else
                   
                 // Symbol definitions
                 if (childElementName.equals("sdefs")) {
-                    final SdefsElement sdefsElement = readSdefs(childElement);
+                    SdefsElement sdefsElement = readSdefs(childElement);
                     dic.setSdefs(sdefsElement);
                 } else
 
                 if (childElementName.equals("section")) {
-                    final SectionElement sectionElement = readSection(childElement);
+                    SectionElement sectionElement = readSection(childElement);
                     dic.addSection(sectionElement);
                 } else
 
                 if (childElementName.equals("pardefs")) {
                     if (isReadParadigms()) {
-                        final PardefsElement pardefsElement = readPardefs(childElement);
+                        PardefsElement pardefsElement = readPardefs(childElement);
                         dic.setPardefs(pardefsElement);
                     }
                 } else
@@ -193,12 +193,12 @@ public class DictionaryReader extends XMLReader {
      * @param e
      * @return The header element
      */
-    public HeaderElement readHeader(final Element e) {
+    public HeaderElement readHeader(Element e) {
         HeaderElement header = new HeaderElement();
         if (e.hasChildNodes()) {
-            final NodeList nodeList = e.getChildNodes();
+            NodeList nodeList = e.getChildNodes();
             for (int j = 0; j < nodeList.getLength(); j++) {
-                final Node node = nodeList.item(j);
+                Node node = nodeList.item(j);
                 if (node.getNodeName().equals("property")) {
                     Element element = (Element) node;
                     String name = getAttributeValue(element, "name");
@@ -217,19 +217,19 @@ public class DictionaryReader extends XMLReader {
      * 
      * @param e
      * @return Undefined         */
-    public static AlphabetElement readAlphabet(final Element e) {
+    public static AlphabetElement readAlphabet(Element e) {
         String alphabet = "";
         if (e.hasChildNodes()) {
-            final NodeList nodeList = e.getChildNodes();
+            NodeList nodeList = e.getChildNodes();
             for (int j = 0; j < nodeList.getLength(); j++) {
-                final Node node = nodeList.item(j);
+                Node node = nodeList.item(j);
                 if (node instanceof Text) {
-                    final Text textNode = (Text) node;
+                    Text textNode = (Text) node;
                     alphabet = textNode.getData().trim();
                 }
             }
         }
-        final AlphabetElement alphabetElement = new AlphabetElement(alphabet);
+        AlphabetElement alphabetElement = new AlphabetElement(alphabet);
 
         return alphabetElement;
     }
@@ -239,21 +239,21 @@ public class DictionaryReader extends XMLReader {
      * 
      * @param e
      */
-    public static PardefsElement readPardefs(final Element e) {
-        final PardefsElement pardefsElement = new PardefsElement();
+    public static PardefsElement readPardefs(Element e) {
+        PardefsElement pardefsElement = new PardefsElement();
 
         StringBuilder characterData = new StringBuilder();
         dics.elements.dtd.Element previousElement = null;
         
         if (e.hasChildNodes()) {
-            final NodeList children = e.getChildNodes();
+            NodeList children = e.getChildNodes();
             for (int i = 0; i < children.getLength(); i++) {
-                final Node child = children.item(i);
-                final String childElementName = child.getNodeName();
+                Node child = children.item(i);
+                String childElementName = child.getNodeName();
                 if (child instanceof Element) {
-                    final Element childElement = (Element) child;
+                    Element childElement = (Element) child;
                     if (childElementName.equals("pardef")) {
-                        final PardefElement pardefElement = readPardef(childElement);
+                        PardefElement pardefElement = readPardef(childElement);
                         pardefsElement.addPardefElement(pardefElement);
                         prependOrAppendCharacterData(characterData, pardefElement, previousElement);
                         previousElement = pardefElement;
@@ -279,22 +279,22 @@ public class DictionaryReader extends XMLReader {
      * 
      * @param e
      */
-    public static PardefElement readPardef(final Element e) {
-        final String n = getAttributeValue(e, "n");
-        final PardefElement pardefElement = new PardefElement(n);
+    public static PardefElement readPardef(Element e) {
+        String n = getAttributeValue(e, "n");
+        PardefElement pardefElement = new PardefElement(n);
 
         StringBuilder characterData = new StringBuilder();
         dics.elements.dtd.Element previousElement = null;
 
         if (e.hasChildNodes()) {
-            final NodeList children = e.getChildNodes();
+            NodeList children = e.getChildNodes();
             for (int i = 0; i < children.getLength(); i++) {
-                final Node child = children.item(i);
-                final String childElementName = child.getNodeName();
+                Node child = children.item(i);
+                String childElementName = child.getNodeName();
                 if (child instanceof Element) {
-                    final Element childElement = (Element) child;
+                    Element childElement = (Element) child;
                     if (childElementName.equals("e")) {
-                        final EElement eElement = readEElement(childElement);
+                        EElement eElement = readEElement(childElement);
                         pardefElement.addEElement(eElement);
                         prependOrAppendCharacterData(characterData, eElement, previousElement);
                         previousElement = eElement;
@@ -320,22 +320,22 @@ public class DictionaryReader extends XMLReader {
      * 
      * @param e
      * @return Undefined         */
-    public SectionElement readSection(final Element e) {
-        final String id = getAttributeValue(e, "id");
-        final String type = getAttributeValue(e, "type");
-        final SectionElement sectionElement = new SectionElement(id, type);
+    public SectionElement readSection(Element e) {
+        String id = getAttributeValue(e, "id");
+        String type = getAttributeValue(e, "type");
+        SectionElement sectionElement = new SectionElement(id, type);
         
         StringBuilder characterData = new StringBuilder();
         dics.elements.dtd.Element previousElement = null;
 
         // Si contiene elementos 'e'
         if (e.hasChildNodes()) {
-            final NodeList children = e.getChildNodes();
+            NodeList children = e.getChildNodes();
             for (int i = 0; i < children.getLength(); i++) {
-                final Node child = children.item(i);
+                Node child = children.item(i);
                 if (child instanceof Element) {
-                    final Element childElement = (Element) child;
-                    final String childElementName = childElement.getNodeName();
+                    Element childElement = (Element) child;
+                    String childElementName = childElement.getNodeName();
                     if (childElementName.equals("e")) {
                         if (this.progressBar != null) {
                             this.nElements++;
@@ -348,7 +348,7 @@ public class DictionaryReader extends XMLReader {
                             oldPerc = perc;
                             } 
                         }
-                        final EElement eElement = readEElement(childElement);
+                        EElement eElement = readEElement(childElement);
                         sectionElement.addEElement(eElement);
                         
                         prependOrAppendCharacterData(characterData, eElement, previousElement);
@@ -401,7 +401,7 @@ public class DictionaryReader extends XMLReader {
     /**
      * @return the dic
      */
-    public final DictionaryElement getDic() {
+    public DictionaryElement getDic() {
         return dic;
     }
 
@@ -409,14 +409,14 @@ public class DictionaryReader extends XMLReader {
      * @param dic
      *                the dic to set
      */
-    public final void setDic(DictionaryElement dic) {
+    public void setDic(DictionaryElement dic) {
         this.dic = dic;
     }
 
     /**
      * @return the readParadigms
      */
-    public final boolean isReadParadigms() {
+    public boolean isReadParadigms() {
         return readParadigms;
     }
 
@@ -424,7 +424,7 @@ public class DictionaryReader extends XMLReader {
      * @param readParadigms
      *                the readParadigms to set
      */
-    public final void setReadParadigms(boolean readParadigms) {
+    public void setReadParadigms(boolean readParadigms) {
         this.readParadigms = readParadigms;
     }
 

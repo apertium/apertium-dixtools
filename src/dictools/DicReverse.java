@@ -47,7 +47,7 @@ public class DicReverse  extends AbstractDictTool {
      * 
      * @param dic
      */
-    public DicReverse(final DictionaryElement dic) {
+    public DicReverse(DictionaryElement dic) {
         dicOrig = dic;
 
     }
@@ -55,7 +55,7 @@ public class DicReverse  extends AbstractDictTool {
     /**
      * 
      * @return Undefined         */
-    public final DictionaryElement reverse() {
+    public DictionaryElement reverse() {
         getDicOrig().reverse();
         // Collections.sort(getDicOrig().getEntries());
         return getDicOrig();
@@ -64,7 +64,7 @@ public class DicReverse  extends AbstractDictTool {
     /**
      * 
      * @return Undefined         */
-    private final DictionaryElement getDicOrig() {
+    private DictionaryElement getDicOrig() {
         return dicOrig;
     }
 
@@ -83,7 +83,7 @@ public class DicReverse  extends AbstractDictTool {
      * 
      * 
      */
-    public final void doReverse() {
+    public void doReverse() {
         processArguments();
         actionReverse();
     }
@@ -92,7 +92,7 @@ public class DicReverse  extends AbstractDictTool {
      * 
      * 
      */
-    public final void actionReverse() {
+    public void actionReverse() {
         DictionaryElement bil = reverse();
         String reverseFileName = "reversed-dic.dix";
         if (getArguments().length == 3) {
@@ -110,7 +110,7 @@ public class DicReverse  extends AbstractDictTool {
      * @param dicOrig
      *                the dicOrig to set
      */
-    private final void setDicOrig(DictionaryElement dicOrig) {
+    private void setDicOrig(DictionaryElement dicOrig) {
         this.dicOrig = dicOrig;
     }
 }

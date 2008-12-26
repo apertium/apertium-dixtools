@@ -68,7 +68,7 @@ public class Action {
      * 
      * @param e
      */
-    public Action(final EElement e) {
+    public Action(EElement e) {
         this.e = e;
     }
 
@@ -76,7 +76,7 @@ public class Action {
      * 
      * @param action
      */
-    public void setAction(final EElement action) {
+    public void setAction(EElement action) {
         e = action;
     }
 
@@ -84,7 +84,7 @@ public class Action {
      * 
      * 
      */
-    public final void print(Msg msg) {
+    public void print(Msg msg) {
         if (e != null) {
             msg.log("action:\n");
             getE().print("L", msg);
@@ -97,7 +97,7 @@ public class Action {
      * @param dos
      * @throws java.io.IOException
      */
-    public final void printXML(Appendable dos, DicOpts opt) throws IOException {
+    public void printXML(Appendable dos, DicOpts opt) throws IOException {
         if (e != null) {
             dos.append("\t<action>\n");
             getE().printXML(dos, opt);
@@ -117,14 +117,14 @@ public class Action {
      * 
      * @param e
      */
-    public void setE(final EElement e) {
+    public void setE(EElement e) {
         this.e = e;
     }
 
     /**
      * @return the name
      */
-    public final String getName() {
+    public String getName() {
         return name;
     }
 
@@ -132,22 +132,22 @@ public class Action {
      * @param name
      *                the name to set
      */
-    public final void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public final Integer getPatternLength() {
+    public Integer getPatternLength() {
         return patternLength;
     }
 
-    public final void setPatternLength(Integer patternLength) {
+    public void setPatternLength(Integer patternLength) {
         this.patternLength = patternLength;
     }
 
     /**
      * 
      * @return Undefined         */
-    public final int getNumberOfConstants() {
+    public int getNumberOfConstants() {
         return numberOfConstants;
     }
 
@@ -155,7 +155,7 @@ public class Action {
      * 
      * @param numberOfConstants
      */
-    public final void setNumberOfConstants(int numberOfConstants) {
+    public void setNumberOfConstants(int numberOfConstants) {
         this.numberOfConstants = numberOfConstants;
     }
 
@@ -163,7 +163,7 @@ public class Action {
      * 
      * 
      */
-    public final void incrementNumberOfConstants() {
+    public void incrementNumberOfConstants() {
         numberOfConstants++;
     }
 
@@ -173,7 +173,7 @@ public class Action {
      * @param patternID
      * @return true if the Action is valid
      */
-    public final boolean isValid(HashMap<String, String> definedVars, final String patternID) {
+    public boolean isValid(HashMap<String, String> definedVars, String patternID) {
         boolean errorsFound = false;
         HashMap<String, String> definedVarsInAction = new HashMap<String, String>();
 
@@ -201,7 +201,7 @@ public class Action {
      * @param ce
      * @param definedVars
      */
-    private final void getDefinedVarsElement(ContentElement ce, HashMap<String, String> definedVars) {
+    private void getDefinedVarsElement(ContentElement ce, HashMap<String, String> definedVars) {
         for (Element e : ce.getChildren()) {
             if (e instanceof TextElement) {
                 String v = ((TextElement) e).getValue();

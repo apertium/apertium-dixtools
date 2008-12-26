@@ -33,7 +33,7 @@ public class Dix2Tiny  extends AbstractDictTool{
     public Dix2Tiny() {
     }
 
-    public final void do_tiny() {
+    public void do_tiny() {
         this.processArguments();
 
         if (this.platform.equals("j2me")) {
@@ -52,7 +52,7 @@ public class Dix2Tiny  extends AbstractDictTool{
 
     }
 
-    private final void do_j2me() {
+    private void do_j2me() {
         System.out.println("Packing linguistic data for apertium-tinylex (J2ME)...");
         Dix2MDix dix2mdix = new Dix2MDix();
         dix2mdix.setBilFileName(bilFileName);
@@ -63,7 +63,7 @@ public class Dix2Tiny  extends AbstractDictTool{
 
     }
 
-    private final void do_palm() {
+    private void do_palm() {
         System.out.println("Converting linguistic data for Palm (.cc files)...");
         Dix2CC dix2cc = new Dix2CC();
         dix2cc.setBilFileName(bilFileName);

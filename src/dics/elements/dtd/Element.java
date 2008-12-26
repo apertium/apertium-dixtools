@@ -84,7 +84,7 @@ public class Element implements Cloneable {
      * @param dos
      * @throws java.io.IOException
      */
-    protected void printXML(final Appendable dos, final DicOpts opt) throws IOException {
+    protected void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
         dos.append(makeCommentIfData(processingComments));
@@ -96,7 +96,7 @@ public class Element implements Cloneable {
      * 
      * @param nTabs
      * @return Undefined         */
-    protected static String tab(final int nTabs) {
+    protected static String tab(int nTabs) {
         /*
         String sTabs = "";
         for (int i = 0; i < nTabs; i++) {
@@ -107,7 +107,7 @@ public class Element implements Cloneable {
         return "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t".substring(0,nTabs);
     }
 
-    public static final String makeCommentIfData(String commentContent) {
+    public static String makeCommentIfData(String commentContent) {
     if (commentContent.isEmpty()) return "";
     return tab(2)+"<!-- "+commentContent.trim()+" -->\n";
   }
@@ -117,14 +117,14 @@ public class Element implements Cloneable {
      * 
      * @param value
      */
-    protected void setTagName(final String value) {
+    protected void setTagName(String value) {
         TAGNAME = value;
     }
 
     /**
      * 
      * @return Undefined         */
-    protected final String getTagName() {
+    protected String getTagName() {
         return TAGNAME;
     }
 
@@ -133,7 +133,7 @@ public class Element implements Cloneable {
    * @param str
    * @return "" if str==null, else the str itself
    */  
-  public static final String maskNull(String str) {
+  public static String maskNull(String str) {
         return (str == null?"":str);
   }
 
@@ -144,14 +144,14 @@ public class Element implements Cloneable {
      * Appends to 
      * @param value
      */
-    public void addProcessingComment(final String value) {
+    public void addProcessingComment(String value) {
         processingComments += tab(3) + value + "\n";
     }
 
     /**
      * XML processingComments originating from the processing if the file. Will be added as <!--   --> just before the XML elemen
      */
-    public void setProcessingComments(final String value) {
+    public void setProcessingComments(String value) {
         processingComments = value;
     }
 
@@ -169,9 +169,9 @@ public class Element implements Cloneable {
     @Override
     public Object clone() {
         try {
-            final Element cloned = (Element) super.clone();
+            Element cloned = (Element) super.clone();
             return cloned;
-        } catch (final CloneNotSupportedException ex) {
+        } catch (CloneNotSupportedException ex) {
             return null;
         }
 
@@ -211,7 +211,7 @@ public class Element implements Cloneable {
     /**
      * @return the temp
      */
-    public final String getTemp() {
+    public String getTemp() {
         return temp;
     }
 
@@ -219,7 +219,7 @@ public class Element implements Cloneable {
      * @param temp
      *                the temp to set
      */
-    public final void setTemp(String temp) {
+    public void setTemp(String temp) {
         this.temp = temp;
     }
 

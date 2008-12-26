@@ -31,7 +31,7 @@ public class Resource extends Properties {
      * 
      * @return The source
      */
-    public final String getSource() {
+    public String getSource() {
         String source = (String) this.get("src");
         return source;
     }
@@ -40,7 +40,7 @@ public class Resource extends Properties {
      * 
      * @return The type of dictionary: morph or bil
      */
-    public final String getDictionaryType() {
+    public String getDictionaryType() {
         String type = (String) this.get("type");
         return type;
     }
@@ -76,7 +76,7 @@ public class Resource extends Properties {
      * 
      * @return Source language code
      */
-    public final String getSL() {
+    public String getSL() {
         String sl = (String) this.get("sl");
         return sl;
     }
@@ -86,7 +86,7 @@ public class Resource extends Properties {
      * @param value
      * @return 'true' if source language is 'value'
      */
-    public final boolean isSL(final String value) {
+    public boolean isSL(String value) {
         String sl = (String) this.get("sl");
         if (sl.equals(value)) {
             return true;
@@ -100,7 +100,7 @@ public class Resource extends Properties {
      * @param value
      * @return 'true' if target language is 'value'
      */
-    public final boolean isTL(final String value) {
+    public boolean isTL(String value) {
         String sl = (String) this.get("tl");
         if (sl.equals(value)) {
             return true;
@@ -113,7 +113,7 @@ public class Resource extends Properties {
      * 
      * @return Full name for source language
      */
-    public final String getSLFull() {
+    public String getSLFull() {
         String slFull = (String) this.get("sl-full");
         return slFull;
     }
@@ -122,7 +122,7 @@ public class Resource extends Properties {
      * 
      * @return Target language code
      */
-    public final String getTL() {
+    public String getTL() {
         String tl = (String) this.get("tl");
         return tl;
     }
@@ -131,7 +131,7 @@ public class Resource extends Properties {
      * Return the full name for target language
      * @return Full name for target language
      */
-    public final String getTLFull() {
+    public String getTLFull() {
         String tlFull = (String) this.get("tl-full");
         return tlFull;
     }
@@ -141,7 +141,7 @@ public class Resource extends Properties {
      * @param lang
      * @return 'true' if sl or tl is 'lang'
      */
-    public final boolean hasLanguage(final String lang) {
+    public boolean hasLanguage(String lang) {
         String sl = (String) this.get("sl");
         String tl = (String) this.get("tl");
         if (sl.equals(lang) || tl.equals(lang)) {
@@ -155,7 +155,7 @@ public class Resource extends Properties {
      * 
      * @return 'true' is this resource can be used for crossing dictionaries
      */
-    public final boolean isUseForCrossing() {
+    public boolean isUseForCrossing() {
         String forcrossing = (String) this.get("for-crossing");
         if (forcrossing != null) {
             if (forcrossing.equals("yes")) {

@@ -47,11 +47,11 @@ public class DicSort  extends AbstractDictTool {
     /**
      * 
      */
-    public static final int BIL = 0;
+    public static int BIL = 0;
     /**
      * 
      */
-    public static final int MON = 1;
+    public static int MON = 1;
     /**
      * 
      */
@@ -78,7 +78,7 @@ public class DicSort  extends AbstractDictTool {
      * 
      * @param dic
      */
-    public DicSort(final DictionaryElement dic) {
+    public DicSort(DictionaryElement dic) {
         this.dic = dic;
         setXinclude(false);
         msg.setLogFileName("sort.log");
@@ -88,7 +88,7 @@ public class DicSort  extends AbstractDictTool {
      * 
      * @return Undefined        
      */
-    public final DictionaryElement sort() {
+    public DictionaryElement sort() {
         DictionaryElement dicSorted = null;
         if (dicType == DicSort.BIL) {
             dicSorted = sortBil();
@@ -103,7 +103,7 @@ public class DicSort  extends AbstractDictTool {
      * 
      * 
      */
-    public final void doSort() {
+    public void doSort() {
         processArguments();
         actionSort();
     }
@@ -151,7 +151,7 @@ public class DicSort  extends AbstractDictTool {
      * 
      * 
      */
-    public final void actionSort() {
+    public void actionSort() {
         DictionaryElement dicSorted = null;
         // System.out.println("Dictype: " + dicType);
         if (dicType == DicSort.BIL) {
@@ -179,7 +179,7 @@ public class DicSort  extends AbstractDictTool {
      * @param dicFormatted
      *                the dicFormatted to set
      */
-    private final void setDic(DictionaryElement dic) {
+    private void setDic(DictionaryElement dic) {
         this.dic = dic;
     }
 
@@ -187,7 +187,7 @@ public class DicSort  extends AbstractDictTool {
      * 
      * @return
      */
-    private final DictionaryElement sortBil() {
+    private DictionaryElement sortBil() {
         int lrs = 0;
         int rls = 0;
         int n = 0;
@@ -258,7 +258,7 @@ public class DicSort  extends AbstractDictTool {
      * 
      * @return Undefined         
      */
-    private final DictionaryElement sortMon() {
+    private DictionaryElement sortMon() {
         int lrs = 0;
         int rls = 0;
 
@@ -354,7 +354,7 @@ public class DicSort  extends AbstractDictTool {
     /**
      * @return the dicType
      */
-    public final int getDicType() {
+    public int getDicType() {
         return dicType;
     }
 
@@ -362,14 +362,14 @@ public class DicSort  extends AbstractDictTool {
      * @param dicType
      *                the dicType to set
      */
-    public final void setDicType(int dicType) {
+    public void setDicType(int dicType) {
         this.dicType = dicType;
     }
 
     /**
      * @return the xinclude
      */
-    private final boolean isXinclude() {
+    private boolean isXinclude() {
         return xinclude;
     }
 
@@ -377,21 +377,21 @@ public class DicSort  extends AbstractDictTool {
      * @param xinclude
      *                the xinclude to set
      */
-    public final void setXinclude(boolean xinclude) {
+    public void setXinclude(boolean xinclude) {
         this.xinclude = xinclude;
     }
 
     /**
      * @return the out
      */
-    private final String getOut() {
+    private String getOut() {
         return out;
     }
 
     /**
      * @return the dic
      */
-    public final DictionaryElement getDic() {
+    public DictionaryElement getDic() {
         return dic;
     }
 
@@ -399,7 +399,7 @@ public class DicSort  extends AbstractDictTool {
      * 
      * @param out
      */
-    public final void setOut(final String out) {
+    public void setOut(String out) {
         this.out = out;
     }
 }

@@ -79,7 +79,7 @@ public class DicFormatE1LineAligned extends AbstractDictTool {
      * 
      * @param fileName
      */
-    public void printXML(final String fileName) {
+    public void printXML(String fileName) {
         this.printXML(fileName, "UTF-8");
         dic.setXmlEncoding("UTF-8");
     }
@@ -88,7 +88,7 @@ public class DicFormatE1LineAligned extends AbstractDictTool {
      * 
      * @param fileName
      */
-    public void printXML(final String fileName, final String encoding) {
+    public void printXML(String fileName, String encoding) {
         dic.setFileName(fileName);
         dic.printXML(fileName, opt);
 /*
@@ -137,7 +137,7 @@ public class DicFormatE1LineAligned extends AbstractDictTool {
                 dic.getPardefsElement().printXML(dos, opt);
             }
             if (dic.getSections() != null) {
-                for (final SectionElement s : dic.getSections()) {
+                for (SectionElement s : dic.getSections()) {
                     String attributes = "";
                     if (s.getID() != null) {
                         attributes += " id=\"" + s.getID() + "\"";
@@ -146,7 +146,7 @@ public class DicFormatE1LineAligned extends AbstractDictTool {
                         attributes += " type=\"" + s.getType() + "\"";
                     }
                     dos.append("  <section " + attributes + ">\n");
-                    for (final EElement e : s.getEElements()) {
+                    for (EElement e : s.getEElements()) {
                         e.printXML1LineAligned(dos, opt.alignP, opt.alignR);
                     }
                     dos.append("  </section>\n");
@@ -157,9 +157,9 @@ public class DicFormatE1LineAligned extends AbstractDictTool {
             bos = null;
             dos.close();
             dos = null;
-        } catch (final IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
-        } catch (final Exception eg) {
+        } catch (Exception eg) {
             eg.printStackTrace();
         }
  */

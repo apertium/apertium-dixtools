@@ -33,7 +33,7 @@ public class SElementList extends Vector<SElement> {
     /**
      *    
      */
-    static final long serialVersionUID = 0;
+    static long serialVersionUID = 0;
 
     /**
      *    
@@ -47,7 +47,7 @@ public class SElementList extends Vector<SElement> {
      *    
      *     @param sList
      */
-    public SElementList(final SElementList sList) {
+    public SElementList(SElementList sList) {
         super(sList);
     }
 
@@ -56,13 +56,13 @@ public class SElementList extends Vector<SElement> {
      *     @param sEList
      *     @return Undefined         
      */
-    public final boolean equals(final SElementList sEList) {
+    public boolean equals(SElementList sEList) {
         if (size() != sEList.size()) {
             return false;
         } else {
             for (int i = 0; i < size(); i++) {
-                final SElement sE1 = get(i);
-                final SElement sE2 = sEList.get(i);
+                SElement sE1 = get(i);
+                SElement sE2 = sEList.get(i);
 
                 if (!sE1.equals(sE2)) {
                     return false;
@@ -76,10 +76,10 @@ public class SElementList extends Vector<SElement> {
      *    
      */
     @Override
-    public final String toString() {
+    public String toString() {
         String str = "";
 
-        for (final SElement s : this) {
+        for (SElement s : this) {
             str += s.toString();
         }
 
@@ -92,13 +92,13 @@ public class SElementList extends Vector<SElement> {
      *     @return Undefined         
      */
     /*
-    public final boolean matches(final SElementList sEList2) {
+    public boolean matches(SElementList sEList2) {
         int i = 0;
 
         if ((sEList2.size() - size()) >= 0) {
-            for (final SElement sE2 : sEList2) {
+            for (SElement sE2 : sEList2) {
                 if (i < size()) {
-                    final SElement sE1 = get(i);
+                    SElement sE1 = get(i);
 
                     if (sE1.getValue().charAt(0) == 'k') {
                         return true;
@@ -125,8 +125,8 @@ public class SElementList extends Vector<SElement> {
      *    
      *    
      */
-    public final void print() {
-        for (final SElement s : this) {
+    public void print() {
+        for (SElement s : this) {
             System.err.print(s.toString());
         }
 
@@ -138,7 +138,7 @@ public class SElementList extends Vector<SElement> {
      * @param value
      * @return Is s certain value?
      */
-    public final boolean is(final String value) {
+    public boolean is(String value) {
         for (SElement sE : this) {
             if (sE.getValue().equals(value)) {
                 return true;

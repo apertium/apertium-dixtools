@@ -38,7 +38,7 @@ public class SdefsReader extends XMLReader {
      * 
      * @param fileName
      */
-    public SdefsReader(final String fileName) {
+    public SdefsReader(String fileName) {
         super(fileName);
     }
 

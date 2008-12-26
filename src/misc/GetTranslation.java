@@ -82,7 +82,7 @@ public class GetTranslation  extends AbstractDictTool {
      * 
      * 
      */
-    public GetTranslation(final String sl, final String tl) {
+    public GetTranslation(String sl, String tl) {
         msg = new Msg();
 
         if (sl.compareTo(tl) > 0) {
@@ -103,7 +103,7 @@ public class GetTranslation  extends AbstractDictTool {
      * 
      * 
      */
-    private void connectDB(final String db, final String u, final String p) {
+    private void connectDB(String db, String u, String p) {
         setDbName(db);
         setUser(u);
         setPassword(p);
@@ -258,8 +258,8 @@ public class GetTranslation  extends AbstractDictTool {
      * @param tl
      * @return
      */
-    private final EElement buildEElement(final String sl, final String tl,
-            final String slPoS, final String tlPoS) {
+    private EElement buildEElement(String sl, String tl,
+            String slPoS, String tlPoS) {
         EElement e = new EElement();
         LElement l = new LElement();
         TextElement lt = new TextElement(sl);
@@ -283,7 +283,7 @@ public class GetTranslation  extends AbstractDictTool {
     /**
      * @return the sl
      */
-    public final String getSl() {
+    public String getSl() {
         return sl;
     }
 
@@ -291,14 +291,14 @@ public class GetTranslation  extends AbstractDictTool {
      * @param sl
      *                the sl to set
      */
-    public final void setSl(String sl) {
+    public void setSl(String sl) {
         this.sl = sl;
     }
 
     /**
      * @return the dbName
      */
-    public final String getDbName() {
+    public String getDbName() {
         return dbName;
     }
 
@@ -306,14 +306,14 @@ public class GetTranslation  extends AbstractDictTool {
      * @param dbName
      *                the dbName to set
      */
-    public final void setDbName(String dbName) {
+    public void setDbName(String dbName) {
         this.dbName = dbName;
     }
 
     /**
      * @return the user
      */
-    public final String getUser() {
+    public String getUser() {
         return user;
     }
 
@@ -321,14 +321,14 @@ public class GetTranslation  extends AbstractDictTool {
      * @param user
      *                the user to set
      */
-    public final void setUser(String user) {
+    public void setUser(String user) {
         this.user = user;
     }
 
     /**
      * @return the password
      */
-    public final String getPassword() {
+    public String getPassword() {
         return password;
     }
 
@@ -336,14 +336,14 @@ public class GetTranslation  extends AbstractDictTool {
      * @param password
      *                the password to set
      */
-    public final void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
     /**
      * @return the tl
      */
-    public final String getTl() {
+    public String getTl() {
         return tl;
     }
 
@@ -351,14 +351,14 @@ public class GetTranslation  extends AbstractDictTool {
      * @param tl
      *                the tl to set
      */
-    public final void setTl(String tl) {
+    public void setTl(String tl) {
         this.tl = tl;
     }
 
     /**
      * @return the outFileName
      */
-    public final String getOutFileName() {
+    public String getOutFileName() {
         return outFileName;
     }
 
@@ -366,7 +366,7 @@ public class GetTranslation  extends AbstractDictTool {
      * @param outFileName
      *                the outFileName to set
      */
-    public final void setOutFileName(String outFileName) {
+    public void setOutFileName(String outFileName) {
         this.outFileName = outFileName;
     }
 }

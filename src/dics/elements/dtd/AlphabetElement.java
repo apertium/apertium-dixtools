@@ -48,7 +48,7 @@ public class AlphabetElement extends Element {
      * 
      * @param value
      */
-    public AlphabetElement(final String value) {
+    public AlphabetElement(String value) {
         alphabet = value;
     }
 
@@ -56,21 +56,21 @@ public class AlphabetElement extends Element {
      * 
      * @param value
      */
-    public final void setAlphabet(final String value) {
+    public void setAlphabet(String value) {
         alphabet = value;
     }
 
     /**
      * 
      * @return Undefined         */
-    public final String getAlphabet() {
+    public String getAlphabet() {
         return alphabet;
     }
 
     /**
      * 
      * @return Undefined         */
-    public final boolean isEmpty() {
+    public boolean isEmpty() {
         if (getAlphabet() == null) {
             return true;
         } else {
@@ -83,7 +83,7 @@ public class AlphabetElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
-    public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
+    public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
         if (isEmpty()) {

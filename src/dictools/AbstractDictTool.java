@@ -60,7 +60,7 @@ public class AbstractDictTool {
     /**
      * @return the arguments
      */
-    public final String[] getArguments() {
+    public String[] getArguments() {
         return arguments;
     }
 
@@ -68,7 +68,7 @@ public class AbstractDictTool {
      * @param arguments
      *                the arguments to set
      */
-    public final void setArguments(String[] arguments) {
+    public void setArguments(String[] arguments) {
         this.arguments = arguments;
         ArrayList<String> unprocessed = new ArrayList<String>();
 /*

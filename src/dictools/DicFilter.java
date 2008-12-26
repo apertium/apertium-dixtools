@@ -54,7 +54,7 @@ public class DicFilter  extends AbstractDictTool{
         
     }    
     
-    public final void doFilter() {
+    public void doFilter() {
         this.processArguments();
         
         

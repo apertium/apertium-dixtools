@@ -62,7 +62,7 @@ public class DicFindEquivPar  extends AbstractDictTool{
      * 
      * 
      */
-    public DicFindEquivPar(final String fileName) {
+    public DicFindEquivPar(String fileName) {
         DictionaryReader dicReader = new DictionaryReader(fileName);
         DictionaryElement dic = dicReader.readDic();
         setDic(dic);
@@ -72,7 +72,7 @@ public class DicFindEquivPar  extends AbstractDictTool{
      * 
      * 
      */
-    public final void findEquivalents() {
+    public void findEquivalents() {
         ArrayList<PardefElement> canBeRemoved = new ArrayList<PardefElement>();
 
         PardefsElement pardefs1 = getDic().getPardefsElement();
@@ -109,7 +109,7 @@ public class DicFindEquivPar  extends AbstractDictTool{
      * 
      * @param equivalents
      */
-    private final void replaceParadigm(final HashMap<String, String> equivalents) {
+    private void replaceParadigm(HashMap<String, String> equivalents) {
         HashMap<String, Integer> counter = new HashMap<String, Integer>();
 
         DictionaryElement dic = getDic();
@@ -143,8 +143,8 @@ public class DicFindEquivPar  extends AbstractDictTool{
      * @param equivalents
      * @param counter
      */
-    private final void processElementList(final EElementList eList,
-            final HashMap<String, String> equivalents,
+    private void processElementList(EElementList eList,
+            HashMap<String, String> equivalents,
             HashMap<String, Integer> counter) {
         for (EElement element : eList) {
             for (Element e : element.getChildren()) {
@@ -166,8 +166,8 @@ public class DicFindEquivPar  extends AbstractDictTool{
      * @param counter
      * @param paradigmName
      */
-    private final void incrementReplacementCounter(
-            final HashMap<String, Integer> counter, final String paradigmName) {
+    private void incrementReplacementCounter(
+            HashMap<String, Integer> counter, String paradigmName) {
         if (!counter.containsKey(paradigmName)) {
             counter.put(paradigmName, new Integer(1));
         } else {
@@ -181,7 +181,7 @@ public class DicFindEquivPar  extends AbstractDictTool{
     /**
      * @return the dic
      */
-    private final DictionaryElement getDic() {
+    private DictionaryElement getDic() {
         return dic;
     }
 
@@ -189,14 +189,14 @@ public class DicFindEquivPar  extends AbstractDictTool{
      * @param dic
      *                the dic to set
      */
-    private final void setDic(DictionaryElement dic) {
+    private void setDic(DictionaryElement dic) {
         this.dic = dic;
     }
 
     /**
      * @return the outFileName
      */
-    public final String getOutFileName() {
+    public String getOutFileName() {
         return outFileName;
     }
 
@@ -204,7 +204,7 @@ public class DicFindEquivPar  extends AbstractDictTool{
      * @param outFileName
      *                the outFileName to set
      */
-    public final void setOutFileName(String outFileName) {
+    public void setOutFileName(String outFileName) {
         this.outFileName = outFileName;
     }
 }

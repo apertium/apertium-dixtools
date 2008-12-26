@@ -55,7 +55,7 @@ public class Node {
      * Constructor with value
      * @param value
      */
-    public Node(final String value) {
+    public Node(String value) {
         this.value = value;
         nodeList = new NodeList();
         wordList = new WordList();
@@ -65,7 +65,7 @@ public class Node {
      * 
      * @param value
      */
-    public final void setValue(final String value) {
+    public void setValue(String value) {
         this.value = value;
     }
 
@@ -73,7 +73,7 @@ public class Node {
      * 
      * @return The node value
      */
-    public final String getValue() {
+    public String getValue() {
         return this.value;
     }
 
@@ -81,7 +81,7 @@ public class Node {
      * 
      * @return The list of nodes
      */
-    public final NodeList getNodeList() {
+    public NodeList getNodeList() {
         return this.nodeList;
     }
 
@@ -91,7 +91,7 @@ public class Node {
      * @param entry
      * @param i
      */
-    public final void addChildNode(Node node, final Entry entry, int i) {
+    public void addChildNode(Node node, Entry entry, int i) {
         String key = entry.getKey();
         if (i <= (key.length() + 1)) {
             if (nodeList.containsKey(node.getValue())) {
@@ -120,7 +120,7 @@ public class Node {
      * Adds a word
      * @param word
      */
-    public final void addWord(final Word word) {
+    public void addWord(Word word) {
         this.wordList.put(word);
     }
 
@@ -128,7 +128,7 @@ public class Node {
      * Gets the list of words
      * @return The list of words
      */
-    public final WordList getWordList() {
+    public WordList getWordList() {
         return this.wordList;
     }
 
@@ -137,7 +137,7 @@ public class Node {
      * @param tabs
      * @param osw
      */
-    public final void print(int tabs, OutputStreamWriter osw) {
+    public void print(int tabs, OutputStreamWriter osw) {
         try {
             String sTabs = "";
             for (int i = 0; i < tabs; i++) {

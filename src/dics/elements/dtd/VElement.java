@@ -48,7 +48,7 @@ public class VElement extends Element {
      * 
      * @param value
      */
-    public VElement(final String value) {
+    public VElement(String value) {
         setTagName("v");
         n = value;
     }
@@ -56,7 +56,7 @@ public class VElement extends Element {
     /*
      * 
      */
-    public VElement(final VElement vE) {
+    public VElement(VElement vE) {
         setTagName("v");
         n = vE.getValue();
     }
@@ -65,7 +65,7 @@ public class VElement extends Element {
      * 
      * @return Undefined         */
     @Override
-    public final String getValue() {
+    public String getValue() {
         return n;
     }
 
@@ -74,7 +74,7 @@ public class VElement extends Element {
      * @param value
      */
     @Override
-    public final void setValue(final String value) {
+    public void setValue(String value) {
         n = value;
     }
 
@@ -84,7 +84,7 @@ public class VElement extends Element {
      * @throws java.io.IOException
      */
     @Override
-    public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
+    public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
         dos.append("<" + getTagName() + " n=\"" + getValue() + "\"/>");
@@ -104,7 +104,7 @@ public class VElement extends Element {
      * @param vE
      * @return Undefined
      */
-    public final boolean equals(final VElement vE) {
+    public boolean equals(VElement vE) {
         return (getValue().equals(vE.getValue()));
     }
 
@@ -115,9 +115,9 @@ public class VElement extends Element {
     @Override
     public Object clone() {
         try {
-            final VElement cloned = (VElement) super.clone();
+            VElement cloned = (VElement) super.clone();
             return cloned;
-        } catch (final Exception ex) {
+        } catch (Exception ex) {
             return null;
         }
     }

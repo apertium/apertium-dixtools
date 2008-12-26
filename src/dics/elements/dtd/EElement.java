@@ -119,7 +119,7 @@ public class EElement extends Element implements Cloneable,
      * @param a
      * @param c
      */
-    public EElement(final String r, final String lm, final String a,  final String c) {
+    public EElement(String r, String lm, String a,  String c) {
         children = new ElementList();
         this.r = r;
         this.lm = lm;
@@ -132,7 +132,7 @@ public class EElement extends Element implements Cloneable,
     /**
      * 
      * @return Undefined         */
-    public final ElementList getChildren() {
+    public ElementList getChildren() {
         return children;
     }
 
@@ -140,7 +140,7 @@ public class EElement extends Element implements Cloneable,
      * 
      * 
      */
-    public static final void incrEElements() {
+    public static void incrEElements() {
         EElement.nEElements++;
     }
 
@@ -148,14 +148,14 @@ public class EElement extends Element implements Cloneable,
      * 
      * @param value
      */
-    public final void setLemma(final String value) {
+    public void setLemma(String value) {
         lm = value;
     }
 
     /**
      * 
      * @return Undefined         */
-    public final String getLemma() {
+    public String getLemma() {
         return lm;
     }
 
@@ -163,14 +163,14 @@ public class EElement extends Element implements Cloneable,
      * 
      * @param value
      */
-    public final void setRestriction(final String value) {
+    public void setRestriction(String value) {
         r = value;
     }
 
     /**
      * 
      * @return Undefined         */
-    public final String getRestriction() {
+    public String getRestriction() {
         return r;
     }
 
@@ -178,14 +178,14 @@ public class EElement extends Element implements Cloneable,
      * 
      * @param comment
      */
-    public final void setComment(final String comment) {
+    public void setComment(String comment) {
         c = comment;
     }
 
     /**
      * 
      * @return Undefined         */
-    public final String getComment() {
+    public String getComment() {
         return c;
     }
 
@@ -193,7 +193,7 @@ public class EElement extends Element implements Cloneable,
      * 
      * @return The 'slr' attribute
      */
-    public final String getSlr() {
+    public String getSlr() {
         return this.slr;
     }
 
@@ -201,7 +201,7 @@ public class EElement extends Element implements Cloneable,
      * 
      * @return The 'srl' attribute
      */
-    public final String getSrl() {
+    public String getSrl() {
         return this.srl;
     }
 
@@ -209,7 +209,7 @@ public class EElement extends Element implements Cloneable,
      * 
      * @param slr
      */
-    public final void setSlr(final String slr) {
+    public void setSlr(String slr) {
         this.slr = slr;
     }
 
@@ -217,7 +217,7 @@ public class EElement extends Element implements Cloneable,
      * 
      * @param srl
      */
-    public final void setSrl(final String srl) {
+    public void setSrl(String srl) {
         this.srl = srl;
     }
 
@@ -226,8 +226,8 @@ public class EElement extends Element implements Cloneable,
      * @param value
      * @param side
      */
-    public final void setProcessingComments(final String value, final String side) {
-        for (final Element e : children) {
+    public void setProcessingComments(String value, String side) {
+        for (Element e : children) {
             if (e instanceof IElement) {
                 ((IElement) e).setProcessingComments(value);
             }
@@ -241,7 +241,7 @@ public class EElement extends Element implements Cloneable,
      * 
      * @param i
      */
-    public final void setIgnore(final String i) {
+    public void setIgnore(String i) {
         this.i = i;
     }
 
@@ -249,7 +249,7 @@ public class EElement extends Element implements Cloneable,
      * 
      * @return 'i' attribute
      */
-    public final String getIgnore() {
+    public String getIgnore() {
         return this.i;
     }
 
@@ -257,20 +257,20 @@ public class EElement extends Element implements Cloneable,
      * 
      * @param value
      */
-    public final void setAuthor(final String value) {
+    public void setAuthor(String value) {
         a = value;
     }
 
     /**
      * 
      * @return Undefined         */
-    public final String getAuthor() {
+    public String getAuthor() {
         return a;
     }
 
     /**
      * @return Undefined         */
-    public final String getHash() {
+    public String getHash() {
         String str = "";
         if (hasRestriction()) {
             str += str + getRestriction() + "---";
@@ -283,8 +283,8 @@ public class EElement extends Element implements Cloneable,
      * 
      * @param value
      */
-    public final void setTranslation(final String value, final String side) {
-        for (final Element e : children) {
+    public void setTranslation(String value, String side) {
+        for (Element e : children) {
             if (e instanceof IElement) {
                 ((IElement) e).setValue(value);
             }
@@ -303,7 +303,7 @@ public class EElement extends Element implements Cloneable,
      * 
      * @param e
      */
-    public final void addChild(final Element e) {
+    public void addChild(Element e) {
         children.add(e);
     }
 
@@ -313,9 +313,9 @@ public class EElement extends Element implements Cloneable,
      * 
      * @param e
      * @return Undefined         */
-    public boolean equalsBil(final EElement e) {
-        final String value1 = getValue("L");
-        final String value2 = e.getValue("L");
+    public boolean equalsBil(EElement e) {
+        String value1 = getValue("L");
+        String value2 = e.getValue("L");
 
         if (value1.equals(value2)) {
             return true;
@@ -326,8 +326,8 @@ public class EElement extends Element implements Cloneable,
     /**
      * 
      * @return Undefined         */
-    public final PElement getP() {
-        for (final Element e : children) {
+    public PElement getP() {
+        for (Element e : children) {
             if (e instanceof PElement) {
                 return (PElement) e;
             }
@@ -339,8 +339,8 @@ public class EElement extends Element implements Cloneable,
      * 
      * @return Undefined         
      */
-    public final IElement getI() {
-        for (final Element e : children) {
+    public IElement getI() {
+        for (Element e : children) {
             if (e instanceof IElement) {
                 return (IElement) e;
             }
@@ -353,8 +353,8 @@ public class EElement extends Element implements Cloneable,
      * @param side
      * @return Undefined         
      */
-    public final String getValue(final String side) {
-        for (final Element e : children) {
+    public String getValue(String side) {
+        for (Element e : children) {
             if (e instanceof IElement) {
                 return ((IElement) e).getValue();
             }
@@ -375,8 +375,8 @@ public class EElement extends Element implements Cloneable,
      * @param side
      * @return Value without tags
      */
-    public final String getValueNoTags(final String side) {
-        for (final Element e : children) {
+    public String getValueNoTags(String side) {
+        for (Element e : children) {
             if (e instanceof IElement) {
                 return ((IElement) e).getValueNoTags();
             }
@@ -403,8 +403,8 @@ public class EElement extends Element implements Cloneable,
      * @param side can be R or L
      * @return A ContentElement object
      */
-    public ContentElement getSide(final String side) {
-        for (final Element e : children) {
+    public ContentElement getSide(String side) {
+        for (Element e : children) {
             if (e instanceof IElement) {
                 return ((IElement) e);
             }
@@ -450,8 +450,8 @@ public class EElement extends Element implements Cloneable,
      * 
      * @param side
      * @return Undefined         */
-    public final ElementList getChildren(final String side) {
-        for (final Element e : children) {
+    public ElementList getChildren(String side) {
+        for (Element e : children) {
             if (e instanceof IElement) {
                 return ((IElement) e).getChildren();
             }
@@ -473,8 +473,8 @@ public class EElement extends Element implements Cloneable,
      * @param side
      * @param value
      * @return Undefined         */
-    public final String setValue(final String side, final String value) {
-        for (final Element e : children) {
+    public String setValue(String side, String value) {
+        for (Element e : children) {
             if (e instanceof IElement) {
                 ((IElement) e).setValue(value);
             }
@@ -496,8 +496,8 @@ public class EElement extends Element implements Cloneable,
      * @param side
      * @param value
      * @return Undefined         */
-    public final String setChildren(final String side, final ElementList value) {
-        for (final Element e : children) {
+    public String setChildren(String side, ElementList value) {
+        for (Element e : children) {
             if (e instanceof IElement) {
                 ((IElement) e).setChildren(value);
             }
@@ -517,8 +517,8 @@ public class EElement extends Element implements Cloneable,
     /**
      * 
      * @return Undefined         */
-    public final boolean isRegularExpr() {
-        for (final Element e : children) {
+    public boolean isRegularExpr() {
+        for (Element e : children) {
             if (e instanceof ReElement) {
                 return true;
             }
@@ -526,14 +526,14 @@ public class EElement extends Element implements Cloneable,
         return false;
     }
 
-    private final static String spaces = "                      ";
+    private static String spaces = "                      ";
     /**
      * 
      * @param dos
      * @throws java.io.IOException
      */
     @Override
-    public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
+    public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
 
@@ -551,7 +551,7 @@ public class EElement extends Element implements Cloneable,
             else dos.append( "<e" + attributes + ">");
 
             if (children != null) {
-                for (final Element e : children) {
+                for (Element e : children) {
                     e.printXML(dos, opt);
                 }
             }
@@ -567,7 +567,7 @@ public class EElement extends Element implements Cloneable,
             }        
 
             if (children != null) {
-                for (final Element e : children) {                
+                for (Element e : children) {                
                     if (e instanceof PElement) {
                       ((PElement) e).printXML1LineAligned(dosy, opt.alignR);
                     } else {
@@ -585,7 +585,7 @@ public class EElement extends Element implements Cloneable,
      * 
      * @return String of attributes
      */
-    private final String getAttrString() {
+    private String getAttrString() {
         String attributes = "";
         if (r != null) {
             attributes += " r=\"" + r + "\"";
@@ -621,8 +621,8 @@ public class EElement extends Element implements Cloneable,
      * 
      * @param side
      * @return Undefined         */
-    public final String getCategory(final String side) {
-        final ArrayList<String> categories = new ArrayList<String>();
+    public String getCategory(String side) {
+        ArrayList<String> categories = new ArrayList<String>();
         categories.add("adj");
         categories.add("adv");
         categories.add("preadv");
@@ -646,7 +646,7 @@ public class EElement extends Element implements Cloneable,
 
         // Añadir otras categorias que se quieran comprobar
 
-        for (final String s : categories) {
+        for (String s : categories) {
             if (is("L", s)) {
                 return s;
             }
@@ -659,9 +659,9 @@ public class EElement extends Element implements Cloneable,
      * @param side
      * @param categories
      * @return Undefined         */
-    public final String getCategory(final String side,
-            final ArrayList<String> categories) {
-        for (final String s : categories) {
+    public String getCategory(String side,
+            ArrayList<String> categories) {
+        for (String s : categories) {
             if (is("L", s)) {
                 return s;
             }
@@ -675,20 +675,20 @@ public class EElement extends Element implements Cloneable,
      * @param value
      * @return Undefined         
      */
-    public final boolean is(final String side, final String value) {
-        for (final Element e : children) {
+    public boolean is(String side, String value) {
+        for (Element e : children) {
             if (e instanceof IElement) {
-                final IElement ie = (IElement) e;
+                IElement ie = (IElement) e;
                 return ie.is(value);
             }
             if (e instanceof PElement) {
-                final PElement p = (PElement) e;
+                PElement p = (PElement) e;
                 if (side.equals("L")) {
-                    final LElement lE = p.getL();
+                    LElement lE = p.getL();
                     return lE.is(value);
                 }
                 if (side.equals("R")) {
-                    final RElement rE = p.getR();
+                    RElement rE = p.getR();
                     return rE.is(value);
                 }
             }
@@ -696,20 +696,20 @@ public class EElement extends Element implements Cloneable,
         return false;
     }
 
-    public final int getNumberOfSElements(final String side) {
-        for (final Element e : children) {
+    public int getNumberOfSElements(String side) {
+        for (Element e : children) {
             if (e instanceof IElement) {
-                final IElement i = (IElement) e;
+                IElement i = (IElement) e;
                 return i.getSElements().size();
             }
             if (e instanceof PElement) {
-                final PElement p = (PElement) e;
+                PElement p = (PElement) e;
                 if (side.equals("L")) {
-                    final LElement lE = p.getL();
+                    LElement lE = p.getL();
                     return lE.getSElements().size();
                 }
                 if (side.equals("R")) {
-                    final RElement rE = p.getR();
+                    RElement rE = p.getR();
                     return rE.getSElements().size();
                 }
             }
@@ -721,7 +721,7 @@ public class EElement extends Element implements Cloneable,
      * 
      * @param side
      * @return Undefined         */
-    public final boolean isAdj(final String side) {
+    public boolean isAdj(String side) {
         return is(side, "adj");
     }
 
@@ -729,14 +729,14 @@ public class EElement extends Element implements Cloneable,
      * 
      * @param side
      * @return Undefined         */
-    public final boolean isNoun(final String side) {
+    public boolean isNoun(String side) {
         return is(side, "n");
     }
 
     /**
      * 
      * @return Undefined         */
-    public final boolean isLR() {
+    public boolean isLR() {
         if (r.equals("LR")) {
             return true;
         } else {
@@ -747,7 +747,7 @@ public class EElement extends Element implements Cloneable,
     /**
      * 
      * @return Undefined         */
-    public final boolean isRL() {
+    public boolean isRL() {
         if (r.equals("RL")) {
             return true;
         } else {
@@ -759,7 +759,7 @@ public class EElement extends Element implements Cloneable,
      * 
      * @param value
      * @return Undefined         */
-    public final boolean hasRestriction(final String value) {
+    public boolean hasRestriction(String value) {
         if (r == null || this.isRestrictionAuto()) {
             return true;
         } else {
@@ -775,7 +775,7 @@ public class EElement extends Element implements Cloneable,
      * Has restriction LR, RL or LR/RL
      * 
      * @return Undefined         */
-    public final boolean hasRestriction() {
+    public boolean hasRestriction() {
         if (r == null || this.isRestrictionAuto()) {
             return false;
         } else {
@@ -789,7 +789,7 @@ public class EElement extends Element implements Cloneable,
     /**
      * 
      * @return Undefined         */
-    public final boolean is_LR_or_LRRL() {
+    public boolean is_LR_or_LRRL() {
         if (r == null) {
             return true;
         } else {
@@ -803,7 +803,7 @@ public class EElement extends Element implements Cloneable,
     /**
      * 
      * @return Undefined         */
-    public final boolean is_RL_or_LRRL() {
+    public boolean is_RL_or_LRRL() {
         if (r == null) {
             return true;
         } else {
@@ -820,16 +820,16 @@ public class EElement extends Element implements Cloneable,
      * @param elementsB
      * @return Undefined9
      */
-    public final boolean containsSElements(final String side,
-            final SElementList elementsB) {
-        final SElementList elementsA = getSElements(side);
+    public boolean containsSElements(String side,
+            SElementList elementsB) {
+        SElementList elementsA = getSElements(side);
         if (elementsA.size() != elementsB.size()) {
             return false;
         } else {
             int i = 0;
-            for (final SElement s1 : elementsA) {
+            for (SElement s1 : elementsA) {
                 boolean exists = false;
-                for (final SElement s2 : elementsB) {
+                for (SElement s2 : elementsB) {
                     if (s1.equals(s2) && (exists == false)) {
                         exists = true;
                     }
@@ -850,21 +850,21 @@ public class EElement extends Element implements Cloneable,
      * @param side
      * @return Undefined         
      */
-    public final SElementList getSElements(final String side) {
+    public SElementList getSElements(String side) {
         SElementList elementsA = null;
-        for (final Element e : children) {
+        for (Element e : children) {
             if (e instanceof IElement) {
-                final IElement i = (IElement) e;
+                IElement i = (IElement) e;
                 elementsA = i.getSElements();
             }
             if (e instanceof PElement) {
-                final PElement p = (PElement) e;
+                PElement p = (PElement) e;
                 if (side.equals("L")) {
-                    final LElement lE = p.getL();
+                    LElement lE = p.getL();
                     elementsA = lE.getSElements();
                 }
                 if (side.equals("R")) {
-                    final RElement rE = p.getR();
+                    RElement rE = p.getR();
                     elementsA = rE.getSElements();
                 }
             }
@@ -877,10 +877,10 @@ public class EElement extends Element implements Cloneable,
      * @param side
      * @param msg
      */
-    public final void printSElements(final String side, Msg msg) {
-        final SElementList elements = getSElements(side);
+    public void printSElements(String side, Msg msg) {
+        SElementList elements = getSElements(side);
         if (elements != null) {
-            for (final SElement s : elements) {
+            for (SElement s : elements) {
                 msg.log(s.toString());
             }
         }
@@ -891,7 +891,7 @@ public class EElement extends Element implements Cloneable,
      * @param side
      * @param msg
      */
-    public final void print(final String side, Msg msg) {
+    public void print(String side, Msg msg) {
         msg.log(getSide(side).getValue() + " / ");
         printSElements(side, msg);
         msg.log("\n");
@@ -901,11 +901,11 @@ public class EElement extends Element implements Cloneable,
      * 
      * @param side
      * @return Undefined         */
-    public final String getSElementsString(final String side) {
-        final SElementList elements = getSElements(side);
+    public String getSElementsString(String side) {
+        SElementList elements = getSElements(side);
         String str = "";
         if (elements != null) {
-            for (final SElement s : elements) {
+            for (SElement s : elements) {
                 str += "<s n=\"" + s.getValue() + "\"/>";
             }
         }
@@ -916,10 +916,10 @@ public class EElement extends Element implements Cloneable,
      * 
      * @param side
      * @return Undefined         */
-    public final String getInfo(final String side) {
-        final SElementList elements = getSElements(side);
+    public String getInfo(String side) {
+        SElementList elements = getSElements(side);
         String str = "( ";
-        for (final SElement s : elements) {
+        for (SElement s : elements) {
             str += s.getValue() + " ";
         }
         str += ")";
@@ -929,11 +929,11 @@ public class EElement extends Element implements Cloneable,
     /**
      * 
      * @return Undefined         */
-    public final String getParadigmValue() {
+    public String getParadigmValue() {
         // Returns value of first paradigm
-        for (final Element e : children) {
+        for (Element e : children) {
             if (e instanceof ParElement) {
-                final ParElement parE = (ParElement) e;
+                ParElement parE = (ParElement) e;
                 return parE.getValue();
             }
         }
@@ -943,11 +943,11 @@ public class EElement extends Element implements Cloneable,
     /**
      * 
      * @return Undefined         */
-    public final ParElement getParadigm() {
+    public ParElement getParadigm() {
         // Returns value of first paradigm
-        for (final Element e : children) {
+        for (Element e : children) {
             if (e instanceof ParElement) {
-                final ParElement parE = (ParElement) e;
+                ParElement parE = (ParElement) e;
                 return parE;
             }
         }
@@ -958,14 +958,14 @@ public class EElement extends Element implements Cloneable,
      * 
      * @param value
      */
-    public final void setShared(final boolean value) {
+    public void setShared(boolean value) {
         shared = value;
     }
 
     /**
      * 
      * @return Undefined         */
-    public final boolean isShared() {
+    public boolean isShared() {
         return shared;
     }
 
@@ -973,14 +973,14 @@ public class EElement extends Element implements Cloneable,
      * 
      * @param value
      */
-    public final void setCommon(final boolean value) {
+    public void setCommon(boolean value) {
         common = value;
     }
 
     /**
      * 
      * @return Undefined         */
-    public final boolean isCommon() {
+    public boolean isCommon() {
         return common;
     }
 
@@ -988,14 +988,14 @@ public class EElement extends Element implements Cloneable,
      * 
      * @param value
      */
-    public final void setForeign(final boolean value) {
+    public void setForeign(boolean value) {
         foreign = value;
     }
 
     /**
      * 
      * @return Undefined         */
-    public final boolean isForeign() {
+    public boolean isForeign() {
         return foreign;
     }
 
@@ -1003,14 +1003,14 @@ public class EElement extends Element implements Cloneable,
      * 
      * @param value
      */
-    public final void setLocked(final boolean value) {
+    public void setLocked(boolean value) {
         locked = value;
     }
 
     /**
      * 
      * @return Undefined         */
-    public final boolean isLocked() {
+    public boolean isLocked() {
         return locked;
     }
 
@@ -1019,20 +1019,20 @@ public class EElement extends Element implements Cloneable,
      * @param side
      * @param newCategory
      */
-    public final void changeCategory(final String side, final String newCategory) {
-        for (final Element e : children) {
+    public void changeCategory(String side, String newCategory) {
+        for (Element e : children) {
             if (e instanceof IElement) {
-                final IElement i = (IElement) e;
+                IElement i = (IElement) e;
                 i.changeFirstSElement(newCategory);
             }
             if (e instanceof PElement) {
-                final PElement p = (PElement) e;
+                PElement p = (PElement) e;
                 if (side.equals("L")) {
-                    final LElement lE = p.getL();
+                    LElement lE = p.getL();
                     lE.changeFirstSElement(newCategory);
                 }
                 if (side.equals("R")) {
-                    final RElement rE = p.getR();
+                    RElement rE = p.getR();
                     rE.changeFirstSElement(newCategory);
                 }
             }
@@ -1044,7 +1044,7 @@ public class EElement extends Element implements Cloneable,
      * 
      */
     @Override
-    public final String toString() {
+    public String toString() {
         StringBuilder str = new StringBuilder(50);
         str.append("<e");
         if (this.i != null) {
@@ -1054,26 +1054,26 @@ public class EElement extends Element implements Cloneable,
             str.append(" r=\"" + getRestriction() + "\"");
         }
         str.append(">");
-        for (final Element e : children) {
+        for (Element e : children) {
             if (e instanceof IElement) {
-                final IElement i = (IElement) e;
+                IElement i = (IElement) e;
                 str.append(i.toString());
             }
             if (e instanceof PElement) {
-                final PElement p = (PElement) e;
+                PElement p = (PElement) e;
 
-                final LElement lE = p.getL();
+                LElement lE = p.getL();
                 str.append(lE.toString());
 
-                final RElement rE = p.getR();
+                RElement rE = p.getR();
                 str.append(rE.toString());
             }
             if (e instanceof ParElement) {
-                final ParElement par = (ParElement) e;
+                ParElement par = (ParElement) e;
                 str.append(par.toString());
             }
             if (e instanceof ReElement) {
-                final ReElement re = (ReElement) e;
+                ReElement re = (ReElement) e;
                 str.append(re.toString());
             }
 
@@ -1086,14 +1086,14 @@ public class EElement extends Element implements Cloneable,
      * 
      * @return Undefined         
      */
-    public final String toStringAll() {
+    public String toStringAll() {
         String str = "";
         String r = "";
         if (this.hasRestriction()) {
             r = " r=\"" + getRestriction() + "\"";
         }
         str += "<e" + r + ">";
-        for (final Element e : children) {
+        for (Element e : children) {
             str += e.toString();
         }
         str += "</e>";
@@ -1103,29 +1103,29 @@ public class EElement extends Element implements Cloneable,
     /**
      * 
      * @return Undefined         */
-    public final String toStringNoParadigm() {
+    public String toStringNoParadigm() {
         String str = "";
         String r = "";
         if (this.hasRestriction()) {
             r = " r=\"" + getRestriction() + "\"";
         }
         str += "<e" + r + ">";
-        for (final Element e : children) {
+        for (Element e : children) {
             if (e instanceof IElement) {
-                final IElement i = (IElement) e;
+                IElement i = (IElement) e;
                 str += i.toString();
             }
             if (e instanceof PElement) {
-                final PElement p = (PElement) e;
+                PElement p = (PElement) e;
 
-                final LElement lE = p.getL();
+                LElement lE = p.getL();
                 str += lE.toString();
 
-                final RElement rE = p.getR();
+                RElement rE = p.getR();
                 str += rE.toString();
             }
             if (e instanceof ReElement) {
-                final ReElement re = (ReElement) e;
+                ReElement re = (ReElement) e;
                 str += re.toString();
             }
 
@@ -1137,7 +1137,7 @@ public class EElement extends Element implements Cloneable,
     /**
      * 
      * @return Undefined         */
-    public final String lemmaAndCategory() {
+    public String lemmaAndCategory() {
         String str = "";
         String r = "";
         if (this.hasRestriction()) {
@@ -1145,22 +1145,22 @@ public class EElement extends Element implements Cloneable,
         }
         str += "<e" + r + ">";
         str += getLemma();
-        for (final Element e : children) {
+        for (Element e : children) {
             /*
-             * if (e instanceof IElement) { final IElement i = (IElement) e;
+             * if (e instanceof IElement) { IElement i = (IElement) e;
              * str += i.toString(); } if (e instanceof PElement) { final
              * PElement p = (PElement) e;
              * 
-             * final LElement lE = p.getL(); str += lE.toString();
+             * LElement lE = p.getL(); str += lE.toString();
              * 
-             * final RElement rE = p.getR(); str += rE.toString(); }
+             * RElement rE = p.getR(); str += rE.toString(); }
              * 
-             * if (e instanceof ReElement) { final ReElement re =
+             * if (e instanceof ReElement) { ReElement re =
              * (ReElement) e; str += re.toString(); }
              */
             if (e instanceof ParElement) {
-                final ParElement par = (ParElement) e;
-                final String parValue = par.getValue();
+                ParElement par = (ParElement) e;
+                String parValue = par.getValue();
                 String[] parts = parValue.toString().split("__");
                 String category = "";
                 for (String element : parts) {
@@ -1177,22 +1177,22 @@ public class EElement extends Element implements Cloneable,
     /**
      * 
      * @return Undefined         */
-    public final String toString2() {
+    public String toString2() {
         String str = "";
-        for (final Element e : children) {
+        for (Element e : children) {
             if (e instanceof IElement) {
-                final IElement i = (IElement) e;
+                IElement i = (IElement) e;
                 str += i.toString2();
                 str += "/";
                 str += i.toString2();
             }
             if (e instanceof PElement) {
-                final PElement p = (PElement) e;
+                PElement p = (PElement) e;
 
-                final LElement lE = p.getL();
+                LElement lE = p.getL();
                 str += lE.toString2();
                 str += "/";
-                final RElement rE = p.getR();
+                RElement rE = p.getR();
                 str += rE.toString2();
             }
 
@@ -1203,8 +1203,8 @@ public class EElement extends Element implements Cloneable,
     /**
      * 
      * @return Undefined         */
-    public final boolean isRegEx() {
-        for (final Element e : children) {
+    public boolean isRegEx() {
+        for (Element e : children) {
             if (e instanceof ReElement) {
                 return true;
             }
@@ -1215,8 +1215,8 @@ public class EElement extends Element implements Cloneable,
     /**
      * 
      * @return Undefined         */
-    public final ReElement getRegEx() {
-        for (final Element e : children) {
+    public ReElement getRegEx() {
+        for (Element e : children) {
             if (e instanceof ReElement) {
                 return (ReElement) e;
             }
@@ -1230,10 +1230,10 @@ public class EElement extends Element implements Cloneable,
     @Override
     public Object clone() {
         try {
-            final EElement cloned = (EElement) super.clone();
+            EElement cloned = (EElement) super.clone();
             cloned.children = (ElementList) children.clone();
             return cloned;
-        } catch (final Exception ex) {
+        } catch (Exception ex) {
             return null;
         }
     }
@@ -1244,7 +1244,7 @@ public class EElement extends Element implements Cloneable,
      * @return int value
      * @throws java.lang.ClassCastException
      */
-    public int compareTo(final EElement anotherEElement)
+    public int compareTo(EElement anotherEElement)
             throws ClassCastException {
 
         if (anotherEElement == null) {
@@ -1259,9 +1259,9 @@ public class EElement extends Element implements Cloneable,
             throw new ClassCastException("An EElement object expected.");
         }
 
-        final String lemma1 = getValue("L");
+        String lemma1 = getValue("L");
 
-        final String lemma2 = (anotherEElement).getValue("L");
+        String lemma2 = (anotherEElement).getValue("L");
 
         if (lemma1 == null || lemma2 == null) {
             return 0;
@@ -1280,7 +1280,7 @@ public class EElement extends Element implements Cloneable,
      * 
      * @return Undefined         
      */
-    public final EElement reverse() {
+    public EElement reverse() {
         // EElement eRev = (EElement) this.clone();
         EElement eRev = new EElement();
         if (getRestriction() != null) {
@@ -1321,7 +1321,7 @@ public class EElement extends Element implements Cloneable,
     /**
      * @return the patternApplied
      */
-    public final String getPatternApplied() {
+    public String getPatternApplied() {
         return patternApplied;
     }
 
@@ -1329,14 +1329,14 @@ public class EElement extends Element implements Cloneable,
      * @param patternApplied
      *                the patternApplied to set
      */
-    public final void setPatternApplied(String patternApplied) {
+    public void setPatternApplied(String patternApplied) {
         this.patternApplied = patternApplied;
     }
 
     /**
      * @return the aversion
      */
-    public final String getAversion() {
+    public String getAversion() {
         return aversion;
     }
 
@@ -1344,7 +1344,7 @@ public class EElement extends Element implements Cloneable,
      * @param aversion
      *                the aversion to set
      */
-    public final void setAversion(String aversion) {
+    public void setAversion(String aversion) {
         this.aversion = aversion;
     }
 
@@ -1352,7 +1352,7 @@ public class EElement extends Element implements Cloneable,
      * 
      * @return Get attribute 'alt'
      */
-    public final String getAlt() {
+    public String getAlt() {
         return this.alt;
     }
 
@@ -1360,7 +1360,7 @@ public class EElement extends Element implements Cloneable,
      * 
      * @param alt
      */
-    public final void setAlt(final String alt) {
+    public void setAlt(String alt) {
         this.alt = alt;
     }
 
@@ -1369,7 +1369,7 @@ public class EElement extends Element implements Cloneable,
      * @param def
      * @return true if the element contains certain definition ('adj', 'n', etc.)
      */
-    public final boolean contains(final String def) {
+    public boolean contains(String def) {
         return (getLeft().contains(def) || this.getRight().contains(def));
     }
 
@@ -1377,7 +1377,7 @@ public class EElement extends Element implements Cloneable,
      * 
      * @return True if restriction will be solved automatically
      */
-    public final boolean isRestrictionAuto() {
+    public boolean isRestrictionAuto() {
         if (r == null) {
             return false;
         } else {

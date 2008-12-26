@@ -126,20 +126,20 @@ public class DictionaryElement extends Element {
      *
      * @param elementMap
      */
-    public DictionaryElement(final EElementMap elementMap, final DictionaryElement dic) {
+    public DictionaryElement(EElementMap elementMap, DictionaryElement dic) {
         sections = new ArrayList<SectionElement>();
-        final SectionElement sectionElement = new SectionElement("main", "standard");
+        SectionElement sectionElement = new SectionElement("main", "standard");
         addSection(sectionElement);
         setAlphabet(dic.getAlphabet());
         setSdefs(dic.getSdefs());
 
-        final Set keySet = elementMap.keySet();
-        final Iterator it = keySet.iterator();
+        Set keySet = elementMap.keySet();
+        Iterator it = keySet.iterator();
 
         while (it.hasNext()) {
-            final String key = (String) it.next();
-            final EElementList eList = elementMap.get(key);
-            for (final EElement e : eList) {
+            String key = (String) it.next();
+            EElementList eList = elementMap.get(key);
+            for (EElement e : eList) {
                 addEElement(e);
             }
         }
@@ -149,9 +149,9 @@ public class DictionaryElement extends Element {
      *
      * @param dic
      */
-    public DictionaryElement(final DictionaryElement dic) {
+    public DictionaryElement(DictionaryElement dic) {
         sections = new ArrayList<SectionElement>();
-        final SectionElement sectionElement = new SectionElement("main", "standard");
+        SectionElement sectionElement = new SectionElement("main", "standard");
         addSection(sectionElement);
         setAlphabet(dic.getAlphabet());
         setSdefs(dic.getSdefs());
@@ -160,9 +160,9 @@ public class DictionaryElement extends Element {
             setPardefs(dic.getPardefsElement());
         }
 
-        final SectionElement sectionElementMain = dic.getSection("main");
-        final ArrayList<EElement> eList = sectionElementMain.getEElements();
-        for (final EElement e : eList) {
+        SectionElement sectionElementMain = dic.getSection("main");
+        ArrayList<EElement> eList = sectionElementMain.getEElements();
+        for (EElement e : eList) {
             if (!e.isShared()) {
                 addEElement(e);
             }
@@ -173,12 +173,12 @@ public class DictionaryElement extends Element {
      *
      * @param eList
      */
-    public final void setMainSection(final EElementList eList) {
-        for (final SectionElement section : sections) {
+    public void setMainSection(EElementList eList) {
+        for (SectionElement section : sections) {
             if (section.getID().equals("main")) {
-                final SectionElement sectionElementMain = new SectionElement(section.getID(), section.getType());
+                SectionElement sectionElementMain = new SectionElement(section.getID(), section.getType());
                 sections.remove(section);
-                for (final EElement e : eList) {
+                for (EElement e : eList) {
                     sectionElementMain.addEElement(e);
                 }
                 addSection(sectionElementMain);
@@ -190,14 +190,14 @@ public class DictionaryElement extends Element {
      *
      * @param value
      */
-    public final void setType(final String value) {
+    public void setType(String value) {
         type = value;
     }
 
     /**
      *
      * @return Undefined     */
-    public final String getType() {
+    public String getType() {
         return type;
     }
 
@@ -205,28 +205,28 @@ public class DictionaryElement extends Element {
      *
      * @param value
      */
-    public final void setFileName(final String value) {
+    public void setFileName(String value) {
         fileName = value;
     }
 
     /**
      *
      * @return Undefined     */
-    public final String getFileName() {
+    public String getFileName() {
         return fileName;
     }
 
     /**
      *
      */
-    public final void setFilePath(final String path) {
+    public void setFilePath(String path) {
         this.filePath = path;
     }
 
     /**
      *
      */
-    public final String getFilePath() {
+    public String getFilePath() {
         return this.filePath;
     }
 
@@ -234,14 +234,14 @@ public class DictionaryElement extends Element {
      *
      * @param value
      */
-    public final void setLeftLanguage(final String value) {
+    public void setLeftLanguage(String value) {
         leftLanguage = value;
     }
 
     /**
      *
      * @return Undefined     */
-    public final String getLeftLanguage() {
+    public String getLeftLanguage() {
         return leftLanguage;
     }
 
@@ -249,7 +249,7 @@ public class DictionaryElement extends Element {
      *
      * @param value
      */
-    public final void setRightLanguage(final String value) {
+    public void setRightLanguage(String value) {
         rightLanguage = value;
     }
 
@@ -257,7 +257,7 @@ public class DictionaryElement extends Element {
      *
      * @return Undefined     
      */
-    public final String getRightLanguage() {
+    public String getRightLanguage() {
         return rightLanguage;
     }
 
@@ -305,7 +305,7 @@ public class DictionaryElement extends Element {
      * 
      * @param header
      */
-    public void setHeaderElement(final HeaderElement header) {
+    public void setHeaderElement(HeaderElement header) {
         this.header = header;
     }
 
@@ -321,7 +321,7 @@ public class DictionaryElement extends Element {
      *
      * @param value
      */
-    public void setAlphabet(final AlphabetElement value) {
+    public void setAlphabet(AlphabetElement value) {
         alphabet = value;
     }
 
@@ -329,7 +329,7 @@ public class DictionaryElement extends Element {
      *
      * @param value
      */
-    public void setSdefs(final SdefsElement value) {
+    public void setSdefs(SdefsElement value) {
         sdefs = value;
     }
 
@@ -344,7 +344,7 @@ public class DictionaryElement extends Element {
      *
      * @param value
      */
-    public void setPardefs(final PardefsElement value) {
+    public void setPardefs(PardefsElement value) {
         pardefs = value;
     }
 
@@ -352,7 +352,7 @@ public class DictionaryElement extends Element {
      *
      * @param value
      */
-    public void addSection(final SectionElement value) {
+    public void addSection(SectionElement value) {
         sections.add(value);
     }
 
@@ -367,8 +367,8 @@ public class DictionaryElement extends Element {
      *
      * @param id
      * @return Undefined     */
-    public SectionElement getSection(final String id) {
-        for (final SectionElement section : sections) {
+    public SectionElement getSection(String id) {
+        for (SectionElement section : sections) {
             if (section.getID().equals(id)) {
                 return section;
             }
@@ -380,7 +380,7 @@ public class DictionaryElement extends Element {
      * 
      * @param fileName
      */
-    public void printXML(final String fileName, DicOpts opt) {
+    public void printXML(String fileName, DicOpts opt) {
         printXML(fileName, this.getXmlEncoding(), opt);
     }
 
@@ -389,7 +389,7 @@ public class DictionaryElement extends Element {
      * @param fileName
      * @param encoding
      */
-    public void printXML(final String fileName, final String encoding, DicOpts opt) {
+    public void printXML(String fileName, String encoding, DicOpts opt) {
         setFileName(fileName);
         try {
             FileOutputStream fos = new FileOutputStream(fileName);
@@ -430,7 +430,7 @@ public class DictionaryElement extends Element {
             }
             if (sections != null) {
                 DicOpts optNow = opt.copy().setNow1line(opt.sectionElementsOn1line).setNowAlign(opt.sectionElementsAligned);
-                for (final SectionElement s : sections) {
+                for (SectionElement s : sections) {
                     s.printXML(dos, optNow);
                 }
             }
@@ -439,7 +439,7 @@ public class DictionaryElement extends Element {
             bos = null;
             dos.close();
             dos = null;
-        } catch (final Exception eg) {
+        } catch (Exception eg) {
             eg.printStackTrace();
         }
     }
@@ -448,7 +448,7 @@ public class DictionaryElement extends Element {
      * 
      * @param fileName
      */
-    public void printXMLXInclude(final String fileName, DicOpts opt) {
+    public void printXMLXInclude(String fileName, DicOpts opt) {
         this.printXMLXInclude(fileName, this.getXmlEncoding(), opt);
     }
 
@@ -457,7 +457,7 @@ public class DictionaryElement extends Element {
      * @param fileName
      * @param encoding
      */
-    public void printXMLXInclude(final String fileName, final String encoding, DicOpts opt) {
+    public void printXMLXInclude(String fileName, String encoding, DicOpts opt) {
         BufferedOutputStream bos;
         FileOutputStream fos;
         OutputStreamWriter dos;
@@ -511,7 +511,7 @@ public class DictionaryElement extends Element {
                 }
                 dos.append(tab(1) + "<" + section.getTagName() + "" + attributes + ">\n");
                 if (includes != null) {
-                    for (final String s : includes) {
+                    for (String s : includes) {
                         dos.append("\t" + s + "\n");
                     }
                 }
@@ -522,9 +522,9 @@ public class DictionaryElement extends Element {
             bos = null;
             dos.close();
             dos = null;
-        } catch (final IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
-        } catch (final Exception eg) {
+        } catch (Exception eg) {
             eg.printStackTrace();
         }
     }
@@ -534,7 +534,7 @@ public class DictionaryElement extends Element {
      * @return The 'e' elements
      */
     public EElementList getEntries() {
-        for (final SectionElement s : sections) {
+        for (SectionElement s : sections) {
             if (s.getID().equals("main")) {
                 return s.getEElements();
             }
@@ -546,7 +546,7 @@ public class DictionaryElement extends Element {
      *
      * @return Undefined     */
     public EElementList getAllEntries() {
-        for (final SectionElement s : sections) {
+        for (SectionElement s : sections) {
             return s.getEElements();
         }
         return null;
@@ -558,7 +558,7 @@ public class DictionaryElement extends Element {
      */
     public int getNumberOfEntries() {
         int c = 0;
-        for (final SectionElement s : sections) {
+        for (SectionElement s : sections) {
             c += s.getEElements().size();
         }
         return c;
@@ -568,8 +568,8 @@ public class DictionaryElement extends Element {
      *
      * @param sectionID
      * @return Undefined     */
-    public EElementList getEntries(final String sectionID) {
-        for (final SectionElement s : sections) {
+    public EElementList getEntries(String sectionID) {
+        for (SectionElement s : sections) {
             if (s.getID().equals(sectionID)) {
                 return s.getEElements();
             }
@@ -581,7 +581,7 @@ public class DictionaryElement extends Element {
      *
      * @param e
      */
-    public final void addEElement(final EElement e) {
+    public void addEElement(EElement e) {
         (getEntries()).add(e);
     }
 
@@ -589,7 +589,7 @@ public class DictionaryElement extends Element {
      *
      * @param e
      */
-    public final void removeEElement(final EElement e) {
+    public void removeEElement(EElement e) {
         (getEntries()).remove(e);
     }
 
@@ -597,13 +597,13 @@ public class DictionaryElement extends Element {
      *
      *
      */
-    public final void countEntries() {
+    public void countEntries() {
         nForeignEntries = 0;
         nEntries = 0;
         nShared = 0;
         nDifferent = 0;
-        final ArrayList<EElement> list = getEntries();
-        for (final EElement e : list) {
+        ArrayList<EElement> list = getEntries();
+        for (EElement e : list) {
             if (e.isForeign()) {
                 nForeignEntries++;
             } else {
@@ -624,28 +624,28 @@ public class DictionaryElement extends Element {
     /**
      *
      * @return Undefined     */
-    public final int getNForeignEntries() {
+    public int getNForeignEntries() {
         return nForeignEntries;
     }
 
     /**
      *
      * @return Undefined     */
-    public final int getNEntries() {
+    public int getNEntries() {
         return nEntries;
     }
 
     /**
      *
      * @return Undefined     */
-    public final int getSharedEntries() {
+    public int getSharedEntries() {
         return nShared;
     }
 
     /**
      *
      * @return Undefined     */
-    public final int getDifferentEntries() {
+    public int getDifferentEntries() {
         return nDifferent;
     }
 
@@ -653,7 +653,7 @@ public class DictionaryElement extends Element {
      *
      *
      */
-    public final void reportMetrics() {
+    public void reportMetrics() {
         countEntries();
         System.err.println(nShared + " shared entries.");
         System.err.println(nDifferent + " not shared entries.");
@@ -665,11 +665,11 @@ public class DictionaryElement extends Element {
      *
      *
      */
-    public final void removeNotCommon() {
-        final ArrayList<EElement> elements = getEntries();
-        final ArrayList<EElement> elementsCopy = new ArrayList<EElement>(elements);
+    public void removeNotCommon() {
+        ArrayList<EElement> elements = getEntries();
+        ArrayList<EElement> elementsCopy = new ArrayList<EElement>(elements);
 
-        for (final EElement e : elementsCopy) {
+        for (EElement e : elementsCopy) {
             if (!e.isShared()) {
                 elements.remove(e);
             }
@@ -680,7 +680,7 @@ public class DictionaryElement extends Element {
      *
      * @param parName
      * @return Undefined     */
-    public final PardefElement getParadigmDefinition(final String parName) {
+    public PardefElement getParadigmDefinition(String parName) {
         return pardefs.getParadigmDefinition(parName);
     }
 
@@ -688,7 +688,7 @@ public class DictionaryElement extends Element {
      *
      * @param pardefE
      */
-    public final void addParDef(final PardefElement pardefE) {
+    public void addParDef(PardefElement pardefE) {
         pardefs.addPardefElement(pardefE);
     }
 
@@ -702,8 +702,8 @@ public class DictionaryElement extends Element {
     /**
      * 
      */
-    public final void searchEquivalentParadigms() {
-        final DicEquivPar dicEquivPar = new DicEquivPar(this);
+    public void searchEquivalentParadigms() {
+        DicEquivPar dicEquivPar = new DicEquivPar(this);
         equivPar = dicEquivPar.findEquivalentsA();
     }
 
@@ -718,11 +718,11 @@ public class DictionaryElement extends Element {
      *
      * @param entry
      * @return Undefined     */
-    public final EElement getEElement(String entry) {
-        final ArrayList<EElement> elements = getEntries();
+    public EElement getEElement(String entry) {
+        ArrayList<EElement> elements = getEntries();
 
-        for (final EElement e : elements) {
-            final String lemma = e.getLemma();
+        for (EElement e : elements) {
+            String lemma = e.getLemma();
             entry = DicTools.clearTags(entry);
 
             if (lemma != null) {
@@ -740,10 +740,10 @@ public class DictionaryElement extends Element {
      */
     public void reverse() {
         for (SectionElement section : getSections()) {
-            final ArrayList<EElement> elements = section.getEElements();
+            ArrayList<EElement> elements = section.getEElements();
 
-            for (final EElement ee : elements) {
-                final ArrayList<Element> children = ee.getChildren();
+            for (EElement ee : elements) {
+                ArrayList<Element> children = ee.getChildren();
 
                 if (ee.getRestriction() != null) {
                     if (ee.getRestriction().equals("LR")) {
@@ -775,11 +775,11 @@ public class DictionaryElement extends Element {
                 }
 
 
-                for (final Element e : children) {
+                for (Element e : children) {
                     if (e instanceof PElement) {
                         LElement lE = ((PElement) e).getL();
                         RElement rE = ((PElement) e).getR();
-                        // final String auxValue = lE.getValue();
+                        // String auxValue = lE.getValue();
                         ElementList auxChildren = lE.getChildren();
                         // lE.setValue(rE.getValue());
                         lE.setChildren(rE.getChildren());
@@ -796,7 +796,7 @@ public class DictionaryElement extends Element {
     /**
      * @return the folder
      */
-    public final String getFolder() {
+    public String getFolder() {
         return folder;
     }
 
@@ -804,7 +804,7 @@ public class DictionaryElement extends Element {
      * @param folder
      *                the folder to set
      */
-    public final void setFolder(String folder) {
+    public void setFolder(String folder) {
         this.folder = folder;
     }
 
@@ -812,7 +812,7 @@ public class DictionaryElement extends Element {
      * 
      * @return XML encoding
      */
-    public final String getXmlEncoding() {
+    public String getXmlEncoding() {
         return xmlEncoding;
     }
 
@@ -820,7 +820,7 @@ public class DictionaryElement extends Element {
      * 
      * @param xmlEncoding
      */
-    public final void setXmlEncoding(String xmlEncoding) {
+    public void setXmlEncoding(String xmlEncoding) {
         this.xmlEncoding = xmlEncoding;
     }
 
@@ -828,7 +828,7 @@ public class DictionaryElement extends Element {
      * 
      * @return XML version of the document
      */
-    public final String getXmlVersion() {
+    public String getXmlVersion() {
         return xmlVersion;
     }
 
@@ -836,7 +836,7 @@ public class DictionaryElement extends Element {
      * 
      * @param xmlVersion
      */
-    public final void setXmlVersion(String xmlVersion) {
+    public void setXmlVersion(String xmlVersion) {
         this.xmlVersion = xmlVersion;
     }
 
@@ -844,7 +844,7 @@ public class DictionaryElement extends Element {
      * 
      * @return Is there a header defined?
      */
-    public final boolean isHeaderDefined() {
+    public boolean isHeaderDefined() {
         return (header != null);
     }
 

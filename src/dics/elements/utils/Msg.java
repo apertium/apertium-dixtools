@@ -82,7 +82,7 @@ public class Msg {
      *
      *
      */
-    public Msg(final String logFileName) {
+    public Msg(String logFileName) {
         //debug            = false;
         this.logFileName = logFileName;
     }
@@ -91,7 +91,7 @@ public class Msg {
      *
      * @param logFileName
      */
-    private final void openLogStream(final String logFileName) {
+    private void openLogStream(String logFileName) {
         try {
 
             // Msg will be change to Logger soon...
@@ -112,7 +112,7 @@ public class Msg {
      *
      * @param text
      */
-    public final void err(final String text) {
+    public void err(String text) {
         System.err.println(text);
     }
 
@@ -120,7 +120,7 @@ public class Msg {
      *
      * @param text
      */
-    public final void out(final String text) {
+    public void out(String text) {
         switch (this.getType()) {
             case LABEL:
                 label.setText(text);
@@ -136,7 +136,7 @@ public class Msg {
     /**
      *
      */
-    public final void msg(final String text) {
+    public void msg(String text) {
 
         // Only for Java components (JLabel, etc)
         switch (this.getType()) {
@@ -153,7 +153,7 @@ public class Msg {
      *
      * @param text
      */
-    public final void log(final String text) {
+    public void log(String text) {
         if (isDebug()) {
             if (log == null) {
                 openLogStream(logFileName);
@@ -170,7 +170,7 @@ public class Msg {
     /**
      * @return the debug
      */
-    public final boolean isDebug() {
+    public boolean isDebug() {
         return debug;
     }
 
@@ -178,14 +178,14 @@ public class Msg {
      * @param debug
      *                the debug to set
      */
-    public final void setDebug(boolean debug) {
+    public void setDebug(boolean debug) {
         this.debug = debug;
     }
 
     /**
      * @return the logFileName
      */
-    public final String getLogFileName() {
+    public String getLogFileName() {
         return logFileName;
     }
 
@@ -193,7 +193,7 @@ public class Msg {
      * @param logFileName
      *                the logFileName to set
      */
-    public final void setLogFileName(String logFileName) {
+    public void setLogFileName(String logFileName) {
         this.logFileName = logFileName;
 
         if (isDebug()) {
@@ -204,21 +204,21 @@ public class Msg {
     /**
      *
      */
-    public final void setType(int t) {
+    public void setType(int t) {
         this.type = t;
     }
 
     /**
      *
      */
-    public final int getType() {
+    public int getType() {
         return type;
     }
 
     /**
      *
      */
-    public final void setLabel(JLabel label) {
+    public void setLabel(JLabel label) {
         this.label = label;
         this.type = this.LABEL;
     }

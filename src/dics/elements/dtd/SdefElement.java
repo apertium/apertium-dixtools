@@ -44,7 +44,7 @@ public class SdefElement extends Element {
      * 
      * @param value
      */
-    public SdefElement(final String value) {
+    public SdefElement(String value) {
         setTagName("sdef");
         n = value;
     }
@@ -53,7 +53,7 @@ public class SdefElement extends Element {
      * 
      * @return Undefined         */
     @Override
-    public final String getValue() {
+    public String getValue() {
         return n;
     }
 
@@ -62,7 +62,7 @@ public class SdefElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
-    public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
+    public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
         dos.append(makeCommentIfData(processingComments));
@@ -78,15 +78,15 @@ public class SdefElement extends Element {
      * 
      */
     @Override
-    public final String toString() {
-        final String str = "<" + getValue() + ">";
+    public String toString() {
+        String str = "<" + getValue() + ">";
         return str;
     }
 
     /**
      * @return the comment
      */
-    public final String getComment() {
+    public String getComment() {
         return comment;
     }
 
@@ -94,7 +94,7 @@ public class SdefElement extends Element {
      * @param comment
      *                the comment to set
      */
-    public final void setComment(String comment) {
+    public void setComment(String comment) {
         this.comment = comment;
     }
 }

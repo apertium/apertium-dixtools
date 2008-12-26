@@ -43,7 +43,7 @@ public class DicGather  extends AbstractDictTool {
      * @param dic
      * @param out
      */
-    public DicGather(final String dic, final String out) {
+    public DicGather(String dic, String out) {
         this.dic = dic;
         this.out = out;
     }
@@ -52,7 +52,7 @@ public class DicGather  extends AbstractDictTool {
      * 
      * 
      */
-    public final void doGather() {
+    public void doGather() {
         DictionaryReader reader = new DictionaryReader(dic);
         DictionaryElement dic = reader.readDic();
         dic.printXML(out,getOpt());

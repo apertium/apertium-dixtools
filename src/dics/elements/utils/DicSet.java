@@ -53,8 +53,8 @@ public class DicSet extends ArrayList<DictionaryElement> {
      * @param mon2
      * @param bil2
      */
-    public DicSet(final DictionaryElement mon1, final DictionaryElement bil1,
-            final DictionaryElement mon2, final DictionaryElement bil2) {
+    public DicSet(DictionaryElement mon1, DictionaryElement bil1,
+            DictionaryElement mon2, DictionaryElement bil2) {
 
         this.add(mon1);
         this.add(mon2);
@@ -75,7 +75,7 @@ public class DicSet extends ArrayList<DictionaryElement> {
      * 
      * @param mon1
      */
-    public DicSet(final DictionaryElement mon1) {
+    public DicSet(DictionaryElement mon1) {
         this.add(mon1);
 
         this.mon1 = mon1;
@@ -90,8 +90,8 @@ public class DicSet extends ArrayList<DictionaryElement> {
      * @param monA
      * @param monB
      */
-    public DicSet(final DictionaryElement bilAB, final DictionaryElement monA,
-            final DictionaryElement monB) {
+    public DicSet(DictionaryElement bilAB, DictionaryElement monA,
+            DictionaryElement monB) {
         this.add(monA);
         this.add(monB);
         this.add(bilAB);
@@ -134,7 +134,7 @@ public class DicSet extends ArrayList<DictionaryElement> {
      * 
      * 
      */
-    public final void reportMetrics() {
+    public void reportMetrics() {
         System.err.println("monA");
         mon1.reportMetrics();
         System.err.println("monC");
@@ -149,7 +149,7 @@ public class DicSet extends ArrayList<DictionaryElement> {
      * 
      * @param suffix
      */
-    public final void printXML(final String suffix, DicOpts opt) {
+    public void printXML(String suffix, DicOpts opt) {
         printMonolXML(suffix, opt);
         getBil1().printXML(suffix + "-bilAB.dix", opt);
         //DicTools.removeExtension(getBil1().getFileName()) + "-" + suffix + ".dix");
@@ -161,7 +161,7 @@ public class DicSet extends ArrayList<DictionaryElement> {
      * 
      * @param suffix
      */
-    public final void printMonolXML(final String suffix, DicOpts opt) {
+    public void printMonolXML(String suffix, DicOpts opt) {
         getMon1().printXML(suffix + "-monA.dix", opt);
         //DicTools.removeExtension(getMon1().getFileName()) + "-"		+ suffix + ".dix");
         getMon2().printXML(suffix + "-monC.dix", opt);

@@ -63,7 +63,7 @@ public class AddSameGender {
      * @param morphDic
      * @param bilDic
      */
-    public AddSameGender(final String morphDic, final String bilDic) {
+    public AddSameGender(String morphDic, String bilDic) {
         this.morphDic = morphDic;
         this.bilDic = bilDic;
 
@@ -72,7 +72,7 @@ public class AddSameGender {
     /**
      * 
      */
-    public final void processArguments() {
+    public void processArguments() {
         morphDic = arguments[1];
         bilDic = arguments[2];
     }
@@ -81,14 +81,14 @@ public class AddSameGender {
      * 
      * @param outFileName
      */
-    public final void setOutFileName(final String outFileName) {
+    public void setOutFileName(String outFileName) {
         this.outFileName = outFileName;
     }
 
     /**
      * 
      */
-    public final void addSameGender() {
+    public void addSameGender() {
         DictionaryReader bilReader = new DictionaryReader(this.bilDic);
         bil = bilReader.readDic();
         this.process_nouns();
@@ -99,7 +99,7 @@ public class AddSameGender {
     /**
      * 
      */
-    private final void process_nouns() {
+    private void process_nouns() {
         DictionaryReader morphReader = new DictionaryReader(this.morphDic);
         DictionaryElement morph = morphReader.readDic();
 
@@ -155,7 +155,7 @@ public class AddSameGender {
 
     }
 
-    private final void process_adjs() {
+    private void process_adjs() {
         DictionaryReader morphReader = new DictionaryReader(this.morphDic);
         DictionaryElement morph = morphReader.readDic();
 

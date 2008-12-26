@@ -66,7 +66,7 @@ public class Dix2Trie {
      * @param fileName
      * @param dir
      */
-    public Dix2Trie(String fileName, final String dir) {
+    public Dix2Trie(String fileName, String dir) {
         this.fileName = fileName;
         this.dir = dir;
         entryList = new EntryList();
@@ -75,7 +75,7 @@ public class Dix2Trie {
     /**
      * 
      */
-    public final void buildTrie() {
+    public void buildTrie() {
         this.readDictionary(fileName, dir);
         this.processEntryList();
         this.printXML();
@@ -84,7 +84,7 @@ public class Dix2Trie {
     /**
      * 
      */
-    private final void processEntryList() {
+    private void processEntryList() {
         root = new Node();
         for (Entry entry : entryList) {
             this.addEntry(entry);
@@ -95,7 +95,7 @@ public class Dix2Trie {
      * 
      * @param entry
      */
-    private final void addEntry(final Entry entry) {
+    private void addEntry(Entry entry) {
         int i = 1;
         String key = entry.getKey();
         char c = key.charAt(0);
@@ -112,7 +112,7 @@ public class Dix2Trie {
      * @param dicFileName
      * @param dir
      */
-    private final void readDictionary(final String dicFileName, final String dir) {
+    private void readDictionary(String dicFileName, String dir) {
         DictionaryReader dicReader = new DictionaryReader(dicFileName);
         DictionaryElement dic = dicReader.readDic();
 
@@ -154,7 +154,7 @@ public class Dix2Trie {
      * 
      * @param outFileName
      */
-    public final void setOutFileName(final String outFileName) {
+    public void setOutFileName(String outFileName) {
         this.outFileName = outFileName;
     }
 
@@ -162,14 +162,14 @@ public class Dix2Trie {
      * 
      * @return The out file name
      */
-    public final String getOutFileName() {
+    public String getOutFileName() {
         return this.outFileName;
     }
 
     /**
      * 
      */
-    public final void printXML() {
+    public void printXML() {
         this.printXML("UTF-8");
     }
 
@@ -177,7 +177,7 @@ public class Dix2Trie {
      * 
      * @param encoding
      */
-    public final void printXML(final String encoding) {
+    public void printXML(String encoding) {
         BufferedOutputStream bos;
         FileOutputStream fos;
         OutputStreamWriter osw;
@@ -196,9 +196,9 @@ public class Dix2Trie {
             bos = null;
             osw.close();
             osw = null;
-        } catch (final IOException ioe) {
+        } catch (IOException ioe) {
             ioe.printStackTrace();
-        } catch (final Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

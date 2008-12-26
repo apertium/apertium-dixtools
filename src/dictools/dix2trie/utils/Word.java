@@ -46,7 +46,7 @@ public class Word {
      * 
      * @param entry
      */
-    public Word(final Entry entry) {
+    public Word(Entry entry) {
         this.entry = entry;
     }
 
@@ -55,7 +55,7 @@ public class Word {
      * @param key
      * @param value
      */
-    public Word(final String key, final String value) {
+    public Word(String key, String value) {
         this.key = key;
         this.value = value;
     }
@@ -64,7 +64,7 @@ public class Word {
      * 
      * @param key
      */
-    public final void setKey(final String key) {
+    public void setKey(String key) {
         this.key = key;
     }
 
@@ -72,7 +72,7 @@ public class Word {
      * 
      * @return The key
      */
-    public final String getKey() {
+    public String getKey() {
         return this.key;
     }
 
@@ -80,7 +80,7 @@ public class Word {
      * 
      * @param value
      */
-    public final void setValue(final String value) {
+    public void setValue(String value) {
         this.value = value;
     }
 
@@ -88,7 +88,7 @@ public class Word {
      * 
      * @return The value
      */
-    public final String getValue() {
+    public String getValue() {
         return this.value;
     }
 
@@ -97,7 +97,7 @@ public class Word {
      * @param tabs
      * @param osw
      */
-    public final void print(int tabs, OutputStreamWriter osw) {
+    public void print(int tabs, OutputStreamWriter osw) {
         try {
             String sTabs = "";
             for (int i = 0; i < tabs; i++) {

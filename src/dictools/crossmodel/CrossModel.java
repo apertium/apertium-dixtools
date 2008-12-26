@@ -62,7 +62,7 @@ public class CrossModel {
      * 
      * @param crossAction
      */
-    public void addCrossAction(final CrossAction crossAction) {
+    public void addCrossAction(CrossAction crossAction) {
         crossActions.add(crossAction);
     }
 
@@ -77,8 +77,8 @@ public class CrossModel {
      * 
      * @param id
      * @return Undefined         */
-    public final CrossAction getCrossAction(final String id) {
-        for (final CrossAction ca : getCrossActions()) {
+    public CrossAction getCrossAction(String id) {
+        for (CrossAction ca : getCrossActions()) {
             if (ca.getId().equals(id)) {
                 return ca;
             }
@@ -90,7 +90,7 @@ public class CrossModel {
      * 
      * @param fileName
      */
-    public void printXML(final String fileName, DicOpts opt) {
+    public void printXML(String fileName, DicOpts opt) {
         this.printXML(fileName, this.getEncoding(), opt);
     }
 
@@ -99,7 +99,7 @@ public class CrossModel {
      * @param fileName
      * @param encoding
      */
-    public void printXML(final String fileName, final String encoding, DicOpts opt) {
+    public void printXML(String fileName, String encoding, DicOpts opt) {
         BufferedOutputStream bos;
         FileOutputStream fos;
         OutputStreamWriter dos;
@@ -125,9 +125,9 @@ public class CrossModel {
             bos = null;
             dos.close();
             dos = null;
-        } catch (final IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
-        } catch (final Exception eg) {
+        } catch (Exception eg) {
             eg.printStackTrace();
         }
     }
@@ -135,28 +135,28 @@ public class CrossModel {
     /**
      * 
      */
-    public final String getFileName() {
+    public String getFileName() {
         return this.fileName;
     }
 
     /**
      * 
      */
-    public final void setFileName(final String fileName) {
+    public void setFileName(String fileName) {
         this.fileName = fileName;
     }
 
     /**
      * 
      */
-    public final String getFilePath() {
+    public String getFilePath() {
         return this.filePath;
     }
 
     /**
      * 
      */
-    public final void setFilePath(final String filePath) {
+    public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
 
@@ -164,7 +164,7 @@ public class CrossModel {
      * 
      * @return Undefined
      */
-    public final String getEncoding() {
+    public String getEncoding() {
         return this.encoding;
     }
 
@@ -172,7 +172,7 @@ public class CrossModel {
      * 
      * @param encoding
      */
-    public final void setEncoding(final String encoding) {
+    public void setEncoding(String encoding) {
         this.encoding = encoding;
     }
 
@@ -180,14 +180,14 @@ public class CrossModel {
      * 
      * @param crossActions
      */
-    public final void setCrossActionList(final CrossActionList crossActions) {
+    public void setCrossActionList(CrossActionList crossActions) {
         this.crossActions = crossActions;
     }
 
     /**
      * 
      */
-    public final void rename() {
+    public void rename() {
         CrossActionList rList = new CrossActionList();
         for (CrossAction cA : this.getCrossActions()) {
             rList.add(cA.rename());
@@ -199,7 +199,7 @@ public class CrossModel {
      * 
      * @return true if the cross model is valid
      */
-    public final boolean isValid() {
+    public boolean isValid() {
         boolean errorsFound = false;
         for (CrossAction cA : this.getCrossActions()) {
             if (!cA.isValid()) {

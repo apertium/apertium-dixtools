@@ -53,7 +53,7 @@ public class Entry {
      * @param key
      * @param value
      */
-    public Entry(final String key, final String value) {
+    public Entry(String key, String value) {
         this.key = key;
         keyAttr = new SElementList();
         this.value = value;
@@ -64,7 +64,7 @@ public class Entry {
      * 
      * @return The key
      */
-    public final String getKey() {
+    public String getKey() {
         return this.key;
     }
 
@@ -72,7 +72,7 @@ public class Entry {
      * 
      * @param e
      */
-    public final void addKeyAttr(final SElement e) {
+    public void addKeyAttr(SElement e) {
         this.keyAttr.add(e);
     }
 
@@ -80,7 +80,7 @@ public class Entry {
      * 
      * @param keyAttr
      */
-    public final void setKeyAttr(final SElementList keyAttr) {
+    public void setKeyAttr(SElementList keyAttr) {
         this.keyAttr = keyAttr;
     }
 
@@ -88,7 +88,7 @@ public class Entry {
      * 
      * @return The attributes
      */
-    public final SElementList getKeyAttr() {
+    public SElementList getKeyAttr() {
         return this.keyAttr;
     }
 
@@ -96,7 +96,7 @@ public class Entry {
      * 
      * @return The value
      */
-    public final String getValue() {
+    public String getValue() {
         return this.value;
     }
 
@@ -104,7 +104,7 @@ public class Entry {
      * 
      * @param e
      */
-    public final void addValueAttr(final SElement e) {
+    public void addValueAttr(SElement e) {
         this.valueAttr.add(e);
     }
 
@@ -112,7 +112,7 @@ public class Entry {
      * 
      * @param valueAttr
      */
-    public final void setValueAttr(final SElementList valueAttr) {
+    public void setValueAttr(SElementList valueAttr) {
         this.valueAttr = valueAttr;
     }
 
@@ -120,7 +120,7 @@ public class Entry {
      * 
      * @return The list of attributes
      */
-    public final SElementList getValueAttr() {
+    public SElementList getValueAttr() {
         return this.valueAttr;
     }
 }

@@ -88,7 +88,7 @@ public class CrossAction implements Comparable<CrossAction> {
      * 
      * @param p
      */
-    public void setPattern(final Pattern p) {
+    public void setPattern(Pattern p) {
         pattern = p;
     }
 
@@ -96,7 +96,7 @@ public class CrossAction implements Comparable<CrossAction> {
      * 
      * @return Undefined     
      */
-    public final Pattern getPattern() {
+    public Pattern getPattern() {
         return pattern;
     }
 
@@ -104,7 +104,7 @@ public class CrossAction implements Comparable<CrossAction> {
      * 
      * @return Undefined     
      */
-    public final String getId() {
+    public String getId() {
         return id;
     }
 
@@ -112,7 +112,7 @@ public class CrossAction implements Comparable<CrossAction> {
      * 
      * @param id
      */
-    public final void setId(final String id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -120,7 +120,7 @@ public class CrossAction implements Comparable<CrossAction> {
      * 
      * 
      */
-    public final void print(Msg msg) {
+    public void print(Msg msg) {
         if (pattern != null) {
             getPattern().print(msg);
         }
@@ -135,7 +135,7 @@ public class CrossAction implements Comparable<CrossAction> {
      * @param id
      * @throws java.io.IOException
      */
-    public final void printXML(OutputStreamWriter dos, int id, DicOpts opt) throws IOException {
+    public void printXML(OutputStreamWriter dos, int id, DicOpts opt) throws IOException {
         dos.append("<cross-action id=\"ND-" + id + "\">\n");
         getPattern().printXML(dos, opt);
         if (actionSet != null) {
@@ -148,7 +148,7 @@ public class CrossAction implements Comparable<CrossAction> {
     /**
      * 
      * @return Undefined     */
-    public final ActionSet getActionSet() {
+    public ActionSet getActionSet() {
         return actionSet;
     }
 
@@ -156,7 +156,7 @@ public class CrossAction implements Comparable<CrossAction> {
      * 
      * @param actionSet
      */
-    public final void setActionSet(ActionSet actionSet) {
+    public void setActionSet(ActionSet actionSet) {
         this.actionSet = actionSet;
         actionSet.setName(getId());
     }
@@ -164,7 +164,7 @@ public class CrossAction implements Comparable<CrossAction> {
     /**
      * @return the occurrences
      */
-    public final int getOccurrences() {
+    public int getOccurrences() {
         return occurrences;
     }
 
@@ -172,7 +172,7 @@ public class CrossAction implements Comparable<CrossAction> {
      * @param occurrences
      *                the occurrences to set
      */
-    public final void setOccurrences(int occurrences) {
+    public void setOccurrences(int occurrences) {
         this.occurrences = occurrences;
     }
 
@@ -180,14 +180,14 @@ public class CrossAction implements Comparable<CrossAction> {
      * 
      * 
      */
-    public final void incrementOccurrences() {
+    public void incrementOccurrences() {
         occurrences++;
     }
 
     /**
      * 
      */
-    public int compareTo(final CrossAction anotherEElement)
+    public int compareTo(CrossAction anotherEElement)
             throws ClassCastException {
         if (anotherEElement == null) {
             return -1;
@@ -195,8 +195,8 @@ public class CrossAction implements Comparable<CrossAction> {
         if (!(anotherEElement instanceof CrossAction)) {
             throw new ClassCastException("A CrossAction object expected.");
         }
-        final int occ1 = getOccurrences();
-        final int occ2 = (anotherEElement).getOccurrences();
+        int occ1 = getOccurrences();
+        int occ2 = (anotherEElement).getOccurrences();
         if (occ1 == occ2) {
             return 0;
         }
@@ -209,7 +209,7 @@ public class CrossAction implements Comparable<CrossAction> {
     /**
      * 
      */
-    public final CrossAction rename() {
+    public CrossAction rename() {
         // Renamed objects
         CrossAction rCrossAction = new CrossAction();
         rCrossAction.setId(this.getId());
@@ -268,7 +268,7 @@ public class CrossAction implements Comparable<CrossAction> {
      * @param valueMap
      * @return A content element (l or r) with renamed variables
      */
-    private final ContentElement renameContentElement(final ContentElement source, HashMap<String, String> valueMap) {
+    private ContentElement renameContentElement(ContentElement source, HashMap<String, String> valueMap) {
         ContentElement rContentElement = new ContentElement();
         for (Element e : source.getChildren()) {
 
@@ -364,7 +364,7 @@ public class CrossAction implements Comparable<CrossAction> {
      * @param value
      * @return
      */
-    private final int getTypeOfVariable(final String value) {
+    private int getTypeOfVariable(String value) {
         if (this.stringMatchesPattern(value, "(\\$)[A-Za-z0-9]+")) {
             return 0;
         }
@@ -386,7 +386,7 @@ public class CrossAction implements Comparable<CrossAction> {
      * @param patternString
      * @return
      */
-    private final boolean stringMatchesPattern(final String value, final String patternString) {
+    private boolean stringMatchesPattern(String value, String patternString) {
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(patternString);
         Matcher matcher = p.matcher(value);
         return (matcher.find());
@@ -412,7 +412,7 @@ public class CrossAction implements Comparable<CrossAction> {
      * 
      * @return true if the cross action is valid
      */
-    public final boolean isValid() {
+    public boolean isValid() {
         if (!pattern.isValid()) {
             return false;
         }

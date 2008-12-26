@@ -66,14 +66,14 @@ public class Apertiumizer extends AbstractDictTool {
      * 
      * @param fileName
      */
-    public Apertiumizer(final String fileName) {
+    public Apertiumizer(String fileName) {
         this.fileName = fileName;
     }
 
     /**
      * 
      */
-    public final void apertiumize() {
+    public void apertiumize() {
         /*
         DictionaryReader encaReader = new DictionaryReader("apertium-en-ca.en-ca.dix");
         DictionaryElement enca = encaReader.readDic();
@@ -92,7 +92,7 @@ public class Apertiumizer extends AbstractDictTool {
      * 
      * @param format
      */
-    private final void readFormat(int format) {
+    private void readFormat(int format) {
         try {
             FileInputStream fstream = new FileInputStream(fileName);
             DataInputStream in = new DataInputStream(fstream);
@@ -153,7 +153,7 @@ public class Apertiumizer extends AbstractDictTool {
     }
 
     
-    private final String removeForms(String strLine) {
+    private String removeForms(String strLine) {
         StringBuffer strBuffer = new StringBuffer(strLine);
         StringBuffer newStr = new StringBuffer();
         int lStr = strBuffer.length();
@@ -173,7 +173,7 @@ public class Apertiumizer extends AbstractDictTool {
     }
      return newStr.toString();   
     }
-    private final void completeDic(DictionaryElement bil) {
+    private void completeDic(DictionaryElement bil) {
 
         for (EElement ee : bil.getAllEntries()) {
             //System.out.println("completing... " + ee.getLeft().getValueNoTags());
@@ -298,7 +298,7 @@ public class Apertiumizer extends AbstractDictTool {
      * @param strLine
      * @return The element
      */
-    private final EElement readElementFormat_0(final String strLine) {
+    private EElement readElementFormat_0(String strLine) {
         StringTokenizer tokenizer = new StringTokenizer(strLine, ":");
         boolean lastToken = false;
         int i = 0;
@@ -345,7 +345,7 @@ public class Apertiumizer extends AbstractDictTool {
         return null;
     }
 
-    private final EElement readElementFormat_3(final String strLine) {
+    private EElement readElementFormat_3(String strLine) {
         StringTokenizer tokenizer = new StringTokenizer(strLine, "\t");
 
         boolean lastToken = false;
@@ -384,7 +384,7 @@ public class Apertiumizer extends AbstractDictTool {
      * @param strLine
      * @return The element
      */
-    private final EElement readElementFormat_1(final String strLine) {
+    private EElement readElementFormat_1(String strLine) {
         StringTokenizer tokenizer = new StringTokenizer(strLine, "\t");
         boolean lastToken = false;
         int i = 0;
@@ -420,7 +420,7 @@ public class Apertiumizer extends AbstractDictTool {
         return null;
     }
 
-    private final String replacePoS(String str) {
+    private String replacePoS(String str) {
         //str = str.replaceAll("\"", "\\&quot;");
         str = str.replaceAll("\'", "");
         str = str.replaceAll("\"", "");
@@ -458,7 +458,7 @@ public class Apertiumizer extends AbstractDictTool {
      * @param strLine
      * @return
      */
-    private final EElementList readElementFormat_2(String strLine) {
+    private EElementList readElementFormat_2(String strLine) {
         StringBuffer strBuffer = new StringBuffer(strLine);
         int lStr = strBuffer.length();
         boolean isIn = false;
@@ -615,7 +615,7 @@ public class Apertiumizer extends AbstractDictTool {
      * 
      * @param outFileName
      */
-    public final void setOutFileName(final String outFileName) {
+    public void setOutFileName(String outFileName) {
         this.outFileName = outFileName;
     }
 
@@ -623,7 +623,7 @@ public class Apertiumizer extends AbstractDictTool {
      * 
      * @return The output file name
      */
-    public final String getOutFileName() {
+    public String getOutFileName() {
         return this.outFileName;
     }
 }

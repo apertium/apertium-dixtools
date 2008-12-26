@@ -40,7 +40,7 @@ public class ReElement extends Element {
      * 
      * @param value
      */
-    public ReElement(final String value) {
+    public ReElement(String value) {
         setTagName("re");
         this.value = value;
     }
@@ -59,7 +59,7 @@ public class ReElement extends Element {
      * @throws java.io.IOException
      */
     @Override
-    public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
+    public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
         
@@ -72,7 +72,7 @@ public class ReElement extends Element {
      * 
      */
     @Override
-    public final String toString() {
+    public String toString() {
         return getValue();
     }
 }

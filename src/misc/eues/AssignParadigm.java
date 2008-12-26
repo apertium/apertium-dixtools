@@ -56,7 +56,7 @@ public class AssignParadigm extends AbstractDictTool {
      * 
      * 
      */
-    public final void processArguments() {
+    public void processArguments() {
         morphDic = arguments[1];
         bilDic = arguments[2];
         out = arguments[3];
@@ -66,7 +66,7 @@ public class AssignParadigm extends AbstractDictTool {
      * 
      * 
      */
-    public final void doAssignParadigm() {
+    public void doAssignParadigm() {
         processArguments();
 
         DictionaryReader reader = new DictionaryReader(morphDic);
@@ -132,7 +132,7 @@ public class AssignParadigm extends AbstractDictTool {
      * @param value
      * @return
      */
-    private final String cleanTags(final String value) {
+    private String cleanTags(String value) {
         String[] vs = value.split("\\[");
         if (vs == null) {
             return value;

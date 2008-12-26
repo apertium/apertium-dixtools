@@ -52,7 +52,7 @@ public class TElement extends Element {
      * 
      * @param value
      */
-    public TElement(final String value) {
+    public TElement(String value) {
         setTagName("t");
         n = value;
     }
@@ -60,7 +60,7 @@ public class TElement extends Element {
     /*
      * 
      */
-    public TElement(final TElement tE) {
+    public TElement(TElement tE) {
         setTagName("t");
         n = tE.getValue();
     }
@@ -69,7 +69,7 @@ public class TElement extends Element {
      * 
      * @return Undefined         */
     @Override
-    public final String getValue() {
+    public String getValue() {
         return n;
     }
 
@@ -78,7 +78,7 @@ public class TElement extends Element {
      * @param value
      */
     @Override
-    public final void setValue(final String value) {
+    public void setValue(String value) {
         n = value;
     }
 
@@ -88,7 +88,7 @@ public class TElement extends Element {
      * @throws java.io.IOException
      */
     @Override
-    public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
+    public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
         dos.append("<" + getTagName() + " n=\"" + getValue() + "\"/>");
@@ -108,7 +108,7 @@ public class TElement extends Element {
      * @param tE
      * @return Undefined
      */
-    public final boolean equals(final TElement tE) {
+    public boolean equals(TElement tE) {
         return (getValue().equals(tE.getValue()));
     }
 
@@ -119,9 +119,9 @@ public class TElement extends Element {
     @Override
     public Object clone() {
         try {
-            final TElement cloned = (TElement) super.clone();
+            TElement cloned = (TElement) super.clone();
             return cloned;
-        } catch (final Exception ex) {
+        } catch (Exception ex) {
             return null;
         }
     }

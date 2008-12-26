@@ -70,7 +70,7 @@ public class ProcessDics extends AbstractDictTool {
         
         System.err.println(ProcessDics.class.getName()+".main(\"" + Arrays.toString(args).replaceAll(", ", "\", \"")+"\");");
         
-        final ProcessDics ps = new ProcessDics();
+        ProcessDics ps = new ProcessDics();
         ps.setArguments(args);
         try {
             ps.checkAction();
@@ -89,7 +89,7 @@ public class ProcessDics extends AbstractDictTool {
      *
      *
      */
-    public final void checkAction() {
+    public void checkAction() {
         if (getArguments().length == 0) {
             this.show_help();
             System.exit(-1);
@@ -179,7 +179,7 @@ public class ProcessDics extends AbstractDictTool {
     /**
      * Shows help
      */
-    private final void show_help() {
+    private void show_help() {
         msg.err("");
         msg.err("Usage: java -jar path/to/apertium-dixtools.jar <task> [options]");
         msg.err("");
@@ -205,7 +205,7 @@ public class ProcessDics extends AbstractDictTool {
     /**
      * 
      */
-    private final void process_consistent() {
+    private void process_consistent() {
         if (getArguments().length < 8) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar consistent -bilAB [-r] <bilAB> -bilBC [-r] <bilBC> -monA <mon-A> -monC <monC>");
             System.exit(-1);
@@ -220,7 +220,7 @@ public class ProcessDics extends AbstractDictTool {
     /**
      * 
      */
-    private final void process_merge() {
+    private void process_merge() {
         if (getArguments().length < 8) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar merge -bilAB [-r] <bilAB> -bilAB2 [-r] <bilAB2> -monA <mon-A> - monA2 <monA2> -monB <monB> -monB2 <monB2>");
             System.exit(-1);
@@ -235,7 +235,7 @@ public class ProcessDics extends AbstractDictTool {
     /**
      * 
      */
-    private final void process_mergemorph() {
+    private void process_mergemorph() {
         if (getArguments().length < 6) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar merge-morph -monA1 monA1.dix -monA2 monA2.dix -out merged.dix");
             System.exit(-1);
@@ -250,7 +250,7 @@ public class ProcessDics extends AbstractDictTool {
     /**
      * 
      */
-    private final void process_mergebil() {
+    private void process_mergebil() {
         if (getArguments().length < 6) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar merge-bil -bilAB1 bilAb1.dix -bilAB2 bilAB2.dix -out merged.dix");
             System.exit(-1);
@@ -265,7 +265,7 @@ public class ProcessDics extends AbstractDictTool {
     /**
      * 
      */
-    private final void process_cross_old() {
+    private void process_cross_old() {
         if (getArguments().length < 8) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar cross-param -bilAB [-r] <bilAB> -bilBC [-r] <bilBC> -monA <mon-A> -monC <monC>");
             System.exit(-1);
@@ -280,7 +280,7 @@ public class ProcessDics extends AbstractDictTool {
     /**
      * 
      */
-    private final void process_cross() {
+    private void process_cross() {
         if (getArguments().length < 3) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar cross -f <ling-resources.xml> <sl-tl>");
             System.exit(-1);
@@ -294,7 +294,7 @@ public class ProcessDics extends AbstractDictTool {
     /**
      * 
      */
-    private final void process_reverse() {
+    private void process_reverse() {
         if ((getArguments().length > 3) || (getArguments().length < 2)) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar reverse <bil> <bil-reversed>");
             System.exit(-1);
@@ -309,12 +309,12 @@ public class ProcessDics extends AbstractDictTool {
     /**
      * 
      */
-    private final void process_format() {
+    private void process_format() {
         if (getArguments().length != 4) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar format <-mon|-bil> <dic> <dic-formatted>");
             System.exit(-1);
         } else {
-            final DicFormat dicFormat = new DicFormat();
+            DicFormat dicFormat = new DicFormat();
             dicFormat.setArguments(arguments);
             dicFormat.doFormat();
         }
@@ -324,7 +324,7 @@ public class ProcessDics extends AbstractDictTool {
     /**
      * 
      */
-    private final void process_sort() {
+    private void process_sort() {
         if (getArguments().length != 4) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar sort <-mon|-bil> <dic> <out>");
             System.exit(-1);
@@ -338,7 +338,7 @@ public class ProcessDics extends AbstractDictTool {
     /**
      * 
      */
-    private final void process_gather() {
+    private void process_gather() {
         if (getArguments().length != 3) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar gather <dic> <dic-sorted>");
             System.exit(-1);
@@ -353,7 +353,7 @@ public class ProcessDics extends AbstractDictTool {
     /**
      * 
      */
-    private final void process_getbilomegawiki() {
+    private void process_getbilomegawiki() {
         if (getArguments().length != 4) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar get-bil-omegawiki <source-lang> <target-lang> <dic-out>");
             System.exit(-1);
@@ -367,7 +367,7 @@ public class ProcessDics extends AbstractDictTool {
     /**
      * 
      */
-    private final void process_format1line() {
+    private void process_format1line() {
         if (getArguments().length == 3) {
             DicFormatE1Line dicFormat = new DicFormatE1Line(arguments[1]);
             dicFormat.printXML(arguments[2]);
@@ -411,7 +411,7 @@ public class ProcessDics extends AbstractDictTool {
     /**
      * 
      */
-    private final void process_dicreader() {
+    private void process_dicreader() {
         if (getArguments().length < 3) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar dic-reader <action> <dic>");
             msg.err("   where <action> can be:");
@@ -441,7 +441,7 @@ public class ProcessDics extends AbstractDictTool {
     /**
      * 
      */
-    private final void process_equivparadigms() {
+    private void process_equivparadigms() {
         if (getArguments().length != 3) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar equiv-paradigms <dic> <dic-out>");
             System.exit(-1);
@@ -456,7 +456,7 @@ public class ProcessDics extends AbstractDictTool {
     /**
      * 
      */
-    private final void process_dix2trie() {
+    private void process_dix2trie() {
         if (getArguments().length < 3) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar dix2trie <dic> <lr|rl> [<out>]");
             System.exit(-1);
@@ -472,7 +472,7 @@ public class ProcessDics extends AbstractDictTool {
     /**
      * 
      */
-    private final void process_apertiumize() {
+    private void process_apertiumize() {
         if (getArguments().length != 3) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar apertiumize <txt> <out>");
             System.exit(-1);
@@ -486,7 +486,7 @@ public class ProcessDics extends AbstractDictTool {
     /**
      * 
      */
-    private final void process_convertmf() {
+    private void process_convertmf() {
         if (getArguments().length != 4) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar convert-mf <morph-dic> <bil-dic> <out>");
             System.exit(-1);
@@ -500,7 +500,7 @@ public class ProcessDics extends AbstractDictTool {
     /**
      * 
      */
-    private final void process_addsamegender() {
+    private void process_addsamegender() {
         if (getArguments().length != 4) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar add-same-gender <morph-dic> <bil-dic> <out>");
             System.exit(-1);
@@ -514,7 +514,7 @@ public class ProcessDics extends AbstractDictTool {
     /**
      * 
      */
-    private final void process_preparedic() {
+    private void process_preparedic() {
         if (getArguments().length != 3) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar preparedic <bil-dic> <missing-entries>");
             System.exit(-1);
@@ -527,7 +527,7 @@ public class ProcessDics extends AbstractDictTool {
     /**
      * 
      */
-    private final void process_completetranslation() {
+    private void process_completetranslation() {
         if (getArguments().length != 4) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar complete-translation <bil> <src-dot> <trans-dot>");
             System.exit(-1);
@@ -540,7 +540,7 @@ public class ProcessDics extends AbstractDictTool {
     /**
      * 
      */
-    private final void process_misc() {
+    private void process_misc() {
         if (getArguments().length != 5) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar misc <dic1> <dic2> <dic3>");
             System.exit(-1);
@@ -553,7 +553,7 @@ public class ProcessDics extends AbstractDictTool {
     /**
      * 
      */
-    private final void process_filter() {
+    private void process_filter() {
         if (getArguments().length != 3) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar filter <dicA> <dicB>");
             System.exit(-1);
@@ -567,7 +567,7 @@ public class ProcessDics extends AbstractDictTool {
     /**
      * 
      */
-    private final void process_dix2mdix() {
+    private void process_dix2mdix() {
         if (getArguments().length < 2) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar dix2mdix [options] <dic1> [<out>]");
             System.exit(-1);
@@ -581,7 +581,7 @@ public class ProcessDics extends AbstractDictTool {
     /**
      * 
      */
-    private final void process_dix2cc() {
+    private void process_dix2cc() {
         if (getArguments().length < 2) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar dix2cc <dix> [<cc>]");
             System.exit(-1);
@@ -592,7 +592,7 @@ public class ProcessDics extends AbstractDictTool {
         }
     }
 
-    private final void process_dix2tiny() {
+    private void process_dix2tiny() {
         if (getArguments().length < 5) {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar dix2tiny <dix> <lang-pair> <lang-pair-text> <platform>");
             msg.err("For example:");
@@ -608,7 +608,7 @@ public class ProcessDics extends AbstractDictTool {
     /**
      * @return the action
      */
-    private final String getAction() {
+    private String getAction() {
         return action;
     }
 
@@ -616,7 +616,7 @@ public class ProcessDics extends AbstractDictTool {
      * @param action
      *                the action to set
      */
-    private final void setAction(final String action) {
+    private void setAction(String action) {
         this.action = action;
     }
 }

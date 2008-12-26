@@ -50,7 +50,7 @@ public class CrossModelProcessor {
      * 
      * @param crossModel
      */
-    public CrossModelProcessor(final CrossModel crossModel, Msg msg) {
+    public CrossModelProcessor(CrossModel crossModel, Msg msg) {
         this.msg = msg;
         startState = new State("^start");
         String str;
@@ -75,7 +75,7 @@ public class CrossModelProcessor {
      * @param eList
      * @param crossAction
      */
-    public final void add(ElementList eList, CrossAction crossAction) {
+    public void add(ElementList eList, CrossAction crossAction) {
         msg.log("Adding pattern '" + crossAction.getId() + "'...");
         eList.printSequence(msg);
         this.startState.add(eList, crossAction, 0);
@@ -86,7 +86,7 @@ public class CrossModelProcessor {
      * @param entries
      * @return The best action set
      */
-    public final CrossActionData getBestActionSet(CrossAction entries) {
+    public CrossActionData getBestActionSet(CrossAction entries) {
         ElementList patternSequence = entries.getPattern().getSequence();
         //patternSequence.print();
         Variables vars = new Variables();
@@ -117,7 +117,7 @@ public class CrossModelProcessor {
      * @param eList
      * @return A string of elements
      */
-    private final String getElementListString(final ElementList eList) {
+    private String getElementListString(ElementList eList) {
         String str = "";
         for (Element e : eList) {
             str += "<" + e.getValue() + ">";

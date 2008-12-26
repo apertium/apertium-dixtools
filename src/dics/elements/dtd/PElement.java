@@ -53,7 +53,7 @@ public class PElement extends Element {
      * 
      * @param pE
      */
-    public PElement(final PElement pE) {
+    public PElement(PElement pE) {
         setTagName("p");
         // l = new LElement(pE.getL());
         l = (LElement) pE.getL().clone();
@@ -66,7 +66,7 @@ public class PElement extends Element {
      * @param l
      * @param r
      */
-    public PElement(final LElement l, final RElement r) {
+    public PElement(LElement l, RElement r) {
         setTagName("p");
         this.l = l;
         this.r = r;
@@ -76,7 +76,7 @@ public class PElement extends Element {
      * 
      * @param l
      */
-    public final void setLElement(final LElement l) {
+    public void setLElement(LElement l) {
         this.l = l;
     }
 
@@ -84,21 +84,21 @@ public class PElement extends Element {
      * 
      * @param r
      */
-    public final void setRElement(final RElement r) {
+    public void setRElement(RElement r) {
         this.r = r;
     }
 
     /**
      * 
      * @return Undefined         */
-    public final LElement getL() {
+    public LElement getL() {
         return l;
     }
 
     /**
      * 
      * @return Undefined         */
-    public final RElement getR() {
+    public RElement getR() {
         return r;
     }
 
@@ -107,7 +107,7 @@ public class PElement extends Element {
      * @param value
      * @param side
      */
-    public final void setProcessingComments(final String value, final String side) {
+    public void setProcessingComments(String value, String side) {
         if (side.equals("L")) {
             l.setProcessingComments(value);
         }
@@ -122,7 +122,7 @@ public class PElement extends Element {
      * @throws java.io.IOException
      */
     @Override
-    public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
+    public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
         String tab3 = opt.now1line?"":tab(3);
@@ -138,9 +138,9 @@ public class PElement extends Element {
     }
 
 
-    private final static String spaces = "                                                                                            ";
+    private static String spaces = "                                                                                            ";
     
-    public final void printXML1LineAligned(final StringBuilder dos, int alignR) throws IOException {
+    public void printXML1LineAligned(StringBuilder dos, int alignR) throws IOException {
       /*
       DicOpts opt = DicOpts.stdnow1line.copy();
       opt.nowAlign = true;
@@ -166,7 +166,7 @@ public class PElement extends Element {
      * 
      */
     @Override
-    public final String toString() {
+    public String toString() {
         String str = "";
 
         str += getL().toString();

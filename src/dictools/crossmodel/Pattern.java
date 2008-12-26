@@ -67,7 +67,7 @@ public class Pattern {
      * @param ab
      * @param bc
      */
-    public Pattern(final EElement ab, final EElement bc) {
+    public Pattern(EElement ab, EElement bc) {
         e1 = ab;
         e2 = bc;
     }
@@ -90,7 +90,7 @@ public class Pattern {
      * 
      * @param ab
      */
-    public void setAB(final EElement ab) {
+    public void setAB(EElement ab) {
         e1 = ab;
     }
 
@@ -98,7 +98,7 @@ public class Pattern {
      * 
      * @param bc
      */
-    public void setBC(final EElement bc) {
+    public void setBC(EElement bc) {
         e2 = bc;
     }
 
@@ -106,7 +106,7 @@ public class Pattern {
      * 
      * @param msg
      */
-    public final void print(Msg msg) {
+    public void print(Msg msg) {
         msg.log("Pattern:\n");
         getAB().print("L", msg);
         getAB().print("R", msg);
@@ -118,7 +118,7 @@ public class Pattern {
      * 
      */
     @Override
-    public final String toString() {
+    public String toString() {
         String e1 = getAB().toString2();
         String e2 = getBC().toString2();
         String str = e1 + "/" + e2;
@@ -130,7 +130,7 @@ public class Pattern {
      * @param dos
      * @throws java.io.IOException
      */
-    protected final void printXML(Appendable dos, DicOpts opt) throws IOException {
+    protected void printXML(Appendable dos, DicOpts opt) throws IOException {
         dos.append("\t<pattern>\n");
         e1.printXML(dos, opt);
         e2.printXML(dos, opt);
@@ -141,7 +141,7 @@ public class Pattern {
      * 
      * @return The list of elements
      */
-    public final ElementList getElementList() {
+    public ElementList getElementList() {
         ElementList list = new ElementList();
         list.add(e1.getLeft());
         list.add(e1.getRight());
@@ -154,7 +154,7 @@ public class Pattern {
      * 
      * @return Sequence of elements in pattern
      */
-    public final ElementList getSequence() {
+    public ElementList getSequence() {
         ElementList eList = new ElementList();
 
         eList = this.getSequenceR(this.getAB(), eList);
@@ -174,7 +174,7 @@ public class Pattern {
      * @param ee
      * @param eList
      */
-    private final ElementList getSequenceR(EElement ee, ElementList eList) {
+    private ElementList getSequenceR(EElement ee, ElementList eList) {
         if (ee != null) {
             if (ee.hasRestriction()) {
                 String r = ee.getRestriction();
@@ -193,7 +193,7 @@ public class Pattern {
      * @param ce
      * @param eList
      */
-    private final ElementList getSequenceCE(ContentElement ce, ElementList eList) {
+    private ElementList getSequenceCE(ContentElement ce, ElementList eList) {
         if (ce != null) {
             ElementList ceSeq = ce.getSequence();
             eList = eList.concat(ceSeq);
@@ -221,7 +221,7 @@ public class Pattern {
     /**
      * 
      */
-    public final void incrementLength() {
+    public void incrementLength() {
         this.length++;
     }
 
@@ -244,7 +244,7 @@ public class Pattern {
     /**
      * 
      */
-    public final void incrementNConstants() {
+    public void incrementNConstants() {
         this.nConstants++;
     }
 
@@ -252,7 +252,7 @@ public class Pattern {
      * 
      * @return true if the pattern is valid
      */
-    public final boolean isValid() {
+    public boolean isValid() {
         return true;
     }
 
@@ -260,7 +260,7 @@ public class Pattern {
      * 
      * @return The names of the variables defined in the pattern
      */
-    public final HashMap<String, String> getDefinedVariables() {
+    public HashMap<String, String> getDefinedVariables() {
         HashMap<String, String> definedVars = new HashMap<String, String>();
 
         getDefinedVarsElement(getAB().getLeft(), definedVars);
@@ -276,7 +276,7 @@ public class Pattern {
      * @param ce
      * @param definedVars
      */
-    private final void getDefinedVarsElement(ContentElement ce, HashMap<String, String> definedVars) {
+    private void getDefinedVarsElement(ContentElement ce, HashMap<String, String> definedVars) {
         for (Element e : ce.getChildren()) {
             if (e instanceof TextElement) {
                 String v = ((TextElement) e).getValue();

@@ -60,7 +60,7 @@ public class ContentElement extends Element implements Cloneable {
      * 
      * @param value
      */
-    public ContentElement(final String value) {
+    public ContentElement(String value) {
         children = new ElementList();
         setValue(value);
     }
@@ -69,7 +69,7 @@ public class ContentElement extends Element implements Cloneable {
      * 
      * @param cE
      */
-    public ContentElement(final ContentElement cE) {
+    public ContentElement(ContentElement cE) {
         children = (ElementList) cE.getChildren().clone();
         value = new String(cE.getValue());
     }
@@ -78,18 +78,18 @@ public class ContentElement extends Element implements Cloneable {
      * 
      * @param e
      */
-    public final void addChild(final Element e) {
+    public void addChild(Element e) {
         getChildren().add(e);
     }
 
     /**
      * 
      * @return Undefined         */
-    public final SElementList getSElements() {
-        final SElementList sEList = new SElementList();
-        for (final Element e : getChildren()) {
+    public SElementList getSElements() {
+        SElementList sEList = new SElementList();
+        for (Element e : getChildren()) {
             if (e instanceof SElement) {
-                final SElement sE = (SElement) e;
+                SElement sE = (SElement) e;
                 sEList.add(sE);
             }
         }
@@ -101,7 +101,7 @@ public class ContentElement extends Element implements Cloneable {
      * @return Undefined         
      */
     @Override
-    public final String getValueNoTags() {
+    public String getValueNoTags() {
         String str = "";
         for (Element e : children) {
             if (!(e instanceof SElement)) {
@@ -121,7 +121,7 @@ public class ContentElement extends Element implements Cloneable {
      * @return Undefined         
      */
     @Override
-    public final String getValue() {
+    public String getValue() {
         String str = "";
         for (Element e : children) {
             if (!(e instanceof SElement)) {
@@ -139,9 +139,9 @@ public class ContentElement extends Element implements Cloneable {
      * 
      * @param value
      * @return Undefined         */
-    public final boolean is(final String value) {
+    public boolean is(String value) {
         if (getSElements().size() > 0) {
-            final SElement sE = getSElements().get(0);
+            SElement sE = getSElements().get(0);
             if (sE != null) {
                 if (sE.is(value)) {
                     return true;
@@ -158,7 +158,7 @@ public class ContentElement extends Element implements Cloneable {
      * @param def
      * @return true is the element contains a certain definition ('m', 'adj', etc)
      */
-    public final boolean contains(final String def) {
+    public boolean contains(String def) {
         for (SElement sE : this.getSElements()) {
             if (sE.getValue().equals(def)) {
                 return true;
@@ -173,7 +173,7 @@ public class ContentElement extends Element implements Cloneable {
      * @throws java.io.IOException
      */
     @Override
-    protected void printXML(final Appendable dos, final DicOpts opt) throws IOException {
+    protected void printXML(Appendable dos, DicOpts opt) throws IOException {
         String tagName = getTagName();        
         if (tagName==null) {
           tagName = "<!-- error tagname -->";
@@ -189,7 +189,7 @@ public class ContentElement extends Element implements Cloneable {
         }  
 
         if (getChildren() != null) {
-            for (final Element e : getChildren()) {
+            for (Element e : getChildren()) {
                 if (e != null) {
                     e.printXML(dos, opt);
                 }
@@ -218,16 +218,16 @@ public class ContentElement extends Element implements Cloneable {
      * @param value
      */
     @Override
-    public final void setValue(final String value) {
+    public void setValue(String value) {
         boolean textE = false;
-        for (final Element e : getChildren()) {
+        for (Element e : getChildren()) {
             if (e instanceof TextElement) {
                 textE = true;
                 ((TextElement) e).setValue(value);
             }
         }
         if (!textE) {
-            final TextElement tE = new TextElement(value);
+            TextElement tE = new TextElement(value);
             getChildren().add(0, tE);
         }
         this.value = value;
@@ -236,7 +236,7 @@ public class ContentElement extends Element implements Cloneable {
     /**
      * 
      * @return Undefined         */
-    public final ElementList getChildren() {
+    public ElementList getChildren() {
         return children;
     }
 
@@ -244,7 +244,7 @@ public class ContentElement extends Element implements Cloneable {
      * 
      * @param value
      */
-    public final void setChildren(final ElementList value) {
+    public void setChildren(ElementList value) {
         children = value;
     }
 
@@ -252,12 +252,12 @@ public class ContentElement extends Element implements Cloneable {
      * 
      * @param value
      */
-    public final void changeFirstSElement(final String value) {
-        final SElement sE2 = new SElement(value);
+    public void changeFirstSElement(String value) {
+        SElement sE2 = new SElement(value);
         getSElements().set(0, sE2);
         int j = 0;
         for (int i = 0; i < children.size(); i++) {
-            final Element e = children.get(i);
+            Element e = children.get(i);
             if (e instanceof SElement) {
                 if (j == 0) {
                     children.set(i, sE2);
@@ -272,9 +272,9 @@ public class ContentElement extends Element implements Cloneable {
     /**
      * 
      * @return Undefined         */
-    public final String getString() {
+    public String getString() {
         String str = "";
-        for (final SElement s : getSElements()) {
+        for (SElement s : getSElements()) {
             str += s.toString();
         }
         return str;
@@ -286,7 +286,7 @@ public class ContentElement extends Element implements Cloneable {
     public String getInfo() {
         String str = "(";
         int i = 0;
-        for (final SElement s : getSElements()) {
+        for (SElement s : getSElements()) {
             // para que no se considere la primera etiqueta, la de
             // categoria,
             // para encontrar paradigmas equivalentes.
@@ -318,7 +318,7 @@ public class ContentElement extends Element implements Cloneable {
             sList = "";
         }
 
-        final String str = "<" + tagName + ">" + v + sList + "</" + tagName + ">";
+        String str = "<" + tagName + ">" + v + sList + "</" + tagName + ">";
         return str;
     }
 
@@ -358,7 +358,7 @@ public class ContentElement extends Element implements Cloneable {
         if (sList == null) {
             sList = "";
         }
-        final String str = sList;
+        String str = sList;
         return str;
     }
 
@@ -366,11 +366,11 @@ public class ContentElement extends Element implements Cloneable {
      * 
      * 
      */
-    public final void print(Msg msg) {
+    public void print(Msg msg) {
         msg.log(value + " / ");
-        final SElementList sList = getSElements();
+        SElementList sList = getSElements();
         if (sList != null) {
-            for (final SElement s : getSElements()) {
+            for (SElement s : getSElements()) {
                 msg.log(s.toString());
             }
         }
@@ -386,7 +386,7 @@ public class ContentElement extends Element implements Cloneable {
         try {
             cloned = (ContentElement) super.clone();
             cloned.children = (ElementList) children.clone();
-        } catch (final Exception ex) {
+        } catch (Exception ex) {
             return null;
         }
         return cloned;
@@ -396,7 +396,7 @@ public class ContentElement extends Element implements Cloneable {
      * 
      * @return A sequence of elements (text and 's' elements)
      */
-    public final ElementList getSequence() {
+    public ElementList getSequence() {
         ElementList eList = new ElementList();
         String str = "";
         boolean hasSElements = false;
@@ -440,7 +440,7 @@ public class ContentElement extends Element implements Cloneable {
      * @param e
      * @return Content of 'g' element (string)
      */
-    private final String processGElement(Element e) {
+    private String processGElement(Element e) {
         GElement gE = (GElement) e;
         String str = "";
         str += "<g>";

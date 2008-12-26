@@ -55,7 +55,7 @@ public class SdefsElement extends Element {
      * 
      * @param value
      */
-    public final void addSdefElement(final SdefElement value) {
+    public void addSdefElement(SdefElement value) {
         setTagName("sdefs");
         sdefsElements.add(value);
     }
@@ -63,7 +63,7 @@ public class SdefsElement extends Element {
     /**
      * 
      * @return Undefined         */
-    public final ArrayList<SdefElement> getSdefsElements() {
+    public ArrayList<SdefElement> getSdefsElements() {
         return sdefsElements;
     }
 
@@ -72,15 +72,15 @@ public class SdefsElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
-    public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
+    public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
         dos.append(makeCommentIfData(processingComments));
         dos.append(tab(1) + "<" + getTagName() + ">\n");
 
-        final HashMap<String, String> descriptions = DicTools.getSdefDescriptions();
-        for (final SdefElement e : sdefsElements) {
-            final String d = descriptions.get(e.getValue());
+        HashMap<String, String> descriptions = DicTools.getSdefDescriptions();
+        for (SdefElement e : sdefsElements) {
+            String d = descriptions.get(e.getValue());
             if (d != null) {
             // e.setProcessingComments("\t<!-- " + d + "-->");
             }
@@ -100,7 +100,7 @@ public class SdefsElement extends Element {
      * 
      * @param fileName
      */
-    public final void printXML(final String fileName, DicOpts opt) {
+    public void printXML(String fileName, DicOpts opt) {
         this.printXML(fileName, "UTF-8", opt);
     }
 
@@ -109,7 +109,7 @@ public class SdefsElement extends Element {
      * @param fileName
      * @param encoding
      */
-    public void printXML(final String fileName, final String encoding, DicOpts opt) {
+    public void printXML(String fileName, String encoding, DicOpts opt) {
         BufferedOutputStream bos;
         FileOutputStream fos;
         OutputStreamWriter dos;
@@ -127,9 +127,9 @@ public class SdefsElement extends Element {
             bos = null;
             dos.close();
             dos = null;
-        } catch (final IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
-        } catch (final Exception eg) {
+        } catch (Exception eg) {
             eg.printStackTrace();
         }
     }
@@ -137,10 +137,10 @@ public class SdefsElement extends Element {
     /**
      * 
      * @return Undefined         */
-    public final ArrayList<String> getAllCategories() {
-        final ArrayList<String> categories = new ArrayList<String>();
+    public ArrayList<String> getAllCategories() {
+        ArrayList<String> categories = new ArrayList<String>();
 
-        for (final SdefElement sdef : getSdefsElements()) {
+        for (SdefElement sdef : getSdefsElements()) {
             categories.add(sdef.getValue());
         }
         return categories;
@@ -150,9 +150,9 @@ public class SdefsElement extends Element {
      * 
      */
     @Override
-    public final String toString() {
+    public String toString() {
         String str = "";
-        for (final SdefElement sdef : getSdefsElements()) {
+        for (SdefElement sdef : getSdefsElements()) {
             str += sdef.toString();
         }
         return str;

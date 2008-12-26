@@ -31,7 +31,7 @@ public class WordList extends ArrayList<Word> {
      * 
      * @param word
      */
-    public final void put(final Word word) {
+    public void put(Word word) {
         this.add(word);
     }
 }

@@ -32,7 +32,7 @@ public class EntryList extends ArrayList<Entry> {
      * @param entry
      * @return The entry
      */
-    public final boolean add(final Entry entry) {
+    public boolean add(Entry entry) {
         return super.add(entry);
     }
 
@@ -41,7 +41,7 @@ public class EntryList extends ArrayList<Entry> {
      * @param key
      * @param value
      */
-    public final void add(final String key, final String value) {
+    public void add(String key, String value) {
         Entry entry = new Entry(key, value);
         this.add(entry);
     }

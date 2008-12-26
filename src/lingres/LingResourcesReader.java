@@ -82,7 +82,7 @@ public class LingResourcesReader {
     /**
      * 
      */
-    public LingResourcesReader(final String source, final int type) {
+    public LingResourcesReader(String source, int type) {
         if (type == LingResourcesReader.FILE) {
             setDicFile(new File(source));
         }
@@ -105,14 +105,14 @@ public class LingResourcesReader {
     /**
      * 
      */
-    private final void init() {
+    private void init() {
         try {
             setFactory(DocumentBuilderFactory.newInstance());
             getFactory().setXIncludeAware(true);
             setBuilder(getFactory().newDocumentBuilder());
-        } catch (final ParserConfigurationException pce) {
+        } catch (ParserConfigurationException pce) {
             pce.printStackTrace();
-        } catch (final Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -120,7 +120,7 @@ public class LingResourcesReader {
     /**
      * 
      */
-    public final void analize() {
+    public void analize() {
         try {
             if (isUrlDic()) {
                 // case: url
@@ -130,16 +130,16 @@ public class LingResourcesReader {
                 // case: file
                 setDocument(getBuilder().parse(getDicFile()));
             }
-        } catch (final FileNotFoundException fnfe) {
+        } catch (FileNotFoundException fnfe) {
             System.err.println("Error: could not find '" + getDicFile() + "' file.");
             System.exit(-1);
-        } catch (final SAXException saxE) {
+        } catch (SAXException saxE) {
             saxE.printStackTrace();
             System.err.println("Error: could not parse '" + getDicFile() + "'");
-        } catch (final IOException ioE) {
+        } catch (IOException ioE) {
             ioE.printStackTrace();
             System.err.println("I/O error");
-        } catch (final Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Error: the XML document is probably not well-formed");
         } finally {
@@ -152,17 +152,17 @@ public class LingResourcesReader {
      * 
      * @return Linguistic resources object
      */
-    public final LingResources readLingResources() {
+    public LingResources readLingResources() {
         this.lingRes = new LingResources();
         this.analize();
         Element root = document.getDocumentElement();
-        final NodeList children = root.getChildNodes();
+        NodeList children = root.getChildNodes();
         for (int i = 0; i < children.getLength(); i++) {
-            final Node child = children.item(i);
+            Node child = children.item(i);
 
             if (child instanceof Element) {
-                final Element childElement = (Element) child;
-                final String childElementName = childElement.getNodeName();
+                Element childElement = (Element) child;
+                String childElementName = childElement.getNodeName();
                 if (childElementName.equals("name")) {
                     String name = this.readSimpleElement(childElement);
                     lingRes.setName(name);
@@ -189,13 +189,13 @@ public class LingResourcesReader {
      * @param element
      * @return Simple element
      */
-    private final String readSimpleElement(Element element) {
+    private String readSimpleElement(Element element) {
         String text = null;
-        final NodeList children = element.getChildNodes();
+        NodeList children = element.getChildNodes();
         for (int i = 0; i < children.getLength(); i++) {
-            final Node child = children.item(i);
+            Node child = children.item(i);
             if (child instanceof Text) {
-                final Text textNode = (Text) child;
+                Text textNode = (Text) child;
                 text = textNode.getData().trim();
                 return text;
             }
@@ -208,14 +208,14 @@ public class LingResourcesReader {
      * @param element
      * @return resouce element
      */
-    private final Resource readResourceElement(Element element) {
+    private Resource readResourceElement(Element element) {
         Resource resourceElement = new Resource();
-        final NodeList children = element.getChildNodes();
+        NodeList children = element.getChildNodes();
         for (int i = 0; i < children.getLength(); i++) {
-            final Node child = children.item(i);
+            Node child = children.item(i);
             if (child instanceof Element) {
-                final Element childElement = (Element) child;
-                final String childElementName = childElement.getNodeName();
+                Element childElement = (Element) child;
+                String childElementName = childElement.getNodeName();
                 if (childElementName.equals("property")) {
                     String name = this.getAttributeValue(childElement, "name");
                     String value = this.getAttributeValue(childElement, "value");
@@ -232,14 +232,14 @@ public class LingResourcesReader {
      * @param element
      * @return Resource set element
      */
-    private final ResourceSet readResourceSetElement(Element element) {
+    private ResourceSet readResourceSetElement(Element element) {
         ResourceSet resourceSetElement = new ResourceSet();
-        final NodeList children = element.getChildNodes();
+        NodeList children = element.getChildNodes();
         for (int i = 0; i < children.getLength(); i++) {
-            final Node child = children.item(i);
+            Node child = children.item(i);
             if (child instanceof Element) {
-                final Element childElement = (Element) child;
-                final String childElementName = childElement.getNodeName();
+                Element childElement = (Element) child;
+                String childElementName = childElement.getNodeName();
                 if (childElementName.equals("name")) {
                     String name = this.readSimpleElement(childElement);
                     resourceSetElement.setName(name);
@@ -262,13 +262,13 @@ public class LingResourcesReader {
      * @param attrName
      * @return The value of the attribute
      */
-    private String getAttributeValue(final Element e, final String attrName) {
+    private String getAttributeValue(Element e, String attrName) {
         String value = "";
         if (e.hasAttributes()) {
-            final NamedNodeMap attributes = e.getAttributes();
+            NamedNodeMap attributes = e.getAttributes();
             for (int i = 0; i < attributes.getLength(); i++) {
-                final Node attribute = attributes.item(i);
-                final String name = attribute.getNodeName();
+                Node attribute = attributes.item(i);
+                String name = attribute.getNodeName();
                 value = attribute.getNodeValue();
                 if (name.equals(attrName)) {
                     return value;

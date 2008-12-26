@@ -44,7 +44,7 @@ public class DicReader {
      * 
      * @param fileName
      */
-    public DicReader(final String fileName) {
+    public DicReader(String fileName) {
         this.fileName = fileName;
         entryList = new EntryList();
     }
@@ -53,7 +53,7 @@ public class DicReader {
      * 
      * @return The list of entries
      */
-    public final EntryList read() {
+    public EntryList read() {
         try {
             FileReader input = new FileReader(fileName);
             BufferedReader bufRead = new BufferedReader(input);
@@ -85,7 +85,7 @@ public class DicReader {
      * @param line
      * @return The entry
      */
-    private Entry getEntry(final String line) {
+    private Entry getEntry(String line) {
         StringTokenizer strTokenizer = new StringTokenizer(line, ":");
         boolean first = true;
         String left = null;

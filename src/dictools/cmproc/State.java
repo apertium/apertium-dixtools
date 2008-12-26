@@ -57,7 +57,7 @@ public class State {
      * 
      * @param value
      */
-    public State(final String value) {
+    public State(String value) {
         this.value = value;
         states = new StateSet();
     }
@@ -68,9 +68,9 @@ public class State {
      * @param crossAction
      * @param i
      */
-    public final void add(final ElementList pattern, final CrossAction crossAction, int i) {
+    public void add(ElementList pattern, CrossAction crossAction, int i) {
         if (i < pattern.size()) {
-            final Element e = pattern.get(i);
+            Element e = pattern.get(i);
             if (this.isConstant(e)) {
                 crossAction.getPattern().incrementNConstants();
             }
@@ -97,7 +97,7 @@ public class State {
      * @param e
      * @return true if 'e' is a constant
      */
-    private final boolean isConstant(final Element e) {
+    private boolean isConstant(Element e) {
         String v = e.getValue();
         if (v.startsWith("^")) {
             return false;
@@ -116,7 +116,7 @@ public class State {
      * @param e
      * @return true if 'e' forces the increment of pattern length
      */
-    private final boolean increments(final Element e) {
+    private boolean increments(Element e) {
         String v = e.getValue();
         if (v.equals("^b") || v.equals("^end")) {
             return false;
@@ -131,7 +131,7 @@ public class State {
      * @param patternString
      * @return true if 'value' macthes pattern 'patternString'
      */
-    private final boolean stringMatchesPattern(final String value, final String patternString) {
+    private boolean stringMatchesPattern(String value, String patternString) {
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(patternString);
         Matcher matcher = p.matcher(value);
         return (matcher.find());
@@ -150,7 +150,7 @@ public class State {
      * @param cadl
      * @param varsSrc
      */
-    public final void getActionSetList(final ElementList patternSequence, int i, CrossActionDataList cadl, final Variables varsSrc) {
+    public void getActionSetList(ElementList patternSequence, int i, CrossActionDataList cadl, Variables varsSrc) {
         if (i < patternSequence.size()) {
             Variables vars = null;
             String v = ((Element) patternSequence.get(i)).getValue();
@@ -276,7 +276,7 @@ public class State {
      * @param cadl
      * @param vars
      */
-    private final void continue_processing(ElementList patternSequence, int i, CrossActionDataList cadl, Variables vars) {
+    private void continue_processing(ElementList patternSequence, int i, CrossActionDataList cadl, Variables vars) {
         Iterator it = states.keySet().iterator();
         while (it.hasNext()) {
             State st = (State) states.get(it.next());
@@ -291,7 +291,7 @@ public class State {
      * @param vars
      * @return true if the process must continue from current state
      */
-    private final boolean process_X(String state_v, String v, Variables vars) {
+    private boolean process_X(String state_v, String v, Variables vars) {
         boolean continueProcessing = false;
         if (!vars.containsKey(state_v)) {
             vars.put(state_v, v);
@@ -315,7 +315,7 @@ public class State {
      * @param cadl
      * @return Index
      */
-    private final int process_S(String state_v, String v, Variables vars, ElementList patternSequence, int i) {
+    private int process_S(String state_v, String v, Variables vars, ElementList patternSequence, int i) {
         boolean continueProcessing = false;
         Element e = patternSequence.get(i);
         SElementList eList = new SElementList();

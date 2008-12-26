@@ -96,7 +96,7 @@ public class Dix2MDix {
     /**
      * 
      */
-    public final void do_convert() {
+    public void do_convert() {
         this.processArguments();
 
         metaInf = new Vector<String>();
@@ -135,7 +135,7 @@ public class Dix2MDix {
      * 
      * @param dic
      */
-    private final void processDic(DictionaryElement dic, final String dir) {
+    private void processDic(DictionaryElement dic, String dir) {
         hm = new HashMap();
         Vector values = null;
 
@@ -170,7 +170,7 @@ public class Dix2MDix {
         this.print(vector);
     }
 
-    private final EElement cleanUp(EElement ee) {
+    private EElement cleanUp(EElement ee) {
 
         for (Element e : ee.getChildren("L")) {
             if (e instanceof TextElement) {
@@ -199,7 +199,7 @@ public class Dix2MDix {
      * 
      * @param vector
      */
-    private final void print(Vector<Entry> vector) {
+    private void print(Vector<Entry> vector) {
         try {
             BufferedOutputStream bos;
             FileOutputStream fos;
@@ -284,7 +284,7 @@ public class Dix2MDix {
      * 
      * @param metaInf
      */
-    private final void printMetaInfFile(Vector<String> metaInf) {
+    private void printMetaInfFile(Vector<String> metaInf) {
         BufferedOutputStream bos;
         FileOutputStream fos;
         OutputStreamWriter dos = null;
@@ -349,7 +349,7 @@ public class Dix2MDix {
      * @param hm
      * @return
      */
-    private final Vector map2vector(HashMap hm) {
+    private Vector map2vector(HashMap hm) {
         Vector<Entry> vector = new Vector<Entry>();
 
         Set keySet = hm.keySet();
@@ -505,7 +505,7 @@ public class Dix2MDix {
             this.zipFileName = zipFileName;
         }
 
-        public final void zip() {
+        public void zip() {
             try {
 
                 File zipFile = new File(this.zipFileName);
@@ -554,14 +554,14 @@ public class Dix2MDix {
             }
         }
 
-        private final void clean() {
+        private void clean() {
             for (int i = 0, n = files.size(); i < n; i++) {
                 String name = files.elementAt(i);
                 this.deleteFile(name);
             }
         }
 
-        private final void deleteFile(final String fileName) {
+        private void deleteFile(String fileName) {
             File f = new File(fileName);
 
             if (!f.exists()) {

@@ -68,7 +68,7 @@ public class SectionElement extends Element {
      * @param id
      * @param type
      */
-    public SectionElement(final String id, final String type) {
+    public SectionElement(String id, String type) {
         setTagName("section");
         eElements = new EElementList();
         includes = new ArrayList<String>();
@@ -80,7 +80,7 @@ public class SectionElement extends Element {
      * 
      * @param value
      */
-    public final void setID(final String value) {
+    public void setID(String value) {
         id = value;
     }
 
@@ -95,7 +95,7 @@ public class SectionElement extends Element {
      * 
      * @param value
      */
-    public final void setType(final String value) {
+    public void setType(String value) {
         type = value;
     }
 
@@ -117,7 +117,7 @@ public class SectionElement extends Element {
      * 
      * @param value
      */
-    public void addEElement(final EElement value) {
+    public void addEElement(EElement value) {
         eElements.add(value);
     }
 
@@ -127,7 +127,7 @@ public class SectionElement extends Element {
      * @throws java.io.IOException
      */
     @Override
-    public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
+    public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
         String attributes = "";
@@ -141,7 +141,7 @@ public class SectionElement extends Element {
         dos.append(tab(1) + "<" + getTagName() + "" + attributes + ">\n");
 
         if (eElements != null) {
-            for (final EElement e : eElements) {
+            for (EElement e : eElements) {
                 e.printXML(dos, opt);
             }
         }
@@ -153,7 +153,7 @@ public class SectionElement extends Element {
      * 
      * @param fileName
      */
-    public void printXMLXInclude(final String fileName, DicOpts opt) {
+    public void printXMLXInclude(String fileName, DicOpts opt) {
         this.printXMLXInclude(fileName, "UTF-8", opt);
     }
 
@@ -162,7 +162,7 @@ public class SectionElement extends Element {
      * @param fileName
      * @param encoding
      */
-    public void printXMLXInclude(final String fileName, final String encoding, DicOpts opt) {
+    public void printXMLXInclude(String fileName, String encoding, DicOpts opt) {
         BufferedOutputStream bos;
         FileOutputStream fos;
         OutputStreamWriter dos;
@@ -175,7 +175,7 @@ public class SectionElement extends Element {
 
             dos.append("<dictionary>\n");
             dos.append("<section>\n");
-            for (final EElement e : eElements) {
+            for (EElement e : eElements) {
                 e.printXML(dos, opt);
             }
             dos.append("</section>\n");
@@ -185,9 +185,9 @@ public class SectionElement extends Element {
             bos = null;
             dos.close();
             dos = null;
-        } catch (final IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
-        } catch (final Exception eg) {
+        } catch (Exception eg) {
             eg.printStackTrace();
         }
     }
@@ -196,7 +196,7 @@ public class SectionElement extends Element {
      * @param elements
      *                the eElements to set
      */
-    public final void setEElements(EElementList elements) {
+    public void setEElements(EElementList elements) {
         eElements = elements;
     }
 
@@ -204,7 +204,7 @@ public class SectionElement extends Element {
      * @param includes
      *                the includes to set
      */
-    public final void setIncludes(ArrayList<String> includes) {
+    public void setIncludes(ArrayList<String> includes) {
         this.includes = includes;
     }
 
@@ -212,14 +212,14 @@ public class SectionElement extends Element {
      * 
      * @param xinclude
      */
-    public final void addXInclude(String xinclude) {
+    public void addXInclude(String xinclude) {
         includes.add(xinclude);
     }
 
     /**
      * @return the includes
      */
-    public final ArrayList<String> getIncludes() {
+    public ArrayList<String> getIncludes() {
         return includes;
     }
 }

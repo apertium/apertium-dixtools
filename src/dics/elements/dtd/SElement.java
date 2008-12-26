@@ -35,7 +35,7 @@ public class SElement extends Element {
     /**
      * 
      */
-    private static final HashMap<String, SElement> sElementList = new HashMap<String, SElement>();
+    private static HashMap<String, SElement> sElementList = new HashMap<String, SElement>();
     /**
      * 
      */
@@ -57,7 +57,7 @@ public class SElement extends Element {
      * 
      * @param value
      */
-    public SElement(final String value) {
+    public SElement(String value) {
         setTagName("s");
         n = value;
     }
@@ -65,7 +65,7 @@ public class SElement extends Element {
     /*
      * 
      */
-    public SElement(final SElement sE) {
+    public SElement(SElement sE) {
         setTagName("s");
         n = sE.getValue();
     }
@@ -74,7 +74,7 @@ public class SElement extends Element {
      * 
      * @return Undefined         */
     @Override
-    public final String getValue() {
+    public String getValue() {
         return n;
     }
 
@@ -83,7 +83,7 @@ public class SElement extends Element {
      * @param value
      */
     @Override
-    public final void setValue(final String value) {
+    public void setValue(String value) {
         n = value;
     }
 
@@ -92,7 +92,7 @@ public class SElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
-    public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
+    public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
         dos.append("<" + getTagName() + " n=\"" + getValue() + "\"/>");
@@ -102,14 +102,14 @@ public class SElement extends Element {
     /**
      * 
      * @return Undefined         */
-    public final boolean isAdj() {
+    public boolean isAdj() {
         return is("adj");
     }
 
     /**
      * 
      * @return Undefined         */
-    public final boolean isN() {
+    public boolean isN() {
         return is("n");
     }
 
@@ -117,7 +117,7 @@ public class SElement extends Element {
      * 
      * @param value
      * @return Undefined         */
-    public final boolean is(final String value) {
+    public boolean is(String value) {
         if (n.equals(value)) {
             return true;
         }
@@ -136,7 +136,7 @@ public class SElement extends Element {
      * 
      * @param sE
      * @return Undefined         */
-    public final boolean equals(final SElement sE) {
+    public boolean equals(SElement sE) {
         return (getValue().equals(sE.getValue()));
     }
 
@@ -144,7 +144,7 @@ public class SElement extends Element {
      * 
      * @param sE
      */
-    public static final void putSElement(final SElement sE) {
+    public static void putSElement(SElement sE) {
         SElement.sElementList.put(sE.getValue(), sE);
     }
 
@@ -152,7 +152,7 @@ public class SElement extends Element {
      * 
      * @param str
      * @return Undefined         */
-    public static final boolean exists(final String str) {
+    public static boolean exists(String str) {
         return SElement.sElementList.containsKey(str);
     }
 
@@ -160,7 +160,7 @@ public class SElement extends Element {
      * 
      * @param str
      * @return Undefined         */
-    public static final SElement get(final String str) {
+    public static SElement get(String str) {
         SElement sE = null;
         if (SElement.exists(str)) {
             sE = SElement.sElementList.get(str);
@@ -172,16 +172,16 @@ public class SElement extends Element {
     }
 
     /*
-     * public final String getTemp() { return temp; }
+     * public String getTemp() { return temp; }
      * 
-     * public final void setTemp(String temp) { this.temp = temp; }
+     * public void setTemp(String temp) { this.temp = temp; }
      */
     @Override
     public Object clone() {
         try {
-            final SElement cloned = (SElement) super.clone();
+            SElement cloned = (SElement) super.clone();
             return cloned;
-        } catch (final Exception ex) {
+        } catch (Exception ex) {
             return null;
         }
     }

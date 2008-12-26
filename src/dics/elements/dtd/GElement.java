@@ -46,7 +46,7 @@ public class GElement extends ContentElement {
      * @throws java.io.IOException
      */
     @Override
-    public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
+    public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
         if (getTagName() != null) {
@@ -55,7 +55,7 @@ public class GElement extends ContentElement {
             dos.append("<!-- error tagname -->\n");
         }
         if (children != null) {
-            for (final Element e : children) {
+            for (Element e : children) {
                 if (e != null) {
                     e.printXML(dos, opt);
                 }

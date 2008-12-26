@@ -31,7 +31,7 @@ public class HeaderElement extends Properties {
      * 
      * @return The type of dictionary: morph or bil
      */
-    public final String getDictionaryType() {
+    public String getDictionaryType() {
         String type = (String) this.get("type");
         return type;
     }
@@ -58,7 +58,7 @@ public class HeaderElement extends Properties {
      * 
      * @return Source language code
      */
-    public final String getSL() {
+    public String getSL() {
         String sl = (String) this.get("sl");
         return sl;
     }
@@ -67,7 +67,7 @@ public class HeaderElement extends Properties {
      * 
      * @return Full name for source language
      */
-    public final String getSLFull() {
+    public String getSLFull() {
         String slFull = (String) this.get("sl-full");
         return slFull;
     }
@@ -76,7 +76,7 @@ public class HeaderElement extends Properties {
      * 
      * @return Target language code
      */
-    public final String getTL() {
+    public String getTL() {
         String tl = (String) this.get("tl");
         return tl;
     }
@@ -85,7 +85,7 @@ public class HeaderElement extends Properties {
      * Return the full name for target language
      * @return Full name for target language
      */
-    public final String getTLFull() {
+    public String getTLFull() {
         String tlFull = (String) this.get("tl-full");
         return tlFull;
     }
@@ -95,7 +95,7 @@ public class HeaderElement extends Properties {
      * @param i
      * @return Alternative i
      */
-    public final String getAlternative(int i) {
+    public String getAlternative(int i) {
         String alti = (String) this.get("alt" + i);
         return alti;
     }

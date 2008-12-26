@@ -39,7 +39,7 @@ public class LElement extends ContentElement {
      * 
      * @param cE
      */
-    public LElement(final ContentElement cE) {
+    public LElement(ContentElement cE) {
         super(cE);
         setTagName("l");
     }

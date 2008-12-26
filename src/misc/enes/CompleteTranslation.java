@@ -58,7 +58,7 @@ public class CompleteTranslation {
      * @param sourceFileName
      * @param translationFileName
      */
-    public CompleteTranslation(final String dicFileName, final String sourceFileName, final String translationFileName) {
+    public CompleteTranslation(String dicFileName, String sourceFileName, String translationFileName) {
         translations = this.readTranslations(sourceFileName, translationFileName);
         DictionaryReader dicReader = new DictionaryReader(dicFileName);
         bil = dicReader.readDic();
@@ -67,7 +67,7 @@ public class CompleteTranslation {
     /**
      * 
      */
-    public final void complete() {
+    public void complete() {
         for (EElement ee : bil.getAllEntries()) {
             LElement left = ee.getLeft();
             if (left != null) {
@@ -107,7 +107,7 @@ public class CompleteTranslation {
      * @param tfn
      * @return
      */
-    private final HashMap<String, String> readTranslations(final String sfn, final String tfn) {
+    private HashMap<String, String> readTranslations(String sfn, String tfn) {
         HashMap<String, String> map = new HashMap<String, String>();
         ArrayList<String> srcList = this.buildList(sfn);
         ArrayList<String> transList = this.buildList(tfn);
@@ -126,7 +126,7 @@ public class CompleteTranslation {
      * @param fileName
      * @return
      */
-    private final ArrayList<String> buildList(final String fileName) {
+    private ArrayList<String> buildList(String fileName) {
         ArrayList<String> list = new ArrayList<String>();
         try {
             FileInputStream fstream = new FileInputStream(fileName);

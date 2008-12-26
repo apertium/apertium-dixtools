@@ -48,7 +48,7 @@ public class PardefElement extends Element {
      * 
      * @param value
      */
-    public PardefElement(final String value) {
+    public PardefElement(String value) {
         n = value;
         eElements = new EElementList();
     }
@@ -59,12 +59,12 @@ public class PardefElement extends Element {
      * @param orig
      * @param name
      */
-    public PardefElement(final PardefElement orig, final String name) {
+    public PardefElement(PardefElement orig, String name) {
         n = name;
         eElements = new EElementList();
 
-        for (final EElement e : orig.eElements) {
-            final EElement e2 = (EElement) e.clone();
+        for (EElement e : orig.eElements) {
+            EElement e2 = (EElement) e.clone();
             eElements.add(e2);
         }
     }
@@ -72,7 +72,7 @@ public class PardefElement extends Element {
     /**
      * 
      * @return Undefined         */
-    public final String getName() {
+    public String getName() {
         return n;
     }
 
@@ -80,7 +80,7 @@ public class PardefElement extends Element {
      * 
      * @param value
      */
-    public final void addEElement(final EElement value) {
+    public void addEElement(EElement value) {
         eElements.add(value);
     }
 
@@ -89,12 +89,12 @@ public class PardefElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
-    public final void printXML(final Appendable dos, final DicOpts opt) throws IOException {
+    public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
         dos.append(makeCommentIfData(processingComments));
         dos.append(tab(2) + "<pardef n=\"" + n + "\">\n");
-        for (final EElement e : eElements) {
+        for (EElement e : eElements) {
             e.printXML(dos, opt);
         }
         dos.append(tab(2) + "</pardef>"+appendCharacterData.trim()+"\n");
@@ -104,7 +104,7 @@ public class PardefElement extends Element {
      * 
      * @param pardef2
      * @return Undefined         */
-    public final boolean equals(final PardefElement pardef2) {
+    public boolean equals(PardefElement pardef2) {
         EElementList eList1 = getEElements();
         EElementList eList2 = pardef2.getEElements();
 
@@ -130,25 +130,25 @@ public class PardefElement extends Element {
      * 
      * @param pardef2
      * @return Undefined         */
-    public final boolean equalsOld(final PardefElement pardef2) {
+    public boolean equalsOld(PardefElement pardef2) {
 
-        final ArrayList<EElement> v1 = getEElements();
-        final ArrayList<EElement> v2 = pardef2.getEElements();
+        ArrayList<EElement> v1 = getEElements();
+        ArrayList<EElement> v2 = pardef2.getEElements();
 
-        final int maxi = v1.size();
-        final int maxj = v2.size();
+        int maxi = v1.size();
+        int maxj = v2.size();
 
         if (maxi != maxj) {
             return false;
         }
 
-        final boolean[] c1 = new boolean[maxi];
-        final boolean[] c2 = new boolean[maxj];
+        boolean[] c1 = new boolean[maxi];
+        boolean[] c2 = new boolean[maxj];
 
         for (int i = 0; i < maxi; i++) {
-            final String sv1 = v1.get(i).toStringAll();
+            String sv1 = v1.get(i).toStringAll();
             for (int j = 0; j < maxj; j++) {
-                final String sv2 = v2.get(j).toStringAll();
+                String sv2 = v2.get(j).toStringAll();
                 if ((sv1 != null) && (sv2 != null)) {
                     if (!c1[i] && !c2[j] && sv1.equals(sv2)) {
                         c1[i] = true;
@@ -175,10 +175,10 @@ public class PardefElement extends Element {
      * 
      */
     @Override
-    public final String toString() {
+    public String toString() {
         String str = "";
         str += "<" + getName() + ">";
-        for (final EElement e : eElements) {
+        for (EElement e : eElements) {
             str += e.toString();
         }
         return str;
@@ -187,9 +187,9 @@ public class PardefElement extends Element {
     /**
      * 
      * @return Undefined         */
-    public final String toStringNoParName() {
+    public String toStringNoParName() {
         String str = "";
-        for (final EElement e : eElements) {
+        for (EElement e : eElements) {
             str += e.toStringAll();
         }
         return str;
@@ -199,7 +199,7 @@ public class PardefElement extends Element {
      * 
      * @param category
      * @return Undefined         */
-    public boolean hasCategory(final String category) {
+    public boolean hasCategory(String category) {
         return (n.endsWith("__" + category));
     }
 
@@ -208,8 +208,8 @@ public class PardefElement extends Element {
      * @param def
      * @return true if the paradigm contains certain definition ('adj', 'm', etc.)
      */
-    public boolean contains(final String def) {
-        for (final EElement e : eElements) {
+    public boolean contains(String def) {
+        for (EElement e : eElements) {
             if (e.contains(def)) {
                 return true;
             }
@@ -224,21 +224,21 @@ public class PardefElement extends Element {
      * @param category
      * @param equivCategory
      * @return Undefined         */
-    public static final PardefElement duplicateParadigm(final EElement e,
-            final DictionaryElement mon, final String category,
-            final String equivCategory) {
+    public static PardefElement duplicateParadigm(EElement e,
+            DictionaryElement mon, String category,
+            String equivCategory) {
         // Hay que cambiar la categoria (primer "s") en cada elemento 'e' en la
         // definicin del paradigma
         PardefElement dupPardefE = null;
-        final String paradigmValue = e.getParadigmValue();
+        String paradigmValue = e.getParadigmValue();
         String dupParadigmValue = e.getParadigmValue();
         dupParadigmValue = dupParadigmValue.replaceAll("__" + equivCategory,
                 "__" + category);
 
-        final PardefElement parDefInMon = mon.getParadigmDefinition(dupParadigmValue);
+        PardefElement parDefInMon = mon.getParadigmDefinition(dupParadigmValue);
 
         if (parDefInMon == null) {
-            final PardefElement pardefE = mon.getParadigmDefinition(paradigmValue);
+            PardefElement pardefE = mon.getParadigmDefinition(paradigmValue);
             dupPardefE = new PardefElement(pardefE, dupParadigmValue);
             dupPardefE.addProcessingComment("equivalent to '" + paradigmValue + "'");
             dupPardefE.changeCategory(category);
@@ -253,8 +253,8 @@ public class PardefElement extends Element {
      * 
      * @param newCategory
      */
-    private final void changeCategory(final String newCategory) {
-        for (final EElement e : eElements) {
+    private void changeCategory(String newCategory) {
+        for (EElement e : eElements) {
             e.changeCategory("R", newCategory);
         }
     }
@@ -262,7 +262,7 @@ public class PardefElement extends Element {
     /**
      * @return the eElements
      */
-    public final EElementList getEElements() {
+    public EElementList getEElements() {
         return eElements;
     }
 
@@ -270,7 +270,7 @@ public class PardefElement extends Element {
      * @param elements
      *                the eElements to set
      */
-    public final void setEElements(EElementList elements) {
+    public void setEElements(EElementList elements) {
         eElements = elements;
     }
 }

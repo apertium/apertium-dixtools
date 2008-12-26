@@ -40,8 +40,8 @@ public class ProcessDicsEUES {
      * 
      * @param args
      */
-    public static void main(final String[] args) {
-        final ProcessDicsEUES ps = new ProcessDicsEUES(args);
+    public static void main(String[] args) {
+        ProcessDicsEUES ps = new ProcessDicsEUES(args);
         ps.go();
     }
 
@@ -49,7 +49,7 @@ public class ProcessDicsEUES {
      * 
      * @param args
      */
-    public ProcessDicsEUES(final String[] args) {
+    public ProcessDicsEUES(String[] args) {
         setArguments(args);
     }
 
@@ -57,7 +57,7 @@ public class ProcessDicsEUES {
      * 
      * 
      */
-    public final void go() {
+    public void go() {
         checkAction();
     }
 
@@ -65,7 +65,7 @@ public class ProcessDicsEUES {
      * 
      * 
      */
-    public final void checkAction() {
+    public void checkAction() {
         if (getArguments().length == 0) {
             System.err.println("Usage: java ProcessDics <action> [options]");
             System.exit(-1);
@@ -111,7 +111,7 @@ public class ProcessDicsEUES {
     /**
      * @return the action
      */
-    private final String getAction() {
+    private String getAction() {
         return action;
     }
 
@@ -119,14 +119,14 @@ public class ProcessDicsEUES {
      * @param action
      *                the action to set
      */
-    private final void setAction(final String action) {
+    private void setAction(String action) {
         this.action = action;
     }
 
     /**
      * @return the arguments
      */
-    private final String[] getArguments() {
+    private String[] getArguments() {
         return arguments;
     }
 
@@ -134,7 +134,7 @@ public class ProcessDicsEUES {
      * @param arguments
      *                the arguments to set
      */
-    private final void setArguments(final String[] arguments) {
+    private void setArguments(String[] arguments) {
         this.arguments = arguments;
     }
 }
