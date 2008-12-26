@@ -50,18 +50,12 @@ public class DicFindEquivPar  extends AbstractDictTool{
      * 
      */
     private String outFileName;
-    /**
-     * 
-     */
-    private Msg msg;
 
     /**
      * 
      * 
      */
     public DicFindEquivPar() {
-        msg = new Msg();
-
     }
 
     /**
@@ -69,7 +63,6 @@ public class DicFindEquivPar  extends AbstractDictTool{
      * 
      */
     public DicFindEquivPar(final String fileName) {
-        msg = new Msg();
         DictionaryReader dicReader = new DictionaryReader(fileName);
         DictionaryElement dic = dicReader.readDic();
         setDic(dic);

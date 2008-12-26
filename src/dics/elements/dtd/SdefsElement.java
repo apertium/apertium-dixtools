@@ -26,7 +26,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import dictools.DicTools;
+import dics.elements.utils.DicTools;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 

@@ -19,6 +19,7 @@
  */
 package dictools;
 
+import dics.elements.utils.DicTools;
 import dictools.xml.DictionaryReader;
 import java.util.Collections;
 import java.util.HashMap;
@@ -148,10 +149,6 @@ public class DicCross  extends AbstractDictTool{
     /**
      *
      */
-    private Msg msg;
-    /**
-     *
-     */
     private String outDir = "dix/";
     /**
      * 
@@ -187,7 +184,6 @@ public class DicCross  extends AbstractDictTool{
      *
      */
     public DicCross() {
-        msg = new Msg();
         msg.setLogFileName("cross.log");
         rMatrix = new int[3][3];
         fillOutRestrictionMatrix();
@@ -1336,21 +1332,6 @@ public class DicCross  extends AbstractDictTool{
      */
     public final void setDicSet(DicSet dicSet) {
         this.dicSet = dicSet;
-    }
-
-    /**
-     * @return the msg
-     */
-    public final Msg getMsg() {
-        return msg;
-    }
-
-    /**
-     * @param msg
-     *                the msg to set
-     */
-    public final void setMsg(Msg msg) {
-        this.msg = msg;
     }
 
     /**

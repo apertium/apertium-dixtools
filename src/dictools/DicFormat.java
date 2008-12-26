@@ -49,15 +49,9 @@ public class DicFormat  extends AbstractDictTool{
     private String out;
     /**
      * 
-     */
-    private Msg msg;
-
-    /**
-     * 
      * 
      */
     public DicFormat() {
-        msg = new Msg();
     }
 
     /**
@@ -65,7 +59,6 @@ public class DicFormat  extends AbstractDictTool{
      * @param dic
      */
     public DicFormat(final DictionaryElement dic) {
-        msg = new Msg();
         dicFormatted = dic;
     }
 

@@ -469,7 +469,8 @@ public class XMLReader {
       if (ch=='\n') {
         chopFrom++;
       } else {
-        System.err.println("Comment '"+txt.substring(chopFrom, chopTo)+"' before element:"+eElement+" probably belongs to previous element:"+previousElement);
+        //if (txt.substring(chopFrom, chopTo).trim().length()>0)
+        //  System.err.println("Comment '"+txt.substring(chopFrom, chopTo).trim()+"' before element:"+eElement+" probably belongs to previous element:"+previousElement);
         if (previousElement!=null)  {
           previousElement.setAppendCharacterData(txt.substring(chopFrom, chopTo));
           characterData.setLength(0);
@@ -490,16 +491,17 @@ public class XMLReader {
     }
       
       if (ch>' ') {
-        System.err.println("Comment before element "+eElement+" will probably disturb indenting.");
+        //System.err.println("Comment '"+txt.substring(chopFrom, chopTo).trim()+"' before element "+eElement+" will probably disturb indenting.");
       }
       //System.err.println("txt.substring(chopFrom, chopTo) = '" + txt.substring(chopFrom, chopTo)+"'");
       if (eElement!=null)
         eElement.setPrependCharacterData(txt.substring(chopFrom, chopTo));
       else if (previousElement!=null) {
-        System.err.println("Comment '"+txt.substring(chopFrom, chopTo)+"' will be appended to previous element:"+previousElement);
+        //System.err.println("Comment '"+txt.substring(chopFrom, chopTo)+"' will be appended to previous element:"+previousElement);
         previousElement.setAppendCharacterData(txt.substring(chopFrom, chopTo));        
       } else {
-        System.err.println("Comment '"+txt.substring(chopFrom, chopTo)+"' will be discarded as element:"+previousElement);
+        if (txt.substring(chopFrom, chopTo).trim().length()>0)
+          System.err.println("Comment '"+txt.substring(chopFrom, chopTo).trim()+"' will be discarded no element could be found to attach it to.");
       }
     }
     characterData.setLength(0);

@@ -31,7 +31,7 @@ import dics.elements.utils.EElementList;
 import dics.elements.utils.EElementMap;
 import dics.elements.utils.ElementList;
 import dictools.DicEquivPar;
-import dictools.DicTools;
+import dics.elements.utils.DicTools;
 import java.io.OutputStreamWriter;
 
 /**

@@ -19,6 +19,7 @@
  */
 package dictools;
 
+import dics.elements.utils.DicTools;
 import dictools.xml.DictionaryReader;
 import java.util.HashMap;
 
@@ -86,17 +87,12 @@ public class DicMerge  extends AbstractDictTool{
      * 
      */
     private HashMap<String, String> paradigmsToRemove;
-    /**
-     * 
-     */
-    private Msg msg;
 
     /**
      * 
      * 
      */
     public DicMerge() {
-        msg = new Msg();
         msg.setLogFileName("merge.log");
     }
 
@@ -114,7 +110,6 @@ public class DicMerge  extends AbstractDictTool{
         setMonA1(ds2.getMon1());
         setMonA2(ds2.getMon2());
 
-        msg = new Msg();
         msg.setLogFileName("merge.log");
 
     }
@@ -833,7 +828,7 @@ public class DicMerge  extends AbstractDictTool{
     public final void mergeMorph() {
         DictionaryElement morph = mergeMonols(getMonA1(), getMonA2());
         DicSort dicSort = new DicSort(morph);
-        dicSort.getMsg().setDebug(false);
+        dicSort.msg.setDebug(false);
         dicSort.setDicType(DicSort.MON);
         DictionaryElement sorted = dicSort.sort();
         sorted.printXML(getSOut(),getOpt());

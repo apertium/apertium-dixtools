@@ -21,6 +21,7 @@
 package dictools;
 
 import dics.elements.utils.DicOpts;
+import dics.elements.utils.Msg;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -29,17 +30,29 @@ import java.util.Collections;
  * @author j
  */
 public class AbstractDictTool {
+  /**
+   * Options
+   */
    protected DicOpts opt =  DicOpts.std;
 
+  /**
+   * Options
+   */
   public DicOpts getOpt() {
     return opt;
   }
 
+  /**
+   * Options
+   */
   public void setOpt(DicOpts opt) {
     this.opt=opt;
   }
    
-    /**
+
+  protected Msg msg = new Msg();
+  
+  /**
      * 
      */
     protected String[] arguments;

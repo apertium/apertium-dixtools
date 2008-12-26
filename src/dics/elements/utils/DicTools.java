@@ -17,7 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-package dictools;
+package dics.elements.utils;
 
 import dictools.xml.DictionaryReader;
 import java.util.ArrayList;
@@ -81,9 +81,8 @@ public class DicTools {
      * @param entries
      * @param side
      * @return Undefined         */
-    public static final EElementMap buildHash(
-            final ArrayList<EElement> entries, final String side) {
-        final EElementMap entriesMap = new EElementMap();
+    public static final EElementMap buildHash(ArrayList<EElement> entries, String side) {
+        EElementMap entriesMap = new EElementMap();
         for (final EElement e : entries) {
             final String value = e.getValue(side);
             final String key = DicTools.clearTags(value);
@@ -106,8 +105,7 @@ public class DicTools {
      * @param entries
      * @return Undefined
      */
-    public static final EElementMap buildHashMon(
-            final ArrayList<EElement> entries) {
+    public static final EElementMap buildHashMon(ArrayList<EElement> entries) {
         final EElementMap entriesMap = new EElementMap();
 
         for (final EElement e : entries) {
@@ -367,10 +365,10 @@ public class DicTools {
      * 
      * @param sMon
      * @return Undefined         */
-    public static DictionaryElement readMonolingual(final String sMon) {
-        DictionaryReader dicReader = new DictionaryReader(sMon);
+    public static DictionaryElement readMonolingual(String sMonFilename) {
+        DictionaryReader dicReader = new DictionaryReader(sMonFilename);
         final DictionaryElement mon = dicReader.readDic();
-        mon.setFileName(sMon);
+        mon.setFileName(sMonFilename);
         dicReader = null;
         return mon;
     }
@@ -380,16 +378,15 @@ public class DicTools {
      * @param sBil
      * @param reverse
      * @return Undefined         */
-    public static DictionaryElement readBilingual(final String sBil,
-            final boolean reverse) {
-        DictionaryReader dicReaderBil = new DictionaryReader(sBil);
+    public static DictionaryElement readBilingual(String sBilFilename,  boolean reverse) {
+        DictionaryReader dicReaderBil = new DictionaryReader(sBilFilename);
         final DictionaryElement bil = dicReaderBil.readDic();
-        bil.setFileName(sBil);
+        bil.setFileName(sBilFilename);
         bil.setType("BIL");
 
         if (reverse) {
             bil.reverse();
-            final String reverseFileName = DicTools.reverseDicName(sBil);
+            final String reverseFileName = DicTools.reverseDicName(sBilFilename);
             //bil.printXML(reverseFileName);
             bil.setFileName(reverseFileName);
         }

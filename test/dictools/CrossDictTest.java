@@ -48,12 +48,39 @@ import misc.eoen.DicFormatE1LineAligned;
  * @author j
  */
 public class CrossDictTest {
-
+  private static String rm(String filename) {
+    File f = new File(filename);
+    if (f.isDirectory()) for (String f2 : f.list()) rm(f2);
+    new File(filename).delete();
+    return filename;
+  }
+  
+  public static String exec(String cmd) throws IOException, InterruptedException {
+    return ReadAndWriteMonodixTest.exec(cmd);
+  }
+  
   
   @Test
+  public void testBigCrossing() throws Exception {
+    String outfile = rm("dix");
+
+    String path = "regression_test_data/crossdict/input/";
+    String[] args = {"cross-param", 
+    "-bilAB", "-r", path+"apertium-es-ca.es-ca.dix",
+    "-bilBC", "-r", path+"apertium-en-ca.en-ca.dix", 
+    "-monA", path+"apertium-es-ca.es.dix", 
+    "-monC", path+"apertium-en-ca.en.metadix", 
+    "-cross-model", path+"../../../../apertium-dixtools/schemas/cross-model.xml"};
+     ProcessDics.main(args);  
+
+    String diff=exec( "diff  -bBw -x .svn  "+path+"../expected_output "+outfile);    
+    Assert.assertEquals("Difference", "", diff);
+    rm(outfile);  
+  }
+/*  
+  @Test
   public void testBigCrossingFromCommandline() throws IOException, InterruptedException {
-//    if (2>1) return;
-//    ProcessDics.main("[cross-param", "-bilAB", "-r", "apertium-es-ca.es-ca.dix", "-bilBC", "-r", "apertium-en-ca.en-ca.dix", "-monA", "apertium-es-ca.es.dix", "-monC", "apertium-en-ca.en.metadix", "-cross-model", "../../../../apertium-dixtools/schemas/cross-model.xml]");
+    if (2>1) return;
     
     String cmd = "./do_test.sh";
     File wd = new File("regression_test_data/crossdict");
@@ -90,6 +117,6 @@ public class CrossDictTest {
     Assert.assertEquals("Exit value", 0, p.exitValue());
 
   }
-
+*/
 
 }

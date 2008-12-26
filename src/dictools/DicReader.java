@@ -59,24 +59,20 @@ public class DicReader {
      * 
      */
     private String url;
-    /**
-     * 
-     */
-    private Msg msg;
+
+      protected Msg msg = new Msg();
 
     /**
      * 
      * 
      */
     public DicReader(final String fileName) {
-        msg = new Msg();
         DictionaryReader dicReader = new DictionaryReader(fileName);
         DictionaryElement d = dicReader.readDic();
         setDic(d);
     }
 
     public DicReader() {
-        msg = new Msg();
     }
 
     /**

@@ -64,10 +64,6 @@ public class DicSort  extends AbstractDictTool {
      * 
      */
     private String out;
-    /**
-     * 
-     */
-    private Msg msg;
 
     /**
      * 
@@ -75,7 +71,6 @@ public class DicSort  extends AbstractDictTool {
      */
     public DicSort() {
         setXinclude(false);
-        msg = new Msg();
         msg.setLogFileName("sort.log");
     }
 
@@ -86,7 +81,6 @@ public class DicSort  extends AbstractDictTool {
     public DicSort(final DictionaryElement dic) {
         this.dic = dic;
         setXinclude(false);
-        msg = new Msg();
         msg.setLogFileName("sort.log");
     }
 
@@ -407,20 +401,5 @@ public class DicSort  extends AbstractDictTool {
      */
     public final void setOut(final String out) {
         this.out = out;
-    }
-
-    /**
-     * @return the msg
-     */
-    public final Msg getMsg() {
-        return msg;
-    }
-
-    /**
-     * @param msg
-     *                the msg to set
-     */
-    public final void setMsg(Msg msg) {
-        this.msg = msg;
     }
 }

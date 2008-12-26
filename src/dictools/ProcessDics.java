@@ -60,11 +60,7 @@ public class ProcessDics extends AbstractDictTool {
      *
      */
     private String action;
-    /**
-     *
-     */
-    private Msg msg;
-
+ 
     /**
      * Método principal.
      *
@@ -74,35 +70,20 @@ public class ProcessDics extends AbstractDictTool {
         
         System.err.println(ProcessDics.class.getName()+".main(\"" + Arrays.toString(args).replaceAll(", ", "\", \"")+"\");");
         
-        final ProcessDics ps = new ProcessDics(args);
-        ps.go();
+        final ProcessDics ps = new ProcessDics();
+        ps.setArguments(args);
+        try {
+            ps.checkAction();
+        } catch (OutOfMemoryError oome) {
+            ps.msg.err("Error occurred during initialization of VM");
+            ps.msg.err("Too small initial heap for new size specified");
+            ps.msg.err("Use, for example:");
+            ps.msg.err("java -Xms64M -Xmx200M -jar path/to/crossdics.jar <task> [options]");
+            System.exit(-1);
+        }
        //System.err.println(Arrays.toString(State.freq));
     }
 
-    /**
-     *
-     * @param args
-     */
-    public ProcessDics(final String[] args) {
-        msg = new Msg();
-        setArguments(args);
-    }
-
-    /**
-     *
-     *
-     */
-    public final void go() {
-        try {
-            checkAction();
-        } catch (OutOfMemoryError oome) {
-            msg.err("Error occurred during initialization of VM");
-            msg.err("Too small initial heap for new size specified");
-            msg.err("Use, for example:");
-            msg.err("java -Xms64M -Xmx200M -jar path/to/crossdics.jar <task> [options]");
-            System.exit(-1);
-        }
-    }
 
     /**
      *

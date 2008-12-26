@@ -19,6 +19,7 @@
  */
 package dictools;
 
+import dics.elements.utils.DicTools;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -81,10 +82,6 @@ public class DicConsistent extends AbstractDictTool {
     /**
      * 
      */
-    private Msg msg;
-    /**
-     * 
-     */
     private String outDir = "dix/";
 
     /**
@@ -92,7 +89,6 @@ public class DicConsistent extends AbstractDictTool {
      * 
      */
     public DicConsistent() {
-        msg = new Msg();
     }
 
     /**
@@ -100,7 +96,6 @@ public class DicConsistent extends AbstractDictTool {
      * 
      */
     public DicConsistent(final DicSet dicset) {
-        msg = new Msg();
         setMon1(dicset.getMon1());
         setMon2(dicset.getMon2());
         setBil1(dicset.getBil1());
