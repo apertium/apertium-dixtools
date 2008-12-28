@@ -41,7 +41,7 @@ public class ElementList extends ArrayList<Element> implements Cloneable {
      *    
      */
     public ElementList() {
-        super();
+        super(6);
     }
 
     /**

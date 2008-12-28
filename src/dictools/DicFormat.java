@@ -141,9 +141,9 @@ public class DicFormat  extends AbstractDictTool{
     private void processArguments() {
       /*
         if (arguments[1].equals("-mon")) {
-            dicType = DicSort.MON;
+            dicType = DictionaryElement.MONOL;
         } else {
-            dicType = DicSort.BIL;
+            dicType = DictionaryElement.BIL;
         }
        */
         DictionaryReader dicReader = new DictionaryReader(arguments[2]);

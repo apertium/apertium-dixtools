@@ -65,13 +65,13 @@ public class CrossDictTest {
     String outfile = rm("dix");
 
     String path = "regression_test_data/crossdict/input/";
-    String[] args = {"cross-param", 
+    String[] argsx = {"cross-param", 
     "-bilAB", "-r", path+"apertium-es-ca.es-ca.dix",
     "-bilBC", "-r", path+"apertium-en-ca.en-ca.dix", 
     "-monA", path+"apertium-es-ca.es.dix", 
     "-monC", path+"apertium-en-ca.en.metadix", 
     "-cross-model", path+"../../../../apertium-dixtools/schemas/cross-model.xml"};
-     ProcessDics.main(args);  
+     dictools.ProcessDics.main(argsx);  
 
     String diff=exec( "diff  -bBw -x .svn  "+path+"../expected_output "+outfile);    
     Assert.assertEquals("Difference", "", diff);

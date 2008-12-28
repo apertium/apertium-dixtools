@@ -261,6 +261,10 @@ public class DictionaryElement extends Element {
         return rightLanguage;
     }
 
+    
+    
+    public static final String BIL = "BIL";
+    public static final String MONOL = "MONOL";
     /**
      *
      * @return Undefined     
@@ -283,7 +287,7 @@ public class DictionaryElement extends Element {
      */
     public boolean isBil() {
         if (type != null) {
-            if (type.equals("BIL")) {
+            if (type.equals(BIL)) {
                 return true;
             } else {
                 return false;

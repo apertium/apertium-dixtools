@@ -94,9 +94,9 @@ public class SElement extends Element {
      */
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
-        dos.append(prependCharacterData);
+        //not strictly necesary for symbols, as they dont have comments: dos.append(prependCharacterData);
         dos.append("<" + getTagName() + " n=\"" + getValue() + "\"/>");
-        dos.append(appendCharacterData);
+        //not strictly necesary for symbols, as they dont have comments:  dos.append(appendCharacterData);
     }
 
     /**
@@ -160,11 +160,18 @@ public class SElement extends Element {
      * 
      * @param str
      * @return Undefined         */
-    public static SElement get(String str) {
-        SElement sE = null;
+    public static SElement getInstance(String str) {
+/*
+      SElement sE = null;
         if (SElement.exists(str)) {
-            sE = SElement.sElementList.get(str);
+            sE = SElement.sElementList.getInstance(str);
         } else {
+            sE = new SElement(str);
+            SElement.putSElement(sE);
+        }
+*/
+        SElement sE = SElement.sElementList.get(str);
+        if (sE==null) {
             sE = new SElement(str);
             SElement.putSElement(sE);
         }

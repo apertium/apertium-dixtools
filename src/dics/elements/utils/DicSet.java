@@ -62,13 +62,13 @@ public class DicSet extends ArrayList<DictionaryElement> {
         this.add(bil2);
 
         this.mon1 = mon1;
-        this.mon1.setType("MONOL");
+        this.mon1.setType(DictionaryElement.MONOL);
         this.bil1 = bil1;
-        this.bil1.setType("BIL");
+        this.bil1.setType(DictionaryElement.BIL);
         this.mon2 = mon2;
-        this.mon2.setType("MONOL");
+        this.mon2.setType(DictionaryElement.MONOL);
         this.bil2 = bil2;
-        this.bil2.setType("BIL");
+        this.bil2.setType(DictionaryElement.BIL);
     }
 
     /**

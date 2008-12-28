@@ -240,7 +240,7 @@ public class XMLReader {
             String childElementName = childElement.getNodeName();
             if (childElementName.equals("sdef")) {
                 SdefElement sdefElement = readSdef(childElement);
-                SElement sE = SElement.get(sdefElement.getValue());
+                SElement sE = SElement.getInstance(sdefElement.getValue());
                 sdefsElement.addSdefElement(sdefElement);
             }
         }
@@ -268,7 +268,7 @@ public class XMLReader {
      */
     protected static SElement readSElement(Element e) {
         String n = getAttributeValue(e, "n");
-        return SElement.get(n);
+        return SElement.getInstance(n);
     }
 
     /**
@@ -339,8 +339,7 @@ public class XMLReader {
      * @param e
      * @return Undefined         
      */
-    protected static ContentElement readContentElement(Element e,
-            ContentElement cElement) {
+    protected static ContentElement readContentElement(Element e,  ContentElement cElement) {
         try {
             if (e.hasChildNodes()) {
                 NodeList children = e.getChildNodes();

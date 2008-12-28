@@ -45,7 +45,8 @@ public class EElement extends Element implements Cloneable,
     /**
      * 
      */
-    private ElementList children;
+    private ElementList children = new ElementList();
+;
     /**
      * 
      */
@@ -108,8 +109,6 @@ public class EElement extends Element implements Cloneable,
      * 
      */
     public EElement() {
-        children = new ElementList();
-        EElement.incrEElements();
     }
 
     /**
@@ -120,13 +119,10 @@ public class EElement extends Element implements Cloneable,
      * @param c
      */
     public EElement(String r, String lm, String a,  String c) {
-        children = new ElementList();
         this.r = r;
         this.lm = lm;
         this.a = a;
         this.c = c;
-        EElement.incrEElements();
-
     }
 
     /**
@@ -134,14 +130,6 @@ public class EElement extends Element implements Cloneable,
      * @return Undefined         */
     public ElementList getChildren() {
         return children;
-    }
-
-    /**
-     * 
-     * 
-     */
-    public static void incrEElements() {
-        EElement.nEElements++;
     }
 
     /**
@@ -541,7 +529,7 @@ public class EElement extends Element implements Cloneable,
 
         String pc = processingComments;
         if (!isCommon()) {
-            pc = pc + tab(2) + "esta entrada no aparece en el otro morfolgico\n";
+            pc = pc + "\n"+tab(2) + "esta entrada no aparece en el otro morfolgico\n";
         }
         dos.append(makeCommentIfData(pc));
 
@@ -550,10 +538,8 @@ public class EElement extends Element implements Cloneable,
             if (!opt.now1line) dos.append(tab(2) + "<e" + attributes + ">\n");
             else dos.append( "<e" + attributes + ">");
 
-            if (children != null) {
-                for (Element e : children) {
-                    e.printXML(dos, opt);
-                }
+            for (Element e : children) {
+                e.printXML(dos, opt);
             }
 
             if (opt.now1line) dos.append("</e>"+appendCharacterData+"\n");
@@ -586,35 +572,35 @@ public class EElement extends Element implements Cloneable,
      * @return String of attributes
      */
     private String getAttrString() {
-        String attributes = "";
+        StringBuilder attributes = new StringBuilder();
         if (r != null) {
-            attributes += " r=\"" + r + "\"";
+            attributes.append(" r=\"" + r + "\"");
         }
         if (slr != null) {
-            attributes += " slr=\"" + slr + "\"";
+            attributes.append(" slr=\"" + slr + "\"");
         }
         if (srl != null) {
-            attributes += " srl=\"" + srl + "\"";
+            attributes.append(" srl=\"" + srl + "\"");
         }
         if (lm != null) {
-            attributes += " lm=\"" + lm + "\"";
+            attributes.append(" lm=\"" + lm + "\"");
         }
         if (a != null) {
-            attributes += " a=\"" + a + "\"";
+            attributes.append(" a=\"" + a + "\"");
         }
         if (c != null) {
-            attributes += " c=\"" + c + "\"";
+            attributes.append(" c=\"" + c + "\"");
         }
         if (i != null) {
-            attributes += " i=\"" + i + "\"";
+            attributes.append(" i=\"" + i + "\"");
         }
         if (aversion != null) {
-            attributes += " aversion=\"" + aversion + "\"";
+            attributes.append(" aversion=\"" + aversion + "\"");
         }
         if (alt != null) {
-            attributes += " alt=\"" + alt + "\"";
+            attributes.append(" alt=\"" + alt + "\"");
         }
-        return attributes;
+        return attributes.toString();
     }
 
     /**

@@ -871,7 +871,7 @@ public class DicCross  extends AbstractDictTool{
         DictionaryElement bilCrossed = bils[0];
         String sl = dicSet.getBil1().getRightLanguage();
         String tl = dicSet.getBil2().getRightLanguage();
-        bilCrossed.setType("BIL");
+        bilCrossed.setType(DictionaryElement.BIL);
         bilCrossed.setLeftLanguage(sl);
         bilCrossed.setRightLanguage(tl);
         msg.out("[" + (taskOrder++) + "] Making consistent morphological dicionaries ...\n");

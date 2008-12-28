@@ -382,7 +382,7 @@ public class DicTools {
         DictionaryReader dicReaderBil = new DictionaryReader(sBilFilename);
         DictionaryElement bil = dicReaderBil.readDic();
         bil.setFileName(sBilFilename);
-        bil.setType("BIL");
+        bil.setType(DictionaryElement.BIL);
 
         if (reverse) {
             bil.reverse();

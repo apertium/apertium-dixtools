@@ -124,7 +124,7 @@ public class Element implements Cloneable {
     /**
      * 
      * @return Undefined         */
-    protected String getTagName() {
+    protected final String getTagName() {
         return TAGNAME;
     }
 
@@ -133,7 +133,7 @@ public class Element implements Cloneable {
    * @param str
    * @return "" if str==null, else the str itself
    */  
-  public static String maskNull(String str) {
+  public final static String maskNull(String str) {
         return (str == null?"":str);
   }
 
@@ -141,15 +141,15 @@ public class Element implements Cloneable {
   
   
     /**
-     * Appends to 
-     * @param value
+     * Appends to XML processingComments originating from the processing if the file. Will be added as <!--   --> just before the XML element
+     * @param value data to be added
      */
     public void addProcessingComment(String value) {
         processingComments += tab(3) + value + "\n";
     }
 
     /**
-     * XML processingComments originating from the processing if the file. Will be added as <!--   --> just before the XML elemen
+     * XML processingComments originating from the processing if the file. Will be added as <!--   --> just before the XML element
      */
     public void setProcessingComments(String value) {
         processingComments = value;
@@ -157,9 +157,9 @@ public class Element implements Cloneable {
 
 
     /**
-     * XML processingComments originating from the processing if the file. Will be added as <!--   --> just before the XML elemen
+     * XML processingComments originating from the processing if the file. Will be added as <!--   --> just before the XML element
      */
-    public String getProcessingComments() {
+    public final String getProcessingComments() {
         return processingComments;
     }
 
@@ -228,8 +228,7 @@ public class Element implements Cloneable {
      */
     @Override
     public String toString() {
-        String str = "";
-        str += getValue();
+        String str = "" + getValue();
         return str;
     }
 }

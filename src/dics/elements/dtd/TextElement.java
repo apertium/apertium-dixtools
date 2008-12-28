@@ -52,9 +52,9 @@ public class TextElement extends Element {
     @Override
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
-        dos.append(prependCharacterData);
+        //not necesary: dos.append(prependCharacterData);
         dos.append(value);
-        dos.append(appendCharacterData);
+        //not necesary: dos.append(appendCharacterData);
     }
 
     /**

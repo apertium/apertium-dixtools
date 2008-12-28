@@ -150,7 +150,7 @@ public class State {
      * @param cadl
      * @param varsSrc
      */
-    public void getActionSetList(ElementList patternSequence, int i, CrossActionDataList cadl, Variables varsSrc) {
+    public final void getActionSetList(ElementList patternSequence, int i, CrossActionDataList cadl, Variables varsSrc) {
         if (i < patternSequence.size()) {
             Variables vars = null;
             String v = ((Element) patternSequence.get(i)).getValue();
@@ -276,7 +276,7 @@ public class State {
      * @param cadl
      * @param vars
      */
-    private void continue_processing(ElementList patternSequence, int i, CrossActionDataList cadl, Variables vars) {
+    private final void continue_processing(ElementList patternSequence, int i, CrossActionDataList cadl, Variables vars) {
         Iterator it = states.keySet().iterator();
         while (it.hasNext()) {
             State st = (State) states.get(it.next());

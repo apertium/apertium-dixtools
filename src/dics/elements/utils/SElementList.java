@@ -33,7 +33,7 @@ public class SElementList extends Vector<SElement> {
     /**
      *    
      */
-    static long serialVersionUID = 0;
+    static final long serialVersionUID = 0;
 
     /**
      *    
@@ -98,7 +98,7 @@ public class SElementList extends Vector<SElement> {
         if ((sEList2.size() - size()) >= 0) {
             for (SElement sE2 : sEList2) {
                 if (i < size()) {
-                    SElement sE1 = get(i);
+                    SElement sE1 = getInstance(i);
 
                     if (sE1.getValue().charAt(0) == 'k') {
                         return true;

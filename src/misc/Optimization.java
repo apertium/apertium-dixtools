@@ -31,9 +31,18 @@ import java.util.Arrays;
 public class Optimization {
     public static void main(final String[] args) {
       new File("dix").mkdir();
-      dictools.ProcessDics.main(new String[] {"cross-param", 
-      "-bilAB", "-r", "apertium-es-ca.es-ca.dix", "-bilBC", "-r", "apertium-en-ca.en-ca.dix", "-monA", "apertium-es-ca.es.dix", "-monC", "apertium-en-ca.en.metadix", "-cross-model", "../../../../apertium-dixtools/schemas/cross-model.xml"});
 
+      
+    String path = "regression_test_data/crossdict/input/";
+    String[] argsx = {"cross-param", 
+    "-bilAB", "-r", path+"apertium-es-ca.es-ca.dix",
+    "-bilBC", "-r", path+"apertium-en-ca.en-ca.dix", 
+    "-monA", path+"apertium-es-ca.es.dix", 
+    "-monC", path+"apertium-en-ca.en.metadix", 
+    "-cross-model", path+"../../../../apertium-dixtools/schemas/cross-model.xml"};
+     dictools.ProcessDics.main(argsx);  
+      
+      
        // System.err.println(Arrays.toString(State.freq));
       
       ;

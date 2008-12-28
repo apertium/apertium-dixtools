@@ -38,7 +38,7 @@ public class ContentElement extends Element implements Cloneable {
     /**
      * 
      */
-    protected ElementList children;
+    protected ElementList children = new ElementList();
     /**
      * 
      */
@@ -53,7 +53,6 @@ public class ContentElement extends Element implements Cloneable {
      * 
      */
     public ContentElement() {
-        children = new ElementList();
     }
 
     /**
@@ -61,7 +60,6 @@ public class ContentElement extends Element implements Cloneable {
      * @param value
      */
     public ContentElement(String value) {
-        children = new ElementList();
         setValue(value);
     }
 
@@ -79,7 +77,7 @@ public class ContentElement extends Element implements Cloneable {
      * @param e
      */
     public void addChild(Element e) {
-        getChildren().add(e);
+        children.add(e);
     }
 
     /**
@@ -87,7 +85,7 @@ public class ContentElement extends Element implements Cloneable {
      * @return Undefined         */
     public SElementList getSElements() {
         SElementList sEList = new SElementList();
-        for (Element e : getChildren()) {
+        for (Element e : children) {
             if (e instanceof SElement) {
                 SElement sE = (SElement) e;
                 sEList.add(sE);
@@ -174,10 +172,9 @@ public class ContentElement extends Element implements Cloneable {
      */
     @Override
     protected void printXML(Appendable dos, DicOpts opt) throws IOException {
-        String tagName = getTagName();        
-        if (tagName==null) {
-          tagName = "<!-- error tagname -->";
-        }
+      dos.append(makeCommentIfData(processingComments));
+
+      String tagName = getTagName();
 
         if (!opt.now1line) {
                 // write blank lines and processingComments from original file
@@ -188,19 +185,13 @@ public class ContentElement extends Element implements Cloneable {
                 dos.append("<" + tagName + ">");          
         }  
 
-        if (getChildren() != null) {
-            for (Element e : getChildren()) {
-                if (e != null) {
-                    e.printXML(dos, opt);
-                }
-            }
-        }
-        String c = "";
-        if (getProcessingComments() != null) {
-            c = getProcessingComments();
-        }
+          for (Element e : children) {
+              if (e != null) {
+                  e.printXML(dos, opt);
+              }
+          }
 
-        dos.append("</" + tagName + "> " + c + (opt.now1line?"":"\n"));    
+        dos.append("</" + tagName + "> " + (opt.now1line?"":"\n"));    
 
         if (!opt.now1line) {
                 // write blank lines and processingComments from original file

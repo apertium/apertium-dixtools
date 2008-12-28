@@ -47,19 +47,11 @@ public class DicSort  extends AbstractDictTool {
     /**
      * 
      */
-    public static int BIL = 0;
-    /**
-     * 
-     */
-    public static int MON = 1;
-    /**
-     * 
-     */
     private boolean xinclude;
     /**
      * 
      */
-    private int dicType;
+    private String dicType;
     /**
      * 
      */
@@ -90,15 +82,35 @@ public class DicSort  extends AbstractDictTool {
      */
     public DictionaryElement sort() {
         DictionaryElement dicSorted = null;
-        if (dicType == DicSort.BIL) {
+        if (DictionaryElement.BIL.equals(dicType)) {
             dicSorted = sortBil();
-        }
-        if (dicType == DicSort.MON) {
+        } else
+        if (DictionaryElement.MONOL.equals(dicType)) {
             dicSorted = sortMon();
-        }
+        } else throw new IllegalStateException(dicType);
         return dicSorted;
     }
 
+    /**
+     * 
+     * 
+     */
+    public void actionSort() {
+        DictionaryElement dicSorted = sort();
+        dicSorted.printXML(out,getOpt());
+
+    /*
+    if (dicSorted != null) {
+    dicSorted.setFolder(getOut() + "-includes");
+    if (isXinclude()) {
+    dicSorted.printXMLXInclude(out);
+    } else {
+    dicSorted.printXML(out);
+    }
+    }
+     */
+    }
+    
     /**
      * 
      * 
@@ -114,9 +126,9 @@ public class DicSort  extends AbstractDictTool {
      */
     private void processArguments() {
         if (arguments[1].equals("-mon")) {
-            dicType = DicSort.MON;
+            dicType = DictionaryElement.MONOL;
         } else {
-            dicType = DicSort.BIL;
+            dicType = DictionaryElement.BIL;
         }
         this.setXinclude(false);
 
@@ -147,33 +159,6 @@ public class DicSort  extends AbstractDictTool {
 
     }
 
-    /**
-     * 
-     * 
-     */
-    public void actionSort() {
-        DictionaryElement dicSorted = null;
-        // System.out.println("Dictype: " + dicType);
-        if (dicType == DicSort.BIL) {
-            dicSorted = sortBil();
-        }
-
-        if (dicType == DicSort.MON) {
-            dicSorted = sortMon();
-        }
-        dicSorted.printXML(out,getOpt());
-
-    /*
-    if (dicSorted != null) {
-    dicSorted.setFolder(getOut() + "-includes");
-    if (isXinclude()) {
-    dicSorted.printXMLXInclude(out);
-    } else {
-    dicSorted.printXML(out);
-    }
-    }
-     */
-    }
 
     /**
      * @param dicFormatted
@@ -354,7 +339,7 @@ public class DicSort  extends AbstractDictTool {
     /**
      * @return the dicType
      */
-    public int getDicType() {
+    public String getDicType() {
         return dicType;
     }
 
@@ -362,7 +347,7 @@ public class DicSort  extends AbstractDictTool {
      * @param dicType
      *                the dicType to set
      */
-    public void setDicType(int dicType) {
+    public void setDicType(String dicType) {
         this.dicType = dicType;
     }
 
