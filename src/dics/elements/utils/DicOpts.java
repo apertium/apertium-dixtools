@@ -30,46 +30,37 @@ import java.util.logging.Logger;
  */
 public class DicOpts implements Cloneable {
    
-    /**
-     * Current (volatile) settings while traversiong a data structure.
-     */
-    public boolean now1line = false;
-    public boolean nowAlign = false;
-  
-    
-    /**
-     * Settings from user choice
-     */
-    public boolean pardefElementsOn1line = false;
-    public boolean sectionElementsOn1line = false;
+  /**
+   * Current (volatile) settings while traversiong a data structure.
+   */
+  public boolean nowAlign = false;
 
-    public boolean sectionElementsAligned = false;
-    public boolean pardefElementsAligned = false;
-    public int alignP = 10;
-    public int alignR = 55;
+  /**
+   * Settings from user choice
+   */
+  public boolean sectionElementsAligned = false;
+  public boolean pardefElementsAligned = false;
+  public int alignP = 10;
+  public int alignR = 55;
 
-  
-  
   public static DicOpts std = new DicOpts();
   public static DicOpts std1line = new DicOpts(false, true, 0, 0);
-  public static DicOpts stdaligned1line = new DicOpts(false, true, 10, 55);
-  public static DicOpts stdnow1line = std1line.copy().setNow1line(true);
+  public static DicOpts stdaligned = new DicOpts(false, true, 10, 55);
+  public static DicOpts stdnow1line = std1line.copy().setNowAlign(true);
   
   public  DicOpts() {
   }
   
-  public DicOpts(boolean pardef1line, boolean entries1line) {
-    this.pardefElementsOn1line = pardef1line;
-    this.sectionElementsOn1line = entries1line;
+  public DicOpts(boolean alignPardefs, boolean alignEntries) {
+    this.pardefElementsAligned = alignPardefs;
+    this.sectionElementsAligned = alignEntries;
   }
 
-  public DicOpts(boolean pardef1line, boolean entries1line, int alignP, int alignR) {
-    this.pardefElementsAligned = pardef1line;
-    this.sectionElementsAligned = entries1line;
-    this.pardefElementsOn1line = pardef1line;
-    this.sectionElementsOn1line = entries1line;
-    this.alignP = alignP;
-    this.alignR = alignR;
+  public DicOpts(boolean alignPardefs, boolean alignEntries, int alignmentP, int alignmentR) {
+    this.pardefElementsAligned = alignPardefs;
+    this.sectionElementsAligned = alignEntries;
+    this.alignP = alignmentP;
+    this.alignR = alignmentR;
   }
 
   
@@ -77,19 +68,12 @@ public class DicOpts implements Cloneable {
     try {
       return (DicOpts) clone();
     } catch (CloneNotSupportedException ex) {
-      Logger.getLogger(DicOpts.class.getName()).log(Level.SEVERE, null, ex);
-      return null;
+      throw new IllegalStateException(ex);
     }
-  }
-
-  public DicOpts setNow1line(boolean b) {
-    now1line = b;
-    return this;
   }
 
   public DicOpts setNowAlign(boolean b) {
     nowAlign = b;
     return this;
   }
-
 }

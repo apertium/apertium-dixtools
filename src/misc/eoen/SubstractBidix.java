@@ -57,7 +57,7 @@ public class SubstractBidix {
         
         
         
-        //System.out.println("Updated morphological dictionary: '" + out + "'");
+        //System.err.println("Updated morphological dictionary: '" + out + "'");
         //dic.printXML(out);
         
         new DicFormatE1LineAligned(dic).setAlignP(10).setAlignR(55).printXML("after-clean.dix");
@@ -77,7 +77,7 @@ public class SubstractBidix {
         if (!ee.isRegEx()) {
           ContentElement l=ee.getSide("L");
           ContentElement r=ee.getSide("R");
-          //System.out.println("======="+ee.toString()+"========");
+          //System.err.println("======="+ee.toString()+"========");
           // L -> R
           checkEarlierAndRestrict("LR", l, hmLR, ee);
 
@@ -89,7 +89,7 @@ public class SubstractBidix {
       for (EElement ee : hmLR.values()) {
         if (!isAllowed("LR", ee)) {
           if (verbose) {
-            System.out.println("LR restic can be lifted "+ee);
+            System.err.println("LR restic can be lifted "+ee);
           }
           if (alsoRemoveUnneededRestrictions) {
             setYesIsAllowed(ee, "LR");
@@ -100,7 +100,7 @@ public class SubstractBidix {
       for (EElement ee : hmRL.values()) {
         if (!isAllowed("RL", ee)) {
           if (verbose) {
-            System.out.println("RL restic can be lifted "+ee);
+            System.err.println("RL restic can be lifted "+ee);
           }
           if (alsoRemoveUnneededRestrictions) {
             setYesIsAllowed(ee, "RL");
@@ -118,7 +118,7 @@ public class SubstractBidix {
           String reasonOfRestriction=ee.getTemp();
           if (reasonOfRestriction!=null) {
             if ("DELETE".equals(reasonOfRestriction)) {
-              System.out.println("DELETE "+ee);
+              System.err.println("DELETE "+ee);
               eei.remove();
             } else {
               String c="Already is "+reasonOfRestriction;
@@ -132,7 +132,7 @@ public class SubstractBidix {
       }
     }
 
-    //System.out.println("Updated morphological dictionary: '" + out + "'");
+    //System.err.println("Updated morphological dictionary: '" + out + "'");
     //dic.printXML(out);
   }
 
@@ -206,7 +206,7 @@ public class SubstractBidix {
 
     String oldReasonOfRestriction=ee.getTemp();
     String existingEeStr=existingEe.toString();
-    //System.out.println("LR: Dobbelt indgang "+existingEe+"   "+ee);
+    //System.err.println("LR: Dobbelt indgang "+existingEe+"   "+ee);
     if (ee.getRestriction() ==null) {
       assert (oldReasonOfRestriction==null);
       ee.setTemp(existingEeStr);

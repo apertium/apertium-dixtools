@@ -535,14 +535,14 @@ public class EElement extends Element implements Cloneable,
 
         String attributes = this.getAttrString();
         if (!opt.nowAlign) {
-            if (!opt.now1line) dos.append(tab(2) + "<e" + attributes + ">\n");
+            if (!opt.nowAlign) dos.append(tab(2) + "<e" + attributes + ">\n");
             else dos.append( "<e" + attributes + ">");
 
             for (Element e : children) {
                 e.printXML(dos, opt);
             }
 
-            if (opt.now1line) dos.append("</e>"+appendCharacterData+"\n");
+            if (opt.nowAlign) dos.append("</e>"+appendCharacterData+"\n");
             else dos.append(tab(2) + "</e>"+appendCharacterData+"\n\n");
         } else { 
             StringBuilder dosy = new StringBuilder(120);
@@ -1150,7 +1150,7 @@ public class EElement extends Element implements Cloneable,
                 String[] parts = parValue.toString().split("__");
                 String category = "";
                 for (String element : parts) {
-                    // System.out.print("(" + parts[i] + ")");
+                    // System.err.print("(" + parts[i] + ")");
                     category = element;
                 }
                 str += "/" + category;

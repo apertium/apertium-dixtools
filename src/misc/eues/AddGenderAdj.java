@@ -76,7 +76,7 @@ public class AddGenderAdj {
         processArguments();
 
         DictionaryReader reader = new DictionaryReader(morphDic);
-        System.out.println("Reading morphological '" + morphDic + "'");
+        System.err.println("Reading morphological '" + morphDic + "'");
         DictionaryElement dic = reader.readDic();
         // dic.printXML("morf-es.dix");
 
@@ -100,7 +100,7 @@ public class AddGenderAdj {
                                         String sv = er.getValue();
                                         if (sv.equals("m") || sv.equals("f") || sv.equals("mf")) {
                                             ng.put(lemma, s);
-                                        // System.out.println(lemma + "
+                                        // System.err.println(lemma + "
                                         // (" + sv + ")");
                                         }
                                     }
@@ -112,7 +112,7 @@ public class AddGenderAdj {
             }
         }
 
-        System.out.println(ng.size() + " adjectives read.");
+        System.err.println(ng.size() + " adjectives read.");
 
         DictionaryReader reader2 = new DictionaryReader(bilDic);
         DictionaryElement bil = reader2.readDic();
@@ -142,7 +142,7 @@ public class AddGenderAdj {
 
                         SElement gender = ng.get(text);
                         if (gender != null) {
-                            // System.out.println(text + " (" +
+                            // System.err.println(text + " (" +
                             // gender.getValue() + ")");
                             genderFound++;
 
@@ -174,10 +174,10 @@ public class AddGenderAdj {
             }
         }
 
-        System.out.println("I found gender for " + genderFound + " lemmas.");
-        System.out.println("I could not find gender for " + genderNotFound + " lemmas (see addgender.err).");
+        System.err.println("I found gender for " + genderFound + " lemmas.");
+        System.err.println("I could not find gender for " + genderNotFound + " lemmas (see addgender.err).");
 
-        System.out.println("Updated bilingual dictionary: '" + out + "'");
+        System.err.println("Updated bilingual dictionary: '" + out + "'");
         bil.printXML(out, dics.elements.utils.DicOpts.std);
     }
 

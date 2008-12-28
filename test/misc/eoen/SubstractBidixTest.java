@@ -101,7 +101,7 @@ public class SubstractBidixTest {
    */
   @Test
   public void testCheckEarlierAndRestrict() {
-    System.out.println("checkEarlierAndRestrict");
+    System.err.println("checkEarlierAndRestrict");
     String direction="";
     ContentElement l=null;
     HashMap<String, EElement> hmLR=null;

@@ -429,7 +429,7 @@ public class ProcessDics extends AbstractDictTool {
             if (arguments[2].equals("-url")) {
                 dicReader.setUrlDic(true);
                 dicReader.setUrl(arguments[3]);
-                System.out.println("URL: " + arguments[3]);
+                System.err.println("URL: " + arguments[3]);
             } else {
                 dicReader.setDic(arguments[2]);
             }

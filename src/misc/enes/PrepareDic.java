@@ -61,11 +61,11 @@ public class PrepareDic {
             EElement ee = ncBil.getAllEntries().get(i);
             //String value = ee.getLeft().getValueNoTags();
             String value = ee.getRight().getValueNoTags();
-            System.out.println("checking " + value + " ...");
+            System.err.println("checking " + value + " ...");
             if (value != null) {
                 if (missing.containsKey(value)) {
                     section.addEElement(ee);
-                    System.out.println("adding " + value + " ...");
+                    System.err.println("adding " + value + " ...");
                 }
             }
         }

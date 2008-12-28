@@ -66,16 +66,16 @@ public class Misc {
     public Misc(String dic1FileName, String dic2FileName, String dic3FileName, String dic4FileName) {
         DictionaryReader dicReader1 = new DictionaryReader(dic1FileName);
         this.dic1 = dicReader1.readDic();
-        System.out.println("dic1.size() = " + dic1.getAllEntries().size());
+        System.err.println("dic1.size() = " + dic1.getAllEntries().size());
         DictionaryReader dicReader2 = new DictionaryReader(dic2FileName);
         this.dic2 = dicReader2.readDic();
-        System.out.println("dic2.size() = " + dic2.getAllEntries().size());
+        System.err.println("dic2.size() = " + dic2.getAllEntries().size());
         DictionaryReader dicReader3 = new DictionaryReader(dic3FileName);
         this.dic3 = dicReader3.readDic();
-        System.out.println("dic3.size() = " + dic3.getAllEntries().size());
+        System.err.println("dic3.size() = " + dic3.getAllEntries().size());
         DictionaryReader dicReader4 = new DictionaryReader(dic4FileName);
         this.dic4 = dicReader4.readDic();
-        System.out.println("dic4.size() = " + dic4.getAllEntries().size());
+        System.err.println("dic4.size() = " + dic4.getAllEntries().size());
 
     }
 
@@ -105,7 +105,7 @@ public class Misc {
      * 
      */
     public void doMisc7() {
-        System.out.println("Begin");
+        System.err.println("Begin");
         DictionaryElement morph_en_adj = this.dic1;
         DictionaryElement bil_en_es_adj = this.dic2;
         DictionaryElement morph_en_n = this.dic3;
@@ -136,10 +136,10 @@ public class Misc {
         for (EElement ee : morph_en_adj.getAllEntries()) {
             String lemma = ee.getLemma();
             if (!entries.containsKey(lemma)) {
-                System.out.println("Falta " + lemma + " en el bilingüe");
+                System.err.println("Falta " + lemma + " en el bilingüe");
                 PElement p = trans_n.get(lemma);
                 if (p != null) {
-                    System.out.println("Nuevo: " + p.getR().getValueNoTags() + " / " + lemma);
+                    System.err.println("Nuevo: " + p.getR().getValueNoTags() + " / " + lemma);
                     EElement ne = new EElement();
                     ne.setComment("check");
                     PElement pE = new PElement();
@@ -187,7 +187,7 @@ public class Misc {
         DictionaryElement bil = dic1;
 
         for (EElement ee : bil.getAllEntries()) {
-            System.out.println(ee.getValue("L") + " / " + ee.getValue("R"));
+            System.err.println(ee.getValue("L") + " / " + ee.getValue("R"));
 
             EElement es = new EElement();
             es.setLemma(ee.getValue("R"));
@@ -261,7 +261,7 @@ public class Misc {
                     }
                 }
                 if (is_mf) {
-                    //System.out.println(parName + " is mf");
+                    //System.err.println(parName + " is mf");
                     mfpars.put(parName, parName);
                 }
             }
@@ -273,7 +273,7 @@ public class Misc {
             String parName = ee.getParadigmValue();
             if (mfpars.containsKey(parName)) {
                 adjpars.put(lemma, parName);
-                System.out.println(lemma + " is mf");
+                System.err.println(lemma + " is mf");
             }
         }
 
@@ -339,16 +339,16 @@ public class Misc {
                 if (re.is("np")) {
                     String lemma = re.getValueNoTags();
                     if (re.contains("f")) {
-                        System.out.println(lemma + " is 'f'");
+                        System.err.println(lemma + " is 'f'");
                         nps.put(lemma, "f");
                     }
                     if (re.contains("m")) {
-                        System.out.println(lemma + " is 'm'");
+                        System.err.println(lemma + " is 'm'");
                         nps.put(lemma, "m");
                     }
                 /*
                 if (re.contains("mf")) {
-                System.out.println(lemma + " is 'mf'");
+                System.err.println(lemma + " is 'mf'");
                 }
                  */
                 }

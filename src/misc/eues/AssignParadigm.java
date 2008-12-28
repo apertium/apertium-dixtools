@@ -71,7 +71,7 @@ public class AssignParadigm extends AbstractDictTool {
 
         DictionaryReader reader = new DictionaryReader(morphDic);
         reader.setReadParadigms(false);
-        System.out.println("Reading morphological '" + morphDic + "'");
+        System.err.println("Reading morphological '" + morphDic + "'");
         DictionaryElement dic = reader.readDic();
 
         HashMap<String, String> np = new HashMap<String, String>();
@@ -86,7 +86,7 @@ public class AssignParadigm extends AbstractDictTool {
             }
         }
 
-        System.out.println(np.size() + " entries read.");
+        System.err.println(np.size() + " entries read.");
         DictionaryReader reader2 = new DictionaryReader(bilDic);
         DictionaryElement bil = reader2.readDic();
 
@@ -123,7 +123,7 @@ public class AssignParadigm extends AbstractDictTool {
                 }
             }
         }
-        System.out.println("Updated morphological dictionary: '" + out + "'");
+        System.err.println("Updated morphological dictionary: '" + out + "'");
         dic.printXML(out, dics.elements.utils.DicOpts.std);
     }
 

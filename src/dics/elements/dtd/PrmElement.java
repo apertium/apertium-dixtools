@@ -28,11 +28,6 @@ public class PrmElement extends Element {
     /**
      * 
      */
-    String value;
-
-    /**
-     * 
-     */
     public PrmElement() {
         setTagName("prm");
         setValue("<prm/>");

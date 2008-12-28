@@ -47,29 +47,7 @@ public class GElement extends ContentElement {
      */
     @Override
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
-        // write blank lines and processingComments from original file
-        dos.append(prependCharacterData);
-        if (getTagName() != null) {
-            dos.append("<" + getTagName() + ">");
-        } else {
-            dos.append("<!-- error tagname -->\n");
-        }
-        if (children != null) {
-            for (Element e : children) {
-                if (e != null) {
-                    e.printXML(dos, opt);
-                }
-            }
-        }
-        String c = "";
-        if (getProcessingComments() != null) {
-            c = getProcessingComments();
-        }
-        if (getTagName() != null) {
-            dos.append("</" + getTagName() + ">" + c + "");
-        } else {
-            dos.append("<!-- error tagname -->\n");
-        }
-        dos.append(appendCharacterData);
+        super.printXML(dos, opt.copy().setNowAlign(true));
     }
+
 }

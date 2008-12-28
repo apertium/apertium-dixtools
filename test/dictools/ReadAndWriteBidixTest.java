@@ -124,7 +124,7 @@ public class ReadAndWriteBidixTest {
   @Test
   public void testprintXML_stdaligned1line() throws IOException, InterruptedException {
     String outfile = rm("tmp_testprintXML_stdaligned1line-eo-en.xml");
-    dic.printXML(outfile, dics.elements.utils.DicOpts.stdaligned1line);
+    dic.printXML(outfile, dics.elements.utils.DicOpts.stdaligned);
     String diff=exec( "diff test/correct_output_DicFormatE1LineAligned-eo-en.xml "+outfile);
     Assert.assertEquals("Difference", "", diff);
     rm(outfile);

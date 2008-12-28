@@ -74,7 +74,7 @@ public class Dix2CC {
     public void do_convert() {
         this.processArguments();
         this.processDic();
-        System.out.println("Done");
+        System.err.println("Done");
 
     }
 
@@ -83,7 +83,7 @@ public class Dix2CC {
      * @param dic
      */
     private void processDic() {
-        System.out.println("Building " + this.outFileName + " for Palm...");
+        System.err.println("Building " + this.outFileName + " for Palm...");
         Vector<String> lines = new Vector<String>();
 
         for (SectionElement section : dic.getSections()) {
@@ -147,7 +147,7 @@ public class Dix2CC {
         }
         if (this.bilFileName != null) {
             DictionaryReader dicReader = new DictionaryReader(this.bilFileName);
-            System.out.println("Processing bilingual dictionary: " + this.bilFileName);
+            System.err.println("Processing bilingual dictionary: " + this.bilFileName);
             dic = dicReader.readDic();
         }
 

@@ -176,7 +176,7 @@ public class GetTranslation  extends AbstractDictTool {
                 Integer i = rs2.getInt("option_id");
                 String pos = rs2.getString("spelling");
                 String lang = rs2.getString("wikimedia_key");
-                System.out.println("(" + i + ") " + pos + " (" + lang + ")");
+                System.err.println("(" + i + ") " + pos + " (" + lang + ")");
                 if (pos.equals("adjective")) {
                     pos = "adj";
                 }
@@ -242,7 +242,7 @@ public class GetTranslation  extends AbstractDictTool {
             if (con != null) {
                 try {
                     con.close();
-                    System.out.println("Database connection terminated");
+                    System.err.println("Database connection terminated");
                 } catch (Exception e) {
                 /* ignore close errors */
                 }

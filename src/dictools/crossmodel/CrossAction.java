@@ -37,6 +37,8 @@ import dics.elements.utils.Msg;
 import dictools.cmproc.Variables;
 import java.io.OutputStreamWriter;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.*;
 
 /**
@@ -269,7 +271,13 @@ public class CrossAction implements Comparable<CrossAction> {
      * @return A content element (l or r) with renamed variables
      */
     private ContentElement renameContentElement(ContentElement source, HashMap<String, String> valueMap) {
-        ContentElement rContentElement = new ContentElement();
+        ContentElement rContentElement;//  new ContentElement();
+        try {
+          rContentElement=source.getClass().newInstance();
+        } catch (Exception ex) {
+          Logger.getLogger(CrossAction.class.getName()).log(Level.SEVERE, null, ex);
+          throw new IllegalStateException(ex);
+        }
         for (Element e : source.getChildren()) {
 
             // text element

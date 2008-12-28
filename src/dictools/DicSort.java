@@ -135,7 +135,7 @@ public class DicSort  extends AbstractDictTool {
         /*
         if (arguments[2].equals("-xinclude")) {
         setXinclude(true);
-        System.out.println("xinclude mode");
+        System.err.println("xinclude mode");
         } else {
         setXinclude(false);
         }
@@ -208,7 +208,7 @@ public class DicSort  extends AbstractDictTool {
                     } else {
                         l = new EElementList();
                         l.add(e);
-                        //System.out.println("category: " + cat);
+                        //System.err.println("category: " + cat);
                         map.put(cat, l);
                     }
                 }

@@ -57,6 +57,6 @@ public class DicGather  extends AbstractDictTool {
         DictionaryElement dic = reader.readDic();
         dic.printXML(out,getOpt());
 
-        System.out.println("Dictionary in a single file: '" + out + "'");
+        System.err.println("Dictionary in a single file: '" + out + "'");
     }
 }

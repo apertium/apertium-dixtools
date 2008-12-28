@@ -78,8 +78,8 @@ public class ReadAndWriteMonodixTest {
     //p.waitFor();
     //if (p.exitValue()!=0) Assert.fail(cmd+" reported an error");
     if (output.length()>0) {
-      System.out.println("exec: " + cmd);
-      System.out.println("output: " + output); 
+      System.err.println("exec: " + cmd);
+      System.err.println("output: " + output); 
       return cmd+"\n"+output;
     }
     return output;

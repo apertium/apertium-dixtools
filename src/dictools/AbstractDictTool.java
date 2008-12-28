@@ -70,23 +70,32 @@ public class AbstractDictTool {
      */
     public void setArguments(String[] arguments) {
         this.arguments = arguments;
-        ArrayList<String> unprocessed = new ArrayList<String>();
-/*
-        for (int i = 0; i < arguments.length; i++) {
-            String arg = arguments[i];
+        ArrayList<String> unprocessed = new ArrayList<String>(arguments.length);
 
-            if (arg.equals("-align")) {
-                i++;
-                opt.
-                arg = arguments[i];
-                source = arg;
-                type = LingResourcesReader.FILE;
-                i++;
-                sltl = getArguments()[i];
-            }
+        for (int i = 0; i < arguments.length; i++) {
+          String arg = arguments[i];
+
+          if (arg.equals("-align")) {
+            opt.sectionElementsAligned = true;
+          } else if (arg.equalsIgnoreCase("-alignPardef")) {
+            opt.pardefElementsAligned = true;
+          } else {
+            unprocessed.add(arg);
+            continue;
+          }
+
+          // see if two numbers follows
+          try {
+            int align1 = Integer.parseInt(arguments[i+1]);
+            int align2 = Integer.parseInt(arguments[i+2]);
+            // OK,  two numbers follows. Interpret as aligment options
+            opt.alignP = align1;
+            opt.alignR = align2;
+            i += 2;
+          } catch (Exception e) {
+          }            
         }
-*/
-    //opt.alignP
+
     }
 /*
    -align 10 55

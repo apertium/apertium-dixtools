@@ -251,7 +251,7 @@ public class State {
                 if (ca != null) {
                     CrossActionData cad = new CrossActionData(ca, vars);
                     cadl.put(ca.getId(), cad);
-                //System.out.println("Patrón aceptado! : " + ca.getId());
+                //System.err.println("Patrón aceptado! : " + ca.getId());
                 //vars.print();
                 }
                 //freq[1]++; // happens 10818 times

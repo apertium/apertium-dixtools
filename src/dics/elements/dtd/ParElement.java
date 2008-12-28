@@ -122,7 +122,7 @@ public class ParElement extends Element {
             saAttr = " sa=\"" + sa + "\" ";
         }
 
-        if (opt.now1line) {
+        if (opt.nowAlign) {
           dos.append("<" + getTagName() + " n=\"" + n + "\"" + prms + saAttr + "/>" );
         } else {
           dos.append(tab(4) + "<" + getTagName() + " n=\"" + n + "\"" +prms + saAttr + "/> "  + "\n");

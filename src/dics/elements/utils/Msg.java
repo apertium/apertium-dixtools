@@ -93,6 +93,7 @@ public class Msg {
      */
     private void openLogStream(String logFileName) {
         try {
+//      Logger.getLogger(CrossAction.class.getName()).log(Level.SEVERE, null, ex);
 
             // Msg will be change to Logger soon...
             // boolean append = true;
@@ -128,7 +129,7 @@ public class Msg {
                 break;
 
             default:
-                System.out.print(text);
+                System.err.print(text);
                 break;
         }
     }

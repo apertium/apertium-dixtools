@@ -219,7 +219,7 @@ public class LingResourcesReader {
                 if (childElementName.equals("property")) {
                     String name = this.getAttributeValue(childElement, "name");
                     String value = this.getAttributeValue(childElement, "value");
-                    //System.out.println("property: (" + name + ", " + value + ")");
+                    //System.err.println("property: (" + name + ", " + value + ")");
                     resourceElement.put(name, value);
                 }
             }

@@ -65,7 +65,7 @@ public class DicFilter  extends AbstractDictTool{
         for(SectionElement section : dicB.getSections()) {
             for( EElement ee : section.getEElements()) {
                 String key = ee.getLeft().getValueNoTags();
-                System.out.println(key);
+                System.err.println(key);
                 map.put(key, ee);
             }            
         }
@@ -100,7 +100,7 @@ public class DicFilter  extends AbstractDictTool{
         DictionaryReader dicReaderB = new DictionaryReader(fileNameB);
         dicB = dicReaderB.readDic();
         
-        System.out.println(fileNameA + "/" + fileNameB);
+        System.err.println(fileNameA + "/" + fileNameB);
      
         
     }

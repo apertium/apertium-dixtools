@@ -117,14 +117,14 @@ public class DictionaryReader extends XMLReader {
 
             /*
              * if (child instanceof Comment) { Comment comment =
-             * (Comment)child; System.out.println("Comment: " +
+             * (Comment)child; System.err.println("Comment: " +
              * comment.getTextContent()); }
              */
 
             if (child instanceof ProcessingInstruction) {
                 ProcessingInstruction pi = (ProcessingInstruction) child;
                 String data = pi.getData();
-            // System.out.println("Data pi: " + data);
+            // System.err.println("Data pi: " + data);
             } else
 
             if (child instanceof Element) {
@@ -169,7 +169,7 @@ public class DictionaryReader extends XMLReader {
                     if (fileName.endsWith("sdefs.dix") || fileName.endsWith("symbols.xml")) {
                         SdefsReader sdefsReader = new SdefsReader(fileName);
                         SdefsElement sdefs = sdefsReader.readSdefs();
-                        //System.out.println("Symbol definitions: " + fileName);
+                        //System.err.println("Symbol definitions: " + fileName);
                         dic.setSdefs(sdefs);
                     } else
                     if (fileName.endsWith("pardefs.dix")) {

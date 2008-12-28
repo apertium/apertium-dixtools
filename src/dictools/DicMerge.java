@@ -272,7 +272,7 @@ public class DicMerge  extends AbstractDictTool{
     private SectionElement mergeSectionElements(
             SectionElement sectionE1, SectionElement sectionE2) {
 
-        System.out.println("Merging section '" + sectionE1.getID() + "'...");
+        System.err.println("Merging section '" + sectionE1.getID() + "'...");
         SectionElement sectionElement = new SectionElement();
         EHashMap eMap = new EHashMap();
 
@@ -284,7 +284,7 @@ public class DicMerge  extends AbstractDictTool{
         paradigmsToRemove = new HashMap<String, String>();
 
         EElementList elements1 = sectionE1.getEElements();
-        System.out.println("  monolingual 1 (" + elements1.size() + " lemmas)");
+        System.err.println("  monolingual 1 (" + elements1.size() + " lemmas)");
         int fromSec1 = 0;
         for (EElement e1 : elements1) {
             //String e1Key = e1.lemmaAndCategory();
@@ -299,7 +299,7 @@ public class DicMerge  extends AbstractDictTool{
         }
 
         EElementList elements2 = sectionE2.getEElements();
-        System.out.println("  monolingual 2 (" + elements2.size() + " lemmas)");
+        System.err.println("  monolingual 2 (" + elements2.size() + " lemmas)");
         int common = 0;
         int notin = 0;
         int fromSec2 = 0;
@@ -314,7 +314,7 @@ public class DicMerge  extends AbstractDictTool{
                 sectionElement.addEElement(e2);
                 fromSec2++;
             } else {
-                // System.out.println("'" + e2.getLemma() + "' already
+                // System.err.println("'" + e2.getLemma() + "' already
                 // exists.");
                 common++;
                 String parName2 = e2.getParadigmValue();
@@ -330,18 +330,18 @@ public class DicMerge  extends AbstractDictTool{
                         e1.getParadigm().addProcessingComment(
                                 "\n\t<!-- also paradigm '" + parName2 + "' -->");
                     } else {
-                    // System.out.println("Paradigms are the same");
+                    // System.err.println("Paradigms are the same");
                     }
                 }
 
             }
         }
-        System.out.println("  " + common + " common lemmas");
-        //System.out.println("  " + (fromSec1 - common) + " new lemmas from monol. 1");
-        //System.out.println("  " + fromSec2 + " new lemmas from monol. 2");
-        System.out.println("  " + sectionElement.getEElements().size() + " lemmas in merged dictionary");
+        System.err.println("  " + common + " common lemmas");
+        //System.err.println("  " + (fromSec1 - common) + " new lemmas from monol. 1");
+        //System.err.println("  " + fromSec2 + " new lemmas from monol. 2");
+        System.err.println("  " + sectionElement.getEElements().size() + " lemmas in merged dictionary");
 
-        // System.out.println(duplicated + " duplicated entries in sections " +
+        // System.err.println(duplicated + " duplicated entries in sections " +
         // sectionE1.getID() + "/" + sectionE2.getID());
 
         return sectionElement;
@@ -399,7 +399,7 @@ public class DicMerge  extends AbstractDictTool{
         HashMap<String, PardefElement> pardefMap = new HashMap<String, PardefElement>();
 
         for (PardefElement pardef1 : pardefs1.getPardefElements()) {
-            // System.out.println("Paradigm: " + pardef1.getName());
+            // System.err.println("Paradigm: " + pardef1.getName());
             String pardef1Key = pardef1.toString();
 
             if (!pardefMap.containsKey(pardef1Key)) {

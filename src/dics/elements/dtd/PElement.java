@@ -125,7 +125,7 @@ public class PElement extends Element {
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
-        String tab3 = opt.now1line?"":tab(3);
+        String tab3 = opt.nowAlign?"":tab(3);
 
         dos.append(tab3 + "<" + getTagName() + ">\n");
         if (l != null) {

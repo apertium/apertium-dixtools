@@ -33,7 +33,7 @@ import java.io.Writer;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class ContentElement extends Element implements Cloneable {
+public abstract class ContentElement extends Element implements Cloneable {
 
     /**
      * 
@@ -172,16 +172,19 @@ public class ContentElement extends Element implements Cloneable {
      */
     @Override
     protected void printXML(Appendable dos, DicOpts opt) throws IOException {
-      dos.append(makeCommentIfData(processingComments));
 
       String tagName = getTagName();
 
-        if (!opt.now1line) {
+        if (!opt.nowAlign) {
                 // write blank lines and processingComments from original file
                 dos.append(prependCharacterData);
+                // write blank lines and processingComments from original file
+                dos.append(makeCommentIfData(processingComments));
                 dos.append(tab(4) + "<" + tagName + ">");  
         } else {
                 dos.append(prependCharacterData.trim()); 
+                  // write blank lines and processingComments from original file
+                dos.append(makeCommentIfData(processingComments));
                 dos.append("<" + tagName + ">");          
         }  
 
@@ -191,9 +194,9 @@ public class ContentElement extends Element implements Cloneable {
               }
           }
 
-        dos.append("</" + tagName + "> " + (opt.now1line?"":"\n"));    
+        dos.append("</" + tagName + "> " + (opt.nowAlign?"":"\n"));    
 
-        if (!opt.now1line) {
+        if (!opt.nowAlign) {
                 // write blank lines and processingComments from original file
                 dos.append(appendCharacterData);
         } else {

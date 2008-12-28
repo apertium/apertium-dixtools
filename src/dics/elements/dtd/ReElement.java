@@ -65,7 +65,7 @@ public class ReElement extends Element {
         
         value = maskNull(value);
 
-        dos.append( (opt.now1line?"":tab(3)) + "<" + getTagName() + ">" + getValue() + "</" + getTagName() + ">"+appendCharacterData.trim()+  (opt.now1line?"":"\n"));
+        dos.append( (opt.nowAlign?"":tab(3)) + "<" + getTagName() + ">" + getValue() + "</" + getTagName() + ">"+appendCharacterData.trim()+  (opt.nowAlign?"":"\n"));
     }
 
     /**

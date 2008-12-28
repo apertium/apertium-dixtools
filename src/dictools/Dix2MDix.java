@@ -113,7 +113,7 @@ public class Dix2MDix {
         metaInf.add("@sl-full:" + slFull + "$");
         metaInf.add("@tl-full:" + tlFull + "$");
 
-        System.out.println("Processing bilingual dictionary: " + dic.getFileName());
+        System.err.println("Processing bilingual dictionary: " + dic.getFileName());
 
         this.outFileName = "sltl";
         this.processDic(dic, "left to right");
@@ -124,10 +124,10 @@ public class Dix2MDix {
         this.printMetaInfFile(metaInf);
 
         String zipFileName = getSltlCode() + "-data.zip";
-        System.out.println("Building " + zipFileName + " for apertium-tinylex...");
+        System.err.println("Building " + zipFileName + " for apertium-tinylex...");
         ZipIt zipIt = new ZipIt(files, zipFileName);
         zipIt.zip();
-        System.out.println("Done!");
+        System.err.println("Done!");
 
     }
 
@@ -164,7 +164,7 @@ public class Dix2MDix {
             }
         }
 
-        System.out.println(dir + ": " + hm.size() + " lemmas.");
+        System.err.println(dir + ": " + hm.size() + " lemmas.");
         Vector<Entry> vector = this.map2vector(hm);
         Collections.sort(vector);
         this.print(vector);
@@ -520,7 +520,7 @@ public class Dix2MDix {
                 CRC32 crc = new CRC32();
                 for (int i = 0, n = files.size(); i < n; i++) {
                     String name = files.elementAt(i);
-                    //System.out.println("adding " + name);
+                    //System.err.println("adding " + name);
                     File file = new File(name);
                     if (!file.exists()) {
                         System.err.println("Skipping: " + name);

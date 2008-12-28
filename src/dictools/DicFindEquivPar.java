@@ -40,7 +40,7 @@ import dics.elements.utils.Msg;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class DicFindEquivPar  extends AbstractDictTool{
+public class DicFindEquivPar  extends AbstractDictTool {
 
     /**
      * 
@@ -89,10 +89,8 @@ public class DicFindEquivPar  extends AbstractDictTool{
                         msg.err("(" + par1.getName() + ", " + par2.getName() + ")");
                         canBeRemoved.add(par2);
                         equivalents.put(par2.getName(), par1.getName());
-                        processed.put(par1.getName() + "---" + par2.getName(),
-                                par1);
-                        processed.put(par2.getName() + "---" + par1.getName(),
-                                par2);
+                        processed.put(par1.getName() + "---" + par2.getName(), par1);
+                        processed.put(par2.getName() + "---" + par1.getName(), par2);
                     }
                 }
             }
