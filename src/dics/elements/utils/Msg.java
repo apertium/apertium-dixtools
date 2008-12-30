@@ -129,7 +129,7 @@ public class Msg {
                 break;
 
             default:
-                System.err.print(text);
+                System.out.print(text);
                 break;
         }
     }

@@ -75,7 +75,6 @@ public class Dix2CC {
         this.processArguments();
         this.processDic();
         System.err.println("Done");
-
     }
 
     /**
@@ -130,9 +129,10 @@ public class Dix2CC {
 
             for (String line : lines) {
                 dos.append(line);
-
             }
+            dos.close();
         } catch (IOException ioe) {
+          ioe.printStackTrace();
         }
     }
 

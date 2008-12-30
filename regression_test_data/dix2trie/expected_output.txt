@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root v="">
+    <n v="felo">
+     <w v="felo">
+     	<l>felo<s n="n"/></l>
+     	<r>hide<s n="n"/></r>
+     </w>
+    </n>
+     <n v="defii">
+      <w v="defii">
+      	<l>defii<s n="vblex"/></l>
+      	<r>face<s n="vblex"/></r>
+      </w>
+     </n>
+        <n v="dek kvar">
+         <w v="dek kvar">
+         	<l>dek kvar<s n="num"/></l>
+         	<r>fourteen<s n="num"/></r>
+         </w>
+        </n>
+        <n v="dek kvin">
+         <w v="dek kvin">
+         	<l>dek kvin<s n="num"/></l>
+         	<r>fifteen<s n="num"/></r>
+         </w>
+        </n>
+       <n v="dek tri">
+        <w v="dek tri">
+        	<l>dek tri<s n="num"/></l>
+        	<r>thirteen<s n="num"/></r>
+        </w>
+       </n>
+      <n v="dek du">
+       <w v="dek du">
+       	<l>dek du<s n="num"/></l>
+       	<r>twelve<s n="num"/></r>
+       </w>
+      </n>
+       <n v="dek unu">
+        <w v="dek unu">
+        	<l>dek unu<s n="num"/></l>
+        	<r>eleven<s n="num"/></r>
+        </w>
+       </n>
+  <n v="du">
+   <w v="du">
+   	<l>du<s n="num"/></l>
+   	<r>two<s n="num"/></r>
+   </w>
+     <n v="dudek">
+      <w v="dudek">
+      	<l>dudek<s n="num"/></l>
+      	<r>twenty<s n="num"/></r>
+      </w>
+     </n>
+  </n>
+      <n v="domaĝi">
+       <w v="domaĝi">
+       	<l>domaĝi<s n="vblex"/></l>
+       	<r>hesitate<s n="vblex"/></r>
+       </w>
+      </n>
+       <n v="Gerardo">
+        <w v="Gerardo">
+        	<l>Gerardo<s n="np"/><s n="ant"/></l>
+        	<r>Gerardo<s n="np"/><s n="ant"/></r>
+        </w>
+       </n>
+        <n v="ABC News">
+         <w v="ABC News">
+         	<l>ABC News<s n="np"/><s n="al"/></l>
+         	<r>ABC News<s n="np"/><s n="al"/></r>
+         </w>
+        </n>
+    <n v="nulo">
+     <w v="nulo">
+     	<l>nulo<s n="num"/></l>
+     	<r>zero<s n="num"/></r>
+     </w>
+    </n>
+       <n v="Manuelo">
+        <w v="Manuelo">
+        	<l>Manuelo<s n="np"/></l>
+        	<r>Manuel<s n="np"/></r>
+        </w>
+       </n>
+     <n v="Maria">
+      <w v="Maria">
+      	<l>Maria<s n="np"/></l>
+      	<r>María<s n="np"/></r>
+      </w>
+     </n>
+     <n v="Marta">
+      <w v="Marta">
+      	<l>Marta<s n="np"/></l>
+      	<r>Marta<s n="np"/></r>
+      </w>
+     </n>
+       <n v="Marteno">
+        <w v="Marteno">
+        	<l>Marteno<s n="np"/></l>
+        	<r>Martín<s n="np"/></r>
+        </w>
+       </n>
+         <n v="malvidigi">
+          <w v="malvidigi">
+          	<l>malvidigi<s n="vblex"/></l>
+          	<r>hide<s n="vblex"/></r>
+          </w>
+         </n>
+       <n v="malvoli">
+        <w v="malvoli">
+        	<l>malvoli<s n="vblex"/></l>
+        	<r>hesitate<s n="vblex"/></r>
+        </w>
+       </n>
+        <n v="maleviti">
+         <w v="maleviti">
+         	<l>maleviti<s n="vblex"/></l>
+         	<r>face<s n="vblex"/></r>
+         </w>
+        </n>
+    <n v="kvin">
+     <w v="kvin">
+     	<l>kvin<s n="num"/></l>
+     	<r>five<s n="num"/></r>
+     </w>
+       <n v="kvindek">
+        <w v="kvindek">
+        	<l>kvindek<s n="num"/></l>
+        	<r>fifty<s n="num"/></r>
+        </w>
+       </n>
+    </n>
+    <n v="kvar">
+     <w v="kvar">
+     	<l>kvar<s n="num"/></l>
+     	<r>four<s n="num"/></r>
+     </w>
+       <n v="kvardek">
+        <w v="kvardek">
+        	<l>kvardek<s n="num"/></l>
+        	<r>forty<s n="num"/></r>
+        </w>
+       </n>
+    </n>
+        <n v="katoliko">
+         <w v="katoliko">
+         	<l>katoliko<s n="n"/></l>
+         	<r>Catholic<s n="n"/></r>
+         </w>
+        </n>
+        <n v="kristano">
+         <w v="kristano">
+         	<l>kristano<s n="n"/></l>
+         	<r>Christian<s n="n"/></r>
+         </w>
+        </n>
+      <n v="heziti">
+       <w v="heziti">
+       	<l>heziti<s n="vblex"/></l>
+       	<r>hesitate<s n="vblex"/></r>
+       </w>
+      </n>
+     <n v="Jaime">
+      <w v="Jaime">
+      	<l>Jaime<s n="np"/><s n="ant"/></l>
+      	<r>Jaime<s n="np"/><s n="ant"/></r>
+      </w>
+     </n>
+        <n v="islamano">
+         <w v="islamano">
+         	<l>islamano<s n="n"/></l>
+         	<r>Muslim<s n="n"/></r>
+         </w>
+        </n>
+      <n v="vizaĝo">
+       <w v="vizaĝo">
+       	<l>vizaĝo<s n="n"/></l>
+       	<r>face<s n="n"/></r>
+       </w>
+      </n>
+   <n v="unu">
+    <w v="unu">
+    	<l>unu<s n="num"/></l>
+    	<r>one<s n="num"/></r>
+    </w>
+   </n>
+   <n v="tri">
+    <w v="tri">
+    	<l>tri<s n="num"/></l>
+    	<r>three<s n="num"/></r>
+    </w>
+      <n v="tridek">
+       <w v="tridek">
+       	<l>tridek<s n="num"/></l>
+       	<r>thirty<s n="num"/></r>
+       </w>
+      </n>
+   </n>
+       <n v="supraĵo">
+        <w v="supraĵo">
+        	<l>supraĵo<s n="n"/></l>
+        	<r>face<s n="n"/></r>
+        </w>
+       </n>
+     <n v="Paris">
+      <w v="Paris">
+      	<l>Paris<s n="np"/><s n="ant"/></l>
+      	<r>Paris<s n="np"/><s n="ant"/></r>
+      </w>
+     </n>
+           <n v="protestanto">
+            <w v="protestanto">
+            	<l>protestanto<s n="n"/></l>
+            	<r>Protestant<s n="n"/></r>
+            </w>
+           </n>
+      <n v="Robert">
+       <w v="Robert">
+       	<l>Robert<s n="np"/><s n="ant"/></l>
+       	<r>Robert<s n="np"/><s n="ant"/></r>
+       </w>
+      </n>
+    <n v="ĉefe">
+     <w v="ĉefe">
+     	<l>ĉefe<s n="adv"/></l>
+     	<r>primarily<s n="adv"/></r>
+     </w>
+    </n>
+          <n v="ĉiusemajne">
+           <w v="ĉiusemajne">
+           	<l>ĉiusemajne<s n="adv"/></l>
+           	<r>weekly<s n="adv"/></r>
+           </w>
+          </n>
+        <n v="ĉiakoste">
+         <w v="ĉiakoste">
+         	<l>ĉiakoste<s n="adv"/></l>
+         	<r>regardless<s n="adv"/></r>
+         </w>
+        </n>
+                                 <n v="Zapatista Armeo de Nacia Liberiĝo">
+                                  <w v="Zapatista Armeo de Nacia Liberiĝo">
+                                  	<l>Zapatista Armeo de Nacia Liberiĝo<s n="np"/><s n="al"/></l>
+                                  	<r>Zapatista National Liberation Army<s n="np"/><s n="al"/></r>
+                                  </w>
+                                 </n>
+</root>
+

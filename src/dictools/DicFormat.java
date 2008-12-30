@@ -119,7 +119,6 @@ public class DicFormat  extends AbstractDictTool{
             }
             String errorMsg = duplicated + " duplicated entries in section '" + section.getID() + "'\n";
             msg.err(errorMsg);
-            msg.out(errorMsg);
         }
         dicFormatted.printXML(this.getOut(),getOpt());
         return dicFormatted;

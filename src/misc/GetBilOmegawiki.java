@@ -43,7 +43,7 @@ import dictools.AbstractDictTool;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class GetTranslation  extends AbstractDictTool {
+public class GetBilOmegawiki  extends AbstractDictTool {
 
     /**
      * 
@@ -82,7 +82,7 @@ public class GetTranslation  extends AbstractDictTool {
      * 
      * 
      */
-    public GetTranslation(String sl, String tl) {
+    public GetBilOmegawiki(String sl, String tl) {
         msg = new Msg();
 
         if (sl.compareTo(tl) > 0) {
@@ -93,8 +93,8 @@ public class GetTranslation  extends AbstractDictTool {
             setTl(tl);
         }
 
-        msg.out("source lang: " + getSl());
-        msg.out("target lang: " + getTl());
+        msg.err("source lang: " + getSl());
+        msg.err("target lang: " + getTl());
 
         connectDB("omegawiki", "omegawiki", "");
     }
@@ -115,7 +115,7 @@ public class GetTranslation  extends AbstractDictTool {
             props.setProperty("user", getUser());
             props.setProperty("password", getPassword());
             con = DriverManager.getConnection(url, props);
-            msg.out("Database connection established");
+            msg.err("Database connection established");
         } catch (ClassNotFoundException cnfe) {
             msg.err("Error: could not find MySQL driver (org.gjt.mm.mysql.Driver)");
             System.exit(-1);

@@ -1,0 +1,1 @@
+dictools.ProcessDics.main("[reverse", "../../test/sample.eo-en.dix", "actual_output.dix]");

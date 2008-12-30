@@ -56,6 +56,7 @@ import dictools.crossmodel.Pattern;
 import dictools.cmproc.CrossActionData;
 import dictools.cmproc.CrossModelProcessor;
 import dictools.cmproc.Variables;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -855,6 +856,8 @@ public class DicCross  extends AbstractDictTool{
      *
      */
     public void doCross() {
+            new File("dix").mkdir();
+
         processArguments();
         actionCross();
     }

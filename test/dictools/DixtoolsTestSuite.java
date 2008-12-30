@@ -28,7 +28,7 @@ import org.junit.runners.Suite;
  * @author j
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({dictools.CrossDictTest.class,dictools.ReadAndWriteMonodixTest.class, misc.eoen.SubstractBidixTest.class})
+@Suite.SuiteClasses({dictools.ReadAndWriteMonodixTest.class, dictools.ReadAndWriteBidixTest.class, misc.eoen.SubstractBidixTest.class, dictools.ZCommandLineTest.class, dictools.ZCrossDictTest.class})
 //@Suite.SuiteClasses({dictools.ReadAndWriteMonodixTest.class})
 public class DixtoolsTestSuite {
 

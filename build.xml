@@ -100,10 +100,6 @@
         <copy file="apertium-dixtools" todir="/usr/local/bin" overwrite="true" failonerror="Error: apertium-dixtools couldn't be installed" verbose="false"/>
         <chmod file="/usr/local/bin/apertium-dixtools" perm="+x"/>
         
-        <!-- apertium-crossdics copy -->
-        <copy file="apertium-crossdics" todir="/usr/local/bin" overwrite="true"/>
-        <chmod file="/usr/local/bin/apertium-crossdics" perm="+x"/>
-        
         <!-- Schemas -->
         <mkdir dir="/usr/local/apertium-dixtools/schemas"/>
         <copy file="schemas/cross-model.xml" todir="/usr/local/apertium-dixtools/schemas"/>
@@ -139,7 +135,6 @@
             </tarfileset>
             <!-- scripts -->
             <tarfileset dir="." prefix="${package-name}" filemode="755">
-                <include name="apertium-crossdics"/>
                 <include name="apertium-dixtools"/>
             </tarfileset>
             <!-- jar file -->

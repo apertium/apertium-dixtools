@@ -369,7 +369,6 @@ public class DicTools {
         DictionaryReader dicReader = new DictionaryReader(sMonFilename);
         DictionaryElement mon = dicReader.readDic();
         mon.setFileName(sMonFilename);
-        dicReader = null;
         return mon;
     }
 

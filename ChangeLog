@@ -1,0 +1,6 @@
+2008-12-30 nordfalk
+
+	* Added ChangeLog
+	* Added CLI tests for crossdict  dic-reader  dix2tiny  dix2trie kind_of_test  merge-morph  reverse-bil  sort
+	* Rmoved apertium-crossdics - didnt work and its a subcommand to apertium-dixtools
+

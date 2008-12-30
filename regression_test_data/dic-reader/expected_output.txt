@@ -1,0 +1,95 @@
+dic-reader list-paradigms ../../test/sample.metadix
+S__encimp
+achèt/e__vblex
+achet/er__vblex
+luî/mes__vblex
+lui/re__vblex
+ach/e[T]er__vblex
+lu/i[]re__vblex
+dic-reader list-lemmas ../../test/sample.metadix
+amener
+détruire
+enlever
+acheter
+amener
+détruire
+enlever
+acheter
+amener
+détruire
+enlever
+comment
+noncomment
+détruire
+enlever
+acheter
+dic-reader list-definitions ../../test/sample.metadix
+adj
+adv
+def
+det
+f
+gen
+ger
+ind
+m
+mf
+n
+nn
+np
+nt
+p1
+p2
+p3
+pr
+prn
+rpar
+sg
+sp
+tn
+vaux
+vblex
+ND
+dic-reader list-pairs ../../test/sample.eo-en.dix
+nulo/zero
+unu/one
+du/two
+tri/three
+kvar/four
+kvin/five
+dek unu/eleven
+dek du/twelve
+dek tri/thirteen
+dek kvar/fourteen
+dek kvin/fifteen
+dudek/twenty
+tridek/thirty
+kvardek/forty
+kvindek/fifty
+Zapatista Armeo de Nacia Liberiĝo/Zapatista National Liberation Army
+ABC News/ABC News
+Manuelo/Manuel
+Maria/María
+Marta/Marta
+Marteno/Martín
+Jaime/Jaime
+Gerardo/Gerardo
+Paris/Paris
+Robert/Robert
+islamano/Muslim
+katoliko/Catholic
+kristano/Christian
+protestanto/Protestant
+vizaĝo/face
+supraĵo/face
+defii/face
+maleviti/face
+heziti/hesitate
+malvoli/hesitate
+domaĝi/hesitate
+malvidigi/hide
+kaŝi/hide
+felo/hide
+ĉefe/primarily
+ĉiakoste/regardless
+ĉiusemajne/weekly

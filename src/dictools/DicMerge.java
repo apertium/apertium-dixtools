@@ -102,13 +102,13 @@ public class DicMerge  extends AbstractDictTool{
      * @param ds2
      */
     public DicMerge(DicSet ds1, DicSet ds2) {
-        setBilAB1(ds1.getBil1());
-        setMonA1(ds1.getMon1());
-        setMonB1(ds1.getMon2());
+        bilAB1 = ds1.getBil1();
+        monA1 = (ds1.getMon1());
+        monB1 =(ds1.getMon2());
 
-        setBilAB2(ds2.getBil1());
-        setMonA1(ds2.getMon1());
-        setMonA2(ds2.getMon2());
+        bilAB2 = (ds2.getBil1());
+        monA1 = (ds2.getMon1());
+        monA2 = (ds2.getMon2());
 
         msg.setLogFileName("merge.log");
 
@@ -119,10 +119,9 @@ public class DicMerge  extends AbstractDictTool{
      * @param bAB1
      * @param bAB2
      */
-    public void setBils(DictionaryElement bAB1,
-            DictionaryElement bAB2) {
-        setBilAB1(bAB1);
-        setBilAB2(bAB2);
+    public void setBils(DictionaryElement bAB1, DictionaryElement bAB2) {
+        bilAB1 = (bAB1);
+        bilAB2 = (bAB2);
     }
 
     /**
@@ -130,10 +129,9 @@ public class DicMerge  extends AbstractDictTool{
      * @param mA1
      * @param mA2
      */
-    public void setMonAs(DictionaryElement mA1,
-            DictionaryElement mA2) {
-        setMonA1(mA1);
-        setMonA2(mA2);
+    public void setMonAs(DictionaryElement mA1, DictionaryElement mA2) {
+        monA1 = (mA1);
+        monA2 = (mA2);
     }
 
     /**
@@ -147,8 +145,8 @@ public class DicMerge  extends AbstractDictTool{
         DictionaryElement morph1 = dicReader1.readDic();
         DictionaryReader dicReader2 = new DictionaryReader(morph2FileName);
         DictionaryElement morph2 = dicReader2.readDic();
-        setMonA1(morph1);
-        setMonA2(morph2);
+        monA1 = (morph1);
+        monA2 = (morph2);
     }
 
     /**
@@ -156,10 +154,9 @@ public class DicMerge  extends AbstractDictTool{
      * @param mB1
      * @param mB2
      */
-    public void setMonBs(DictionaryElement mB1,
-            DictionaryElement mB2) {
-        setMonB1(mB1);
-        setMonB2(mB2);
+    public void setMonBs(DictionaryElement mB1, DictionaryElement mB2) {
+        monB1 = (mB1);
+        monB2 =(mB2);
     }
 
     /**
@@ -167,38 +164,38 @@ public class DicMerge  extends AbstractDictTool{
      * @return Undefined         
      */
     private DicSet merge() {
-        DictionaryElement bilAB = mergeBils(getBilAB1(), getBilAB2());
-        String fileName = getBilAB1().getFileName();
+        DictionaryElement bilAB = mergeBils(bilAB1, bilAB2);
+        String fileName = bilAB1.getFileName();
         fileName = DicTools.removeExtension(fileName);
         bilAB.setFileName(fileName + "-merged.dix");
 
         bilAB.countEntries();
-        getBilAB1().countEntries();
-        getBilAB2().countEntries();
+        bilAB1.countEntries();
+        bilAB2.countEntries();
         bilAB.addProcessingComment("\n\tResult of merging 2 dictionaries:");
-        bilAB.addProcessingComment("\t" + bilAB.getNEntries() + " entries (" + getBilAB1().getNEntries() + " U " + getBilAB2().getNEntries() + ")");
+        bilAB.addProcessingComment("\t" + bilAB.getNEntries() + " entries (" + bilAB1.getNEntries() + " U " + bilAB2.getNEntries() + ")");
 
-        DictionaryElement monA = mergeMonols(getMonA1(), getMonA2());
-        String monAfn = getMonA1().getFileName();
+        DictionaryElement monA = mergeMonols(monA1, monA2);
+        String monAfn = monA1.getFileName();
         monAfn = DicTools.removeExtension(monAfn);
         monA.setFileName(monAfn + "-merged.dix");
 
         monA.countEntries();
-        getMonA1().countEntries();
-        getMonA2().countEntries();
+        monA1.countEntries();
+        monA2.countEntries();
         monA.addProcessingComment("\n\tResult of merging 2 dictionaries:");
-        monA.addProcessingComment("\t" + monA.getNEntries() + " entries (" + getMonA1().getNEntries() + " U " + getMonA2().getNEntries() + ")");
+        monA.addProcessingComment("\t" + monA.getNEntries() + " entries (" + monA1.getNEntries() + " U " + monA2.getNEntries() + ")");
 
-        DictionaryElement monB = mergeMonols(getMonB1(), getMonB2());
-        String monBfn = getMonB1().getFileName();
+        DictionaryElement monB = mergeMonols(monB1, monB2);
+        String monBfn = monB1.getFileName();
         monBfn = DicTools.removeExtension(monBfn);
         monB.setFileName(monBfn + "-merged.dix");
 
         monB.countEntries();
-        getMonB1().countEntries();
-        getMonB2().countEntries();
+        monB1.countEntries();
+        monB2.countEntries();
         monB.addProcessingComment("\n\tResult of merging 2 dictionaries:");
-        monB.addProcessingComment("\t" + monB.getNEntries() + " entries (" + getMonB1().getNEntries() + " U " + getMonB2().getNEntries() + ")");
+        monB.addProcessingComment("\t" + monB.getNEntries() + " entries (" + monB1.getNEntries() + " U " + monB2.getNEntries() + ")");
 
         DicSet dicSet = new DicSet(bilAB, monA, monB);
         return dicSet;
@@ -209,8 +206,7 @@ public class DicMerge  extends AbstractDictTool{
      * @param bAB1
      * @param bAB2
      * @return Undefined         */
-    private DictionaryElement mergeBils(DictionaryElement bAB1,
-            DictionaryElement bAB2) {
+    private DictionaryElement mergeBils(DictionaryElement bAB1, DictionaryElement bAB2) {
         DictionaryElement dic = new DictionaryElement();
 
         AlphabetElement alphabet = mergeAlphabetElement(bAB1.getAlphabet(), bAB2.getAlphabet());
@@ -237,11 +233,9 @@ public class DicMerge  extends AbstractDictTool{
      * @param m2
      * @return Undefined         
      */
-    private DictionaryElement mergeMonols(DictionaryElement m1,
-            DictionaryElement m2) {
+    private DictionaryElement mergeMonols(DictionaryElement m1, DictionaryElement m2) {
         DictionaryElement mon = new DictionaryElement();
-        AlphabetElement alphabet = mergeAlphabetElement(m1.getAlphabet(),
-                m2.getAlphabet());
+        AlphabetElement alphabet = mergeAlphabetElement(m1.getAlphabet(), m2.getAlphabet());
         mon.setAlphabet(alphabet);
 
         SdefsElement sdefs = mergeSdefElements(m1.getSdefs(), m2.getSdefs());
@@ -269,8 +263,7 @@ public class DicMerge  extends AbstractDictTool{
      * @param sectionE2
      * @return Undefined         
      */
-    private SectionElement mergeSectionElements(
-            SectionElement sectionE1, SectionElement sectionE2) {
+    private SectionElement mergeSectionElements( SectionElement sectionE1, SectionElement sectionE2) {
 
         System.err.println("Merging section '" + sectionE1.getID() + "'...");
         SectionElement sectionElement = new SectionElement();
@@ -352,8 +345,7 @@ public class DicMerge  extends AbstractDictTool{
      * @param sdefs1
      * @param sdefs2
      * @return Undefined         */
-    private SdefsElement mergeSdefElements(SdefsElement sdefs1,
-            SdefsElement sdefs2) {
+    private SdefsElement mergeSdefElements(SdefsElement sdefs1, SdefsElement sdefs2) {
         SdefsElement sdefs = new SdefsElement();
         HashMap<String, SdefElement> sdefMap = new HashMap<String, SdefElement>();
 
@@ -380,8 +372,7 @@ public class DicMerge  extends AbstractDictTool{
      * @param alphabet1
      * @param alphabet2
      * @return Undefined         */
-    private AlphabetElement mergeAlphabetElement(
-            AlphabetElement alphabet1, AlphabetElement alphabet2) {
+    private AlphabetElement mergeAlphabetElement( AlphabetElement alphabet1, AlphabetElement alphabet2) {
         AlphabetElement alphabet = new AlphabetElement();
         // We take one of them
         alphabet.setAlphabet(alphabet1.getAlphabet());
@@ -393,8 +384,7 @@ public class DicMerge  extends AbstractDictTool{
      * @param pardefs1
      * @param pardefs2
      * @return Undefined         */
-    private PardefsElement mergePardefElements(
-            PardefsElement pardefs1, PardefsElement pardefs2) {
+    private PardefsElement mergePardefElements( PardefsElement pardefs1, PardefsElement pardefs2) {
         PardefsElement pardefs = new PardefsElement();
         HashMap<String, PardefElement> pardefMap = new HashMap<String, PardefElement>();
 
@@ -415,96 +405,6 @@ public class DicMerge  extends AbstractDictTool{
             }
         }
         return pardefs;
-    }
-
-    /**
-     * @return the bilAB1
-     */
-    private DictionaryElement getBilAB1() {
-        return bilAB1;
-    }
-
-    /**
-     * @param bilAB1
-     *                the bilAB1 to set
-     */
-    private void setBilAB1(DictionaryElement bilAB1) {
-        this.bilAB1 = bilAB1;
-    }
-
-    /**
-     * @return the bilAB2
-     */
-    private DictionaryElement getBilAB2() {
-        return bilAB2;
-    }
-
-    /**
-     * @param bilAB2
-     *                the bilAB2 to set
-     */
-    private void setBilAB2(DictionaryElement bilAB2) {
-        this.bilAB2 = bilAB2;
-    }
-
-    /**
-     * @return the monA1
-     */
-    private DictionaryElement getMonA1() {
-        return monA1;
-    }
-
-    /**
-     * @param monA1
-     *                the monA1 to set
-     */
-    private void setMonA1(DictionaryElement monA1) {
-        this.monA1 = monA1;
-    }
-
-    /**
-     * @return the monA2
-     */
-    private DictionaryElement getMonA2() {
-        return monA2;
-    }
-
-    /**
-     * @param monA2
-     *                the monA2 to set
-     */
-    private void setMonA2(DictionaryElement monA2) {
-        this.monA2 = monA2;
-    }
-
-    /**
-     * @return the monB1
-     */
-    private DictionaryElement getMonB1() {
-        return monB1;
-    }
-
-    /**
-     * @param monB1
-     *                the monB1 to set
-     */
-    private void setMonB1(DictionaryElement monB1) {
-        this.monB1 = monB1;
-    }
-
-    /**
-     * @return the monB2
-     */
-    private DictionaryElement getMonB2() {
-        return monB2;
-    }
-
-    /**
-     * @param monB2
-     *                the monB2 to set
-     */
-    private void setMonB2(DictionaryElement monB2) {
-        this.monB2 = monB2;
     }
 
     /**
@@ -642,18 +542,18 @@ public class DicMerge  extends AbstractDictTool{
         DictionaryElement monB1 = DicTools.readMonolingual(sDicMonB1);
         DicSet dicSet1 = new DicSet(bilAB1, monA1, monB1);
         setDicSet1(dicSet1);
-        setBilAB1(bilAB1);
-        setMonA1(monA1);
-        setMonB1(monB1);
+        this.bilAB1 =(bilAB1);
+        this.monA1 = (monA1);
+        this.monB1 = (monB1);
 
         DictionaryElement bilAB2 = DicTools.readBilingual(sDicBilAB2,
                 bilAB2Reverse);
         DictionaryElement monA2 = DicTools.readMonolingual(sDicMonA2);
         DictionaryElement monB2 = DicTools.readMonolingual(sDicMonB2);
         DicSet dicSet2 = new DicSet(bilAB2, monA2, monB2);
-        setBilAB2(bilAB2);
-        setMonA2(monA2);
-        setMonB2(monB2);
+        this.bilAB2 = (bilAB2);
+        this.monA2 = (monA2);
+        this.monB2 = (monB2);
 
         setDicSet2(dicSet2);
 
@@ -668,7 +568,7 @@ public class DicMerge  extends AbstractDictTool{
 
         String sDicMonA1, sDicMonA2;
         sDicMonA1 = sDicMonA2 = null;
-        ;
+        
         for (int i = 1; i < nArgs; i++) {
             String arg = getArguments()[i];
             if (arg.equals("-monA1")) {
@@ -695,16 +595,16 @@ public class DicMerge  extends AbstractDictTool{
             if (arg.equals("-debug")) {
                 i++;
                 msg.setDebug(true);
-                msg.out("debug: on");
+                msg.err("debug: on");
             }
 
         }
 
         DictionaryElement monA1 = DicTools.readMonolingual(sDicMonA1);
-        setMonA1(monA1);
+        this.monA1 =(monA1);
 
         DictionaryElement monA2 = DicTools.readMonolingual(sDicMonA2);
-        setMonA2(monA2);
+        this.monA2 =(monA2);
     }
 
     /**
@@ -767,11 +667,11 @@ public class DicMerge  extends AbstractDictTool{
 
         DictionaryElement bilAB1 = DicTools.readBilingual(sDicBilAB1,
                 bilAB1Reverse);
-        setBilAB1(bilAB1);
+        this.bilAB1 =(bilAB1);
 
         DictionaryElement bilAB2 = DicTools.readBilingual(sDicBilAB2,
                 bilAB2Reverse);
-        setBilAB2(bilAB2);
+        this.bilAB2 =(bilAB2);
 
     }
 
@@ -826,7 +726,7 @@ public class DicMerge  extends AbstractDictTool{
      * 
      */
     public void mergeMorph() {
-        DictionaryElement morph = mergeMonols(getMonA1(), getMonA2());
+        DictionaryElement morph = mergeMonols(monA1, monA2);
         DicSort dicSort = new DicSort(morph);
         dicSort.msg.setDebug(false);
         dicSort.setDicType(DictionaryElement.MONOL);
@@ -839,7 +739,7 @@ public class DicMerge  extends AbstractDictTool{
      * 
      */
     public void mergeBil() {
-        DictionaryElement bil = mergeBils(getBilAB1(), getBilAB2());
+        DictionaryElement bil = mergeBils(bilAB1, bilAB2);
         DicSort dicSort = new DicSort(bil);
         dicSort.setDicType(DictionaryElement.BIL);
         DictionaryElement sorted = dicSort.sort();
