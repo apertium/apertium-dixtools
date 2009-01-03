@@ -10,6 +10,7 @@ fi
 library="$CROSSDICS_PATH/dist/apertium-dixtools.jar"
 java_options="-Xms${defaultMinMem}m -Xmx${defaultMaxMem}m -jar ${library}"
 
+
 #
 #	cross-param
 #
@@ -30,6 +31,7 @@ function cross-param() {
 #               	   
 #   	java ${java_options} $task -bilAB $3 $4 -bilBC $5 $6 -monA $2 -monC $7 -cross-model $crossmodel $9
    else
+#	show_help2();
    	echo "Usage: dictools cross <monA> <-r|-n> <bilAB> <-r|-n> <bilBC> <monC> crossmodel";
    	echo "";
    	echo "More information in http://wiki.apertium.org/wiki/Crossdics";
@@ -46,7 +48,8 @@ function cross() {
      	then
              mkdir dix
         fi
-   	java ${java_options} $task $2 $3 $4
+#   	java ${java_options} $task $2 $3 $4
+   	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
    else
    	echo "Usage: dictools cross -f <ling-resources.xml> <sl-tl>";
    	echo "";
@@ -59,12 +62,13 @@ function cross() {
 #  format
 #
 function format() {
-   if [ $nparams == 4 ]
+   if [ $nparams -ge 4 ]
    then
-      echo "Reading '$3'..."
-   	java ${java_options} $task $2 $3 $4 2> format.err
-      echo "Formatted dictonary: $4"
-      echo "Log file in 'format.err'"
+   	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
+#      echo "Reading '$3'..."
+#   	java ${java_options} $task $2 $3 $4 2> format.err
+#      echo "Formatted dictonary: $4"
+#      echo "Log file in 'format.err'"
    else
       echo "Usage: dictools format <-mon|-bil> <dic> <out>"
       echo "";
@@ -79,7 +83,8 @@ function format() {
 function merge-morph() {
    if [ $nparams -ge 4 ]
    then
-      java ${java_options} $task -monA1 $2 -monA2 $3 -out $4 $5
+   	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
+#      java ${java_options} $task -monA1 $2 -monA2 $3 -out $4 $5
       echo "Merged dictionary: $4"
    else
       echo "Usage: dictools merge-morph <monA1> <monA2> <merged>"
@@ -110,10 +115,11 @@ function merge-bil() {
 #  reverse-bil
 #
 function reverse-bil() {
-   if [ $nparams == 3 ]
+   if [ $nparams -ge 3 ]
    then
-      echo "Reading '$2'..."
-   	java ${java_options} reverse $2 $3 2> reverse-bil.err      
+   	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
+#      echo "Reading '$2'..."
+#   	java ${java_options} reverse $2 $3 2> reverse-bil.err      
    else
       echo "Usage: dictools reverse-bil <dic> <out>";
       echo "";
@@ -126,11 +132,12 @@ function reverse-bil() {
 #  sort
 #
 function sort() {
-   if [ $nparams == 4 ]
+   if [ $nparams -ge 4 ]
    then
-      echo "Reading '$3' ($2)"
-      java ${java_options} $task $2 $3 $4
-      echo "Sorted: $4"
+   	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
+#      echo "Reading '$3' ($2)"
+#      java ${java_options} $task $2 $3 $4
+#      echo "Sorted: $4"
    else
       echo "Usage: dictools sort <-bil|-mon> <dic.dix> <out.dix>";
       echo "";
@@ -143,9 +150,9 @@ function sort() {
 #  process-xincludes
 #
 function process-xincludes() {
-   if [ $nparams == 3 ]
+   if [ $nparams -ge 3 ]
    then
-      java ${java_options} gather $2 $3
+      java ${java_options} gather $2 $3 $4 $5 $6 $7 $8 $9
       echo "Dictionary: $3"
    else
       echo "Usage: dictools process-xincludes <dic> <out.dix>";
@@ -159,9 +166,9 @@ function process-xincludes() {
 #  get-bil-omegawiki
 #
 function get-bil-omegawiki() {
-   if [ $nparams == 4 ]
+   if [ $nparams -ge 4 ]
    then
-      java ${java_options} $task $2 $3 $4
+   	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
       echo "Dictionary: $4"
    else
       echo "Usage: dictools get-bil-omegawiki <source-lang> <target-lang> <dic-out>"
@@ -177,8 +184,7 @@ function get-bil-omegawiki() {
 function format-1line() {
    if [ $nparams -ge 3 ]
    then
-      java ${java_options} $task $2 $3 $4 $5
-      echo "Dictionary: $3"
+   	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
    else
       echo "Usage: dictools format-1line [alignP alignR] <input-dic> <output-dic>"
       echo "       where alignP / alignR: column to align <p> and <r> entries. 0 = no indent."
@@ -206,7 +212,7 @@ function format-1line() {
 function dic-reader() {
    if [ $nparams -ge 3 ]
    then
-      java ${java_options} $task $2 $3 $4
+   	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
    else
       echo "Usage: dictools dic-reader <action> <dic>"
       echo "where <action> can be:"
@@ -226,7 +232,7 @@ function dic-reader() {
 function equiv-paradigms() {
    if [ $nparams -ge 2 ]
    then
-      java ${java_options} $task $2 $3
+   	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
    else
       echo "Usage: dictools equiv-paradigms <dic> <out>"
       echo "";
@@ -241,7 +247,7 @@ function equiv-paradigms() {
 function dix2trie() {
    if [ $nparams -ge 3 ]
    then
-      java ${java_options} $task $2 $3 $4
+   	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
    else
       echo "Usage: dictools dic2trie <dic> <lr|rl> [<out>]"
       echo "";
@@ -254,7 +260,7 @@ function dix2trie() {
 function dix2cc() {
    if [ $nparams -ge 3 ]
    then
-      java ${java_options} $task $2 $3
+   	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
    else
       echo "Usage: apertium-dixtools dix2cc <dix> <cc>"
       echo "";
@@ -265,9 +271,9 @@ function dix2cc() {
 #  dix2tiny
 #
 function dix2tiny() {
-   if [ $nparams -eq 5 ]
+   if [ $nparams -ge 5 ]
    then
-      java ${java_options} $task $2 $3 $4 $5
+   	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
    else
       echo ""
       echo "Usage: apertium-dixtools dix2tiny <dix> <lang-pair> <lang-pair-text> <platform>"
@@ -285,7 +291,7 @@ function dix2tiny() {
 function apertiumize() {
    if [ $nparams -ge 2 ]
    then
-      java ${java_options} $task $2 $3
+   	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
    else
       echo "Usage: dictools apertiumize <txt> <out>"
       echo "";
@@ -298,7 +304,7 @@ function apertiumize() {
 function filter() {
    if [ $nparams -ge 2 ]
    then
-      java ${java_options} $task $2 $3
+   	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
    else
       echo "Usage: apertium-dixtools filter <dicA> <dicB>"
       echo "";
@@ -313,7 +319,7 @@ function filter() {
 function convert-mf() {
    if [ $nparams -ge 3 ]
    then
-      java ${java_options} $task $2 $3 $4
+   	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
    else
       echo "Usage: dictools convert-mf <morph> <bil> <out>"
       echo "";
@@ -326,7 +332,7 @@ function convert-mf() {
 function add-same-gender() {
    if [ $nparams -ge 3 ]
    then
-      java ${java_options} $task $2 $3 $4
+   	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
    else
       echo "Usage: dictools add-same-gender <morph> <bil> <out>"
       echo "";
@@ -339,7 +345,7 @@ function add-same-gender() {
 function prepare-dic() {
    if [ $nparams -ge 2 ]
    then
-      java ${java_options} $task $2 $3
+   	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
    else
       echo "Usage: dictools prepare-dic <bil> <missing-entries>>"
       echo "";
@@ -354,7 +360,7 @@ function prepare-dic() {
 function complete-translation() {
    if [ $nparams -ge 3 ]
    then
-      java ${java_options} $task $2 $3 $4
+   	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
    else
       echo "Usage: dictools complete-translation <bil> <src-dot> <trans-dot>"
       echo "";
@@ -367,7 +373,7 @@ function complete-translation() {
 function misc() {
    if [ $nparams -ge 4 ]
    then
-      java ${java_options} $task $2 $3 $4 $5
+   	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
    else
       echo "Usage: dictools misc <dic1> <dic2> <dic3> <dic4>"
       echo "";
@@ -398,6 +404,13 @@ function show_help() {
    echo ""
    exit 127
 }
+
+
+function show_help2() {
+   	java ${java_options} help $0 $1 $2 $3 $4 $5 $6 $7 $8 $9
+}
+
+
 
 task=$1
 nparams="$#"

@@ -63,6 +63,7 @@ public class ZCrossDictTest {
   
   @Test
   public void testBigCrossing() throws Exception {
+    if (DixtoolsTestSuite.onlyCLI) return;
     String outfile = rm("dix");
     new File(outfile).mkdir();
 

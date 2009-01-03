@@ -1,3 +1,10 @@
+2009-01-03 nordfalk
+ * Standard input and standard output can not be used (using file name - )
+ * All commands takes optional arguments -align and -alignPardef 
+      with optional 2 numbers for aligment element after <e> and aligment of <r> element
+ * File names are reported (to stderr) when reading and writing files
+
+
 2008-12-30 nordfalk
 
 	* Added ChangeLog

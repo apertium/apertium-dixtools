@@ -100,6 +100,7 @@ public class ReadAndWriteMonodixTest {
    */
   @Test
   public void testGetDic() throws IOException, InterruptedException {
+    if (DixtoolsTestSuite.onlyCLI) return;
     
     /*
     for (PardefElement pe : dic.getPardefsElement().getPardefElements()) {
@@ -133,6 +134,7 @@ public class ReadAndWriteMonodixTest {
   
   @Test
   public void testDicFormat() throws IOException, InterruptedException {
+    if (DixtoolsTestSuite.onlyCLI) return;
     String outfile = rm("tmp_testDicFormat.xml");
 
     DicFormat df = new DicFormat(dic);
@@ -146,6 +148,7 @@ public class ReadAndWriteMonodixTest {
 
   @Test
   public void testprintXML_std() throws IOException, InterruptedException {
+    if (DixtoolsTestSuite.onlyCLI) return;
     String outfile = rm("tmp_testprintXML_std.xml");
     dic.printXML(outfile, dics.elements.utils.DicOpts.std);
     String diff=exec( "diff test/correct_output_DicFormat.xml "+outfile);
@@ -155,6 +158,7 @@ public class ReadAndWriteMonodixTest {
   
   @Test
   public void testDicFormatE1Line() throws IOException, InterruptedException {
+    if (DixtoolsTestSuite.onlyCLI) return;
     String outfile = rm("tmp_testDicFormatE1Line.xml");
     new DicFormatE1Line(dic).printXML(outfile);
     String diff=exec( "diff -b test/correct_output_DicFormatE1Line.xml "+outfile);
@@ -164,6 +168,7 @@ public class ReadAndWriteMonodixTest {
 
   @Test
   public void testprintXML_std1line() throws IOException, InterruptedException {
+    if (DixtoolsTestSuite.onlyCLI) return;
     String outfile = rm("tmp_testprintXML_std1line.xml");
     dic.printXML(outfile, dics.elements.utils.DicOpts.std1line);
     String diff=exec( "diff -b test/correct_output_DicFormatE1Line.xml "+outfile);

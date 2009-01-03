@@ -31,5 +31,6 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({dictools.ReadAndWriteMonodixTest.class, dictools.ReadAndWriteBidixTest.class, misc.eoen.SubstractBidixTest.class, dictools.ZCommandLineTest.class, dictools.ZCrossDictTest.class})
 //@Suite.SuiteClasses({dictools.ReadAndWriteMonodixTest.class})
 public class DixtoolsTestSuite {
+  static boolean onlyCLI = false;
 
 }

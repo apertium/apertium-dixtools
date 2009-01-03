@@ -62,6 +62,7 @@ public class CrossDictTest {
   
   @Test
   public void testBigCrossing() throws Exception {
+    if (DixtoolsTestSuite.onlyCLI) return;
     String outfile = rm("dix");
 
     String path = "regression_test_data/crossdict/input/";

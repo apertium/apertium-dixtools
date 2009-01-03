@@ -536,8 +536,7 @@ public class DicMerge  extends AbstractDictTool{
 
         }
 
-        DictionaryElement bilAB1 = DicTools.readBilingual(sDicBilAB1,
-                bilAB1Reverse);
+        DictionaryElement bilAB1 = DicTools.readBilingual(sDicBilAB1, bilAB1Reverse);
         DictionaryElement monA1 = DicTools.readMonolingual(sDicMonA1);
         DictionaryElement monB1 = DicTools.readMonolingual(sDicMonB1);
         DicSet dicSet1 = new DicSet(bilAB1, monA1, monB1);
@@ -546,8 +545,7 @@ public class DicMerge  extends AbstractDictTool{
         this.monA1 = (monA1);
         this.monB1 = (monB1);
 
-        DictionaryElement bilAB2 = DicTools.readBilingual(sDicBilAB2,
-                bilAB2Reverse);
+        DictionaryElement bilAB2 = DicTools.readBilingual(sDicBilAB2, bilAB2Reverse);
         DictionaryElement monA2 = DicTools.readMonolingual(sDicMonA2);
         DictionaryElement monB2 = DicTools.readMonolingual(sDicMonB2);
         DicSet dicSet2 = new DicSet(bilAB2, monA2, monB2);
@@ -577,27 +575,22 @@ public class DicMerge  extends AbstractDictTool{
                 sDicMonA1 = arg;
                 System.err.println("Monolingual A1:\t'" + sDicMonA1 + "'");
             }
-
+            else
             if (arg.equals("-monA2")) {
                 i++;
                 arg = getArguments()[i];
                 sDicMonA2 = arg;
                 System.err.println("Monolingual A2:\t '" + sDicMonA2 + "'");
             }
-
+            else
             if (arg.equals("-out")) {
                 i++;
                 arg = getArguments()[i];
                 sOut = arg;
                 System.err.println("Merged:\t'" + sOut + "'");
             }
-
-            if (arg.equals("-debug")) {
-                i++;
-                msg.setDebug(true);
-                msg.err("debug: on");
-            }
-
+            else
+              System.err.println("Uknown option  "+arg);
         }
 
         DictionaryElement monA1 = DicTools.readMonolingual(sDicMonA1);

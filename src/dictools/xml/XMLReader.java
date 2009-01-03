@@ -115,7 +115,7 @@ public class XMLReader {
      * 
      * @param fileName
      */
-    public XMLReader(String fileName) {
+    public XMLReader(String fileName) {      
         setDicFile(new File(fileName));
         init();
     }
@@ -145,11 +145,19 @@ public class XMLReader {
         try {
             if (isUrlDic()) {
                 // case: url
+                System.err.println("Reading URL");
                 setDocument(getBuilder().parse(getIs()));
 
             } else {
+                // case: standard input
+              if (getDicFile().equals(new File("-"))) {
+                System.err.println("Reading from standard input");
+                setDocument(getBuilder().parse(System.in));
+              } else {
                 // case: file
+                System.err.println("Reading file " + getDicFile());
                 setDocument(getBuilder().parse(getDicFile()));
+              }
                 
             }
         } catch (FileNotFoundException fnfe) {

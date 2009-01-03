@@ -33,6 +33,7 @@ import dics.elements.utils.ElementList;
 import dictools.DicEquivPar;
 import dics.elements.utils.DicTools;
 import java.io.OutputStreamWriter;
+import java.io.Writer;
 
 /**
  *
@@ -396,9 +397,15 @@ public class DictionaryElement extends Element {
     public void printXML(String fileName, String encoding, DicOpts opt) {
         setFileName(fileName);
         try {
-            FileOutputStream fos = new FileOutputStream(fileName);
-            BufferedOutputStream bos = new BufferedOutputStream(fos);
-            OutputStreamWriter dos = new OutputStreamWriter(bos, encoding);
+            Writer dos;
+              if ("-".equals(fileName)) {
+                 dos = new OutputStreamWriter(System.out);
+              } else {          
+                System.err.println("Writing file " + fileName);
+                FileOutputStream fos = new FileOutputStream(fileName);
+                BufferedOutputStream bos = new BufferedOutputStream(fos);
+                dos = new OutputStreamWriter(bos, encoding);
+              }
             dos.append("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
             dos.append("<!--\n\tDictionary:\n");
             if (sections != null) {
@@ -439,8 +446,6 @@ public class DictionaryElement extends Element {
                 }
             }
             dos.append("</dictionary>\n");
-            fos = null;
-            bos = null;
             dos.close();
             dos = null;
         } catch (Exception eg) {

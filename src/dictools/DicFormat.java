@@ -145,6 +145,8 @@ public class DicFormat  extends AbstractDictTool{
             dicType = DictionaryElement.BIL;
         }
        */
+      
+        msg.err("Reading " + arguments[2]);
         DictionaryReader dicReader = new DictionaryReader(arguments[2]);
         DictionaryElement dic = dicReader.readDic();
         dicReader = null;
@@ -158,6 +160,7 @@ public class DicFormat  extends AbstractDictTool{
      */
     private void actionFormat() {
         DictionaryElement dicFormatted = format();
+        msg.err("Writing formatted dictonary to " + getOut());
         dicFormatted.printXML(getOut(),getOpt());
     }
 

@@ -514,7 +514,7 @@ public class EElement extends Element implements Cloneable,
         return false;
     }
 
-    private static String spaces = "                      ";
+    private static String spaces = "                                                                                                                 ";
     /**
      * 
      * @param dos
