@@ -247,8 +247,7 @@ public class DicMerge  extends AbstractDictTool{
         for (SectionElement section1 : m1.getSections()) {
             SectionElement section2 = m2.getSection(section1.getID());
             if (section2 != null) {
-                SectionElement section = mergeSectionElements(section1,
-                        section2);
+                SectionElement section = mergeSectionElements(section1, section2);
                 mon.addSection(section);
             } else {
                 msg.err("There's no '" + section1.getID() + "' section in monolingual 2");

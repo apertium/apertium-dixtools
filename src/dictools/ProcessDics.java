@@ -29,7 +29,6 @@ import dictools.DicCross;
 import dictools.DicFilter;
 import dictools.DicFindEquivPar;
 import dictools.DicFormat;
-import dictools.DicGather;
 import dictools.DicMerge;
 import dictools.DicReader;
 import dictools.DicReverse;
@@ -58,42 +57,19 @@ import misc.esca.AddSameGender;
 public class ProcessDics extends AbstractDictTool {
 
     /**
-     *
-     */
-    private String action;
-
-
-    /**
-     * @return the action
-     */
-    private String getAction() {
-        return action;
-    }
-
-    /**
-     * @param action
-     *                the action to set
-     */
-    private void setAction(String action) {
-        this.action = action;
-    }
-    
-    /**
      * Método principal.
      *
      * @param args
      */
     public static void main(final String[] args) {
         
-        System.err.println(ProcessDics.class.getName()+".main(\"" + Arrays.toString(args).replaceAll(", ", "\", \"")+"\");");
-        System.err.println(System.getProperties());
-        System.err.println(System.getenv());
+        //System.err.println(ProcessDics.class.getName()+".main(\"" + Arrays.toString(args).replaceAll(", ", "\", \"")+"\");");
+        //System.err.println(System.getProperties());
+        //System.err.println(System.getenv());
         
         ProcessDics ps = new ProcessDics();
-        String[] args2 = ps.processGenericArgiments(args);
-        ps.setArguments(args2);
         try {
-            ps.checkAction();
+            ps.processArguments(args);
         } catch (OutOfMemoryError oome) {
             ps.msg.err("Error occurred during initialization of VM");
             ps.msg.err("Too small initial heap for new size specified");
@@ -104,12 +80,17 @@ public class ProcessDics extends AbstractDictTool {
        //System.err.println(Arrays.toString(State.freq));
     }
 
-    public String[] processGenericArgiments(String[] a) {
-        ArrayList<String> unprocessed = new ArrayList<String>(a.length);
+    /**
+     * Processes generic arguments applyable to all tools, like -debug and -align
+     * @param args
+     * @return
+     */
+    private String[] processGenericArguments(String[] args) {
+        ArrayList<String> unprocessed = new ArrayList<String>(args.length);
+        //DicOpts opt = this;
 
-        for (int i = 0; i < a.length; i++) {
-          String arg = a[i];
-
+        for (int i = 0; i < args.length; i++) {
+          String arg = args[i];
 
           if (arg.equals("-debug")) {
             opt.debug=true;
@@ -125,8 +106,8 @@ public class ProcessDics extends AbstractDictTool {
 
           // see if two numbers follows
           try {
-            int align1 = Integer.parseInt(a[i+1]);
-            int align2 = Integer.parseInt(a[i+2]);
+            int align1 = Integer.parseInt(args[i+1]);
+            int align2 = Integer.parseInt(args[i+2]);
             // OK,  two numbers follows. Interpret as aligment options
             opt.alignP = align1;
             opt.alignR = align2;
@@ -134,102 +115,99 @@ public class ProcessDics extends AbstractDictTool {
           } catch (Exception e) {
           }            
         }
-        a = unprocessed.toArray(new String[unprocessed.size()]);
-        return a;
+        args = unprocessed.toArray(new String[unprocessed.size()]);
+        return args;
     }
+    
     /**
      *
      *
      */
-    public void checkAction() {
-        if (getArguments().length == 0) {
+    private void processArguments(String[] args) {
+        args = processGenericArguments(args);
+        setArguments(args);
+        if (args.length == 0) {
             this.show_help();
             System.exit(-1);
         }
-        setAction(getArguments()[0]);
+        String action = args[0];
 
-        if (getAction().equals("help")) {
+        if (action.equals("help")) {
             this.show_help();
             System.exit(-1);
         } 
-        else if (getAction().equals("consistent")) {
+        else if (action.equals("consistent")) {
             this.process_consistent();
         }
-        else if (getAction().equals("merge")) {
+        else if (action.equals("merge")) {
             this.process_merge();
         }
-        else if (getAction().equals("merge-morph")) {
+        else if (action.equals("merge-morph")) {
             this.process_mergemorph();
         }
-        else if (getAction().equals("merge-bil")) {
+        else if (action.equals("merge-bil")) {
             this.process_mergebil();
         }
-        else if (getAction().equals("cross")) {
+        else if (action.equals("cross")) {
             this.process_cross();
         }
-        else if (getAction().equals("cross-param")) {
+        else if (action.equals("cross-param")) {
             this.process_cross_param();
         }
-        else if (getAction().equals("reverse")) {
+        else if (action.equals("reverse")) {
             this.process_reverse();
         }
-        else if (getAction().equals("format")) {
+        else if (action.equals("format")) {
             this.process_format();
         }
-        else if (getAction().equals("sort")) {
+        else if (action.equals("sort")) {
             this.process_sort();
         }
-        else if (getAction().equals("gather")) {
-            this.process_gather();
-        }
-        else if (getAction().equals("get-bil-omegawiki")) {
+        else if (action.equals("get-bil-omegawiki")) {
             this.process_getbilomegawiki();
         }
-        else if (getAction().equals("format-1line")) {
+        else if (action.equals("format-1line")) {
             this.process_format1line();
         }
-        else if (getAction().equals("dic-reader")) {
+        else if (action.equals("dic-reader")) {
             this.process_dicreader();
         }
-        else if (getAction().equals("equiv-paradigms")) {
+        else if (action.equals("equiv-paradigms")) {
             this.process_equivparadigms();
         }
-        else if (getAction().equals("dix2trie")) {
+        else if (action.equals("dix2trie")) {
             this.process_dix2trie();
         }
-        else if (getAction().equals("apertiumize")) {
+        else if (action.equals("apertiumize")) {
             this.process_apertiumize();
         }
-        else if (getAction().equals("convert-mf")) {
+        else if (action.equals("convert-mf")) {
             this.process_convertmf();
         }
-        else if (getAction().equals("add-same-gender")) {
+        else if (action.equals("add-same-gender")) {
             this.process_addsamegender();
         }
-        else if (getAction().equals("prepare-dic")) {
+        else if (action.equals("prepare-dic")) {
             this.process_preparedic();
         }
-        else if (getAction().equals("complete-translation")) {
+        else if (action.equals("complete-translation")) {
             this.process_completetranslation();
         }
-        else if (getAction().equals("misc")) {
+        else if (action.equals("misc")) {
             this.process_misc();
         }
-        else if (getAction().equals("filter")) {
+        else if (action.equals("filter")) {
             this.process_filter();
         }
-        else if (getAction().equals("dix2mdix")) {
+        else if (action.equals("dix2mdix")) {
             this.process_dix2mdix();
         }
-        else if (getAction().equals("dix2cc")) {
+        else if (action.equals("dix2cc")) {
             this.process_dix2cc();
         }
-        else if (getAction().equals("dix2tiny")) {
+        else if (action.equals("dix2tiny")) {
             this.process_dix2tiny();
         }
-
-
-
     }
 
     /**
@@ -294,22 +272,23 @@ public class ProcessDics extends AbstractDictTool {
      */
     private void process_mergemorph() {
 
-      String arg[] =getArguments();
-          System.err.println("arg2=" + Arrays.toString(arg));
-      if (arg.length==4) {
+      String args[] =getArguments();
+      //    System.err.println("arg2=" + Arrays.toString(arg));
+      if (args.length==4) {
 
-          String[] arg2x= new String[] {arg[0], "-monA1", arg[1],  "-monA2", arg[2],  "-out", arg[3]};
+          String[] arg2x= new String[] {args[0], "-monA1", args[1],  "-monA2", args[2],  "-out", args[3]};
           System.err.println("xxx arg2=" + Arrays.toString(arg2x));
-          arg = arg2x;
+          args = arg2x;
         }
 
-      if (arg.length < 6) {
-            msg.err("Usage: java -jar path/to/apertium-dixtools.jar merge-morph -monA1 monA1.dix -monA2 monA2.dix -out merged.dix");
+      if (args.length < 6) {
+            //msg.err("Usage: java -jar path/to/apertium-dixtools.jar merge-morph -monA1 monA1.dix -monA2 monA2.dix -out merged.dix");
+            msg.err("Usage: java -jar path/to/apertium-dixtools.jar merge-morph  monA1.dix  monA2.dix merged.dix");
             System.exit(-1);
         } else {
             DicMerge tool = new DicMerge();
             tool.setOpt(getOpt());
-            tool.setArguments(arg);
+            tool.setArguments(args);
             tool.doMergeMorph();
         }
 
@@ -431,22 +410,6 @@ public class ProcessDics extends AbstractDictTool {
             tool.setArguments(arguments);
             tool.doSort();
         }
-    }
-
-    /**
-     * 
-     */
-    private void process_gather() {
-        if (getArguments().length != 3) {
-            msg.err("Usage: java -jar path/to/apertium-dixtools.jar gather <dic> <dic-sorted>");
-            System.exit(-1);
-        } else {
-            DicGather tool = new DicGather(arguments[1], arguments[2]);
-            tool.setOpt(getOpt());
-            // dicGather.setArguments(arguments);
-            tool.doGather();
-        }
-
     }
 
     /**

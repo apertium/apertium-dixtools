@@ -20,6 +20,7 @@
 
 package dics.elements.utils;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -74,6 +75,7 @@ public class DicOpts implements Cloneable {
       throw new IllegalStateException(ex);
     }
   }
+
 
   public DicOpts setNowAlign(boolean b) {
     nowAlign = b;
