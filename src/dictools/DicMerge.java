@@ -717,6 +717,11 @@ public class DicMerge  extends AbstractDictTool{
      * 
      * 
      */
+    public void mergeMorph__NEW() {
+        DictionaryElement morph = mergeMonols(monA1, monA2);
+        morph.printXML(getSOut(),getOpt());
+    }
+
     public void mergeMorph() {
         DictionaryElement morph = mergeMonols(monA1, monA2);
         DicSort dicSort = new DicSort(morph);
@@ -725,6 +730,7 @@ public class DicMerge  extends AbstractDictTool{
         DictionaryElement sorted = dicSort.sort();
         sorted.printXML(getSOut(),getOpt());
     }
+
 
     /**
      * 
