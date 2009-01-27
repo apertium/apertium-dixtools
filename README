@@ -24,6 +24,10 @@ COMPILING
 $ cd apertium-dixtools
 $ ant jar
 
+TESTING
+
+$ ant test
+
 INSTALLING
 
 Installing is actually optional. The program can also be execute using only the .jar file:

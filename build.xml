@@ -67,6 +67,18 @@
     nbproject/build-impl.xml file. 
 
     -->
+
+
+    <taskdef name="junit"
+            classname="org.apache.tools.ant.taskdefs.optional.junit.JUnitTask">
+
+      <classpath>
+        <pathelement location="lib/junit.jar"/>
+        <pathelement location="lib/ant-junit.jar"/>
+      </classpath>
+    </taskdef>
+
+
     <target name="jar2">
         <echo message="apertium-dixtools is temporarily unavailable."/>    
         <echo message="Keep your current version of apertium-dixtools."/>    
