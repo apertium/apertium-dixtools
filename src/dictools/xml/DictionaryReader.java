@@ -46,6 +46,7 @@ import dics.elements.dtd.SdefElement;
 import dics.elements.dtd.SdefsElement;
 import dics.elements.dtd.SectionElement;
 import dics.elements.utils.EElementList;
+import java.io.File;
 import java.util.Arrays;
 import javax.swing.JProgressBar;
 import org.w3c.dom.Comment;
@@ -162,21 +163,23 @@ public class DictionaryReader extends XMLReader {
                 } else
 
                 if (childElementName.equals("xi:include")) {
-                    String fileName = getAttributeValue(childElement, "href");
-                    System.err.println("xi:include (" + fileName + ")");
-                    DictionaryReader reader = new DictionaryReader(fileName);
+                    String includeFileName = getAttributeValue(childElement, "href");
+                    File f = getDicFile();
+                    String includeFileNameAndPath = f.getParent()+File.pathSeparator+ includeFileName;
+                    System.err.println("xi:include (" + includeFileName + ")   -> "+includeFileNameAndPath);
+                    DictionaryReader reader = new DictionaryReader(includeFileNameAndPath );
                     DictionaryElement dic2 = reader.readDic();
-                    if (fileName.endsWith("sdefs.dix") || fileName.endsWith("symbols.xml")) {
-                        SdefsReader sdefsReader = new SdefsReader(fileName);
+                    if (includeFileName.endsWith("sdefs.dix") || includeFileName.endsWith("symbols.xml")) {
+                        SdefsReader sdefsReader = new SdefsReader(includeFileName);
                         SdefsElement sdefs = sdefsReader.readSdefs();
                         //System.err.println("Symbol definitions: " + fileName);
                         dic.setSdefs(sdefs);
                     } else
-                    if (fileName.endsWith("pardefs.dix")) {
+                    if (includeFileName.endsWith("pardefs.dix")) {
                         PardefsElement pardefs = dic2.getPardefsElement();
                         dic.setPardefs(pardefs);
                     } else
-                    System.err.println("Unknown xi:include href type ignored: " + fileName);
+                    System.err.println("Unknown xi:include href type ignored: " + includeFileName);
                 } else
 
                 System.err.println("Unknown node ignored: " + childElementName);
