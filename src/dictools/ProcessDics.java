@@ -154,7 +154,7 @@ public class ProcessDics extends AbstractDictTool {
         else if (action.equals("cross-param")) {
             this.process_cross_param();
         }
-        else if (action.equals("reverse")) {
+        else if (action.equals("reverse-bil")) {
             this.process_reverse();
         }
         else if (action.equals("format")) {
@@ -207,6 +207,10 @@ public class ProcessDics extends AbstractDictTool {
         }
         else if (action.equals("dix2tiny")) {
             this.process_dix2tiny();
+        }
+        else {
+            this.show_help();
+            System.exit(-1);
         }
     }
 
