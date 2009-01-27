@@ -6,6 +6,7 @@ BIN=../../apertium-dixtools
 
 DIX=../../test/sample.eo-en.dix
 $BIN reverse-bil $DIX actual_output.dix
+#$BIN reverse $DIX actual_output.dix
 
 echo -------------------------------
 res=FAILED
