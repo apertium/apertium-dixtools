@@ -47,6 +47,7 @@ import dics.elements.dtd.SdefsElement;
 import dics.elements.dtd.SectionElement;
 import dics.elements.utils.EElementList;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import javax.swing.JProgressBar;
 import org.w3c.dom.Comment;
@@ -165,17 +166,30 @@ public class DictionaryReader extends XMLReader {
                 if (childElementName.equals("xi:include")) {
                     String includeFileName = getAttributeValue(childElement, "href");
                     File f = getDicFile();
-                    String includeFileNameAndPath = f.getParent()+File.pathSeparator+ includeFileName;
+                    String parent = f.getParent();
+                    if (parent == null) parent = ".";
+                    String includeFileNameAndPath = parent+File.separator+ includeFileName;
+                    if (!new File(includeFileNameAndPath).exists()) try {
+                        includeFileNameAndPath = f.getCanonicalFile().getParent()+File.separator+ includeFileName;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     System.err.println("xi:include (" + includeFileName + ")   -> "+includeFileNameAndPath);
-                    DictionaryReader reader = new DictionaryReader(includeFileNameAndPath );
-                    DictionaryElement dic2 = reader.readDic();
+                    if (!new File(includeFileNameAndPath).exists()) {
+                        new FileNotFoundException(includeFileNameAndPath).printStackTrace();
+                        continue;
+                    }
+
                     if (includeFileName.endsWith("sdefs.dix") || includeFileName.endsWith("symbols.xml")) {
-                        SdefsReader sdefsReader = new SdefsReader(includeFileName);
+                        System.err.println("Symbol definitions: " + includeFileNameAndPath);
+                        SdefsReader sdefsReader = new SdefsReader(includeFileNameAndPath);
                         SdefsElement sdefs = sdefsReader.readSdefs();
-                        //System.err.println("Symbol definitions: " + fileName);
                         dic.setSdefs(sdefs);
                     } else
                     if (includeFileName.endsWith("pardefs.dix")) {
+                        System.err.println("Paradigm definitions: " + includeFileNameAndPath);
+                        DictionaryReader reader = new DictionaryReader(includeFileNameAndPath );
+                        DictionaryElement dic2 = reader.readDic();
                         PardefsElement pardefs = dic2.getPardefsElement();
                         dic.setPardefs(pardefs);
                     } else

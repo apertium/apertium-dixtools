@@ -68,6 +68,9 @@
 
     -->
 
+    <!-- the command line tests depends on that the JAR file exists -->
+    <target name="-pre-compile-test" depends="jar"/>
+
 
     <taskdef name="junit"
             classname="org.apache.tools.ant.taskdefs.optional.junit.JUnitTask">

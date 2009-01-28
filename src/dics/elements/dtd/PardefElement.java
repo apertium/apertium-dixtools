@@ -93,11 +93,12 @@ public class PardefElement extends Element {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
         dos.append(makeCommentIfData(processingComments));
-        dos.append(tab(2) + "<pardef n=\"" + n + "\">\n");
+
+        dos.append((opt.nowAlign?"":tab(2))+ "<pardef n=\"" + n + "\">\n");
         for (EElement e : eElements) {
             e.printXML(dos, opt);
         }
-        dos.append(tab(2) + "</pardef>"+appendCharacterData.trim()+"\n");
+        dos.append((opt.nowAlign?"":tab(2)) + "</pardef>"+appendCharacterData.trim()+"\n");
     }
 
     /**
