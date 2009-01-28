@@ -393,7 +393,6 @@ public class DicMerge  extends AbstractDictTool{
         PardefsElement pardefs = new PardefsElement();
         HashMap<String, PardefElement> pardefMap = new HashMap<String, PardefElement>();
 
-        boolean first = true;
 
         for (PardefElement pardef1 : pardefs1.getPardefElements()) {
             // System.err.println("Paradigm: " + pardef1.getName());
@@ -401,18 +400,21 @@ public class DicMerge  extends AbstractDictTool{
 
             if (!pardefMap.containsKey(pardef1Key)) {
                 pardefMap.put(pardef1Key, pardef1);
-
-                if (first) {
-                    pardef1.setProcessingComments("\n\n ====== HERE AND BELOW ARE ADDITIONS FROM SECOND FILE======\n\n");
-                    first = false;
-                }
                 pardefs.addPardefElement(pardef1);
             }
         }
+
+        boolean first = true;
+
         for (PardefElement pardef2 : pardefs2.getPardefElements()) {
             String pardef2Key = pardef2.toString();
             if (!pardefMap.containsKey(pardef2Key)) {
                 pardefMap.put(pardef2Key, pardef2);
+
+                if (first) {
+                    pardef2.setProcessingComments("\n\n ====== HERE AND BELOW ARE ADDITIONS FROM SECOND FILE======\n\n");
+                    first = false;
+                }
                 pardefs.addPardefElement(pardef2);
             }
         }
@@ -730,12 +732,12 @@ public class DicMerge  extends AbstractDictTool{
      * 
      * 
      */
-    public void mergeMorph__NEW() {
+    public void mergeMorph() {
         DictionaryElement morph = mergeMonols(monA1, monA2);
         morph.printXML(getSOut(),getOpt());
     }
 
-    public void mergeMorph() {
+    public void mergeMorph__OLD_which_sorts_output_but() {
         DictionaryElement morph = mergeMonols(monA1, monA2);
         DicSort dicSort = new DicSort(morph);
         dicSort.msg.setDebug(false);
