@@ -295,6 +295,7 @@ public class DicMerge  extends AbstractDictTool{
         int common = 0;
         int notin = 0;
         int fromSec2 = 0;
+        boolean first = true;
         for (EElement e2 : elements2) {
             // String e2Key = e2.toStringNoParadigm();
             //String e2Key = e2.lemmaAndCategory();
@@ -303,6 +304,10 @@ public class DicMerge  extends AbstractDictTool{
                 notin++;
                 msg.log("[" + notin + "] section 1 doesn't contain: " + e2Key);
                 eMap.put(e2Key, e2);
+                if (first) {
+                    e2.setProcessingComments("\n\n ====== HERE AND BELOW ARE ADDITIONS FROM SECOND FILE======\n\n");
+                    first = false;
+                }
                 sectionElement.addEElement(e2);
                 fromSec2++;
             } else {
@@ -382,10 +387,13 @@ public class DicMerge  extends AbstractDictTool{
      * 
      * @param pardefs1
      * @param pardefs2
-     * @return Undefined         */
+     * @return Undefined
+     */
     private PardefsElement mergePardefElements( PardefsElement pardefs1, PardefsElement pardefs2) {
         PardefsElement pardefs = new PardefsElement();
         HashMap<String, PardefElement> pardefMap = new HashMap<String, PardefElement>();
+
+        boolean first = true;
 
         for (PardefElement pardef1 : pardefs1.getPardefElements()) {
             // System.err.println("Paradigm: " + pardef1.getName());
@@ -393,6 +401,11 @@ public class DicMerge  extends AbstractDictTool{
 
             if (!pardefMap.containsKey(pardef1Key)) {
                 pardefMap.put(pardef1Key, pardef1);
+
+                if (first) {
+                    pardef1.setProcessingComments("\n\n ====== HERE AND BELOW ARE ADDITIONS FROM SECOND FILE======\n\n");
+                    first = false;
+                }
                 pardefs.addPardefElement(pardef1);
             }
         }
