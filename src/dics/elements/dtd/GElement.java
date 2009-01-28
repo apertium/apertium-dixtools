@@ -47,6 +47,8 @@ public class GElement extends ContentElement {
      */
     @Override
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
+        //System.out.println("G'"+processingComments+"' '"+prependCharacterData+"' '"+appendCharacterData+"'");
+        //super.printXML(System.out, opt.copy().setNowAlign(true));
         super.printXML(dos, opt.copy().setNowAlign(true));
     }
 

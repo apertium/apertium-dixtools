@@ -185,7 +185,7 @@ public abstract class ContentElement extends Element implements Cloneable {
                 dos.append(prependCharacterData.trim()); 
                   // write blank lines and processingComments from original file
                 dos.append(makeCommentIfData(processingComments));
-                dos.append("<" + tagName + ">");          
+                dos.append("<" + tagName + ">");
         }  
 
           for (Element e : children) {
@@ -194,7 +194,7 @@ public abstract class ContentElement extends Element implements Cloneable {
               }
           }
 
-        dos.append("</" + tagName + "> " + (opt.nowAlign?"":"\n"));    
+        dos.append("</" + tagName + ">" + (opt.nowAlign?"":"\n"));    
 
         if (!opt.nowAlign) {
                 // write blank lines and processingComments from original file
