@@ -523,8 +523,12 @@ public class EElement extends Element implements Cloneable,
     @Override
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
-        dos.append(prependCharacterData);
-
+        if (opt.stripEmptyLines && prependCharacterData.trim().isEmpty()) {
+            ;
+        } else {
+            dos.append(prependCharacterData);
+        }
+        
         // prepend processingComments added in this run
 
         String pc = processingComments;
@@ -591,7 +595,7 @@ public class EElement extends Element implements Cloneable,
         if (c != null) {
             attributes.append(" c=\"" + c + "\"");
         }
-        if (i != null) {
+        if (i != null && !i.isEmpty()) {
             attributes.append(" i=\"" + i + "\"");
         }
         if (aversion != null) {

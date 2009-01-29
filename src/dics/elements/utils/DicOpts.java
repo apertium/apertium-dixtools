@@ -50,6 +50,7 @@ public class DicOpts implements Cloneable {
   public static DicOpts stdnow1line = std1line.copy().setNowAlign(true);
 
   public boolean debug = false;
+    public boolean stripEmptyLines = false;
 
   
   public  DicOpts() {

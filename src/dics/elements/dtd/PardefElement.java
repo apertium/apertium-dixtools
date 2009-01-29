@@ -76,6 +76,11 @@ public class PardefElement extends Element {
         return n;
     }
 
+    // Used for renaming paradigms when merging
+    public void setName(String newName) {
+        n = newName;
+    }
+
     /**
      * 
      * @param value

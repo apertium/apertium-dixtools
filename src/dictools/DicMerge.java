@@ -349,7 +349,7 @@ public class DicMerge  extends AbstractDictTool{
      * @param sdefs1
      * @param sdefs2
      * @return Undefined         */
-    private SdefsElement mergeSdefElements(SdefsElement sdefs1, SdefsElement sdefs2) {
+    private static SdefsElement mergeSdefElements(SdefsElement sdefs1, SdefsElement sdefs2) {
         SdefsElement sdefs = new SdefsElement();
         HashMap<String, SdefElement> sdefMap = new HashMap<String, SdefElement>();
 
@@ -376,7 +376,7 @@ public class DicMerge  extends AbstractDictTool{
      * @param alphabet1
      * @param alphabet2
      * @return Undefined         */
-    private AlphabetElement mergeAlphabetElement( AlphabetElement alphabet1, AlphabetElement alphabet2) {
+    private static AlphabetElement mergeAlphabetElement( AlphabetElement alphabet1, AlphabetElement alphabet2) {
         AlphabetElement alphabet = new AlphabetElement();
         // We take one of them
         alphabet.setAlphabet(alphabet1.getAlphabet());
@@ -389,32 +389,39 @@ public class DicMerge  extends AbstractDictTool{
      * @param pardefs2
      * @return Undefined
      */
-    private PardefsElement mergePardefElements( PardefsElement pardefs1, PardefsElement pardefs2) {
+    private static PardefsElement mergePardefElements( PardefsElement pardefs1, PardefsElement pardefs2) {
         PardefsElement pardefs = new PardefsElement();
-        HashMap<String, PardefElement> pardefMap = new HashMap<String, PardefElement>();
+        HashMap<String, PardefElement> pardefNameMap = new HashMap<String, PardefElement>();
+        HashMap<String, PardefElement> pardefAllMap = new HashMap<String, PardefElement>();
 
 
         for (PardefElement pardef1 : pardefs1.getPardefElements()) {
-            // System.err.println("Paradigm: " + pardef1.getName());
-            String pardef1Key = pardef1.toString();
+            //System.err.println("Paradigm: " + pardef1.getName());
 
-            if (!pardefMap.containsKey(pardef1Key)) {
-                pardefMap.put(pardef1Key, pardef1);
-                pardefs.addPardefElement(pardef1);
-            }
+            pardefNameMap.put(pardef1.getName(), pardef1);
+            pardefAllMap.put(pardef1.toString(), pardef1);
+            pardefs.addPardefElement(pardef1);
         }
 
         boolean first = true;
 
         for (PardefElement pardef2 : pardefs2.getPardefElements()) {
             String pardef2Key = pardef2.toString();
-            if (!pardefMap.containsKey(pardef2Key)) {
-                pardefMap.put(pardef2Key, pardef2);
+            if (!pardefAllMap.containsKey(pardef2Key)) {
+                System.err.println("Paradigm: " + pardef2.getName());
+
+                while (pardefNameMap.containsKey(pardef2.getName())) {
+                    // Rename
+                    pardef2.setName( pardef2.getName()+"___mergeTODO");
+                    pardef2Key  = pardef2.toString();
+                }
 
                 if (first) {
                     pardef2.setProcessingComments("\n\n ====== HERE AND BELOW ARE ADDITIONS FROM SECOND FILE======\n\n");
                     first = false;
                 }
+                pardefNameMap.put(pardef2.getName(), pardef2);
+                pardefAllMap.put(pardef2Key, pardef2);
                 pardefs.addPardefElement(pardef2);
             }
         }
