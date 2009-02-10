@@ -4,7 +4,16 @@
   <sdefs>
     <sdef n="pron" /> 
     <sdef n="web" /> 
+    <sdef n="GD" /> 
+    <sdef n="f" /> 
     <sdef n="m" /> 
+    <sdef n="num" /> 
+    <sdef n="np" /> 
+    <sdef n="al" /> 
+    <sdef n="ant" /> 
+    <sdef n="n" /> 
+    <sdef n="vblex" /> 
+    <sdef n="adv" /> 
     <sdef n="guio" /> 
   </sdefs>
 
