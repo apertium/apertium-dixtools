@@ -132,6 +132,10 @@ public class EElement extends Element implements Cloneable,
         return children;
     }
 
+    public boolean hasPrependorAppendData() {
+        return !(prependCharacterData.trim().isEmpty() && appendCharacterData.trim().isEmpty());
+    }
+
     /**
      * 
      * @param value

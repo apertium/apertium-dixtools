@@ -33,6 +33,7 @@ import dics.elements.dtd.ParElement;
 import dics.elements.dtd.RElement;
 import dics.elements.dtd.SectionElement;
 import dics.elements.dtd.TextElement;
+import dics.elements.utils.DicOpts;
 import dictools.xml.DictionaryReader;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -45,27 +46,24 @@ import misc.DicFormatE1Line;
 public class SubstractBidix {
 
       public static void main(final String[] args) {
+        DicOpts opt  = DicOpts.stdaligned;
         //DictionaryElement dic = new DictionaryReader("../apertium-eo-en/apertium-lille.eo-en.dix").readDic();
         DictionaryElement dic = new DictionaryReader("../apertium-eo-en/apertium-eo-en.eo-en.dix").readDic();
+        //DictionaryElement dic = new DictionaryReader("../apertium-eo-en/slet.eo-en.dix").readDic();
         dic.reportMetrics();
-        new DicFormatE1LineAligned(dic).printXML("before-clean.dix");
+        dic.printXML("before-clean.dix", opt);
         
-        boolean verbose = false;
+        boolean verbose = true;
         boolean liftUnneededRestrictions = true;
         SubstractBidix.reviseRestrictions(dic, verbose, liftUnneededRestrictions);
-
-        
-        
-        
+               
         //System.err.println("Updated morphological dictionary: '" + out + "'");
         //dic.printXML(out);
         
-        new DicFormatE1LineAligned(dic).setAlignP(10).setAlignR(55).printXML("after-clean.dix");
-        //new DicFormatE1LineAligned(dic).printXML("after-clean.dix");
-        //new DicFormatE1LineAligned(dic).setAlignP(10).setAlignR(60).printXML("slet.dix");        
+        dic.printXML("after-clean.dix", opt);
       }
 
-  public static void reviseRestrictions(DictionaryElement dic, boolean verbose, boolean alsoRemoveUnneededRestrictions) {
+  public static void reviseRestrictions(DictionaryElement dic, boolean verbose, boolean alsoLiftUnneededRestrictions) {
 
     HashMap<String, EElement> hmLR=new HashMap<String, EElement>();
     HashMap<String, EElement> hmRL=new HashMap<String, EElement>();
@@ -91,7 +89,7 @@ public class SubstractBidix {
           if (verbose) {
             System.err.println("LR restic can be lifted "+ee);
           }
-          if (alsoRemoveUnneededRestrictions) {
+          if (alsoLiftUnneededRestrictions) {
             setYesIsAllowed(ee, "LR");
           }
         }
@@ -102,7 +100,7 @@ public class SubstractBidix {
           if (verbose) {
             System.err.println("RL restic can be lifted "+ee);
           }
-          if (alsoRemoveUnneededRestrictions) {
+          if (alsoLiftUnneededRestrictions) {
             setYesIsAllowed(ee, "RL");
           }
         }
@@ -119,13 +117,19 @@ public class SubstractBidix {
           ee.setTemp(null);
           if (reasonOfRestriction!=null) {
             if ("DELETE".equals(reasonOfRestriction)) {
-              System.err.println("DELETE "+ee);
-              eei.remove();
+              if (!ee.hasPrependorAppendData()) {
+                eei.remove();
+                   System.err.println("DELETE "+ee);
+                } else {
+                   System.err.println("Should DELETE "+ee+" but hasPrependorAppendData, so set to ignore instead");
+                   ee.setIgnore("yes");
+                }
+
             } else {
               String c="Already is "+reasonOfRestriction;
               System.err.println("x "+c);
-              if (ee.getProcessingComments()!=null) {
-                c+=c+" ; "+ee.getProcessingComments();
+              if (ee.getProcessingComments()!=null && !ee.getProcessingComments().trim().isEmpty()) {
+                c=c+" ; "+ee.getProcessingComments();
               }
               System.err.println("x "+c);
               ee.setProcessingComments(c);
