@@ -48,7 +48,6 @@
 				<r>en<s n="prn"/><s n="enc"/><s n="adv"/></r>
 			</p>
 		</e><!-- comment after e -->   
-    
 
 		<e>
 			<p>
@@ -242,7 +241,6 @@
 				<i>ach</i>
 				<par n="comach/e[T]er__vblex" prm="t"/> 
 		</e><!-- bla bla -->
-    
 
 		<e lm="noncomment">
 				<i>am</i>

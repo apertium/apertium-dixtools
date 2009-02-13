@@ -48,7 +48,6 @@
 				<r>en<s n="prn"/><s n="enc"/><s n="adv"/></r>
 			</p>
 		</e><!-- comment after e -->   
-    
 
 		<e>
 			<p>
@@ -221,5 +220,6 @@
 -->
 <e lm="enlever"><i>enl</i><par n="ach/e[T]er__vblex" prm="v"/></e>
 <e lm="acheter"><i>ach</i><par n="ach/e[T]er__vblex" prm="t"/></e>
+
 	</section>
 </dictionary>

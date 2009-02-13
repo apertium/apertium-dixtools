@@ -116,15 +116,18 @@ public class SubstractBidix {
         EElement ee=eei.next();
         if (!ee.isRegEx()) {
           String reasonOfRestriction=ee.getTemp();
+          ee.setTemp(null);
           if (reasonOfRestriction!=null) {
             if ("DELETE".equals(reasonOfRestriction)) {
               System.err.println("DELETE "+ee);
               eei.remove();
             } else {
               String c="Already is "+reasonOfRestriction;
+              System.err.println("x "+c);
               if (ee.getProcessingComments()!=null) {
                 c+=c+" ; "+ee.getProcessingComments();
               }
+              System.err.println("x "+c);
               ee.setProcessingComments(c);
             }
           }

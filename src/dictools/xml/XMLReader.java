@@ -68,6 +68,22 @@ import org.w3c.dom.Comment;
  */
 public class XMLReader {
 
+    /** Takes trailing whitespace and the last newline away */
+    private static String trimNewlineOnEnd(String str) {
+        int i = str.length()-1;
+        while (str.charAt(i)==' ' || str.charAt(i)=='\t') i--;
+        if (str.charAt(i)=='\n') i--;
+        return str.substring(0,i+1);
+    }
+/*
+    public static void main(String[] args) {
+
+        System.err.println("s = '" + trimNewlineOnEnd("xxx  ")+"'");
+
+        System.err.println("s = '" + trimNewlineOnEnd("xxx  \n   ")+"'");
+        System.err.println("s = '" + trimNewlineOnEnd("xxx  \n\n")+"'");
+}*/
+
     /**
      * 
      */
@@ -479,7 +495,7 @@ public class XMLReader {
         //if (txt.substring(chopFrom, chopTo).trim().length()>0)
         //  System.err.println("Comment '"+txt.substring(chopFrom, chopTo).trim()+"' before element:"+eElement+" probably belongs to previous element:"+previousElement);
         if (previousElement!=null)  {
-          previousElement.setAppendCharacterData(txt.substring(chopFrom, chopTo));
+          previousElement.setAppendCharacterData(trimNewlineOnEnd(txt.substring(0, chopTo)));
           characterData.setLength(0);
           return;
         } else {
@@ -505,7 +521,7 @@ public class XMLReader {
         eElement.setPrependCharacterData(txt.substring(chopFrom, chopTo));
       else if (previousElement!=null) {
         //System.err.println("Comment '"+txt.substring(chopFrom, chopTo)+"' will be appended to previous element:"+previousElement);
-        previousElement.setAppendCharacterData(txt.substring(chopFrom, chopTo));        
+        previousElement.setAppendCharacterData(trimNewlineOnEnd(txt.substring(0, chopTo)));
       } else {
         if (txt.substring(chopFrom, chopTo).trim().length()>0)
           System.err.println("Comment '"+txt.substring(chopFrom, chopTo).trim()+"' will be discarded no element could be found to attach it to.");
