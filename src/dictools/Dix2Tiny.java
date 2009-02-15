@@ -19,16 +19,23 @@
  */
 package dictools;
 
+import dictools.utils.dicmaker.DictCCDictionary;
+import dictools.utils.dicmaker.DictionaryWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
 /**
  *
  * @author Enrique Benimeli Bofarull
  */
-public class Dix2Tiny  extends AbstractDictTool{
+public class Dix2Tiny extends AbstractDictTool {
 
     private String bilFileName;
     private String sltlCode;
     private String sltlFull;
     private String platform;
+    private String filter;
 
     public Dix2Tiny() {
     }
@@ -54,7 +61,16 @@ public class Dix2Tiny  extends AbstractDictTool{
 
     private void do_j2me() {
         System.err.println("Packing linguistic data for apertium-tinylex (J2ME)...");
-        Dix2MDix dix2mdix = new Dix2MDix();
+
+        Dix2MDix dix2mdix = null;
+        if (this.filter != null) {
+            System.err.println("Filter: " + this.filter);
+            dix2mdix = new Dix2MDix(new TinyFilter(this.filter));
+        } else {
+            System.err.println("Filter: default");
+            dix2mdix = new Dix2MDix(new TinyFilter());
+
+        }
         dix2mdix.setBilFileName(bilFileName);
         dix2mdix.setSltlCode(sltlCode);
         dix2mdix.setSltlFull(sltlFull);
@@ -65,23 +81,50 @@ public class Dix2Tiny  extends AbstractDictTool{
 
     private void do_palm() {
         System.err.println("Converting linguistic data for Palm (.cc files)...");
-        Dix2CC dix2cc = new Dix2CC();
+        
+        Dix2CC dix2cc = null;
+        if (this.filter != null) {
+            System.err.println("Filter: " + this.filter);
+            dix2cc = new Dix2CC(new TinyFilter(this.filter));
+        } else {
+            System.err.println("Filter: default");
+            dix2cc = new Dix2CC(new TinyFilter());
+        }
         dix2cc.setBilFileName(bilFileName);
         dix2cc.setSltlCode(sltlCode);
         dix2cc.setSltlFull(sltlFull);
-        dix2cc.setOutFileName(this.sltlCode + "-data.cc");
+        String outFileName = this.sltlCode + "-data.cc";
+        dix2cc.setOutFileName(outFileName);
+
+        // check Exception
+        String[] langs = this.sltlFull.split("-");
+        String slFull = langs[0];
+        String tlFull = langs[1];
+
 
         dix2cc.do_convert();
+
+        System.err.println("Creating PDB file...");
+        try {
+            DictCCDictionary dicPalm = new DictCCDictionary(new FileInputStream(new File(outFileName)), slFull, tlFull);
+            DictionaryWriter dicW = new DictionaryWriter(sltlCode + "-apertium-palm", dicPalm);
+            dicW.writeToFile((new File(sltlCode + "-apertium-palm.pdb")));
+        } catch (IOException ioe) {
+        }
+
     }
 
     private void processArguments() {
-        if (this.arguments.length == 5) {
+        if (this.arguments.length >= 5) {
             bilFileName = this.getArguments()[1];
             this.sltlCode = this.getArguments()[2];
             this.sltlFull = this.getArguments()[3];
             this.platform = this.getArguments()[4];
+        }
+        if (this.arguments.length > 5) {
 
+            this.filter = this.getArguments()[5];
+        System.out.println("Filter: " +  filter);
         }
     }
-
 }

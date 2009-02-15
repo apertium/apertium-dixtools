@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
 package dictools;
 
 import dics.elements.utils.DicOpts;
@@ -30,33 +29,31 @@ import java.util.Collections;
  * @author j
  */
 public class AbstractDictTool {
-  /**
-   * Options
-   */
-   protected DicOpts opt =  DicOpts.std;
 
-  /**
-   * Options
-   */
-  public DicOpts getOpt() {
-    return opt;
-  }
+    /**
+     * Options
+     */
+    protected DicOpts opt = DicOpts.std;
 
-  /**
-   * Options
-   */
-  public void setOpt(DicOpts opt) {
-    this.opt=opt;
-  }
-   
+    /**
+     * Options
+     */
+    public DicOpts getOpt() {
+        return opt;
+    }
 
-  protected Msg msg = new Msg();
-  
-  /**
+    /**
+     * Options
+     */
+    public void setOpt(DicOpts opt) {
+        this.opt = opt;
+    }
+    protected Msg msg = new Msg();
+    /**
      * 
      */
     protected String[] arguments;
-    
+
     /**
      * @return the arguments
      */
@@ -71,9 +68,8 @@ public class AbstractDictTool {
     public void setArguments(String[] arguments) {
         this.arguments = arguments;
     }
-/*
-   -align 10 55
-   -pardef
- */        
-        
+    /*
+    -align 10 55
+    -pardef
+     */
 }

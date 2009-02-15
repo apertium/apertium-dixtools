@@ -61,11 +61,19 @@ public class Dix2CC {
      * 
      */
     private String outFileName;
+    /**
+     *
+     */
+    private TinyFilter tinyFilter;
 
     /**
      * 
      */
     public Dix2CC() {
+    }
+
+    public Dix2CC(TinyFilter tinyFilter) {
+        this.tinyFilter = tinyFilter;
     }
 
     /**
@@ -88,20 +96,30 @@ public class Dix2CC {
         for (SectionElement section : dic.getSections()) {
             for (EElement ee : section.getEElements()) {
                 StringBuffer sb = new StringBuffer();
-                if (ee.is_LR_or_LRRL()) {
+                if (ee.is_LR_or_LRRL() && !ee.isRegularExpr()) {
                     String left = ee.getValueNoTags("L");
+                    left = tinyFilter.applyToLemma(left);
                     sb.append(left + " ");
                     SElementList leftS = ee.getSElements("L");
+
                     for (SElement sE : leftS) {
-                        sb.append("{" + sE.getValue() + "} ");
+                        if (this.tinyFilter.preserve(sE.getValue())) {
+                            String tagName = this.tinyFilter.rename(sE.getValue());
+                            sb.append("{" + tagName + "} ");
+                        }
                     }
 
                     sb.append(":: ");
                     String right = ee.getValueNoTags("R");
+
+                    right = this.tinyFilter.applyToLemma(right);
                     sb.append(right + " ");
                     SElementList rightS = ee.getSElements("R");
                     for (SElement sE : rightS) {
-                        sb.append("{" + sE.getValue() + "} ");
+                        if (tinyFilter.preserve(sE.getValue())) {
+                            String tagName = this.tinyFilter.rename(sE.getValue());
+                            sb.append("{" + tagName + "} ");
+                        }
                     }
                     sb.append("\n");
                     lines.add(sb.toString());
@@ -125,14 +143,14 @@ public class Dix2CC {
 
             fos = new FileOutputStream(outFileName);
             bos = new BufferedOutputStream(fos);
-            dos = new OutputStreamWriter(bos, "UTF-8");
+            dos = new OutputStreamWriter(bos, "ISO-8859-1");
 
             for (String line : lines) {
                 dos.append(line);
             }
             dos.close();
         } catch (IOException ioe) {
-          ioe.printStackTrace();
+            ioe.printStackTrace();
         }
     }
 
@@ -149,6 +167,10 @@ public class Dix2CC {
             DictionaryReader dicReader = new DictionaryReader(this.bilFileName);
             System.err.println("Processing bilingual dictionary: " + this.bilFileName);
             dic = dicReader.readDic();
+
+            if (this.tinyFilter != null) {
+                dic = tinyFilter.doFilter(dic);
+            }
         }
 
 

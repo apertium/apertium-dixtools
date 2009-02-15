@@ -668,9 +668,9 @@ public class ProcessDics extends AbstractDictTool {
 
     private void process_dix2tiny() {
         if (getArguments().length < 5) {
-            msg.err("Usage: java -jar path/to/apertium-dixtools.jar dix2tiny <dix> <lang-pair> <lang-pair-text> <platform>");
+            msg.err("Usage: java -jar path/to/apertium-dixtools.jar dix2tiny <dix> <lang-pair> <lang-pair-text> <platform> [<filter>]");
             msg.err("For example:");
-            msg.err("   java -jar path/to/apertium-dixtools.jar dix2tiny apertium-es-ca.es-ca.dix es-ca Spanish-Catalan j2me");
+            msg.err("   java -jar path/to/apertium-dixtools.jar dix2tiny apertium-es-ca.es-ca.dix es-ca Spanish-Catalan j2me [<filter-es-ca.xml>]");
             System.exit(-1);
         } else {
             Dix2Tiny tool = new Dix2Tiny();

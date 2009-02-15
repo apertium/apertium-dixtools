@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>Configuration</comment>
+
+    <!-- force to preserve the following tags -->
+    <entry key="preserveTags"></entry>
+
+    <!-- force to ignore the following tags -->
+    <entry key="ignoreTags">GD,ND,cm</entry>
+
+    <!-- ignore tags not listed in 'preserveTags' and 'ignoreTags' properties -->
+    <entry key="ignoreNotListedTags">no</entry>
+
+    <!-- characters to remove -->
+    <entry key="removeCharacters">\\*</entry>
+
+    <!-- characters to replace with blank -->
+    <entry key="replaceCharactersWithBlank">_</entry>
+
+    <entry key="rename_n">noun</entry>
+    <entry key="rename_np">proper noun</entry>
+    <entry key="rename_vblex">verb</entry>
+    <entry key="rename_vbsint">verb</entry>
+    <entry key="rename_adv">adverb</entry>
+    <entry key="rename_adj">adjective</entry>
+    <entry key="rename_prn">pronoun</entry>
+    <entry key="rename_ij">interjection</entry>
+
+
+</properties>

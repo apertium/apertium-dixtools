@@ -85,12 +85,21 @@ public class Dix2MDix {
      * 
      */
     private Vector<String> files;
+    /**
+     *
+     */
+    private TinyFilter tinyFilter;
 
     /**
      * 
      */
     public Dix2MDix() {
         files = new Vector<String>();
+    }
+
+    public Dix2MDix(TinyFilter filter) {
+        files = new Vector<String>();
+        this.tinyFilter = filter;
     }
 
     /**
@@ -141,11 +150,10 @@ public class Dix2MDix {
 
         for (SectionElement section : dic.getSections()) {
             for (EElement ee : section.getEElements()) {
-                if (ee.is_LR_or_LRRL() && !ee.contains("acr") && !ee.contains("np")) {
+                if (ee.is_LR_or_LRRL() && !ee.isRegularExpr()) {
                     String left = ee.getValueNoTags("L");
-                    left = left.replaceAll("_", " "); // for dictionaries like eu-es
+                    left = tinyFilter.applyToLemma(left);
                     left = left.toLowerCase();
-                    ee = this.cleanUp(ee); // for dictionaries like eu-es
 
                     if (left.length() > 1) {
                         if (Character.isLetter(left.charAt(0))) {
@@ -317,6 +325,9 @@ public class Dix2MDix {
         }
         DictionaryReader dicReader = new DictionaryReader(this.bilFileName);
         dic = dicReader.readDic();
+        if (this.tinyFilter != null) {
+            dic = this.tinyFilter.doFilter(dic);
+        }
         dic.setFileName(this.bilFileName);
     }
 
@@ -367,14 +378,20 @@ public class Dix2MDix {
                 SElementList slPoS = ee.getSElements("L");
                 value = value + slLemma + ":";
                 for (SElement sE : slPoS) {
-                    value = value + sE.getValue() + ".";
+                    if (this.tinyFilter.preserve(sE.getValue())) {
+                        String tagName = this.tinyFilter.rename(sE.getValue());
+                        value = value + tagName + ".";
+                    }
                 }
                 value = value + "?";
                 String tlLemma = ee.getValueNoTags("R");
                 SElementList tlPoS = ee.getSElements("R");
                 value = value + tlLemma + ":";
                 for (SElement sE : tlPoS) {
-                    value = value + sE.getValue() + ".";
+                    if (this.tinyFilter.preserve(sE.getValue())) {
+                        String tagName = this.tinyFilter.rename(sE.getValue());
+                        value = value + tagName + ".";
+                    }
                 }
                 value = value + ";";
             }
