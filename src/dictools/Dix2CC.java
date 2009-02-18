@@ -96,7 +96,7 @@ public class Dix2CC {
         for (SectionElement section : dic.getSections()) {
             for (EElement ee : section.getEElements()) {
                 StringBuffer sb = new StringBuffer();
-                if (ee.is_LR_or_LRRL() && !ee.isRegularExpr()) {
+                if (ee.is_LR_or_LRRL() && !ee.isRegularExpr() && this.validLemma(ee.getValueNoTags("L")) && this.validLemma(ee.getValueNoTags("R"))) {
                     String left = ee.getValueNoTags("L");
                     left = tinyFilter.applyToLemma(left);
                     sb.append(left + " ");
@@ -129,6 +129,18 @@ public class Dix2CC {
 
         this.print(lines);
 
+    }
+
+    private final boolean validLemma(String lm) {
+        if(lm.equals("-"))
+            return false;
+        if(lm.equals("'"))
+            return false;
+        if(lm.equals(""))
+            return false;
+        if(lm.equals(","))
+            return false;
+        return true;
     }
 
     /**
