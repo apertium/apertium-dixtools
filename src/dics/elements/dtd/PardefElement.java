@@ -97,7 +97,7 @@ public class PardefElement extends Element {
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
-        dos.append(makeCommentIfData(processingComments));
+        if (!opt.noProcessingComments) dos.append(makeCommentIfData(processingComments));
 
         dos.append((opt.nowAlign?"":tab(2))+ "<pardef n=\"" + n + "\">\n");
         for (EElement e : eElements) {

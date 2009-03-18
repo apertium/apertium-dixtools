@@ -87,7 +87,7 @@ public class Element implements Cloneable {
     protected void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
-        dos.append(makeCommentIfData(processingComments));
+        if (!opt.noProcessingComments) dos.append(makeCommentIfData(processingComments));
         dos.append("<" + getTagName() + "/>");
         dos.append(appendCharacterData);
     }

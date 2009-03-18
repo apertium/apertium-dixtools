@@ -179,12 +179,12 @@ public abstract class ContentElement extends Element implements Cloneable {
                 // write blank lines and processingComments from original file
                 dos.append(prependCharacterData);
                 // write blank lines and processingComments from original file
-                dos.append(makeCommentIfData(processingComments));
+                if (!opt.noProcessingComments) dos.append(makeCommentIfData(processingComments));
                 dos.append(tab(4) + "<" + tagName + ">");  
         } else {
                 dos.append(prependCharacterData.trim()); 
                   // write blank lines and processingComments from original file
-                dos.append(makeCommentIfData(processingComments));
+                if (!opt.noProcessingComments) dos.append(makeCommentIfData(processingComments));
                 dos.append("<" + tagName + ">");
         }  
 

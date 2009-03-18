@@ -534,12 +534,13 @@ public class EElement extends Element implements Cloneable,
         }
         
         // prepend processingComments added in this run
-
-        String pc = processingComments;
-        if (!isCommon()) {
-            pc = pc + "\n"+tab(2) + "esta entrada no aparece en el otro morfolgico\n";
+        if (!opt.noProcessingComments) {
+            String pc = processingComments;
+            if (!isCommon()) {
+                pc = pc + "\n"+tab(2) + "esta entrada no aparece en el otro morfolgico\n";
+            }
+            dos.append(makeCommentIfData(pc));
         }
-        dos.append(makeCommentIfData(pc));
 
         String attributes = this.getAttrString();
         if (!opt.nowAlign) {

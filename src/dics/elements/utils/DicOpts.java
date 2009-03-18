@@ -49,8 +49,15 @@ public class DicOpts implements Cloneable {
   public static DicOpts stdaligned = new DicOpts(false, true, 10, 55);
   public static DicOpts stdnow1line = std1line.copy().setNowAlign(true);
 
+  
+  /**
+   echo "    -debug                        prints (possibly) some debugging information"
+   echo "    -stripEmptyLines    removes empty lines originating from original file"
+   echo "    -noProcComments    don't add comments telling which processing was done"
+  */
   public boolean debug = false;
-    public boolean stripEmptyLines = false;
+  public boolean stripEmptyLines = false;
+  public boolean noProcessingComments = false;
 
   
   public  DicOpts() {

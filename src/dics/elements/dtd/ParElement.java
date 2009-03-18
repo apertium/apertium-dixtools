@@ -110,7 +110,7 @@ public class ParElement extends Element {
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
-        dos.append(makeCommentIfData(processingComments));
+        if (!opt.noProcessingComments) dos.append(makeCommentIfData(processingComments));
         
         String prms = "";
         if (prm != null) {

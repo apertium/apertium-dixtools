@@ -95,7 +95,10 @@ public class ProcessDics extends AbstractDictTool {
           if (arg.equals("-debug")) {
             opt.debug=true;
             continue;
-          } else  if (arg.equalsIgnoreCase("-stripEmptyLines")) {
+          } else if (arg.equalsIgnoreCase("-noProcComments")) {
+            opt.noProcessingComments=true;
+            continue;
+          } else if (arg.equalsIgnoreCase("-stripEmptyLines")) {
             opt.stripEmptyLines = true;
           } else  if (arg.equalsIgnoreCase("-align")) {
             opt.sectionElementsAligned = true;

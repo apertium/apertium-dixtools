@@ -419,6 +419,7 @@ function show_help() {
    echo "    -align [alignP alignR]        aligns output dix elements (default alignP=10 alignR=55)"
    echo "    -alignpardef [alignP alignR]  aligns paradigm elements"
    echo "    -stripEmptyLines    removes empty lines originating from original file"
+   echo "    -noProcComments    don't add comments telling which processing was done"
    echo ""
    echo "More info: http://wiki.apertium.org/wiki/Apertium-dixtools"
    echo ""

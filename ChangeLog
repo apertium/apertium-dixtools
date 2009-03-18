@@ -1,9 +1,13 @@
+2009-03-18 nordfalk
+
+* Added -noProcComments option (don't add comments telling which processing was done)
+
 2009-01-04 nordfalk
 
 * Deleted 'gather' function
 
 2009-01-03 nordfalk
- * Standard input and standard output can not be used (using file name - )
+ * Standard input and standard output can now be used (using file name - )
  * All commands takes optional arguments -align and -alignPardef 
       with optional 2 numbers for aligment element after <e> and aligment of <r> element
  * File names are reported (to stderr) when reading and writing files
