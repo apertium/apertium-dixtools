@@ -80,7 +80,9 @@ public class RecordEntry {
 		if (indexResults != null) {
 			result += indexResults.size() * 4;
 		}
-		if (result > 256) throw new RuntimeException(phrase.getPhrase()+"/"+(indexResults.size()) +"/"+(dicentry.length));
+		if (result > 256) {
+        throw new RuntimeException("result="+result+" for phrase '"+phrase+"'/"+(indexResults) +"/"+(dicentry!=null?dicentry.length:null));
+    }
 		return result;
 	}
 
