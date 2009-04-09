@@ -26,75 +26,75 @@
 	</sdefs>
 	<pardefs>
 <pardef n="MF_GD">
-<e r="RL">          <p><l><s n="GD"/></l>                                       <r></r></p></e>
+  <e r="RL">        <p><l><s n="GD"/></l>                                       <r></r></p></e>
 
-<e r="LR">          <p><l><s n="f"/></l>                                        <r></r></p></e>
+  <e r="LR">        <p><l><s n="f"/></l>                                        <r></r></p></e>
 
-<e r="LR">          <p><l><s n="m"/></l>                                        <r></r></p></e>
+  <e r="LR">        <p><l><s n="m"/></l>                                        <r></r></p></e>
 </pardef>
 	</pardefs>
 
 	<section id="main" type="standard">
 
     <!-- Numerals -->
-<e>                 <p><l>nulo<s n="num"/></l>                                  <r>zero<s n="num"/></r></p></e>
-<e>                 <p><l>unu<s n="num"/></l>                                   <r>one<s n="num"/></r></p></e>
-<e>                 <p><l>du<s n="num"/></l>                                    <r>two<s n="num"/></r></p></e>
-<e>                 <p><l>tri<s n="num"/></l>                                   <r>three<s n="num"/></r></p></e>
-<e>                 <p><l>kvar<s n="num"/></l>                                  <r>four<s n="num"/></r></p></e>
-<e>                 <p><l>kvin<s n="num"/></l>                                  <r>five<s n="num"/></r></p></e>
+  <e>               <p><l>nulo<s n="num"/></l>                                  <r>zero<s n="num"/></r></p></e>
+  <e>               <p><l>unu<s n="num"/></l>                                   <r>one<s n="num"/></r></p></e>
+  <e>               <p><l>du<s n="num"/></l>                                    <r>two<s n="num"/></r></p></e>
+  <e>               <p><l>tri<s n="num"/></l>                                   <r>three<s n="num"/></r></p></e>
+  <e>               <p><l>kvar<s n="num"/></l>                                  <r>four<s n="num"/></r></p></e>
+  <e>               <p><l>kvin<s n="num"/></l>                                  <r>five<s n="num"/></r></p></e>
 
-<e>                 <p><l>dek<b/>unu<s n="num"/></l>                            <r>eleven<s n="num"/></r></p></e>
-<e>                 <p><l>dek<b/>du<s n="num"/></l>                             <r>twelve<s n="num"/></r></p></e>
-<e>                 <p><l>dek<b/>tri<s n="num"/></l>                            <r>thirteen<s n="num"/></r></p></e>
-<e>                 <p><l>dek<b/>kvar<s n="num"/></l>                           <r>fourteen<s n="num"/></r></p></e>
-<e>                 <p><l>dek<b/>kvin<s n="num"/></l>                           <r>fifteen<s n="num"/></r></p></e>
+  <e>               <p><l>dek<b/>unu<s n="num"/></l>                            <r>eleven<s n="num"/></r></p></e>
+  <e>               <p><l>dek<b/>du<s n="num"/></l>                             <r>twelve<s n="num"/></r></p></e>
+  <e>               <p><l>dek<b/>tri<s n="num"/></l>                            <r>thirteen<s n="num"/></r></p></e>
+  <e>               <p><l>dek<b/>kvar<s n="num"/></l>                           <r>fourteen<s n="num"/></r></p></e>
+  <e>               <p><l>dek<b/>kvin<s n="num"/></l>                           <r>fifteen<s n="num"/></r></p></e>
 
-<e>                 <p><l>dudek<s n="num"/></l>                                 <r>twenty<s n="num"/></r></p></e>
-<e>                 <p><l>tridek<s n="num"/></l>                                <r>thirty<s n="num"/></r></p></e>
-<e>                 <p><l>kvardek<s n="num"/></l>                               <r>forty<s n="num"/></r></p></e>
-<e>                 <p><l>kvindek<s n="num"/></l>                               <r>fifty<s n="num"/></r></p></e>
+  <e>               <p><l>dudek<s n="num"/></l>                                 <r>twenty<s n="num"/></r></p></e>
+  <e>               <p><l>tridek<s n="num"/></l>                                <r>thirty<s n="num"/></r></p></e>
+  <e>               <p><l>kvardek<s n="num"/></l>                               <r>forty<s n="num"/></r></p></e>
+  <e>               <p><l>kvindek<s n="num"/></l>                               <r>fifty<s n="num"/></r></p></e>
 
-<e>                 <p><l>Zapatista<b/>Armeo<b/>de<b/>Nacia<b/>Liberiĝo<s n="np"/><s n="al"/></l><r>Zapatista<b/>National<b/>Liberation<b/>Army<s n="np"/><s n="al"/></r></p></e>
-<e>                 <i>ABC<b/>News<s n="np"/><s n="al"/></i></e>
+  <e>               <p><l>Zapatista<b/>Armeo<b/>de<b/>Nacia<b/>Liberiĝo<s n="np"/><s n="al"/></l><r>Zapatista<b/>National<b/>Liberation<b/>Army<s n="np"/><s n="al"/></r></p></e>
+  <e>               <i>ABC<b/>News<s n="np"/><s n="al"/></i></e>
 
 
-<e>                 <p><l>Manuelo<s n="np"/></l>                                <r>Manuel<s n="np"/></r></p></e>
-<e>                 <p><l>Maria<s n="np"/></l>                                  <r>María<s n="np"/></r></p></e>
-<e>                 <p><l>Marta<s n="np"/></l>                                  <r>Marta<s n="np"/></r></p></e>
-<e>                 <p><l>Marteno<s n="np"/></l>                                <r>Martín<s n="np"/></r></p></e>
+  <e>               <p><l>Manuelo<s n="np"/></l>                                <r>Manuel<s n="np"/></r></p></e>
+  <e>               <p><l>Maria<s n="np"/></l>                                  <r>María<s n="np"/></r></p></e>
+  <e>               <p><l>Marta<s n="np"/></l>                                  <r>Marta<s n="np"/></r></p></e>
+  <e>               <p><l>Marteno<s n="np"/></l>                                <r>Martín<s n="np"/></r></p></e>
 
-<e>                 <i>Jaime<s n="np"/><s n="ant"/></i></e>
-<e>                 <i>Gerardo<s n="np"/><s n="ant"/></i></e>
-<e>                 <i>Paris<s n="np"/><s n="ant"/></i></e>
-<e>                 <i>Robert<s n="np"/><s n="ant"/></i></e>
+  <e>               <i>Jaime<s n="np"/><s n="ant"/></i></e>
+  <e>               <i>Gerardo<s n="np"/><s n="ant"/></i></e>
+  <e>               <i>Paris<s n="np"/><s n="ant"/></i></e>
+  <e>               <i>Robert<s n="np"/><s n="ant"/></i></e>
 
 
     <!-- Nouns with gender in Esperanto but not in English -->
 
-<e>                 <p><l>islamano<s n="n"/></l>                                <r>Muslim<s n="n"/></r></p><par n="MF_GD"/></e>
-<e>                 <p><l>katoliko<s n="n"/></l>                                <r>Catholic<s n="n"/></r></p><par n="MF_GD"/></e>
-<e>                 <p><l>kristano<s n="n"/></l>                                <r>Christian<s n="n"/></r></p><par n="MF_GD"/></e>
-<e>                 <p><l>protestanto<s n="n"/></l>                             <r>Protestant<s n="n"/></r></p><par n="MF_GD"/></e>
+  <e>               <p><l>islamano<s n="n"/></l>                                <r>Muslim<s n="n"/></r></p><par n="MF_GD"/></e>
+  <e>               <p><l>katoliko<s n="n"/></l>                                <r>Catholic<s n="n"/></r></p><par n="MF_GD"/></e>
+  <e>               <p><l>kristano<s n="n"/></l>                                <r>Christian<s n="n"/></r></p><par n="MF_GD"/></e>
+  <e>               <p><l>protestanto<s n="n"/></l>                             <r>Protestant<s n="n"/></r></p><par n="MF_GD"/></e>
 
-<e>                 <p><l>vizaĝo<s n="n"/></l>                                  <r>face<s n="n"/></r></p></e>
-<e r="LR">          <p><l>supraĵo<s n="n"/></l>                                 <r>face<s n="n"/></r></p></e>
-<e r="LR">          <p><l>defii<s n="vblex"/></l>                               <r>face<s n="vblex"/></r></p></e>
-<e r="LR">          <p><l>maleviti<s n="vblex"/></l>                            <r>face<s n="vblex"/></r></p></e>
+  <e>               <p><l>vizaĝo<s n="n"/></l>                                  <r>face<s n="n"/></r></p></e>
+  <e r="LR">        <p><l>supraĵo<s n="n"/></l>                                 <r>face<s n="n"/></r></p></e>
+  <e r="LR">        <p><l>defii<s n="vblex"/></l>                               <r>face<s n="vblex"/></r></p></e>
+  <e r="LR">        <p><l>maleviti<s n="vblex"/></l>                            <r>face<s n="vblex"/></r></p></e>
 
-<e>                 <p><l>heziti<s n="vblex"/></l>                              <r>hesitate<s n="vblex"/></r></p></e>
-<e r="LR">          <p><l>malvoli<s n="vblex"/></l>                             <r>hesitate<s n="vblex"/></r></p></e>
-<e r="LR">          <p><l>domaĝi<s n="vblex"/></l>                              <r>hesitate<s n="vblex"/></r></p></e>
-<e r="LR">          <p><l>malvidigi<s n="vblex"/></l>                           <r>hide<s n="vblex"/></r></p></e>
-<e r="RL">          <p><l>kaŝi<s n="vblex"/></l>                                <r>hide<s n="vblex"/></r></p></e>
-<e>                 <p><l>felo<s n="n"/></l>                                    <r>hide<s n="n"/></r></p></e>
+  <e>               <p><l>heziti<s n="vblex"/></l>                              <r>hesitate<s n="vblex"/></r></p></e>
+  <e r="LR">        <p><l>malvoli<s n="vblex"/></l>                             <r>hesitate<s n="vblex"/></r></p></e>
+  <e r="LR">        <p><l>domaĝi<s n="vblex"/></l>                              <r>hesitate<s n="vblex"/></r></p></e>
+  <e r="LR">        <p><l>malvidigi<s n="vblex"/></l>                           <r>hide<s n="vblex"/></r></p></e>
+  <e r="RL">        <p><l>kaŝi<s n="vblex"/></l>                                <r>hide<s n="vblex"/></r></p></e>
+  <e>               <p><l>felo<s n="n"/></l>                                    <r>hide<s n="n"/></r></p></e>
 
 <!-- Already is <e><l>unuavice<adv></l><r>primarily<adv></r></e>-->
-<e i="yes">         <p><l>ĉefe<s n="adv"/></l>                                  <r>primarily<s n="adv"/></r></p></e>
+  <e i="yes">       <p><l>ĉefe<s n="adv"/></l>                                  <r>primarily<s n="adv"/></r></p></e>
 
 <!-- Already is <e><l>ĉiaokaze<adv></l><r>regardless<adv></r></e>-->
-<e r="LR" c="añadir también 'regardless of' como 'a pesar de'"><p><l>ĉiakoste<s n="adv"/></l><r>regardless<s n="adv"/></r></p></e>
-<e>                 <p><l>ĉiusemajne<s n="adv"/></l>                            <r>weekly<s n="adv"/></r></p></e>
+  <e r="LR" c="añadir también 'regardless of' como 'a pesar de'"><p><l>ĉiakoste<s n="adv"/></l><r>regardless<s n="adv"/></r></p></e>
+  <e>               <p><l>ĉiusemajne<s n="adv"/></l>                            <r>weekly<s n="adv"/></r></p></e>
 
 	</section>
 </dictionary>
