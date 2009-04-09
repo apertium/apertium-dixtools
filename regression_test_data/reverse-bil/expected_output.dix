@@ -5,6 +5,7 @@
 	Entries: 42
 	Sdefs: 13
 	Paradigms: 1
+	Last processed by: apertium-dixtools reverse-bil ../../test/sample.eo-en.dix actual_output.dix
 
 -->
 <dictionary>

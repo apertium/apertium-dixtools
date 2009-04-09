@@ -6,6 +6,7 @@
 	Entries: 1311
 	Sdefs: 89
 	Paradigms: 8
+	Last processed by: apertium-dixtools cross-param apertium-es-ca.es.dix -r apertium-es-ca.es-ca.dix -r apertium-en-ca.en-ca.dix apertium-en-ca.en.metadix
 
 -->
 <dictionary>

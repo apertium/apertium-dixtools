@@ -5,6 +5,7 @@
 	Entries: 8
 	Sdefs: 26
 	Paradigms: 10
+	Last processed by: apertium-dixtools merge-morph ../../test/sample.metadix ../../test/sample2.metadix actual_output.dix
 
 -->
 <dictionary>
@@ -58,7 +59,7 @@
 
 		</pardef>
 
-		<pardef n="achèt/e__vblex">
+		<pardef n="achèt/e__vblex"><!-- commentzzz on same line, just after pardef tag start -->
 		<e>
 			<p>
 				<l>e</l>

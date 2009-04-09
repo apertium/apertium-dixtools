@@ -11,6 +11,7 @@ $BIN dix2tiny $DIX eo-en Esperanto-English all
 rm -rf actual_output
 mkdir actual_output
 mv eo-en-data.cc actual_output
+rm -f eo-en-apertium-palm.pdb
 cd actual_output
 unzip ../eo-en-data.zip
 rm -f ../eo-en-data.zip

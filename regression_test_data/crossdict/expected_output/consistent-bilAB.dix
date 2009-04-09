@@ -5,6 +5,7 @@
 	Sections: 1
 	Entries: 1292
 	Sdefs: 69
+	Last processed by: apertium-dixtools cross-param apertium-es-ca.es.dix -r apertium-es-ca.es-ca.dix -r apertium-en-ca.en-ca.dix apertium-en-ca.en.metadix
 
 -->
 <dictionary>

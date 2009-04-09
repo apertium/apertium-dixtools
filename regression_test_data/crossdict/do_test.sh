@@ -17,7 +17,7 @@ cd ..
 
 echo -------------------------------
 res=FAILED
-diff -bBw -x .svn expected_output actual_output && res=SUCCESS
+diff -bBw -x .svn -I processed expected_output actual_output && res=SUCCESS
 
 echo test $res
 

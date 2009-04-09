@@ -5,6 +5,7 @@
 	Entries: 16
 	Sdefs: 26
 	Paradigms: 7
+	Last processed by: apertium-dixtools sort -mon ../../test/sample.metadix actual_output/mon.dix
 
 -->
 <dictionary>
@@ -58,7 +59,7 @@
 
 		</pardef>
 
-		<pardef n="achèt/e__vblex">
+		<pardef n="achèt/e__vblex"><!-- commentzzz on same line, just after pardef tag start -->
 		<e>
 			<p>
 				<l>e</l>

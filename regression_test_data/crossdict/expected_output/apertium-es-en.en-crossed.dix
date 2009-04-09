@@ -5,6 +5,7 @@
 	Entries: 292
 	Sdefs: 87
 	Paradigms: 263
+	Last processed by: apertium-dixtools cross-param apertium-es-ca.es.dix -r apertium-es-ca.es-ca.dix -r apertium-en-ca.en-ca.dix apertium-en-ca.en.metadix
 
 -->
 <dictionary>
@@ -10330,10 +10331,9 @@
 <!-- Paradigmes per als pronoms personals-->                                                                 
 
 
-		<pardef n="prsubj__prn">
-<!--Un sol paradigma per als pronoms personals de subjecte -->
+		<pardef n="prsubj__prn"><!--Un sol paradigma per als pronoms personals de subjecte -->
       
-      		<e>
+		<e>
 			<p>
 				<l>I</l>
 				<r>prpers<s n="prn"/><s n="subj"/><s n="p1"/><s n="mf"/><s n="sg"/></r>
@@ -10387,10 +10387,9 @@
 
 		</pardef>
 
-		<pardef n="probj__prn">
-<!--Un sol paradigma per als pronoms personals d'objecte -->
+		<pardef n="probj__prn"><!--Un sol paradigma per als pronoms personals d'objecte -->
       
-      		<e>
+		<e>
 			<p>
 				<l>me</l>
 				<r>prpers<s n="prn"/><s n="obj"/><s n="p1"/><s n="mf"/><s n="sg"/></r>
