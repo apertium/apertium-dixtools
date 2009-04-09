@@ -178,7 +178,7 @@ public class AddGenderAdj {
         System.err.println("I could not find gender for " + genderNotFound + " lemmas (see addgender.err).");
 
         System.err.println("Updated bilingual dictionary: '" + out + "'");
-        bil.printXML(out, dics.elements.utils.DicOpts.std);
+        bil.printXML(out, dics.elements.utils.DicOpts.STD);
     }
 
     /**

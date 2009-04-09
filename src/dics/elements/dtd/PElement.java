@@ -142,7 +142,7 @@ public class PElement extends Element {
     
     public void printXML1LineAligned(StringBuilder dos, int alignR) throws IOException {
       /*
-      DicOpts opt = DicOpts.stdnow1line.copy();
+      DicOpts opt = DicOpts.STD_NOW_1_LINE.copy();
       opt.nowAlign = true;
       opt.alignR = alignR;
       printXML(dos, opt);
@@ -151,13 +151,13 @@ public class PElement extends Element {
         dos.append(prependCharacterData);
         dos.append("<" + getTagName() + ">");
 
-        l.printXML(dos, DicOpts.stdnow1line);
+        l.printXML(dos, DicOpts.STD_NOW_1_LINE);
 
         int neededSpaces = alignR - dos.length();
         if (neededSpaces>0) {
           dos.append(spaces.substring(0, Math.min(spaces.length(), neededSpaces)));
         }
-        r.printXML(dos, DicOpts.stdnow1line);
+        r.printXML(dos, DicOpts.STD_NOW_1_LINE);
         dos.append("</" + getTagName() + ">"+appendCharacterData.trim());
     }
         

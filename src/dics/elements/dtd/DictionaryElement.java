@@ -425,6 +425,11 @@ public class DictionaryElement extends Element {
             if (pardefs != null) {
                 dos.append("\tParadigms: " + pardefs.getPardefElements().size() + "\n");
             }
+            if (opt.originalArguments != null) {
+                dos.append("\tLast processed by: apertium-dixtools");
+                for (String s : opt.originalArguments) dos.append(' ').append(s);
+                dos.append("\n");
+            }
             dos.append(processingComments);
 
             dos.append("\n-->\n");
@@ -436,7 +441,7 @@ public class DictionaryElement extends Element {
                 sdefs.printXML(dos, opt);
             }
             if (pardefs != null) {
-                DicOpts optNow = opt.copy().setNowAlign(opt.pardefElementsAligned);
+                DicOpts optNow = (opt.pardefAlignOpts==null?opt.copy():opt.pardefAlignOpts).setNowAlign(opt.pardefElementsAligned);
                 pardefs.printXML(dos, optNow);
             }
             if (sections != null) {

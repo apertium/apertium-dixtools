@@ -553,7 +553,7 @@ public class EElement extends Element implements Cloneable,
             dos.append(tab(2) + "</e>"+appendCharacterData+"\n\n");
         } else { 
             StringBuilder dosy = new StringBuilder(120);
-            dosy.append("<e" + attributes + ">");
+            dosy.append("  <e" + attributes + ">");
             int neededSpaces = opt.alignP - dosy.length();
             if (neededSpaces>0) {
               dosy.append(spaces.substring(0, Math.min(spaces.length(), neededSpaces)));

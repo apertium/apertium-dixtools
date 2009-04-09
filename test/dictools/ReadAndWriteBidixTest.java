@@ -86,7 +86,7 @@ public class ReadAndWriteBidixTest {
   public void testprintXML_std() throws IOException, InterruptedException {
     if (DixtoolsTestSuite.onlyCLI) return;
     String outfile = rm("tmp_testprintXML_std-eo-en.xml");
-    dic.printXML(outfile, dics.elements.utils.DicOpts.std);
+    dic.printXML(outfile, dics.elements.utils.DicOpts.STD);
     String diff=exec( "diff test/correct_output_DicFormat-eo-en.xml "+outfile);
     Assert.assertEquals("Difference", "", diff);
     rm(outfile);
@@ -108,7 +108,7 @@ public class ReadAndWriteBidixTest {
   public void testprintXML_std1line() throws IOException, InterruptedException {
     if (DixtoolsTestSuite.onlyCLI) return;
     String outfile = rm("tmp_testprintXML_std1line-eo-en.xml");
-    dic.printXML(outfile, dics.elements.utils.DicOpts.std1line);
+    dic.printXML(outfile, dics.elements.utils.DicOpts.STD_1_LINE);
     String diff=exec( "diff test/correct_output_DicFormatE1Line-eo-en.xml "+outfile);
     Assert.assertEquals("Difference", "", diff);
     rm(outfile);
@@ -130,7 +130,7 @@ public class ReadAndWriteBidixTest {
   public void testprintXML_stdaligned1line() throws IOException, InterruptedException {
     if (DixtoolsTestSuite.onlyCLI) return;
     String outfile = rm("tmp_testprintXML_stdaligned1line-eo-en.xml");
-    dic.printXML(outfile, dics.elements.utils.DicOpts.stdaligned);
+    dic.printXML(outfile, dics.elements.utils.DicOpts.STD_ALIGNED);
     String diff=exec( "diff test/correct_output_DicFormatE1LineAligned-eo-en.xml "+outfile);
     Assert.assertEquals("Difference", "", diff);
     rm(outfile);

@@ -21,6 +21,7 @@ package dictools;
  */
 
 import dics.elements.dtd.DictionaryElement;
+import dics.elements.utils.DicOpts;
 import misc.DicFormatE1Line;
 import misc.GetBilOmegawiki;
 import dictools.xml.DictionaryReader;
@@ -78,30 +79,37 @@ public class ProcessDics extends AbstractDictTool {
         for (int i = 0; i < args.length; i++) {
           String arg = args[i];
 
+          boolean align=false, alignPardef=false;
           if (arg.equals("-debug")) {
             opt.debug=true;
-            continue;
           } else if (arg.equalsIgnoreCase("-noProcComments")) {
             opt.noProcessingComments=true;
-            continue;
           } else if (arg.equalsIgnoreCase("-stripEmptyLines")) {
             opt.stripEmptyLines = true;
+          } else  if (arg.equalsIgnoreCase("-alignMonodix")) {
+            opt.copyAlignSettings(DicOpts.STD_ALIGNED_MONODIX);
+          } else if (arg.equalsIgnoreCase("-alignBidix")) {
+            opt.copyAlignSettings(DicOpts.STD_ALIGNED_BIDIX);
           } else  if (arg.equalsIgnoreCase("-align")) {
             opt.sectionElementsAligned = true;
           } else if (arg.equalsIgnoreCase("-alignPardef")) {
             opt.pardefElementsAligned = true;
           } else {
             unprocessed.add(arg);
-            continue;
           }
 
-          // see if two numbers follows
-          try {
+          // see if two numbers of alignment follows...
+          if (align || alignPardef) try {
             int align1 = Integer.parseInt(args[i+1]);
             int align2 = Integer.parseInt(args[i+2]);
             // OK,  two numbers follows. Interpret as aligment options
-            opt.alignP = align1;
-            opt.alignR = align2;
+            DicOpts o = opt;
+            if (alignPardef && o.pardefAlignOpts==null) {
+                o.pardefAlignOpts = o.copy();
+                o = o.pardefAlignOpts;
+            }
+            o.alignP = align1;
+            o.alignR = align2;
             i += 2;
           } catch (Exception e) {
           }            
@@ -115,6 +123,7 @@ public class ProcessDics extends AbstractDictTool {
      *
      */
     private void processArguments(String[] args) {
+        opt.originalArguments = args;
         args = processGenericArguments(args);
         setArguments(args);
         if (args.length == 0) {

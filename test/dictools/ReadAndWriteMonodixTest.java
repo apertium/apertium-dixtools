@@ -150,7 +150,7 @@ public class ReadAndWriteMonodixTest {
   public void testprintXML_std() throws IOException, InterruptedException {
     if (DixtoolsTestSuite.onlyCLI) return;
     String outfile = rm("tmp_testprintXML_std.xml");
-    dic.printXML(outfile, dics.elements.utils.DicOpts.std);
+    dic.printXML(outfile, dics.elements.utils.DicOpts.STD);
     String diff=exec( "diff test/correct_output_DicFormat.xml "+outfile);
     Assert.assertTrue("Difference: "+diff, diff.isEmpty());
     rm(outfile);
@@ -170,7 +170,7 @@ public class ReadAndWriteMonodixTest {
   public void testprintXML_std1line() throws IOException, InterruptedException {
     if (DixtoolsTestSuite.onlyCLI) return;
     String outfile = rm("tmp_testprintXML_std1line.xml");
-    dic.printXML(outfile, dics.elements.utils.DicOpts.std1line);
+    dic.printXML(outfile, dics.elements.utils.DicOpts.STD_1_LINE);
     String diff=exec( "diff -b test/correct_output_DicFormatE1Line.xml "+outfile);
     Assert.assertTrue("Difference: "+diff, diff.isEmpty());
     rm(outfile);

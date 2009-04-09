@@ -98,7 +98,7 @@ public class Misc {
             section.addEElement(ne);
         }
 
-        morph_n_en.printXML("new-es-nouns.dix", "UTF-8",  dics.elements.utils.DicOpts.std);
+        morph_n_en.printXML("new-es-nouns.dix", "UTF-8",  dics.elements.utils.DicOpts.STD);
     }
 
     /**
@@ -168,7 +168,7 @@ public class Misc {
             }
         }
 
-        ndic.printXML("new-en-es-nouns.xml", "UTF-8", dics.elements.utils.DicOpts.std);
+        ndic.printXML("new-en-es-nouns.xml", "UTF-8", dics.elements.utils.DicOpts.STD);
 
     }
 
@@ -236,8 +236,8 @@ public class Misc {
             s2.addEElement(en);
         }
 
-        morph_es.printXML("es-please-check.dix", "UTF-8", dics.elements.utils.DicOpts.std);
-        morph_en.printXML("en-please-check.dix", "UTF-8", dics.elements.utils.DicOpts.std);
+        morph_es.printXML("es-please-check.dix", "UTF-8", dics.elements.utils.DicOpts.STD);
+        morph_en.printXML("en-please-check.dix", "UTF-8", dics.elements.utils.DicOpts.STD);
 
     }
 
@@ -288,7 +288,7 @@ public class Misc {
 
         }
 
-        en_es_adjs.printXML("new-adjs-mf.dix", "UTF-8", dics.elements.utils.DicOpts.std);
+        en_es_adjs.printXML("new-adjs-mf.dix", "UTF-8", dics.elements.utils.DicOpts.STD);
     }
 
     /**
@@ -325,7 +325,7 @@ public class Misc {
                 }
             }
         }
-        es_morph.printXML("new-es-morph.dix", "UTF-8", dics.elements.utils.DicOpts.std);
+        es_morph.printXML("new-es-morph.dix", "UTF-8", dics.elements.utils.DicOpts.STD);
     }
 
     /**
@@ -372,6 +372,6 @@ public class Misc {
             }
         }
 
-        dic3.printXML("nps-gender.dix", "UTF-8", dics.elements.utils.DicOpts.std);
+        dic3.printXML("nps-gender.dix", "UTF-8", dics.elements.utils.DicOpts.STD);
     }
 }

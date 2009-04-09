@@ -120,7 +120,7 @@ public class SdefsElement extends Element {
             dos = new OutputStreamWriter(bos, encoding);
             dos.append("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
             dos.append("<dictionary>\n");
-            printXML(dos, DicOpts.std);
+            printXML(dos, DicOpts.STD);
             dos.append("</dictionary>\n");
 
             fos = null;

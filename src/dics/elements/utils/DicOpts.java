@@ -44,10 +44,33 @@ public class DicOpts implements Cloneable {
   public int alignP = 10;
   public int alignR = 55;
 
-  public static DicOpts std = new DicOpts();
-  public static DicOpts std1line = new DicOpts(false, true, 0, 0);
-  public static DicOpts stdaligned = new DicOpts(false, true, 10, 55);
-  public static DicOpts stdnow1line = std1line.copy().setNowAlign(true);
+  public DicOpts pardefAlignOpts = null; // null = Use same alignment for pardefs as for other entries
+    public String[] originalArguments;
+    public void copyAlignSettings(DicOpts source) {
+        sectionElementsAligned = source.sectionElementsAligned;
+        pardefElementsAligned = source.pardefElementsAligned;
+        pardefAlignOpts = source.pardefAlignOpts;
+        alignP = source.alignP;
+        alignR = source.alignR;
+    }
+
+    public DicOpts setPardefAlign(DicOpts pardefAlignOpts) {
+      this.pardefAlignOpts = pardefAlignOpts;
+      return this;
+  }
+
+
+  /**
+   * Standard XML-like format with separate line and indent for each element
+   */
+  public static final DicOpts STD = new DicOpts();
+  public static final DicOpts STD_ALIGNED = new DicOpts(false, true, 10, 55);
+
+  public static final DicOpts STD_ALIGNED_BIDIX = new DicOpts(true, true, 10, 55);
+  public static final DicOpts STD_ALIGNED_MONODIX = new DicOpts(true, true, 25, 45).setPardefAlign(new DicOpts(true, true, 10, 30));
+  
+  public static final DicOpts STD_1_LINE = new DicOpts(false, true, 0, 0);
+  public static final DicOpts STD_NOW_1_LINE = STD_1_LINE.copy().setNowAlign(true);
 
   
   /**
@@ -61,11 +84,6 @@ public class DicOpts implements Cloneable {
 
   
   public  DicOpts() {
-  }
-  
-  public DicOpts(boolean alignPardefs, boolean alignEntries) {
-    this.pardefElementsAligned = alignPardefs;
-    this.sectionElementsAligned = alignEntries;
   }
 
   public DicOpts(boolean alignPardefs, boolean alignEntries, int alignmentP, int alignmentR) {

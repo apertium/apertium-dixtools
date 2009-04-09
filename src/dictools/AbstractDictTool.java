@@ -33,7 +33,7 @@ public class AbstractDictTool {
     /**
      * Options
      */
-    protected DicOpts opt = DicOpts.std;
+    protected DicOpts opt = DicOpts.STD;
 
     /**
      * Options

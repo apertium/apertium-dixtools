@@ -46,7 +46,7 @@ import misc.DicFormatE1Line;
 public class SubstractBidix {
 
       public static void main(final String[] args) {
-        DicOpts opt  = DicOpts.stdaligned;
+        DicOpts opt  = DicOpts.STD_ALIGNED;
         //DictionaryElement dic = new DictionaryReader("../apertium-eo-en/apertium-lille.eo-en.dix").readDic();
         DictionaryElement dic = new DictionaryReader("../apertium-eo-en/apertium-eo-en.eo-en.dix").readDic();
         //DictionaryElement dic = new DictionaryReader("../apertium-eo-en/slet.eo-en.dix").readDic();
