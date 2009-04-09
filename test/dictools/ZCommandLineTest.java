@@ -71,7 +71,7 @@ public class ZCommandLineTest {
             System.err.println(s);
           }
         } catch (IOException ex) {
-          Logger.getLogger(ZCrossDictTest.class.getName()).log(Level.SEVERE, null, ex);
+          Logger.getLogger(CrossDictTest.class.getName()).log(Level.SEVERE, null, ex);
         }
       }
     }

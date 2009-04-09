@@ -99,7 +99,7 @@ public class PardefElement extends Element {
         dos.append(prependCharacterData);
         if (!opt.noProcessingComments) dos.append(makeCommentIfData(processingComments));
 
-        dos.append((opt.nowAlign?"":tab(2))+ "<pardef n=\"" + n + "\">\n");
+        dos.append((opt.nowAlign?"":tab(2))+ "<pardef n=\"" + n + "\">"+justInsideStartTagCharacterData+"\n");
         for (EElement e : eElements) {
             e.printXML(dos, opt);
         }

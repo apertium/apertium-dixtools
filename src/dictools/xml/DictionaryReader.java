@@ -29,6 +29,7 @@ import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
 
 import dics.elements.dtd.AlphabetElement;
+import dics.elements.dtd.CharacterDataNeighbour;
 import dics.elements.dtd.DictionaryElement;
 import dics.elements.dtd.EElement;
 import dics.elements.dtd.GElement;
@@ -230,6 +231,27 @@ public class DictionaryReader extends XMLReader {
         return header;
     }
 
+
+    static class InsideTag implements CharacterDataNeighbour {
+
+        dics.elements.dtd.Element enclosingElement;
+
+        public InsideTag(dics.elements.dtd.Element enclosingElement) {
+            this.enclosingElement=enclosingElement;
+        }
+
+        public void setPrependCharacterData(String prependCharacterData) {
+            throw new IllegalStateException("Can never happen. "+prependCharacterData);
+        }
+
+        /**
+         * XML processingComments, blanks and newlines originating from a loaded file. Will be added after the XML elemen (before processingComments)
+         */
+        public void setAppendCharacterData(String appendCharacterData) {
+            enclosingElement.setJustInsideStartTagCharacterData(appendCharacterData);
+        }
+    }
+
     /**
      * 
      * @param e
@@ -289,7 +311,6 @@ public class DictionaryReader extends XMLReader {
 
         prependOrAppendCharacterData(characterData, null, previousElement);
         return pardefsElement;
-
     }
 
     /**
@@ -301,7 +322,7 @@ public class DictionaryReader extends XMLReader {
         PardefElement pardefElement = new PardefElement(n);
 
         StringBuilder characterData = new StringBuilder();
-        dics.elements.dtd.Element previousElement = null;
+        dics.elements.dtd.CharacterDataNeighbour previousElement = new InsideTag(pardefElement);
 
         if (e.hasChildNodes()) {
             NodeList children = e.getChildNodes();

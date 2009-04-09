@@ -470,7 +470,7 @@ public class XMLReader {
      * @param prependCharacterData A StringBuilder with all characters. This will be emptied so its ready to collect for next tag.
      * @param eElement The element will got set its prependCharacterData.
      */
-  public static void prependOrAppendCharacterData(StringBuilder characterData, dics.elements.dtd.Element eElement, dics.elements.dtd.Element previousElement) {
+  public static void prependOrAppendCharacterData(StringBuilder characterData, dics.elements.dtd.CharacterDataNeighbour eElement, dics.elements.dtd.CharacterDataNeighbour previousElement) {
     if (characterData.length()==0) return;
 
     String txt=characterData.toString();
