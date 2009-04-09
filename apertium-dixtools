@@ -405,7 +405,7 @@ function show_help() {
    echo "    dic-reader:         reads elements from a dictionary"
    echo "    dix2tiny:           generates linguistic data for mobile platforms (j2me, palm)"
    echo "    dix2trie:           creates a Trie from an existing bilingual dictionary"
-   #echo "    equiv-paradigms:    finds equivalent paradigms and updates references"
+   echo "    equiv-paradigms:    finds equivalent paradigms and updates references"
    echo "    format:             formats a dictionary"   
    echo "    format-1line:       formats a dictionary (1 element per line)"
    #echo "    merge-bil:          merges two bilingual dictionaries"
