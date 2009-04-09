@@ -58,7 +58,7 @@
 
 		</pardef>
 
-		<pardef n="achèt/e__vblex">
+		<pardef n="achèt/e__vblex"><!-- commentzzz on same line, just after pardef tag start -->
 		<e>
 			<p>
 				<l>e</l>
@@ -182,20 +182,20 @@
       
 
     <!-- Verbs -->
-<e lm="amener"><i>am</i><par n="ach/e[T]er__vblex" prm="n"/></e>
-<e lm="détruire"><i>détru</i><par n="lu/i[]re__vblex" prm="" prm2="A" prm3="B" prm4="C"/></e>
-<e lm="enlever"><i>enl</i><par n="ach/e[T]er__vblex" prm="v"/></e>
-<e lm="acheter"><i>ach</i><par n="ach/e[T]er__vblex" prm="t"/></e>
-<e lm="amener"><i>am</i><par n="ach/e[T]er__vblex" prm="n"/></e>
-<e lm="détruire"><i>détru</i><par n="lu/i[]re__vblex" prm="" prm2="A" prm3="B" prm4="C"/></e>
-<e lm="enlever"><i>enl</i><par n="ach/e[T]er__vblex" prm="v"/></e>
-<e lm="acheter"><i>ach</i><par n="ach/e[T]er__vblex" prm="t"/></e>
-<e lm="amener" alt="val"><i>am</i><par n="ach/e[T]er__vblex" prm="n"/></e>
-<e lm="détruire" alt="val"><i>détru</i><par n="lu/i[]re__vblex" prm="" prm2="A" prm3="B" prm4="C"/></e>
-<e lm="enlever" alt="val"><i>enl</i><par n="ach/e[T]er__vblex" prm="v"/></e>
-<e lm="comment"><i>ach</i><par n="comach/e[T]er__vblex" prm="t"/></e><!-- bla bla -->
-<e lm="noncomment"><i>am</i><par n="noncomach/e[T]er__vblex" prm="n"/></e>
-<e lm="détruire"><i>détru</i><par n="lu/i[]re__vblex" prm="" prm2="A" prm3="B" prm4="C"/></e>
+  <e lm="amener"><i>am</i><par n="ach/e[T]er__vblex" prm="n"/></e>
+  <e lm="détruire"><i>détru</i><par n="lu/i[]re__vblex" prm="" prm2="A" prm3="B" prm4="C"/></e>
+  <e lm="enlever"><i>enl</i><par n="ach/e[T]er__vblex" prm="v"/></e>
+  <e lm="acheter"><i>ach</i><par n="ach/e[T]er__vblex" prm="t"/></e>
+  <e lm="amener"><i>am</i><par n="ach/e[T]er__vblex" prm="n"/></e>
+  <e lm="détruire"><i>détru</i><par n="lu/i[]re__vblex" prm="" prm2="A" prm3="B" prm4="C"/></e>
+  <e lm="enlever"><i>enl</i><par n="ach/e[T]er__vblex" prm="v"/></e>
+  <e lm="acheter"><i>ach</i><par n="ach/e[T]er__vblex" prm="t"/></e>
+  <e lm="amener" alt="val"><i>am</i><par n="ach/e[T]er__vblex" prm="n"/></e>
+  <e lm="détruire" alt="val"><i>détru</i><par n="lu/i[]re__vblex" prm="" prm2="A" prm3="B" prm4="C"/></e>
+  <e lm="enlever" alt="val"><i>enl</i><par n="ach/e[T]er__vblex" prm="v"/></e>
+  <e lm="comment"><i>ach</i><par n="comach/e[T]er__vblex" prm="t"/></e><!-- bla bla -->
+  <e lm="noncomment"><i>am</i><par n="noncomach/e[T]er__vblex" prm="n"/></e>
+  <e lm="détruire"><i>détru</i><par n="lu/i[]re__vblex" prm="" prm2="A" prm3="B" prm4="C"/></e>
 
 
     <!-- Verbs // Multiwords -->
@@ -218,8 +218,8 @@
       </p>
     </e>
 -->
-<e lm="enlever"><i>enl</i><par n="ach/e[T]er__vblex" prm="v"/></e>
-<e lm="acheter"><i>ach</i><par n="ach/e[T]er__vblex" prm="t"/></e>
+  <e lm="enlever"><i>enl</i><par n="ach/e[T]er__vblex" prm="v"/></e>
+  <e lm="acheter"><i>ach</i><par n="ach/e[T]er__vblex" prm="t"/></e>
 
 	</section>
 </dictionary>

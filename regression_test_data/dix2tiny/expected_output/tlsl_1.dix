@@ -1,4 +1,5 @@
-@size:24$
+@size:34$
+[abc news]ABC News:np.al.?ABC News:np.al.;$
 [catholic]Catholic:n.?katoliko:n.;$
 [christian]Christian:n.?kristano:n.;$
 [eleven]eleven:num.?dek unu:num.;$
@@ -9,12 +10,20 @@
 [forty]forty:num.?kvardek:num.;$
 [four]four:num.?kvar:num.;$
 [fourteen]fourteen:num.?dek kvar:num.;$
+[gerardo]Gerardo:np.ant.?Gerardo:np.ant.;$
 [hesitate]hesitate:vblex.?heziti:vblex.;$
 [hide]hide:vblex.?kaŝi:vblex.;hide:n.?felo:n.;$
+[jaime]Jaime:np.ant.?Jaime:np.ant.;$
+[manuel]Manuel:np.?Manuelo:np.;$
+[marta]Marta:np.?Marta:np.;$
+[martín]Martín:np.?Marteno:np.;$
+[maría]María:np.?Maria:np.;$
 [muslim]Muslim:n.?islamano:n.;$
 [one]one:num.?unu:num.;$
+[paris]Paris:np.ant.?Paris:np.ant.;$
 [primarily]primarily:adv.?ĉefe:adv.;$
 [protestant]Protestant:n.?protestanto:n.;$
+[robert]Robert:np.ant.?Robert:np.ant.;$
 [thirteen]thirteen:num.?dek tri:num.;$
 [thirty]thirty:num.?tridek:num.;$
 [three]three:num.?tri:num.;$
@@ -22,4 +31,5 @@
 [twenty]twenty:num.?dudek:num.;$
 [two]two:num.?du:num.;$
 [weekly]weekly:adv.?ĉiusemajne:adv.;$
+[zapatista national liberation army]Zapatista National Liberation Army:np.al.?Zapatista Armeo de Nacia Liberiĝo:np.al.;$
 [zero]zero:num.?nulo:num.;$

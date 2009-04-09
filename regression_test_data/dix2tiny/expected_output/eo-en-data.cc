@@ -13,12 +13,12 @@ dudek {num} :: twenty {num}
 tridek {num} :: thirty {num} 
 kvardek {num} :: forty {num} 
 kvindek {num} :: fifty {num} 
-Zapatista Armeo de Nacia Liberiĝo {np} {al} :: Zapatista National Liberation Army {np} {al} 
+Zapatista Armeo de Nacia Liberi?o {np} {al} :: Zapatista National Liberation Army {np} {al} 
 ABC News {np} {al} :: ABC News {np} {al} 
 Manuelo {np} :: Manuel {np} 
-Maria {np} :: María {np} 
+Maria {np} :: Mar�a {np} 
 Marta {np} :: Marta {np} 
-Marteno {np} :: Martín {np} 
+Marteno {np} :: Mart�n {np} 
 Jaime {np} {ant} :: Jaime {np} {ant} 
 Gerardo {np} {ant} :: Gerardo {np} {ant} 
 Paris {np} {ant} :: Paris {np} {ant} 
@@ -27,15 +27,15 @@ islamano {n} :: Muslim {n}
 katoliko {n} :: Catholic {n} 
 kristano {n} :: Christian {n} 
 protestanto {n} :: Protestant {n} 
-vizaĝo {n} :: face {n} 
-supraĵo {n} :: face {n} 
+viza?o {n} :: face {n} 
+supra?o {n} :: face {n} 
 defii {vblex} :: face {vblex} 
 maleviti {vblex} :: face {vblex} 
 heziti {vblex} :: hesitate {vblex} 
 malvoli {vblex} :: hesitate {vblex} 
-domaĝi {vblex} :: hesitate {vblex} 
+doma?i {vblex} :: hesitate {vblex} 
 malvidigi {vblex} :: hide {vblex} 
 felo {n} :: hide {n} 
-ĉefe {adv} :: primarily {adv} 
-ĉiakoste {adv} :: regardless {adv} 
-ĉiusemajne {adv} :: weekly {adv} 
+?efe {adv} :: primarily {adv} 
+?iakoste {adv} :: regardless {adv} 
+?iusemajne {adv} :: weekly {adv} 

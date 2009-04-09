@@ -77,7 +77,7 @@ public class ProcessDics extends AbstractDictTool {
         //DicOpts opt = this;
 
         for (int i = 0; i < args.length; i++) {
-          String arg = args[i];
+          String arg = args[i].toLowerCase();
 
           boolean align=false, alignPardef=false;
           if (arg.equals("-debug")) {
@@ -86,16 +86,16 @@ public class ProcessDics extends AbstractDictTool {
             opt.noProcessingComments=true;
           } else if (arg.equalsIgnoreCase("-stripEmptyLines")) {
             opt.stripEmptyLines = true;
-          } else  if (arg.equalsIgnoreCase("-alignMonodix")) {
+          } else  if (arg.startsWith("-alignmon")) { // -alignMonodix
             opt.copyAlignSettings(DicOpts.STD_ALIGNED_MONODIX);
-          } else if (arg.equalsIgnoreCase("-alignBidix")) {
+          } else if (arg.startsWith("-alignbi")) { // -alignBidix
             opt.copyAlignSettings(DicOpts.STD_ALIGNED_BIDIX);
           } else  if (arg.equalsIgnoreCase("-align")) {
-            opt.sectionElementsAligned = true;
+            align = opt.sectionElementsAligned = true;
           } else if (arg.equalsIgnoreCase("-alignPardef")) {
-            opt.pardefElementsAligned = true;
+            alignPardef = opt.pardefElementsAligned = true;
           } else {
-            unprocessed.add(arg);
+            unprocessed.add(args[i]);
           }
 
           // see if two numbers of alignment follows...

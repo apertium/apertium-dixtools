@@ -74,7 +74,7 @@ public class CrossDictTest {
     "-cross-model", path+"../../../../apertium-dixtools/schemas/cross-model.xml"};
      dictools.ProcessDics.main(argsx);  
 
-    String diff=exec( "diff  -bBw -x .svn  "+path+"../expected_output "+outfile);    
+    String diff=exec( "diff  -bBw -x .svn -I processed "+path+"../expected_output "+outfile);
     Assert.assertEquals("Difference", "", diff);
     rm(outfile);  
   }

@@ -1,12 +1,29 @@
+2009-04-10 nordfalk - Version 0.9.0 - Lucy Lexicographer
+
+ * Different aligment of pardef and other entries.
+ * 2 spaces before <e> even in aligned 1-line mode
+ * option -alignMonodix aligns monodix (pardef 10, 30, entries 25, 45)
+ * Character data just inside a <pardef> tag is now retained in the right place
+ * Added support for 'equiv-paradigms'
+
 2009-03-18 nordfalk
 
-* Added -noProcComments option (don't add comments telling which processing was done)
+ * Added -noProcComments option (don't add comments telling which processing was done)
 
-2009-01-04 nordfalk
+2009-02-15 16:45  ebenimeli
 
-* Deleted 'gather' function
+ * new features for dix2tiny: dics for Palm (PDB) from dix / XML conf (filter) for language pair / examples
+
+2009-02-13 05:58  nordfalk
+
+ * Merge improved - double paradigms are now clearly visible
+ * merge doesent sort anymore
+ * New option -stripEmptyLines removes empty lines originating from original files
+
 
 2009-01-03 nordfalk
+
+ * Deleted 'gather' function
  * Standard input and standard output can now be used (using file name - )
  * All commands takes optional arguments -align and -alignPardef 
       with optional 2 numbers for aligment element after <e> and aligment of <r> element
@@ -15,8 +32,7 @@
 
 2008-12-30 nordfalk
 
-
-	* Added ChangeLog
-	* Added CLI tests for crossdict  dic-reader  dix2tiny  dix2trie kind_of_test  merge-morph  reverse-bil  sort
-	* Rmoved apertium-crossdics - didnt work and its a subcommand to apertium-dixtools
+ * Added ChangeLog
+ * Added CLI tests for crossdict  dic-reader  dix2tiny  dix2trie kind_of_test  merge-morph  reverse-bil  sort
+ * Rmoved apertium-crossdics - didnt work and its a subcommand to apertium-dixtools
 
