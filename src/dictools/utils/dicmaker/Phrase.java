@@ -45,6 +45,11 @@ public class Phrase {
 		return result;
 	}
 
+@Override
+	public String toString() {
+    return getPhrase();
+  }
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
