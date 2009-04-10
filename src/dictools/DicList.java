@@ -41,7 +41,7 @@ import dics.elements.utils.Msg;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class DicReader {
+public class DicList {
 
     /**
      * 
@@ -66,13 +66,13 @@ public class DicReader {
      * 
      * 
      */
-    public DicReader(String fileName) {
+    public DicList(String fileName) {
         DictionaryReader dicReader = new DictionaryReader(fileName);
         DictionaryElement d = dicReader.readDic();
         setDic(d);
     }
 
-    public DicReader() {
+    public DicList() {
     }
 
     /**
@@ -169,19 +169,19 @@ public class DicReader {
      * 
      */
     public void doit() {
-        if (getAction().equals("list-paradigms")) {
+        if (action.endsWith("paradigms")) {
             getListOfParadigms();
         }
-        if (getAction().equals("list-lemmas")) {
+        if (action.endsWith("lemmas")) {
             getListOfLemmas();
         }
-        if (getAction().equals("list-definitions")) {
+        if (action.endsWith("definitions")) {
             getDefinitions();
         }
-        if (getAction().equals("list-pairs")) {
+        if (action.endsWith("pairs")) {
             getPairs();
         }
-        if (getAction().equals("list-with-dot")) {
+        if (action.endsWith("dot")) {
             getListWithDot();
         }
     }

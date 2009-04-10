@@ -37,7 +37,7 @@ import dics.elements.utils.Msg;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class DicFormat  extends AbstractDictTool{
+public class DicFix  extends AbstractDictTool{
 
     /**
      * 
@@ -51,14 +51,14 @@ public class DicFormat  extends AbstractDictTool{
      * 
      * 
      */
-    public DicFormat() {
+    public DicFix() {
     }
 
     /**
      * 
      * @param dic
      */
-    public DicFormat(DictionaryElement dic) {
+    public DicFix(DictionaryElement dic) {
         dicFormatted = dic;
     }
 
@@ -138,20 +138,13 @@ public class DicFormat  extends AbstractDictTool{
      * 
      */
     private void processArguments() {
-      /*
-        if (arguments[1].equals("-mon")) {
-            dicType = DictionaryElement.MONOL;
-        } else {
-            dicType = DictionaryElement.BIL;
-        }
-       */
       
-        msg.err("Reading " + arguments[2]);
-        DictionaryReader dicReader = new DictionaryReader(arguments[2]);
+        msg.err("Reading " + arguments[1]);
+        DictionaryReader dicReader = new DictionaryReader(arguments[1]);
         DictionaryElement dic = dicReader.readDic();
         dicReader = null;
         setDicFormatted(dic);
-        this.setOut(arguments[3]);
+        this.setOut(arguments[2]);
     }
 
     /**

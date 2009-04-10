@@ -30,7 +30,7 @@ import java.util.Set;
 import dics.elements.utils.EElementList;
 import dics.elements.utils.EElementMap;
 import dics.elements.utils.ElementList;
-import dictools.DicEquivPar;
+import dictools.unused__DicEquivPar;
 import dics.elements.utils.DicTools;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -715,11 +715,11 @@ public class DictionaryElement extends Element {
 
     /**
      * 
-     */
     public void searchEquivalentParadigms() {
-        DicEquivPar dicEquivPar = new DicEquivPar(this);
+        unused__DicEquivPar dicEquivPar = new unused__DicEquivPar(this);
         equivPar = dicEquivPar.findEquivalentsA();
     }
+     */
 
     /**
      *

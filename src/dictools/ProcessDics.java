@@ -157,8 +157,8 @@ public class ProcessDics extends AbstractDictTool {
         else if (action.equals("reverse-bil")) {
             this.process_reverse();
         }
-        else if (action.equals("format")) {
-            this.process_format();
+        else if (action.equals("fix")) {
+            this.process_fix();
         }
         else if (action.equals("sort")) {
             this.process_sort();
@@ -166,11 +166,8 @@ public class ProcessDics extends AbstractDictTool {
         else if (action.equals("get-bil-omegawiki")) {
             this.process_getbilomegawiki();
         }
-        else if (action.equals("format-1line")) {
-            this.process_format1line();
-        }
-        else if (action.equals("dic-reader")) {
-            this.process_dicreader();
+        else if (action.equals("list") || action.equals("dic-reader")) {
+            this.process_list();
         }
         else if (action.equals("equiv-paradigms")) {
             this.process_equivparadigms();
@@ -199,7 +196,14 @@ public class ProcessDics extends AbstractDictTool {
         else if (action.equals("filter")) {
             this.process_filter();
         }
-        else if (action.equals("cat")) {
+        else if (action.equals("format-1line")) {
+            this.process_format1line();
+            //opt.copyAlignSettings(DicOpts.STD_1_LINE);
+            //DictionaryElement dic = new DictionaryReader(args[1]).readDic();
+            //dic.setXmlEncoding("UTF-8");
+            //dic.printXML(args[2], opt);
+        }
+        else if (action.equals("cat") || action.equals("format")) {
             DictionaryElement dic = new DictionaryReader(args[1]).readDic();
             dic.setXmlEncoding("UTF-8");
             dic.printXML(args[2], opt);
@@ -387,18 +391,17 @@ public class ProcessDics extends AbstractDictTool {
             tool.setArguments(arguments);
             tool.doReverse();
         }
-
     }
 
     /**
      * 
      */
-    private void process_format() {
-        if (getArguments().length != 4) {
-            msg.err("Usage: java -jar path/to/apertium-dixtools.jar format <-mon|-bil> <dic> <dic-formatted>");
+    private void process_fix() {
+        if (getArguments().length != 3) {
+            msg.err("Usage: java -jar path/to/apertium-dixtools.jar fix <dic> <dic-fixed>");
             System.exit(-1);
         } else {
-            DicFormat tool = new DicFormat();
+            DicFix tool = new DicFix();
             tool.setOpt(getOpt());
             tool.setArguments(arguments);
             tool.doFormat();
@@ -482,9 +485,11 @@ public class ProcessDics extends AbstractDictTool {
     /**
      * 
      */
-    private void process_dicreader() {
+    private void process_list() {
         if (getArguments().length < 3) {
-            msg.err("Usage: java -jar path/to/apertium-dixtools.jar dic-reader <action> <dic>");
+            msg.err("Insufficient arguments: "+Arrays.toString(getArguments()));
+            msg.err("");
+            msg.err("Usage: java -jar path/to/apertium-dixtools.jar list <action> <dic>");
             msg.err("   where <action> can be:");
             msg.err("   list-paradigms:   list of paradigms");
             msg.err("   list-lemmas:      list of lemmas");
@@ -495,7 +500,7 @@ public class ProcessDics extends AbstractDictTool {
             msg.err("");
             System.exit(-1);
         } else {
-            DicReader tool = new DicReader();
+            DicList tool = new DicList();
             tool.setAction(arguments[1]);
             if (arguments[2].equals("-url")) {
                 tool.setUrlDic(true);

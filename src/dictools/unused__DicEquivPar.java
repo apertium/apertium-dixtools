@@ -31,7 +31,7 @@ import dics.elements.utils.DicSet;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class DicEquivPar {
+public class unused__DicEquivPar {
 
     /**
      * 
@@ -50,7 +50,7 @@ public class DicEquivPar {
      * 
      * @param dics
      */
-    public DicEquivPar(DicSet dics) {
+    public unused__DicEquivPar(DicSet dics) {
         dicSet = dics;
     }
 
@@ -58,7 +58,7 @@ public class DicEquivPar {
      * 
      * @param mon
      */
-    public DicEquivPar(DictionaryElement mon) {
+    public unused__DicEquivPar(DictionaryElement mon) {
         DicSet ds = new DicSet(mon);
         dicSet = ds;
     }

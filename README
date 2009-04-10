@@ -15,10 +15,6 @@ Software prerequisites
 
 You will need to install Ant and Java Development Kit 6 (JDK6)
 
-Uncompress the package
-
-$ tar xvfz apertium-dixtools-0.8.tar.gz
-
 COMPILING
 
 $ cd apertium-dixtools

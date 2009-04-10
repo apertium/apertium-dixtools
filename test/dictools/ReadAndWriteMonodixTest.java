@@ -137,7 +137,7 @@ public class ReadAndWriteMonodixTest {
     if (DixtoolsTestSuite.onlyCLI) return;
     String outfile = rm("tmp_testDicFormat.xml");
 
-    DicFormat df = new DicFormat(dic);
+    DicFix df = new DicFix(dic);
     df.setOut(outfile);
     DictionaryElement dicFormatted = df.format();
     //dicFormatted.printXML(outfile,df.getOpt());

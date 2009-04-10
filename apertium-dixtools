@@ -32,7 +32,7 @@ function cross-param() {
 #   	java ${java_options} $task -bilAB $3 $4 -bilBC $5 $6 -monA $2 -monC $7 -cross-model $crossmodel $9
    else
 #	show_help2();
-   	echo "Usage: dictools cross <monA> <-r|-n> <bilAB> <-r|-n> <bilBC> <monC> crossmodel";
+   	echo "Usage: apertium-dixtools cross-param <monA> <-r|-n> <bilAB> <-r|-n> <bilBC> <monC> crossmodel";
    	echo "";
    	echo "More information in http://wiki.apertium.org/wiki/Crossdics";
    	echo "";
@@ -51,7 +51,7 @@ function cross() {
 #   	java ${java_options} $task $2 $3 $4
    	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
    else
-   	echo "Usage: dictools cross -f <ling-resources.xml> <sl-tl>";
+   	echo "Usage: apertium-dixtools cross -f <ling-resources.xml> <sl-tl>";
    	echo "";
    	echo "More information in http://wiki.apertium.org/wiki/Crossdics";
    	echo "";
@@ -62,7 +62,7 @@ function cross() {
 #  format
 #
 function format() {
-   if [ $nparams -ge 4 ]
+   if [ $nparams -ge 3 ]
    then
    	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
 #      echo "Reading '$3'..."
@@ -70,7 +70,7 @@ function format() {
 #      echo "Formatted dictonary: $4"
 #      echo "Log file in 'format.err'"
    else
-      echo "Usage: dictools format <-mon|-bil> <dic> <out>"
+      echo "Usage: apertium-dixtools format <dic> <out>"
       echo "";
       echo "More information: http://wiki.apertium.org/wiki/Format_dictionaries";
       echo "";
@@ -87,7 +87,7 @@ function merge-morph() {
 #      java ${java_options} $task -monA1 $2 -monA2 $3 -out $4 $5
       echo "Merged dictionary: $4"
    else
-      echo "Usage: dictools merge-morph <monA1> <monA2> <merged>"
+      echo "Usage: apertium-dixtools merge-morph <monA1> <monA2> <merged>"
       echo "";
       echo "More information: http://wiki.apertium.org/wiki/Merge_dictionaries";
       echo "";
@@ -106,7 +106,7 @@ function merge-bil() {
       java ${java_options} $task -bilAB1 $2 $3 -bilAB2 $4 $5 -out $6
       echo "Merged: $6"
    else
-   	echo "Usage: dictools merge-bil <-n|-r> <bilAB1> <-n|-r> <bilAB2> <merged>";
+   	echo "Usage: apertium-dixtools merge-bil <-n|-r> <bilAB1> <-n|-r> <bilAB2> <merged>";
    	echo "";
    fi
 }
@@ -121,7 +121,7 @@ function reverse-bil() {
 #      echo "Reading '$2'..."
 #   	java ${java_options} reverse $2 $3 2> reverse-bil.err      
    else
-      echo "Usage: dictools reverse-bil <dic> <out>";
+      echo "Usage: apertium-dixtools reverse-bil <dic> <out>";
       echo "";
       echo "More information: http://wiki.apertium.org/wiki/Reverse_a_dictionary";
       echo "";
@@ -139,7 +139,7 @@ function sort() {
 #      java ${java_options} $task $2 $3 $4
 #      echo "Sorted: $4"
    else
-      echo "Usage: dictools sort <-bil|-mon> <dic.dix> <out.dix>";
+      echo "Usage: apertium-dixtools sort <-bil|-mon> <dic.dix> <out.dix>";
       echo "";
       echo "More information: http://wiki.apertium.org/wiki/Sort_a_dictionary";
       echo "";
@@ -155,7 +155,7 @@ function process-xincludes() {
       java ${java_options} gather $2 $3 $4 $5 $6 $7 $8 $9
       echo "Dictionary: $3"
    else
-      echo "Usage: dictools process-xincludes <dic> <out.dix>";
+      echo "Usage: apertium-dixtools process-xincludes <dic> <out.dix>";
       echo "";
       #echo "More information: ";
       #echo "";
@@ -171,7 +171,7 @@ function get-bil-omegawiki() {
    	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
       echo "Dictionary: $4"
    else
-      echo "Usage: dictools get-bil-omegawiki <source-lang> <target-lang> <dic-out>"
+      echo "Usage: apertium-dixtools get-bil-omegawiki <source-lang> <target-lang> <dic-out>"
       echo "";
       echo "More information: http://wiki.apertium.org/wiki/Getting_bilingual_dictionaries_from_OmegaWiki";
       echo "";
@@ -186,7 +186,7 @@ function format-1line() {
    then
    	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
    else
-      echo "Usage: dictools format-1line [alignP alignR] <input-dic> <output-dic>"
+      echo "Usage: apertium-dixtools format-1line [alignP alignR] <input-dic> <output-dic>"
       echo "       where alignP / alignR: column to align <p> and <r> entries. 0 = no indent."
       echo "";
       echo "Example: ' format-1line old.dix new.dix '   will give indent a la"
@@ -209,21 +209,25 @@ function format-1line() {
 #
 #  read-dic
 #
-function dic-reader() {
+function list() {
    if [ $nparams -ge 3 ]
    then
    	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
    else
-      echo "Usage: dictools dic-reader <action> <dic>"
-      echo "where <action> can be:"
-      echo "   list-paradigms:   list of paradigms";
-      echo "   list-lemmas:      list of lemmas";
-      echo "   list-definitions: list of <sdef> elemenst";
-      echo "   list-pairs:       list of pairs (for bilingual dictionaries";
+      echo "Usage: apertium-dixtools list <thing> <dic>"
+      echo "where <thing> can be:"
+      echo "   paradigms:   list of paradigms";
+      echo "   lemmas:      list of lemmas";
+      echo "   definitions: list of <sdef> elemenst";
+      echo "   pairs:       list of pairs (for bilingual dictionaries)";
       echo "";
       echo "More information: http://wiki.apertium.org/wiki/Dictionary_reader";
       echo "";
    fi
+}
+
+function dic-reader() {
+list $params;
 }
 
 #
@@ -234,7 +238,7 @@ function equiv-paradigms() {
    then
    	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
    else
-      echo "Usage: dictools equiv-paradigms <dic> <out>"
+      echo "Usage: apertium-dixtools equiv-paradigms <dic> <out>"
       echo "";
       echo "More information: http://wiki.apertium.org/wiki/Equivalent_paradigms";
       echo "";
@@ -249,7 +253,7 @@ function dix2trie() {
    then
    	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
    else
-      echo "Usage: dictools dic2trie <dic> <lr|rl> [<out>]"
+      echo "Usage: apertium-dixtools dic2trie <dic> <lr|rl> [<out>]"
       echo "";
    fi
 }
@@ -293,7 +297,7 @@ function apertiumize() {
    then
    	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
    else
-      echo "Usage: dictools apertiumize <txt> <out>"
+      echo "Usage: apertium-dixtools apertiumize <txt> <out>"
       echo "";
    fi
 }
@@ -321,7 +325,7 @@ function convert-mf() {
    then
    	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
    else
-      echo "Usage: dictools convert-mf <morph> <bil> <out>"
+      echo "Usage: apertium-dixtools convert-mf <morph> <bil> <out>"
       echo "";
    fi
 }
@@ -334,7 +338,7 @@ function add-same-gender() {
    then
    	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
    else
-      echo "Usage: dictools add-same-gender <morph> <bil> <out>"
+      echo "Usage: apertium-dixtools add-same-gender <morph> <bil> <out>"
       echo "";
    fi
 }
@@ -347,7 +351,7 @@ function prepare-dic() {
    then
    	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
    else
-      echo "Usage: dictools prepare-dic <bil> <missing-entries>>"
+      echo "Usage: apertium-dixtools prepare-dic <bil> <missing-entries>>"
       echo "";
       #echo "More information: http://wiki.apertium.org/wiki/Equivalent_paradigms";
       #echo "";
@@ -362,7 +366,7 @@ function complete-translation() {
    then
    	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
    else
-      echo "Usage: dictools complete-translation <bil> <src-dot> <trans-dot>"
+      echo "Usage: apertium-dixtools complete-translation <bil> <src-dot> <trans-dot>"
       echo "";
    fi
 }
@@ -375,20 +379,39 @@ function misc() {
    then
    	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
    else
-      echo "Usage: dictools misc <dic1> <dic2> <dic3> <dic4>"
+      echo "Usage: apertium-dixtools misc <dic1> <dic2> <dic3> <dic4>"
       echo "";
    fi
 }
 
 #
-#  misc
+#  format
 #
-function cat() {
+function format() {
    if [ $nparams -ge 2 ]
    then
    	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
    else
-      echo "Usage: dictools cat <input-dic> <output-dic>"
+      echo "Usage: apertium-dixtools format <input-dic> <output-dic>"
+      echo "See Generic options and http://wiki.apertium.org/wiki/Format_dictionaries";
+      echo "";
+      echo "Example ";
+   fi
+}
+
+function cat() {
+format $params;
+}
+
+#
+#  fix
+#
+function fix() {
+   if [ $nparams -ge 2 ]
+   then
+   	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
+   else
+      echo "Usage: apertium-dixtools fix <input-dic> <output-dic>"
       echo "";
    fi
 }
@@ -398,36 +421,45 @@ function cat() {
 #
 function show_help() {
    echo ""
-   echo "Usage: apertium-dixtools [task] [generic options] task parameters ..."
+   echo "Usage: apertium-dixtools [task] [generic options] [task parameters] ..."
    echo "  Tasks:"
-   echo "    cat:                print a dictionary (with format according to generic options)"
-   echo "    cross:              crosses a set of dictionaries"
-   echo "    dic-reader:         reads elements from a dictionary"
+   echo "    cross:              crosses 2 language pairs (using a linguistic resources XML file)"
+   echo "    cross-param:        crosses 2 language pairs (using command line parameters)"
+  #echo "    merge-bil:          merges two bilingual dictionaries (bidix)"
+   echo "    merge-morph:        merges two morphological dictionaries (monodix)"
+   echo "    equiv-paradigms:    finds equivalent paradigms and updates references"
+   echo "    list:               lists entries in a dictionary"
    echo "    dix2tiny:           generates linguistic data for mobile platforms (j2me, palm)"
    echo "    dix2trie:           creates a Trie from an existing bilingual dictionary"
-   echo "    equiv-paradigms:    finds equivalent paradigms and updates references"
-   echo "    format:             formats a dictionary"   
-   echo "    format-1line:       formats a dictionary (1 element per line)"
-   #echo "    merge-bil:          merges two bilingual dictionaries"
-   echo "    merge-morph:        merges two morphological dictionaries"
-   #echo "    process-xincludes:  processes and expands all xincludes in the dictionary"
+  #echo "    process-xincludes:  processes and expands all xincludes in the dictionary"
    echo "    reverse-bil:        reverses a bilingual dictionary"
    echo "    sort:               sorts (and groups by category) a dictionary"
+   echo "    format:             formats a dictionary (format according to Generic Options)"
+   echo "    fix:                fix a dictionary (remove duplicate entries, convert spaces to <b/>)" 
+   echo "  For help on a task, invoke it without parameters"
    echo ""
-   echo "  Generic options:"
-   echo "    -debug              prints (possibly) some debugging information"
-   echo "    -noProcComments     don't add comments telling which processing was done"
-   echo "    -stripEmptyLines    removes empty lines originating from original file"
+   echo "  Generic options:  (mostly for tasks that outputs dix files)"
+   echo "    -debug              print extra debugging information"
+   echo "    -noProcComments     don't add processing comments (telling which processing was done)"
+   echo "    -stripEmptyLines    removes empty lines (originating from original file)"
+   echo "    -alignBidix         align for a bidix (<p> or <i> at col 10, <r> at col 55)"
+   echo "    -alignMonodix       align for a monodix (pardef 10, 30, other entries 25, 45)"
    echo "    -align [P R]        custom alignment (default <p> or <i> at col 10, <r> at col 55)"
-   echo "    -alignpardef [P R]  paradigm elements (can differ from general alignment)"
-   echo "    -alignBidix         predefined for a bidix (<p> or <i> at col 10, <r> at col 55)"
-   echo "    -alignMonodix       predefined for a monodix (pardef 10, 30, other entries 25, 45)"
+   echo "    -alignpardef [P R]  paradigm alignment (can differ from general alignment)"
+   echo ""
+   echo "  Any -align option implies 'compact output style' (one dictionary entry per line)"
+   echo "  otherwise the output is in noncompact XML style (one XML tag per line, lots of indents)"
+   echo ""
+   echo "  Use - as file name for piping (reading/writing .dix files from/to standard input/output)"
    echo ""
    echo "More info: http://wiki.apertium.org/wiki/Apertium-dixtools"
    echo ""
    exit 127
 }
 
+function help() {
+show_help;
+}
 
 function show_help2() {
    	java ${java_options} help $0 $1 $2 $3 $4 $5 $6 $7 $8 $9
