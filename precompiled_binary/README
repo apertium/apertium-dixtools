@@ -21,6 +21,6 @@ tar -C / -xvf apertium-dixtools-0.90.tgz
 
 MAKING A NEW BINARY RELEASE
 cd ..
-ant install
+sudo ant install
 cd -
 tar -czvf apertium-dixtools-0.90.tgz /usr/local/apertium-dixtools /usr/local/bin/apertium-dixtools
