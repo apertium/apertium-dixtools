@@ -1,0 +1,26 @@
+Directory for binary stable release (not updated often).
+
+Its a pain and totally unneccesary that people have to compile 
+Java things themselves (its platform independent, remenmber? :-)
+
+Its not necessary that all that wants to use dixtools must
+compile it. They don't need for people to struggle JDK, ant and
+Netbeans. They just need a Java runtime (JRE) and a precompiled
+binary.
+
+
+INSTALLING
+sudo tar -C / -xvf apertium-dixtools-0.90.tgz
+
+if you don't have sudo, try
+su
+tar -C / -xvf apertium-dixtools-0.90.tgz
+
+
+
+
+MAKING A NEW BINARY RELEASE
+cd ..
+ant install
+cd -
+tar -czvf apertium-dixtools-0.90.tgz /usr/local/apertium-dixtools /usr/local/bin/apertium-dixtools
