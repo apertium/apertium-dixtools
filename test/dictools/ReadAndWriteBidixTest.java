@@ -142,7 +142,7 @@ public class ReadAndWriteBidixTest {
   public void testprintXML_aligned20_80_also_pardefs() throws IOException, InterruptedException {
     if (DixtoolsTestSuite.onlyCLI) return;
     String outfile = rm("tmp_aligned20_80_also_pardefs.xml");
-    DicOpts opt = new DicOpts(true, true, 20, 80);
+    DicOpts opt = new DicOpts(true, true, 0, 20, 80);
     dic.printXML(outfile, opt);
     String diff=exec( "diff test/correct_output_aligned20_80_also_pardefs.xml "+outfile);
     Assert.assertEquals("Difference", "", diff);

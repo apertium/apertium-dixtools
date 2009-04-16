@@ -41,6 +41,7 @@ public class DicOpts implements Cloneable {
    */
   public boolean sectionElementsAligned = false;
   public boolean pardefElementsAligned = false;
+  public int alignE = 0;
   public int alignP = 10;
   public int alignR = 55;
 
@@ -50,6 +51,7 @@ public class DicOpts implements Cloneable {
         sectionElementsAligned = source.sectionElementsAligned;
         pardefElementsAligned = source.pardefElementsAligned;
         pardefAlignOpts = source.pardefAlignOpts;
+        alignE = source.alignE;
         alignP = source.alignP;
         alignR = source.alignR;
     }
@@ -64,12 +66,14 @@ public class DicOpts implements Cloneable {
    * Standard XML-like format with separate line and indent for each element
    */
   public static final DicOpts STD = new DicOpts();
-  public static final DicOpts STD_ALIGNED = new DicOpts(false, true, 10, 55);
 
-  public static final DicOpts STD_ALIGNED_BIDIX = new DicOpts(true, true, 10, 55);
-  public static final DicOpts STD_ALIGNED_MONODIX = new DicOpts(true, true, 25, 45).setPardefAlign(new DicOpts(true, true, 10, 30));
+  public static final DicOpts STD_ALIGNED_BIDIX = new DicOpts(true, true, 0, 10, 55).setPardefAlign(new DicOpts(true, true, 2, 12, 32));
+  public static final DicOpts STD_ALIGNED_MONODIX = new DicOpts(true, true, 0, 25, 45).setPardefAlign(new DicOpts(true, true, 2, 12, 32));
   
-  public static final DicOpts STD_1_LINE = new DicOpts(false, true, 0, 0);
+  public static final DicOpts STD_ALIGNED = STD_ALIGNED_BIDIX;
+
+
+  public static final DicOpts STD_1_LINE = new DicOpts(false, true, 2, 0, 0);
   public static final DicOpts STD_NOW_1_LINE = STD_1_LINE.copy().setNowAlign(true);
 
   
@@ -86,9 +90,10 @@ public class DicOpts implements Cloneable {
   public  DicOpts() {
   }
 
-  public DicOpts(boolean alignPardefs, boolean alignEntries, int alignmentP, int alignmentR) {
+  public DicOpts(boolean alignPardefs, boolean alignEntries, int alignmentE, int alignmentP, int alignmentR) {
     this.pardefElementsAligned = alignPardefs;
     this.sectionElementsAligned = alignEntries;
+    this.alignE = alignmentE;
     this.alignP = alignmentP;
     this.alignR = alignmentR;
   }

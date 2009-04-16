@@ -92,7 +92,7 @@ public class ProcessDics extends AbstractDictTool {
             opt.copyAlignSettings(DicOpts.STD_ALIGNED_BIDIX);
           } else  if (arg.equalsIgnoreCase("-align")) {
             align = opt.sectionElementsAligned = true;
-          } else if (arg.equalsIgnoreCase("-alignPardef")) {
+          } else if (arg.startsWith("-alignpar")) {
             alignPardef = opt.pardefElementsAligned = true;
           } else {
             unprocessed.add(args[i]);
@@ -108,9 +108,22 @@ public class ProcessDics extends AbstractDictTool {
                 o.pardefAlignOpts = o.copy();
                 o = o.pardefAlignOpts;
             }
-            o.alignP = align1;
-            o.alignR = align2;
-            i += 2;
+
+            // OK, see if a 3rd number comes. In thas case the E align was also specified....
+            try {
+                int align3 = Integer.parseInt(args[i+3]);
+                // Yes,  a number. Then both E, R and R alignment was specified.
+                o.alignE = align1;
+                o.alignP = align2;
+                o.alignR = align3;
+                i += 3;
+            } catch (Exception e) {
+                // No,  not a number. Then only R and R alignment was specified.
+                o.alignP = align1;
+                o.alignR = align2;
+                i += 2;
+            }
+
           } catch (Exception e) {
           }            
         }

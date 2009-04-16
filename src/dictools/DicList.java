@@ -19,6 +19,7 @@
  */
 package dictools;
 
+import dics.elements.utils.SElementList;
 import dictools.xml.DictionaryReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,7 +28,10 @@ import java.net.URL;
 
 import dics.elements.dtd.DictionaryElement;
 import dics.elements.dtd.EElement;
+import dics.elements.dtd.Element;
+import dics.elements.dtd.IElement;
 import dics.elements.dtd.LElement;
+import dics.elements.dtd.PElement;
 import dics.elements.dtd.PardefElement;
 import dics.elements.dtd.PardefsElement;
 import dics.elements.dtd.RElement;
@@ -35,6 +39,7 @@ import dics.elements.dtd.SdefElement;
 import dics.elements.dtd.SdefsElement;
 import dics.elements.dtd.SectionElement;
 import dics.elements.utils.Msg;
+import java.util.HashMap;
 
 /**
  * 
@@ -61,11 +66,8 @@ public class DicList {
     private String url;
 
       protected Msg msg = new Msg();
+    private SElementList elementsA;
 
-    /**
-     * 
-     * 
-     */
     public DicList(String fileName) {
         DictionaryReader dicReader = new DictionaryReader(fileName);
         DictionaryElement d = dicReader.readDic();
@@ -75,10 +77,6 @@ public class DicList {
     public DicList() {
     }
 
-    /**
-     * 
-     * 
-     */
     public void getListOfParadigms() {
         DictionaryElement dic = getDic();
         PardefsElement paradigms = dic.getPardefsElement();
@@ -88,10 +86,6 @@ public class DicList {
         }
     }
 
-    /**
-     * 
-     * 
-     */
     public void getListOfLemmas() {
         DictionaryElement dic = getDic();
 
@@ -121,10 +115,6 @@ public class DicList {
         }
     }
 
-    /**
-     * 
-     * 
-     */
     public void getPairs() {
         DictionaryElement dic = getDic();
 
@@ -146,9 +136,55 @@ public class DicList {
         msg.err("# " + nLemmas + " entries.");
     }
 
-    /**
-     * 
-     */
+
+
+    private void expand(EElement ee, HashMap<String, PardefElement> pardefs) {
+        if ("yes".equals(ee.getIgnore())) return;
+
+
+/* XXXXXX
+                for (Element e : ee.getChildren()) {
+                    if (e instanceof IElement) {
+                        IElement i = (IElement) e;
+                        elementsA = i.getSElements();
+                    } else
+                    if (e instanceof PElement) {
+                        PElement p = (PElement) e;
+                        if (side.equals("L")) {
+                            LElement lE = p.getL();
+                            elementsA = lE.getSElements();
+                        }
+                        if (side.equals("R")) {
+                            RElement rE = p.getR();
+                            elementsA = rE.getSElements();
+                        }
+                    }
+                }
+      */
+
+    }
+
+    private void ltExpand() {
+        DictionaryElement dic = getDic();
+        HashMap<String, PardefElement> pardefs = new HashMap<String, PardefElement>();
+
+        for (PardefElement paradigm : dic.getPardefsElement().getPardefElements()) {
+            msg.out(paradigm.getName() + "\n");
+            pardefs.put(paradigm.getName(), paradigm);
+        }
+
+        int nLemmas = 0;
+        for (SectionElement section : dic.getSections()) {
+            for (EElement ee : section.getEElements()) {
+                expand(ee, pardefs);
+            }
+        }
+        msg.err("# " + nLemmas + " entries.");
+
+    }
+
+
+
     public void getListWithDot() {
         DictionaryElement dic = getDic();
 
@@ -183,6 +219,9 @@ public class DicList {
         }
         if (action.endsWith("dot")) {
             getListWithDot();
+        }
+        if (action.endsWith("expand")) {
+            ltExpand();
         }
     }
 
