@@ -63,7 +63,7 @@ public class DicFix  extends AbstractDictTool{
      * @param dic
      */
     public DicFix(DictionaryElement dic) {
-        dic = dic;
+        this.dic = dic;
     }
 
     /**
@@ -74,6 +74,7 @@ public class DicFix  extends AbstractDictTool{
 
  
         // Check for duplicate entries in paradigm
+        if (dic.getPardefsElement() != null)
         for (PardefElement par :  dic.getPardefsElement().getPardefElements()) {
             HashSet<String> ees = new HashSet<String>();
             EElement eePrevious = null;
@@ -93,8 +94,7 @@ public class DicFix  extends AbstractDictTool{
             if (removed) msg.err("Removed duplicate entries in paradigm "+par.getName());
         }
 
-
-        DicCross.addMissingLemmas(dic);
+        if (dic.isMonol()) DicCross.addMissingLemmas(dic);
 
 
         EHashMap eMap = new EHashMap();
