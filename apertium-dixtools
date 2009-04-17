@@ -445,7 +445,7 @@ function show_help() {
    echo "    -alignBidix         align a bidix (<p> or <i> at col 10, <r> at col 55)"
    echo "    -alignMonodix       align a monodix (pardef 10, 30, other entries 25, 45)"
    echo "    -align [[E] P R]    custom align (default <p>/<i> at col 10, <r> at col 55)"
-   echo "    -alignpardef [P R]  paradigm alignment (can differ from general alignment)"
+   echo "    -alignpardef [[E] P R] paradigm alignment (if differ from general align)"
    echo ""
    echo "  Any -align option implies 'compact output style' (one dict entry per line)"
    echo "  otherwise output is noncompact XML style (one tag per line, lots of indents)"

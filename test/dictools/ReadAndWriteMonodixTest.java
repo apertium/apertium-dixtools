@@ -139,7 +139,7 @@ public class ReadAndWriteMonodixTest {
 
     DicFix df = new DicFix(dic);
     df.setOut(outfile);
-    DictionaryElement dicFormatted = df.format();
+    DictionaryElement dicFormatted = df.fix();
     //dicFormatted.printXML(outfile,df.getOpt());
     String diff=exec( "diff test/correct_output_DicFormat.xml "+outfile);    
     Assert.assertTrue("Difference: "+diff, diff.isEmpty());
