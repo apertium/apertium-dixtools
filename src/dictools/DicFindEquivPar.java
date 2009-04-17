@@ -73,108 +73,111 @@ public class DicFindEquivPar  extends AbstractDictTool {
      * 
      */
     public void findEquivalents() {
-        ArrayList<PardefElement> canBeRemoved = new ArrayList<PardefElement>();
 
-        PardefsElement pardefs1 = getDic().getPardefsElement();
-        PardefsElement pardefs2 = getDic().getPardefsElement();
+        ArrayList<PardefElement> pardefs = dic.getPardefsElement().getPardefElements();
 
-        HashMap<String, PardefElement> processed = new HashMap<String, PardefElement>();
-        HashMap<String, String> equivalents = new HashMap<String, String>();
+        HashMap<String, PardefElement> name2pardef = new HashMap<String, PardefElement>();
+        HashMap<String, String> name2replacementName = new HashMap<String, String>();
+        HashMap<String, Integer> usagecounter = new HashMap<String, Integer>();
 
-        msg.err("Equivalent paradigms:");
-        for (PardefElement par1 : pardefs1.getPardefElements()) {
-            for (PardefElement par2 : pardefs2.getPardefElements()) {
-                if (!processed.containsKey(par1.getName() + "---" + par2.getName())) {
-                    if (!par1.getName().equals(par2.getName()) && par1.equals(par2)) {
-                        msg.err("(" + par1.getName() + ", " + par2.getName() + ")");
-                        canBeRemoved.add(par2);
-                        equivalents.put(par2.getName(), par1.getName());
-                        processed.put(par1.getName() + "---" + par2.getName(), par1);
-                        processed.put(par2.getName() + "---" + par1.getName(), par2);
+        for (Iterator<PardefElement> pi =  pardefs.iterator(); pi.hasNext(); ) {
+            PardefElement par = pi.next();
+
+            // remove duplicate names
+            if (name2pardef.containsKey(par.getName())) {
+                PardefElement first = name2pardef.get(par.getName());
+                if (par.contentEquals(first)) {
+                    msg.err("Subsequent instance of " +par.getName() + " deleted");
+                    first.getEElements().addAll(par.getEElements());
+                } else {
+                    msg.err("WARNING: Subsequent instance of " +par.getName() + " has other contents than original!\nMerging the 2 paradigms (the same way as lt-toolbox would)");
+                    EElement firstEe = par.getEElements().get(0);
+                    if (firstEe!=null) {
+                        firstEe.addProcessingComment("Below is content of a subsequent definition of "+par.getName());
+                        first.getEElements().addAll(par.getEElements());
                     }
                 }
+                pi.remove();
+                continue;
             }
+            // this pararigm will be retained
+            name2pardef.put(par.getName(), par);
         }
 
-        for (PardefElement par : canBeRemoved) {
-            pardefs1.remove(par);
+        // now, start over with a fresh data structure, adding paradigms as we meet them
+        name2pardef.clear();
+
+        pardefLoop:
+        for (Iterator<PardefElement> pi =  pardefs.iterator(); pi.hasNext(); ) {
+            PardefElement par = pi.next();
+
+            // seach for existing pardef with same content and remove
+            for (PardefElement existingPardef : name2pardef.values()) {
+                if (par.contentEquals(existingPardef)) {
+                    msg.err(par.getName() + " will be replaced with "+existingPardef.getName());
+                    name2replacementName.put(par.getName(), existingPardef.getName());
+                    pi.remove();
+                    continue pardefLoop;
+                }
+            }
+
+            // this pararigm will be retained
+            name2pardef.put(par.getName(), par);
         }
-        replaceParadigm(equivalents);
-        dic.printXML(getOutFileName(),getOpt());
-    }
 
-    /**
-     * 
-     * @param equivalents
-     */
-    private void replaceParadigm(HashMap<String, String> equivalents) {
-        HashMap<String, Integer> counter = new HashMap<String, Integer>();
 
-        DictionaryElement dic = getDic();
 
-        // Paradigm definitions
+        // Iterate throught all paradigm definitions and sections and replace paradigms
+        ArrayList<EElement> allElements = new ArrayList<EElement>();
+
         for (PardefElement pardef : dic.getPardefsElement().getPardefElements()) {
-            EElementList eList = pardef.getEElements();
-            processElementList(eList, equivalents, counter);
+            allElements.addAll(pardef.getEElements());
         }
-
-        // Sections
         for (SectionElement section : dic.getSections()) {
-            EElementList eList = section.getEElements();
-            processElementList(eList, equivalents, counter);
+            allElements.addAll(section.getEElements());
         }
 
-        Set keySet = counter.keySet();
-        Iterator it = keySet.iterator();
-        msg.err("\nReplacements:");
-        while (it.hasNext()) {
-            String key = (String) it.next();
-            Integer iO = counter.get(key);
-            msg.err("'" + key + "' has been replaced " + iO + " times.");
-        }
-
-    }
-
-    /**
-     * 
-     * @param eList
-     * @param equivalents
-     * @param counter
-     */
-    private void processElementList(EElementList eList,
-            HashMap<String, String> equivalents,
-            HashMap<String, Integer> counter) {
-        for (EElement element : eList) {
-            for (Element e : element.getChildren()) {
+        // Now replace paradigms
+        HashMap<String, Integer> replacementcounter = new HashMap<String, Integer>();
+        for (EElement ee : allElements) {
+            for (Element e : ee.getChildren()) {
                 if (e instanceof ParElement) {
                     ParElement parE = (ParElement) e;
-                    String prevParName = parE.getValue();
-                    if (equivalents.containsKey(parE.getValue())) {
-                        incrementReplacementCounter(counter, parE.getValue());
-                        parE.setValue(equivalents.get(parE.getValue()));
-                        parE.addProcessingComment(prevParName + "' was replaced");
+                    String name = parE.getValue();
+                    String newName = name2replacementName.get(name);
+                    if (newName != null) {
+                        parE.setValue(newName);
+                        parE.addProcessingComment(name + "' was replaced");
+
+                        Integer count = replacementcounter.get(name);
+                        replacementcounter.put(name, count==null? 1 : count + 1);
+                        name = newName; // for use below
                     }
+
+                    Integer count = usagecounter.get(name);
+                    usagecounter.put(name, count==null? 1 : count + 1);
                 }
             }
         }
+
+        if (replacementcounter.isEmpty()) msg.err("\nNo replacements were made");
+        else for (String key : replacementcounter.keySet()) {
+            msg.err("'" + key + "' has been replaced " + replacementcounter.get(key) + " times.");
+        }
+
+        // find unused pardefs and delete them
+        for (Iterator<PardefElement> pi =  pardefs.iterator(); pi.hasNext(); ) {
+            PardefElement par = pi.next();
+            if (usagecounter.get(par.getName())==null) {
+                msg.err("Unused paradigm  " +par.getName() + " deleted");
+                pi.remove();
+            }
+        }
+
+        dic.printXML(getOutFileName(),getOpt());
+
     }
 
-    /**
-     * 
-     * @param counter
-     * @param paradigmName
-     */
-    private void incrementReplacementCounter(
-            HashMap<String, Integer> counter, String paradigmName) {
-        if (!counter.containsKey(paradigmName)) {
-            counter.put(paradigmName, new Integer(1));
-        } else {
-            Integer iO = counter.get(paradigmName);
-            int i = iO.intValue();
-            i++;
-            counter.put(paradigmName, new Integer(i));
-        }
-    }
 
     /**
      * @return the dic

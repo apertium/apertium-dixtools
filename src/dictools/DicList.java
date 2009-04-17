@@ -150,11 +150,11 @@ public class DicList {
                     } else
                     if (e instanceof PElement) {
                         PElement p = (PElement) e;
-                        if (side.equals("L")) {
+                        if (side.contentEquals("L")) {
                             LElement lE = p.getL();
                             elementsA = lE.getSElements();
                         }
-                        if (side.equals("R")) {
+                        if (side.contentEquals("R")) {
                             RElement rE = p.getR();
                             elementsA = rE.getSElements();
                         }

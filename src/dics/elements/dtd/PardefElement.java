@@ -107,10 +107,10 @@ public class PardefElement extends Element {
     }
 
     /**
-     * 
+     * Equals method. Check on equality of pardef elements, regardless to order.
      * @param pardef2
      * @return Undefined         */
-    public boolean equals(PardefElement pardef2) {
+    public boolean contentEquals(PardefElement pardef2) {
         EElementList eList1 = getEElements();
         EElementList eList2 = pardef2.getEElements();
 
@@ -132,50 +132,6 @@ public class PardefElement extends Element {
         return true;
     }
 
-    /**
-     * 
-     * @param pardef2
-     * @return Undefined         */
-    public boolean equalsOld(PardefElement pardef2) {
-
-        ArrayList<EElement> v1 = getEElements();
-        ArrayList<EElement> v2 = pardef2.getEElements();
-
-        int maxi = v1.size();
-        int maxj = v2.size();
-
-        if (maxi != maxj) {
-            return false;
-        }
-
-        boolean[] c1 = new boolean[maxi];
-        boolean[] c2 = new boolean[maxj];
-
-        for (int i = 0; i < maxi; i++) {
-            String sv1 = v1.get(i).toStringAll();
-            for (int j = 0; j < maxj; j++) {
-                String sv2 = v2.get(j).toStringAll();
-                if ((sv1 != null) && (sv2 != null)) {
-                    if (!c1[i] && !c2[j] && sv1.equals(sv2)) {
-                        c1[i] = true;
-                        c2[j] = true;
-                    }
-                }
-            }
-        }
-
-        for (int i = 0; i < maxi; i++) {
-            if (!c1[i]) {
-                return false;
-            }
-        }
-        for (int j = 0; j < maxj; j++) {
-            if (!c2[j]) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     /**
      * 
@@ -229,7 +185,7 @@ public class PardefElement extends Element {
      * @param mon
      * @param category
      * @param equivCategory
-     * @return Undefined         */
+     * @return Undefined         
     public static PardefElement duplicateParadigm(EElement e,
             DictionaryElement mon, String category,
             String equivCategory) {
@@ -254,6 +210,7 @@ public class PardefElement extends Element {
         }
         return dupPardefE;
     }
+*/
 
     /**
      * 

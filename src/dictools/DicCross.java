@@ -1226,7 +1226,7 @@ public class DicCross  extends AbstractDictTool{
      * @param dic
      * @return Dictionary with missing lemmas
      */
-    private DictionaryElement addMissingLemmas(DictionaryElement dic) {
+    public static DictionaryElement addMissingLemmas(DictionaryElement dic) {
         int c = 0;
         try {
             for (SectionElement s : dic.getSections()) {
@@ -1255,7 +1255,7 @@ public class DicCross  extends AbstractDictTool{
                 }
             }
         } catch (NullPointerException npe) {
-            msg.log(npe.getMessage() + "\n");
+            npe.printStackTrace();
         }
         //msg.out("[-] " + c + " missing 'lm' atrributes generated\n");
         return dic;

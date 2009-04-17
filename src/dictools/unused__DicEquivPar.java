@@ -124,7 +124,7 @@ public class unused__DicEquivPar {
             for (PardefElement pardefA2 : pardefscopy) {
                 // System.err.println("Comparando " + pardefA1.getName() + " y "
                 // + pardefA2.getName() + " ...");
-                if (!pardefA1.getName().equals(pardefA2.getName()) && pardefA1.equals(pardefA2)) {
+                if (!pardefA1.getName().equals(pardefA2.getName()) && pardefA1.contentEquals(pardefA2)) {
                     System.err.println(pardefA1.getName() + " es equivalente a " + pardefA2.getName());
                     nEquiv++;
                     /*

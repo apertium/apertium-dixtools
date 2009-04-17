@@ -19,18 +19,22 @@
  */
 package dictools;
 
+import dics.elements.dtd.ContentElement;
 import dictools.xml.DictionaryReader;
 import dics.elements.dtd.DictionaryElement;
 import dics.elements.dtd.EElement;
 import dics.elements.dtd.Element;
 import dics.elements.dtd.IElement;
 import dics.elements.dtd.LElement;
+import dics.elements.dtd.PardefElement;
 import dics.elements.dtd.RElement;
 import dics.elements.dtd.SectionElement;
 import dics.elements.dtd.TextElement;
 import dics.elements.utils.EElementList;
 import dics.elements.utils.EHashMap;
 import dics.elements.utils.Msg;
+import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  * 
@@ -42,7 +46,7 @@ public class DicFix  extends AbstractDictTool{
     /**
      * 
      */
-    private DictionaryElement dicFormatted;
+    private DictionaryElement dic;
     /**
      * 
      */
@@ -59,69 +63,80 @@ public class DicFix  extends AbstractDictTool{
      * @param dic
      */
     public DicFix(DictionaryElement dic) {
-        dicFormatted = dic;
+        dic = dic;
     }
 
     /**
      * 
      * @return Undefined         
      */
-    public DictionaryElement format() {
+    public DictionaryElement fix() {
+
+ 
+        // Check for duplicate entries in paradigm
+        for (PardefElement par :  dic.getPardefsElement().getPardefElements()) {
+            HashSet<String> ees = new HashSet<String>();
+            EElement eePrevious = null;
+            boolean removed = false;
+            for (Iterator<EElement> eei = par.getEElements().iterator(); eei.hasNext(); ) {
+                EElement ee = eei.next();
+                String s = ee.toStringAll();
+                boolean alreadyThere = !ees.add(s);
+                if (alreadyThere) { // remove if this entry already existed
+                    moveCommentsToPrevious(eePrevious, ee);
+                    eei.remove();
+                    removed = true;
+                }  else {
+                    eePrevious = ee;
+                }
+            }
+            if (removed) msg.err("Removed duplicate entries in paradigm "+par.getName());
+        }
+
+
+        DicCross.addMissingLemmas(dic);
+
+
         EHashMap eMap = new EHashMap();
-        for (SectionElement section : dicFormatted.getSections()) {
+        for (SectionElement section : dic.getSections()) {
             int duplicated = 0;
-            EElementList elements = section.getEElements();
-            for (EElement e : elements) {
-                String e1Key = e.toString();
+            EElement eePrevious = null;
+
+            for (Iterator<EElement> ei =section.getEElements().iterator(); ei.hasNext(); ) {
+                EElement ee = ei.next();
+
+                String e1Key = ee.toString();
                 if (!eMap.containsKey(e1Key)) {
-                    eMap.put(e1Key, e);
-                    IElement iE = e.getI();
-                    if (iE != null) {
-                        for (Element child : e.getI().getChildren()) {
-                            if (child instanceof TextElement) {
-                                TextElement tE = (TextElement) child;
-                                String v = tE.getValue();
-                                v = v.replaceAll("\\s", "<b/>");
-                                tE.setValue(v);
-                            }
-                        }
-                    }
-                    LElement lE = e.getLeft();
-                    if (lE != null) {
-                        for (Element child : e.getLeft().getChildren()) {
-                            if (child instanceof TextElement) {
-                                TextElement tE = (TextElement) child;
-                                String v = tE.getValue();
-                                v = v.replaceAll("\\s", "<b/>");
-                                tE.setValue(v);
-                            }
-                        }
-                    }
-                    RElement rE = e.getRight();
-                    if (rE != null) {
+                    eMap.put(e1Key, ee);
 
-                        for (Element child : e.getRight().getChildren()) {
-                            if (child instanceof TextElement) {
-                                TextElement tE = (TextElement) child;
-                                String v = tE.getValue();
-                                v = v.replaceAll("\\s", "<b/>");
-                                tE.setValue(v);
+                    for (Element irlelem : ee.getChildren()) {
+                        if (irlelem instanceof ContentElement) {
+                            for (Element child : ((ContentElement)irlelem).getChildren()) {
+                                if (child instanceof TextElement) {
+                                    TextElement tE = (TextElement) child;
+                                    String v = tE.getValue();
+                                    v = v.replaceAll("\\s", "<b/>");
+                                    tE.setValue(v);
+                                }
                             }
                         }
                     }
 
+                    eePrevious = ee;
                 } else {
-                    String left = e.getValue("L");
-                    String right = e.getValue("R");
+                    String left = ee.getValue("L");
+                    String right = ee.getValue("R");
                     msg.err("Duplicated: " + left + "/" + right + "\n");
                     duplicated++;
+                    moveCommentsToPrevious(eePrevious, ee);
+                    ei.remove();
                 }
             }
             String errorMsg = duplicated + " duplicated entries in section '" + section.getID() + "'\n";
             msg.err(errorMsg);
         }
-        dicFormatted.printXML(this.getOut(),getOpt());
-        return dicFormatted;
+        dic.printXML(this.getOut(),getOpt());
+        return dic;
     }
 
     /**
@@ -130,7 +145,14 @@ public class DicFix  extends AbstractDictTool{
      */
     public void doFormat() {
         processArguments();
-        actionFormat();
+        actionFix();
+    }
+
+    public void moveCommentsToPrevious(EElement eePrevious, EElement ee) {
+        // remove if this entry already existed
+        if (eePrevious!=null&&!(ee.getPrependCharacterData()+ee.getAppendCharacterData()).trim().isEmpty()) {
+            eePrevious.addAppendCharacterData("\n"+ee.getPrependCharacterData()+ee.getAppendCharacterData());
+        }
     }
 
     /**
@@ -143,7 +165,7 @@ public class DicFix  extends AbstractDictTool{
         DictionaryReader dicReader = new DictionaryReader(arguments[1]);
         DictionaryElement dic = dicReader.readDic();
         dicReader = null;
-        setDicFormatted(dic);
+        setDic(dic);
         this.setOut(arguments[2]);
     }
 
@@ -151,9 +173,9 @@ public class DicFix  extends AbstractDictTool{
      * 
      * 
      */
-    private void actionFormat() {
-        DictionaryElement dicFormatted = format();
-        msg.err("Writing formatted dictonary to " + getOut());
+    private void actionFix() {
+        DictionaryElement dicFormatted = fix();
+        msg.err("Writing fixed dictonary to " + getOut());
         dicFormatted.printXML(getOut(),getOpt());
     }
 
@@ -161,8 +183,8 @@ public class DicFix  extends AbstractDictTool{
      * @param dicFormatted
      *                the dicFormatted to set
      */
-    private void setDicFormatted(DictionaryElement dicFormatted) {
-        this.dicFormatted = dicFormatted;
+    private void setDic(DictionaryElement dicFormatted) {
+        this.dic = dicFormatted;
     }
 
     /**

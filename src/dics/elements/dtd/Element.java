@@ -66,6 +66,15 @@ public class Element implements Cloneable, CharacterDataNeighbour {
       this.prependCharacterData = prependCharacterData;
     }
     
+    public String getPrependCharacterData() {
+      return prependCharacterData;
+    }
+
+    public String getAppendCharacterData() {
+      return appendCharacterData;
+    }
+
+
     /**
      * blanks, newlines and XML processingComments originating from a original loaded file. Will be added after the XML elemen (before processingComments)
      */
@@ -77,6 +86,11 @@ public class Element implements Cloneable, CharacterDataNeighbour {
     public void setAppendCharacterData(String appendCharacterData) {
       this.appendCharacterData = appendCharacterData;
     }
+
+    public void addAppendCharacterData(String moreappendCharacterData) {
+      this.appendCharacterData = appendCharacterData + moreappendCharacterData;
+    }
+
 
 
         /**
