@@ -111,21 +111,12 @@ public class ParElement extends Element {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
         if (!opt.noProcessingComments) dos.append(makeCommentIfData(processingComments));
-        
-        String prms = "";
-        if (prm != null) {
-            for (int i=0;i<prm.length; i++) if (prm[i]!=null) prms+=" prm"+(i==0?"":i)+"=\"" + prm[i] + "\"";
-        }
 
-        String saAttr = "";
-        if (this.sa != null) {
-            saAttr = " sa=\"" + sa + "\" ";
-        }
 
         if (opt.nowAlign) {
-          dos.append("<" + getTagName() + " n=\"" + n + "\"" + prms + saAttr + "/>" );
+          dos.append(toString());
         } else {
-          dos.append(tab(4) + "<" + getTagName() + " n=\"" + n + "\"" +prms + saAttr + "/> "  + "\n");
+          dos.append(tab(4) + toString() +  " \n");
         }
     }
 
@@ -135,7 +126,8 @@ public class ParElement extends Element {
      */
     @Override
     public String toString() {
-        return "<" + getTagName() + " n=\"" + n + "\"/> ";
+        String saAttr = sa==null?"":" sa=\"" + sa + "\" ";
+        return "<" + getTagName() + " n=\"" + n + "\"" + prmToString() + saAttr + "/>" ;
     }
 
   public String[] getPrm() {
@@ -147,6 +139,18 @@ public class ParElement extends Element {
     if (prm==null) prm=new String[10];
     prm[n] = v;
   }
+
+    private String prmToString() {
+        String prms="";
+        if (prm!=null) {
+            for (int i=0; i<prm.length; i++) {
+                if (prm[i]!=null) {
+                    prms+=" prm"+(i==0?"":i)+"=\""+prm[i]+"\"";
+                }
+            }
+        }
+        return prms;
+    }
 
 
 }

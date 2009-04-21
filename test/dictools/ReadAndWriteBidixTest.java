@@ -68,19 +68,6 @@ public class ReadAndWriteBidixTest {
     return ReadAndWriteMonodixTest.exec(cmd);
   }
   
-  @Test
-  public void testDicFormat() throws IOException, InterruptedException {
-    if (DixtoolsTestSuite.onlyCLI) return;
-    String outfile = rm("tmp_testDicFormat-eo-en.xml");
-
-    DicFix df = new DicFix(dic);
-    df.setOut(outfile);
-    DictionaryElement dicFormatted = df.fix();
-    //dicFormatted.printXML(outfile,df.getOpt());
-    String diff=exec( "diff test/correct_output_DicFormat-eo-en.xml "+outfile);    
-    Assert.assertEquals("Difference", "", diff);
-    rm(outfile);
-   }
 
   @Test
   public void testprintXML_std() throws IOException, InterruptedException {
