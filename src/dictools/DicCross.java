@@ -1235,7 +1235,7 @@ public class DicCross  extends AbstractDictTool{
                         if (ee.getLemma() == null) {
                             String v = ee.getValueNoTags("L");
                             if (v != null) {
-                                String pv = ee.getParadigmValue();
+                                String pv = ee.getMainParadigmName();
                                 if (pv != null) {
                                     String[] parts = pv.split("/");
                                     if (parts.length > 1) {

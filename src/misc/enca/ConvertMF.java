@@ -106,7 +106,7 @@ public class ConvertMF {
         HashMap<String, EElement> mfElementsNouns = new HashMap<String, EElement>();
         for (EElement e : morph.getAllEntries()) {
             String lemma = e.getLemma();
-            String parName = e.getParadigmValue();
+            String parName = e.getMainParadigmName();
             if (mfPardefsNouns.containsKey(parName)) {
                 mfElementsNouns.put(lemma, e);
             }
@@ -115,7 +115,7 @@ public class ConvertMF {
         HashMap<String, EElement> mfElementsAdjs = new HashMap<String, EElement>();
         for (EElement e : morph.getAllEntries()) {
             String lemma = e.getLemma();
-            String parName = e.getParadigmValue();
+            String parName = e.getMainParadigmName();
             if (mfPardefsAdjs.containsKey(parName)) {
                 mfElementsAdjs.put(lemma, e);
             }

@@ -314,12 +314,12 @@ public class DicMerge  extends AbstractDictTool{
                 // System.err.println("'" + e2.getLemma() + "' already
                 // exists.");
                 common++;
-                String parName2 = e2.getParadigmValue();
+                String parName2 = e2.getMainParadigmName();
 
                 if (parName2 != null) {
 
                     EElement e1 = eMap.get(e2Key);
-                    String parName1 = e1.getParadigmValue();
+                    String parName1 = e1.getMainParadigmName();
 
                     if (!parName1.equals(parName2)) {
                         msg.log("Paradigms for <" + e1.getLemma() + "> : (" + parName1 + ", " + parName2 + ")");

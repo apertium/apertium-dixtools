@@ -156,6 +156,7 @@ public class Msg {
      */
     public void log(String text) {
         if (isDebug()) {
+        System.out.println(text);
             if (log == null) {
                 openLogStream(logFileName);
             }

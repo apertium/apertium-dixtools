@@ -82,6 +82,7 @@ public class ProcessDics extends AbstractDictTool {
           boolean align=false, alignPardef=false;
           if (arg.equals("-debug")) {
             opt.debug=true;
+            msg.setDebug(true);
           } else if (arg.equalsIgnoreCase("-noProcComments")) {
             opt.noProcessingComments=true;
           } else if (arg.equalsIgnoreCase("-stripEmptyLines")) {

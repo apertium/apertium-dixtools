@@ -78,7 +78,7 @@ public class AssignParadigm extends AbstractDictTool {
 
         for (SectionElement section : dic.getSections()) {
             for (EElement ee : section.getEElements()) {
-                String parName = ee.getParadigmValue();
+                String parName = ee.getMainParadigmName();
                 if (parName != null) {
                     String right = ee.getSide("R").getValue();
                     np.put(right, parName);

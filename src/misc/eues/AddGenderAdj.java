@@ -88,7 +88,7 @@ public class AddGenderAdj {
             for (EElement ee : section.getEElements()) {
                 String lemma = ee.getLemma();
                 if (lemma != null) {
-                    String parName = ee.getParadigmValue();
+                    String parName = ee.getMainParadigmName();
                     if ((parName != null) && parName.endsWith("__adj")) {
                         PardefElement par = pars.getParadigmDefinition(parName);
                         if (par != null) {

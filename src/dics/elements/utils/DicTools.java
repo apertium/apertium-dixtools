@@ -215,11 +215,9 @@ public class DicTools {
         EElementMap monAMap = DicTools.buildHashMon(monA.getEntries());
         EElementMap monBMap = DicTools.buildHashMon(monB.getEntries());
 
-        EElementList monAConsistent = DicTools.makeConsistent(bilABMapL,
-                "L", monAMap);
+        EElementList monAConsistent = DicTools.makeConsistent(bilABMapL,"L", monAMap);
 
-        EElementList monBConsistent = DicTools.makeConsistent(bilABMapR,
-                "R", monBMap);
+        EElementList monBConsistent = DicTools.makeConsistent(bilABMapR, "R", monBMap);
 
         Collections.sort(monAConsistent);
         consistentMons[0] = monAConsistent;
@@ -235,8 +233,7 @@ public class DicTools {
      * @param side
      * @param monMap
      */
-    private static EElementList makeConsistent(EElementMap bilABMap,
-            String side, EElementMap monMap) {
+    private static EElementList makeConsistent(EElementMap bilABMap, String side, EElementMap monMap) {
         EElementList consistentMon = new EElementList();
         Set<String> keySet = monMap.keySet();
         Iterator<String> it = keySet.iterator();
@@ -258,31 +255,6 @@ public class DicTools {
             }
         }
         return consistentMon;
-    }
-
-    /**
-     * 
-     * @param bilAB
-     * @param monA
-     * @param monC
-     * @return Undefined         
-     */
-    public static DicSet makeConsistentBilAndMonols(
-            DictionaryElement bilAB, DictionaryElement monA,
-            DictionaryElement monC) {
-        EElementList[] commonCrossedMons = DicTools.makeConsistent(bilAB,
-                monA, monC);
-        EElementList crossedMonA = commonCrossedMons[0];
-        EElementList crossedMonB = commonCrossedMons[1];
-
-        DictionaryElement monACrossed = new DictionaryElement(monA);
-        monACrossed.setMainSection(crossedMonA);
-
-        DictionaryElement monBCrossed = new DictionaryElement(monC);
-        monBCrossed.setMainSection(crossedMonB);
-
-        DicSet dicSet = new DicSet(bilAB, monACrossed, monBCrossed);
-        return dicSet;
     }
 
     /**

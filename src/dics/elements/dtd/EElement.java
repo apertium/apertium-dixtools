@@ -29,19 +29,15 @@ import dics.elements.utils.SElementList;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.Comparator;
 
 /**
  * 
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class EElement extends Element implements Cloneable,
-        Comparable<EElement> {
+public class EElement extends Element implements Cloneable,  Comparable<EElement> {
 
-    /**
-     * 
-     */
-    public static int nEElements = 0;
     /**
      * 
      */
@@ -923,14 +919,21 @@ public class EElement extends Element implements Cloneable,
     /**
      * 
      * @return Undefined         */
-    public String getParadigmValue() {
-        // Returns value of first paradigm
+    public String getMainParadigmName() {
+        // Returns value of main paradigm
+        ParElement parE = null;
         for (Element e : children) {
             if (e instanceof ParElement) {
-                ParElement parE = (ParElement) e;
-                return parE.getValue();
+                parE = (ParElement) e;
+
+                if (parE.getValue().contains("__"))
+                    return parE.getValue();
             }
         }
+        // no main paradigm (containing __) was found.
+        // assume last met paradigm is the main one, then
+        if (parE!=null) return parE.getValue();
+        // no paradimgs at all
         return null;
     }
 
@@ -1232,42 +1235,38 @@ public class EElement extends Element implements Cloneable,
         }
     }
 
-    /**
-     * 
-     * @param anotherEElement
-     * @return int value
-     * @throws java.lang.ClassCastException
-     */
-    public int compareTo(EElement anotherEElement)
-            throws ClassCastException {
 
-        if (anotherEElement == null) {
-            return -1;
+    public static class EElementComparator implements Comparator<EElement> {
+        String side;
+        public EElementComparator(String side) {
+            this.side = side;
         }
 
-        if (isRegEx()) {
-            return 0;
+        @Override
+        public int compare(EElement e1, EElement anotherEElement) {
+            if (anotherEElement == null) return -1;
+            if (e1.isRegEx()) return 0;
+            if (!(anotherEElement instanceof EElement))  throw new ClassCastException("An EElement object expected.");
+
+
+            String lemma1 = e1.getValue(side);
+
+            String lemma2 = anotherEElement.getValue(side);
+
+            if (lemma1 == null || lemma2 == null)  return 0;
+
+            int cmp = lemma1.compareTo(lemma2);
+            if (cmp!=0) return cmp;
+
+            // TODO equal lemma, check symbols
+            return cmp;
         }
+    }
 
-        if (!(anotherEElement instanceof EElement)) {
-            throw new ClassCastException("An EElement object expected.");
-        }
+    public static final EElementComparator eElementComparatorL = new EElementComparator("L");
 
-        String lemma1 = getValue("L");
-
-        String lemma2 = (anotherEElement).getValue("L");
-
-        if (lemma1 == null || lemma2 == null) {
-            return 0;
-        } else {
-            if (lemma1.compareTo(lemma2) == 0) {
-                return 0;
-            }
-            if (lemma1.compareTo(lemma2) < 0) {
-                return -1;
-            }
-        }
-        return 1;
+    public int compareTo(EElement anotherEElement)  throws ClassCastException {
+        return eElementComparatorL.compare(this, anotherEElement);
     }
 
     /**

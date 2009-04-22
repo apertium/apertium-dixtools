@@ -89,7 +89,7 @@ public class AddGender {
             for (EElement ee : section.getEElements()) {
                 String lemma = ee.getLemma();
                 if (lemma != null) {
-                    String parName = ee.getParadigmValue();
+                    String parName = ee.getMainParadigmName();
                     if ((parName != null) && parName.endsWith("__n")) {
                         PardefElement par = pars.getParadigmDefinition(parName);
                         if (par != null) {
@@ -133,7 +133,7 @@ public class AddGender {
         for (SectionElement section : bil.getSections()) {
             for (EElement ee : section.getEElements()) {
                 if (!ee.isRegEx()) {
-                    String parName = ee.getParadigmValue();
+                    String parName = ee.getMainParadigmName();
                     if (parName != null) {
                         if (parName.contains("NC")) {
                             ContentElement leftSide = ee.getSide("L");

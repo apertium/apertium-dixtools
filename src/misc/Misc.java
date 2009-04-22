@@ -270,7 +270,7 @@ public class Misc {
         HashMap<String, String> adjpars = new HashMap<String, String>();
         for (EElement ee : es_adjs.getAllEntries()) {
             String lemma = ee.getLemma();
-            String parName = ee.getParadigmValue();
+            String parName = ee.getMainParadigmName();
             if (mfpars.containsKey(parName)) {
                 adjpars.put(lemma, parName);
                 System.err.println(lemma + " is mf");

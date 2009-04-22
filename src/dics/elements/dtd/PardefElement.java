@@ -192,8 +192,8 @@ public class PardefElement extends Element {
         // Hay que cambiar la categoria (primer "s") en cada elemento 'e' en la
         // definicin del paradigma
         PardefElement dupPardefE = null;
-        String paradigmValue = e.getParadigmValue();
-        String dupParadigmValue = e.getParadigmValue();
+        String paradigmValue = e.getMainParadigmName();
+        String dupParadigmValue = e.getMainParadigmName();
         dupParadigmValue = dupParadigmValue.replaceAll("__" + equivCategory,
                 "__" + category);
 
