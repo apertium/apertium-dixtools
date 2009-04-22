@@ -294,7 +294,7 @@ public class DicCross  extends AbstractDictTool{
         }
 
         msg.out("[" + (taskOrder++) + "] Sorting crossed dictionary...\n");
-        Collections.sort(dic.getEntries());
+        Collections.sort(dic.getEntries(), EElement.eElementComparatorL);
 
         getNDCrossModel().printXML(this.getOutDir() + "patterns-not-detected.xml",getOpt());
         dics[0] = dic;

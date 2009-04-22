@@ -132,14 +132,23 @@ function reverse-bil() {
 #  sort
 #
 function sort() {
-   if [ $nparams -ge 4 ]
+   if [ $nparams -ge 3 ]
    then
    	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
 #      echo "Reading '$3' ($2)"
 #      java ${java_options} $task $2 $3 $4
 #      echo "Sorted: $4"
    else
-      echo "Usage: apertium-dixtools sort <-bil|-mon> <dic.dix> <out.dix>";
+      echo "Usage: apertium-dixtools sort [-group <symbol list>] [-right] [-ignorecase] <dic.dix> <out.dix>";
+      echo "";
+      echo "";
+      echo "  -ignorecase will sort according to value on right side (useful bidixes)";
+      echo "";
+      echo "  -right  will sort according to value on right side (useful bidixes)";
+      echo "";
+      echo "  -group <commaseparated list>  will group symbol categories together. For example:";
+      echo "     -group n,n_symbol,adj,adv,vblex,vblex_symbol ";
+      echo "     will sort all nouns, adj, adv and verbs together. Other entries will be sorted separately";
       echo "";
       echo "More information: http://wiki.apertium.org/wiki/Sort_a_dictionary";
       echo "";

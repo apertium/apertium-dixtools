@@ -427,8 +427,8 @@ public class ProcessDics extends AbstractDictTool {
      * 
      */
     private void process_sort() {
-        if (getArguments().length != 4) {
-            msg.err("Usage: java -jar path/to/apertium-dixtools.jar sort <-mon|-bil> <dic> <out>");
+        if (getArguments().length < 4) {
+            msg.err("Usage: java -jar path/to/apertium-dixtools.jar sort XXXXXXX <-mon|-bil> <dic> <out>");
             System.exit(-1);
         } else {
             DicSort tool = new DicSort();

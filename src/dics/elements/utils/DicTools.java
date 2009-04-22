@@ -219,9 +219,9 @@ public class DicTools {
 
         EElementList monBConsistent = DicTools.makeConsistent(bilABMapR, "R", monBMap);
 
-        Collections.sort(monAConsistent);
+        Collections.sort(monAConsistent, EElement.eElementComparatorL);
         consistentMons[0] = monAConsistent;
-        Collections.sort(monBConsistent);
+        Collections.sort(monBConsistent, EElement.eElementComparatorL);
         consistentMons[1] = monBConsistent;
 
         return consistentMons;

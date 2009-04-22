@@ -36,7 +36,7 @@ import java.util.Comparator;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class EElement extends Element implements Cloneable,  Comparable<EElement> {
+public class EElement extends Element implements Cloneable {
 
     /**
      * 
@@ -1242,6 +1242,8 @@ public class EElement extends Element implements Cloneable,  Comparable<EElement
             this.side = side;
         }
 
+        public boolean ignoreCase=false;
+
         @Override
         public int compare(EElement e1, EElement anotherEElement) {
             if (anotherEElement == null) return -1;
@@ -1255,7 +1257,8 @@ public class EElement extends Element implements Cloneable,  Comparable<EElement
 
             if (lemma1 == null || lemma2 == null)  return 0;
 
-            int cmp = lemma1.compareTo(lemma2);
+            
+            int cmp = ignoreCase?  lemma1.compareToIgnoreCase(lemma2) : lemma1.compareTo(lemma2);
             if (cmp!=0) return cmp;
 
             // TODO equal lemma, check symbols

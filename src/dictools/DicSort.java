@@ -28,11 +28,13 @@ import java.util.Set;
 
 import dics.elements.dtd.DictionaryElement;
 import dics.elements.dtd.EElement;
+import dics.elements.dtd.EElement.EElementComparator;
 import dics.elements.dtd.SectionElement;
 import dics.elements.utils.EElementList;
 import dics.elements.utils.Msg;
 import dics.elements.utils.SElementList;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.TreeSet;
 
 /**
@@ -49,11 +51,10 @@ public class DicSort  extends AbstractDictTool {
     /**
      * 
      */
-    private String dicType;
-    /**
-     * 
-     */
     private String out;
+
+    public boolean sortAccordingToRightSide = false;
+    private boolean ignoreCaseWhenSorting = false;
 
     /**
      * 
@@ -78,12 +79,7 @@ public class DicSort  extends AbstractDictTool {
      */
     public DictionaryElement sort() {
         DictionaryElement dicSorted = null;
-        if (DictionaryElement.BIL.equals(dicType)) {
-            dicSorted = sortBil();
-        } else
-        if (DictionaryElement.MONOL.equals(dicType)) {
-            dicSorted = sortMon();
-        } else throw new IllegalStateException(dicType);
+        dicSorted = sortDictionaryAccordingToCategories();
         return dicSorted;
     }
 
@@ -105,15 +101,23 @@ public class DicSort  extends AbstractDictTool {
         actionSort();
     }
 
+
+    Map<String, String> groupsOfCategoriesToBeSortedTogether = new LinkedHashMap<String, String>();
+
+    private void addGroupOfCategoriesToBeSortedTogether(String commaseparatedList) {
+        String[] arr = commaseparatedList.split(",");
+        for (String e:arr) groupsOfCategoriesToBeSortedTogether.put(e.trim(), commaseparatedList);
+    }
+
     private String findCategory(EElement e) {
         String par=e.getMainParadigmName();
         String cat=null;
         if (par==null) {
             SElementList sel=e.getSElements("R");
             if (sel!=null&&sel.size()>0) {
-                cat=sel.get(0).getValue()+" symbol";
+                cat=sel.get(0).getValue()+"_symbol";
             } else {
-                cat="none";
+                cat="(none)";
             }
         } else {
             String[] aux=par.split("__");
@@ -143,19 +147,28 @@ public class DicSort  extends AbstractDictTool {
      * 
      */
     private void processArguments() {
-        if (arguments[1].equals("-mon")) {
-            dicType = DictionaryElement.MONOL;
-        } else {
-            dicType = DictionaryElement.BIL;
+        int i=1;
+        while (i<arguments.length) {
+            String a = arguments[i].toLowerCase();
+            if (a.startsWith("-mon")) msg.err("Old option "+a+" is ignored");
+            else if (a.startsWith("-bil")) msg.err("Old option "+a+" is ignored");
+            else if (a.startsWith("-case") || a.startsWith("-ignorecase")) {
+                ignoreCaseWhenSorting = true;
+            } else if (a.startsWith("-right") || a.startsWith("-sortright")) {
+                sortAccordingToRightSide = true;
+            } else if (a.startsWith("-group")) {
+                String group = arguments[++i];
+                addGroupOfCategoriesToBeSortedTogether(group);
+            } else break; // not recognized, must be file name then
+            i++;
         }
 
-        DictionaryReader dicReader = new DictionaryReader(arguments[2]);
+        DictionaryReader dicReader = new DictionaryReader(arguments[i]);
         DictionaryElement dic = dicReader.readDic();
-        dic.setFileName(arguments[2]);
+        dic.setFileName(arguments[i]);
         dicReader = null;
         setDic(dic);
-        out = arguments[3];
-
+        out = arguments[i+1];
     }
 
 
@@ -168,30 +181,34 @@ public class DicSort  extends AbstractDictTool {
     }
 
 
-    private EElementList sortElementsAccordingToCategory(HashMap<String, EElementList> map, SectionElement section) {
+    private EElementList sortSectionAccordingToCategory(HashMap<String, EElementList> map, SectionElement section) {
         if (map.size()>1) {
-            msg.err("section \""+section.getID()+ "\" categories: "+map.keySet());
+            msg.err("section \""+section.getID()+ "\" categories: "+map.keySet().toString().replaceAll("[ \\[\\]]", ""));
         }
 
         EElementList listAll=new EElementList();
         EElementList categoriesWithOnlyOne=new EElementList();
+
+        EElementComparator eElementComparator = new EElementComparator(sortAccordingToRightSide ? "R":"L");
+        eElementComparator.ignoreCase = ignoreCaseWhenSorting;
+
         Iterator it=map.keySet().iterator();
         while (it.hasNext()) {
             String cat=(String) it.next();
             EElementList list=map.get(cat);
             msg.log(cat+": "+list.size());
             if (list.size()>1) {
-                Collections.sort(list);
+                Collections.sort(list, eElementComparator);
                 EElement eHead=list.get(0);
                 eHead.addProcessingComment("******************************");
-                eHead.addProcessingComment("    ("+cat+") group");
+                eHead.addProcessingComment("    group "+cat);
                 eHead.addProcessingComment("******************************");
                 listAll.addAll(list);
             } else {
                 categoriesWithOnlyOne.addAll(list);
             }
         }
-        if (categoriesWithOnlyOne.size()>1 && listAll.size()>0) {
+        if (listAll.size()>0 && categoriesWithOnlyOne.size()>0) {
             EElement eHead=categoriesWithOnlyOne.get(0);
             eHead.addProcessingComment("******************************");
             eHead.addProcessingComment("    group(s) with only one element");
@@ -202,61 +219,8 @@ public class DicSort  extends AbstractDictTool {
     }
 
 
-    /**
-     * 
-     * @return
-     */
-    private DictionaryElement sortBil() {
-
-        for (SectionElement section : dic.getSections()) {
-            HashMap<String, EElementList> map = new LinkedHashMap<String, EElementList>();
-            int lrs = 0;
-            int rls = 0;
-            int n = 0;
-
-            for (EElement e : section.getEElements()) {
-                n++;
-                SElementList sList = e.getSElements("L");
-                if (e.hasRestriction()) {
-                    String r = e.getRestriction();
-                    if (r.equals("LR")) {
-                        lrs++;
-                    }
-                    if (r.equals("RL")) {
-                        rls++;
-                    }
-                }
-                /*
-                String cat;
-                if (sList != null) {
-                    if (sList.size() > 0) {
-                        cat = sList.get(0).getValue();
-                    } else {
-                        cat = "none";
-                    }
-                    if (cat==null) cat = "null";
-                }*/
-                String cat=findCategory(e);
-                EElementList l=getEElementListForCat(map, cat);
-                l.add(e);
-            }
-            msg.log("lemmas: " + n);
-            msg.log("LR: " + lrs);
-            msg.log("RL: " + rls);
-
-            EElementList listAll=sortElementsAccordingToCategory(map, section);
-            section.setEElements(listAll);
-        }
-        msg.err("(categories are kept order according to appearance in source file,  so you can reorder by");
-        msg.err("  putting entries in the top. Categories with only one element will be put in the end)");
-        return dic;
-    }
-
-    /**
-     * 
-     * @return Undefined         
-     */
-    private DictionaryElement sortMon() {
+    
+    private DictionaryElement sortDictionaryAccordingToCategories() {
         for (SectionElement section : dic.getSections()) {
             int lrs = 0;
             int rls = 0;
@@ -274,8 +238,10 @@ public class DicSort  extends AbstractDictTool {
                         rls++;
                     }
                 }
-                String cat=findCategory(e);
 
+                String cat=findCategory(e);
+                String catGrp = groupsOfCategoriesToBeSortedTogether.get(cat);
+                if (catGrp != null) cat = catGrp;
                 EElementList l=getEElementListForCat(map, cat);
                 l.add(e);
 
@@ -284,28 +250,13 @@ public class DicSort  extends AbstractDictTool {
             msg.log("LR: " + lrs);
             msg.log("RL: " + rls);
 
-            EElementList listAll=sortElementsAccordingToCategory(map, section);
+            EElementList listAll=sortSectionAccordingToCategory(map, section);
             section.setEElements(listAll);
         }
         msg.err("(categories are kept order according to appearance in source file,  so you can reorder by");
         msg.err("  putting entries in the top. Categories with only one element will be put in the end)");
 
         return dic;
-    }
-
-    /**
-     * @return the dicType
-     */
-    public String getDicType() {
-        return dicType;
-    }
-
-    /**
-     * @param dicType
-     *                the dicType to set
-     */
-    public void setDicType(String dicType) {
-        this.dicType = dicType;
     }
 
     /**
