@@ -55,7 +55,7 @@
 
 	<section id="main" type="standard">
 		<!-- ******************************
-			(num) group
+			    group num_symbol
 			****************************** -->
 		<e>
 			<p>
@@ -167,7 +167,7 @@
 		</e>
 
 		<!-- ******************************
-			(np) group
+			    group np_symbol
 			****************************** -->
 		<e>
 				<i>ABC<b/>News<s n="np"/><s n="al"/></i>
@@ -228,20 +228,13 @@
 			</p>
 		</e>
 
-		<!-- ******************************
-			(n) group
-			****************************** -->
-		<e>
-			<p>
-				<l>felo<s n="n"/></l>
-				<r>hide<s n="n"/></r>
-			</p>
-		</e>
-
 
 
     <!-- Nouns with gender in Esperanto but not in English -->
 
+		<!-- ******************************
+			    group MF_GD
+			****************************** -->
 		<e>
 			<p>
 				<l>islamano<s n="n"/></l>
@@ -274,6 +267,16 @@
 				<par n="MF_GD"/> 
 		</e>
 
+		<!-- ******************************
+			    group n_symbol
+			****************************** -->
+		<e>
+			<p>
+				<l>felo<s n="n"/></l>
+				<r>hide<s n="n"/></r>
+			</p>
+		</e>
+
 		<e r="LR">
 			<p>
 				<l>supraĵo<s n="n"/></l>
@@ -289,37 +292,8 @@
 			</p>
 		</e>
 
-
-<!-- Already is <e><l>unuavice<adv></l><r>primarily<adv></r></e>-->
 		<!-- ******************************
-			(adv) group
-			****************************** -->
-		<e i="yes">
-			<p>
-				<l>ĉefe<s n="adv"/></l>
-				<r>primarily<s n="adv"/></r>
-			</p>
-		</e>
-
-
-<!-- Already is <e><l>ĉiaokaze<adv></l><r>regardless<adv></r></e>-->
-		<e r="LR" c="añadir también 'regardless of' como 'a pesar de'">
-			<p>
-				<l>ĉiakoste<s n="adv"/></l>
-				<r>regardless<s n="adv"/></r>
-			</p>
-		</e>
-
-		<e>
-			<p>
-				<l>ĉiusemajne<s n="adv"/></l>
-				<r>weekly<s n="adv"/></r>
-			</p>
-		</e>
-
-
-		<!-- ******************************
-			(vblex) group
+			    group vblex_symbol
 			****************************** -->
 		<e r="LR">
 			<p>
@@ -370,6 +344,35 @@
 				<r>hesitate<s n="vblex"/></r>
 			</p>
 		</e>
+
+
+<!-- Already is <e><l>unuavice<adv></l><r>primarily<adv></r></e>-->
+		<!-- ******************************
+			    group adv_symbol
+			****************************** -->
+		<e i="yes">
+			<p>
+				<l>ĉefe<s n="adv"/></l>
+				<r>primarily<s n="adv"/></r>
+			</p>
+		</e>
+
+
+<!-- Already is <e><l>ĉiaokaze<adv></l><r>regardless<adv></r></e>-->
+		<e r="LR" c="añadir también 'regardless of' como 'a pesar de'">
+			<p>
+				<l>ĉiakoste<s n="adv"/></l>
+				<r>regardless<s n="adv"/></r>
+			</p>
+		</e>
+
+		<e>
+			<p>
+				<l>ĉiusemajne<s n="adv"/></l>
+				<r>weekly<s n="adv"/></r>
+			</p>
+		</e>
+
 
 	</section>
 </dictionary>
