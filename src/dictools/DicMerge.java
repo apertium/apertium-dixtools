@@ -216,6 +216,20 @@ public class DicMerge  extends AbstractDictTool{
         sdefs = mergeSdefElements(bAB1.getSdefs(), bAB2.getSdefs());
         dic.setSdefs(sdefs);
 
+        PardefsElement pardefs1 = bAB1.getPardefsElement();
+        PardefsElement pardefs2 = bAB2.getPardefsElement();
+        PardefsElement pardefs;
+        if ((pardefs1 != null) && (pardefs2 != null)) {
+            pardefs = mergePardefElements(pardefs1, pardefs2);
+        } else if ((pardefs1 != null) && (pardefs2 == null)) {
+            pardefs = pardefs1;
+        } else if ((pardefs1 == null) && (pardefs2 != null)) {
+            pardefs = pardefs2;
+        } else {
+            pardefs = null;
+        }
+        dic.setPardefs(pardefs);
+
         for (SectionElement section1 : bAB1.getSections()) {
             SectionElement section2 = bAB2.getSection(section1.getID());
             if (section2 != null) {
