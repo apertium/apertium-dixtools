@@ -19,6 +19,9 @@
  */
 package dics.elements.dtd;
 
+import dics.elements.utils.DicOpts;
+import java.io.IOException;
+
 /**
  * 
  * @author Enrique Benimeli Bofarull
@@ -42,5 +45,18 @@ public class RElement extends ContentElement {
     public RElement(ContentElement cE) {
         super(cE);
         setTagName("r");
+    }
+
+    /**
+     * 
+     * @param dos
+     * @throws java.io.IOException
+     */
+    @Override
+    public void printXML(Appendable dos, DicOpts opt) throws IOException {
+        String escaped = this.getValue();
+        escaped = escaped.replaceAll("\\&", "\\&amp;");
+        this.setValue(escaped);
+        super.printXML(dos, opt);
     }
 }
