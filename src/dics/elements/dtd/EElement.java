@@ -537,6 +537,10 @@ public class EElement extends Element implements Cloneable {
             }
             dos.append(makeCommentIfData(pc));
         }
+        
+        String escapedlm = this.getLemma();
+        escapedlm = escapedlm.replaceAll("\\&", "\\&amp;");
+        this.setLemma(escapedlm);
 
         String attributes = this.getAttrString();
         if (!opt.nowAlign) {
