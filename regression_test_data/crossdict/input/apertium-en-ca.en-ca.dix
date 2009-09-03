@@ -7982,7 +7982,7 @@
 <e srl="boss"><p><l>boss<s n="n"/></l>            <r>cap<s n="n"/><s n="m"/></r></p></e>
 <e r="RL"><p><l>boss<s n="n"/></l>                <r>cap<s n="n"/><s n="f"/></r></p></e>
 <e r="LR"><p><l>bottom<s n="n"/></l>              <r>fons<s n="n"/><s n="m"/></r></p></e>
-<e r="RL" srl="bottom D"><p><l>bottom<s n="n"/>><s n="ND"/></l><r>fons<s n="n"/><s n="m"/><s n="sp"/></r></p></e>
+<e r="RL" srl="bottom D"><p><l>bottom<s n="n"/><s n="ND"/></l><r>fons<s n="n"/><s n="m"/><s n="sp"/></r></p></e>
 <e>       <p><l>box<s n="n"/></l>                 <r>caixa<s n="n"/><s n="f"/></r></p></e>
 <e r="RL" c="'nen' en masculí"><p><l>boy<s n="n"/></l><r>nen<s n="n"/><s n="m"/></r></p></e>
 <e c="'noi' en masculí"><p><l>boy<s n="n"/></l>   <r>noi<s n="n"/><s n="m"/></r></p></e>
