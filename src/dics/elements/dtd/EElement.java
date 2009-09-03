@@ -117,7 +117,7 @@ public class EElement extends Element implements Cloneable {
     public EElement(String r, String lm, String a,  String c) {
         this.r = r;
 
-        // JimReagans' dubious fix.
+        // JimRegan's dubious fix.
         // Should really be in DicFix or somewhere else, and not in the DTD code.
         if (lm != null) lm = lm.replaceAll("\\&", "\\&amp;");
 
