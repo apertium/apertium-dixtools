@@ -41,7 +41,7 @@ import java.util.Iterator;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class DicFix  extends AbstractDictTool{
+public class DicFix  extends AbstractDictTool {
 
     /**
      * 
@@ -148,7 +148,7 @@ public class DicFix  extends AbstractDictTool{
         actionFix();
     }
 
-    public void moveCommentsToPrevious(EElement eePrevious, EElement ee) {
+    private void moveCommentsToPrevious(EElement eePrevious, EElement ee) {
         // remove if this entry already existed
         if (eePrevious!=null&&!(ee.getPrependCharacterData()+ee.getAppendCharacterData()).trim().isEmpty()) {
             eePrevious.addAppendCharacterData("\n"+ee.getPrependCharacterData()+ee.getAppendCharacterData());

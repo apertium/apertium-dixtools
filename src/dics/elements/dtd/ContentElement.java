@@ -400,6 +400,9 @@ public abstract class ContentElement extends Element implements Cloneable {
             }
             if (e instanceof BElement) {
                 str += "<b/>";
+                // Argn this is really ugly, adding "<b/>" as TEXT into another text element.
+                // This makes it impossible to escape < and > properly when outputting text elements.
+                // Jacob Nordfalk 3sept 2009
             }
             if (e instanceof GElement) {
                 str += processGElement(e);

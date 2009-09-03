@@ -174,6 +174,12 @@ public class ProcessDics extends AbstractDictTool {
         else if (action.equals("fix")) {
             this.process_fix();
         }
+        else if (action.equals("profile1")) {
+            DictionaryElement dic = new DictionaryReader(arguments[1]).readDic();
+            DicProfiler p = new DicProfiler();
+            p.fix(dic);
+            dic.printXML(arguments[2],getOpt());
+        }
         else if (action.equals("sort")) {
             this.process_sort();
         }
