@@ -79,6 +79,7 @@ public class DicFindEquivPar  extends AbstractDictTool {
         HashMap<String, PardefElement> name2pardef = new HashMap<String, PardefElement>();
         HashMap<String, String> name2replacementName = new HashMap<String, String>();
         HashMap<String, Integer> usagecounter = new HashMap<String, Integer>();
+        String replacementName;
 
         for (Iterator<PardefElement> pi =  pardefs.iterator(); pi.hasNext(); ) {
             PardefElement par = pi.next();
@@ -113,9 +114,15 @@ public class DicFindEquivPar  extends AbstractDictTool {
 
             // seach for existing pardef with same content and remove
             for (PardefElement existingPardef : name2pardef.values()) {
+                String name;
                 if (par.contentEquals(existingPardef)) {
-                    msg.err(par.getName() + " will be replaced with "+existingPardef.getName());
-                    name2replacementName.put(par.getName(), existingPardef.getName());
+                    if (name2replacementName.containsKey(existingPardef.getName())) {
+                        replacementName = name2replacementName.get(existingPardef.getName());
+                    } else {
+                        replacementName = existingPardef.getName();
+                    }
+                    msg.err(par.getName() + " will be replaced with "+replacementName);
+                    name2replacementName.put(par.getName(), replacementName);
                     pi.remove();
                     continue pardefLoop;
                 }
