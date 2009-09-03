@@ -61,7 +61,7 @@ public class ProcessDics extends AbstractDictTool {
             ps.msg.err("Error occurred during initialization of VM");
             ps.msg.err("Too small initial heap for new size specified");
             ps.msg.err("Use, for example:");
-            ps.msg.err("java -Xms64M -Xmx200M -jar path/to/crossdics.jar <task> [options]");
+            ps.msg.err("java -Xms200M -Xmx500M -jar path/to/crossdics.jar <task> [options]");
             System.exit(-1);
         }
        //System.err.println(Arrays.toString(State.freq));
