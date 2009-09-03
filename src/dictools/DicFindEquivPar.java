@@ -166,6 +166,8 @@ public class DicFindEquivPar  extends AbstractDictTool {
         }
 
         // find unused pardefs and delete them
+        // Wah! We don't want this to happen!
+        /*
         for (Iterator<PardefElement> pi =  pardefs.iterator(); pi.hasNext(); ) {
             PardefElement par = pi.next();
             if (usagecounter.get(par.getName())==null) {
@@ -173,6 +175,7 @@ public class DicFindEquivPar  extends AbstractDictTool {
                 pi.remove();
             }
         }
+         */
 
         dic.printXML(getOutFileName(),getOpt());
 
