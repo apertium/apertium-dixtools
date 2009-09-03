@@ -51,7 +51,6 @@ public class LElement extends ContentElement {
      * 
      * @param dos
      * @throws java.io.IOException
-     */
     @Override
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         String escaped = this.getValue();
@@ -59,4 +58,5 @@ public class LElement extends ContentElement {
         this.setValue(escaped);
         super.printXML(dos, opt);
     }
+     */
 }

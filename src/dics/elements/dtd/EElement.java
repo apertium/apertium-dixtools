@@ -116,6 +116,16 @@ public class EElement extends Element implements Cloneable {
      */
     public EElement(String r, String lm, String a,  String c) {
         this.r = r;
+
+        // JimReagans' dubious fix.
+        // Should really be in DicFix or somewhere else, and not in the DTD code.
+        if (lm != null) lm = lm.replaceAll("\\&", "\\&amp;");
+
+//        String escapedlm = this.getLemma();
+ //       escapedlm = escapedlm.replaceAll("\\&", "\\&amp;");
+  //      this.setLemma(escapedlm);
+
+
         this.lm = lm;
         this.a = a;
         this.c = c;
@@ -538,10 +548,6 @@ public class EElement extends Element implements Cloneable {
             dos.append(makeCommentIfData(pc));
         }
         
-        String escapedlm = this.getLemma();
-        escapedlm = escapedlm.replaceAll("\\&", "\\&amp;");
-        this.setLemma(escapedlm);
-
         String attributes = this.getAttrString();
         if (!opt.nowAlign) {
             dos.append(tab(2) + "<e" + attributes + ">\n");
