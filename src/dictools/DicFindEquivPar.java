@@ -114,7 +114,6 @@ public class DicFindEquivPar  extends AbstractDictTool {
 
             // seach for existing pardef with same content and remove
             for (PardefElement existingPardef : name2pardef.values()) {
-                String name;
                 if (par.contentEquals(existingPardef)) {
                     if (name2replacementName.containsKey(existingPardef.getName())) {
                         replacementName = name2replacementName.get(existingPardef.getName());
