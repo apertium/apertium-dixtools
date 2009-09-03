@@ -53,7 +53,13 @@ public class TextElement extends Element {
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         //not necesary: dos.append(prependCharacterData);
-        dos.append(value);
+
+      // In ContentElement line 400 "<b/>" is being added as TEXT into another text element,
+        // so we can't escape > and < !
+        // replaceAll("<", "&lt;").replaceAll(">", "&gt;").
+
+        dos.append(value.replace("&", "&amp;").replace("\"", "&apos;"));
+
         //not necesary: dos.append(appendCharacterData);
     }
 
