@@ -60,6 +60,7 @@ public class PardefsElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
+    @Override
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
