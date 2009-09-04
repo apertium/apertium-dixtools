@@ -22,6 +22,7 @@ package dictools;
 
 import dics.elements.dtd.DictionaryElement;
 import dics.elements.utils.DicOpts;
+import java.io.IOException;
 import misc.DicFormatE1Line;
 import misc.GetBilOmegawiki;
 import dictools.xml.DictionaryReader;
@@ -48,7 +49,7 @@ public class ProcessDics extends AbstractDictTool {
      *
      * @param args
      */
-    public static void main(final String[] args) {
+    public static void main(final String[] args) throws IOException {
         
         //System.err.println(ProcessDics.class.getName()+".main(\"" + Arrays.toString(args).replaceAll(", ", "\", \"")+"\");");
         //System.err.println(System.getProperties());
@@ -136,7 +137,7 @@ public class ProcessDics extends AbstractDictTool {
      *
      *
      */
-    private void processArguments(String[] args) {
+    private void processArguments(String[] args) throws IOException {
         opt.originalArguments = args;
         args = processGenericArguments(args);
         setArguments(args);
@@ -174,11 +175,18 @@ public class ProcessDics extends AbstractDictTool {
         else if (action.equals("fix")) {
             this.process_fix();
         }
-        else if (action.equals("profile1")) {
-            DictionaryElement dic = new DictionaryReader(arguments[1]).readDic();
+        else if (action.toLowerCase().startsWith("profilecreate")) {
             DicProfiler p = new DicProfiler();
-            p.fix(dic);
+            //p.createProfilerdirectory("../apertium-eo-en/", "en-eo", null);
+            p.createProfilerdirectory(arguments[1], arguments[2], null);
+            DictionaryElement dic = new DictionaryReader(arguments[1]).readDic();
+            p.generateProfileData(dic);
             dic.printXML(arguments[2],getOpt());
+        }
+        else if (action.equals("profilecollect")) {
+            DicProfiler p = new DicProfiler();
+            if (arguments.length>1) p.collectProfileData(arguments[1]);
+            else p.collectProfileData("dixtools-profiledata.txt");
         }
         else if (action.equals("sort")) {
             this.process_sort();

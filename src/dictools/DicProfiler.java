@@ -25,9 +25,20 @@ import dics.elements.dtd.SectionElement;
 import dics.elements.dtd.TextElement;
 import dics.elements.utils.DicOpts;
 import dictools.xml.DictionaryReader;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Adds entries like <p><l/><r>%1234</r></p> in the start or end of all entries in a dix files,
@@ -35,37 +46,41 @@ import java.util.List;
  * @author Jacob Nordfalk
  */
 public class DicProfiler  extends AbstractDictTool {
-    public boolean insert_before = false;
-    public boolean direction_lr = true;
-    public String prepend = "%";
-    public String append  = "§";
-    public int key;
+  public boolean insert_before = false;
+  public boolean direction_lr = true;
+  public static final String prepend = "%"; // §
+  public static final String append  = " ";
+  private static final String appendRegex = "[ $]"; // space or newline (in case the space is trimmed away)
 
-    public DictionaryElement fix(DictionaryElement dic) {
+  public int sequence;
 
- 
-        if (dic.getPardefsElement() != null)
-        for (PardefElement par :  dic.getPardefsElement().getPardefElements()) {
-          for (EElement ee: par.getEElements()) {
-            setProfilerInfo(ee);
-          }
-        }
+  Writer profileKeysDataFile;
 
-        if (dic.getSections() != null)
-        for (SectionElement section : dic.getSections()) {
-          for (EElement ee: section.getEElements()) {
-            setProfilerInfo(ee);
-          }
-        }
-
-        return dic;
+  public DictionaryElement generateProfileData(DictionaryElement dic) throws IOException {
+    if (dic.getPardefsElement() != null)
+    for (PardefElement par :  dic.getPardefsElement().getPardefElements()) {
+      for (EElement ee: par.getEElements()) {
+        setProfilerInfo(ee);
+      }
     }
 
+    if (dic.getSections() != null)
+    for (SectionElement section : dic.getSections()) {
+      for (EElement ee: section.getEElements()) {
+        setProfilerInfo(ee);
+      }
+    }
+    return dic;
+  }
 
-  private void setProfilerInfo(EElement ee) {
-    key++;
-    String s = Integer.toString(key, Character.MAX_RADIX);
-    s = "0000".substring(Math.min(4,s.length()))+s;
+  private void setProfilerInfo(EElement ee) throws IOException {
+    sequence++;
+    String s = Integer.toString(sequence, Character.MAX_RADIX);
+    s = "000".substring(Math.min(3,s.length()))+s;
+
+    //System.err.println(s+ " " + ee);
+    profileKeysDataFile.append(s).append(' ').append(ee.toString()).append('\n');
+
     s = prepend + s +append;
     if (direction_lr) s = "<p><l/><r>"+s+"</r></p>";
     else s = "<p><l>"+s+"</l><r/></p>";
@@ -77,6 +92,7 @@ public class DicProfiler  extends AbstractDictTool {
     else ee.getChildren().add(te);
   }
 
+
   /**
    * Creates profiling data for a whole directory, given that the naming corresponds more or less to
    * that of the English-Esperanto directory
@@ -84,7 +100,7 @@ public class DicProfiler  extends AbstractDictTool {
    * @param direction "eo-en" or "en-eo"
    * @param dixfiles list of dix files (if null the directory is scanned for them)
    */
-  public void createProfilerdirectory(String languagePairDirecory, String direction, List<String> dixfiles) {
+  public void createProfilerdirectory(String languagePairDirecory, String direction, List<String> dixfiles) throws IOException {
     File d = new File(languagePairDirecory);
     File profiler_dir = new File(d,"profiler");
     profiler_dir.mkdirs();
@@ -93,27 +109,75 @@ public class DicProfiler  extends AbstractDictTool {
       dixfiles = new ArrayList<String>();
       for (String f : d.list()) if (f.startsWith("apertium-") && (f.endsWith("dix") || f.endsWith("dix.xml")) && !f.contains("post-")) dixfiles.add(f);
     }
+
+    profileKeysDataFile = new OutputStreamWriter(new FileOutputStream(new File(profiler_dir, "profilekeys.txt")),"UTF-8");
+
     for (String f : dixfiles) {
       String dixtype =  f.split("\\.")[1]; // Gives eo-en for ex "apertium-eo-en.eo-en.dix"
 
-      if (dixtype.contains(direction)) this.direction_lr = true; // bidix
-      else if (dixtype.length()>4) this.direction_lr = false; // bidix other dir
-      else if (dixtype.contains(direction.split("-")[0])) this.direction_lr = true; // source lang
-      else this.direction_lr = false; // target lang
+      if (dixtype.contains(direction)) { this.direction_lr = true; this.insert_before=true; } // bidix
+      else if (dixtype.length()>4) { this.direction_lr = false;this.insert_before=true; } // bidix other dir
+      else if (dixtype.contains(direction.split("-")[0])) { this.direction_lr = true; this.insert_before=false; }// source lang
+      else { this.direction_lr = false; this.insert_before=false; }// target lang
 
       msg.err("Processing "+f+" in direction "+(direction_lr?"LR":"RL"));
       DictionaryElement dic = new DictionaryReader(new File(d,f).getPath()).readDic();
-      fix(dic); 
+      generateProfileData(dic);
       dic.printXML(new File(profiler_dir,f).getPath(),DicOpts.STD_ALIGNED_MONODIX);
+    }
+
+    profileKeysDataFile.close();
+  }
+
+
+
+  /**
+   * This method is called _during_ processing of a text, to split profile tokens from text,
+   * It filters profile tokens out of standard input and prints the cleansed text to standart oputput
+   * The tokens are written to a seperate file
+   * @param profileFileName Filename to where token values are appended
+   */
+  public void collectProfileData(String profileFileName) {
+    try {
+      String lin;
+      BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+
+      Writer w = new FileWriter(profileFileName, true);
+
+      Pattern p = Pattern.compile(prepend+"([0-9a-z]+)"+appendRegex);
+
+      //System.err.println("p = " + p);
+
+      while ((lin=br.readLine())!=null) {
+
+        //System.err.println("lin = " + lin);
+        Matcher m = p.matcher(lin);
+
+        //System.err.println("m = " + m);
+        int prevEnd = 0;
+        while (m.find()) {
+          //System.err.println("m.start() = " + m.start());
+          System.out.print(lin.substring(prevEnd, m.start()));
+          String key = m.group(1);
+          w.write(key); w.write("\n");
+          prevEnd = m.end();
+        }
+        System.out.println(lin.substring(prevEnd));
+      }
+      w.close();
+    } catch (IOException ex) {
+      ex.printStackTrace();
     }
   }
 
-  public static void main(final String[] args) {
+
+  public static void main(final String[] args) throws IOException {
     DicProfiler p = new DicProfiler();
+    
     p.createProfilerdirectory("../apertium-eo-en/", "en-eo", null);
     /*
     DictionaryElement dic = new DictionaryReader("../apertium-eo-en/apertium-eo-en.eo.dix.xml").readDic();
-    p.fix(dic);
+    p.generateProfileData(dic);
     dic.printXML("../apertium-eo-en/profiler/apertium-eo-en.eo.dix.xml",DicOpts.STD_ALIGNED_MONODIX);
      */
   }
