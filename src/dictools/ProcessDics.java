@@ -188,6 +188,14 @@ public class ProcessDics extends AbstractDictTool {
             if (arguments.length>1) p.collectProfileData(arguments[1]);
             else p.collectProfileData("dixtools-profiledata.txt");
         }
+        else if (action.equals("profileresult")) {
+            DicProfiler p = new DicProfiler();
+            if (arguments.length>1) p.createResultOfProfilingDix(
+                arguments.length>1?arguments[1]:"profilekeys.txt",
+                arguments.length>2?arguments[2]:"dixtools-profiledata.txt",
+                arguments.length>3?arguments[3]:"dixtools-profileresult.txt");
+            else p.collectProfileData("dixtools-profiledata.txt");
+        }
         else if (action.equals("sort")) {
             this.process_sort();
         }

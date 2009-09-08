@@ -26,15 +26,22 @@ import dics.elements.dtd.TextElement;
 import dics.elements.utils.DicOpts;
 import dictools.xml.DictionaryReader;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -50,7 +57,7 @@ public class DicProfiler  extends AbstractDictTool {
   public boolean direction_lr = true;
   public static final String prepend = "%"; // §
   public static final String append  = " ";
-  private static final String appendRegex = "[ $]"; // space or newline (in case the space is trimmed away)
+  private static final String appendRegex = "[ \n$]"; // space or newline (in case the space is trimmed away)
 
   public int sequence;
 
@@ -130,6 +137,62 @@ public class DicProfiler  extends AbstractDictTool {
   }
 
 
+  private static class Count { public int n = 0; }
+
+  public void createResultOfProfilingDix(String profilerKeys, String profileDataFile, String profileResultFile) throws IOException {
+    HashMap<String,String> keys = new LinkedHashMap<String,String>();
+    HashMap<String,Count> counts= new HashMap<String,Count>();
+    String line=null;
+    int lineNo=0;
+
+    try {
+      msg.err("Reading "+profilerKeys);
+      BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(profilerKeys),"UTF-8"));
+      while ( (line=br.readLine())!=null) {
+        lineNo++;
+        int n = line.indexOf(' ');
+        String k = line.substring(0,n);
+        keys.put(k, line.substring(n+1));
+        counts.put(k, new Count());
+
+        //System.err.println("line.substring(0,n) = " + line.substring(0,n));
+      }
+      br.close();
+
+      msg.err("Reading "+profileDataFile);
+      lineNo=0;
+      br = new BufferedReader(new InputStreamReader(new FileInputStream(profileDataFile),"UTF-8"));
+      while ( (line=br.readLine())!=null) {
+        lineNo++;
+        Count count = counts.get(line);
+        if (count!=null) {
+          count.n++;
+          //System.err.println("line = '" + line +"' "+ count.n);
+        } //else msg.err("Error in line "+lineNo+" in " +profileDataFile+ "- key '"+line+"' not found in "+profilerKeys);
+      }
+      br.close();
+
+      msg.err("Writing "+profileResultFile);
+      PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(profileResultFile),"UTF-8"));
+
+      for (Entry<String,String> e : keys.entrySet()) {
+        String k = e.getKey();
+
+        //System.err.println("k = '" + k + "''");
+        int count = counts.get(k).n;
+
+        //System.err.println("count = " + count);
+        pw.append(Integer.toString(count)).append(' ').append(k).append(' ').append(e.getValue()).append('\n');
+      }
+      pw.close();
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      msg.err("Error at line "+lineNo+" "+line);
+    }
+
+  }
+
 
   /**
    * This method is called _during_ processing of a text, to split profile tokens from text,
@@ -146,20 +209,14 @@ public class DicProfiler  extends AbstractDictTool {
 
       Pattern p = Pattern.compile(prepend+"([0-9a-z]+)"+appendRegex);
 
-      //System.err.println("p = " + p);
-
       while ((lin=br.readLine())!=null) {
-
-        //System.err.println("lin = " + lin);
         Matcher m = p.matcher(lin);
-
-        //System.err.println("m = " + m);
         int prevEnd = 0;
         while (m.find()) {
-          //System.err.println("m.start() = " + m.start());
           System.out.print(lin.substring(prevEnd, m.start()));
           String key = m.group(1);
-          w.write(key); w.write("\n");
+          w.write(key);
+          w.write("\n");
           prevEnd = m.end();
         }
         System.out.println(lin.substring(prevEnd));
@@ -174,12 +231,15 @@ public class DicProfiler  extends AbstractDictTool {
   public static void main(final String[] args) throws IOException {
     DicProfiler p = new DicProfiler();
     
-    p.createProfilerdirectory("../apertium-eo-en/", "en-eo", null);
     /*
     DictionaryElement dic = new DictionaryReader("../apertium-eo-en/apertium-eo-en.eo.dix.xml").readDic();
     p.generateProfileData(dic);
     dic.printXML("../apertium-eo-en/profiler/apertium-eo-en.eo.dix.xml",DicOpts.STD_ALIGNED_MONODIX);
      */
+    //p.createProfilerdirectory("../apertium-eo-en/", "en-eo", null);
+
+   p.createResultOfProfilingDix( "../apertium-eo-en/profiler/profilekeys.txt", "../apertium-eo-en/dixtools-profiledata.txt","../apertium-eo-en/dixtools-profileresult.txt");
+
   }
 
 }
