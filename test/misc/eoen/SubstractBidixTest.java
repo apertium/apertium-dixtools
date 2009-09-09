@@ -21,7 +21,7 @@
 package misc.eoen;
 
 import dics.elements.dtd.ContentElement;
-import dics.elements.dtd.EElement;
+import dics.elements.dtd.E;
 import java.util.HashMap;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -60,7 +60,7 @@ public class SubstractBidixTest {
    */
   @Test
   public void testIsRestricted() {
-    EElement ee=new EElement();
+    E ee=new E();
 
     ee.setRestriction("LR");
     assertEquals(SubstractBidix.isAllowed("LR", ee), true);
@@ -84,7 +84,7 @@ public class SubstractBidixTest {
    */
   @Test
   public void testRemoveRestriction() {
-    EElement ee=new EElement();
+    E ee=new E();
 
     ee.setIgnore("yes");
     SubstractBidix.setYesIsAllowed(ee, "LR");
@@ -104,8 +104,8 @@ public class SubstractBidixTest {
     System.err.println("checkEarlierAndRestrict");
     String direction="";
     ContentElement l=null;
-    HashMap<String, EElement> hmLR=null;
-    EElement ee=null;
+    HashMap<String, E> hmLR=null;
+    E ee=null;
     //SubstractBidix.checkEarlierAndRestrict(direction, l, hmLR, ee);
     // TODO review the generated test code and remove the default call to fail.
     //fail("The test case is a prototype.");

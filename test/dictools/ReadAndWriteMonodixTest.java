@@ -29,11 +29,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import dics.elements.dtd.ContentElement;
 
-import dics.elements.dtd.DictionaryElement;
-import dics.elements.dtd.EElement;
-import dics.elements.dtd.Element;
-import dics.elements.dtd.PardefElement;
-import dics.elements.dtd.SectionElement;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.DixElement;
+import dics.elements.dtd.Pardef;
+import dics.elements.dtd.Section;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
@@ -51,7 +51,7 @@ public class ReadAndWriteMonodixTest {
     public ReadAndWriteMonodixTest() {
     }
 
-      static DictionaryElement dic;
+      static Dictionary dic;
     
   @BeforeClass
   public static void setUpClass() throws Exception {
@@ -103,7 +103,7 @@ public class ReadAndWriteMonodixTest {
     if (DixtoolsTestSuite.onlyCLI) return;
     
     /*
-    for (PardefElement pe : dic.getPardefsElement().getPardefElements()) {
+    for (Pardef pe : dic.getPardefsElement().getPardefElements()) {
       System.err.println("pe = " + pe);
     }*/
 
@@ -113,8 +113,8 @@ public class ReadAndWriteMonodixTest {
 
 
     /*
-    for (SectionElement section : dic.getSections()) {
-      for (EElement ee : section.getEElements()) {
+    for (Section section : dic.getSections()) {
+      for (E ee : section.getEElements()) {
         System.err.println("ee = " + ee);
       }
     }*/
@@ -143,7 +143,7 @@ public class ReadAndWriteMonodixTest {
 
     DicFix df = new DicFix(dic);
     df.setOut(outfile);
-    DictionaryElement dicFormatted = df.fix();
+    Dictionary dicFormatted = df.fix();
     //dicFormatted.printXML(outfile,df.getOpt());
     String diff=exec( "diff test/correct_output_DicFormat.xml "+outfile);    
 

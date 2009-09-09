@@ -31,11 +31,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import dics.elements.dtd.ContentElement;
 
-import dics.elements.dtd.DictionaryElement;
-import dics.elements.dtd.EElement;
-import dics.elements.dtd.Element;
-import dics.elements.dtd.PardefElement;
-import dics.elements.dtd.SectionElement;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.DixElement;
+import dics.elements.dtd.Pardef;
+import dics.elements.dtd.Section;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
