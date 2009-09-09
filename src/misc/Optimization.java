@@ -22,6 +22,7 @@ package misc;
 
 import dictools.cmproc.State;
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 
 /**
@@ -29,7 +30,7 @@ import java.util.Arrays;
  * @author j
  */
 public class Optimization {
-    public static void main(final String[] args) {
+    public static void main(final String[] args) throws IOException {
       new File("dix").mkdir();
 
       

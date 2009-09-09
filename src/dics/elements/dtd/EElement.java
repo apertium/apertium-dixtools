@@ -567,7 +567,7 @@ public class EElement extends Element implements Cloneable {
             }        
 
             if (children != null) {
-                for (Element e : children) {                
+                for (Element e : children) {
                     if (e instanceof PElement) {
                       ((PElement) e).printXML1LineAligned(dosy, opt.alignR);
                     } else {

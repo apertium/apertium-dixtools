@@ -1,3 +1,6 @@
+
+import java.io.IOException;
+
 /*
  * Copyright (C) 2008 Dana Esperanta Junulara Organizo http://dejo.dk/
  * Author: Jacob Nordfalk
@@ -23,7 +26,7 @@
  * @author j
  */
 public class ProcessDics {
-    public static void main(final String[] args) {
+    public static void main(final String[] args) throws IOException {
       dictools.ProcessDics.main(args);
     }
     
