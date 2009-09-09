@@ -171,17 +171,15 @@ public class DicFindEquivPar  extends AbstractDictTool {
             msg.err("'" + key + "' has been replaced " + replacementcounter.get(key) + " times.");
         }
 
-        // find unused pardefs and delete them
+        // find unused pardefs (and delete them)
         for (Iterator<Pardef> pi =  pardefs.iterator(); pi.hasNext(); ) {
             Pardef par = pi.next();
-        // Wah! We don't want this to happen!
-        /*
-            PardefElement par = pi.next();
             if (usagecounter.get(par.getName())==null) {
-                msg.err("Unused paradigm  " +par.getName() + " deleted");
-                pi.remove();
+                // Wah! We don't want this to happen!
+                // msg.err("Unused paradigm  " +par.getName() + " deleted");
+                // pi.remove();
+                msg.err("Unused paradigm  " +par.getName() + " (could be deleted)");
             }
-         */
         }
 
         dic.printXML(getOutFileName(),getOpt());

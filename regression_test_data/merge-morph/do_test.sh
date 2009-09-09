@@ -9,7 +9,7 @@ $BIN merge-morph ../../test/sample.metadix ../../test/sample2.metadix actual_out
 
 echo -------------------------------
 res=FAILED
-diff -bBw -x .svn expected_output.dix actual_output.dix && res=SUCCESS
+diff -bBw  -I apertium-dixtools  expected_output.dix actual_output.dix && res=SUCCESS
 
 echo test $res
 

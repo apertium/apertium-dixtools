@@ -46,7 +46,7 @@ import misc.eoen.DicFormatE1LineAligned;
  *
  * @author j
  */
-public class ReadAndWriteMonodixTest extends Tools {
+public class ReadAndWriteMonodixTest extends TestTools {
 
     public ReadAndWriteMonodixTest() {
     }

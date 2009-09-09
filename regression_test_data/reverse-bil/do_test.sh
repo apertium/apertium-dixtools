@@ -10,7 +10,7 @@ $BIN reverse-bil $DIX actual_output.dix
 
 echo -------------------------------
 res=FAILED
-diff -bBw -x .svn expected_output.dix actual_output.dix && res=SUCCESS
+diff -bBw  -I apertium-dixtools  expected_output.dix actual_output.dix && res=SUCCESS
 
 echo test $res
 

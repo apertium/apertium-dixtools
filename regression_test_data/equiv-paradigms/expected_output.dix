@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Dictionary:
+	Sections: 1
+	Entries: 8
+	Sdefs: 26
+	Paradigms: 8
+	Last processed by: apertium-dixtools equiv-paradigms regression_test_data/merge-morph/actual_output.dix regression_test_data/equiv-paradigms/actual_output.dix
+
+-->
+<dictionary>
+	<alphabet>·ÀÁÂÄÇÈÉÊËÌÍÎÏÑÒÓÔÖÙÚÛÜàáâäçèéêëìíîïñòóôöùúûüABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</alphabet>
+	<sdefs>
+		<sdef n="adj" /> 
+		<sdef n="adv" /> 
+		<sdef n="def" /> 
+		<sdef n="det" /> 
+		<sdef n="f" /> 
+		<sdef n="gen" /> 
+		<sdef n="ger" /> 
+		<sdef n="ind" /> 
+		<sdef n="m" /> 
+		<sdef n="mf" /> 
+		<sdef n="n" /> 
+		<sdef n="nn" /> 
+		<sdef n="np" /> 
+		<sdef n="nt" /> 
+		<sdef n="p1" /> 
+		<sdef n="p2" /> 
+		<sdef n="p3" /> 
+		<sdef n="pr" /> 
+		<sdef n="prn" /> 
+		<sdef n="rpar" /> 
+		<sdef n="sg" /> 
+		<sdef n="sp" /> 
+		<sdef n="tn" /> 
+		<sdef n="vaux" /> 
+		<sdef n="vblex" /> 
+		<sdef n="ND" /> 
+	</sdefs>
+	<pardefs>
+    <!-- comment before pardef -->
+		<pardef n="S__encimp">
+    <!-- comment before e -->
+		<e>
+    <!-- comment before p -->
+			<p>
+				<l>-en</l>
+				<r>en<s n="prn"/><s n="enc"/><s n="adv"/></r>
+			</p>
+		</e><!-- comment after e -->   
+
+
+		<e>
+			<p>
+				<l>-la</l>
+				<r>le<s n="prn"/><s n="enc"/><s n="p3"/><s n="f"/><s n="sg"/></r>
+			</p>
+		</e>
+
+
+		</pardef>
+
+		<pardef n="achèt/e__vblex"><!-- commentzzz on same line, just after pardef tag start -->
+		<e>
+			<p>
+				<l>e</l>
+				<r>er<s n="vblex"/><s n="imp"/><s n="p2"/><s n="sg"/></r>
+			</p>
+		</e>
+
+
+		<e>
+			<p>
+				<l>e</l>
+				<r>er<s n="vblex"/><s n="imp"/><s n="p2"/><s n="sg"/><j/></r>
+			</p>
+				<par n="S__encimp"/> 
+		</e>
+
+
+		</pardef>
+		<pardef n="achet/er__vblex">
+		<e>
+			<p>
+				<l>a</l>
+				<r>er<s n="vblex"/><s n="ifi"/><s n="p3"/><s n="sg"/></r>
+			</p>
+		</e>
+
+
+		<e>
+			<p>
+				<l>ai</l>
+				<r>er<s n="vblex"/><s n="ifi"/><s n="p1"/><s n="sg"/></r>
+			</p>
+		</e>
+
+
+		</pardef>
+		<pardef n="luî/mes__vblex">
+		<e r="LR">
+			<p>
+				<l>mes</l>
+				<r>re<s n="vblex"/><s n="ifi"/><s n="p1"/><s n="pl"/></r>
+			</p>
+		</e>
+
+
+		<e r="LR">
+			<p>
+				<l>tes</l>
+				<r>re<s n="vblex"/><s n="ifi"/><s n="p2"/><s n="pl"/></r>
+			</p>
+		</e>
+
+
+		</pardef>
+		<pardef n="lui/re__vblex">
+		<e r="LR">
+			<p>
+				<l>rent</l>
+				<r>re<s n="vblex"/><s n="ifi"/><s n="p3"/><s n="pl"/></r>
+			</p>
+		</e>
+
+
+		<e r="LR">
+			<p>
+				<l>s</l>
+				<r>re<s n="vblex"/><s n="ifi"/><s n="p1"/><s n="sg"/></r>
+			</p>
+		</e>
+
+
+		<e r="LR">
+			<p>
+				<l>s</l>
+				<r>re<s n="vblex"/><s n="ifi"/><s n="p2"/><s n="sg"/></r>
+			</p>
+		</e>
+
+
+		<e>
+			<p>
+				<l>s</l>
+				<r>re<s n="vblex"/><s n="imp"/><s n="p2"/><s n="sg"/><j/></r>
+			</p>
+				<par n="S__encimp"/> 
+		</e>
+
+
+		</pardef>
+		<pardef n="ach/e[T]er__vblex">
+		<e>
+			<p>
+				<l><prm/>è</l>
+				<r>e<prm/></r>
+			</p>
+				<par n="achèt/e__vblex"/> 
+		</e>
+
+
+		<e>
+				<i>e<prm/></i>
+				<par n="achet/er__vblex"/> 
+		</e>
+
+
+		</pardef>
+		<pardef n="lu/i[]re__vblex">
+		<e>
+			<p>
+				<l><prm1/>î</l>
+				<r>i<prm2/></r>
+			</p>
+				<i><prm/></i>
+				<par n="luî/mes__vblex"/> 
+		</e>
+
+
+		<e>
+				<i>i<prm3/></i>
+				<par n="lui/re__vblex"/> 
+		</e>
+
+
+		</pardef>
+    <!-- commentyy before pardef -->
+		<!-- ====== HERE AND BELOW ARE ADDITIONS FROM SECOND FILE====== -->
+		<pardef n="S__encimpyy">
+    <!-- commentyy before e -->
+		<e>
+    <!-- commentyy before p -->
+			<p>
+				<l>-enyy</l>
+				<r>en<s n="prn"/><s n="enc"/><s n="adv"/></r>
+			</p>
+		</e><!-- commentyy after e -->   
+
+
+		<e>
+			<p>
+				<l>-layy</l>
+				<r>le<s n="prn"/><s n="enc"/><s n="p3"/><s n="f"/><s n="sg"/></r>
+			</p>
+		</e>
+
+
+		</pardef>
+	</pardefs>
+
+	<section id="main" type="standard">
+
+    <!-- ======== IMPORTANT ============
+      When editing this file, please be EXTREMELY CAREFUL about following the existing format.
+      The reason is: This file is run through and re-formatted by the dixtools and saved by
+      new DicFormatE1LineAligned(dic).printXML("tmp_test.xml") and compared to itself.
+      Any substantial difference will make the unit tests FAIL. Jacob Nordfalk 3 dec 2008.
+      ================================== -->
+      
+
+    <!-- Verbs -->
+		<e lm="amener">
+				<i>am</i>
+				<par n="ach/e[T]er__vblex" prm="n"/> 
+		</e>
+
+
+		<e lm="détruire">
+				<i>détru</i>
+				<par n="lu/i[]re__vblex" prm="" prm2="A" prm3="B" prm4="C"/> 
+		</e>
+
+
+		<e lm="enlever">
+				<i>enl</i>
+				<par n="ach/e[T]er__vblex" prm="v"/> 
+		</e>
+
+
+		<e lm="acheter">
+				<i>ach</i>
+				<par n="ach/e[T]er__vblex" prm="t"/> 
+		</e>
+
+
+		<e lm="comment">
+				<i>ach</i>
+				<par n="comach/e[T]er__vblex" prm="t"/> 
+		</e><!-- bla bla -->
+
+
+		<e lm="noncomment">
+				<i>am</i>
+				<par n="noncomach/e[T]er__vblex" prm="n"/> 
+		</e>
+
+
+    <!-- Verbs -->
+		<!-- ====== HERE AND BELOW ARE ADDITIONS FROM SECOND FILE====== -->
+		<e lm="yyamener">
+				<i>yyam</i>
+		<!-- yyach/e[T]er__vblex' was replaced -->
+				<par n="ach/e[T]er__vblex" prm="n"/> 
+		</e>
+
+
+		<e lm="yyacheter">
+				<i>ach</i>
+		<!-- yyach/e[T]er__vblex' was replaced -->
+				<par n="ach/e[T]er__vblex" prm="t"/> 
+		</e>
+
+
+	</section>
+</dictionary>

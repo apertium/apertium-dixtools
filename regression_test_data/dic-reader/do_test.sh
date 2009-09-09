@@ -6,17 +6,17 @@ export LANG=eo.UTF-8
 BIN=../../apertium-dixtools
 
 DIX=../../test/sample.metadix
-echo dic-reader list-paradigms $DIX > actual_output.txt
-$BIN dic-reader list-paradigms $DIX >> actual_output.txt
+# echo dic-reader list-paradigms $DIX > actual_output.txt
+$BIN dic-reader list-paradigms $DIX > actual_output.txt
 
-echo dic-reader list-lemmas $DIX >> actual_output.txt
+# echo dic-reader list-lemmas $DIX >> actual_output.txt
 $BIN dic-reader list-lemmas $DIX >> actual_output.txt
 
-echo dic-reader list-definitions $DIX >> actual_output.txt
+# echo dic-reader list-definitions $DIX >> actual_output.txt
 $BIN dic-reader list-definitions $DIX >> actual_output.txt
 
 DIX=../../test/sample.eo-en.dix
-echo dic-reader list-pairs $DIX >> actual_output.txt
+# echo dic-reader list-pairs $DIX >> actual_output.txt
 $BIN dic-reader list-pairs $DIX >> actual_output.txt
 
 echo -------------------------------

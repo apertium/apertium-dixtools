@@ -28,8 +28,21 @@ import org.junit.runners.Suite;
  * @author j
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({dictools.ReadAndWriteMonodixTest.class, dictools.ReadAndWriteBidixTest.class, misc.eoen.SubstractBidixTest.class, dictools.ZCommandLineTest.class})
+@Suite.SuiteClasses({
+      dictools.ReadAndWriteMonodixTest.class,
+      dictools.ReadAndWriteBidixTest.class,
+
+      dictools.CrossDictTest.class,
+      dictools.Testmergemorph_equivparadigms.class,
+      dictools.DicReaderTest.class,
+      dictools.Testdix2tiny.class,
+      dictools.Testdix2trie.class,
+      dictools.Testreversebil.class,
+      dictools.Testsort.class,
+      misc.eoen.SubstractBidixTest.class})
 //@Suite.SuiteClasses({dictools.ReadAndWriteMonodixTest.class})
-public class DixtoolsTestSuite {
-  static boolean preferCLI = false;;
+
+public class DixtoolsTestSuite
+{
+  static boolean preferShellTest = false;
 }

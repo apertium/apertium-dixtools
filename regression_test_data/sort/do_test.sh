@@ -14,7 +14,7 @@ $BIN sort -bil $DIX actual_output/bil.dix
 
 echo -------------------------------
 res=FAILED
-diff -bBw -x .svn expected_output actual_output && res=SUCCESS
+diff -bBw -x .svn -I apertium-dixtools  expected_output actual_output && res=SUCCESS
 
 echo test $res
 

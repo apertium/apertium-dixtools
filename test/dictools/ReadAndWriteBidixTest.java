@@ -48,7 +48,7 @@ import misc.eoen.DicFormatE1LineAligned;
  *
  * @author j
  */
-public class ReadAndWriteBidixTest extends Tools {
+public class ReadAndWriteBidixTest extends TestTools {
     static Dictionary dic;
     
   @BeforeClass
