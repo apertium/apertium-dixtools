@@ -48,7 +48,7 @@ public class AbstractDictTool {
     public void setOpt(DicOpts opt) {
         this.opt = opt;
     }
-    protected Msg msg = new Msg();
+    protected Msg msg = Msg.inst();
     /**
      * 
      */

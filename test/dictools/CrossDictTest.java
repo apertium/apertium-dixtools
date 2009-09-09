@@ -43,26 +43,20 @@ import junit.framework.Assert;
 import misc.eoen.DicFormatE1LineAligned;
 
 
+
 /**
  *
  * @author j
  */
-public class CrossDictTest {
-  private static String rm(String filename) {
-    File f = new File(filename);
-    if (f.isDirectory()) for (String f2 : f.list()) rm(f2);
-    new File(filename).delete();
-    return filename;
-  }
-  
-  public static String exec(String cmd) throws IOException, InterruptedException {
-    return ReadAndWriteMonodixTest.exec(cmd);
-  }
-  
+public class CrossDictTest extends Tools {
   
   @Test
   public void testBigCrossing() throws Exception {
-    if (DixtoolsTestSuite.onlyCLI) return;
+    if (DixtoolsTestSuite.preferCLI) {
+      Process p=ZCommandLineTest.exep("regression_test_data/crossdict", "./do_test.sh");
+      Assert.assertEquals("Exit value", 0, p.exitValue());
+      return;
+    }
     String outfile = rm("dix");
 
     String path = "regression_test_data/crossdict/input/";
@@ -78,5 +72,4 @@ public class CrossDictTest {
     Assert.assertEquals("Difference", "", diff);
     rm(outfile);  
   }
-
 }

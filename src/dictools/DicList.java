@@ -65,7 +65,7 @@ public class DicList {
      */
     private String url;
 
-      protected Msg msg = new Msg();
+    protected Msg msg = Msg.inst();
     private SElementList elementsA;
 
     public DicList(String fileName) {

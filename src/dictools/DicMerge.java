@@ -761,7 +761,6 @@ public class DicMerge  extends AbstractDictTool{
     public void mergeMorph__OLD_which_sorts_output_but() {
         Dictionary morph = mergeMonols(monA1, monA2);
         DicSort dicSort = new DicSort(morph);
-        dicSort.msg.setDebug(false);
         Dictionary sorted = dicSort.sort();
         sorted.printXML(getSOut(),getOpt());
     }

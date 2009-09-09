@@ -46,7 +46,7 @@ import misc.eoen.DicFormatE1LineAligned;
  *
  * @author j
  */
-public class ReadAndWriteMonodixTest {
+public class ReadAndWriteMonodixTest extends Tools {
 
     public ReadAndWriteMonodixTest() {
     }
@@ -62,30 +62,6 @@ public class ReadAndWriteMonodixTest {
   public static void tearDownClass() throws Exception {
   }
 
-  private static String rm(String filename) {
-    new File(filename).delete();
-    return filename;
-  }
-  
-  public static String exec(String cmd) throws IOException, InterruptedException {    
-    Process p=Runtime.getRuntime().exec(cmd);
-    String output="";
-    String s;
-    BufferedReader br=new BufferedReader(new InputStreamReader(p.getInputStream()));
-    while ((s=br.readLine())!=null)  output=output+s+"\n";
-    br=new BufferedReader(new InputStreamReader(p.getErrorStream()));
-    while ((s=br.readLine())!=null)  output=output+s+"\n";    
-    //p.waitFor();
-    //if (p.exitValue()!=0) Assert.fail(cmd+" reported an error");
-    if (output.length()>0) {
-      System.err.println("exec: " + cmd);
-      System.err.println("output: " + output); 
-      return cmd+"\n"+output;
-    }
-    return output;
-  }
-
-
     @Before
     public void setUp() {
     }
@@ -100,24 +76,12 @@ public class ReadAndWriteMonodixTest {
    */
   @Test
   public void testGetDic() throws IOException, InterruptedException {
-    if (DixtoolsTestSuite.onlyCLI) return;
-    
-    /*
-    for (Pardef pe : dic.getPardefsElement().getPardefElements()) {
-      System.err.println("pe = " + pe);
-    }*/
 
     String pe = dic.getPardefsElement().getPardefElements().get(0).toString();
     System.err.println("pe = " + pe);
     Assert.assertEquals("<S__encimp><e><l>-en</l><r>en<prn><enc><adv></r></e><e><l>-la</l><r>le<prn><enc><p3><f><sg></r></e>", pe);
 
 
-    /*
-    for (Section section : dic.getSections()) {
-      for (E ee : section.getEElements()) {
-        System.err.println("ee = " + ee);
-      }
-    }*/
     String ee = dic.getSections().get(0).getEElements().get(0).toString();
     System.err.println("ee = " + ee);
     Assert.assertEquals("<e><i>am</i><par n=\"ach/e[T]er__vblex\" prm=\"n\"/></e>", ee);
@@ -156,7 +120,6 @@ public class ReadAndWriteMonodixTest {
 */
   @Test
   public void testprintXML_std() throws IOException, InterruptedException {
-    if (DixtoolsTestSuite.onlyCLI) return;
     String outfile = rm("tmp_testprintXML_std.xml");
     dic.printXML(outfile, dics.elements.utils.DicOpts.STD);
     String diff=exec( "diff test/correct_output_DicFormat.xml "+outfile);
@@ -166,7 +129,6 @@ public class ReadAndWriteMonodixTest {
   
   @Test
   public void testDicFormatE1Line() throws IOException, InterruptedException {
-    if (DixtoolsTestSuite.onlyCLI) return;
     String outfile = rm("tmp_testDicFormatE1Line.xml");
     new DicFormatE1Line(dic).printXML(outfile);
     String diff=exec( "diff -b test/correct_output_DicFormatE1Line.xml "+outfile);
@@ -176,7 +138,6 @@ public class ReadAndWriteMonodixTest {
 
   @Test
   public void testprintXML_std1line() throws IOException, InterruptedException {
-    if (DixtoolsTestSuite.onlyCLI) return;
     String outfile = rm("tmp_testprintXML_std1line.xml");
     dic.printXML(outfile, dics.elements.utils.DicOpts.STD_1_LINE);
     String diff=exec( "diff -b test/correct_output_DicFormatE1Line.xml "+outfile);

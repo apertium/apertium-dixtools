@@ -72,10 +72,6 @@ public class GetBilOmegawiki  extends AbstractDictTool {
     /**
      * 
      */
-    private Msg msg;
-    /**
-     * 
-     */
     private String outFileName;
 
     /**
@@ -83,8 +79,6 @@ public class GetBilOmegawiki  extends AbstractDictTool {
      * 
      */
     public GetBilOmegawiki(String sl, String tl) {
-        msg = new Msg();
-
         if (sl.compareTo(tl) > 0) {
             setSl(tl);
             setTl(sl);

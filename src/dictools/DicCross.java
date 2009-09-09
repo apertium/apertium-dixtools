@@ -511,7 +511,6 @@ public class DicCross  extends AbstractDictTool{
         }
 
         msg.log("crossing " + e1.getValue("R") + " and " + e2.getValue("R") + "\n");
-        msg.msg("crossing " + e1.getValue("R") + " and " + e2.getValue("R") + "\n");
 
         CrossAction crossAction = new CrossAction();
         Pattern entriesPattern = new Pattern(e1.reverse(), e2);

@@ -47,54 +47,13 @@ import misc.eoen.DicFormatE1LineAligned;
  *
  * @author j
  */
-public class ZCommandLineTest {
+public class ZCommandLineTest extends Tools {
 
-  public Process exe(String dir, String cmd) throws IOException, InterruptedException {
-
-    File wd=new File(dir);
-
-    Process p=Runtime.getRuntime().exec(cmd, null, wd);
-
-    class Print extends Thread {
-
-      BufferedReader br;
-
-      private Print(InputStream errorStream) {
-        br=new BufferedReader(new InputStreamReader(errorStream));
-        start();
-      }
-
-      public void run() {
-        try {
-          String s;
-          while ((s=br.readLine())!=null) {
-            System.err.println(s);
-          }
-        } catch (IOException ex) {
-          Logger.getLogger(CrossDictTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-      }
-    }
-    new Print(p.getInputStream());
-    new Print(p.getErrorStream());
-    p.waitFor();
-
-
-
-    return p;
-  }
-  
-
-  @Test
-  public void test_dic_reader() throws Exception {
-    Process p=exe("regression_test_data/dic-reader", "./do_test.sh");
-    Assert.assertEquals("Exit value", 0, p.exitValue());
-  }
 
 
   @Test
   public void test_dix2tiny() throws Exception {
-    Process p=exe("regression_test_data/dix2tiny", "./do_test.sh");
+    Process p=exep("regression_test_data/dix2tiny", "./do_test.sh");
     Assert.assertEquals("Exit value", 0, p.exitValue());
   }
 
@@ -102,7 +61,7 @@ public class ZCommandLineTest {
 
   @Test
   public void test_dix2trie() throws Exception {
-    Process p=exe("regression_test_data/dix2trie", "./do_test.sh");
+    Process p=exep("regression_test_data/dix2trie", "./do_test.sh");
     Assert.assertEquals("Exit value", 0, p.exitValue());
   }
 
@@ -110,7 +69,7 @@ public class ZCommandLineTest {
 
   @Test
   public void test_merge_morph() throws Exception {
-    Process p=exe("regression_test_data/merge-morph", "./do_test.sh");
+    Process p=exep("regression_test_data/merge-morph", "./do_test.sh");
     Assert.assertEquals("Exit value", 0, p.exitValue());
   }
 
@@ -118,7 +77,7 @@ public class ZCommandLineTest {
 
   @Test
   public void test_reverse_bil() throws Exception {
-    Process p=exe("regression_test_data/reverse-bil", "./do_test.sh");
+    Process p=exep("regression_test_data/reverse-bil", "./do_test.sh");
     Assert.assertEquals("Exit value", 0, p.exitValue());
   }
 
@@ -126,15 +85,7 @@ public class ZCommandLineTest {
 
   @Test
   public void test_sort() throws Exception {
-    Process p=exe("regression_test_data/sort", "./do_test.sh");
-    Assert.assertEquals("Exit value", 0, p.exitValue());
-  }
-
-    
-
-  @Test
-  public void testBigCrossing() throws Exception {
-    Process p=exe("regression_test_data/crossdict", "./do_test.sh");
+    Process p=exep("regression_test_data/sort", "./do_test.sh");
     Assert.assertEquals("Exit value", 0, p.exitValue());
   }
   

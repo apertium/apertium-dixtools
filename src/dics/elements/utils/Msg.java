@@ -21,10 +21,15 @@ package dics.elements.utils;
 
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import javax.swing.JLabel;
 
 /**
  *
@@ -33,121 +38,25 @@ import javax.swing.JLabel;
  */
 public class Msg {
 
-    /**
-     *
-     */
-    static final int LABEL = 1;
-    /**
-     *
-     */
-    static final int NORMAL = 0;
-    /**
-     *
-     */
-    private int type = 0;
-    /**
-     *
-     */
-    private boolean debug = false;
-    /**
-     *
-     */
-    private JLabel label;
-    /**
-     *
-     */
-    private DataOutputStream log;
-    /**
-     *
-     */
-    private String logFileName;
+    public PrintStream log;
+    public PrintStream out = System.out;
+    public PrintStream err = System.err;
 
-    /**
-     *
-     *
-     */
-    public Msg() {
-    //debug = false;
+    private Msg() {
+    }
+    
+    private static Msg instance =new Msg();
+
+    public static Msg inst() {
+      return instance;
     }
 
-    /**
-     *
-     */
-    public Msg(JLabel label) {
-        this.label = label;
-        this.setType(this.LABEL);
-    }
-
-    /**
-     *
-     *
-     */
-    public Msg(String logFileName) {
-        //debug            = false;
-        this.logFileName = logFileName;
-    }
-
-    /**
-     *
-     * @param logFileName
-     */
-    private void openLogStream(String logFileName) {
-        try {
-//      Logger.getLogger(CrossAction.class.getName()).log(Level.SEVERE, null, ex);
-
-            // Msg will be change to Logger soon...
-            // boolean append = true;
-            // FileHandler handler = new FileHandler(logFileName, append);
-            // Logger logger = Logger.getLogger("crossdics");
-            // logger.addHandler(handler);
-            File file = new File(logFileName);
-            FileOutputStream fos = new FileOutputStream(file);
-
-            log = new DataOutputStream(fos);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     *
-     * @param text
-     */
     public void err(String text) {
-        System.err.println(text);
+        err.println(text);
     }
 
-    /**
-     *
-     * @param text
-     */
     public void out(String text) {
-        switch (this.getType()) {
-            case LABEL:
-                label.setText(text);
-
-                break;
-
-            default:
-                System.out.print(text);
-                break;
-        }
-    }
-
-    /**
-     *
-     */
-    public void msg(String text) {
-
-        // Only for Java components (JLabel, etc)
-        switch (this.getType()) {
-            case LABEL:
-                label.setText(text);
-                break;
-
-            default:
-                break;
-        }
+        out.print(text);
     }
 
     /**
@@ -155,75 +64,30 @@ public class Msg {
      * @param text
      */
     public void log(String text) {
-        if (isDebug()) {
-        System.out.println(text);
-            if (log == null) {
-                openLogStream(logFileName);
-            }
-
-            try {
-                log.writeBytes(text);
-            } catch (IOException ioe) {
-                System.err.println("Error writing log file " + getLogFileName());
-            }
+        if (log!=null) {
+            //System.out.println(text);
+            log.println(text);
         }
     }
 
-    /**
-     * @return the debug
-     */
-    public boolean isDebug() {
-        return debug;
-    }
-
-    /**
-     * @param debug
-     *                the debug to set
-     */
-    public void setDebug(boolean debug) {
-        this.debug = debug;
-    }
-
-    /**
-     * @return the logFileName
-     */
-    public String getLogFileName() {
-        return logFileName;
-    }
+  public void setDebug(boolean b) {
+    if (b && log==null) log = System.err;
+    if (!b && log!=null) log = null;
+  }
 
     /**
      * @param logFileName
      *                the logFileName to set
      */
     public void setLogFileName(String logFileName) {
-        this.logFileName = logFileName;
-
-        if (isDebug()) {
-            openLogStream(logFileName);
+        try {
+          log=new PrintStream(logFileName);
+          log.println("Logging started "+new Date());
+          Runtime.getRuntime().addShutdownHook(new Thread() { public void run() {
+            log.close();
+          }});
+        } catch (Exception ex) {
+          err("Cannot log to "+logFileName);
         }
     }
-
-    /**
-     *
-     */
-    public void setType(int t) {
-        this.type = t;
-    }
-
-    /**
-     *
-     */
-    public int getType() {
-        return type;
-    }
-
-    /**
-     *
-     */
-    public void setLabel(JLabel label) {
-        this.label = label;
-        this.type = this.LABEL;
-    }
 }
-//~ Formatted by Jindent --- http://www.jindent.com
-
