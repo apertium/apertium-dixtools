@@ -19,13 +19,13 @@
  */
 package misc.enes;
 
-import dics.elements.dtd.DictionaryElement;
-import dics.elements.dtd.EElement;
-import dics.elements.dtd.IElement;
-import dics.elements.dtd.LElement;
-import dics.elements.dtd.PElement;
-import dics.elements.dtd.RElement;
-import dics.elements.dtd.SElement;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.I;
+import dics.elements.dtd.L;
+import dics.elements.dtd.P;
+import dics.elements.dtd.R;
+import dics.elements.dtd.S;
 import dics.elements.dtd.TextElement;
 import dics.elements.utils.SElementList;
 import dictools.xml.DictionaryReader;
@@ -46,7 +46,7 @@ public class CompleteTranslation {
     /**
      * 
      */
-    private DictionaryElement bil;
+    private Dictionary bil;
     /**
      * 
      */
@@ -68,8 +68,8 @@ public class CompleteTranslation {
      * 
      */
     public void complete() {
-        for (EElement ee : bil.getAllEntries()) {
-            LElement left = ee.getLeft();
+        for (E ee : bil.getAllEntries()) {
+            L left = ee.getLeft();
             if (left != null) {
                 System.out.println("Completing " + left.getValueNoTags());
                 SElementList slist = left.getSElements();
@@ -77,19 +77,19 @@ public class CompleteTranslation {
                 if (source != null) {
                     String translation = translations.get(source);
                     if (translation != null) {
-                        RElement rE = new RElement();
+                        R rE = new R();
                         TextElement tE = new TextElement(translation);
                         rE.addChild(tE);
-                        for (SElement sE : slist) {
+                        for (S sE : slist) {
                             rE.addChild(sE);
                         }
                         if (ee.getP() != null) {
                             ee.getP().setRElement(rE);
                         } else {
-                            PElement pE = new PElement();
+                            P pE = new P();
                             pE.setRElement(rE);
                             pE.setRElement(ee.getRight());
-                            IElement iE = ee.getI();
+                            I iE = ee.getI();
                             ee.getChildren().remove(iE);
                             ee.addChild(pE);
                         }

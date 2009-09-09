@@ -29,24 +29,20 @@ import java.io.Writer;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class SdefElement extends Element {
+public class Re extends DixElement {
 
     /**
      * 
      */
-    private String n;
-    /**
-     * 
-     */
-    private String comment;
+    private String value;
 
     /**
      * 
      * @param value
      */
-    public SdefElement(String value) {
-        setTagName("sdef");
-        n = value;
+    public Re(String value) {
+        setTagName("re");
+        this.value = value;
     }
 
     /**
@@ -54,7 +50,7 @@ public class SdefElement extends Element {
      * @return Undefined         */
     @Override
     public String getValue() {
-        return n;
+        return value;
     }
 
     /**
@@ -62,16 +58,14 @@ public class SdefElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
+    @Override
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
-        if (!opt.noProcessingComments) dos.append(makeCommentIfData(processingComments));
-        String comment = "";
-        if (this.comment != null) {
-            comment = "\tc=\"" + getComment() + "\"";
+        
+        value = maskNull(value);
 
-        }
-        dos.append(tab(2) + "<" + getTagName() + " n=\"" + getValue() + "\" " + comment + "/> "  +appendCharacterData.trim()+"\n");
+        dos.append( (opt.nowAlign?"":tab(3)) + "<" + getTagName() + ">" + getValue() + "</" + getTagName() + ">"+appendCharacterData.trim()+  (opt.nowAlign?"":"\n"));
     }
 
     /**
@@ -79,22 +73,6 @@ public class SdefElement extends Element {
      */
     @Override
     public String toString() {
-        String str = "<" + getValue() + ">";
-        return str;
-    }
-
-    /**
-     * @return the comment
-     */
-    public String getComment() {
-        return comment;
-    }
-
-    /**
-     * @param comment
-     *                the comment to set
-     */
-    public void setComment(String comment) {
-        this.comment = comment;
+        return getValue();
     }
 }

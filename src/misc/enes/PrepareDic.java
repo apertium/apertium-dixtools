@@ -19,9 +19,9 @@
  */
 package misc.enes;
 
-import dics.elements.dtd.DictionaryElement;
-import dics.elements.dtd.EElement;
-import dics.elements.dtd.SectionElement;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.Section;
 import dictools.xml.DictionaryReader;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -35,7 +35,7 @@ import java.util.HashMap;
  */
 public class PrepareDic {
 
-    private DictionaryElement ncBil;
+    private Dictionary ncBil;
     private HashMap<String, String> missing;
 
     /**
@@ -52,13 +52,13 @@ public class PrepareDic {
      * 
      */
     public void prepare() {
-        DictionaryElement dic = new DictionaryElement();
-        SectionElement section = new SectionElement("main", "standard");
+        Dictionary dic = new Dictionary();
+        Section section = new Section("main", "standard");
         dic.addSection(section);
 
         int max = ncBil.getAllEntries().size();
         for (int i = 0; i < max; i++) {
-            EElement ee = ncBil.getAllEntries().get(i);
+            E ee = ncBil.getAllEntries().get(i);
             //String value = ee.getLeft().getValueNoTags();
             String value = ee.getRight().getValueNoTags();
             System.err.println("checking " + value + " ...");

@@ -19,16 +19,16 @@
  */
 package misc;
 
-import dics.elements.dtd.DictionaryElement;
-import dics.elements.dtd.EElement;
-import dics.elements.dtd.IElement;
-import dics.elements.dtd.LElement;
-import dics.elements.dtd.PElement;
-import dics.elements.dtd.ParElement;
-import dics.elements.dtd.PardefElement;
-import dics.elements.dtd.RElement;
-import dics.elements.dtd.SElement;
-import dics.elements.dtd.SectionElement;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.I;
+import dics.elements.dtd.L;
+import dics.elements.dtd.P;
+import dics.elements.dtd.Par;
+import dics.elements.dtd.Pardef;
+import dics.elements.dtd.R;
+import dics.elements.dtd.S;
+import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
 import dictools.xml.DictionaryReader;
 import java.util.HashMap;
@@ -42,19 +42,19 @@ public class Misc {
     /**
      * 
      */
-    private DictionaryElement dic1;
+    private Dictionary dic1;
     /**
      * 
      */
-    private DictionaryElement dic2;
+    private Dictionary dic2;
     /**
      * 
      */
-    private DictionaryElement dic3;
+    private Dictionary dic3;
     /**
      * 
      */
-    private DictionaryElement dic4;
+    private Dictionary dic4;
 
     /**
      * 
@@ -80,20 +80,20 @@ public class Misc {
     }
 
     public void doMisc() {
-        DictionaryElement bil_n = this.dic1;
+        Dictionary bil_n = this.dic1;
 
 
-        DictionaryElement morph_n_en = new DictionaryElement();
-        SectionElement section = new SectionElement("main", "standard");
+        Dictionary morph_n_en = new Dictionary();
+        Section section = new Section("main", "standard");
         morph_n_en.addSection(section);
 
-        for (EElement ee : bil_n.getAllEntries()) {
-            EElement ne = new EElement();
+        for (E ee : bil_n.getAllEntries()) {
+            E ne = new E();
             ne.setLemma(ee.getValue("R"));
-            IElement iE = new IElement();
+            I iE = new I();
             iE.setValue(ee.getValue("R"));
             ne.addChild(iE);
-            ParElement parE = new ParElement();
+            Par parE = new Par();
             ne.addChild(parE);
             section.addEElement(ne);
         }
@@ -106,52 +106,52 @@ public class Misc {
      */
     public void doMisc7() {
         System.err.println("Begin");
-        DictionaryElement morph_en_adj = this.dic1;
-        DictionaryElement bil_en_es_adj = this.dic2;
-        DictionaryElement morph_en_n = this.dic3;
-        DictionaryElement bil_en_es_n = this.dic4;
+        Dictionary morph_en_adj = this.dic1;
+        Dictionary bil_en_es_adj = this.dic2;
+        Dictionary morph_en_n = this.dic3;
+        Dictionary bil_en_es_n = this.dic4;
 
-        HashMap<String, PElement> trans_n = new HashMap<String, PElement>();
-        for (EElement ee : bil_en_es_n.getAllEntries()) {
+        HashMap<String, P> trans_n = new HashMap<String, P>();
+        for (E ee : bil_en_es_n.getAllEntries()) {
             String left = ee.getValue("L");
-            LElement lE = ee.getLeft();
+            L lE = ee.getLeft();
             String right = ee.getValue("R");
-            RElement rE = ee.getRight();
-            PElement pE = new PElement();
+            R rE = ee.getRight();
+            P pE = new P();
             pE.setLElement(lE);
             pE.setRElement(rE);
             trans_n.put(left, pE);
         }
 
 
-        HashMap<String, EElement> entries = new HashMap<String, EElement>();
-        for (EElement ee : bil_en_es_adj.getAllEntries()) {
+        HashMap<String, E> entries = new HashMap<String, E>();
+        for (E ee : bil_en_es_adj.getAllEntries()) {
             String value = ee.getValue("L");
             entries.put(value, ee);
         }
 
-        DictionaryElement ndic = new DictionaryElement();
-        SectionElement section = new SectionElement();
+        Dictionary ndic = new Dictionary();
+        Section section = new Section();
         ndic.addSection(section);
-        for (EElement ee : morph_en_adj.getAllEntries()) {
+        for (E ee : morph_en_adj.getAllEntries()) {
             String lemma = ee.getLemma();
             if (!entries.containsKey(lemma)) {
                 System.err.println("Falta " + lemma + " en el bilingüe");
-                PElement p = trans_n.get(lemma);
+                P p = trans_n.get(lemma);
                 if (p != null) {
                     System.err.println("Nuevo: " + p.getR().getValueNoTags() + " / " + lemma);
-                    EElement ne = new EElement();
+                    E ne = new E();
                     ne.setComment("check");
-                    PElement pE = new PElement();
+                    P pE = new P();
                     ne.addChild(pE);
 
-                    RElement rE = new RElement();
-                    for (SElement sE : p.getL().getSElements()) {
+                    R rE = new R();
+                    for (S sE : p.getL().getSElements()) {
                         if (sE.getValue().equals("adj")) {
                             sE.setValue("n");
                         }
                     }
-                    for (SElement sE : p.getR().getSElements()) {
+                    for (S sE : p.getR().getSElements()) {
                         if (sE.getValue().equals("adj")) {
                             sE.setValue("n");
                         }
@@ -160,7 +160,7 @@ public class Misc {
                     pE.setLElement(p.getL());
 
                     //rE.addChild(new TextElement(p.getR().getValueNoTags()));
-                    //rE.addChild(new SElement("n"));
+                    //rE.addChild(new S("n"));
                     pE.setRElement(p.getR());
 
                     section.addEElement(ne);
@@ -176,25 +176,25 @@ public class Misc {
      * 
      */
     public void doMisc5() {
-        DictionaryElement morph_es = new DictionaryElement();
-        SectionElement s1 = new SectionElement("main", "standard");
+        Dictionary morph_es = new Dictionary();
+        Section s1 = new Section("main", "standard");
         morph_es.addSection(s1);
-        DictionaryElement morph_en = new DictionaryElement();
-        SectionElement s2 = new SectionElement("main", "standard");
+        Dictionary morph_en = new Dictionary();
+        Section s2 = new Section("main", "standard");
         morph_en.addSection(s2);
 
 
-        DictionaryElement bil = dic1;
+        Dictionary bil = dic1;
 
-        for (EElement ee : bil.getAllEntries()) {
+        for (E ee : bil.getAllEntries()) {
             System.err.println(ee.getValue("L") + " / " + ee.getValue("R"));
 
-            EElement es = new EElement();
+            E es = new E();
             es.setLemma(ee.getValue("R"));
-            IElement iE = new IElement();
+            I iE = new I();
             iE.setValue(ee.getValue("R"));
             es.addChild(iE);
-            ParElement parE = new ParElement();
+            Par parE = new Par();
             String par = "";
             if (ee.contains("adv")) {
                 par = "ahora__adv";
@@ -203,12 +203,12 @@ public class Misc {
             es.addChild(parE);
             s1.addEElement(es);
 
-            EElement en = new EElement();
+            E en = new E();
             en.setLemma(ee.getValue("L"));
-            IElement iEen = new IElement();
+            I iEen = new I();
             iEen.setValue(ee.getValue("L"));
             en.addChild(iEen);
-            ParElement parEen = new ParElement();
+            Par parEen = new Par();
             String cat = "";
             if (ee.contains("adv")) {
                 cat = "maybe__adv";
@@ -245,16 +245,16 @@ public class Misc {
      * 
      */
     public void doMisc4() {
-        DictionaryElement es_pardefs = dic1;
-        DictionaryElement es_adjs = dic2;
-        DictionaryElement en_es_adjs = dic3;
+        Dictionary es_pardefs = dic1;
+        Dictionary es_adjs = dic2;
+        Dictionary en_es_adjs = dic3;
 
         HashMap<String, String> mfpars = new HashMap<String, String>();
-        for (PardefElement pardef : es_pardefs.getPardefsElement().getPardefElements()) {
+        for (Pardef pardef : es_pardefs.getPardefsElement().getPardefElements()) {
             String parName = pardef.getName();
             if (parName != null) {
                 boolean is_mf = false;
-                for (EElement ee : pardef.getEElements()) {
+                for (E ee : pardef.getEElements()) {
                     if (ee.contains("mf")) {
                         is_mf = true;
 
@@ -268,7 +268,7 @@ public class Misc {
         }
 
         HashMap<String, String> adjpars = new HashMap<String, String>();
-        for (EElement ee : es_adjs.getAllEntries()) {
+        for (E ee : es_adjs.getAllEntries()) {
             String lemma = ee.getLemma();
             String parName = ee.getMainParadigmName();
             if (mfpars.containsKey(parName)) {
@@ -277,12 +277,12 @@ public class Misc {
             }
         }
 
-        for (EElement ee : en_es_adjs.getAllEntries()) {
-            RElement rE = ee.getRight();
+        for (E ee : en_es_adjs.getAllEntries()) {
+            R rE = ee.getRight();
             String rv = rE.getValueNoTags();
             if (adjpars.containsKey(rv)) {
                 if (!rE.contains("mf")) {
-                    rE.addChild(new SElement("mf"));
+                    rE.addChild(new S("mf"));
                 }
             }
 
@@ -295,16 +295,16 @@ public class Misc {
      * 
      */
     public void doMisc3() {
-        DictionaryElement ca_morph = dic1;
-        DictionaryElement es_morph = dic2;
-        //DictionaryElement en_es_bil = dic3;      
+        Dictionary ca_morph = dic1;
+        Dictionary es_morph = dic2;
+        //Dictionary en_es_bil = dic3;
 
         HashMap<String, String> pars = new HashMap<String, String>();
 
-        for (EElement ee : ca_morph.getAllEntries()) {
+        for (E ee : ca_morph.getAllEntries()) {
             String lemma = ee.getLemma();
             if (lemma != null) {
-                ParElement parE = ee.getParadigm();
+                Par parE = ee.getParadigm();
                 if (parE != null) {
                     if (parE.getValue().equals("Marc__np") || parE.getValue().equals("Maria__np")) {
                         pars.put(lemma, parE.getValue());
@@ -313,10 +313,10 @@ public class Misc {
             }
         }
 
-        for (EElement ee : es_morph.getAllEntries()) {
+        for (E ee : es_morph.getAllEntries()) {
             String lemma = ee.getLemma();
             if (lemma != null) {
-                ParElement parE = ee.getParadigm();
+                Par parE = ee.getParadigm();
                 if (parE != null) {
                     String npar = pars.get(lemma);
                     if (npar != null) {
@@ -333,8 +333,8 @@ public class Misc {
      */
     public void doMisc2() {
         HashMap<String, String> nps = new HashMap<String, String>();
-        for (EElement ee : dic1.getAllEntries()) {
-            RElement re = ee.getRight();
+        for (E ee : dic1.getAllEntries()) {
+            R re = ee.getRight();
             if (re != null) {
                 if (re.is("np")) {
                     String lemma = re.getValueNoTags();
@@ -355,10 +355,10 @@ public class Misc {
             }
         }
 
-        for (EElement ee : dic3.getAllEntries()) {
+        for (E ee : dic3.getAllEntries()) {
             String lemma = ee.getLemma();
             if (lemma != null) {
-                ParElement parE = ee.getParadigm();
+                Par parE = ee.getParadigm();
                 if (parE != null) {
                     if (nps.get(lemma) != null) {
                         if (nps.get(lemma).equals("m")) {

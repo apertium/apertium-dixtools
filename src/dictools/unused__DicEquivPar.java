@@ -22,9 +22,9 @@ package dictools;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import dics.elements.dtd.DictionaryElement;
-import dics.elements.dtd.PardefElement;
-import dics.elements.dtd.PardefsElement;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.Pardef;
+import dics.elements.dtd.Pardefs;
 import dics.elements.utils.DicSet;
 
 /**
@@ -40,11 +40,11 @@ public class unused__DicEquivPar {
     /**
      * 
      */
-    private HashMap<String, ArrayList<PardefElement>> equivA;
+    private HashMap<String, ArrayList<Pardef>> equivA;
     /**
      * 
      */
-    private HashMap<String, ArrayList<PardefElement>> equivC;
+    private HashMap<String, ArrayList<Pardef>> equivC;
 
     /**
      * 
@@ -58,7 +58,7 @@ public class unused__DicEquivPar {
      * 
      * @param mon
      */
-    public unused__DicEquivPar(DictionaryElement mon) {
+    public unused__DicEquivPar(Dictionary mon) {
         DicSet ds = new DicSet(mon);
         dicSet = ds;
     }
@@ -69,11 +69,11 @@ public class unused__DicEquivPar {
      */
     public void findEquivalents() {
         System.err.println("Searching for equivalents...");
-        DictionaryElement monA = dicSet.getMon1();
-        DictionaryElement monC = dicSet.getMon2();
+        Dictionary monA = dicSet.getMon1();
+        Dictionary monC = dicSet.getMon2();
 
-        PardefsElement pardefsA = monA.getPardefsElement();
-        PardefsElement pardefsC = monC.getPardefsElement();
+        Pardefs pardefsA = monA.getPardefsElement();
+        Pardefs pardefsC = monC.getPardefsElement();
 
         System.err.println("Searching for equivalents in monA...");
         equivA = this.findEquivalents(pardefsA);
@@ -81,11 +81,11 @@ public class unused__DicEquivPar {
         equivC = this.findEquivalents(pardefsC);
     }
 
-    public HashMap<String, ArrayList<PardefElement>> findEquivalentsA() {
+    public HashMap<String, ArrayList<Pardef>> findEquivalentsA() {
         System.err.println("Searching for equivalents...");
-        DictionaryElement monA = dicSet.getMon1();
+        Dictionary monA = dicSet.getMon1();
 
-        PardefsElement pardefsA = monA.getPardefsElement();
+        Pardefs pardefsA = monA.getPardefsElement();
 
         System.err.println("Searching for equivalents in monA...");
         equivA = this.findEquivalents(pardefsA);
@@ -95,14 +95,14 @@ public class unused__DicEquivPar {
     /**
      * 
      * @return Undefined         */
-    public HashMap<String, ArrayList<PardefElement>> getEquivalentsA() {
+    public HashMap<String, ArrayList<Pardef>> getEquivalentsA() {
         return equivA;
     }
 
     /**
      * 
      * @return Undefined         */
-    public HashMap<String, ArrayList<PardefElement>> getEquivalentsC() {
+    public HashMap<String, ArrayList<Pardef>> getEquivalentsC() {
         return equivC;
     }
 
@@ -110,18 +110,18 @@ public class unused__DicEquivPar {
      * 
      * @param pardefs
      */
-    private HashMap<String, ArrayList<PardefElement>> findEquivalents(
-            PardefsElement pardefs) {
-        ArrayList<PardefElement> pardefscopy = new ArrayList<PardefElement>(
+    private HashMap<String, ArrayList<Pardef>> findEquivalents(
+            Pardefs pardefs) {
+        ArrayList<Pardef> pardefscopy = new ArrayList<Pardef>(
                 pardefs.getPardefElements());
-        HashMap<String, ArrayList<PardefElement>> equivalents = new HashMap<String, ArrayList<PardefElement>>();
+        HashMap<String, ArrayList<Pardef>> equivalents = new HashMap<String, ArrayList<Pardef>>();
 
         System.err.println(pardefs.getPardefElements().size() + " paradigmas");
         int nEquiv = 0;
-        for (PardefElement pardefA1 : pardefs.getPardefElements()) {
+        for (Pardef pardefA1 : pardefs.getPardefElements()) {
             // lista de equivalentes
 
-            for (PardefElement pardefA2 : pardefscopy) {
+            for (Pardef pardefA2 : pardefscopy) {
                 // System.err.println("Comparando " + pardefA1.getName() + " y "
                 // + pardefA2.getName() + " ...");
                 if (!pardefA1.getName().equals(pardefA2.getName()) && pardefA1.contentEquals(pardefA2)) {
@@ -135,11 +135,11 @@ public class unused__DicEquivPar {
                      */
 
                     if (!equivalents.containsKey(pardefA1.getName())) {
-                        ArrayList<PardefElement> equivList = new ArrayList<PardefElement>();
+                        ArrayList<Pardef> equivList = new ArrayList<Pardef>();
                         equivList.add(pardefA2);
                         equivalents.put(pardefA1.getName(), equivList);
                     } else {
-                        ArrayList<PardefElement> list = equivalents.get(pardefA1.getName());
+                        ArrayList<Pardef> list = equivalents.get(pardefA1.getName());
                         list.add(pardefA2);
                         equivalents.put(pardefA1.getName(), list);
                     }
@@ -160,14 +160,14 @@ public class unused__DicEquivPar {
      * @param category
      * @return Undefined
      */
-    public static PardefElement getEquivalentParadigm(String parName,
-            HashMap<String, ArrayList<PardefElement>> equivPar,
+    public static Pardef getEquivalentParadigm(String parName,
+            HashMap<String, ArrayList<Pardef>> equivPar,
             String category) {
         // System.err.println("Searching for equivalent paradigm with category
         // '" + category + "' for '" + lemma + "'");
-        ArrayList<PardefElement> list = equivPar.get(parName);
+        ArrayList<Pardef> list = equivPar.get(parName);
         if (list != null) {
-            for (PardefElement pE : list) {
+            for (Pardef pE : list) {
                 if (pE.hasCategory(category)) {
                     return pE;
                 }

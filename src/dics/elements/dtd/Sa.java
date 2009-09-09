@@ -19,31 +19,19 @@
  */
 package dics.elements.dtd;
 
-import dics.elements.utils.DicOpts;
-import java.io.IOException;
-
 /**
  * 
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class LElement extends ContentElement {
+public class Sa extends DixElement {
 
     /**
      * 
      * 
      */
-    public LElement() {
-        super();
-        setTagName("l");
-    }
-
-    /**
-     * 
-     * @param cE
-     */
-    public LElement(ContentElement cE) {
-        super(cE);
-        setTagName("l");
+    public Sa() {
+        setTagName("sa");
+        setValue("<sa/>");
     }
 }

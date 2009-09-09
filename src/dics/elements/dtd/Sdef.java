@@ -29,7 +29,7 @@ import java.io.Writer;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class ParElement extends Element {
+public class Sdef extends DixElement {
 
     /**
      * 
@@ -38,42 +38,14 @@ public class ParElement extends Element {
     /**
      * 
      */
-    private String sa;
-
-    private String[] prm;
-
-    /**
-     * 
-     * 
-     */
-    public ParElement() {
-        setTagName("par");
-
-    }
+    private String comment;
 
     /**
      * 
      * @param value
      */
-    public ParElement(String value) {
-        setTagName("par");
-        n = value;
-    }
-
-    /**
-     * 
-     * @param pE
-     */
-    public ParElement(ParElement pE) {
-        n = pE.getValue();
-    }
-
-    /**
-     * 
-     * @param value
-     */
-    @Override
-    public void setValue(String value) {
+    public Sdef(String value) {
+        setTagName("sdef");
         n = value;
     }
 
@@ -87,70 +59,42 @@ public class ParElement extends Element {
 
     /**
      * 
-     * @param sa
-     */
-    public void setSa(String sa) {
-        this.sa = sa;
-    }
-
-    /**
-     * 
-     * @return 'sa' attribute
-     */
-    public String getSa() {
-        return this.sa;
-    }
-
-    /**
-     * 
      * @param dos
      * @throws java.io.IOException
      */
-    @Override
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
         if (!opt.noProcessingComments) dos.append(makeCommentIfData(processingComments));
+        String comment = "";
+        if (this.comment != null) {
+            comment = "\tc=\"" + getComment() + "\"";
 
-
-        if (opt.nowAlign) {
-          dos.append(toString());
-        } else {
-          dos.append(tab(4) + toString() +  " \n");
         }
+        dos.append(tab(2) + "<" + getTagName() + " n=\"" + getValue() + "\" " + comment + "/> "  +appendCharacterData.trim()+"\n");
     }
-
 
     /**
      * 
      */
     @Override
     public String toString() {
-        String saAttr = sa==null?"":" sa=\"" + sa + "\" ";
-        return "<" + getTagName() + " n=\"" + n + "\"" + prmToString() + saAttr + "/>" ;
+        String str = "<" + getValue() + ">";
+        return str;
     }
 
-  public String[] getPrm() {
-    return prm;
-  }
-
-
-  public void setPrm(int n, String v) {
-    if (prm==null) prm=new String[10];
-    prm[n] = v;
-  }
-
-    private String prmToString() {
-        String prms="";
-        if (prm!=null) {
-            for (int i=0; i<prm.length; i++) {
-                if (prm[i]!=null) {
-                    prms+=" prm"+(i==0?"":i)+"=\""+prm[i]+"\"";
-                }
-            }
-        }
-        return prms;
+    /**
+     * @return the comment
+     */
+    public String getComment() {
+        return comment;
     }
 
-
+    /**
+     * @param comment
+     *                the comment to set
+     */
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 }

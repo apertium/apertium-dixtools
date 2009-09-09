@@ -26,18 +26,18 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import dics.elements.dtd.DictionaryElement;
-import dics.elements.dtd.EElement;
-import dics.elements.dtd.Element;
-import dics.elements.dtd.IElement;
-import dics.elements.dtd.LElement;
-import dics.elements.dtd.PElement;
-import dics.elements.dtd.PardefElement;
-import dics.elements.dtd.PardefsElement;
-import dics.elements.dtd.RElement;
-import dics.elements.dtd.SdefElement;
-import dics.elements.dtd.SdefsElement;
-import dics.elements.dtd.SectionElement;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.DixElement;
+import dics.elements.dtd.I;
+import dics.elements.dtd.L;
+import dics.elements.dtd.P;
+import dics.elements.dtd.Pardef;
+import dics.elements.dtd.Pardefs;
+import dics.elements.dtd.R;
+import dics.elements.dtd.Sdef;
+import dics.elements.dtd.Sdefs;
+import dics.elements.dtd.Section;
 import dics.elements.utils.Msg;
 import java.util.HashMap;
 
@@ -51,7 +51,7 @@ public class DicList {
     /**
      * 
      */
-    private DictionaryElement dic;
+    private Dictionary dic;
     /**
      * 
      */
@@ -70,7 +70,7 @@ public class DicList {
 
     public DicList(String fileName) {
         DictionaryReader dicReader = new DictionaryReader(fileName);
-        DictionaryElement d = dicReader.readDic();
+        Dictionary d = dicReader.readDic();
         setDic(d);
     }
 
@@ -78,20 +78,20 @@ public class DicList {
     }
 
     public void getListOfParadigms() {
-        DictionaryElement dic = getDic();
-        PardefsElement paradigms = dic.getPardefsElement();
+        Dictionary dic = getDic();
+        Pardefs paradigms = dic.getPardefsElement();
 
-        for (PardefElement paradigm : paradigms.getPardefElements()) {
+        for (Pardef paradigm : paradigms.getPardefElements()) {
             msg.out(paradigm.getName() + "\n");
         }
     }
 
     public void getListOfLemmas() {
-        DictionaryElement dic = getDic();
+        Dictionary dic = getDic();
 
         int nLemmas = 0;
-        for (SectionElement section : dic.getSections()) {
-            for (EElement element : section.getEElements()) {
+        for (Section section : dic.getSections()) {
+            for (E element : section.getEElements()) {
                 if (element.getLemma() != null) {
                     msg.out(element.getLemma() + "\n");
                     nLemmas++;
@@ -106,23 +106,23 @@ public class DicList {
      * 
      */
     public void getDefinitions() {
-        DictionaryElement dic = getDic();
+        Dictionary dic = getDic();
 
-        SdefsElement sdefs = dic.getSdefs();
+        Sdefs sdefs = dic.getSdefs();
 
-        for (SdefElement sdef : sdefs.getSdefsElements()) {
+        for (Sdef sdef : sdefs.getSdefsElements()) {
             msg.out(sdef.getValue() + "\n");
         }
     }
 
     public void getPairs() {
-        DictionaryElement dic = getDic();
+        Dictionary dic = getDic();
 
         int nLemmas = 0;
-        for (SectionElement section : dic.getSections()) {
-            for (EElement element : section.getEElements()) {
-                LElement left = element.getLeft();
-                RElement right = element.getRight();
+        for (Section section : dic.getSections()) {
+            for (E element : section.getEElements()) {
+                L left = element.getLeft();
+                R right = element.getRight();
 
                 String leftValue = left.getValueNoTags();
                 String rightValue = right.getValueNoTags();
@@ -138,24 +138,24 @@ public class DicList {
 
 
 
-    private void expand(EElement ee, HashMap<String, PardefElement> pardefs) {
+    private void expand(E ee, HashMap<String, Pardef> pardefs) {
         if ("yes".equals(ee.getIgnore())) return;
 
 
 /* XXXXXX
-                for (Element e : ee.getChildren()) {
-                    if (e instanceof IElement) {
-                        IElement i = (IElement) e;
+                for (DixElement e : ee.getChildren()) {
+                    if (e instanceof I) {
+                        I i = (I) e;
                         elementsA = i.getSElements();
                     } else
-                    if (e instanceof PElement) {
-                        PElement p = (PElement) e;
+                    if (e instanceof P) {
+                        P p = (P) e;
                         if (side.contentEquals("L")) {
-                            LElement lE = p.getL();
+                            L lE = p.getL();
                             elementsA = lE.getSElements();
                         }
                         if (side.contentEquals("R")) {
-                            RElement rE = p.getR();
+                            R rE = p.getR();
                             elementsA = rE.getSElements();
                         }
                     }
@@ -165,17 +165,17 @@ public class DicList {
     }
 
     private void ltExpand() {
-        DictionaryElement dic = getDic();
-        HashMap<String, PardefElement> pardefs = new HashMap<String, PardefElement>();
+        Dictionary dic = getDic();
+        HashMap<String, Pardef> pardefs = new HashMap<String, Pardef>();
 
-        for (PardefElement paradigm : dic.getPardefsElement().getPardefElements()) {
+        for (Pardef paradigm : dic.getPardefsElement().getPardefElements()) {
             msg.out(paradigm.getName() + "\n");
             pardefs.put(paradigm.getName(), paradigm);
         }
 
         int nLemmas = 0;
-        for (SectionElement section : dic.getSections()) {
-            for (EElement ee : section.getEElements()) {
+        for (Section section : dic.getSections()) {
+            for (E ee : section.getEElements()) {
                 expand(ee, pardefs);
             }
         }
@@ -186,12 +186,12 @@ public class DicList {
 
 
     public void getListWithDot() {
-        DictionaryElement dic = getDic();
+        Dictionary dic = getDic();
 
         int nLemmas = 0;
-        for (SectionElement section : dic.getSections()) {
-            for (EElement element : section.getEElements()) {
-                RElement right = element.getRight();
+        for (Section section : dic.getSections()) {
+            for (E element : section.getEElements()) {
+                R right = element.getRight();
                 String rightValue = right.getValueNoTags();
                 msg.out(rightValue + ".\n");
                 nLemmas++;
@@ -228,7 +228,7 @@ public class DicList {
     /**
      * @return the dic
      */
-    public DictionaryElement getDic() {
+    public Dictionary getDic() {
         return dic;
     }
 
@@ -236,7 +236,7 @@ public class DicList {
      * @param dic
      *                the dic to set
      */
-    public void setDic(DictionaryElement dic) {
+    public void setDic(Dictionary dic) {
         this.dic = dic;
     }
 
@@ -246,7 +246,7 @@ public class DicList {
      */
     public void setDic(String fileName) {
         DictionaryReader dicReader = new DictionaryReader(fileName);
-        DictionaryElement dic = dicReader.readDic();
+        Dictionary dic = dicReader.readDic();
         setDic(dic);
     }
 
@@ -299,7 +299,7 @@ public class DicList {
             DictionaryReader dicReader = new DictionaryReader();
             dicReader.setUrlDic(true);
             dicReader.setIs(is);
-            DictionaryElement dic = dicReader.readDic();
+            Dictionary dic = dicReader.readDic();
             setDic(dic);
         } catch (MalformedURLException mfue) {
             msg.err("Error: URL not well formed");

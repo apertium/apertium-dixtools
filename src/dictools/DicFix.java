@@ -21,14 +21,14 @@ package dictools;
 
 import dics.elements.dtd.ContentElement;
 import dictools.xml.DictionaryReader;
-import dics.elements.dtd.DictionaryElement;
-import dics.elements.dtd.EElement;
-import dics.elements.dtd.Element;
-import dics.elements.dtd.IElement;
-import dics.elements.dtd.LElement;
-import dics.elements.dtd.PardefElement;
-import dics.elements.dtd.RElement;
-import dics.elements.dtd.SectionElement;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.DixElement;
+import dics.elements.dtd.I;
+import dics.elements.dtd.L;
+import dics.elements.dtd.Pardef;
+import dics.elements.dtd.R;
+import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
 import dics.elements.utils.EElementList;
 import dics.elements.utils.EHashMap;
@@ -46,7 +46,7 @@ public class DicFix  extends AbstractDictTool {
     /**
      * 
      */
-    private DictionaryElement dic;
+    private Dictionary dic;
     /**
      * 
      */
@@ -62,7 +62,7 @@ public class DicFix  extends AbstractDictTool {
      * 
      * @param dic
      */
-    public DicFix(DictionaryElement dic) {
+    public DicFix(Dictionary dic) {
         this.dic = dic;
     }
 
@@ -70,17 +70,17 @@ public class DicFix  extends AbstractDictTool {
      * 
      * @return Undefined         
      */
-    public DictionaryElement fix() {
+    public Dictionary fix() {
 
  
         // Check for duplicate entries in paradigm
         if (dic.getPardefsElement() != null)
-        for (PardefElement par :  dic.getPardefsElement().getPardefElements()) {
+        for (Pardef par :  dic.getPardefsElement().getPardefElements()) {
             HashSet<String> ees = new HashSet<String>();
-            EElement eePrevious = null;
+            E eePrevious = null;
             boolean removed = false;
-            for (Iterator<EElement> eei = par.getEElements().iterator(); eei.hasNext(); ) {
-                EElement ee = eei.next();
+            for (Iterator<E> eei = par.getEElements().iterator(); eei.hasNext(); ) {
+                E ee = eei.next();
                 String s = ee.toStringAll();
                 boolean alreadyThere = !ees.add(s);
                 if (alreadyThere) { // remove if this entry already existed
@@ -98,20 +98,20 @@ public class DicFix  extends AbstractDictTool {
 
 
         EHashMap eMap = new EHashMap();
-        for (SectionElement section : dic.getSections()) {
+        for (Section section : dic.getSections()) {
             int duplicated = 0;
-            EElement eePrevious = null;
+            E eePrevious = null;
 
-            for (Iterator<EElement> ei =section.getEElements().iterator(); ei.hasNext(); ) {
-                EElement ee = ei.next();
+            for (Iterator<E> ei =section.getEElements().iterator(); ei.hasNext(); ) {
+                E ee = ei.next();
 
                 String e1Key = ee.toString();
                 if (!eMap.containsKey(e1Key)) {
                     eMap.put(e1Key, ee);
 
-                    for (Element irlelem : ee.getChildren()) {
+                    for (DixElement irlelem : ee.getChildren()) {
                         if (irlelem instanceof ContentElement) {
-                            for (Element child : ((ContentElement)irlelem).getChildren()) {
+                            for (DixElement child : ((ContentElement)irlelem).getChildren()) {
                                 if (child instanceof TextElement) {
                                     TextElement tE = (TextElement) child;
                                     String v = tE.getValue();
@@ -148,7 +148,7 @@ public class DicFix  extends AbstractDictTool {
         actionFix();
     }
 
-    private void moveCommentsToPrevious(EElement eePrevious, EElement ee) {
+    private void moveCommentsToPrevious(E eePrevious, E ee) {
         // remove if this entry already existed
         if (eePrevious!=null&&!(ee.getPrependCharacterData()+ee.getAppendCharacterData()).trim().isEmpty()) {
             eePrevious.addAppendCharacterData("\n"+ee.getPrependCharacterData()+ee.getAppendCharacterData());
@@ -163,7 +163,7 @@ public class DicFix  extends AbstractDictTool {
       
         msg.err("Reading " + arguments[1]);
         DictionaryReader dicReader = new DictionaryReader(arguments[1]);
-        DictionaryElement dic = dicReader.readDic();
+        Dictionary dic = dicReader.readDic();
         dicReader = null;
         setDic(dic);
         this.setOut(arguments[2]);
@@ -174,7 +174,7 @@ public class DicFix  extends AbstractDictTool {
      * 
      */
     private void actionFix() {
-        DictionaryElement dicFormatted = fix();
+        Dictionary dicFormatted = fix();
         msg.err("Writing fixed dictonary to " + getOut());
         dicFormatted.printXML(getOut(),getOpt());
     }
@@ -183,7 +183,7 @@ public class DicFix  extends AbstractDictTool {
      * @param dicFormatted
      *                the dicFormatted to set
      */
-    private void setDic(DictionaryElement dicFormatted) {
+    private void setDic(Dictionary dicFormatted) {
         this.dic = dicFormatted;
     }
 

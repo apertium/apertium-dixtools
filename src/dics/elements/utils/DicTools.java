@@ -26,8 +26,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
-import dics.elements.dtd.DictionaryElement;
-import dics.elements.dtd.EElement;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
 import dics.elements.utils.DicSet;
 import dics.elements.utils.EElementList;
 import dics.elements.utils.EElementMap;
@@ -58,9 +58,9 @@ public class DicTools {
      * 
      * @param entries
      * @return Undefined         */
-    public static EElementMap buildHash(ArrayList<EElement> entries) {
+    public static EElementMap buildHash(ArrayList<E> entries) {
         EElementMap entriesMap = new EElementMap();
-        for (EElement e : entries) {
+        for (E e : entries) {
             String value = e.getValue("L");
             String key = DicTools.clearTags(value);
             if (entriesMap.containsKey(key)) {
@@ -81,9 +81,9 @@ public class DicTools {
      * @param entries
      * @param side
      * @return Undefined         */
-    public static EElementMap buildHash(ArrayList<EElement> entries, String side) {
+    public static EElementMap buildHash(ArrayList<E> entries, String side) {
         EElementMap entriesMap = new EElementMap();
-        for (EElement e : entries) {
+        for (E e : entries) {
             String value = e.getValue(side);
             String key = DicTools.clearTags(value);
 
@@ -105,10 +105,10 @@ public class DicTools {
      * @param entries
      * @return Undefined
      */
-    public static EElementMap buildHashMon(ArrayList<EElement> entries) {
+    public static EElementMap buildHashMon(ArrayList<E> entries) {
         EElementMap entriesMap = new EElementMap();
 
-        for (EElement e : entries) {
+        for (E e : entries) {
             String lemma = e.getLemma();
             if (lemma == null) {
                 //lemma = e.getValueNoTags();
@@ -204,10 +204,10 @@ public class DicTools {
      * @param monA
      * @param monB
      */
-    public static EElementList[] makeConsistent(DictionaryElement bilAB,
-            DictionaryElement monA, DictionaryElement monB) {
+    public static EElementList[] makeConsistent(Dictionary bilAB,
+            Dictionary monA, Dictionary monB) {
         EElementList[] consistentMons = new EElementList[2];
-        ArrayList<EElement> elements = bilAB.getEntries();
+        ArrayList<E> elements = bilAB.getEntries();
 
         EElementMap bilABMapL = DicTools.buildHash(elements, "L");
         EElementMap bilABMapR = DicTools.buildHash(elements, "R");
@@ -219,9 +219,9 @@ public class DicTools {
 
         EElementList monBConsistent = DicTools.makeConsistent(bilABMapR, "R", monBMap);
 
-        Collections.sort(monAConsistent, EElement.eElementComparatorL);
+        Collections.sort(monAConsistent, E.eElementComparatorL);
         consistentMons[0] = monAConsistent;
-        Collections.sort(monBConsistent, EElement.eElementComparatorL);
+        Collections.sort(monBConsistent, E.eElementComparatorL);
         consistentMons[1] = monBConsistent;
 
         return consistentMons;
@@ -241,7 +241,7 @@ public class DicTools {
         while (it.hasNext()) {
             String key = it.next();
             EElementList eList = monMap.get(key);
-            for (EElement e : eList) {
+            for (E e : eList) {
                 String lemma = e.getLemma();
                 // in case no lemma is defined
                 if (lemma == null) {
@@ -337,9 +337,9 @@ public class DicTools {
      * 
      * @param sMon
      * @return Undefined         */
-    public static DictionaryElement readMonolingual(String sMonFilename) {
+    public static Dictionary readMonolingual(String sMonFilename) {
         DictionaryReader dicReader = new DictionaryReader(sMonFilename);
-        DictionaryElement mon = dicReader.readDic();
+        Dictionary mon = dicReader.readDic();
         mon.setFileName(sMonFilename);
         return mon;
     }
@@ -349,11 +349,11 @@ public class DicTools {
      * @param sBil
      * @param reverse
      * @return Undefined         */
-    public static DictionaryElement readBilingual(String sBilFilename,  boolean reverse) {
+    public static Dictionary readBilingual(String sBilFilename,  boolean reverse) {
         DictionaryReader dicReaderBil = new DictionaryReader(sBilFilename);
-        DictionaryElement bil = dicReaderBil.readDic();
+        Dictionary bil = dicReaderBil.readDic();
         bil.setFileName(sBilFilename);
-        bil.setType(DictionaryElement.BIL);
+        bil.setType(Dictionary.BIL);
 
         if (reverse) {
             bil.reverse();

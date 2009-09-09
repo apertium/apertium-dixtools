@@ -20,7 +20,7 @@ package dictools;
  * 02111-1307, USA.
  */
 
-import dics.elements.dtd.DictionaryElement;
+import dics.elements.dtd.Dictionary;
 import dics.elements.utils.DicOpts;
 import java.io.IOException;
 import misc.DicFormatE1Line;
@@ -179,7 +179,7 @@ public class ProcessDics extends AbstractDictTool {
             DicProfiler p = new DicProfiler();
             //p.createProfilerdirectory("../apertium-eo-en/", "en-eo", null);
             p.createProfilerdirectory(arguments[1], arguments[2], null);
-            DictionaryElement dic = new DictionaryReader(arguments[1]).readDic();
+            Dictionary dic = new DictionaryReader(arguments[1]).readDic();
             p.generateProfileData(dic);
             dic.printXML(arguments[2],getOpt());
         }
@@ -235,12 +235,12 @@ public class ProcessDics extends AbstractDictTool {
         else if (action.equals("format-1line")) {
             this.process_format1line();
             //opt.copyAlignSettings(DicOpts.STD_1_LINE);
-            //DictionaryElement dic = new DictionaryReader(args[1]).readDic();
+            //Dictionary dic = new DictionaryReader(args[1]).readDic();
             //dic.setXmlEncoding("UTF-8");
             //dic.printXML(args[2], opt);
         }
         else if (action.equals("cat") || action.equals("format")) {
-            DictionaryElement dic = new DictionaryReader(args[1]).readDic();
+            Dictionary dic = new DictionaryReader(args[1]).readDic();
             dic.setXmlEncoding("UTF-8");
             dic.printXML(args[2], opt);
         }
@@ -486,7 +486,7 @@ public class ProcessDics extends AbstractDictTool {
                 if (arguments.length < 4) {
                     throw new IllegalArgumentException("Not enough arguments.");
                 }
-                DictionaryElement dic = new DictionaryReader(arguments[3]).readDic();
+                Dictionary dic = new DictionaryReader(arguments[3]).readDic();
                 DicFormatE1LineAligned tool = new DicFormatE1LineAligned(dic);
                 tool.setAlignP(Integer.parseInt(arguments[1]));
                 tool.setAlignR(Integer.parseInt(arguments[2]));

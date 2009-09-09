@@ -19,15 +19,15 @@
  */
 package misc.enca;
 
-import dics.elements.dtd.DictionaryElement;
-import dics.elements.dtd.EElement;
-import dics.elements.dtd.IElement;
-import dics.elements.dtd.LElement;
-import dics.elements.dtd.PardefElement;
-import dics.elements.dtd.PardefsElement;
-import dics.elements.dtd.RElement;
-import dics.elements.dtd.SElement;
-import dics.elements.dtd.SectionElement;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.I;
+import dics.elements.dtd.L;
+import dics.elements.dtd.Pardef;
+import dics.elements.dtd.Pardefs;
+import dics.elements.dtd.R;
+import dics.elements.dtd.S;
+import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
 import dics.elements.utils.EElementList;
 import dics.elements.utils.SElementList;
@@ -59,11 +59,11 @@ public class ConvertMF {
     /**
      * 
      */
-    private HashMap<String, PardefElement> mfPardefsNouns;
+    private HashMap<String, Pardef> mfPardefsNouns;
     /**
      * 
      */
-    private HashMap<String, PardefElement> mfPardefsAdjs;
+    private HashMap<String, Pardef> mfPardefsAdjs;
 
     /**
      * 
@@ -100,11 +100,11 @@ public class ConvertMF {
         //this.completeBil();
 
         DictionaryReader morphReader = new DictionaryReader(this.morphDic);
-        DictionaryElement morph = morphReader.readDic();
+        Dictionary morph = morphReader.readDic();
         findMFParadigms(morph);
 
-        HashMap<String, EElement> mfElementsNouns = new HashMap<String, EElement>();
-        for (EElement e : morph.getAllEntries()) {
+        HashMap<String, E> mfElementsNouns = new HashMap<String, E>();
+        for (E e : morph.getAllEntries()) {
             String lemma = e.getLemma();
             String parName = e.getMainParadigmName();
             if (mfPardefsNouns.containsKey(parName)) {
@@ -112,8 +112,8 @@ public class ConvertMF {
             }
         }
 
-        HashMap<String, EElement> mfElementsAdjs = new HashMap<String, EElement>();
-        for (EElement e : morph.getAllEntries()) {
+        HashMap<String, E> mfElementsAdjs = new HashMap<String, E>();
+        for (E e : morph.getAllEntries()) {
             String lemma = e.getLemma();
             String parName = e.getMainParadigmName();
             if (mfPardefsAdjs.containsKey(parName)) {
@@ -121,7 +121,7 @@ public class ConvertMF {
             }
         }
         DictionaryReader bilReader = new DictionaryReader(this.bilDic);
-        DictionaryElement bil = bilReader.readDic();
+        Dictionary bil = bilReader.readDic();
 
         this.processNouns(mfElementsNouns, bil);
         this.processAdjs(mfElementsAdjs, bil);
@@ -135,10 +135,10 @@ public class ConvertMF {
      * @param mfElementsNouns
      * @param bil
      */
-    private void processNouns(HashMap<String, EElement> mfElementsNouns, DictionaryElement bil) {
+    private void processNouns(HashMap<String, E> mfElementsNouns, Dictionary bil) {
         boolean isF, isM, isNoun;
         EElementList toRemove = new EElementList();
-        for (EElement e : bil.getAllEntries()) {
+        for (E e : bil.getAllEntries()) {
             if (mfElementsNouns.containsKey(e.getValue("R"))) {
                 SElementList attr = e.getRight().getSElements();
                 isF = isM = isNoun = false;
@@ -160,9 +160,9 @@ public class ConvertMF {
                 } else {
                     if (isM && isNoun) {
                         SElementList sList = e.getRight().getSElements();
-                        for (SElement sE : sList) {
+                        for (S sE : sList) {
                             if (sE.is("m")) {
-                                SElement newSE = new SElement("mf");
+                                S newSE = new S("mf");
                                 e.getRight().getChildren().remove(sE);
                                 e.getRight().addChild(newSE);
                             }
@@ -172,12 +172,12 @@ public class ConvertMF {
             }
         }
         EElementList list = new EElementList();
-        for (EElement e : toRemove) {
+        for (E e : toRemove) {
             list.add(e);
         }
 
         for (int i = 0; i < list.size(); i++) {
-            EElement e = list.get(i);
+            E e = list.get(i);
             bil.getAllEntries().remove(e);
         }
 
@@ -188,12 +188,12 @@ public class ConvertMF {
      * @param mfElementsAdjs
      * @param bil
      */
-    private void processAdjs(HashMap<String, EElement> mfElementsAdjs, DictionaryElement bil) {
-        for (EElement e : bil.getAllEntries()) {
+    private void processAdjs(HashMap<String, E> mfElementsAdjs, Dictionary bil) {
+        for (E e : bil.getAllEntries()) {
             if (mfElementsAdjs.containsKey(e.getValue("R"))) {
                 SElementList attributes = e.getRight().getSElements();
                 if (attributes.is("adj")) {
-                    e.getRight().addChild(new SElement("mf"));
+                    e.getRight().addChild(new S("mf"));
                 }
             }
         }
@@ -204,16 +204,16 @@ public class ConvertMF {
      * @param morph
      * @return
      */
-    private void findMFParadigms(DictionaryElement morph) {
-        mfPardefsNouns = new HashMap<String, PardefElement>();
-        mfPardefsAdjs = new HashMap<String, PardefElement>();
-        PardefsElement pardefs = morph.getPardefsElement();
-        for (PardefElement pardef : pardefs.getPardefElements()) {
+    private void findMFParadigms(Dictionary morph) {
+        mfPardefsNouns = new HashMap<String, Pardef>();
+        mfPardefsAdjs = new HashMap<String, Pardef>();
+        Pardefs pardefs = morph.getPardefsElement();
+        for (Pardef pardef : pardefs.getPardefElements()) {
             String parName = pardef.getName();
             boolean isMF = false;
             boolean isNoun = false;
             boolean isAdj = false;
-            for (EElement e : pardef.getEElements()) {
+            for (E e : pardef.getEElements()) {
                 SElementList attr = e.getRight().getSElements();
                 if (attr.is("mf")) {
                     isMF = true;
@@ -236,18 +236,18 @@ public class ConvertMF {
 
     private void generateMon() {
         DictionaryReader bilReader = new DictionaryReader(this.bilDic);
-        DictionaryElement bil = bilReader.readDic();
+        Dictionary bil = bilReader.readDic();
 
-        DictionaryElement mon = new DictionaryElement();
-        SectionElement section = new SectionElement();
+        Dictionary mon = new Dictionary();
+        Section section = new Section();
         section.setID("main");
         section.setType("standard");
         mon.addSection(section);
 
-        for (EElement e1 : bil.getAllEntries()) {
-            EElement e = new EElement();
+        for (E e1 : bil.getAllEntries()) {
+            E e = new E();
             e.setLemma(e1.getValue("L"));
-            IElement iE = new IElement();
+            I iE = new I();
             iE.addChild(new TextElement(e1.getValue("L")));
             e.addChild(iE);
             section.addEElement(e);
@@ -257,18 +257,18 @@ public class ConvertMF {
 
     private void completeBil() {
         DictionaryReader bilReader = new DictionaryReader(this.bilDic);
-        DictionaryElement bil = bilReader.readDic();
+        Dictionary bil = bilReader.readDic();
 
-        for (EElement e1 : bil.getAllEntries()) {
-            LElement lE = e1.getLeft();
-            RElement rE = e1.getRight();
+        for (E e1 : bil.getAllEntries()) {
+            L lE = e1.getLeft();
+            R rE = e1.getRight();
 
             SElementList attr = lE.getSElements();
             if (attr.size() > 0) {
-                SElement attr0 = attr.get(0);
+                S attr0 = attr.get(0);
                 if (attr0 != null) {
                     String v = attr0.getValue();
-                    SElement newSE = new SElement(v);
+                    S newSE = new S(v);
                     rE.addChild(newSE);
                 }
             }

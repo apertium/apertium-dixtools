@@ -29,7 +29,7 @@ import java.io.Writer;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class VElement extends Element {
+public class V extends DixElement {
 
     /**
      * 
@@ -40,7 +40,7 @@ public class VElement extends Element {
      * 
      * 
      */
-    public VElement() {
+    public V() {
         setTagName("v");
     }
 
@@ -48,7 +48,7 @@ public class VElement extends Element {
      * 
      * @param value
      */
-    public VElement(String value) {
+    public V(String value) {
         setTagName("v");
         n = value;
     }
@@ -56,7 +56,7 @@ public class VElement extends Element {
     /*
      * 
      */
-    public VElement(VElement vE) {
+    public V(V vE) {
         setTagName("v");
         n = vE.getValue();
     }
@@ -104,7 +104,7 @@ public class VElement extends Element {
      * @param vE
      * @return Undefined
      */
-    public boolean equals(VElement vE) {
+    public boolean equals(V vE) {
         return (getValue().equals(vE.getValue()));
     }
 
@@ -115,7 +115,7 @@ public class VElement extends Element {
     @Override
     public Object clone() {
         try {
-            VElement cloned = (VElement) super.clone();
+            V cloned = (V) super.clone();
             return cloned;
         } catch (Exception ex) {
             return null;

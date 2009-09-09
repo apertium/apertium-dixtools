@@ -36,7 +36,7 @@ import java.util.Comparator;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class EElement extends Element implements Cloneable {
+public class E extends DixElement implements Cloneable {
 
     /**
      * 
@@ -104,7 +104,7 @@ public class EElement extends Element implements Cloneable {
      * 
      * 
      */
-    public EElement() {
+    public E() {
     }
 
     /**
@@ -114,7 +114,7 @@ public class EElement extends Element implements Cloneable {
      * @param a
      * @param c
      */
-    public EElement(String r, String lm, String a,  String c) {
+    public E(String r, String lm, String a,  String c) {
         this.r = r;
 
         // JimRegan's dubious fix.
@@ -225,12 +225,12 @@ public class EElement extends Element implements Cloneable {
      * @param side
      */
     public void setProcessingComments(String value, String side) {
-        for (Element e : children) {
-            if (e instanceof IElement) {
-                ((IElement) e).setProcessingComments(value);
+        for (DixElement e : children) {
+            if (e instanceof I) {
+                ((I) e).setProcessingComments(value);
             }
-            if (e instanceof PElement) {
-                ((PElement) e).setProcessingComments(value, side);
+            if (e instanceof P) {
+                ((P) e).setProcessingComments(value, side);
             }
         }
     }
@@ -282,16 +282,16 @@ public class EElement extends Element implements Cloneable {
      * @param value
      */
     public void setTranslation(String value, String side) {
-        for (Element e : children) {
-            if (e instanceof IElement) {
-                ((IElement) e).setValue(value);
+        for (DixElement e : children) {
+            if (e instanceof I) {
+                ((I) e).setValue(value);
             }
-            if (e instanceof PElement) {
+            if (e instanceof P) {
                 if (side.equals("L")) {
-                    ((PElement) e).getL().setValue(value);
+                    ((P) e).getL().setValue(value);
                 }
                 if (side.equals("R")) {
-                    ((PElement) e).getR().setValue(value);
+                    ((P) e).getR().setValue(value);
                 }
             }
         }
@@ -301,7 +301,7 @@ public class EElement extends Element implements Cloneable {
      * 
      * @param e
      */
-    public void addChild(Element e) {
+    public void addChild(DixElement e) {
         children.add(e);
     }
 
@@ -311,7 +311,7 @@ public class EElement extends Element implements Cloneable {
      * 
      * @param e
      * @return Undefined         */
-    public boolean equalsBil(EElement e) {
+    public boolean equalsBil(E e) {
         String value1 = getValue("L");
         String value2 = e.getValue("L");
 
@@ -324,10 +324,10 @@ public class EElement extends Element implements Cloneable {
     /**
      * 
      * @return Undefined         */
-    public PElement getP() {
-        for (Element e : children) {
-            if (e instanceof PElement) {
-                return (PElement) e;
+    public P getP() {
+        for (DixElement e : children) {
+            if (e instanceof P) {
+                return (P) e;
             }
         }
         return null;
@@ -337,10 +337,10 @@ public class EElement extends Element implements Cloneable {
      * 
      * @return Undefined         
      */
-    public IElement getI() {
-        for (Element e : children) {
-            if (e instanceof IElement) {
-                return (IElement) e;
+    public I getI() {
+        for (DixElement e : children) {
+            if (e instanceof I) {
+                return (I) e;
             }
         }
         return null;
@@ -352,16 +352,16 @@ public class EElement extends Element implements Cloneable {
      * @return Undefined         
      */
     public String getValue(String side) {
-        for (Element e : children) {
-            if (e instanceof IElement) {
-                return ((IElement) e).getValue();
+        for (DixElement e : children) {
+            if (e instanceof I) {
+                return ((I) e).getValue();
             }
-            if (e instanceof PElement) {
+            if (e instanceof P) {
                 if (side.equals("L")) {
-                    return ((PElement) e).getL().getValue();
+                    return ((P) e).getL().getValue();
                 }
                 if (side.equals("R")) {
-                    return ((PElement) e).getR().getValue();
+                    return ((P) e).getR().getValue();
                 }
             }
         }
@@ -374,16 +374,16 @@ public class EElement extends Element implements Cloneable {
      * @return Value without tags
      */
     public String getValueNoTags(String side) {
-        for (Element e : children) {
-            if (e instanceof IElement) {
-                return ((IElement) e).getValueNoTags();
+        for (DixElement e : children) {
+            if (e instanceof I) {
+                return ((I) e).getValueNoTags();
             }
-            if (e instanceof PElement) {
+            if (e instanceof P) {
                 if (side.equals("L")) {
-                    return ((PElement) e).getL().getValueNoTags();
+                    return ((P) e).getL().getValueNoTags();
                 }
                 if (side.equals("R")) {
-                    return ((PElement) e).getR().getValueNoTags();
+                    return ((P) e).getR().getValueNoTags();
                 }
             }
         }
@@ -402,16 +402,16 @@ public class EElement extends Element implements Cloneable {
      * @return A ContentElement object
      */
     public ContentElement getSide(String side) {
-        for (Element e : children) {
-            if (e instanceof IElement) {
-                return ((IElement) e);
+        for (DixElement e : children) {
+            if (e instanceof I) {
+                return ((I) e);
             }
-            if (e instanceof PElement) {
+            if (e instanceof P) {
                 if (side.equals("L")) {
-                    return ((PElement) e).getL();
+                    return ((P) e).getL();
                 }
                 if (side.equals("R")) {
-                    return ((PElement) e).getR();
+                    return ((P) e).getR();
                 }
             }
         }
@@ -421,27 +421,27 @@ public class EElement extends Element implements Cloneable {
     /**
      * 
      * @return Undefined         */
-    public LElement getLeft() {
+    public L getLeft() {
         ContentElement cE = getSide("L");
-        LElement lE = null;
-        if (cE instanceof IElement) {
-            lE = new LElement(cE);
+        L lE = null;
+        if (cE instanceof I) {
+            lE = new L(cE);
             return lE;
         }
-        return (LElement) cE;
+        return (L) cE;
     }
 
     /**
      * 
      * @return Undefined         */
-    public RElement getRight() {
+    public R getRight() {
         ContentElement cE = getSide("R");
-        RElement rE = null;
-        if (cE instanceof IElement) {
-            rE = new RElement(cE);
+        R rE = null;
+        if (cE instanceof I) {
+            rE = new R(cE);
             return rE;
         }
-        return (RElement) cE;
+        return (R) cE;
     }
 
     /**
@@ -449,16 +449,16 @@ public class EElement extends Element implements Cloneable {
      * @param side
      * @return Undefined         */
     public ElementList getChildren(String side) {
-        for (Element e : children) {
-            if (e instanceof IElement) {
-                return ((IElement) e).getChildren();
+        for (DixElement e : children) {
+            if (e instanceof I) {
+                return ((I) e).getChildren();
             }
-            if (e instanceof PElement) {
+            if (e instanceof P) {
                 if (side.equals("L")) {
-                    return ((PElement) e).getL().getChildren();
+                    return ((P) e).getL().getChildren();
                 }
                 if (side.equals("R")) {
-                    return ((PElement) e).getR().getChildren();
+                    return ((P) e).getR().getChildren();
                 }
             }
         }
@@ -472,16 +472,16 @@ public class EElement extends Element implements Cloneable {
      * @param value
      * @return Undefined         */
     public String setValue(String side, String value) {
-        for (Element e : children) {
-            if (e instanceof IElement) {
-                ((IElement) e).setValue(value);
+        for (DixElement e : children) {
+            if (e instanceof I) {
+                ((I) e).setValue(value);
             }
-            if (e instanceof PElement) {
+            if (e instanceof P) {
                 if (side.equals("L")) {
-                    ((PElement) e).getL().setValue(value);
+                    ((P) e).getL().setValue(value);
                 }
                 if (side.equals("R")) {
-                    ((PElement) e).getR().setValue(value);
+                    ((P) e).getR().setValue(value);
                 }
             }
         }
@@ -495,16 +495,16 @@ public class EElement extends Element implements Cloneable {
      * @param value
      * @return Undefined         */
     public String setChildren(String side, ElementList value) {
-        for (Element e : children) {
-            if (e instanceof IElement) {
-                ((IElement) e).setChildren(value);
+        for (DixElement e : children) {
+            if (e instanceof I) {
+                ((I) e).setChildren(value);
             }
-            if (e instanceof PElement) {
+            if (e instanceof P) {
                 if (side.equals("L")) {
-                    ((PElement) e).getL().setChildren(value);
+                    ((P) e).getL().setChildren(value);
                 }
                 if (side.equals("R")) {
-                    ((PElement) e).getR().setChildren(value);
+                    ((P) e).getR().setChildren(value);
                 }
             }
         }
@@ -516,8 +516,8 @@ public class EElement extends Element implements Cloneable {
      * 
      * @return Undefined         */
     public boolean isRegularExpr() {
-        for (Element e : children) {
-            if (e instanceof ReElement) {
+        for (DixElement e : children) {
+            if (e instanceof Re) {
                 return true;
             }
         }
@@ -552,7 +552,7 @@ public class EElement extends Element implements Cloneable {
         if (!opt.nowAlign) {
             dos.append(tab(2) + "<e" + attributes + ">\n");
 
-            for (Element e : children) {
+            for (DixElement e : children) {
                 e.printXML(dos, opt);
             }
 
@@ -567,9 +567,9 @@ public class EElement extends Element implements Cloneable {
             }        
 
             if (children != null) {
-                for (Element e : children) {
-                    if (e instanceof PElement) {
-                      ((PElement) e).printXML1LineAligned(dosy, opt.alignR);
+                for (DixElement e : children) {
+                    if (e instanceof P) {
+                      ((P) e).printXML1LineAligned(dosy, opt.alignR);
                     } else {
                       e.printXML(dosy, opt);
                     }
@@ -676,19 +676,19 @@ public class EElement extends Element implements Cloneable {
      * @return Undefined         
      */
     public boolean is(String side, String value) {
-        for (Element e : children) {
-            if (e instanceof IElement) {
-                IElement ie = (IElement) e;
+        for (DixElement e : children) {
+            if (e instanceof I) {
+                I ie = (I) e;
                 return ie.is(value);
             }
-            if (e instanceof PElement) {
-                PElement p = (PElement) e;
+            if (e instanceof P) {
+                P p = (P) e;
                 if (side.equals("L")) {
-                    LElement lE = p.getL();
+                    L lE = p.getL();
                     return lE.is(value);
                 }
                 if (side.equals("R")) {
-                    RElement rE = p.getR();
+                    R rE = p.getR();
                     return rE.is(value);
                 }
             }
@@ -697,19 +697,19 @@ public class EElement extends Element implements Cloneable {
     }
 
     public int getNumberOfSElements(String side) {
-        for (Element e : children) {
-            if (e instanceof IElement) {
-                IElement i = (IElement) e;
+        for (DixElement e : children) {
+            if (e instanceof I) {
+                I i = (I) e;
                 return i.getSElements().size();
             }
-            if (e instanceof PElement) {
-                PElement p = (PElement) e;
+            if (e instanceof P) {
+                P p = (P) e;
                 if (side.equals("L")) {
-                    LElement lE = p.getL();
+                    L lE = p.getL();
                     return lE.getSElements().size();
                 }
                 if (side.equals("R")) {
-                    RElement rE = p.getR();
+                    R rE = p.getR();
                     return rE.getSElements().size();
                 }
             }
@@ -827,9 +827,9 @@ public class EElement extends Element implements Cloneable {
             return false;
         } else {
             int i = 0;
-            for (SElement s1 : elementsA) {
+            for (S s1 : elementsA) {
                 boolean exists = false;
-                for (SElement s2 : elementsB) {
+                for (S s2 : elementsB) {
                     if (s1.equals(s2) && (exists == false)) {
                         exists = true;
                     }
@@ -852,19 +852,19 @@ public class EElement extends Element implements Cloneable {
      */
     public SElementList getSElements(String side) {
         SElementList elementsA = null;
-        for (Element e : children) {
-            if (e instanceof IElement) {
-                IElement i = (IElement) e;
+        for (DixElement e : children) {
+            if (e instanceof I) {
+                I i = (I) e;
                 elementsA = i.getSElements();
             }
-            if (e instanceof PElement) {
-                PElement p = (PElement) e;
+            if (e instanceof P) {
+                P p = (P) e;
                 if (side.equals("L")) {
-                    LElement lE = p.getL();
+                    L lE = p.getL();
                     elementsA = lE.getSElements();
                 }
                 if (side.equals("R")) {
-                    RElement rE = p.getR();
+                    R rE = p.getR();
                     elementsA = rE.getSElements();
                 }
             }
@@ -880,7 +880,7 @@ public class EElement extends Element implements Cloneable {
     public void printSElements(String side, Msg msg) {
         SElementList elements = getSElements(side);
         if (elements != null) {
-            for (SElement s : elements) {
+            for (S s : elements) {
                 msg.log(s.toString());
             }
         }
@@ -905,7 +905,7 @@ public class EElement extends Element implements Cloneable {
         SElementList elements = getSElements(side);
         String str = "";
         if (elements != null) {
-            for (SElement s : elements) {
+            for (S s : elements) {
                 str += "<s n=\"" + s.getValue() + "\"/>";
             }
         }
@@ -919,7 +919,7 @@ public class EElement extends Element implements Cloneable {
     public String getInfo(String side) {
         SElementList elements = getSElements(side);
         String str = "( ";
-        for (SElement s : elements) {
+        for (S s : elements) {
             str += s.getValue() + " ";
         }
         str += ")";
@@ -931,10 +931,10 @@ public class EElement extends Element implements Cloneable {
      * @return Undefined         */
     public String getMainParadigmName() {
         // Returns value of main paradigm
-        ParElement parE = null;
-        for (Element e : children) {
-            if (e instanceof ParElement) {
-                parE = (ParElement) e;
+        Par parE = null;
+        for (DixElement e : children) {
+            if (e instanceof Par) {
+                parE = (Par) e;
 
                 if (parE.getValue().contains("__"))
                     return parE.getValue();
@@ -950,11 +950,11 @@ public class EElement extends Element implements Cloneable {
     /**
      * 
      * @return Undefined         */
-    public ParElement getParadigm() {
+    public Par getParadigm() {
         // Returns value of first paradigm
-        for (Element e : children) {
-            if (e instanceof ParElement) {
-                ParElement parE = (ParElement) e;
+        for (DixElement e : children) {
+            if (e instanceof Par) {
+                Par parE = (Par) e;
                 return parE;
             }
         }
@@ -1027,19 +1027,19 @@ public class EElement extends Element implements Cloneable {
      * @param newCategory
      */
     public void changeCategory(String side, String newCategory) {
-        for (Element e : children) {
-            if (e instanceof IElement) {
-                IElement i = (IElement) e;
+        for (DixElement e : children) {
+            if (e instanceof I) {
+                I i = (I) e;
                 i.changeFirstSElement(newCategory);
             }
-            if (e instanceof PElement) {
-                PElement p = (PElement) e;
+            if (e instanceof P) {
+                P p = (P) e;
                 if (side.equals("L")) {
-                    LElement lE = p.getL();
+                    L lE = p.getL();
                     lE.changeFirstSElement(newCategory);
                 }
                 if (side.equals("R")) {
-                    RElement rE = p.getR();
+                    R rE = p.getR();
                     rE.changeFirstSElement(newCategory);
                 }
             }
@@ -1061,26 +1061,26 @@ public class EElement extends Element implements Cloneable {
             str.append(" r=\"" + getRestriction() + "\"");
         }
         str.append(">");
-        for (Element e : children) {
-            if (e instanceof IElement) {
-                IElement i = (IElement) e;
+        for (DixElement e : children) {
+            if (e instanceof I) {
+                I i = (I) e;
                 str.append(i.toString());
             }
-            if (e instanceof PElement) {
-                PElement p = (PElement) e;
+            if (e instanceof P) {
+                P p = (P) e;
 
-                LElement lE = p.getL();
+                L lE = p.getL();
                 str.append(lE.toString());
 
-                RElement rE = p.getR();
+                R rE = p.getR();
                 str.append(rE.toString());
             }
-            if (e instanceof ParElement) {
-                ParElement par = (ParElement) e;
+            if (e instanceof Par) {
+                Par par = (Par) e;
                 str.append(par.toString());
             }
-            if (e instanceof ReElement) {
-                ReElement re = (ReElement) e;
+            if (e instanceof Re) {
+                Re re = (Re) e;
                 str.append(re.toString());
             }
 
@@ -1100,7 +1100,7 @@ public class EElement extends Element implements Cloneable {
             r = " r=\"" + getRestriction() + "\"";
         }
         str += "<e" + r + ">";
-        for (Element e : children) {
+        for (DixElement e : children) {
             str += e.toString();
         }
         str += "</e>";
@@ -1117,22 +1117,22 @@ public class EElement extends Element implements Cloneable {
             r = " r=\"" + getRestriction() + "\"";
         }
         str += "<e" + r + ">";
-        for (Element e : children) {
-            if (e instanceof IElement) {
-                IElement i = (IElement) e;
+        for (DixElement e : children) {
+            if (e instanceof I) {
+                I i = (I) e;
                 str += i.toString();
             }
-            if (e instanceof PElement) {
-                PElement p = (PElement) e;
+            if (e instanceof P) {
+                P p = (P) e;
 
-                LElement lE = p.getL();
+                L lE = p.getL();
                 str += lE.toString();
 
-                RElement rE = p.getR();
+                R rE = p.getR();
                 str += rE.toString();
             }
-            if (e instanceof ReElement) {
-                ReElement re = (ReElement) e;
+            if (e instanceof Re) {
+                Re re = (Re) e;
                 str += re.toString();
             }
 
@@ -1152,21 +1152,21 @@ public class EElement extends Element implements Cloneable {
         }
         str += "<e" + r + ">";
         str += getLemma();
-        for (Element e : children) {
+        for (DixElement e : children) {
             /*
-             * if (e instanceof IElement) { IElement i = (IElement) e;
-             * str += i.toString(); } if (e instanceof PElement) { final
-             * PElement p = (PElement) e;
+             * if (e instanceof I) { I i = (I) e;
+             * str += i.toString(); } if (e instanceof P) { final
+             * P p = (P) e;
              * 
-             * LElement lE = p.getL(); str += lE.toString();
+             * L lE = p.getL(); str += lE.toString();
              * 
-             * RElement rE = p.getR(); str += rE.toString(); }
+             * R rE = p.getR(); str += rE.toString(); }
              * 
-             * if (e instanceof ReElement) { ReElement re =
-             * (ReElement) e; str += re.toString(); }
+             * if (e instanceof Re) { Re re =
+             * (Re) e; str += re.toString(); }
              */
-            if (e instanceof ParElement) {
-                ParElement par = (ParElement) e;
+            if (e instanceof Par) {
+                Par par = (Par) e;
                 String parValue = par.getValue();
                 String[] parts = parValue.toString().split("__");
                 String category = "";
@@ -1186,20 +1186,20 @@ public class EElement extends Element implements Cloneable {
      * @return Undefined         */
     public String toString2() {
         String str = "";
-        for (Element e : children) {
-            if (e instanceof IElement) {
-                IElement i = (IElement) e;
+        for (DixElement e : children) {
+            if (e instanceof I) {
+                I i = (I) e;
                 str += i.toString2();
                 str += "/";
                 str += i.toString2();
             }
-            if (e instanceof PElement) {
-                PElement p = (PElement) e;
+            if (e instanceof P) {
+                P p = (P) e;
 
-                LElement lE = p.getL();
+                L lE = p.getL();
                 str += lE.toString2();
                 str += "/";
-                RElement rE = p.getR();
+                R rE = p.getR();
                 str += rE.toString2();
             }
 
@@ -1211,8 +1211,8 @@ public class EElement extends Element implements Cloneable {
      * 
      * @return Undefined         */
     public boolean isRegEx() {
-        for (Element e : children) {
-            if (e instanceof ReElement) {
+        for (DixElement e : children) {
+            if (e instanceof Re) {
                 return true;
             }
         }
@@ -1222,10 +1222,10 @@ public class EElement extends Element implements Cloneable {
     /**
      * 
      * @return Undefined         */
-    public ReElement getRegEx() {
-        for (Element e : children) {
-            if (e instanceof ReElement) {
-                return (ReElement) e;
+    public Re getRegEx() {
+        for (DixElement e : children) {
+            if (e instanceof Re) {
+                return (Re) e;
             }
         }
         return null;
@@ -1237,7 +1237,7 @@ public class EElement extends Element implements Cloneable {
     @Override
     public Object clone() {
         try {
-            EElement cloned = (EElement) super.clone();
+            E cloned = (E) super.clone();
             cloned.children = (ElementList) children.clone();
             return cloned;
         } catch (Exception ex) {
@@ -1246,7 +1246,7 @@ public class EElement extends Element implements Cloneable {
     }
 
 
-    public static class EElementComparator implements Comparator<EElement> {
+    public static class EElementComparator implements Comparator<E> {
         String side;
         public EElementComparator(String side) {
             this.side = side;
@@ -1255,10 +1255,10 @@ public class EElement extends Element implements Cloneable {
         public boolean ignoreCase=false;
 
         @Override
-        public int compare(EElement e1, EElement anotherEElement) {
+        public int compare(E e1, E anotherEElement) {
             if (anotherEElement == null) return -1;
             if (e1.isRegEx()) return 0;
-            if (!(anotherEElement instanceof EElement))  throw new ClassCastException("An EElement object expected.");
+            if (!(anotherEElement instanceof E))  throw new ClassCastException("An EElement object expected.");
 
 
             String lemma1 = e1.getValue(side);
@@ -1278,7 +1278,7 @@ public class EElement extends Element implements Cloneable {
 
     public static final EElementComparator eElementComparatorL = new EElementComparator("L");
 
-    public int compareTo(EElement anotherEElement)  throws ClassCastException {
+    public int compareTo(E anotherEElement)  throws ClassCastException {
         return eElementComparatorL.compare(this, anotherEElement);
     }
 
@@ -1286,9 +1286,9 @@ public class EElement extends Element implements Cloneable {
      * 
      * @return Undefined         
      */
-    public EElement reverse() {
-        // EElement eRev = (EElement) this.clone();
-        EElement eRev = new EElement();
+    public E reverse() {
+        // E eRev = (E) this.clone();
+        E eRev = new E();
         if (getRestriction() != null) {
             if (getRestriction().equals("LR")) {
                 eRev.setRestriction("RL");
@@ -1298,26 +1298,26 @@ public class EElement extends Element implements Cloneable {
                 }
             }
         }
-        for (Element e : getChildren()) {
-            if (e instanceof PElement) {
-                PElement pE = new PElement();
+        for (DixElement e : getChildren()) {
+            if (e instanceof P) {
+                P pE = new P();
                 eRev.addChild(pE);
-                LElement newLE = new LElement();
-                RElement newRE = new RElement();
+                L newLE = new L();
+                R newRE = new R();
                 pE.setLElement(newLE);
                 pE.setRElement(newRE);
 
-                LElement lE = ((PElement) e).getL();
-                RElement rE = ((PElement) e).getR();
+                L lE = ((P) e).getL();
+                R rE = ((P) e).getR();
 
                 ElementList auxChildren = lE.getChildren();
 
                 eRev.getSide("L").setChildren(rE.getChildren());
                 eRev.getSide("R").setChildren(auxChildren);
             }
-            if (e instanceof IElement) {
-                IElement iE = new IElement();
-                iE.setChildren(((IElement) e).getChildren());
+            if (e instanceof I) {
+                I iE = new I();
+                iE.setChildren(((I) e).getChildren());
                 eRev.addChild(iE);
             }
         }

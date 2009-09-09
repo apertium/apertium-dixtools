@@ -34,7 +34,7 @@ import java.io.Writer;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class SectionElement extends Element {
+public class Section extends DixElement {
 
     /**
      * 
@@ -57,7 +57,7 @@ public class SectionElement extends Element {
      * 
      * 
      */
-    public SectionElement() {
+    public Section() {
         setTagName("section");
         eElements = new EElementList();
         includes = new ArrayList<String>();
@@ -68,7 +68,7 @@ public class SectionElement extends Element {
      * @param id
      * @param type
      */
-    public SectionElement(String id, String type) {
+    public Section(String id, String type) {
         setTagName("section");
         eElements = new EElementList();
         includes = new ArrayList<String>();
@@ -117,7 +117,7 @@ public class SectionElement extends Element {
      * 
      * @param value
      */
-    public void addEElement(EElement value) {
+    public void addEElement(E value) {
         eElements.add(value);
     }
 
@@ -141,7 +141,7 @@ public class SectionElement extends Element {
         dos.append(tab(1) + "<" + getTagName() + "" + attributes + ">\n");
 
         if (eElements != null) {
-            for (EElement e : eElements) {
+            for (E e : eElements) {
                 e.printXML(dos, opt);
             }
         }
@@ -175,7 +175,7 @@ public class SectionElement extends Element {
 
             dos.append("<dictionary>\n");
             dos.append("<section>\n");
-            for (EElement e : eElements) {
+            for (E e : eElements) {
                 e.printXML(dos, opt);
             }
             dos.append("</section>\n");

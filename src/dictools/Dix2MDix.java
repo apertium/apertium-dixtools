@@ -20,11 +20,11 @@
 package dictools;
 
 import dictools.xml.DictionaryReader;
-import dics.elements.dtd.DictionaryElement;
-import dics.elements.dtd.EElement;
-import dics.elements.dtd.Element;
-import dics.elements.dtd.SElement;
-import dics.elements.dtd.SectionElement;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.DixElement;
+import dics.elements.dtd.S;
+import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
 import dics.elements.utils.SElementList;
 import java.io.BufferedInputStream;
@@ -52,7 +52,7 @@ public class Dix2MDix {
     /**
      * 
      */
-    private DictionaryElement dic;
+    private Dictionary dic;
     /**
      * 
      */
@@ -144,12 +144,12 @@ public class Dix2MDix {
      * 
      * @param dic
      */
-    private void processDic(DictionaryElement dic, String dir) {
+    private void processDic(Dictionary dic, String dir) {
         hm = new HashMap();
         Vector values = null;
 
-        for (SectionElement section : dic.getSections()) {
-            for (EElement ee : section.getEElements()) {
+        for (Section section : dic.getSections()) {
+            for (E ee : section.getEElements()) {
                 if (ee.is_LR_or_LRRL() && !ee.isRegularExpr()) {
                     String left = ee.getValueNoTags("L");
                     left = tinyFilter.applyToLemma(left);
@@ -178,9 +178,9 @@ public class Dix2MDix {
         this.print(vector);
     }
 
-    private EElement cleanUp(EElement ee) {
+    private E cleanUp(E ee) {
 
-        for (Element e : ee.getChildren("L")) {
+        for (DixElement e : ee.getChildren("L")) {
             if (e instanceof TextElement) {
                 TextElement tE = (TextElement) e;
                 String v = tE.getValue();
@@ -189,7 +189,7 @@ public class Dix2MDix {
             }
 
         }
-        for (Element e : ee.getChildren("R")) {
+        for (DixElement e : ee.getChildren("R")) {
             if (e instanceof TextElement) {
                 TextElement tE = (TextElement) e;
                 String v = tE.getValue();
@@ -370,14 +370,14 @@ public class Dix2MDix {
             Entry entry = new Entry();
             String key = (String) it.next();
             entry.setKey(key);
-            Vector<EElement> v = (Vector) hm.get(key);
+            Vector<E> v = (Vector) hm.get(key);
             String value = "";
             value = value + "[" + key + "]";
-            for (EElement ee : v) {
+            for (E ee : v) {
                 String slLemma = ee.getValueNoTags("L");
                 SElementList slPoS = ee.getSElements("L");
                 value = value + slLemma + ":";
-                for (SElement sE : slPoS) {
+                for (S sE : slPoS) {
                     if (this.tinyFilter.preserve(sE.getValue())) {
                         String tagName = this.tinyFilter.rename(sE.getValue());
                         value = value + tagName + ".";
@@ -387,7 +387,7 @@ public class Dix2MDix {
                 String tlLemma = ee.getValueNoTags("R");
                 SElementList tlPoS = ee.getSElements("R");
                 value = value + tlLemma + ":";
-                for (SElement sE : tlPoS) {
+                for (S sE : tlPoS) {
                     if (this.tinyFilter.preserve(sE.getValue())) {
                         String tagName = this.tinyFilter.rename(sE.getValue());
                         value = value + tagName + ".";

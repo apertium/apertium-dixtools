@@ -20,10 +20,10 @@
 package dictools;
 
 import dictools.xml.DictionaryReader;
-import dics.elements.dtd.DictionaryElement;
-import dics.elements.dtd.EElement;
-import dics.elements.dtd.SElement;
-import dics.elements.dtd.SectionElement;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.S;
+import dics.elements.dtd.Section;
 import dics.elements.utils.SElementList;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
@@ -40,7 +40,7 @@ public class Dix2CC {
     /**
      * 
      */
-    private DictionaryElement dic;
+    private Dictionary dic;
     /**
      *
      */
@@ -93,8 +93,8 @@ public class Dix2CC {
         System.err.println("Building " + this.outFileName + " for Palm...");
         Vector<String> lines = new Vector<String>();
 
-        for (SectionElement section : dic.getSections()) {
-            for (EElement ee : section.getEElements()) {
+        for (Section section : dic.getSections()) {
+            for (E ee : section.getEElements()) {
                 StringBuffer sb = new StringBuffer();
                 if (ee.is_LR_or_LRRL() && !ee.isRegularExpr() && this.validLemma(ee.getValueNoTags("L")) && this.validLemma(ee.getValueNoTags("R"))) {
                     String left = ee.getValueNoTags("L");
@@ -102,7 +102,7 @@ public class Dix2CC {
                     sb.append(left + " ");
                     SElementList leftS = ee.getSElements("L");
 
-                    for (SElement sE : leftS) {
+                    for (S sE : leftS) {
                         if (this.tinyFilter.preserve(sE.getValue())) {
                             String tagName = this.tinyFilter.rename(sE.getValue());
                             sb.append("{" + tagName + "} ");
@@ -115,7 +115,7 @@ public class Dix2CC {
                     right = this.tinyFilter.applyToLemma(right);
                     sb.append(right + " ");
                     SElementList rightS = ee.getSElements("R");
-                    for (SElement sE : rightS) {
+                    for (S sE : rightS) {
                         if (tinyFilter.preserve(sE.getValue())) {
                             String tagName = this.tinyFilter.rename(sE.getValue());
                             sb.append("{" + tagName + "} ");

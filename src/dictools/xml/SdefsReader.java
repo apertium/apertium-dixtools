@@ -23,9 +23,9 @@ package dictools.xml;
 import dictools.xml.XMLReader;
 import org.w3c.dom.Element;
 
-import dics.elements.dtd.SElement;
-import dics.elements.dtd.SdefElement;
-import dics.elements.dtd.SdefsElement;
+import dics.elements.dtd.S;
+import dics.elements.dtd.Sdef;
+import dics.elements.dtd.Sdefs;
 
 /**
  * 
@@ -45,11 +45,11 @@ public class SdefsReader extends XMLReader {
     /**
      * 
      * @return Undefined         */
-    public SdefsElement readSdefs() {
+    public Sdefs readSdefs() {
         analize();
         Element root = getDocument().getDocumentElement();
         String elementName = root.getNodeName();
-        SdefsElement sdefsElement = null;
+        Sdefs sdefsElement = null;
 
         // Symbol definitions
         if (elementName.equals("sdefs")) {

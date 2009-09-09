@@ -21,74 +21,33 @@ package dics.elements.dtd;
 
 import dics.elements.utils.DicOpts;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 
 /**
  * 
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class AlphabetElement extends Element {
-
-    /**
-     * 
-     */
-    private String alphabet;
+public class I extends ContentElement {
 
     /**
      * 
      * 
      */
-    public AlphabetElement() {
-
+    public I() {
+        super();
+        setTagName("i");
     }
-
-    /**
-     * 
-     * @param value
-     */
-    public AlphabetElement(String value) {
-        alphabet = value;
-    }
-
-    /**
-     * 
-     * @param value
-     */
-    public void setAlphabet(String value) {
-        alphabet = value;
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    public String getAlphabet() {
-        return alphabet;
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    public boolean isEmpty() {
-        if (getAlphabet() == null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
+    
     /**
      * 
      * @param dos
      * @throws java.io.IOException
-     */
+    @Override
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
-        // write blank lines and processingComments from original file
-        dos.append(prependCharacterData);
-        if (isEmpty()) {
-            setAlphabet("");
-        }
-        dos.append(tab(1) + "<alphabet>" + getAlphabet() + "</alphabet>"+appendCharacterData.trim()+"\n");
+        String escaped = this.getValue();
+        escaped = escaped.replaceAll("\\&", "\\&amp;");
+        this.setValue(escaped);
+        super.printXML(dos, opt);
     }
+     */
 }

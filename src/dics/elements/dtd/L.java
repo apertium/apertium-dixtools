@@ -19,18 +19,31 @@
  */
 package dics.elements.dtd;
 
+import dics.elements.utils.DicOpts;
+import java.io.IOException;
+
 /**
+ * 
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class JElement extends Element {
+public class L extends ContentElement {
 
     /**
      * 
      * 
      */
-    public JElement() {
-        setTagName("j");
-        setValue("<j/>");
+    public L() {
+        super();
+        setTagName("l");
+    }
+
+    /**
+     * 
+     * @param cE
+     */
+    public L(ContentElement cE) {
+        super(cE);
+        setTagName("l");
     }
 }

@@ -29,7 +29,7 @@ import java.io.Writer;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class Element implements Cloneable, CharacterDataNeighbour {
+public class DixElement implements Cloneable, CharacterDataNeighbour {
 
     /**
      * 
@@ -193,7 +193,7 @@ public class Element implements Cloneable, CharacterDataNeighbour {
     @Override
     public Object clone() {
         try {
-            Element cloned = (Element) super.clone();
+            DixElement cloned = (DixElement) super.clone();
             return cloned;
         } catch (CloneNotSupportedException ex) {
             return null;

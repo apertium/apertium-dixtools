@@ -21,14 +21,14 @@ package dics.elements.utils;
 
 import java.util.ArrayList;
 
-import dics.elements.dtd.EElement;
+import dics.elements.dtd.E;
 
 /**
  * 
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class EElementList extends ArrayList<EElement> {
+public class EElementList extends ArrayList<E> {
 
     /**
      * 

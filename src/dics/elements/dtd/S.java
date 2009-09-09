@@ -23,14 +23,19 @@ import dics.elements.utils.DicOpts;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.HashMap;
 
 /**
  * 
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class TElement extends Element {
+public class S extends DixElement {
 
+    /**
+     * 
+     */
+    private static HashMap<String, S> sElementList = new HashMap<String, S>();
     /**
      * 
      */
@@ -44,25 +49,25 @@ public class TElement extends Element {
      * 
      * 
      */
-    public TElement() {
-        setTagName("t");
+    public S() {
+        setTagName("s");
     }
 
     /**
      * 
      * @param value
      */
-    public TElement(String value) {
-        setTagName("t");
+    public S(String value) {
+        setTagName("s");
         n = value;
     }
 
     /*
      * 
      */
-    public TElement(TElement tE) {
-        setTagName("t");
-        n = tE.getValue();
+    public S(S sE) {
+        setTagName("s");
+        n = sE.getValue();
     }
 
     /**
@@ -87,12 +92,36 @@ public class TElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
-    @Override
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
-        dos.append(prependCharacterData);
+        //not strictly necesary for symbols, as they dont have comments: dos.append(prependCharacterData);
         dos.append("<" + getTagName() + " n=\"" + getValue() + "\"/>");
-        dos.append(appendCharacterData);
+        //not strictly necesary for symbols, as they dont have comments:  dos.append(appendCharacterData);
+    }
+
+    /**
+     * 
+     * @return Undefined         */
+    public boolean isAdj() {
+        return is("adj");
+    }
+
+    /**
+     * 
+     * @return Undefined         */
+    public boolean isN() {
+        return is("n");
+    }
+
+    /**
+     * 
+     * @param value
+     * @return Undefined         */
+    public boolean is(String value) {
+        if (n.equals(value)) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -105,21 +134,59 @@ public class TElement extends Element {
 
     /**
      * 
-     * @param tE
-     * @return Undefined
-     */
-    public boolean equals(TElement tE) {
-        return (getValue().equals(tE.getValue()));
+     * @param sE
+     * @return Undefined         */
+    public boolean equals(S sE) {
+        return (getValue().equals(sE.getValue()));
     }
 
     /**
      * 
-     * @return Object
+     * @param sE
+     */
+    public static void putSElement(S sE) {
+        S.sElementList.put(sE.getValue(), sE);
+    }
+
+    /**
+     * 
+     * @param str
+     * @return Undefined         */
+    public static boolean exists(String str) {
+        return S.sElementList.containsKey(str);
+    }
+
+    /**
+     * 
+     * @param str
+     * @return Undefined         */
+    public static S getInstance(String str) {
+/*
+      S sE = null;
+        if (S.exists(str)) {
+            sE = S.sElementList.getInstance(str);
+        } else {
+            sE = new S(str);
+            S.putSElement(sE);
+        }
+*/
+        S sE = S.sElementList.get(str);
+        if (sE==null) {
+            sE = new S(str);
+            S.putSElement(sE);
+        }
+        return sE;
+    }
+
+    /*
+     * public String getTemp() { return temp; }
+     * 
+     * public void setTemp(String temp) { this.temp = temp; }
      */
     @Override
     public Object clone() {
         try {
-            TElement cloned = (TElement) super.clone();
+            S cloned = (S) super.clone();
             return cloned;
         } catch (Exception ex) {
             return null;

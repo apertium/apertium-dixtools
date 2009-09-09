@@ -19,8 +19,8 @@
  */
 package dictools.cmproc;
 
-import dics.elements.dtd.Element;
-import dics.elements.dtd.SElement;
+import dics.elements.dtd.DixElement;
+import dics.elements.dtd.S;
 import dics.elements.utils.ElementList;
 import dics.elements.utils.SElementList;
 import dictools.crossmodel.CrossAction;
@@ -70,7 +70,7 @@ public class State {
      */
     public void add(ElementList pattern, CrossAction crossAction, int i) {
         if (i < pattern.size()) {
-            Element e = pattern.get(i);
+            DixElement e = pattern.get(i);
             if (this.isConstant(e)) {
                 crossAction.getPattern().incrementNConstants();
             }
@@ -97,7 +97,7 @@ public class State {
      * @param e
      * @return true if 'e' is a constant
      */
-    private boolean isConstant(Element e) {
+    private boolean isConstant(DixElement e) {
         String v = e.getValue();
         if (v.startsWith("^")) {
             return false;
@@ -116,7 +116,7 @@ public class State {
      * @param e
      * @return true if 'e' forces the increment of pattern length
      */
-    private boolean increments(Element e) {
+    private boolean increments(DixElement e) {
         String v = e.getValue();
         if (v.equals("^b") || v.equals("^end")) {
             return false;
@@ -153,7 +153,7 @@ public class State {
     public final void getActionSetList(ElementList patternSequence, int i, CrossActionDataList cadl, Variables varsSrc) {
         if (i < patternSequence.size()) {
             Variables vars = null;
-            String v = ((Element) patternSequence.get(i)).getValue();
+            String v = ((DixElement) patternSequence.get(i)).getValue();
             String state_v = getValue();
 
 
@@ -181,7 +181,7 @@ public class State {
             //if (state_v.equals("^*")) {
             if (state_v == "^*") {  // == is OK, state_v is an interned string
                 vars = new Variables(varsSrc);
-                Element e = patternSequence.get(i);
+                DixElement e = patternSequence.get(i);
                 while (!e.getValue().equals("^b")) {
                     i++;
                     e = patternSequence.get(i);
@@ -317,11 +317,11 @@ public class State {
      */
     private int process_S(String state_v, String v, Variables vars, ElementList patternSequence, int i) {
         boolean continueProcessing = false;
-        Element e = patternSequence.get(i);
+        DixElement e = patternSequence.get(i);
         SElementList eList = new SElementList();
         int index = 0;
         while (i < patternSequence.size() && !e.getValue().equals("^b")) {
-            SElement sE = new SElement(e.getValue());
+            S sE = new S(e.getValue());
             eList.add(sE);
             index++;
             i++;

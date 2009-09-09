@@ -18,10 +18,10 @@
  * 02111-1307, USA.
  */
 package dictools;
-import dics.elements.dtd.DictionaryElement;
-import dics.elements.dtd.EElement;
-import dics.elements.dtd.PardefElement;
-import dics.elements.dtd.SectionElement;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.Pardef;
+import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
 import dics.elements.utils.DicOpts;
 import dictools.xml.DictionaryReader;
@@ -63,24 +63,24 @@ public class DicProfiler  extends AbstractDictTool {
 
   Writer profileKeysDataFile;
 
-  public DictionaryElement generateProfileData(DictionaryElement dic) throws IOException {
+  public Dictionary generateProfileData(Dictionary dic) throws IOException {
     if (dic.getPardefsElement() != null)
-    for (PardefElement par :  dic.getPardefsElement().getPardefElements()) {
-      for (EElement ee: par.getEElements()) {
+    for (Pardef par :  dic.getPardefsElement().getPardefElements()) {
+      for (E ee: par.getEElements()) {
         setProfilerInfo(ee);
       }
     }
 
     if (dic.getSections() != null)
-    for (SectionElement section : dic.getSections()) {
-      for (EElement ee: section.getEElements()) {
+    for (Section section : dic.getSections()) {
+      for (E ee: section.getEElements()) {
         setProfilerInfo(ee);
       }
     }
     return dic;
   }
 
-  private void setProfilerInfo(EElement ee) throws IOException {
+  private void setProfilerInfo(E ee) throws IOException {
     sequence++;
     String s = Integer.toString(sequence, Character.MAX_RADIX);
     s = "000".substring(Math.min(3,s.length()))+s;
@@ -128,7 +128,7 @@ public class DicProfiler  extends AbstractDictTool {
       else { this.direction_lr = false; this.insert_before=false; }// target lang
 
       msg.err("Processing "+f+" in direction "+(direction_lr?"LR":"RL"));
-      DictionaryElement dic = new DictionaryReader(new File(d,f).getPath()).readDic();
+      Dictionary dic = new DictionaryReader(new File(d,f).getPath()).readDic();
       generateProfileData(dic);
       dic.printXML(new File(profiler_dir,f).getPath(),DicOpts.STD_ALIGNED_MONODIX);
     }
@@ -232,7 +232,7 @@ public class DicProfiler  extends AbstractDictTool {
     DicProfiler p = new DicProfiler();
     
     /*
-    DictionaryElement dic = new DictionaryReader("../apertium-eo-en/apertium-eo-en.eo.dix.xml").readDic();
+    Dictionary dic = new DictionaryReader("../apertium-eo-en/apertium-eo-en.eo.dix.xml").readDic();
     p.generateProfileData(dic);
     dic.printXML("../apertium-eo-en/profiler/apertium-eo-en.eo.dix.xml",DicOpts.STD_ALIGNED_MONODIX);
      */

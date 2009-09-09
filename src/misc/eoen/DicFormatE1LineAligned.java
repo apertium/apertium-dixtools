@@ -24,9 +24,9 @@ import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import dics.elements.dtd.DictionaryElement;
-import dics.elements.dtd.EElement;
-import dics.elements.dtd.SectionElement;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.Section;
 import dics.elements.utils.DicOpts;
 import dictools.AbstractDictTool;
 import dictools.xml.DictionaryReader;
@@ -47,7 +47,7 @@ public class DicFormatE1LineAligned extends AbstractDictTool {
     /**
      * 
      */
-    private DictionaryElement dic;
+    private Dictionary dic;
     
   public DicFormatE1LineAligned setAlignP(int attrSpaces) {
     opt.alignP=attrSpaces;
@@ -59,7 +59,7 @@ public class DicFormatE1LineAligned extends AbstractDictTool {
     return this;
   }
 
-  public DicFormatE1LineAligned setDic(DictionaryElement dic) {
+  public DicFormatE1LineAligned setDic(Dictionary dic) {
     this.dic=dic;
     return this;
   }
@@ -67,10 +67,10 @@ public class DicFormatE1LineAligned extends AbstractDictTool {
     
     
     /**
-     * Initializes and prepares write a DictionaryElement 
+     * Initializes and prepares write a Dictionary
      * @param dic The dictionary element
      */
-    public DicFormatE1LineAligned(DictionaryElement dic) {
+    public DicFormatE1LineAligned(Dictionary dic) {
         this.dic = dic;
         setOpt(dics.elements.utils.DicOpts.STD_ALIGNED);
     }

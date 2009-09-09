@@ -19,7 +19,7 @@
  */
 package dictools.dix2trie.utils;
 
-import dics.elements.dtd.SElement;
+import dics.elements.dtd.S;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
@@ -109,7 +109,7 @@ public class Word {
             osw.write(entry.getKey());
 
 
-            for (SElement sE : entry.getKeyAttr()) {
+            for (S sE : entry.getKeyAttr()) {
                 osw.write("<s n=\"" + sE.getValue() + "\"/>");
             }
 
@@ -118,7 +118,7 @@ public class Word {
             osw.write(sTabs + "\t<r>");
             osw.write(entry.getValue());
 
-            for (SElement sE : entry.getValueAttr()) {
+            for (S sE : entry.getValueAttr()) {
                 osw.write("<s n=\"" + sE.getValue() + "\"/>");
             }
             osw.write("</r>\n");

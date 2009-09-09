@@ -19,7 +19,7 @@
  */
 package dictools;
 
-import dics.elements.dtd.DictionaryElement;
+import dics.elements.dtd.Dictionary;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -77,7 +77,7 @@ public class TinyFilter {
      * @param dic
      * @return pre-filtered dictionary
      */
-    public DictionaryElement doFilter(DictionaryElement dic) {
+    public Dictionary doFilter(Dictionary dic) {
         //this.printProperties();
         return dic;
     }

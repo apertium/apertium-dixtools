@@ -21,7 +21,7 @@ package dictools.crossmodel;
 
 import org.w3c.dom.Element;
 
-import dics.elements.dtd.EElement;
+import dics.elements.dtd.E;
 import dictools.xml.XMLReader;
 
 /**
@@ -95,7 +95,7 @@ public class CrossModelReader extends XMLReader {
         for (Element childElement : readChildren(e)) {
             String childElementName = childElement.getNodeName();
             if (childElementName.equals("e")) {
-                EElement eE = readEElement(childElement);
+                E eE = readEElement(childElement);
                 if (i == 0) {
                     pattern.setAB(eE);
                 }
@@ -137,7 +137,7 @@ public class CrossModelReader extends XMLReader {
         for (Element childElement : readChildren(e)) {
             String childElementName = childElement.getNodeName();
             if (childElementName.equals("e")) {
-                EElement eE = readEElement(childElement);
+                E eE = readEElement(childElement);
                 action.setAction(eE);
             }
         }

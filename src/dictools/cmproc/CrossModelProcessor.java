@@ -19,7 +19,7 @@
  */
 package dictools.cmproc;
 
-import dics.elements.dtd.Element;
+import dics.elements.dtd.DixElement;
 import dics.elements.utils.ElementList;
 import dics.elements.utils.Msg;
 import dictools.crossmodel.CrossAction;
@@ -119,7 +119,7 @@ public class CrossModelProcessor {
      */
     private String getElementListString(ElementList eList) {
         String str = "";
-        for (Element e : eList) {
+        for (DixElement e : eList) {
             str += "<" + e.getValue() + ">";
         }
         return str;

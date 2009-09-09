@@ -37,26 +37,26 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 
-import dics.elements.dtd.AElement;
-import dics.elements.dtd.BElement;
+import dics.elements.dtd.A;
+import dics.elements.dtd.B;
 import dics.elements.dtd.ContentElement;
-import dics.elements.dtd.EElement;
-import dics.elements.dtd.GElement;
-import dics.elements.dtd.IElement;
-import dics.elements.dtd.JElement;
-import dics.elements.dtd.LElement;
-import dics.elements.dtd.PElement;
-import dics.elements.dtd.ParElement;
-import dics.elements.dtd.PrmElement;
-import dics.elements.dtd.RElement;
-import dics.elements.dtd.ReElement;
-import dics.elements.dtd.SElement;
-import dics.elements.dtd.SaElement;
-import dics.elements.dtd.SdefElement;
-import dics.elements.dtd.SdefsElement;
-import dics.elements.dtd.TElement;
+import dics.elements.dtd.E;
+import dics.elements.dtd.G;
+import dics.elements.dtd.I;
+import dics.elements.dtd.J;
+import dics.elements.dtd.L;
+import dics.elements.dtd.P;
+import dics.elements.dtd.Par;
+import dics.elements.dtd.Prm;
+import dics.elements.dtd.R;
+import dics.elements.dtd.Re;
+import dics.elements.dtd.S;
+import dics.elements.dtd.Sa;
+import dics.elements.dtd.Sdef;
+import dics.elements.dtd.Sdefs;
+import dics.elements.dtd.T;
 import dics.elements.dtd.TextElement;
-import dics.elements.dtd.VElement;
+import dics.elements.dtd.V;
 import org.w3c.dom.Attr;
 import org.w3c.dom.CharacterData;
 import org.w3c.dom.Comment;
@@ -111,11 +111,11 @@ public class XMLReader {
 
 
     // These tags have no internal data and can therefore be re-used
-    protected static final BElement bElementConstant  = new BElement();
-    protected static final AElement aElementConstant = new AElement();
-    protected static final JElement jElementConstant = new JElement();
-    protected static final SaElement saElementConstant = new SaElement();
-    protected static final PrmElement prmElementNonumberConstant = new PrmElement();
+    protected static final B bElementConstant  = new B();
+    protected static final A aElementConstant = new A();
+    protected static final J jElementConstant = new J();
+    protected static final Sa saElementConstant = new Sa();
+    protected static final Prm prmElementNonumberConstant = new Prm();
 
     
     
@@ -207,7 +207,7 @@ public class XMLReader {
                 Node child = children.item(i);
                 /*
                 if (child instanceof Comment) {
-                Element comment = (Element) child;
+                DixElement comment = (DixElement) child;
                 eList.add(comment);
                 }
                  * */
@@ -257,14 +257,14 @@ public class XMLReader {
      * 
      * @param e
      */
-    public static SdefsElement readSdefs(Element e) {
-        SdefsElement sdefsElement = new SdefsElement();
+    public static Sdefs readSdefs(Element e) {
+        Sdefs sdefsElement = new Sdefs();
 
         for (Element childElement : readChildren(e)) {
             String childElementName = childElement.getNodeName();
             if (childElementName.equals("sdef")) {
-                SdefElement sdefElement = readSdef(childElement);
-                SElement sE = SElement.getInstance(sdefElement.getValue());
+                Sdef sdefElement = readSdef(childElement);
+                S sE = S.getInstance(sdefElement.getValue());
                 sdefsElement.addSdefElement(sdefElement);
             }
         }
@@ -276,10 +276,10 @@ public class XMLReader {
      * 
      * @param e
      */
-    public static SdefElement readSdef(Element e) {
+    public static Sdef readSdef(Element e) {
         String n = getAttributeValue(e, "n");
         String c = getAttributeValue(e, "c");
-        SdefElement sdefElement = new SdefElement(n);
+        Sdef sdefElement = new Sdef(n);
         sdefElement.setComment(c);
         return sdefElement;
     }
@@ -290,9 +290,9 @@ public class XMLReader {
      * @param e
      * @return Undefined         
      */
-    protected static SElement readSElement(Element e) {
+    protected static S readSElement(Element e) {
         String n = getAttributeValue(e, "n");
-        return SElement.getInstance(n);
+        return S.getInstance(n);
     }
 
     /**
@@ -300,9 +300,9 @@ public class XMLReader {
      * @param e
      * @return A 'v' element
      */
-    protected static VElement readVElement(Element e) {
+    protected static V readVElement(Element e) {
         String n = getAttributeValue(e, "n");
-        VElement vE = new VElement(n);
+        V vE = new V(n);
         return vE;
     }
 
@@ -311,9 +311,9 @@ public class XMLReader {
      * @param e
      * @return A 't' element
      */
-    protected static TElement readTElement(Element e) {
+    protected static T readTElement(Element e) {
         String n = getAttributeValue(e, "n");
-        TElement tE = new TElement(n);
+        T tE = new T(n);
         return tE;
     }
 
@@ -352,9 +352,9 @@ public class XMLReader {
      * 
      * @param e
      * @return Undefined         */
-    protected static IElement readIElement(Element e) {
-        IElement iElement = new IElement();
-        IElement iE = (IElement) readContentElement(e, iElement);
+    protected static I readIElement(Element e) {
+        I iElement = new I();
+        I iE = (I) readContentElement(e, iElement);
         return iE;
     }
 
@@ -378,7 +378,7 @@ public class XMLReader {
                         if (!(child instanceof Comment)) {
                             Element childElement = (Element) child;
                             String tag = childElement.getNodeName();
-                            dics.elements.dtd.Element element = processTagE(tag, child);
+                            dics.elements.dtd.DixElement element = processTagE(tag, child);
                             cElement.addChild(element);
                         }
                     }
@@ -412,20 +412,20 @@ public class XMLReader {
      * @param child
      * @return Undefined        
      */
-    protected static dics.elements.dtd.Element processTagE(String tag, Node child) {
+    protected static dics.elements.dtd.DixElement processTagE(String tag, Node child) {
         if (tag.equals("s")) {
             Element childElement = (Element) child;
-            SElement sElement = readSElement(childElement);
+            S sElement = readSElement(childElement);
             return sElement;
         }
         if (tag.equals("v")) {
             Element childElement = (Element) child;
-            VElement vElement = readVElement(childElement);
+            V vElement = readVElement(childElement);
             return vElement;
         }
         if (tag.equals("t")) {
             Element childElement = (Element) child;
-            TElement tElement = readTElement(childElement);
+            T tElement = readTElement(childElement);
             return tElement;
         }
         if (tag.equals("b")) {
@@ -442,7 +442,7 @@ public class XMLReader {
         }
         if (tag.equals("g")) {
             Element childElement = (Element) child;
-            GElement gElement = readGElement(childElement);
+            G gElement = readGElement(childElement);
             return gElement;
         }
         if (tag.equals("prm")) {
@@ -450,7 +450,7 @@ public class XMLReader {
         }
         if (tag.startsWith("prm") && '0'<=tag.charAt(3)  && tag.charAt(3)<='9') {
             // We can't use the singleton here, so make a new element
-            return new PrmElement(tag.substring(3));
+            return new Prm(tag.substring(3));
         }
         System.err.println("processTagE(): Unknown tag "+tag+" ignored in: " + child);
 
@@ -485,7 +485,7 @@ public class XMLReader {
     }
     
     if (chopFrom==chopTo) {
-      //System.err.println("Two elements on same line. Element will be moved to next line: "+eElement);
+      //System.err.println("Two elements on same line. DixElement will be moved to next line: "+eElement);
       characterData.setLength(0);
       return; // no important character data
     } else {
@@ -535,7 +535,7 @@ public class XMLReader {
      * 
      * @param e
      * @return Undefined         */
-    protected static EElement readEElement(Element e) {
+    protected static E readEElement(Element e) {
         String a = getAttributeValue(e, "a");
         String c = getAttributeValue(e, "c");
         String ign = getAttributeValue(e, "i");
@@ -547,10 +547,10 @@ public class XMLReader {
         String alt = getAttributeValue(e, "alt");
 
         StringBuilder characterData = new StringBuilder();
-        dics.elements.dtd.Element previousElement = null;
+        dics.elements.dtd.DixElement previousElement = null;
 
 
-        EElement eElement = new EElement(r, lm, a, c);
+        E eElement = new E(r, lm, a, c);
         eElement.setAversion(aversion);
         eElement.setAlt(alt);
         eElement.setSlr(slr);
@@ -565,28 +565,28 @@ public class XMLReader {
                     Element childElement = (Element) child;
                     String childElementName = childElement.getNodeName();
                     if (childElementName.equals("i")) {
-                        IElement iElement = readIElement(childElement);
+                        I iElement = readIElement(childElement);
                         eElement.addChild(iElement);
 
                         prependOrAppendCharacterData(characterData, iElement, previousElement);
                         previousElement = iElement;
                     } else
                     if (childElementName.equals("p")) {
-                        PElement pElement = readPElement(childElement);
+                        P pElement = readPElement(childElement);
                         eElement.addChild(pElement);
 
                         prependOrAppendCharacterData(characterData, pElement, previousElement);
                         previousElement = pElement;
                     } else
                     if (childElementName.equals("par")) {
-                        ParElement parElement = readParElement(childElement);
+                        Par parElement = readParElement(childElement);
                         eElement.addChild(parElement);
 
                         prependOrAppendCharacterData(characterData, parElement, previousElement);
                         previousElement = parElement;
                     } else
                     if (childElementName.equals("re")) {
-                        ReElement reElement = readReElement(childElement);
+                        Re reElement = readReElement(childElement);
                         eElement.addChild(reElement);
 
                         prependOrAppendCharacterData(characterData, reElement, previousElement);
@@ -622,9 +622,9 @@ public class XMLReader {
      * @param e
      * @return Undefined         
      */
-    protected static LElement readLElement(Element e) {
-        LElement lElement = new LElement();
-        LElement lE = (LElement) readContentElement(e, lElement);
+    protected static L readLElement(Element e) {
+        L lElement = new L();
+        L lE = (L) readContentElement(e, lElement);
         return lE;
     }
 
@@ -633,9 +633,9 @@ public class XMLReader {
      * @param e
      * @return Undefined        
      */
-    protected static RElement readRElement(Element e) {
-        RElement rElement = new RElement();
-        RElement rE = (RElement) readContentElement(e, rElement);
+    protected static R readRElement(Element e) {
+        R rElement = new R();
+        R rE = (R) readContentElement(e, rElement);
         return rE;
     }
 
@@ -644,9 +644,9 @@ public class XMLReader {
      * @param e
      * @return Undefined         
      */
-    protected static GElement readGElement(Element e) {
-        GElement gElement = new GElement();
-        GElement gE = (GElement) readContentElement(e, gElement);
+    protected static G readGElement(Element e) {
+        G gElement = new G();
+        G gE = (G) readContentElement(e, gElement);
         return gE;
     }
 
@@ -655,8 +655,8 @@ public class XMLReader {
      * @param e
      * @return Undefined         
      */
-    protected static PElement readPElement(Element e) {
-        PElement pElement = new PElement();
+    protected static P readPElement(Element e) {
+        P pElement = new P();
 
         if (e.hasChildNodes()) {
             NodeList children = e.getChildNodes();
@@ -666,11 +666,11 @@ public class XMLReader {
                     Element childElement = (Element) child;
                     String childElementName = childElement.getNodeName();
                     if (childElementName.equals("l")) {
-                        LElement lElement = readLElement(childElement);
+                        L lElement = readLElement(childElement);
                         pElement.setLElement(lElement);
                     } else
                     if (childElementName.equals("r")) {
-                        RElement rElement = readRElement(childElement);
+                        R rElement = readRElement(childElement);
                         pElement.setRElement(rElement);
                     } else
                     System.err.println("readPElement(): Unknown node ignored: " + childElementName);
@@ -686,11 +686,11 @@ public class XMLReader {
      * @param e
      * @return Undefined        
      */
-    public static ParElement readParElement(Element e) {
+    public static Par readParElement(Element e) {
       
         String n = getAttributeValue(e, "n");
         String sa = getAttributeValue(e, "sa");
-        ParElement parElement = new ParElement(n);
+        Par parElement = new Par(n);
         parElement.setSa(sa);
 
         if (e.hasAttributes()) {
@@ -718,7 +718,7 @@ public class XMLReader {
      * @param e
      * @return Undefined
      */
-    protected static ReElement readReElement(Element e) {
+    protected static Re readReElement(Element e) {
         String value = "";
 
         if (e.hasChildNodes()) {
@@ -731,7 +731,7 @@ public class XMLReader {
                 }
             }
         }
-        ReElement reElement = new ReElement(value);
+        Re reElement = new Re(value);
         return reElement;
     }
     

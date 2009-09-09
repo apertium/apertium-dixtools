@@ -21,13 +21,13 @@ package misc.eues;
 
 import java.util.HashMap;
 
-import dics.elements.dtd.DictionaryElement;
-import dics.elements.dtd.EElement;
-import dics.elements.dtd.LElement;
-import dics.elements.dtd.PElement;
-import dics.elements.dtd.ParElement;
-import dics.elements.dtd.RElement;
-import dics.elements.dtd.SectionElement;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.L;
+import dics.elements.dtd.P;
+import dics.elements.dtd.Par;
+import dics.elements.dtd.R;
+import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
 import dictools.AbstractDictTool;
 import dictools.xml.DictionaryReader;
@@ -72,12 +72,12 @@ public class AssignParadigm extends AbstractDictTool {
         DictionaryReader reader = new DictionaryReader(morphDic);
         reader.setReadParadigms(false);
         System.err.println("Reading morphological '" + morphDic + "'");
-        DictionaryElement dic = reader.readDic();
+        Dictionary dic = reader.readDic();
 
         HashMap<String, String> np = new HashMap<String, String>();
 
-        for (SectionElement section : dic.getSections()) {
-            for (EElement ee : section.getEElements()) {
+        for (Section section : dic.getSections()) {
+            for (E ee : section.getEElements()) {
                 String parName = ee.getMainParadigmName();
                 if (parName != null) {
                     String right = ee.getSide("R").getValue();
@@ -88,10 +88,10 @@ public class AssignParadigm extends AbstractDictTool {
 
         System.err.println(np.size() + " entries read.");
         DictionaryReader reader2 = new DictionaryReader(bilDic);
-        DictionaryElement bil = reader2.readDic();
+        Dictionary bil = reader2.readDic();
 
-        for (SectionElement section : bil.getSections()) {
-            for (EElement ee : section.getEElements()) {
+        for (Section section : bil.getSections()) {
+            for (E ee : section.getEElements()) {
                 if (!ee.isRegEx()) {
                     String left = ee.getSide("L").getValue();
                     String right = ee.getSide("R").getValue();
@@ -100,20 +100,20 @@ public class AssignParadigm extends AbstractDictTool {
                     String rightNoTags = cleanTags(right);
                     String par = np.get(rightNoTags);
 
-                    EElement e = new EElement();
+                    E e = new E();
                     e.setComment("auto");
 
-                    PElement p = new PElement();
+                    P p = new P();
                     e.addChild(p);
                     if (par == null) {
                         System.err.println("No paradigm for '" + leftNoTags + "'");
                         par = "";
                     }
-                    ParElement parE = new ParElement(par);
+                    Par parE = new Par(par);
                     e.addChild(parE);
 
-                    LElement l = new LElement();
-                    RElement r = new RElement();
+                    L l = new L();
+                    R r = new R();
                     TextElement text = new TextElement(leftNoTags);
                     r.addChild(text);
                     p.setLElement(l);

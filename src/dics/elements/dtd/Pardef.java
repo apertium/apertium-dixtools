@@ -33,7 +33,7 @@ import java.io.Writer;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class PardefElement extends Element {
+public class Pardef extends DixElement {
 
     /**
      * 
@@ -48,7 +48,7 @@ public class PardefElement extends Element {
      * 
      * @param value
      */
-    public PardefElement(String value) {
+    public Pardef(String value) {
         n = value;
         eElements = new EElementList();
     }
@@ -59,12 +59,12 @@ public class PardefElement extends Element {
      * @param orig
      * @param name
      */
-    public PardefElement(PardefElement orig, String name) {
+    public Pardef(Pardef orig, String name) {
         n = name;
         eElements = new EElementList();
 
-        for (EElement e : orig.eElements) {
-            EElement e2 = (EElement) e.clone();
+        for (E e : orig.eElements) {
+            E e2 = (E) e.clone();
             eElements.add(e2);
         }
     }
@@ -85,7 +85,7 @@ public class PardefElement extends Element {
      * 
      * @param value
      */
-    public void addEElement(EElement value) {
+    public void addEElement(E value) {
         eElements.add(value);
     }
 
@@ -101,7 +101,7 @@ public class PardefElement extends Element {
         if (!opt.noProcessingComments) dos.append(makeCommentIfData(processingComments));
 
         dos.append((opt.nowAlign?"":tab(2))+ "<pardef n=\"" + n + "\">"+justInsideStartTagCharacterData+"\n");
-        for (EElement e : eElements) {
+        for (E e : eElements) {
             e.printXML(dos, opt);
         }
         dos.append((opt.nowAlign?"":tab(2)) + "</pardef>"+appendCharacterData.trim()+"\n");
@@ -111,7 +111,7 @@ public class PardefElement extends Element {
      * Equals method. Check on equality of pardef elements, regardless to order.
      * @param pardef2
      * @return Undefined         */
-    public boolean contentEquals(PardefElement pardef2) {
+    public boolean contentEquals(Pardef pardef2) {
         EElementList eList1 = getEElements();
         EElementList eList2 = pardef2.getEElements();
 
@@ -119,13 +119,13 @@ public class PardefElement extends Element {
             return false;
         }
 
-        HashMap<String, EElement> elementsPardef1 = new HashMap<String, EElement>();
+        HashMap<String, E> elementsPardef1 = new HashMap<String, E>();
 
-        for (EElement element1 : eList1) {
+        for (E element1 : eList1) {
             elementsPardef1.put(element1.toStringAll(), element1);
         }
 
-        for (EElement element2 : eList2) {
+        for (E element2 : eList2) {
             if (!elementsPardef1.containsKey(element2.toStringAll())) {
                 return false;
             }
@@ -141,7 +141,7 @@ public class PardefElement extends Element {
     public String toString() {
         String str = "";
         str += "<" + getName() + ">";
-        for (EElement e : eElements) {
+        for (E e : eElements) {
             str += e.toString();
         }
         return str;
@@ -152,7 +152,7 @@ public class PardefElement extends Element {
      * @return Undefined         */
     public String toStringNoParName() {
         String str = "";
-        for (EElement e : eElements) {
+        for (E e : eElements) {
             str += e.toStringAll();
         }
         return str;
@@ -172,7 +172,7 @@ public class PardefElement extends Element {
      * @return true if the paradigm contains certain definition ('adj', 'm', etc.)
      */
     public boolean contains(String def) {
-        for (EElement e : eElements) {
+        for (E e : eElements) {
             if (e.contains(def)) {
                 return true;
             }
@@ -187,22 +187,22 @@ public class PardefElement extends Element {
      * @param category
      * @param equivCategory
      * @return Undefined         
-    public static PardefElement duplicateParadigm(EElement e,
+    public static Pardef duplicateParadigm(E e,
             DictionaryElement mon, String category,
             String equivCategory) {
         // Hay que cambiar la categoria (primer "s") en cada elemento 'e' en la
         // definicin del paradigma
-        PardefElement dupPardefE = null;
+        Pardef dupPardefE = null;
         String paradigmValue = e.getMainParadigmName();
         String dupParadigmValue = e.getMainParadigmName();
         dupParadigmValue = dupParadigmValue.replaceAll("__" + equivCategory,
                 "__" + category);
 
-        PardefElement parDefInMon = mon.getParadigmDefinition(dupParadigmValue);
+        Pardef parDefInMon = mon.getParadigmDefinition(dupParadigmValue);
 
         if (parDefInMon == null) {
-            PardefElement pardefE = mon.getParadigmDefinition(paradigmValue);
-            dupPardefE = new PardefElement(pardefE, dupParadigmValue);
+            Pardef pardefE = mon.getParadigmDefinition(paradigmValue);
+            dupPardefE = new Pardef(pardefE, dupParadigmValue);
             dupPardefE.addProcessingComment("equivalent to '" + paradigmValue + "'");
             dupPardefE.changeCategory(category);
         } else {
@@ -218,7 +218,7 @@ public class PardefElement extends Element {
      * @param newCategory
      */
     private void changeCategory(String newCategory) {
-        for (EElement e : eElements) {
+        for (E e : eElements) {
             e.changeCategory("R", newCategory);
         }
     }

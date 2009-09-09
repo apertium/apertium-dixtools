@@ -25,13 +25,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
-import dics.elements.dtd.DictionaryElement;
-import dics.elements.dtd.EElement;
-import dics.elements.dtd.Element;
-import dics.elements.dtd.ParElement;
-import dics.elements.dtd.PardefElement;
-import dics.elements.dtd.PardefsElement;
-import dics.elements.dtd.SectionElement;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.DixElement;
+import dics.elements.dtd.Par;
+import dics.elements.dtd.Pardef;
+import dics.elements.dtd.Pardefs;
+import dics.elements.dtd.Section;
 import dics.elements.utils.EElementList;
 import dics.elements.utils.Msg;
 
@@ -45,7 +45,7 @@ public class DicFindEquivPar  extends AbstractDictTool {
     /**
      * 
      */
-    private DictionaryElement dic;
+    private Dictionary dic;
     /**
      * 
      */
@@ -64,7 +64,7 @@ public class DicFindEquivPar  extends AbstractDictTool {
      */
     public DicFindEquivPar(String fileName) {
         DictionaryReader dicReader = new DictionaryReader(fileName);
-        DictionaryElement dic = dicReader.readDic();
+        Dictionary dic = dicReader.readDic();
         setDic(dic);
     }
 
@@ -74,25 +74,25 @@ public class DicFindEquivPar  extends AbstractDictTool {
      */
     public void findEquivalents() {
 
-        ArrayList<PardefElement> pardefs = dic.getPardefsElement().getPardefElements();
+        ArrayList<Pardef> pardefs = dic.getPardefsElement().getPardefElements();
 
-        HashMap<String, PardefElement> name2pardef = new HashMap<String, PardefElement>();
+        HashMap<String, Pardef> name2pardef = new HashMap<String, Pardef>();
         HashMap<String, String> name2replacementName = new HashMap<String, String>();
         HashMap<String, Integer> usagecounter = new HashMap<String, Integer>();
         String replacementName;
 
-        for (Iterator<PardefElement> pi =  pardefs.iterator(); pi.hasNext(); ) {
-            PardefElement par = pi.next();
+        for (Iterator<Pardef> pi =  pardefs.iterator(); pi.hasNext(); ) {
+            Pardef par = pi.next();
 
             // remove duplicate names
             if (name2pardef.containsKey(par.getName())) {
-                PardefElement first = name2pardef.get(par.getName());
+                Pardef first = name2pardef.get(par.getName());
                 if (par.contentEquals(first)) {
                     msg.err("Subsequent instance of " +par.getName() + " deleted");
                     first.getEElements().addAll(par.getEElements());
                 } else {
                     msg.err("WARNING: Subsequent instance of " +par.getName() + " has other contents than original!\nMerging the 2 paradigms (the same way as lt-toolbox would)");
-                    EElement firstEe = par.getEElements().get(0);
+                    E firstEe = par.getEElements().get(0);
                     if (firstEe!=null) {
                         firstEe.addProcessingComment("Below is content of a subsequent definition of "+par.getName());
                         first.getEElements().addAll(par.getEElements());
@@ -109,11 +109,11 @@ public class DicFindEquivPar  extends AbstractDictTool {
         name2pardef.clear();
 
         pardefLoop:
-        for (Iterator<PardefElement> pi =  pardefs.iterator(); pi.hasNext(); ) {
-            PardefElement par = pi.next();
+        for (Iterator<Pardef> pi =  pardefs.iterator(); pi.hasNext(); ) {
+            Pardef par = pi.next();
 
             // seach for existing pardef with same content and remove
-            for (PardefElement existingPardef : name2pardef.values()) {
+            for (Pardef existingPardef : name2pardef.values()) {
                 if (par.contentEquals(existingPardef)) {
                     if (name2replacementName.containsKey(existingPardef.getName())) {
                         replacementName = name2replacementName.get(existingPardef.getName());
@@ -134,21 +134,21 @@ public class DicFindEquivPar  extends AbstractDictTool {
 
 
         // Iterate throught all paradigm definitions and sections and replace paradigms
-        ArrayList<EElement> allElements = new ArrayList<EElement>();
+        ArrayList<E> allElements = new ArrayList<E>();
 
-        for (PardefElement pardef : dic.getPardefsElement().getPardefElements()) {
+        for (Pardef pardef : dic.getPardefsElement().getPardefElements()) {
             allElements.addAll(pardef.getEElements());
         }
-        for (SectionElement section : dic.getSections()) {
+        for (Section section : dic.getSections()) {
             allElements.addAll(section.getEElements());
         }
 
         // Now replace paradigms
         HashMap<String, Integer> replacementcounter = new HashMap<String, Integer>();
-        for (EElement ee : allElements) {
-            for (Element e : ee.getChildren()) {
-                if (e instanceof ParElement) {
-                    ParElement parE = (ParElement) e;
+        for (E ee : allElements) {
+            for (DixElement e : ee.getChildren()) {
+                if (e instanceof Par) {
+                    Par parE = (Par) e;
                     String name = parE.getValue();
                     String newName = name2replacementName.get(name);
                     if (newName != null) {
@@ -172,16 +172,17 @@ public class DicFindEquivPar  extends AbstractDictTool {
         }
 
         // find unused pardefs and delete them
+        for (Iterator<Pardef> pi =  pardefs.iterator(); pi.hasNext(); ) {
+            Pardef par = pi.next();
         // Wah! We don't want this to happen!
         /*
-        for (Iterator<PardefElement> pi =  pardefs.iterator(); pi.hasNext(); ) {
             PardefElement par = pi.next();
             if (usagecounter.get(par.getName())==null) {
                 msg.err("Unused paradigm  " +par.getName() + " deleted");
                 pi.remove();
             }
-        }
          */
+        }
 
         dic.printXML(getOutFileName(),getOpt());
 
@@ -191,7 +192,7 @@ public class DicFindEquivPar  extends AbstractDictTool {
     /**
      * @return the dic
      */
-    private DictionaryElement getDic() {
+    private Dictionary getDic() {
         return dic;
     }
 
@@ -199,7 +200,7 @@ public class DicFindEquivPar  extends AbstractDictTool {
      * @param dic
      *                the dic to set
      */
-    private void setDic(DictionaryElement dic) {
+    private void setDic(Dictionary dic) {
         this.dic = dic;
     }
 

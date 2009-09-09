@@ -25,20 +25,20 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
-import dics.elements.dtd.AlphabetElement;
-import dics.elements.dtd.BElement;
+import dics.elements.dtd.Alphabet;
+import dics.elements.dtd.B;
 import dics.elements.dtd.ContentElement;
-import dics.elements.dtd.DictionaryElement;
-import dics.elements.dtd.EElement;
-import dics.elements.dtd.Element;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.DixElement;
 import dics.elements.dtd.HeaderElement;
-import dics.elements.dtd.LElement;
-import dics.elements.dtd.PElement;
-import dics.elements.dtd.RElement;
-import dics.elements.dtd.SElement;
-import dics.elements.dtd.SdefElement;
-import dics.elements.dtd.SdefsElement;
-import dics.elements.dtd.SectionElement;
+import dics.elements.dtd.L;
+import dics.elements.dtd.P;
+import dics.elements.dtd.R;
+import dics.elements.dtd.S;
+import dics.elements.dtd.Sdef;
+import dics.elements.dtd.Sdefs;
+import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
 import dics.elements.utils.DicOpts;
 import dics.elements.utils.DicSet;
@@ -98,11 +98,11 @@ public class DicCross  extends AbstractDictTool{
     /**
      * Bilingual dictionary A-B
      */
-    private DictionaryElement bilAB;
+    private Dictionary bilAB;
     /**
      * Bilingual dictionary B-C
      */
-    private DictionaryElement bilBC;
+    private Dictionary bilBC;
     /**
      *
      */
@@ -256,12 +256,12 @@ public class DicCross  extends AbstractDictTool{
      * @param dicSet
      * @return Undefined
      */
-    public DictionaryElement[] crossDictionaries(DicSet dicSet) {
-        DictionaryElement[] dics = new DictionaryElement[2];
+    public Dictionary[] crossDictionaries(DicSet dicSet) {
+        Dictionary[] dics = new Dictionary[2];
         readCrossModel();
 
-        DictionaryElement dic1 = dicSet.getBil1();
-        DictionaryElement dic2 = dicSet.getBil2();
+        Dictionary dic1 = dicSet.getBil1();
+        Dictionary dic2 = dicSet.getBil2();
 
         int nDic1 = dic1.getEntries().size();
         int nDic2 = dic2.getEntries().size();
@@ -271,30 +271,30 @@ public class DicCross  extends AbstractDictTool{
         setBilAB(dic1);
         setBilBC(dic2);
 
-        DictionaryElement dic = new DictionaryElement();
+        Dictionary dic = new Dictionary();
 
         // encoding
         String encoding = crossXmlEncodings(dic1.getXmlEncoding(), dic2.getXmlEncoding());
         dic.setXmlEncoding(encoding);
 
         // alphabet
-        AlphabetElement alphabet = crossAlphabets(dic1.getAlphabet(), dic2.getAlphabet());
+        Alphabet alphabet = crossAlphabets(dic1.getAlphabet(), dic2.getAlphabet());
         dic.setAlphabet(alphabet);
 
         // sdefs
-        SdefsElement sdefs = crossSdefs(dic1.getSdefs(), dic2.getSdefs());
+        Sdefs sdefs = crossSdefs(dic1.getSdefs(), dic2.getSdefs());
         dic.setSdefs(sdefs);
 
         // sections
-        for (SectionElement section1 : dic1.getSections()) {
-            SectionElement section2 = dic2.getSection(section1.getID());
-            SectionElement[] sections = crossSections(section1, section2, sdefs);
-            SectionElement section = sections[0];
+        for (Section section1 : dic1.getSections()) {
+            Section section2 = dic2.getSection(section1.getID());
+            Section[] sections = crossSections(section1, section2, sdefs);
+            Section section = sections[0];
             dic.addSection(section);
         }
 
         msg.out("[" + (taskOrder++) + "] Sorting crossed dictionary...\n");
-        Collections.sort(dic.getEntries(), EElement.eElementComparatorL);
+        Collections.sort(dic.getEntries(), E.eElementComparatorL);
 
         getNDCrossModel().printXML(this.getOutDir() + "patterns-not-detected.xml",getOpt());
         dics[0] = dic;
@@ -316,8 +316,8 @@ public class DicCross  extends AbstractDictTool{
      * @param alphabet2
      * @return Undefined     
      */
-    private AlphabetElement crossAlphabets(AlphabetElement alphabet1, AlphabetElement alphabet2) {
-        AlphabetElement alphabet = new AlphabetElement();
+    private Alphabet crossAlphabets(Alphabet alphabet1, Alphabet alphabet2) {
+        Alphabet alphabet = new Alphabet();
         if (alphabet2 != null && alphabet2 != null) {
 
 
@@ -352,23 +352,23 @@ public class DicCross  extends AbstractDictTool{
      * @param sdefs2
      * @return Undefined     
      */
-    private SdefsElement crossSdefs(SdefsElement sdefs1, SdefsElement sdefs2) {
-        SdefsElement sdefs = new SdefsElement();
+    private Sdefs crossSdefs(Sdefs sdefs1, Sdefs sdefs2) {
+        Sdefs sdefs = new Sdefs();
         if (sdefs1 != null && sdefs2 != null) {
             msg.out("[" + (taskOrder++) + "] Crossing definitions...\n");
 
-            HashMap<String, SdefElement> sdefList = new HashMap<String, SdefElement>();
+            HashMap<String, Sdef> sdefList = new HashMap<String, Sdef>();
 
-            for (SdefElement sdef1 : sdefs1.getSdefsElements()) {
+            for (Sdef sdef1 : sdefs1.getSdefsElements()) {
                 if (!sdefList.containsKey(sdef1.getValue())) {
                     sdefList.put(sdef1.getValue(), sdef1);
                 }
             }
-            for (SdefElement sdef2 : sdefs2.getSdefsElements()) {
+            for (Sdef sdef2 : sdefs2.getSdefsElements()) {
                 if (!sdefList.containsKey(sdef2.getValue())) {
                     sdefList.put(sdef2.getValue(), sdef2);
                 } else {
-                    SdefElement sdef1 = sdefList.get(sdef2.getValue());
+                    Sdef sdef1 = sdefList.get(sdef2.getValue());
 
                     if ((sdef1.getComment() != null) && (sdef2.getComment() == null)) {
                         sdef2.setComment(sdef1.getComment());
@@ -388,7 +388,7 @@ public class DicCross  extends AbstractDictTool{
 
             while (it.hasNext()) {
                 String str = it.next();
-                SdefElement sdef = sdefList.get(str);
+                Sdef sdef = sdefList.get(str);
                 sdefs.addSdefElement(sdef);
             }
             sdefList = null;
@@ -404,12 +404,12 @@ public class DicCross  extends AbstractDictTool{
      * @param section1
      * @param section2
      * @return Undefined     */
-    private SectionElement[] crossSections(SectionElement section1, SectionElement section2, SdefsElement sdefs) {
+    private Section[] crossSections(Section section1, Section section2, Sdefs sdefs) {
 
         msg.out("[" + (taskOrder++) + "] Crossing sections '" + section1.getID() + "' and '" + section2.getID() + "'\n");
-        SectionElement[] sections = new SectionElement[2];
+        Section[] sections = new Section[2];
 
-        SectionElement section = new SectionElement();
+        Section section = new Section();
         section.setID(section1.getID());
         section.setType(section1.getType());
         EElementList elements1 = section1.getEElements();
@@ -432,8 +432,8 @@ public class DicCross  extends AbstractDictTool{
      * @param bil
      * @param dir
      */
-    private void crossSectionsAB(EElementList elements, EElementMap sectionMap, SectionElement section, DictionaryElement bil, int dir) {
-        for (EElement e : elements) {
+    private void crossSectionsAB(EElementList elements, EElementMap sectionMap, Section section, Dictionary bil, int dir) {
+        for (E e : elements) {
             if (e.isRegEx()) {
                 String key = e.getRegEx().getValue();
                 if (!getRegExProcessed().containsKey(key)) {
@@ -456,12 +456,12 @@ public class DicCross  extends AbstractDictTool{
      * @param section
      * @param dir
      */
-    private void crossElementAndPairs(EElement e1, EElementList candidates, SectionElement section, int dir) {
+    private void crossElementAndPairs(E e1, EElementList candidates, Section section, int dir) {
         try {
-            for (EElement e2 : candidates) {
+            for (E e2 : candidates) {
                 EElementList actionEList = cross(e1, e2, dir);
                 if (!actionEList.isEmpty()) {
-                    for (EElement e : actionEList) {
+                    for (E e : actionEList) {
                         String str = e.getHash();
 
                         if (!getProcessed().containsKey(str)) {
@@ -500,13 +500,13 @@ public class DicCross  extends AbstractDictTool{
      * @param dir
      * @return
      */
-    private EElementList cross(EElement e1, EElement e2, int dir) {
+    private EElementList cross(E e1, E e2, int dir) {
         EElementList actionEList = new EElementList();
         this.incrementNCrossedElements();
         if (dir != 0) {
-            EElement aux;
-            aux = (EElement) e2.clone();
-            e2 = (EElement) e1.clone();
+            E aux;
+            aux = (E) e2.clone();
+            e2 = (E) e1.clone();
             e1 = aux;
         }
 
@@ -538,15 +538,15 @@ public class DicCross  extends AbstractDictTool{
      * @param cad
      * @return
      */
-    private EElementList applyCrossAction(EElement e1, EElement e2, CrossActionData cad) {
+    private EElementList applyCrossAction(E e1, E e2, CrossActionData cad) {
         EElementList elementList = new EElementList();
         CrossAction cA = cad.getCrossAction();
 
         for (Action action : cA.getActionSet()) {
-            EElement eAction = action.getE();
+            E eAction = action.getE();
             int iR = resolveRestriction(e1.getRestriction(), e2.getRestriction());
             if (iR != NONE) {
-                EElement actionE = assignValues(e1, e2, eAction, cad.getVars());
+                E actionE = assignValues(e1, e2, eAction, cad.getVars());
                 String actionID = cad.getCrossAction().getId();
                 actionE.setPatternApplied(actionID);
 
@@ -580,8 +580,8 @@ public class DicCross  extends AbstractDictTool{
      * @param vars
      * @return New 'e' element
      */
-    public EElement assignValues(EElement e1, EElement e2, EElement eAction, Variables vars) {
-        EElement eCrossed = new EElement();
+    public E assignValues(E e1, E e2, E eAction, Variables vars) {
+        E eCrossed = new E();
         //if (eAction.hasRestriction()) {
         if (!eAction.isRestrictionAuto()) {
             // restriction indicated in cross pattern
@@ -594,11 +594,11 @@ public class DicCross  extends AbstractDictTool{
             eCrossed.setRestriction(restriction);
         }
 
-        PElement pE = new PElement();
+        P pE = new P();
         ContentElement lE = eAction.getSide("L");
         ContentElement rE = eAction.getSide("R");
-        LElement lE2 = new LElement();
-        RElement rE2 = new RElement();
+        L lE2 = new L();
+        R rE2 = new R();
 
         assignValuesSide(lE2, lE, vars);
         assignValuesSide(rE2, rE, vars);
@@ -616,7 +616,7 @@ public class DicCross  extends AbstractDictTool{
      * @param vars
      */
     private void assignValuesSide(ContentElement ceWrite, ContentElement ceRead, Variables vars) {
-        for (Element e : ceRead.getChildren()) {
+        for (DixElement e : ceRead.getChildren()) {
             if (e instanceof TextElement) {
                 String x = e.getValue();
                 if (vars.containsKey(x)) {
@@ -626,26 +626,26 @@ public class DicCross  extends AbstractDictTool{
                     ceWrite.addChild(new TextElement(x));
                 }
             }
-            if (e instanceof BElement) {
-                ceWrite.addChild(new BElement());
+            if (e instanceof B) {
+                ceWrite.addChild(new B());
             }
 
-            if (e instanceof SElement) {
-                String x = ((SElement) e).getValue();
+            if (e instanceof S) {
+                String x = ((S) e).getValue();
                 if (vars.containsKey(x)) {
                     if (x.startsWith("X")) {
                         String sx = (String) vars.get(x);
-                        ceWrite.addChild(new SElement(sx));
+                        ceWrite.addChild(new S(sx));
                     }
                     if (x.startsWith("S")) {
                         SElementList sxlist = (SElementList) vars.get(x);
-                        for (SElement sE : sxlist) {
-                            ceWrite.addChild(new SElement(sE));
+                        for (S sE : sxlist) {
+                            ceWrite.addChild(new S(sE));
                         }
 
                     }
                 } else {
-                    ceWrite.addChild(new SElement(e.getValue()));
+                    ceWrite.addChild(new S(e.getValue()));
                 }
 
             }
@@ -658,7 +658,7 @@ public class DicCross  extends AbstractDictTool{
      * @param hm
      * @return Undefined     
      */
-    private EElementList getPairs(EElement e, EElementMap hm) {
+    private EElementList getPairs(E e, EElementMap hm) {
         String lemma = e.getValue("L");
         lemma = DicTools.clearTags(lemma);
         EElementList pairs = hm.get(lemma);
@@ -771,7 +771,7 @@ public class DicCross  extends AbstractDictTool{
     /**
      * @return the bilAB
      */
-    private DictionaryElement getBilAB() {
+    private Dictionary getBilAB() {
         return bilAB;
     }
 
@@ -779,14 +779,14 @@ public class DicCross  extends AbstractDictTool{
      * @param bilAB
      *                the bilAB to set
      */
-    private void setBilAB(DictionaryElement bilAB) {
+    private void setBilAB(Dictionary bilAB) {
         this.bilAB = bilAB;
     }
 
     /**
      * @return the bilBC
      */
-    private DictionaryElement getBilBC() {
+    private Dictionary getBilBC() {
         return bilBC;
     }
 
@@ -794,7 +794,7 @@ public class DicCross  extends AbstractDictTool{
      * @param bilBC
      *                the bilBC to set
      */
-    private void setBilBC(DictionaryElement bilBC) {
+    private void setBilBC(Dictionary bilBC) {
         this.bilBC = bilBC;
     }
 
@@ -870,11 +870,11 @@ public class DicCross  extends AbstractDictTool{
         actionConsistent(dicSet, "yes");
         setCrossModelFileName(getCrossModelFileName());
 
-        DictionaryElement[] bils = crossDictionaries(dicSet);
-        DictionaryElement bilCrossed = bils[0];
+        Dictionary[] bils = crossDictionaries(dicSet);
+        Dictionary bilCrossed = bils[0];
         String sl = dicSet.getBil1().getRightLanguage();
         String tl = dicSet.getBil2().getRightLanguage();
-        bilCrossed.setType(DictionaryElement.BIL);
+        bilCrossed.setType(Dictionary.BIL);
         bilCrossed.setLeftLanguage(sl);
         bilCrossed.setRightLanguage(tl);
         msg.out("[" + (taskOrder++) + "] Making consistent morphological dicionaries ...\n");
@@ -883,9 +883,9 @@ public class DicCross  extends AbstractDictTool{
         EElementList crossedMonA = commonCrossedMons[0];
         EElementList crossedMonB = commonCrossedMons[1];
 
-        DictionaryElement monACrossed = new DictionaryElement(dicSet.getMon1());
+        Dictionary monACrossed = new Dictionary(dicSet.getMon1());
         monACrossed.setMainSection(crossedMonA);
-        DictionaryElement monBCrossed = new DictionaryElement(dicSet.getMon2());
+        Dictionary monBCrossed = new Dictionary(dicSet.getMon2());
         monBCrossed.setMainSection(crossedMonB);
 
         DictionaryElementList dicList = new DictionaryElementList();
@@ -904,9 +904,9 @@ public class DicCross  extends AbstractDictTool{
      * @param tl
      */
     private void printXMLCrossed(DictionaryElementList del, String sl, String tl, DicOpts opt) {
-        DictionaryElement bilCrossed = del.get(0);
-        DictionaryElement monACrossed = del.get(1);
-        DictionaryElement monBCrossed = del.get(2);
+        Dictionary bilCrossed = del.get(0);
+        Dictionary monACrossed = del.get(1);
+        Dictionary monBCrossed = del.get(2);
 
         int i = 0;
         String patterns = "";
@@ -1059,13 +1059,13 @@ public class DicCross  extends AbstractDictTool{
             setDicSet(theDicSet);
         } else {
             msg.out("[" + (taskOrder++) + "] Loading bilingual AB (" + sDicBilAB + ")\n");
-            DictionaryElement bil1 = DicTools.readBilingual(sDicBilAB, bilABReverse);
+            Dictionary bil1 = DicTools.readBilingual(sDicBilAB, bilABReverse);
             msg.out("[" + (taskOrder++) + "] Loading bilingual BC (" + sDicBilBC + ")\n");
-            DictionaryElement bil2 = DicTools.readBilingual(sDicBilBC, bilBCReverse);
+            Dictionary bil2 = DicTools.readBilingual(sDicBilBC, bilBCReverse);
             msg.out("[" + (taskOrder++) + "] Loading monolingual A (" + sDicMonA + ")\n");
-            DictionaryElement mon1 = DicTools.readMonolingual(sDicMonA);
+            Dictionary mon1 = DicTools.readMonolingual(sDicMonA);
             msg.out("[" + (taskOrder++) + "] Loading monolingual C (" + sDicMonC + ")\n");
-            DictionaryElement mon2 = DicTools.readMonolingual(sDicMonC);
+            Dictionary mon2 = DicTools.readMonolingual(sDicMonC);
             DicSet theDicSet = new DicSet(mon1, bil1, mon2, bil2);
             setDicSet(theDicSet);
         }
@@ -1084,10 +1084,10 @@ public class DicCross  extends AbstractDictTool{
         msg.out("[" + (taskOrder++) + "] New language pair: " + sl + "-" + tl + "\n");
         ArrayList<Resource> resources = lingRes.getResourceList();
 
-        DictionaryElement mA = null;
-        DictionaryElement mC = null;
-        DictionaryElement bAB = null;
-        DictionaryElement bBC = null;
+        Dictionary mA = null;
+        Dictionary mC = null;
+        Dictionary bAB = null;
+        Dictionary bBC = null;
 
         boolean mAok = false;
         boolean mCok = false;
@@ -1210,11 +1210,11 @@ public class DicCross  extends AbstractDictTool{
             System.exit(-1);
         }
 
-        DictionaryElement mAn = getMainSectionDic(mA);
+        Dictionary mAn = getMainSectionDic(mA);
         mAn = addMissingLemmas(mAn);
-        DictionaryElement bABn = getMainSectionDic(bAB);
-        DictionaryElement bBCn = getMainSectionDic(bBC);
-        DictionaryElement mCn = getMainSectionDic(mC);
+        Dictionary bABn = getMainSectionDic(bAB);
+        Dictionary bBCn = getMainSectionDic(bBC);
+        Dictionary mCn = getMainSectionDic(mC);
         mCn = addMissingLemmas(mCn);
 
         DicSet dicSetC = new DicSet(mAn, bABn, mCn, bBCn);
@@ -1226,12 +1226,12 @@ public class DicCross  extends AbstractDictTool{
      * @param dic
      * @return Dictionary with missing lemmas
      */
-    public static DictionaryElement addMissingLemmas(DictionaryElement dic) {
+    public static Dictionary addMissingLemmas(Dictionary dic) {
         int c = 0;
         try {
-            for (SectionElement s : dic.getSections()) {
+            for (Section s : dic.getSections()) {
                 if (s.getType().equals("standard")) {
-                    for (EElement ee : s.getEElements()) {
+                    for (E ee : s.getEElements()) {
                         if (ee.getLemma() == null) {
                             String v = ee.getValueNoTags("L");
                             if (v != null) {
@@ -1266,12 +1266,12 @@ public class DicCross  extends AbstractDictTool{
      * @param dic
      * @return
      */
-    private DictionaryElement getMainSectionDic(DictionaryElement dic) {
-        ArrayList<SectionElement> sections = new ArrayList<SectionElement>();
-        SectionElement mainSection = new SectionElement("main", "standard");
-        for (SectionElement s : dic.getSections()) {
+    private Dictionary getMainSectionDic(Dictionary dic) {
+        ArrayList<Section> sections = new ArrayList<Section>();
+        Section mainSection = new Section("main", "standard");
+        for (Section s : dic.getSections()) {
             if (s.getType().equals("standard")) {
-                for (EElement ee : s.getEElements()) {
+                for (E ee : s.getEElements()) {
                     mainSection.addEElement(ee);
                 }
             } else {
@@ -1288,8 +1288,8 @@ public class DicCross  extends AbstractDictTool{
      * @param source
      * @return
      */
-    private DictionaryElement readDic(String source, int type, boolean reverse) {
-        DictionaryElement dic = null;
+    private Dictionary readDic(String source, int type, boolean reverse) {
+        Dictionary dic = null;
         if (source.startsWith("http://")) {
             try {
                 URL url = new URL(source);
@@ -1429,7 +1429,7 @@ public class DicCross  extends AbstractDictTool{
     public String getCommonLanguage(DicSet dicSet) {
         // Sin tener en cuentra el orden. Se resuelve automáticamente
         if (isMetaInfoComplete(dicSet)) {
-            Vector<DictionaryElement> dics = new Vector<DictionaryElement>();
+            Vector<Dictionary> dics = new Vector<Dictionary>();
             HeaderElement d1 = this.dicSet.getMon1().getHeaderElement();
             HeaderElement d2 = this.dicSet.getMon2().getHeaderElement();
             HeaderElement d3 = this.dicSet.getBil1().getHeaderElement();
@@ -1444,7 +1444,7 @@ public class DicCross  extends AbstractDictTool{
      * @return Checks whether the meta info is complete
      */
     public boolean isMetaInfoComplete(DicSet dicSet) {
-        for (DictionaryElement dic : dicSet) {
+        for (Dictionary dic : dicSet) {
             if (!dic.isHeaderDefined()) {
                 return false;
             }

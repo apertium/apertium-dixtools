@@ -25,13 +25,13 @@ package misc.eoen;
 import dics.elements.dtd.ContentElement;
 import java.util.HashMap;
 
-import dics.elements.dtd.DictionaryElement;
-import dics.elements.dtd.EElement;
-import dics.elements.dtd.LElement;
-import dics.elements.dtd.PElement;
-import dics.elements.dtd.ParElement;
-import dics.elements.dtd.RElement;
-import dics.elements.dtd.SectionElement;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.L;
+import dics.elements.dtd.P;
+import dics.elements.dtd.Par;
+import dics.elements.dtd.R;
+import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
 import dics.elements.utils.DicOpts;
 import dictools.xml.DictionaryReader;
@@ -47,9 +47,9 @@ public class SubstractBidix {
 
       public static void main(final String[] args) {
         DicOpts opt  = DicOpts.STD_ALIGNED;
-        //DictionaryElement dic = new DictionaryReader("../apertium-eo-en/apertium-lille.eo-en.dix").readDic();
-        DictionaryElement dic = new DictionaryReader("../apertium-eo-en/apertium-eo-en.eo-en.dix").readDic();
-        //DictionaryElement dic = new DictionaryReader("../apertium-eo-en/slet.eo-en.dix").readDic();
+        //Dictionary dic = new DictionaryReader("../apertium-eo-en/apertium-lille.eo-en.dix").readDic();
+        Dictionary dic = new DictionaryReader("../apertium-eo-en/apertium-eo-en.eo-en.dix").readDic();
+        //Dictionary dic = new DictionaryReader("../apertium-eo-en/slet.eo-en.dix").readDic();
         dic.reportMetrics();
         dic.printXML("before-clean.dix", opt);
         
@@ -63,13 +63,13 @@ public class SubstractBidix {
         dic.printXML("after-clean.dix", opt);
       }
 
-  public static void reviseRestrictions(DictionaryElement dic, boolean verbose, boolean alsoLiftUnneededRestrictions) {
+  public static void reviseRestrictions(Dictionary dic, boolean verbose, boolean alsoLiftUnneededRestrictions) {
 
-    HashMap<String, EElement> hmLR=new HashMap<String, EElement>();
-    HashMap<String, EElement> hmRL=new HashMap<String, EElement>();
+    HashMap<String, E> hmLR=new HashMap<String, E>();
+    HashMap<String, E> hmRL=new HashMap<String, E>();
     //HashSet<String> restrics = new HashSet<String>();
-    for (SectionElement section : dic.getSections()) {
-      for (EElement ee : section.getEElements()) {
+    for (Section section : dic.getSections()) {
+      for (E ee : section.getEElements()) {
         //setYesIsAllowed(ee, "LR"); // XXXX
         //setYesIsAllowed(ee, "RL"); // XXXX
         if (!ee.isRegEx()) {
@@ -84,7 +84,7 @@ public class SubstractBidix {
         }
       }
 
-      for (EElement ee : hmLR.values()) {
+      for (E ee : hmLR.values()) {
         if (!isAllowed("LR", ee)) {
           if (verbose) {
             System.err.println("LR restic can be lifted "+ee);
@@ -95,7 +95,7 @@ public class SubstractBidix {
         }
       }
 
-      for (EElement ee : hmRL.values()) {
+      for (E ee : hmRL.values()) {
         if (!isAllowed("RL", ee)) {
           if (verbose) {
             System.err.println("RL restic can be lifted "+ee);
@@ -109,9 +109,9 @@ public class SubstractBidix {
 
 
       // Transfer reasons from temp to comment
-      Iterator<EElement> eei=section.getEElements().iterator();
+      Iterator<E> eei=section.getEElements().iterator();
       while (eei.hasNext()) {
-        EElement ee=eei.next();
+        E ee=eei.next();
         if (!ee.isRegEx()) {
           String reasonOfRestriction=ee.getTemp();
           ee.setTemp(null);
@@ -143,7 +143,7 @@ public class SubstractBidix {
     //dic.printXML(out);
   }
 
-  public static boolean isAllowed(String direction, EElement ee) {
+  public static boolean isAllowed(String direction, E ee) {
     if ("yes".equals(ee.getIgnore())) return false;
     String restric = ee.getRestriction();    
     if (restric==null) return true;
@@ -156,7 +156,7 @@ public class SubstractBidix {
     return direction.equals("RL")?"LR":"RL";
   }
   
-  public static void setYesIsAllowed(EElement ee, String direction) {
+  public static void setYesIsAllowed(E ee, String direction) {
     boolean i = "yes".equals(ee.getIgnore());
     String restric = ee.getRestriction();    
 
@@ -174,7 +174,7 @@ public class SubstractBidix {
   }
 
 
-  public static void setNoIsNotAllowed(EElement ee, String direction) {
+  public static void setNoIsNotAllowed(E ee, String direction) {
     boolean i = "yes".equals(ee.getIgnore());
     String restric = ee.getRestriction();    
 
@@ -194,11 +194,11 @@ public class SubstractBidix {
   
   
       
-  public static void checkEarlierAndRestrict(String direction, ContentElement l, HashMap<String, EElement> hmLR, EElement ee) {
+  public static void checkEarlierAndRestrict(String direction, ContentElement l, HashMap<String, E> hmLR, E ee) {
     //if (isAllowed(direction, ee)) return;
     
     String key=l.toString();
-    EElement existingEe=hmLR.get(key);
+    E existingEe=hmLR.get(key);
     if (existingEe==null) {
       hmLR.put(key, ee);
       return;

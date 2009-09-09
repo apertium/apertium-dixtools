@@ -20,18 +20,17 @@
 package dics.elements.dtd;
 
 /**
- * 
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class SaElement extends Element {
+public class J extends DixElement {
 
     /**
      * 
      * 
      */
-    public SaElement() {
-        setTagName("sa");
-        setValue("<sa/>");
+    public J() {
+        setTagName("j");
+        setValue("<j/>");
     }
 }

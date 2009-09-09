@@ -30,22 +30,22 @@ import java.io.Writer;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class PElement extends Element {
+public class P extends DixElement {
 
     /**
      * 
      */
-    private LElement l;
+    private L l;
     /**
      * 
      */
-    private RElement r;
+    private R r;
 
     /**
      * 
      * 
      */
-    public PElement() {
+    public P() {
         setTagName("p");
     }
 
@@ -53,12 +53,12 @@ public class PElement extends Element {
      * 
      * @param pE
      */
-    public PElement(PElement pE) {
+    public P(P pE) {
         setTagName("p");
-        // l = new LElement(pE.getL());
-        l = (LElement) pE.getL().clone();
-        // r = new RElement(pE.getR());
-        r = (RElement) pE.getR().clone();
+        // l = new L(pE.getL());
+        l = (L) pE.getL().clone();
+        // r = new R(pE.getR());
+        r = (R) pE.getR().clone();
     }
 
     /**
@@ -66,7 +66,7 @@ public class PElement extends Element {
      * @param l
      * @param r
      */
-    public PElement(LElement l, RElement r) {
+    public P(L l, R r) {
         setTagName("p");
         this.l = l;
         this.r = r;
@@ -76,7 +76,7 @@ public class PElement extends Element {
      * 
      * @param l
      */
-    public void setLElement(LElement l) {
+    public void setLElement(L l) {
         this.l = l;
     }
 
@@ -84,21 +84,21 @@ public class PElement extends Element {
      * 
      * @param r
      */
-    public void setRElement(RElement r) {
+    public void setRElement(R r) {
         this.r = r;
     }
 
     /**
      * 
      * @return Undefined         */
-    public LElement getL() {
+    public L getL() {
         return l;
     }
 
     /**
      * 
      * @return Undefined         */
-    public RElement getR() {
+    public R getR() {
         return r;
     }
 

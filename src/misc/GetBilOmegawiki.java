@@ -27,13 +27,13 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Properties;
 
-import dics.elements.dtd.DictionaryElement;
-import dics.elements.dtd.EElement;
-import dics.elements.dtd.LElement;
-import dics.elements.dtd.PElement;
-import dics.elements.dtd.RElement;
-import dics.elements.dtd.SElement;
-import dics.elements.dtd.SectionElement;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.L;
+import dics.elements.dtd.P;
+import dics.elements.dtd.R;
+import dics.elements.dtd.S;
+import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
 import dics.elements.utils.Msg;
 import dictools.AbstractDictTool;
@@ -137,8 +137,8 @@ public class GetBilOmegawiki  extends AbstractDictTool {
      * 
      */
     public void printDictionary() {
-        DictionaryElement dic = new DictionaryElement();
-        SectionElement section = new SectionElement();
+        Dictionary dic = new Dictionary();
+        Section section = new Section();
         dic.addSection(section);
 
         try {
@@ -229,7 +229,7 @@ public class GetBilOmegawiki  extends AbstractDictTool {
                     tlPoS = posTag;
                     sltext = sltext.replaceAll(" ", "<b/>");
                     tltext = tltext.replaceAll(" ", "<b/>");
-                    EElement e = buildEElement(sltext, tltext, slPoS, tlPoS);
+                    E e = buildEElement(sltext, tltext, slPoS, tlPoS);
                     section.addEElement(e);
                 }
             }
@@ -258,22 +258,22 @@ public class GetBilOmegawiki  extends AbstractDictTool {
      * @param tl
      * @return
      */
-    private EElement buildEElement(String sl, String tl,
+    private E buildEElement(String sl, String tl,
             String slPoS, String tlPoS) {
-        EElement e = new EElement();
-        LElement l = new LElement();
+        E e = new E();
+        L l = new L();
         TextElement lt = new TextElement(sl);
         l.addChild(lt);
-        SElement sL = new SElement(slPoS);
+        S sL = new S(slPoS);
         l.addChild(sL);
 
-        RElement r = new RElement();
+        R r = new R();
         TextElement rt = new TextElement(tl);
         r.addChild(rt);
-        SElement sR = new SElement(tlPoS);
+        S sR = new S(tlPoS);
         r.addChild(sR);
 
-        PElement p = new PElement();
+        P p = new P();
         p.setLElement(l);
         p.setRElement(r);
         e.addChild(p);

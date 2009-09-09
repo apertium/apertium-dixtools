@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import dics.elements.dtd.SElement;
+import dics.elements.dtd.S;
 import dics.elements.utils.DicOpts;
 import dics.elements.utils.ElementList;
 import dics.elements.utils.Msg;
@@ -182,7 +182,7 @@ public class ActionSet extends ArrayList<Action> {
      * @return Undefined         
      */
     private boolean containsTail(SElementList list) {
-        for (SElement s : list) {
+        for (S s : list) {
             if (s.getValue().equals("0")) {
                 return true;
             }

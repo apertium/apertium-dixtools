@@ -21,9 +21,9 @@
 package dictools;
 
 import dictools.xml.DictionaryReader;
-import dics.elements.dtd.DictionaryElement;
-import dics.elements.dtd.EElement;
-import dics.elements.dtd.SectionElement;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.Section;
 import java.util.HashMap;
 
 /**
@@ -35,11 +35,11 @@ public class DicFilter  extends AbstractDictTool{
     /**
      * 
      */
-    private DictionaryElement dicA;
+    private Dictionary dicA;
     /**
      * 
      */
-    private DictionaryElement dicB;
+    private Dictionary dicB;
     
     
     /**
@@ -60,22 +60,22 @@ public class DicFilter  extends AbstractDictTool{
         
         
         // recorremos en-es
-        HashMap<String,EElement> map = new HashMap<String,EElement>();
+        HashMap<String,E> map = new HashMap<String,E>();
         
-        for(SectionElement section : dicB.getSections()) {
-            for( EElement ee : section.getEElements()) {
+        for(Section section : dicB.getSections()) {
+            for( E ee : section.getEElements()) {
                 String key = ee.getLeft().getValueNoTags();
                 System.err.println(key);
                 map.put(key, ee);
             }            
         }
 
-        DictionaryElement dicFilt = new DictionaryElement();
-        SectionElement sectionFilt = new SectionElement();
+        Dictionary dicFilt = new Dictionary();
+        Section sectionFilt = new Section();
         dicFilt.addSection(sectionFilt);
         
-        for(SectionElement section : dicA.getSections()) {
-            for( EElement ee : section.getEElements()) {
+        for(Section section : dicA.getSections()) {
+            for( E ee : section.getEElements()) {
                 String key = ee.getRight().getValueNoTags();
                 if(map.containsKey(key)) {
                     sectionFilt.addEElement(ee);

@@ -21,7 +21,7 @@ package dictools;
 
 import dics.elements.utils.DicTools;
 import dictools.xml.DictionaryReader;
-import dics.elements.dtd.DictionaryElement;
+import dics.elements.dtd.Dictionary;
 
 /**
  * 
@@ -33,7 +33,7 @@ public class DicReverse  extends AbstractDictTool {
     /**
      * 
      */
-    private DictionaryElement dicOrig;
+    private Dictionary dicOrig;
 
     /**
      * 
@@ -47,7 +47,7 @@ public class DicReverse  extends AbstractDictTool {
      * 
      * @param dic
      */
-    public DicReverse(DictionaryElement dic) {
+    public DicReverse(Dictionary dic) {
         dicOrig = dic;
 
     }
@@ -55,7 +55,7 @@ public class DicReverse  extends AbstractDictTool {
     /**
      * 
      * @return Undefined         */
-    public DictionaryElement reverse() {
+    public Dictionary reverse() {
         getDicOrig().reverse();
         // Collections.sort(getDicOrig().getEntries());
         return getDicOrig();
@@ -64,7 +64,7 @@ public class DicReverse  extends AbstractDictTool {
     /**
      * 
      * @return Undefined         */
-    private DictionaryElement getDicOrig() {
+    private Dictionary getDicOrig() {
         return dicOrig;
     }
 
@@ -74,7 +74,7 @@ public class DicReverse  extends AbstractDictTool {
      */
     private void processArguments() {
         DictionaryReader dicReader = new DictionaryReader(arguments[1]);
-        DictionaryElement bil = dicReader.readDic();
+        Dictionary bil = dicReader.readDic();
         dicReader = null;
         setDicOrig(bil);
     }
@@ -93,7 +93,7 @@ public class DicReverse  extends AbstractDictTool {
      * 
      */
     public void actionReverse() {
-        DictionaryElement bil = reverse();
+        Dictionary bil = reverse();
         String reverseFileName = "reversed-dic.dix";
         if (getArguments().length == 3) {
             if (getArguments()[2].equals("out.dix")) {
@@ -110,7 +110,7 @@ public class DicReverse  extends AbstractDictTool {
      * @param dicOrig
      *                the dicOrig to set
      */
-    private void setDicOrig(DictionaryElement dicOrig) {
+    private void setDicOrig(Dictionary dicOrig) {
         this.dicOrig = dicOrig;
     }
 }

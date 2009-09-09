@@ -22,17 +22,17 @@ package misc.eues;
 import java.util.HashMap;
 
 import dics.elements.dtd.ContentElement;
-import dics.elements.dtd.DictionaryElement;
-import dics.elements.dtd.EElement;
-import dics.elements.dtd.Element;
-import dics.elements.dtd.ParElement;
-import dics.elements.dtd.PardefElement;
-import dics.elements.dtd.PardefsElement;
-import dics.elements.dtd.RElement;
-import dics.elements.dtd.SElement;
-import dics.elements.dtd.SdefElement;
-import dics.elements.dtd.SdefsElement;
-import dics.elements.dtd.SectionElement;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.DixElement;
+import dics.elements.dtd.Par;
+import dics.elements.dtd.Pardef;
+import dics.elements.dtd.Pardefs;
+import dics.elements.dtd.R;
+import dics.elements.dtd.S;
+import dics.elements.dtd.Sdef;
+import dics.elements.dtd.Sdefs;
+import dics.elements.dtd.Section;
 import dictools.xml.DictionaryReader;
 
 /**
@@ -78,26 +78,26 @@ public class AddGender {
 
         DictionaryReader reader = new DictionaryReader(morphDic);
         System.err.println("Reading morphological '" + morphDic + "'");
-        DictionaryElement dic = reader.readDic();
+        Dictionary dic = reader.readDic();
         // dic.printXML("morf-es.dix");
 
-        HashMap<String, SElement> ng = new HashMap<String, SElement>();
+        HashMap<String, S> ng = new HashMap<String, S>();
 
-        PardefsElement pars = dic.getPardefsElement();
+        Pardefs pars = dic.getPardefsElement();
 
-        for (SectionElement section : dic.getSections()) {
-            for (EElement ee : section.getEElements()) {
+        for (Section section : dic.getSections()) {
+            for (E ee : section.getEElements()) {
                 String lemma = ee.getLemma();
                 if (lemma != null) {
                     String parName = ee.getMainParadigmName();
                     if ((parName != null) && parName.endsWith("__n")) {
-                        PardefElement par = pars.getParadigmDefinition(parName);
+                        Pardef par = pars.getParadigmDefinition(parName);
                         if (par != null) {
-                            for (EElement eepar : par.getEElements()) {
-                                RElement r = eepar.getP().getR();
-                                for (Element er : r.getChildren()) {
-                                    if (er instanceof SElement) {
-                                        SElement s = (SElement) er;
+                            for (E eepar : par.getEElements()) {
+                                R r = eepar.getP().getR();
+                                for (DixElement er : r.getChildren()) {
+                                    if (er instanceof S) {
+                                        S s = (S) er;
                                         String sv = er.getValue();
                                         if (sv.equals("m") || sv.equals("f") || sv.equals("mf")) {
                                             ng.put(lemma, s);
@@ -116,13 +116,13 @@ public class AddGender {
         System.err.println(ng.size() + " nouns read.");
 
         DictionaryReader reader2 = new DictionaryReader(bilDic);
-        DictionaryElement bil = reader2.readDic();
+        Dictionary bil = reader2.readDic();
 
-        SdefsElement sdefs = bil.getSdefs();
-        SdefElement n = new SdefElement("n");
-        SdefElement m = new SdefElement("m");
-        SdefElement f = new SdefElement("f");
-        SdefElement mf = new SdefElement("mf");
+        Sdefs sdefs = bil.getSdefs();
+        Sdef n = new Sdef("n");
+        Sdef m = new Sdef("m");
+        Sdef f = new Sdef("f");
+        Sdef mf = new Sdef("mf");
         sdefs.addSdefElement(n);
         sdefs.addSdefElement(m);
         sdefs.addSdefElement(f);
@@ -130,8 +130,8 @@ public class AddGender {
 
         int genderFound = 0;
         int genderNotFound = 0;
-        for (SectionElement section : bil.getSections()) {
-            for (EElement ee : section.getEElements()) {
+        for (Section section : bil.getSections()) {
+            for (E ee : section.getEElements()) {
                 if (!ee.isRegEx()) {
                     String parName = ee.getMainParadigmName();
                     if (parName != null) {
@@ -140,20 +140,20 @@ public class AddGender {
                             ContentElement rightSide = ee.getSide("R");
                             String text = leftSide.getValue();
 
-                            SElement gender = ng.get(text);
+                            S gender = ng.get(text);
                             if (gender != null) {
                                 // System.err.println(text + " (" +
                                 // gender.getValue() + ")");
                                 genderFound++;
-                                SElement noun = new SElement("n");
+                                S noun = new S("n");
                                 leftSide.addChild(noun);
                                 rightSide.addChild(noun);
                                 leftSide.addChild(gender);
                                 // and remove par element if NC
-                                ParElement par = null;
-                                for (Element e : ee.getChildren()) {
-                                    if (e instanceof ParElement) {
-                                        par = (ParElement) e;
+                                Par par = null;
+                                for (DixElement e : ee.getChildren()) {
+                                    if (e instanceof Par) {
+                                        par = (Par) e;
                                     }
                                 }
 

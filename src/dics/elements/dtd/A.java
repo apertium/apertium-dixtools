@@ -23,23 +23,15 @@ package dics.elements.dtd;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class PrmElement extends Element {
+public class A extends DixElement {
 
     /**
      * 
+     * 
      */
-    public PrmElement() {
-        setTagName("prm");
-        setValue("<prm/>");
-        setValueNoTags("");
-    }
-
-    /**
-     * Used for tags like prn0, prn1, prn2,... prn 9
-     */
-    public PrmElement(String number) {
-        setTagName("prm"+number);
-        setValue("<prm"+number+"/>");
+    public A() {
+        setTagName("a");
+        setValue("<a/>");
         setValueNoTags("");
     }
 }

@@ -22,9 +22,9 @@ package dictools.crossmodel;
 import dics.elements.dtd.ContentElement;
 import java.io.IOException;
 
-import dics.elements.dtd.EElement;
-import dics.elements.dtd.Element;
-import dics.elements.dtd.SElement;
+import dics.elements.dtd.E;
+import dics.elements.dtd.DixElement;
+import dics.elements.dtd.S;
 import dics.elements.dtd.TextElement;
 import dics.elements.utils.DicOpts;
 import dics.elements.utils.Msg;
@@ -42,7 +42,7 @@ public class Action {
     /**
      * 
      */
-    private EElement e;
+    private E e;
     /**
      * 
      */
@@ -68,7 +68,7 @@ public class Action {
      * 
      * @param e
      */
-    public Action(EElement e) {
+    public Action(E e) {
         this.e = e;
     }
 
@@ -76,7 +76,7 @@ public class Action {
      * 
      * @param action
      */
-    public void setAction(EElement action) {
+    public void setAction(E action) {
         e = action;
     }
 
@@ -109,7 +109,7 @@ public class Action {
     /**
      * 
      * @return Undefined         */
-    public EElement getE() {
+    public E getE() {
         return e;
     }
 
@@ -117,7 +117,7 @@ public class Action {
      * 
      * @param e
      */
-    public void setE(EElement e) {
+    public void setE(E e) {
         this.e = e;
     }
 
@@ -202,15 +202,15 @@ public class Action {
      * @param definedVars
      */
     private void getDefinedVarsElement(ContentElement ce, HashMap<String, String> definedVars) {
-        for (Element e : ce.getChildren()) {
+        for (DixElement e : ce.getChildren()) {
             if (e instanceof TextElement) {
                 String v = ((TextElement) e).getValue();
                 if (v.startsWith("$") || v.startsWith("@")) {
                     definedVars.put(v, v);
                 }
             }
-            if (e instanceof SElement) {
-                String v = ((SElement) e).getValue();
+            if (e instanceof S) {
+                String v = ((S) e).getValue();
                 if (v.startsWith("$") || v.startsWith("@")) {
                     definedVars.put(v, v);
                 }

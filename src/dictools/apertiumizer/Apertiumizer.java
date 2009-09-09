@@ -19,14 +19,14 @@
  */
 package dictools.apertiumizer;
 
-import dics.elements.dtd.DictionaryElement;
-import dics.elements.dtd.EElement;
-import dics.elements.dtd.Element;
-import dics.elements.dtd.LElement;
-import dics.elements.dtd.PElement;
-import dics.elements.dtd.RElement;
-import dics.elements.dtd.SElement;
-import dics.elements.dtd.SectionElement;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.DixElement;
+import dics.elements.dtd.L;
+import dics.elements.dtd.P;
+import dics.elements.dtd.R;
+import dics.elements.dtd.S;
+import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
 import dics.elements.utils.EElementList;
 import dics.elements.utils.SElementList;
@@ -76,10 +76,10 @@ public class Apertiumizer extends AbstractDictTool {
     public void apertiumize() {
         /*
         DictionaryReader encaReader = new DictionaryReader("apertium-en-ca.en-ca.dix");
-        DictionaryElement enca = encaReader.readDic();
+        Dictionary enca = encaReader.readDic();
         en = new HashMap<String, String>();
-        for (EElement e : enca.getAllEntries()) {
-        LElement l = e.getLeft();
+        for (E e : enca.getAllEntries()) {
+        L l = e.getLeft();
         String lv = l.getValueNoTags();
         en.put(lv, lv);
         }
@@ -99,9 +99,9 @@ public class Apertiumizer extends AbstractDictTool {
             BufferedReader br = new BufferedReader(new InputStreamReader(in, "UTF-8"));
             String strLine;
 
-            DictionaryElement dic = new DictionaryElement();
+            Dictionary dic = new Dictionary();
             dic.setXmlEncoding("UTF-8");
-            SectionElement section = new SectionElement("main", "standard");
+            Section section = new Section("main", "standard");
             dic.addSection(section);
 
             int priority = 1;
@@ -111,7 +111,7 @@ public class Apertiumizer extends AbstractDictTool {
                 if (!strLine.startsWith("#")) {
                     switch (format) {
                         case 0:
-                            EElement e = readElementFormat_0(strLine);
+                            E e = readElementFormat_0(strLine);
                             //e.setComment("priority: " + priority);
                             //System.out.println("Adding: "  + e.getLeft().getValueNoTags());
                             if (e != null) {
@@ -122,14 +122,14 @@ public class Apertiumizer extends AbstractDictTool {
                             System.out.println("<e lm=\"" + lm + "\" c=\"" + comments + "\"><i>" + lm + "</i><par n=\"ADN__n\"/></e>");
                             break;
                         case 3:
-                            EElement e3 = readElementFormat_3(strLine);
+                            E e3 = readElementFormat_3(strLine);
                             if (e3 != null) {
                                 section.addEElement(e3);
                             }
                             break;
                         case 2:
                             EElementList eList = readElementFormat_2(strLine);
-                            for (EElement e1 : eList) {
+                            for (E e1 : eList) {
                                 section.addEElement(e1);
                             }
                             break;
@@ -144,7 +144,7 @@ public class Apertiumizer extends AbstractDictTool {
 
             dic.printXML(this.getOutFileName(), "UTF-8",getOpt());
         DictionaryReader reader = new DictionaryReader("dic.tmp");
-        DictionaryElement bil = reader.readDic();
+        Dictionary bil = reader.readDic();
         this.completeDic(bil);
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
@@ -173,15 +173,15 @@ public class Apertiumizer extends AbstractDictTool {
     }
      return newStr.toString();   
     }
-    private void completeDic(DictionaryElement bil) {
+    private void completeDic(Dictionary bil) {
 
-        for (EElement ee : bil.getAllEntries()) {
+        for (E ee : bil.getAllEntries()) {
             //System.out.println("completing... " + ee.getLeft().getValueNoTags());
-            LElement l = ee.getLeft();
-            RElement r = ee.getRight();
+            L l = ee.getLeft();
+            R r = ee.getRight();
             String cat = "";
             int icat = 0;
-            for (Element e : l.getChildren()) {
+            for (DixElement e : l.getChildren()) {
                 if (e instanceof TextElement) {
                     TextElement tE = (TextElement) e;
                     String v = tE.getValue();
@@ -190,8 +190,8 @@ public class Apertiumizer extends AbstractDictTool {
                     v = v.replaceAll("\\&", "\\&amp;");
                     tE.setValue(v);
                 }
-                if (e instanceof SElement) {
-                    SElement sE = (SElement) e;
+                if (e instanceof S) {
+                    S sE = (S) e;
                     String v = sE.getValue();
 
                     if (icat == 0) {
@@ -201,7 +201,7 @@ public class Apertiumizer extends AbstractDictTool {
                 }
             }
             boolean isVerb = false;
-            for (Element e : r.getChildren()) {
+            for (DixElement e : r.getChildren()) {
                 if (e instanceof TextElement) {
                     TextElement tE = (TextElement) e;
                     String v = tE.getValue();
@@ -212,7 +212,7 @@ public class Apertiumizer extends AbstractDictTool {
                     if(v.startsWith("to<b/>")) {
                         System.out.println("Verb: " + v);
                         if(!ee.getLeft().contains("vblex")) {
-                        ee.getLeft().addChild(new SElement("vblex"));
+                        ee.getLeft().addChild(new S("vblex"));
                         }
                         isVerb = true;
                         v = v.replaceAll("to<b/>", "");
@@ -225,24 +225,24 @@ public class Apertiumizer extends AbstractDictTool {
                     //tE.setValue(v);
                 }
             }
-            SElement sE = new SElement(cat);
+            S sE = new S(cat);
             if (!sE.getValue().equals("")) {
             r.getChildren().add(sE);
             }
             if(isVerb) {
                 if(!ee.getRight().contains("vblex")) {
-                ee.getRight().addChild(new SElement("vblex"));
+                ee.getRight().addChild(new S("vblex"));
                 }
             }
 
         }
 
         
-        DictionaryElement bilFil = new DictionaryElement();
-        SectionElement sectionFil = new SectionElement();
+        Dictionary bilFil = new Dictionary();
+        Section sectionFil = new Section();
         bilFil.addSection(sectionFil);
-                for (SectionElement sec : bil.getSections()) {
-            for (EElement ee : sec.getEElements()) {
+                for (Section sec : bil.getSections()) {
+            for (E ee : sec.getEElements()) {
                 ///if( ee.contains("f") || ee.contains("pl")) {
                     
                 //} else {
@@ -254,18 +254,18 @@ public class Apertiumizer extends AbstractDictTool {
 
         
         DicSort dicSort = new DicSort(bilFil);
-        DictionaryElement sorted = dicSort.sort();
+        Dictionary sorted = dicSort.sort();
 
         String prevCat = "";
-        SectionElement sectionElement = null;
-        SectionElement noneSection = new SectionElement("none", "standard");
-        for (SectionElement sec : sorted.getSections()) {
-            for (EElement ee : sec.getEElements()) {
+        Section sectionElement = null;
+        Section noneSection = new Section("none", "standard");
+        for (Section sec : sorted.getSections()) {
+            for (E ee : sec.getEElements()) {
 
                 SElementList slist = ee.getLeft().getSElements();
 
                 if (slist.size() > 0) {
-                    SElement sE = slist.get(0);
+                    S sE = slist.get(0);
                     String currentCat = sE.getValue();
                     if (currentCat.equals(prevCat)) {
                         sectionElement.addEElement(ee);
@@ -274,7 +274,7 @@ public class Apertiumizer extends AbstractDictTool {
                             sectionElement.printXMLXInclude(prevCat, "UTF-8",getOpt());
                         }
                         prevCat = currentCat;
-                        sectionElement = new SectionElement();
+                        sectionElement = new Section();
                         sectionElement.setID(currentCat);
                         sectionElement.setType("standard");
                     }
@@ -298,13 +298,13 @@ public class Apertiumizer extends AbstractDictTool {
      * @param strLine
      * @return The element
      */
-    private EElement readElementFormat_0(String strLine) {
+    private E readElementFormat_0(String strLine) {
         StringTokenizer tokenizer = new StringTokenizer(strLine, ":");
         boolean lastToken = false;
         int i = 0;
-        EElement e = new EElement();
-        LElement left = new LElement();
-        RElement right = new RElement();
+        E e = new E();
+        L left = new L();
+        R right = new R();
 
         String lV = "";
         while (i < 2 && !lastToken && tokenizer.hasMoreTokens()) {
@@ -326,7 +326,7 @@ public class Apertiumizer extends AbstractDictTool {
                     token = token.replaceAll("\"", "'");
                     e.setComment(token);
                     //System.out.println(token);
-                    PElement pE = new PElement();
+                    P pE = new P();
                     pE.setLElement(left);
                     pE.setRElement(right);
                     e.addChild(pE);
@@ -334,7 +334,7 @@ public class Apertiumizer extends AbstractDictTool {
                 case 2:
                     lastToken = true;
                 /*
-                SElement sE = new SElement(token);
+                S sE = new S(token);
                 left.addChild(sE);
                 right.addChild(sE);
                  */
@@ -345,14 +345,14 @@ public class Apertiumizer extends AbstractDictTool {
         return null;
     }
 
-    private EElement readElementFormat_3(String strLine) {
+    private E readElementFormat_3(String strLine) {
         StringTokenizer tokenizer = new StringTokenizer(strLine, "\t");
 
         boolean lastToken = false;
         int i = 0;
-        EElement e = new EElement();
-        LElement left = new LElement();
-        RElement right = new RElement();
+        E e = new E();
+        L left = new L();
+        R right = new R();
 
         while (i < 3 && !lastToken && tokenizer.hasMoreTokens()) {
             String token = tokenizer.nextToken();
@@ -364,7 +364,7 @@ public class Apertiumizer extends AbstractDictTool {
                     lastToken = true;
                     if (!token.equals("")) {
                         right.addChild(new TextElement(token));
-                        PElement pE = new PElement();
+                        P pE = new P();
                         pE.setLElement(left);
                         pE.setRElement(right);
                         e.addChild(pE);
@@ -384,13 +384,13 @@ public class Apertiumizer extends AbstractDictTool {
      * @param strLine
      * @return The element
      */
-    private EElement readElementFormat_1(String strLine) {
+    private E readElementFormat_1(String strLine) {
         StringTokenizer tokenizer = new StringTokenizer(strLine, "\t");
         boolean lastToken = false;
         int i = 0;
-        EElement e = new EElement();
-        LElement left = new LElement();
-        RElement right = new RElement();
+        E e = new E();
+        L left = new L();
+        R right = new R();
 
         while (i < 3 && !lastToken && tokenizer.hasMoreTokens()) {
             String token = tokenizer.nextToken();
@@ -405,10 +405,10 @@ public class Apertiumizer extends AbstractDictTool {
                     if (token.endsWith(":")) {
                         lastToken = true;
                         String newString = token.substring(0, token.length() - 1);
-                        SElement sE = new SElement(newString);
+                        S sE = new S(newString);
                         left.addChild(sE);
                         right.addChild(sE);
-                        PElement pE = new PElement();
+                        P pE = new P();
                         pE.setLElement(left);
                         pE.setRElement(right);
                         e.addChild(pE);
@@ -593,12 +593,12 @@ public class Apertiumizer extends AbstractDictTool {
                 }
                 if (!itemLeft.contains("{pl}") && !itemLeft.startsWith("+")) {
                     if (itemLeft != null && itemRight != null) {
-                        EElement e = new EElement();
-                        LElement left = new LElement();
+                        E e = new E();
+                        L left = new L();
                         left.addChild(new TextElement(replacePoS(new String(itemLeft))));
-                        RElement right = new RElement();
+                        R right = new R();
                         right.addChild(new TextElement(replacePoS(new String(itemRight))));
-                        PElement pE = new PElement();
+                        P pE = new P();
                         pE.setLElement(left);
                         pE.setRElement(right);
                         e.addChild(pE);

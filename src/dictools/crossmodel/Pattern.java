@@ -22,9 +22,9 @@ package dictools.crossmodel;
 import dics.elements.dtd.ContentElement;
 import java.io.IOException;
 
-import dics.elements.dtd.EElement;
-import dics.elements.dtd.Element;
-import dics.elements.dtd.SElement;
+import dics.elements.dtd.E;
+import dics.elements.dtd.DixElement;
+import dics.elements.dtd.S;
 import dics.elements.dtd.TextElement;
 import dics.elements.utils.DicOpts;
 import dics.elements.utils.ElementList;
@@ -43,11 +43,11 @@ public class Pattern {
     /**
      * 
      */
-    private EElement e1;
+    private E e1;
     /**
      * 
      */
-    private EElement e2;
+    private E e2;
     /**
      * 
      */
@@ -67,7 +67,7 @@ public class Pattern {
      * @param ab
      * @param bc
      */
-    public Pattern(EElement ab, EElement bc) {
+    public Pattern(E ab, E bc) {
         e1 = ab;
         e2 = bc;
     }
@@ -75,14 +75,14 @@ public class Pattern {
     /**
      * 
      * @return Undefined         */
-    public EElement getAB() {
+    public E getAB() {
         return e1;
     }
 
     /**
      * 
      * @return Undefined         */
-    public EElement getBC() {
+    public E getBC() {
         return e2;
     }
 
@@ -90,7 +90,7 @@ public class Pattern {
      * 
      * @param ab
      */
-    public void setAB(EElement ab) {
+    public void setAB(E ab) {
         e1 = ab;
     }
 
@@ -98,7 +98,7 @@ public class Pattern {
      * 
      * @param bc
      */
-    public void setBC(EElement bc) {
+    public void setBC(E bc) {
         e2 = bc;
     }
 
@@ -165,7 +165,7 @@ public class Pattern {
         eList = this.getSequenceCE(this.getBC().getLeft(), eList);
         eList = this.getSequenceCE(this.getBC().getRight(), eList);
 
-        eList.add(new SElement("^end"));
+        eList.add(new S("^end"));
         return eList;
     }
 
@@ -174,15 +174,15 @@ public class Pattern {
      * @param ee
      * @param eList
      */
-    private ElementList getSequenceR(EElement ee, ElementList eList) {
+    private ElementList getSequenceR(E ee, ElementList eList) {
         if (ee != null) {
             if (ee.hasRestriction()) {
                 String r = ee.getRestriction();
                 if (!r.equals("")) {
-                    eList.add(new SElement("^" + r));
+                    eList.add(new S("^" + r));
                 }
             } else {
-                eList.add(new SElement("^LRRL"));
+                eList.add(new S("^LRRL"));
             }
         }
         return eList;
@@ -198,7 +198,7 @@ public class Pattern {
             ElementList ceSeq = ce.getSequence();
             eList = eList.concat(ceSeq);
         }
-        eList.add(new SElement("^b"));
+        eList.add(new S("^b"));
         return eList;
     }
 
@@ -277,15 +277,15 @@ public class Pattern {
      * @param definedVars
      */
     private void getDefinedVarsElement(ContentElement ce, HashMap<String, String> definedVars) {
-        for (Element e : ce.getChildren()) {
+        for (DixElement e : ce.getChildren()) {
             if (e instanceof TextElement) {
                 String v = ((TextElement) e).getValue();
                 if (v.startsWith("$") || v.startsWith("@")) {
                     definedVars.put(v, v);
                 }
             }
-            if (e instanceof SElement) {
-                String v = ((SElement) e).getValue();
+            if (e instanceof S) {
+                String v = ((S) e).getValue();
                 if (v.startsWith("$") || v.startsWith("@")) {
                     definedVars.put(v, v);
                 }

@@ -23,8 +23,8 @@ import dics.elements.utils.DicTools;
 import java.util.Iterator;
 import java.util.Set;
 
-import dics.elements.dtd.DictionaryElement;
-import dics.elements.dtd.EElement;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
 import dics.elements.utils.DicOpts;
 import dics.elements.utils.DicSet;
 import dics.elements.utils.EElementList;
@@ -42,19 +42,19 @@ public class DicConsistent extends AbstractDictTool {
     /**
      * 
      */
-    private DictionaryElement mon1;
+    private Dictionary mon1;
     /**
      * 
      */
-    private DictionaryElement mon2;
+    private Dictionary mon2;
     /**
      * 
      */
-    private DictionaryElement bil1;
+    private Dictionary bil1;
     /**
      * 
      */
-    private DictionaryElement bil2;
+    private Dictionary bil2;
     /**
      * 
      */
@@ -144,8 +144,8 @@ public class DicConsistent extends AbstractDictTool {
      * 
      * @param dic
      */
-    private void buildNotCommonDictionary(DictionaryElement dic, DicOpts opt) {
-        DictionaryElement dicNotCommon = new DictionaryElement(dic);
+    private void buildNotCommonDictionary(Dictionary dic, DicOpts opt) {
+        Dictionary dicNotCommon = new Dictionary(dic);
         String fnDic = dic.getFileName();
 
         File file = new File(fnDic);
@@ -200,13 +200,13 @@ public class DicConsistent extends AbstractDictTool {
             EElementMap mon) {
         String k = DicTools.clearTags(str);
         EElementList list = common.get(k);
-        for (EElement e : list) {
+        for (E e : list) {
             e.setShared(true);
             String trad = e.getValue("R");
             String key = DicTools.clearTags(trad);
             EElementList monAList = mon.get(key);
             if (monAList != null) {
-                for (EElement eMon : monAList) {
+                for (E eMon : monAList) {
                     eMon.setShared(true);
                 }
             }
@@ -254,7 +254,7 @@ public class DicConsistent extends AbstractDictTool {
     /**
      * @return Undefined Undefined the bil1
      */
-    public DictionaryElement getBil1() {
+    public Dictionary getBil1() {
         return bil1;
     }
 
@@ -262,14 +262,14 @@ public class DicConsistent extends AbstractDictTool {
      * @param bil1
      *                the bil1 to set
      */
-    public void setBil1(DictionaryElement bil1) {
+    public void setBil1(Dictionary bil1) {
         this.bil1 = bil1;
     }
 
     /**
      * @return Undefined Undefined the bil2
      */
-    public DictionaryElement getBil2() {
+    public Dictionary getBil2() {
         return bil2;
     }
 
@@ -277,14 +277,14 @@ public class DicConsistent extends AbstractDictTool {
      * @param bil2
      *                the bil2 to set
      */
-    public void setBil2(DictionaryElement bil2) {
+    public void setBil2(Dictionary bil2) {
         this.bil2 = bil2;
     }
 
     /**
      * @return the mon1
      */
-    public DictionaryElement getMon1() {
+    public Dictionary getMon1() {
         return mon1;
     }
 
@@ -292,14 +292,14 @@ public class DicConsistent extends AbstractDictTool {
      * @param mon1
      *                the mon1 to set
      */
-    private void setMon1(DictionaryElement mon1) {
+    private void setMon1(Dictionary mon1) {
         this.mon1 = mon1;
     }
 
     /**
      * @return the mon2
      */
-    public DictionaryElement getMon2() {
+    public Dictionary getMon2() {
         return mon2;
     }
 
@@ -307,7 +307,7 @@ public class DicConsistent extends AbstractDictTool {
      * @param mon2
      *                the mon2 to set
      */
-    private void setMon2(DictionaryElement mon2) {
+    private void setMon2(Dictionary mon2) {
         this.mon2 = mon2;
     }
 
@@ -415,10 +415,10 @@ public class DicConsistent extends AbstractDictTool {
 
         }
 
-        DictionaryElement bil1 = DicTools.readBilingual(sDicBilAB, bilABReverse);
-        DictionaryElement bil2 = DicTools.readBilingual(sDicBilBC, bilBCReverse);
-        DictionaryElement mon1 = DicTools.readMonolingual(sDicMonA);
-        DictionaryElement mon2 = DicTools.readMonolingual(sDicMonC);
+        Dictionary bil1 = DicTools.readBilingual(sDicBilAB, bilABReverse);
+        Dictionary bil2 = DicTools.readBilingual(sDicBilBC, bilBCReverse);
+        Dictionary mon1 = DicTools.readMonolingual(sDicMonA);
+        Dictionary mon2 = DicTools.readMonolingual(sDicMonC);
 
         DicSet dicSet = new DicSet(mon1, bil1, mon2, bil2);
         setDicSet(dicSet);

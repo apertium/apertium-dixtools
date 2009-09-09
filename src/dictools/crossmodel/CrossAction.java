@@ -23,15 +23,15 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import dics.elements.dtd.ContentElement;
-import dics.elements.dtd.EElement;
-import dics.elements.dtd.Element;
-import dics.elements.dtd.LElement;
-import dics.elements.dtd.PElement;
-import dics.elements.dtd.RElement;
-import dics.elements.dtd.SElement;
-import dics.elements.dtd.TElement;
+import dics.elements.dtd.E;
+import dics.elements.dtd.DixElement;
+import dics.elements.dtd.L;
+import dics.elements.dtd.P;
+import dics.elements.dtd.R;
+import dics.elements.dtd.S;
+import dics.elements.dtd.T;
 import dics.elements.dtd.TextElement;
-import dics.elements.dtd.VElement;
+import dics.elements.dtd.V;
 import dics.elements.utils.DicOpts;
 import dics.elements.utils.Msg;
 import dictools.cmproc.Variables;
@@ -229,17 +229,17 @@ public class CrossAction implements Comparable<CrossAction> {
         // Rename patterns
         ContentElement rLeftAB = this.renameContentElement(leftAB, valueMap);
         ContentElement rRightAB = this.renameContentElement(rightAB, valueMap);
-        EElement rAB = new EElement();
+        E rAB = new E();
         rAB.setRestriction(this.getPattern().getAB().getRestriction());
 
-        rAB.addChild(new PElement(new LElement(rLeftAB), new RElement(rRightAB)));
+        rAB.addChild(new P(new L(rLeftAB), new R(rRightAB)));
 
         ContentElement rLeftBC = this.renameContentElement(leftBC, valueMap);
         ContentElement rRightBC = this.renameContentElement(rightBC, valueMap);
-        EElement rBC = new EElement();
+        E rBC = new E();
         rBC.setRestriction(this.getPattern().getBC().getRestriction());
 
-        rBC.addChild(new PElement(new LElement(rLeftBC), new RElement(rRightBC)));
+        rBC.addChild(new P(new L(rLeftBC), new R(rRightBC)));
 
         rPattern.setAB(rAB);
         rPattern.setBC(rBC);
@@ -250,7 +250,7 @@ public class CrossAction implements Comparable<CrossAction> {
             ContentElement rightA = a.getE().getRight();
             ContentElement rLeftA = this.renameContentElement(leftA, valueMap);
             ContentElement rRightA = this.renameContentElement(rightA, valueMap);
-            EElement rA = new EElement();
+            E rA = new E();
             if (a.getE().isRestrictionAuto()) {
                 rA.setRestriction("auto");
             } else {
@@ -258,7 +258,7 @@ public class CrossAction implements Comparable<CrossAction> {
                     rA.setRestriction(a.getE().getRestriction());
                 }
             }
-            rA.addChild(new PElement(new LElement(rLeftA), new RElement(rRightA)));
+            rA.addChild(new P(new L(rLeftA), new R(rRightA)));
             rActionSet.add(new Action(rA));
         }
         return rCrossAction;
@@ -278,7 +278,7 @@ public class CrossAction implements Comparable<CrossAction> {
           Logger.getLogger(CrossAction.class.getName()).log(Level.SEVERE, null, ex);
           throw new IllegalStateException(ex);
         }
-        for (Element e : source.getChildren()) {
+        for (DixElement e : source.getChildren()) {
 
             // text element
             if (e instanceof TextElement) {
@@ -300,9 +300,9 @@ public class CrossAction implements Comparable<CrossAction> {
             }
 
             // 'v' element
-            if (e instanceof VElement) {
-                SElement rSE = new SElement();
-                String v = ((VElement) e).getValue();
+            if (e instanceof V) {
+                S rSE = new S();
+                String v = ((V) e).getValue();
                 if (v == null) {
                     rSE.setValue("?");
                 } else {
@@ -319,9 +319,9 @@ public class CrossAction implements Comparable<CrossAction> {
             }
 
             // 't' element
-            if (e instanceof TElement) {
-                SElement rSE = new SElement();
-                String v = ((TElement) e).getValue();
+            if (e instanceof T) {
+                S rSE = new S();
+                String v = ((T) e).getValue();
                 if (v == null) {
                     rSE.setValue("*");
                 } else {
@@ -338,9 +338,9 @@ public class CrossAction implements Comparable<CrossAction> {
             }
 
             // 's' element
-            if (e instanceof SElement) {
-                SElement rSE = new SElement();
-                String v = ((SElement) e).getValue();
+            if (e instanceof S) {
+                S rSE = new S();
+                String v = ((S) e).getValue();
                 if (valueMap.containsKey(v)) {
                     rSE.setValue(valueMap.get(v));
                 } else {

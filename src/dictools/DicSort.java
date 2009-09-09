@@ -26,10 +26,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
-import dics.elements.dtd.DictionaryElement;
-import dics.elements.dtd.EElement;
-import dics.elements.dtd.EElement.EElementComparator;
-import dics.elements.dtd.SectionElement;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.E.EElementComparator;
+import dics.elements.dtd.Section;
 import dics.elements.utils.EElementList;
 import dics.elements.utils.Msg;
 import dics.elements.utils.SElementList;
@@ -47,7 +47,7 @@ public class DicSort  extends AbstractDictTool {
     /**
      * 
      */
-    private DictionaryElement dic;
+    private Dictionary dic;
     /**
      * 
      */
@@ -68,7 +68,7 @@ public class DicSort  extends AbstractDictTool {
      * 
      * @param dic
      */
-    public DicSort(DictionaryElement dic) {
+    public DicSort(Dictionary dic) {
         this.dic = dic;
         msg.setLogFileName("sort.log");
     }
@@ -77,8 +77,8 @@ public class DicSort  extends AbstractDictTool {
      * 
      * @return Undefined        
      */
-    public DictionaryElement sort() {
-        DictionaryElement dicSorted = null;
+    public Dictionary sort() {
+        Dictionary dicSorted = null;
         dicSorted = sortDictionaryAccordingToCategories();
         return dicSorted;
     }
@@ -88,7 +88,7 @@ public class DicSort  extends AbstractDictTool {
      * 
      */
     public void actionSort() {
-        DictionaryElement dicSorted = sort();
+        Dictionary dicSorted = sort();
         dicSorted.printXML(out,getOpt());
     }
     
@@ -109,7 +109,7 @@ public class DicSort  extends AbstractDictTool {
         for (String e:arr) groupsOfCategoriesToBeSortedTogether.put(e.trim(), commaseparatedList);
     }
 
-    private String findCategory(EElement e) {
+    private String findCategory(E e) {
         String par=e.getMainParadigmName();
         String cat=null;
         if (par==null) {
@@ -164,7 +164,7 @@ public class DicSort  extends AbstractDictTool {
         }
 
         DictionaryReader dicReader = new DictionaryReader(arguments[i]);
-        DictionaryElement dic = dicReader.readDic();
+        Dictionary dic = dicReader.readDic();
         dic.setFileName(arguments[i]);
         dicReader = null;
         setDic(dic);
@@ -176,12 +176,12 @@ public class DicSort  extends AbstractDictTool {
      * @param dicFormatted
      *                the dicFormatted to set
      */
-    private void setDic(DictionaryElement dic) {
+    private void setDic(Dictionary dic) {
         this.dic = dic;
     }
 
 
-    private EElementList sortSectionAccordingToCategory(HashMap<String, EElementList> map, SectionElement section) {
+    private EElementList sortSectionAccordingToCategory(HashMap<String, EElementList> map, Section section) {
         if (map.size()>1) {
             msg.err("section \""+section.getID()+ "\" categories: "+map.keySet().toString().replaceAll("[ \\[\\]]", ""));
         }
@@ -199,7 +199,7 @@ public class DicSort  extends AbstractDictTool {
             msg.log(cat+": "+list.size());
             if (list.size()>1) {
                 Collections.sort(list, eElementComparator);
-                EElement eHead=list.get(0);
+                E eHead=list.get(0);
                 eHead.addProcessingComment("******************************");
                 eHead.addProcessingComment("    group "+cat);
                 eHead.addProcessingComment("******************************");
@@ -209,7 +209,7 @@ public class DicSort  extends AbstractDictTool {
             }
         }
         if (listAll.size()>0 && categoriesWithOnlyOne.size()>0) {
-            EElement eHead=categoriesWithOnlyOne.get(0);
+            E eHead=categoriesWithOnlyOne.get(0);
             eHead.addProcessingComment("******************************");
             eHead.addProcessingComment("    group(s) with only one element");
             eHead.addProcessingComment("******************************");
@@ -220,14 +220,14 @@ public class DicSort  extends AbstractDictTool {
 
 
     
-    private DictionaryElement sortDictionaryAccordingToCategories() {
-        for (SectionElement section : dic.getSections()) {
+    private Dictionary sortDictionaryAccordingToCategories() {
+        for (Section section : dic.getSections()) {
             int lrs = 0;
             int rls = 0;
             int n = 0;
             HashMap<String, EElementList> map = new LinkedHashMap<String, EElementList>();
 
-            for (EElement e : section.getEElements()) {
+            for (E e : section.getEElements()) {
                 n++;
                 if (e.hasRestriction()) {
                     String r = e.getRestriction();
@@ -269,7 +269,7 @@ public class DicSort  extends AbstractDictTool {
     /**
      * @return the dic
      */
-    public DictionaryElement getDic() {
+    public Dictionary getDic() {
         return dic;
     }
 

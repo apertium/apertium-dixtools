@@ -19,8 +19,8 @@
  */
 package dics.elements.utils;
 
-import dics.elements.dtd.Element;
-import dics.elements.dtd.SElement;
+import dics.elements.dtd.DixElement;
+import dics.elements.dtd.S;
 
 import java.util.ArrayList;
 
@@ -29,7 +29,7 @@ import java.util.ArrayList;
  * @author Enrique Benimeli Bofarull
  *
  */
-public class ElementList extends ArrayList<Element> implements Cloneable {
+public class ElementList extends ArrayList<DixElement> implements Cloneable {
 
     /**
      *    
@@ -53,7 +53,7 @@ public class ElementList extends ArrayList<Element> implements Cloneable {
             ElementList cloned = (ElementList) super.clone();
 
             for (int i = 0; i < size(); i++) {
-                Element eCloned = (Element) cloned.get(i).clone();
+                DixElement eCloned = (DixElement) cloned.get(i).clone();
 
                 cloned.set(i, eCloned);
             }
@@ -72,11 +72,11 @@ public class ElementList extends ArrayList<Element> implements Cloneable {
         String str = "";
 
         if (size() > 0) {
-            for (Element e : this) {
+            for (DixElement e : this) {
                 String tmp = "";
 
-                if (e instanceof SElement) {
-                    tmp = ((SElement) e).getTemp();
+                if (e instanceof S) {
+                    tmp = ((S) e).getTemp();
 
                     if (tmp == null) {
                         tmp = "";
@@ -97,10 +97,10 @@ public class ElementList extends ArrayList<Element> implements Cloneable {
      */
     public ElementList concat(ElementList eList) {
         ElementList cList = new ElementList();
-        for (Element e1 : this) {
+        for (DixElement e1 : this) {
             cList.add(e1);
         }
-        for (Element e2 : eList) {
+        for (DixElement e2 : eList) {
             cList.add(e2);
         }
         return cList;
@@ -111,7 +111,7 @@ public class ElementList extends ArrayList<Element> implements Cloneable {
      */
     public void printSequence(Msg msg) {
         msg.log("[]");
-        for (Element e : this) {
+        for (DixElement e : this) {
             msg.log("<" + e.getValue() + "> ");
         }
         msg.log("]");

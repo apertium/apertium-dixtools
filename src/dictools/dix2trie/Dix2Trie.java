@@ -19,11 +19,11 @@
  */
 package dictools.dix2trie;
 
-import dics.elements.dtd.DictionaryElement;
-import dics.elements.dtd.EElement;
-import dics.elements.dtd.LElement;
-import dics.elements.dtd.RElement;
-import dics.elements.dtd.SectionElement;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.L;
+import dics.elements.dtd.R;
+import dics.elements.dtd.Section;
 import dics.elements.utils.SElementList;
 import dictools.xml.DictionaryReader;
 import dictools.dix2trie.utils.Entry;
@@ -114,12 +114,12 @@ public class Dix2Trie {
      */
     private void readDictionary(String dicFileName, String dir) {
         DictionaryReader dicReader = new DictionaryReader(dicFileName);
-        DictionaryElement dic = dicReader.readDic();
+        Dictionary dic = dicReader.readDic();
 
-        for (SectionElement section : dic.getSections()) {
-            for (EElement e : section.getEElements()) {
-                LElement left = e.getLeft();
-                RElement right = e.getRight();
+        for (Section section : dic.getSections()) {
+            for (E e : section.getEElements()) {
+                L left = e.getLeft();
+                R right = e.getRight();
 
                 String lemmaLeft = left.getValueNoTags();
                 String lemmaRight = right.getValueNoTags();

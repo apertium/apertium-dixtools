@@ -19,7 +19,7 @@
  */
 package dics.elements.utils;
 
-import dics.elements.dtd.SElement;
+import dics.elements.dtd.S;
 
 import java.util.Vector;
 
@@ -28,7 +28,7 @@ import java.util.Vector;
  * @author Enrique Benimeli Bofarull
  *
  */
-public class SElementList extends Vector<SElement> {
+public class SElementList extends Vector<S> {
 
     /**
      *    
@@ -61,8 +61,8 @@ public class SElementList extends Vector<SElement> {
             return false;
         } else {
             for (int i = 0; i < size(); i++) {
-                SElement sE1 = get(i);
-                SElement sE2 = sEList.get(i);
+                S sE1 = get(i);
+                S sE2 = sEList.get(i);
 
                 if (!sE1.equals(sE2)) {
                     return false;
@@ -79,7 +79,7 @@ public class SElementList extends Vector<SElement> {
     public String toString() {
         String str = "";
 
-        for (SElement s : this) {
+        for (S s : this) {
             str += s.toString();
         }
 
@@ -96,9 +96,9 @@ public class SElementList extends Vector<SElement> {
         int i = 0;
 
         if ((sEList2.size() - size()) >= 0) {
-            for (SElement sE2 : sEList2) {
+            for (S sE2 : sEList2) {
                 if (i < size()) {
-                    SElement sE1 = getInstance(i);
+                    S sE1 = getInstance(i);
 
                     if (sE1.getValue().charAt(0) == 'k') {
                         return true;
@@ -126,7 +126,7 @@ public class SElementList extends Vector<SElement> {
      *    
      */
     public void print() {
-        for (SElement s : this) {
+        for (S s : this) {
             System.err.print(s.toString());
         }
 
@@ -139,7 +139,7 @@ public class SElementList extends Vector<SElement> {
      * @return Is s certain value?
      */
     public boolean is(String value) {
-        for (SElement sE : this) {
+        for (S sE : this) {
             if (sE.getValue().equals(value)) {
                 return true;
             }

@@ -29,12 +29,12 @@ import java.io.Writer;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class GElement extends ContentElement {
+public class G extends ContentElement {
 
     /**
      * 
      */
-    public GElement() {
+    public G() {
         super();
         setTagName("g");
         setValueNoTags("");

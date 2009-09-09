@@ -19,7 +19,7 @@
  */
 package dictools.dix2trie.utils;
 
-import dics.elements.dtd.SElement;
+import dics.elements.dtd.S;
 import dics.elements.utils.SElementList;
 
 /**
@@ -72,7 +72,7 @@ public class Entry {
      * 
      * @param e
      */
-    public void addKeyAttr(SElement e) {
+    public void addKeyAttr(S e) {
         this.keyAttr.add(e);
     }
 
@@ -104,7 +104,7 @@ public class Entry {
      * 
      * @param e
      */
-    public void addValueAttr(SElement e) {
+    public void addValueAttr(S e) {
         this.valueAttr.add(e);
     }
 

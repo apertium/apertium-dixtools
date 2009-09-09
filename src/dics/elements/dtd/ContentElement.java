@@ -33,7 +33,7 @@ import java.io.Writer;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public abstract class ContentElement extends Element implements Cloneable {
+public abstract class ContentElement extends DixElement implements Cloneable {
 
     /**
      * 
@@ -76,7 +76,7 @@ public abstract class ContentElement extends Element implements Cloneable {
      * 
      * @param e
      */
-    public void addChild(Element e) {
+    public void addChild(DixElement e) {
         children.add(e);
     }
 
@@ -85,9 +85,9 @@ public abstract class ContentElement extends Element implements Cloneable {
      * @return Undefined         */
     public SElementList getSElements() {
         SElementList sEList = new SElementList();
-        for (Element e : children) {
-            if (e instanceof SElement) {
-                SElement sE = (SElement) e;
+        for (DixElement e : children) {
+            if (e instanceof S) {
+                S sE = (S) e;
                 sEList.add(sE);
             }
         }
@@ -101,8 +101,8 @@ public abstract class ContentElement extends Element implements Cloneable {
     @Override
     public String getValueNoTags() {
         String str = "";
-        for (Element e : children) {
-            if (!(e instanceof SElement)) {
+        for (DixElement e : children) {
+            if (!(e instanceof S)) {
                 if (e instanceof TextElement) {
                     TextElement tE = (TextElement) e;
                     str += tE.getValue();
@@ -121,10 +121,10 @@ public abstract class ContentElement extends Element implements Cloneable {
     @Override
     public String getValue() {
         String str = "";
-        for (Element e : children) {
-            if (!(e instanceof SElement)) {
-                if (e instanceof GElement) {
-                    str += "<g>" + ((GElement) e).getValue() + "</g>";
+        for (DixElement e : children) {
+            if (!(e instanceof S)) {
+                if (e instanceof G) {
+                    str += "<g>" + ((G) e).getValue() + "</g>";
                 } else {
                     str += e.getValue();
                 }
@@ -139,7 +139,7 @@ public abstract class ContentElement extends Element implements Cloneable {
      * @return Undefined         */
     public boolean is(String value) {
         if (getSElements().size() > 0) {
-            SElement sE = getSElements().get(0);
+            S sE = getSElements().get(0);
             if (sE != null) {
                 if (sE.is(value)) {
                     return true;
@@ -157,7 +157,7 @@ public abstract class ContentElement extends Element implements Cloneable {
      * @return true is the element contains a certain definition ('m', 'adj', etc)
      */
     public boolean contains(String def) {
-        for (SElement sE : this.getSElements()) {
+        for (S sE : this.getSElements()) {
             if (sE.getValue().equals(def)) {
                 return true;
             }
@@ -188,7 +188,7 @@ public abstract class ContentElement extends Element implements Cloneable {
                 dos.append("<" + tagName + ">");
         }  
 
-          for (Element e : children) {
+          for (DixElement e : children) {
               if (e != null) {
                   e.printXML(dos, opt);
               }
@@ -214,7 +214,7 @@ public abstract class ContentElement extends Element implements Cloneable {
     @Override
     public void setValue(String value) {
         boolean textE = false;
-        for (Element e : getChildren()) {
+        for (DixElement e : getChildren()) {
             if (e instanceof TextElement) {
                 textE = true;
                 ((TextElement) e).setValue(value);
@@ -247,12 +247,12 @@ public abstract class ContentElement extends Element implements Cloneable {
      * @param value
      */
     public void changeFirstSElement(String value) {
-        SElement sE2 = new SElement(value);
+        S sE2 = new S(value);
         getSElements().set(0, sE2);
         int j = 0;
         for (int i = 0; i < children.size(); i++) {
-            Element e = children.get(i);
-            if (e instanceof SElement) {
+            DixElement e = children.get(i);
+            if (e instanceof S) {
                 if (j == 0) {
                     children.set(i, sE2);
                     return;
@@ -268,7 +268,7 @@ public abstract class ContentElement extends Element implements Cloneable {
      * @return Undefined         */
     public String getString() {
         String str = "";
-        for (SElement s : getSElements()) {
+        for (S s : getSElements()) {
             str += s.toString();
         }
         return str;
@@ -280,7 +280,7 @@ public abstract class ContentElement extends Element implements Cloneable {
     public String getInfo() {
         String str = "(";
         int i = 0;
-        for (SElement s : getSElements()) {
+        for (S s : getSElements()) {
             // para que no se considere la primera etiqueta, la de
             // categoria,
             // para encontrar paradigmas equivalentes.
@@ -329,7 +329,7 @@ public abstract class ContentElement extends Element implements Cloneable {
         }
 
         str += "<" + tagName + ">";
-        for (Element e : getChildren()) {
+        for (DixElement e : getChildren()) {
           if (e==null) continue;
             String v = e.toString();
             str += v;
@@ -364,7 +364,7 @@ public abstract class ContentElement extends Element implements Cloneable {
         msg.log(value + " / ");
         SElementList sList = getSElements();
         if (sList != null) {
-            for (SElement s : getSElements()) {
+            for (S s : getSElements()) {
                 msg.log(s.toString());
             }
         }
@@ -394,34 +394,34 @@ public abstract class ContentElement extends Element implements Cloneable {
         ElementList eList = new ElementList();
         String str = "";
         boolean hasSElements = false;
-        for (Element e : this.children) {
+        for (DixElement e : this.children) {
             if (e instanceof TextElement) {
                 str += e.getValue();
             }
-            if (e instanceof BElement) {
+            if (e instanceof B) {
                 str += "<b/>";
                 // Argn this is really ugly, adding "<b/>" as TEXT into another text element.
                 // This makes it impossible to escape < and > properly when outputting text elements.
                 // Jacob Nordfalk 3sept 2009
             }
-            if (e instanceof GElement) {
+            if (e instanceof G) {
                 str += processGElement(e);
             }
 
-            if (e instanceof SElement) {
+            if (e instanceof S) {
                 if (!hasSElements) {
                     eList.add(new TextElement(str));
                 }
                 str = "";
                 hasSElements = true;
-                String v = ((SElement) e).getValue();
+                String v = ((S) e).getValue();
                 if (v.equals("*")) {
-                    eList.add(new SElement("^*"));
+                    eList.add(new S("^*"));
                 } else {
                     if (v.equals("?")) {
-                        eList.add(new SElement("^?"));
+                        eList.add(new S("^?"));
                     } else {
-                        eList.add(new SElement(v));
+                        eList.add(new S(v));
                     }
                 }
             }
@@ -437,16 +437,16 @@ public abstract class ContentElement extends Element implements Cloneable {
      * @param e
      * @return Content of 'g' element (string)
      */
-    private String processGElement(Element e) {
-        GElement gE = (GElement) e;
+    private String processGElement(DixElement e) {
+        G gE = (G) e;
         String str = "";
         str += "<g>";
-        for (Element e1 : gE.getChildren()) {
+        for (DixElement e1 : gE.getChildren()) {
             if (e1 instanceof TextElement) {
                 TextElement tE = (TextElement) e1;
                 str += tE.getValue();
             }
-            if (e1 instanceof BElement) {
+            if (e1 instanceof B) {
                 str += "<b/>";
             }
         }

@@ -19,10 +19,10 @@
  */
 package misc.esca;
 
-import dics.elements.dtd.DictionaryElement;
-import dics.elements.dtd.EElement;
-import dics.elements.dtd.PardefElement;
-import dics.elements.dtd.SElement;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.Pardef;
+import dics.elements.dtd.S;
 import dictools.xml.DictionaryReader;
 import java.util.HashMap;
 
@@ -51,12 +51,12 @@ public class AddSameGender {
     /**
      * 
      */
-    private HashMap<String, PardefElement> pardefsNouns;
+    private HashMap<String, Pardef> pardefsNouns;
     /**
      * 
      */
-    private HashMap<String, PardefElement> mfPardefsAdjs;
-    private DictionaryElement bil;
+    private HashMap<String, Pardef> mfPardefsAdjs;
+    private Dictionary bil;
 
     /**
      * 
@@ -101,11 +101,11 @@ public class AddSameGender {
      */
     private void process_nouns() {
         DictionaryReader morphReader = new DictionaryReader(this.morphDic);
-        DictionaryElement morph = morphReader.readDic();
+        Dictionary morph = morphReader.readDic();
 
         HashMap<String, String> parNameGender = new HashMap<String, String>();
 
-        for (PardefElement pfe : morph.getPardefsElement().getPardefElements()) {
+        for (Pardef pfe : morph.getPardefsElement().getPardefElements()) {
             if (pfe.hasCategory("n")) {
                 if ((pfe.contains("m") && pfe.contains("f"))) {
                     parNameGender.put(pfe.getName(), "GD");
@@ -125,14 +125,14 @@ public class AddSameGender {
         }
 
         HashMap<String, String> lemmaParName = new HashMap<String, String>();
-        for (EElement ee : morph.getAllEntries()) {
+        for (E ee : morph.getAllEntries()) {
             String lemma = ee.getLemma();
             String parName = ee.getMainParadigmName();
             lemmaParName.put(lemma, parName);
         }
 
 
-        for (EElement ee : bil.getAllEntries()) {
+        for (E ee : bil.getAllEntries()) {
             if (ee.is("L", "n")) {
                 String value = ee.getLeft().getValueNoTags();
                 if (ee.getLeft().contains("GD") || ee.getLeft().contains("m") || ee.getLeft().contains("f") || ee.getLeft().contains("mf")) {
@@ -144,7 +144,7 @@ public class AddSameGender {
                         String genderValue = parNameGender.get(parValue);
                         if (genderValue != null) {
                             System.out.println(value + " is '" + genderValue + "'");
-                            ee.getChildren("L").add(new SElement(genderValue));
+                            ee.getChildren("L").add(new S(genderValue));
                         }
                     }
                 }
@@ -157,11 +157,11 @@ public class AddSameGender {
 
     private void process_adjs() {
         DictionaryReader morphReader = new DictionaryReader(this.morphDic);
-        DictionaryElement morph = morphReader.readDic();
+        Dictionary morph = morphReader.readDic();
 
         HashMap<String, String> parNameGender = new HashMap<String, String>();
 
-        for (PardefElement pfe : morph.getPardefsElement().getPardefElements()) {
+        for (Pardef pfe : morph.getPardefsElement().getPardefElements()) {
             if (pfe.hasCategory("adj")) {
                 if (pfe.contains("mf")) {
                     parNameGender.put(pfe.getName(), "mf");
@@ -171,14 +171,14 @@ public class AddSameGender {
 
 
         HashMap<String, String> lemmaParName = new HashMap<String, String>();
-        for (EElement ee : morph.getAllEntries()) {
+        for (E ee : morph.getAllEntries()) {
             String lemma = ee.getLemma();
             String parName = ee.getMainParadigmName();
             lemmaParName.put(lemma, parName);
         }
 
 
-        for (EElement ee : bil.getAllEntries()) {
+        for (E ee : bil.getAllEntries()) {
             if (ee.is("L", "adj")) {
                 String value = ee.getLeft().getValueNoTags();
                 if (ee.getLeft().contains("GD") || ee.getLeft().contains("m") || ee.getLeft().contains("f") || ee.getLeft().contains("mf")) {
@@ -190,7 +190,7 @@ public class AddSameGender {
                         String genderValue = parNameGender.get(parValue);
                         if (genderValue != null) {
                             System.out.println(value + " is '" + genderValue + "'");
-                            ee.getChildren("L").add(new SElement(genderValue));
+                            ee.getChildren("L").add(new S(genderValue));
                         }
                     }
                 }

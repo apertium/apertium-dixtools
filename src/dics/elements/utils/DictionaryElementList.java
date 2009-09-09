@@ -21,14 +21,14 @@ package dics.elements.utils;
 
 import java.util.ArrayList;
 
-import dics.elements.dtd.DictionaryElement;
+import dics.elements.dtd.Dictionary;
 
 /**
  * 
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class DictionaryElementList extends ArrayList<DictionaryElement> {
+public class DictionaryElementList extends ArrayList<Dictionary> {
 
     /**
      * 

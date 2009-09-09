@@ -29,28 +29,53 @@ import java.io.Writer;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class ReElement extends Element {
+public class Alphabet extends DixElement {
 
     /**
      * 
      */
-    private String value;
+    private String alphabet;
+
+    /**
+     * 
+     * 
+     */
+    public Alphabet() {
+
+    }
 
     /**
      * 
      * @param value
      */
-    public ReElement(String value) {
-        setTagName("re");
-        this.value = value;
+    public Alphabet(String value) {
+        alphabet = value;
+    }
+
+    /**
+     * 
+     * @param value
+     */
+    public void setAlphabet(String value) {
+        alphabet = value;
     }
 
     /**
      * 
      * @return Undefined         */
-    @Override
-    public String getValue() {
-        return value;
+    public String getAlphabet() {
+        return alphabet;
+    }
+
+    /**
+     * 
+     * @return Undefined         */
+    public boolean isEmpty() {
+        if (getAlphabet() == null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -58,21 +83,12 @@ public class ReElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
-    @Override
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
-        
-        value = maskNull(value);
-
-        dos.append( (opt.nowAlign?"":tab(3)) + "<" + getTagName() + ">" + getValue() + "</" + getTagName() + ">"+appendCharacterData.trim()+  (opt.nowAlign?"":"\n"));
-    }
-
-    /**
-     * 
-     */
-    @Override
-    public String toString() {
-        return getValue();
+        if (isEmpty()) {
+            setAlphabet("");
+        }
+        dos.append(tab(1) + "<alphabet>" + getAlphabet() + "</alphabet>"+appendCharacterData.trim()+"\n");
     }
 }

@@ -23,36 +23,48 @@ import dics.elements.utils.DicOpts;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import dics.elements.utils.DicTools;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.util.ArrayList;
 
 /**
  * 
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class PardefsElement extends Element {
+public class Sdefs extends DixElement {
 
     /**
      * 
      */
-    private ArrayList<PardefElement> pardefElements;
+    private ArrayList<Sdef> sdefsElements;
 
     /**
      * 
      * 
      */
-    public PardefsElement() {
-        pardefElements = new ArrayList<PardefElement>();
+    public Sdefs() {
+        setTagName("sdefs");
+        sdefsElements = new ArrayList<Sdef>();
     }
 
     /**
      * 
      * @param value
      */
-    public void addPardefElement(PardefElement value) {
-        pardefElements.add(value);
+    public void addSdefElement(Sdef value) {
+        setTagName("sdefs");
+        sdefsElements.add(value);
+    }
+
+    /**
+     * 
+     * @return Undefined         */
+    public ArrayList<Sdef> getSdefsElements() {
+        return sdefsElements;
     }
 
     /**
@@ -60,15 +72,28 @@ public class PardefsElement extends Element {
      * @param dos
      * @throws java.io.IOException
      */
-    @Override
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
-        dos.append(tab(1) + "<pardefs>\n");
-        for (PardefElement e : pardefElements) {
+        dos.append(makeCommentIfData(processingComments));
+        dos.append(tab(1) + "<" + getTagName() + ">\n");
+
+        HashMap<String, String> descriptions = DicTools.getSdefDescriptions();
+        for (Sdef e : sdefsElements) {
+            String d = descriptions.get(e.getValue());
+            if (d != null) {
+            // e.setProcessingComments("\t<!-- " + d + "-->");
+            }
             e.printXML(dos, opt);
         }
-        dos.append(tab(1) + "</pardefs>"+appendCharacterData.trim()+"\n\n");
+        dos.append(tab(1) + "</" + getTagName() + ">\n");
+        /*
+        if (processingComments != null  && !processingComments.isEmpty()) {
+            dos.append(tab(1) + "<!-- \n");
+            dos.append(tab(1) + getProcessingComments());
+            dos.append(tab(1) + " -->\n");
+        }*/
+        dos.append(appendCharacterData.trim());
     }
 
     /**
@@ -95,7 +120,7 @@ public class PardefsElement extends Element {
             dos = new OutputStreamWriter(bos, encoding);
             dos.append("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
             dos.append("<dictionary>\n");
-            printXML(dos, opt);
+            printXML(dos, DicOpts.STD);
             dos.append("</dictionary>\n");
 
             fos = null;
@@ -111,29 +136,25 @@ public class PardefsElement extends Element {
 
     /**
      * 
-     * @param parName
      * @return Undefined         */
-    public PardefElement getParadigmDefinition(String parName) {
-        for (PardefElement pardefE : pardefElements) {
-            if (pardefE.getName().equals(parName)) {
-                return pardefE;
-            }
+    public ArrayList<String> getAllCategories() {
+        ArrayList<String> categories = new ArrayList<String>();
+
+        for (Sdef sdef : getSdefsElements()) {
+            categories.add(sdef.getValue());
         }
-        return null;
+        return categories;
     }
 
     /**
      * 
-     * @return Undefined         */
-    public ArrayList<PardefElement> getPardefElements() {
-        return pardefElements;
-    }
-
-    /**
-     * 
-     * @param par
      */
-    public void remove(PardefElement par) {
-        getPardefElements().remove(par);
+    @Override
+    public String toString() {
+        String str = "";
+        for (Sdef sdef : getSdefsElements()) {
+            str += sdef.toString();
+        }
+        return str;
     }
 }

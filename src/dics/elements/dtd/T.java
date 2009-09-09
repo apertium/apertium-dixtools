@@ -25,23 +25,61 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 
 /**
+ * 
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class TextElement extends DixElement {
+public class T extends DixElement {
 
     /**
      * 
      */
-    private String value;
+    private String n;
 
     /**
      * 
-     * @param str
      */
-    public TextElement(String str) {
-        setTagName("");
-        value = str;
+    // private String temp;
+    /**
+     * 
+     * 
+     */
+    public T() {
+        setTagName("t");
+    }
+
+    /**
+     * 
+     * @param value
+     */
+    public T(String value) {
+        setTagName("t");
+        n = value;
+    }
+
+    /*
+     * 
+     */
+    public T(T tE) {
+        setTagName("t");
+        n = tE.getValue();
+    }
+
+    /**
+     * 
+     * @return Undefined         */
+    @Override
+    public String getValue() {
+        return n;
+    }
+
+    /**
+     * 
+     * @param value
+     */
+    @Override
+    public void setValue(String value) {
+        n = value;
     }
 
     /**
@@ -52,28 +90,9 @@ public class TextElement extends DixElement {
     @Override
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
-        //not necesary: dos.append(prependCharacterData);
-
-      // In ContentElement line 400 "<b/>" is being added as TEXT into another text element,
-        // so we can't escape > and < !
-        // replaceAll("<", "&lt;").replaceAll(">", "&gt;").
-
-        dos.append(value.replace("&", "&amp;").replace("\"", "&apos;"));
-
-        //not necesary: dos.append(appendCharacterData);
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    @Override
-    public String getValue() {
-        return value;
-    }
-
-    @Override
-    public void setValue(String v) {
-        value = v;
+        dos.append(prependCharacterData);
+        dos.append("<" + getTagName() + " n=\"" + getValue() + "\"/>");
+        dos.append(appendCharacterData);
     }
 
     /**
@@ -81,8 +100,29 @@ public class TextElement extends DixElement {
      */
     @Override
     public String toString() {
-        String str = "";
-        str += getValue();
-        return str;
+        return "<" + getValue() + ">";
+    }
+
+    /**
+     * 
+     * @param tE
+     * @return Undefined
+     */
+    public boolean equals(T tE) {
+        return (getValue().equals(tE.getValue()));
+    }
+
+    /**
+     * 
+     * @return Object
+     */
+    @Override
+    public Object clone() {
+        try {
+            T cloned = (T) super.clone();
+            return cloned;
+        } catch (Exception ex) {
+            return null;
+        }
     }
 }

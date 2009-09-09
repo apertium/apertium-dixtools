@@ -19,7 +19,7 @@
  */
 package dics.elements.utils;
 
-import dics.elements.dtd.DictionaryElement;
+import dics.elements.dtd.Dictionary;
 import java.util.ArrayList;
 
 /**
@@ -27,24 +27,24 @@ import java.util.ArrayList;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class DicSet extends ArrayList<DictionaryElement> {
+public class DicSet extends ArrayList<Dictionary> {
 
     /**
      * 
      */
-    private DictionaryElement mon1;
+    private Dictionary mon1;
     /**
      * 
      */
-    private DictionaryElement bil1;
+    private Dictionary bil1;
     /**
      * 
      */
-    private DictionaryElement mon2;
+    private Dictionary mon2;
     /**
      * 
      */
-    private DictionaryElement bil2;
+    private Dictionary bil2;
 
     /**
      * 
@@ -53,8 +53,8 @@ public class DicSet extends ArrayList<DictionaryElement> {
      * @param mon2
      * @param bil2
      */
-    public DicSet(DictionaryElement mon1, DictionaryElement bil1,
-            DictionaryElement mon2, DictionaryElement bil2) {
+    public DicSet(Dictionary mon1, Dictionary bil1,
+            Dictionary mon2, Dictionary bil2) {
 
         this.add(mon1);
         this.add(mon2);
@@ -62,20 +62,20 @@ public class DicSet extends ArrayList<DictionaryElement> {
         this.add(bil2);
 
         this.mon1 = mon1;
-        this.mon1.setType(DictionaryElement.MONOL);
+        this.mon1.setType(Dictionary.MONOL);
         this.bil1 = bil1;
-        this.bil1.setType(DictionaryElement.BIL);
+        this.bil1.setType(Dictionary.BIL);
         this.mon2 = mon2;
-        this.mon2.setType(DictionaryElement.MONOL);
+        this.mon2.setType(Dictionary.MONOL);
         this.bil2 = bil2;
-        this.bil2.setType(DictionaryElement.BIL);
+        this.bil2.setType(Dictionary.BIL);
     }
 
     /**
      * 
      * @param mon1
      */
-    public DicSet(DictionaryElement mon1) {
+    public DicSet(Dictionary mon1) {
         this.add(mon1);
 
         this.mon1 = mon1;
@@ -90,8 +90,8 @@ public class DicSet extends ArrayList<DictionaryElement> {
      * @param monA
      * @param monB
      */
-    public DicSet(DictionaryElement bilAB, DictionaryElement monA,
-            DictionaryElement monB) {
+    public DicSet(Dictionary bilAB, Dictionary monA,
+            Dictionary monB) {
         this.add(monA);
         this.add(monB);
         this.add(bilAB);
@@ -105,28 +105,28 @@ public class DicSet extends ArrayList<DictionaryElement> {
     /**
      * 
      * @return Undefined         */
-    public DictionaryElement getMon1() {
+    public Dictionary getMon1() {
         return mon1;
     }
 
     /**
      * 
      * @return Undefined         */
-    public DictionaryElement getMon2() {
+    public Dictionary getMon2() {
         return mon2;
     }
 
     /**
      * 
      * @return Undefined         */
-    public DictionaryElement getBil1() {
+    public Dictionary getBil1() {
         return bil1;
     }
 
     /**
      * 
      * @return Undefined         */
-    public DictionaryElement getBil2() {
+    public Dictionary getBil2() {
         return bil2;
     }
 
