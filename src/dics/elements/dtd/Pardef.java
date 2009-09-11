@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import dics.elements.utils.EElementList;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
@@ -38,7 +37,7 @@ public class Pardef extends DixElement {
     /**
      * 
      */
-    private EElementList eElements;
+    private ArrayList<E> eElements;
     /**
      * 
      */
@@ -50,7 +49,7 @@ public class Pardef extends DixElement {
      */
     public Pardef(String value) {
         n = value;
-        eElements = new EElementList();
+        eElements = new ArrayList<E>();
     }
 
     /**
@@ -61,7 +60,7 @@ public class Pardef extends DixElement {
      */
     public Pardef(Pardef orig, String name) {
         n = name;
-        eElements = new EElementList();
+        eElements = new ArrayList<E>();
 
         for (E e : orig.eElements) {
             E e2 = (E) e.clone();
@@ -112,8 +111,8 @@ public class Pardef extends DixElement {
      * @param pardef2
      * @return Undefined         */
     public boolean contentEquals(Pardef pardef2) {
-        EElementList eList1 = getEElements();
-        EElementList eList2 = pardef2.getEElements();
+        ArrayList<E> eList1 = getEElements();
+        ArrayList<E> eList2 = pardef2.getEElements();
 
         if (eList1.size() != eList2.size()) {
             return false;
@@ -226,7 +225,7 @@ public class Pardef extends DixElement {
     /**
      * @return the eElements
      */
-    public EElementList getEElements() {
+    public ArrayList<E> getEElements() {
         return eElements;
     }
 
@@ -234,7 +233,7 @@ public class Pardef extends DixElement {
      * @param elements
      *                the eElements to set
      */
-    public void setEElements(EElementList elements) {
+    public void setEElements(ArrayList<E> elements) {
         eElements = elements;
     }
 }

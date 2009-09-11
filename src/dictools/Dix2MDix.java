@@ -26,7 +26,6 @@ import dics.elements.dtd.DixElement;
 import dics.elements.dtd.S;
 import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
-import dics.elements.utils.SElementList;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -375,9 +374,8 @@ public class Dix2MDix {
             value = value + "[" + key + "]";
             for (E ee : v) {
                 String slLemma = ee.getValueNoTags("L");
-                SElementList slPoS = ee.getSElements("L");
                 value = value + slLemma + ":";
-                for (S sE : slPoS) {
+                for (S sE : ee.getSymbols("L")) {
                     if (this.tinyFilter.preserve(sE.getValue())) {
                         String tagName = this.tinyFilter.rename(sE.getValue());
                         value = value + tagName + ".";
@@ -385,9 +383,8 @@ public class Dix2MDix {
                 }
                 value = value + "?";
                 String tlLemma = ee.getValueNoTags("R");
-                SElementList tlPoS = ee.getSElements("R");
                 value = value + tlLemma + ":";
-                for (S sE : tlPoS) {
+                for (S sE : ee.getSymbols("R")) {
                     if (this.tinyFilter.preserve(sE.getValue())) {
                         String tagName = this.tinyFilter.rename(sE.getValue());
                         value = value + tagName + ".";

@@ -25,7 +25,6 @@ import java.util.ArrayList;
 
 import dics.elements.utils.ElementList;
 import dics.elements.utils.Msg;
-import dics.elements.utils.SElementList;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -700,17 +699,17 @@ public class E extends DixElement implements Cloneable {
         for (DixElement e : children) {
             if (e instanceof I) {
                 I i = (I) e;
-                return i.getSElements().size();
+                return i.getSymbols().size();
             }
             if (e instanceof P) {
                 P p = (P) e;
                 if (side.equals("L")) {
                     L lE = p.getL();
-                    return lE.getSElements().size();
+                    return lE.getSymbols().size();
                 }
                 if (side.equals("R")) {
                     R rE = p.getR();
-                    return rE.getSElements().size();
+                    return rE.getSymbols().size();
                 }
             }
         }
@@ -819,10 +818,8 @@ public class E extends DixElement implements Cloneable {
      * @param side
      * @param elementsB
      * @return Undefined9
-     */
-    public boolean containsSElements(String side,
-            SElementList elementsB) {
-        SElementList elementsA = getSElements(side);
+    public boolean containsSElements(String side, ArrayList<S> elementsB) {
+        ArrayList<S> elementsA = getSymbols(side);
         if (elementsA.size() != elementsB.size()) {
             return false;
         } else {
@@ -844,28 +841,29 @@ public class E extends DixElement implements Cloneable {
         }
         return false;
     }
+     */
 
     /**
      * 
      * @param side
      * @return Undefined         
      */
-    public SElementList getSElements(String side) {
-        SElementList elementsA = null;
+    public ArrayList<S> getSymbols(String side) {
+        ArrayList<S> elementsA = null;
         for (DixElement e : children) {
             if (e instanceof I) {
                 I i = (I) e;
-                elementsA = i.getSElements();
+                elementsA = i.getSymbols();
             }
             if (e instanceof P) {
                 P p = (P) e;
                 if (side.equals("L")) {
                     L lE = p.getL();
-                    elementsA = lE.getSElements();
+                    elementsA = lE.getSymbols();
                 }
                 if (side.equals("R")) {
                     R rE = p.getR();
-                    elementsA = rE.getSElements();
+                    elementsA = rE.getSymbols();
                 }
             }
         }
@@ -878,12 +876,9 @@ public class E extends DixElement implements Cloneable {
      * @param msg
      */
     public void printSElements(String side, Msg msg) {
-        SElementList elements = getSElements(side);
-        if (elements != null) {
-            for (S s : elements) {
+            for (S s : getSymbols(side)) {
                 msg.log(s.toString());
             }
-        }
     }
 
     /**
@@ -902,22 +897,19 @@ public class E extends DixElement implements Cloneable {
      * @param side
      * @return Undefined         */
     public String getSElementsString(String side) {
-        SElementList elements = getSElements(side);
         String str = "";
-        if (elements != null) {
-            for (S s : elements) {
+            for (S s : getSymbols(side)) {
                 str += "<s n=\"" + s.getValue() + "\"/>";
             }
-        }
         return str;
     }
 
     /**
      * 
      * @param side
-     * @return Undefined         */
+     * @return Undefined         
     public String getInfo(String side) {
-        SElementList elements = getSElements(side);
+        ArrayList<S> elements = getSymbols(side);
         String str = "( ";
         for (S s : elements) {
             str += s.getValue() + " ";
@@ -925,7 +917,7 @@ public class E extends DixElement implements Cloneable {
         str += ")";
         return str;
     }
-
+*/
     /**
      * 
      * @return Undefined         */

@@ -27,8 +27,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
-import dics.elements.utils.EElementList;
-import dics.elements.utils.EElementMap;
 import dics.elements.utils.ElementList;
 import dictools.unused__DicEquivPar;
 import dics.elements.utils.DicTools;
@@ -127,7 +125,7 @@ public class Dictionary extends DixElement {
      *
      * @param elementMap
      */
-    public Dictionary(EElementMap elementMap, Dictionary dic) {
+    public Dictionary(HashMap<String, ArrayList<E>> elementMap, Dictionary dic) {
         sections = new ArrayList<Section>();
         Section sectionElement = new Section("main", "standard");
         addSection(sectionElement);
@@ -139,7 +137,7 @@ public class Dictionary extends DixElement {
 
         while (it.hasNext()) {
             String key = (String) it.next();
-            EElementList eList = elementMap.get(key);
+            ArrayList<E> eList = elementMap.get(key);
             for (E e : eList) {
                 addEElement(e);
             }
@@ -174,7 +172,7 @@ public class Dictionary extends DixElement {
      *
      * @param eList
      */
-    public void setMainSection(EElementList eList) {
+    public void setMainSection(ArrayList<E> eList) {
         for (Section section : sections) {
             if (section.getID().equals("main")) {
                 Section sectionElementMain = new Section(section.getID(), section.getType());
@@ -547,7 +545,7 @@ public class Dictionary extends DixElement {
      *
      * @return The 'e' elements
      */
-    public EElementList getEntries() {
+    public ArrayList<E> getEntries() {
         for (Section s : sections) {
             if (s.getID().equals("main")) {
                 return s.getEElements();
@@ -559,7 +557,7 @@ public class Dictionary extends DixElement {
     /**
      *
      * @return Undefined     */
-    public EElementList getAllEntries() {
+    public ArrayList<E> getAllEntries() {
         for (Section s : sections) {
             return s.getEElements();
         }
@@ -582,7 +580,7 @@ public class Dictionary extends DixElement {
      *
      * @param sectionID
      * @return Undefined     */
-    public EElementList getEntries(String sectionID) {
+    public ArrayList<E> getEntries(String sectionID) {
         for (Section s : sections) {
             if (s.getID().equals(sectionID)) {
                 return s.getEElements();

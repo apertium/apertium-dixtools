@@ -27,10 +27,10 @@ import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.E;
 import dics.elements.utils.DicOpts;
 import dics.elements.utils.DicSet;
-import dics.elements.utils.EElementList;
-import dics.elements.utils.EElementMap;
 import dics.elements.utils.Msg;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * 
@@ -58,19 +58,19 @@ public class DicConsistent extends AbstractDictTool {
     /**
      * 
      */
-    private EElementMap commonA;
+    private HashMap<String, ArrayList<E>> commonA;
     /**
      * 
      */
-    private EElementMap commonC;
+    private HashMap<String, ArrayList<E>> commonC;
     /**
      * 
      */
-    private EElementMap differentA;
+    private HashMap<String, ArrayList<E>> differentA;
     /**
      * 
      */
-    private EElementMap differentC;
+    private HashMap<String, ArrayList<E>> differentC;
     /**
      * 
      */
@@ -100,10 +100,10 @@ public class DicConsistent extends AbstractDictTool {
         setMon2(dicset.getMon2());
         setBil1(dicset.getBil1());
         setBil2(dicset.getBil2());
-        differentA = new EElementMap();
-        differentC = new EElementMap();
-        commonA = new EElementMap();
-        commonC = new EElementMap();
+        differentA = new HashMap<String, ArrayList<E>>();
+        differentC = new HashMap<String, ArrayList<E>>();
+        commonA = new HashMap<String, ArrayList<E>>();
+        commonC = new HashMap<String, ArrayList<E>>();
         setNotCommonSuffix("not-common-");
     }
 
@@ -122,10 +122,10 @@ public class DicConsistent extends AbstractDictTool {
      * @param entries2
      */
     private void compare() {
-        EElementMap bilABMap = DicTools.buildHash(getBil1().getEntries());
-        EElementMap bilBCMap = DicTools.buildHash(getBil2().getEntries());
-        EElementMap monAMap = DicTools.buildHashMon(getMon1().getEntries());
-        EElementMap monCMap = DicTools.buildHashMon(getMon2().getEntries());
+        HashMap<String, ArrayList<E>> bilABMap = DicTools.buildHash(getBil1().getEntries());
+        HashMap<String, ArrayList<E>> bilBCMap = DicTools.buildHash(getBil2().getEntries());
+        HashMap<String, ArrayList<E>> monAMap = DicTools.buildHashMon(getMon1().getEntries());
+        HashMap<String, ArrayList<E>> monCMap = DicTools.buildHashMon(getMon2().getEntries());
         markCommonEntries(bilABMap, bilBCMap, monAMap, getCommonA(), getDifferentA());
         markCommonEntries(bilBCMap, bilABMap, monCMap, getCommonC(), getDifferentC());
     }
@@ -171,16 +171,16 @@ public class DicConsistent extends AbstractDictTool {
      * @param different
      * @param comm
      */
-    private void markCommonEntries(EElementMap bilABMap,
-            EElementMap bilBCMap, EElementMap monAMap,
-            EElementMap commonA, EElementMap differentA) {
+    private void markCommonEntries(HashMap<String, ArrayList<E>> bilABMap,
+            HashMap<String, ArrayList<E>> bilBCMap, HashMap<String, ArrayList<E>> monAMap,
+            HashMap<String, ArrayList<E>> commonA, HashMap<String, ArrayList<E>> differentA) {
 
         Set<String> keysBilAB = bilABMap.keySet();
         Iterator<String> itBilAB = keysBilAB.iterator();
 
         while (itBilAB.hasNext()) {
             String str = itBilAB.next();
-            EElementList eList = bilABMap.get(str);
+            ArrayList<E> eList = bilABMap.get(str);
             if (bilBCMap.containsKey(str)) {
                 commonA.put(str, eList);
                 markShared(commonA, str, monAMap);
@@ -196,15 +196,15 @@ public class DicConsistent extends AbstractDictTool {
      * @param str
      * @param monA
      */
-    private void markShared(EElementMap common, String str,
-            EElementMap mon) {
+    private void markShared(HashMap<String, ArrayList<E>> common, String str,
+            HashMap<String, ArrayList<E>> mon) {
         String k = DicTools.clearTags(str);
-        EElementList list = common.get(k);
+        ArrayList<E> list = common.get(k);
         for (E e : list) {
             e.setShared(true);
             String trad = e.getValue("R");
             String key = DicTools.clearTags(trad);
-            EElementList monAList = mon.get(key);
+            ArrayList<E> monAList = mon.get(key);
             if (monAList != null) {
                 for (E eMon : monAList) {
                     eMon.setShared(true);
@@ -240,14 +240,14 @@ public class DicConsistent extends AbstractDictTool {
      * 
      * @return Undefined
      */
-    public EElementMap getDifferentA() {
+    public HashMap<String, ArrayList<E>> getDifferentA() {
         return differentA;
     }
 
     /**
      * 
      * @return Undefined         */
-    public EElementMap getDifferentC() {
+    public HashMap<String, ArrayList<E>> getDifferentC() {
         return differentC;
     }
 
@@ -314,14 +314,14 @@ public class DicConsistent extends AbstractDictTool {
     /**
      * @return the commonA
      */
-    public EElementMap getCommonA() {
+    public HashMap<String, ArrayList<E>> getCommonA() {
         return commonA;
     }
 
     /**
      * @return the commonC
      */
-    public EElementMap getCommonC() {
+    public HashMap<String, ArrayList<E>> getCommonC() {
         return commonC;
     }
 

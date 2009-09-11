@@ -14,7 +14,7 @@ import org.junit.Test;
  *
  * @author Jacob Nordfalk
  */
-public class Testmergemorph_equivparadigms extends TestTools {
+public class MergemorphEquivparTest extends TestTools {
 
   @Test
   public void test_merge_morph__equiv_paradigms() throws Exception {

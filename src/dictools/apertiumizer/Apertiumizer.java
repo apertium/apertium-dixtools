@@ -28,8 +28,6 @@ import dics.elements.dtd.R;
 import dics.elements.dtd.S;
 import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
-import dics.elements.utils.EElementList;
-import dics.elements.utils.SElementList;
 import dictools.AbstractDictTool;
 import dictools.DicSort;
 import dictools.xml.DictionaryReader;
@@ -128,7 +126,7 @@ public class Apertiumizer extends AbstractDictTool {
                             }
                             break;
                         case 2:
-                            EElementList eList = readElementFormat_2(strLine);
+                            ArrayList<E> eList = readElementFormat_2(strLine);
                             for (E e1 : eList) {
                                 section.addEElement(e1);
                             }
@@ -262,7 +260,7 @@ public class Apertiumizer extends AbstractDictTool {
         for (Section sec : sorted.getSections()) {
             for (E ee : sec.getEElements()) {
 
-                SElementList slist = ee.getLeft().getSElements();
+                ArrayList<S> slist = ee.getLeft().getSymbols();
 
                 if (slist.size() > 0) {
                     S sE = slist.get(0);
@@ -458,7 +456,7 @@ public class Apertiumizer extends AbstractDictTool {
      * @param strLine
      * @return
      */
-    private EElementList readElementFormat_2(String strLine) {
+    private ArrayList<E> readElementFormat_2(String strLine) {
         StringBuffer strBuffer = new StringBuffer(strLine);
         int lStr = strBuffer.length();
         boolean isIn = false;
@@ -498,7 +496,7 @@ public class Apertiumizer extends AbstractDictTool {
 
         //System.out.println(strLine);
 
-        EElementList eList = new EElementList();
+        ArrayList<E> eList = new ArrayList<E>();
 
         StringTokenizer tokenizer = new StringTokenizer(strLine, "::");
 

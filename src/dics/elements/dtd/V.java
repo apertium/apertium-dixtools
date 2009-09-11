@@ -107,18 +107,4 @@ public class V extends DixElement {
     public boolean equals(V vE) {
         return (getValue().equals(vE.getValue()));
     }
-
-    /**
-     * 
-     * @return Object
-     */
-    @Override
-    public Object clone() {
-        try {
-            V cloned = (V) super.clone();
-            return cloned;
-        } catch (Exception ex) {
-            return null;
-        }
-    }
 }

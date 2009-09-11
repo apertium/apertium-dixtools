@@ -32,9 +32,8 @@ import dics.elements.dtd.Sdef;
 import dics.elements.dtd.Sdefs;
 import dics.elements.dtd.Section;
 import dics.elements.utils.DicSet;
-import dics.elements.utils.EElementList;
-import dics.elements.utils.EHashMap;
 import dics.elements.utils.Msg;
+import java.util.ArrayList;
 
 /**
  * 
@@ -280,7 +279,7 @@ public class DicMerge  extends AbstractDictTool{
 
         System.err.println("Merging section '" + sectionE1.getID() + "'...");
         Section sectionElement = new Section();
-        EHashMap eMap = new EHashMap();
+        HashMap<String, E> eMap = new HashMap<String, E>();
 
         sectionElement.setID(sectionE1.getID());
         sectionElement.setType(sectionE1.getType());
@@ -289,7 +288,7 @@ public class DicMerge  extends AbstractDictTool{
 
         paradigmsToRemove = new HashMap<String, String>();
 
-        EElementList elements1 = sectionE1.getEElements();
+        ArrayList<E> elements1 = sectionE1.getEElements();
         System.err.println("  monolingual 1 (" + elements1.size() + " lemmas)");
         int fromSec1 = 0;
         for (E e1 : elements1) {
@@ -304,7 +303,7 @@ public class DicMerge  extends AbstractDictTool{
             }
         }
 
-        EElementList elements2 = sectionE2.getEElements();
+        ArrayList<E> elements2 = sectionE2.getEElements();
         System.err.println("  monolingual 2 (" + elements2.size() + " lemmas)");
         int common = 0;
         int notin = 0;

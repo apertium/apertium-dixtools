@@ -20,7 +20,7 @@
 package dictools.dix2trie.utils;
 
 import dics.elements.dtd.S;
-import dics.elements.utils.SElementList;
+import java.util.ArrayList;
 
 /**
  *
@@ -36,7 +36,7 @@ public class Entry {
     /**
      * 
      */
-    private SElementList keyAttr;
+    private ArrayList<S> keyAttr;
     
     /**
      * 
@@ -46,7 +46,7 @@ public class Entry {
     /**
      * 
      */
-    private SElementList valueAttr;
+    private ArrayList<S> valueAttr;
 
     /**
      * 
@@ -55,9 +55,9 @@ public class Entry {
      */
     public Entry(String key, String value) {
         this.key = key;
-        keyAttr = new SElementList();
+        keyAttr = new ArrayList<S>();
         this.value = value;
-        valueAttr = new SElementList();
+        valueAttr = new ArrayList<S>();
     }
 
     /**
@@ -80,7 +80,7 @@ public class Entry {
      * 
      * @param keyAttr
      */
-    public void setKeyAttr(SElementList keyAttr) {
+    public void setKeyAttr(ArrayList<S> keyAttr) {
         this.keyAttr = keyAttr;
     }
 
@@ -88,7 +88,7 @@ public class Entry {
      * 
      * @return The attributes
      */
-    public SElementList getKeyAttr() {
+    public ArrayList<S> getKeyAttr() {
         return this.keyAttr;
     }
 
@@ -112,7 +112,7 @@ public class Entry {
      * 
      * @param valueAttr
      */
-    public void setValueAttr(SElementList valueAttr) {
+    public void setValueAttr(ArrayList<S> valueAttr) {
         this.valueAttr = valueAttr;
     }
 
@@ -120,7 +120,7 @@ public class Entry {
      * 
      * @return The list of attributes
      */
-    public SElementList getValueAttr() {
+    public ArrayList<S> getValueAttr() {
         return this.valueAttr;
     }
 }

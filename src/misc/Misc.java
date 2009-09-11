@@ -146,12 +146,12 @@ public class Misc {
                     ne.addChild(pE);
 
                     R rE = new R();
-                    for (S sE : p.getL().getSElements()) {
+                    for (S sE : p.getL().getSymbols()) {
                         if (sE.getValue().equals("adj")) {
                             sE.setValue("n");
                         }
                     }
-                    for (S sE : p.getR().getSElements()) {
+                    for (S sE : p.getR().getSymbols()) {
                         if (sE.getValue().equals("adj")) {
                             sE.setValue("n");
                         }

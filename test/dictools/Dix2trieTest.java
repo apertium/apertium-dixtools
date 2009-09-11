@@ -14,7 +14,7 @@ import org.junit.Test;
  *
  * @author Jacob Nordfalk
  */
-public class Testdix2trie extends TestTools {
+public class Dix2trieTest extends TestTools {
 
     @Test
   public void test_dix2trie() throws Exception {
@@ -24,7 +24,7 @@ public class Testdix2trie extends TestTools {
       return;
     }
 
-    dictools.ProcessDics.main(new String[] {"dix2trie", "test/sample.eo-en.dix", "lr", "regression_test_data/dic-reader/actual_output.txt"});
+    dictools.ProcessDics.main(new String[] {"dix2trie", "test/sample.eo-en.dix", "lr", rm("regression_test_data/dic-reader/actual_output.txt")});
     String diff=exec( "diff -bBw regression_test_data/dix2trie/expected_output.txt regression_test_data/dix2trie/actual_output.txt");
     Assert.assertEquals("Difference", "", diff);
   }

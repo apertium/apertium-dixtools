@@ -14,7 +14,7 @@ import org.junit.Test;
  *
  * @author Jacob Nordfalk
  */
-public class Testreversebil extends TestTools {
+public class ReversebilTest extends TestTools {
 
 
 
@@ -26,7 +26,7 @@ public class Testreversebil extends TestTools {
       return;
     }
 
-    dictools.ProcessDics.main(new String[] {"reverse-bil", "test/sample.eo-en.dix", "regression_test_data/reverse-bil/actual_output.dix"});
+    dictools.ProcessDics.main(new String[] {"reverse-bil", "test/sample.eo-en.dix", rm("regression_test_data/reverse-bil/actual_output.dix")});
     String diff=exec( "diff -bBw -I apertium-dixtools regression_test_data/reverse-bil/expected_output.dix regression_test_data/reverse-bil/actual_output.dix");
     Assert.assertEquals("Difference", "", diff);
   }

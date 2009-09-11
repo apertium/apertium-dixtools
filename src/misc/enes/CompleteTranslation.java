@@ -27,7 +27,6 @@ import dics.elements.dtd.P;
 import dics.elements.dtd.R;
 import dics.elements.dtd.S;
 import dics.elements.dtd.TextElement;
-import dics.elements.utils.SElementList;
 import dictools.xml.DictionaryReader;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -72,7 +71,6 @@ public class CompleteTranslation {
             L left = ee.getLeft();
             if (left != null) {
                 System.out.println("Completing " + left.getValueNoTags());
-                SElementList slist = left.getSElements();
                 String source = left.getValueNoTags();
                 if (source != null) {
                     String translation = translations.get(source);
@@ -80,7 +78,7 @@ public class CompleteTranslation {
                         R rE = new R();
                         TextElement tE = new TextElement(translation);
                         rE.addChild(tE);
-                        for (S sE : slist) {
+                        for (S sE : left.getSymbols()) {
                             rE.addChild(sE);
                         }
                         if (ee.getP() != null) {

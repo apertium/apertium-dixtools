@@ -42,12 +42,7 @@ import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
 import dics.elements.utils.DicOpts;
 import dics.elements.utils.DicSet;
-import dics.elements.utils.DictionaryElementList;
-import dics.elements.utils.EElementList;
-import dics.elements.utils.EElementMap;
-import dics.elements.utils.EHashMap;
 import dics.elements.utils.Msg;
-import dics.elements.utils.SElementList;
 import dictools.crossmodel.Action;
 import dictools.crossmodel.CrossAction;
 import dictools.crossmodel.CrossModel;
@@ -106,11 +101,11 @@ public class DicCross  extends AbstractDictTool{
     /**
      *
      */
-    private EHashMap processed;
+    private HashMap<String, E> processed;
     /**
      *
      */
-    private EHashMap regExProcessed;
+    private HashMap<String, E> regExProcessed;
     /**
      *
      */
@@ -188,8 +183,8 @@ public class DicCross  extends AbstractDictTool{
         msg.setLogFileName("cross.log");
         rMatrix = new int[3][3];
         fillOutRestrictionMatrix();
-        processed = new EHashMap();
-        regExProcessed = new EHashMap();
+        processed = new HashMap<String, E>();
+        regExProcessed = new HashMap<String, E>();
         nDCrossActions = new HashMap<String, CrossAction>();
         nDCrossModel = new CrossModel();
         usedPatterns = new HashMap<String, Integer>();
@@ -412,10 +407,10 @@ public class DicCross  extends AbstractDictTool{
         Section section = new Section();
         section.setID(section1.getID());
         section.setType(section1.getType());
-        EElementList elements1 = section1.getEElements();
-        EElementList elements2 = section2.getEElements();
-        EElementMap section1Map = DicTools.buildHash(elements1);
-        EElementMap section2Map = DicTools.buildHash(elements2);
+        ArrayList<E> elements1 = section1.getEElements();
+        ArrayList<E> elements2 = section2.getEElements();
+        HashMap<String, ArrayList<E>> section1Map = DicTools.buildHash(elements1);
+        HashMap<String, ArrayList<E>> section2Map = DicTools.buildHash(elements2);
         crossSectionsAB(elements1, section2Map, section, getBilBC(), 0);
         section2Map = null;
         crossSectionsAB(elements2, section1Map, section, getBilAB(), 1);
@@ -432,7 +427,7 @@ public class DicCross  extends AbstractDictTool{
      * @param bil
      * @param dir
      */
-    private void crossSectionsAB(EElementList elements, EElementMap sectionMap, Section section, Dictionary bil, int dir) {
+    private void crossSectionsAB(ArrayList<E> elements, HashMap<String, ArrayList<E>> sectionMap, Section section, Dictionary bil, int dir) {
         for (E e : elements) {
             if (e.isRegEx()) {
                 String key = e.getRegEx().getValue();
@@ -441,7 +436,7 @@ public class DicCross  extends AbstractDictTool{
                     getRegExProcessed().put(e.getRegEx().getValue(), e);
                 }
             } else {
-                EElementList candidates = getPairs(e, sectionMap);
+                ArrayList<E> candidates = getPairs(e, sectionMap);
                 if (candidates != null) {
                     crossElementAndPairs(e, candidates, section, dir);
                 }
@@ -456,10 +451,10 @@ public class DicCross  extends AbstractDictTool{
      * @param section
      * @param dir
      */
-    private void crossElementAndPairs(E e1, EElementList candidates, Section section, int dir) {
+    private void crossElementAndPairs(E e1, ArrayList<E> candidates, Section section, int dir) {
         try {
             for (E e2 : candidates) {
-                EElementList actionEList = cross(e1, e2, dir);
+                ArrayList<E> actionEList = cross(e1, e2, dir);
                 if (!actionEList.isEmpty()) {
                     for (E e : actionEList) {
                         String str = e.getHash();
@@ -500,8 +495,8 @@ public class DicCross  extends AbstractDictTool{
      * @param dir
      * @return
      */
-    private EElementList cross(E e1, E e2, int dir) {
-        EElementList actionEList = new EElementList();
+    private ArrayList<E> cross(E e1, E e2, int dir) {
+        ArrayList<E> actionEList = new ArrayList<E>();
         this.incrementNCrossedElements();
         if (dir != 0) {
             E aux;
@@ -537,8 +532,8 @@ public class DicCross  extends AbstractDictTool{
      * @param cad
      * @return
      */
-    private EElementList applyCrossAction(E e1, E e2, CrossActionData cad) {
-        EElementList elementList = new EElementList();
+    private ArrayList<E> applyCrossAction(E e1, E e2, CrossActionData cad) {
+        ArrayList<E> elementList = new ArrayList<E>();
         CrossAction cA = cad.getCrossAction();
 
         for (Action action : cA.getActionSet()) {
@@ -637,7 +632,7 @@ public class DicCross  extends AbstractDictTool{
                         ceWrite.addChild(new S(sx));
                     }
                     if (x.startsWith("S")) {
-                        SElementList sxlist = (SElementList) vars.get(x);
+                        ArrayList<S> sxlist = (ArrayList<S>) vars.get(x);
                         for (S sE : sxlist) {
                             ceWrite.addChild(new S(sE));
                         }
@@ -657,10 +652,10 @@ public class DicCross  extends AbstractDictTool{
      * @param hm
      * @return Undefined     
      */
-    private EElementList getPairs(E e, EElementMap hm) {
+    private ArrayList<E> getPairs(E e, HashMap<String, ArrayList<E>> hm) {
         String lemma = e.getValue("L");
         lemma = DicTools.clearTags(lemma);
-        EElementList pairs = hm.get(lemma);
+        ArrayList<E> pairs = hm.get(lemma);
         return pairs;
     }
 
@@ -756,14 +751,14 @@ public class DicCross  extends AbstractDictTool{
     /**
      * @return the processed
      */
-    private EHashMap getProcessed() {
+    private HashMap<String, E> getProcessed() {
         return processed;
     }
 
     /**
      * @return the regExProcessed
      */
-    private EHashMap getRegExProcessed() {
+    private HashMap<String, E> getRegExProcessed() {
         return regExProcessed;
     }
 
@@ -878,16 +873,16 @@ public class DicCross  extends AbstractDictTool{
         bilCrossed.setRightLanguage(tl);
         msg.out("[" + (taskOrder++) + "] Making consistent morphological dicionaries ...\n");
 
-        EElementList[] commonCrossedMons = DicTools.makeConsistent(bilCrossed, dicSet.getMon1(), dicSet.getMon2());
-        EElementList crossedMonA = commonCrossedMons[0];
-        EElementList crossedMonB = commonCrossedMons[1];
+        ArrayList<E>[] commonCrossedMons = DicTools.makeConsistent(bilCrossed, dicSet.getMon1(), dicSet.getMon2());
+        ArrayList<E> crossedMonA = commonCrossedMons[0];
+        ArrayList<E> crossedMonB = commonCrossedMons[1];
 
         Dictionary monACrossed = new Dictionary(dicSet.getMon1());
         monACrossed.setMainSection(crossedMonA);
         Dictionary monBCrossed = new Dictionary(dicSet.getMon2());
         monBCrossed.setMainSection(crossedMonB);
 
-        DictionaryElementList dicList = new DictionaryElementList();
+        ArrayList<Dictionary> dicList = new ArrayList<Dictionary>();
         dicList.add(bilCrossed);
         dicList.add(monACrossed);
         dicList.add(monBCrossed);
@@ -902,7 +897,7 @@ public class DicCross  extends AbstractDictTool{
      * @param sl
      * @param tl
      */
-    private void printXMLCrossed(DictionaryElementList del, String sl, String tl, DicOpts opt) {
+    private void printXMLCrossed(ArrayList<Dictionary> del, String sl, String tl, DicOpts opt) {
         Dictionary bilCrossed = del.get(0);
         Dictionary monACrossed = del.get(1);
         Dictionary monBCrossed = del.get(2);

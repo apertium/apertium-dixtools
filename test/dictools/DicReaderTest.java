@@ -25,7 +25,8 @@ public class DicReaderTest extends TestTools {
     }
 
     // Redirect output
-    Msg.inst().out = new PrintStream("regression_test_data/dic-reader/actual_output.txt");
+    String actout;
+    Msg.inst().out = new PrintStream(actout=rm("regression_test_data/dic-reader/actual_output.txt"));
 
     dictools.ProcessDics.main(new String[] {"list", "paradigms", "test/sample.metadix"});
     dictools.ProcessDics.main(new String[] {"list", "lemmas", "test/sample.metadix"});
@@ -34,7 +35,7 @@ public class DicReaderTest extends TestTools {
 
     Msg.inst().out.close();
     Msg.inst().out = System.out;
-    String diff=exec( "diff -bBw regression_test_data/dic-reader/expected_output.txt regression_test_data/dic-reader/actual_output.txt");
+    String diff=exec( "diff -bBw regression_test_data/dic-reader/expected_output.txt "+actout);
     Assert.assertEquals("Difference", "", diff);
   }
 

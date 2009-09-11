@@ -152,44 +152,12 @@ public class S extends DixElement {
      * 
      * @param str
      * @return Undefined         */
-    public static boolean exists(String str) {
-        return S.sElementList.containsKey(str);
-    }
-
-    /**
-     * 
-     * @param str
-     * @return Undefined         */
     public static S getInstance(String str) {
-/*
-      S sE = null;
-        if (S.exists(str)) {
-            sE = S.sElementList.getInstance(str);
-        } else {
-            sE = new S(str);
-            S.putSElement(sE);
-        }
-*/
         S sE = S.sElementList.get(str);
         if (sE==null) {
             sE = new S(str);
             S.putSElement(sE);
         }
         return sE;
-    }
-
-    /*
-     * public String getTemp() { return temp; }
-     * 
-     * public void setTemp(String temp) { this.temp = temp; }
-     */
-    @Override
-    public Object clone() {
-        try {
-            S cloned = (S) super.clone();
-            return cloned;
-        } catch (Exception ex) {
-            return null;
-        }
     }
 }

@@ -22,8 +22,8 @@ package dictools.cmproc;
 import dics.elements.dtd.DixElement;
 import dics.elements.dtd.S;
 import dics.elements.utils.ElementList;
-import dics.elements.utils.SElementList;
 import dictools.crossmodel.CrossAction;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.regex.Matcher;
 
@@ -318,7 +318,7 @@ public class State {
     private int process_S(String state_v, String v, Variables vars, ElementList patternSequence, int i) {
         boolean continueProcessing = false;
         DixElement e = patternSequence.get(i);
-        SElementList eList = new SElementList();
+        ArrayList<S> eList = new ArrayList<S>();
         int index = 0;
         while (i < patternSequence.size() && !e.getValue().equals("^b")) {
             S sE = new S(e.getValue());
@@ -331,7 +331,7 @@ public class State {
             vars.put(state_v, eList);
             continueProcessing = true;
         } else {
-            SElementList existingValue = (SElementList) vars.get(state_v);
+            ArrayList<S> existingValue = (ArrayList<S>) vars.get(state_v);
             if (existingValue.equals(eList)) {
                 continueProcessing = true;
             }

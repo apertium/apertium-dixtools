@@ -32,7 +32,6 @@ import dics.elements.dtd.Par;
 import dics.elements.dtd.Pardef;
 import dics.elements.dtd.Pardefs;
 import dics.elements.dtd.Section;
-import dics.elements.utils.EElementList;
 import dics.elements.utils.Msg;
 
 /**

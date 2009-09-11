@@ -19,7 +19,6 @@
  */
 package dictools;
 
-import dics.elements.utils.SElementList;
 import dictools.xml.DictionaryReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,10 +34,12 @@ import dics.elements.dtd.P;
 import dics.elements.dtd.Pardef;
 import dics.elements.dtd.Pardefs;
 import dics.elements.dtd.R;
+import dics.elements.dtd.S;
 import dics.elements.dtd.Sdef;
 import dics.elements.dtd.Sdefs;
 import dics.elements.dtd.Section;
 import dics.elements.utils.Msg;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -66,7 +67,7 @@ public class DicList {
     private String url;
 
     protected Msg msg = Msg.inst();
-    private SElementList elementsA;
+    private ArrayList<S> elementsA;
 
     public DicList(String fileName) {
         DictionaryReader dicReader = new DictionaryReader(fileName);
@@ -146,17 +147,17 @@ public class DicList {
                 for (DixElement e : ee.getChildren()) {
                     if (e instanceof I) {
                         I i = (I) e;
-                        elementsA = i.getSElements();
+                        elementsA = i.getSymbols();
                     } else
                     if (e instanceof P) {
                         P p = (P) e;
                         if (side.contentEquals("L")) {
                             L lE = p.getL();
-                            elementsA = lE.getSElements();
+                            elementsA = lE.getSymbols();
                         }
                         if (side.contentEquals("R")) {
                             R rE = p.getR();
-                            elementsA = rE.getSElements();
+                            elementsA = rE.getSymbols();
                         }
                     }
                 }

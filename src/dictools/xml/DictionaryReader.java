@@ -46,9 +46,9 @@ import dics.elements.dtd.S;
 import dics.elements.dtd.Sdef;
 import dics.elements.dtd.Sdefs;
 import dics.elements.dtd.Section;
-import dics.elements.utils.EElementList;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.JProgressBar;
 import org.w3c.dom.Comment;
@@ -398,7 +398,7 @@ public class DictionaryReader extends XMLReader {
                         System.err.println("XInclude (" + fileName + ")");
                         DictionaryReader reader = new DictionaryReader(fileName);
                         Dictionary dic = reader.readDic();
-                        EElementList eList = dic.getAllEntries();
+                        ArrayList<E> eList = dic.getAllEntries();
                         for (E e2 : eList) {
                             sectionElement.addEElement(e2);
                         }

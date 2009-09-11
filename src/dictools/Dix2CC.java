@@ -24,7 +24,6 @@ import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.E;
 import dics.elements.dtd.S;
 import dics.elements.dtd.Section;
-import dics.elements.utils.SElementList;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -100,9 +99,8 @@ public class Dix2CC {
                     String left = ee.getValueNoTags("L");
                     left = tinyFilter.applyToLemma(left);
                     sb.append(left + " ");
-                    SElementList leftS = ee.getSElements("L");
 
-                    for (S sE : leftS) {
+                    for (S sE : ee.getSymbols("L")) {
                         if (this.tinyFilter.preserve(sE.getValue())) {
                             String tagName = this.tinyFilter.rename(sE.getValue());
                             sb.append("{" + tagName + "} ");
@@ -114,8 +112,7 @@ public class Dix2CC {
 
                     right = this.tinyFilter.applyToLemma(right);
                     sb.append(right + " ");
-                    SElementList rightS = ee.getSElements("R");
-                    for (S sE : rightS) {
+                    for (S sE : ee.getSymbols("R")) {
                         if (tinyFilter.preserve(sE.getValue())) {
                             String tagName = this.tinyFilter.rename(sE.getValue());
                             sb.append("{" + tagName + "} ");

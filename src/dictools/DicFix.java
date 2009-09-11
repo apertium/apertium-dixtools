@@ -30,9 +30,8 @@ import dics.elements.dtd.Pardef;
 import dics.elements.dtd.R;
 import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
-import dics.elements.utils.EElementList;
-import dics.elements.utils.EHashMap;
 import dics.elements.utils.Msg;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -96,8 +95,7 @@ public class DicFix  extends AbstractDictTool {
 
         if (dic.isMonol()) DicCross.addMissingLemmas(dic);
 
-
-        EHashMap eMap = new EHashMap();
+        HashMap<String, E> eMap = new HashMap<String, E>();
         for (Section section : dic.getSections()) {
             int duplicated = 0;
             E eePrevious = null;

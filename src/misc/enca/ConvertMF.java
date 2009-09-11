@@ -29,9 +29,8 @@ import dics.elements.dtd.R;
 import dics.elements.dtd.S;
 import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
-import dics.elements.utils.EElementList;
-import dics.elements.utils.SElementList;
 import dictools.xml.DictionaryReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -136,21 +135,16 @@ public class ConvertMF {
      * @param bil
      */
     private void processNouns(HashMap<String, E> mfElementsNouns, Dictionary bil) {
-        boolean isF, isM, isNoun;
-        EElementList toRemove = new EElementList();
+        boolean isF=false, isM=false, isNoun=false;
+        ArrayList<E> toRemove = new ArrayList<E>();
         for (E e : bil.getAllEntries()) {
             if (mfElementsNouns.containsKey(e.getValue("R"))) {
-                SElementList attr = e.getRight().getSElements();
-                isF = isM = isNoun = false;
-                if (attr.is("m")) {
-                    isM = true;
+                for (S s : e.getRight().getSymbols()) {
+                  if ("m".equals(s.getValue())) isM = true;
+                  if ("n".equals(s.getValue())) isNoun = true;
+                  if ("f".equals(s.getValue())) isF = true;
                 }
-                if (attr.is("f")) {
-                    isF = true;
-                }
-                if (attr.is("n")) {
-                    isNoun = true;
-                }
+
                 if (e.hasRestriction()) {
                     if (e.getRestriction().equals("RL")) {
                         if (isF && isNoun) {
@@ -159,7 +153,7 @@ public class ConvertMF {
                     }
                 } else {
                     if (isM && isNoun) {
-                        SElementList sList = e.getRight().getSElements();
+                        ArrayList<S> sList = e.getRight().getSymbols();
                         for (S sE : sList) {
                             if (sE.is("m")) {
                                 S newSE = new S("mf");
@@ -171,7 +165,7 @@ public class ConvertMF {
                 }
             }
         }
-        EElementList list = new EElementList();
+        ArrayList<E> list = new ArrayList<E>();
         for (E e : toRemove) {
             list.add(e);
         }
@@ -191,13 +185,13 @@ public class ConvertMF {
     private void processAdjs(HashMap<String, E> mfElementsAdjs, Dictionary bil) {
         for (E e : bil.getAllEntries()) {
             if (mfElementsAdjs.containsKey(e.getValue("R"))) {
-                SElementList attributes = e.getRight().getSElements();
-                if (attributes.is("adj")) {
-                    e.getRight().addChild(new S("mf"));
+                for (S s : e.getRight().getSymbols()) {
+                  if ("adj".equals(s.getValue())) e.getRight().addChild(new S("mf"));
                 }
             }
         }
     }
+
 
     /**
      * 
@@ -214,15 +208,10 @@ public class ConvertMF {
             boolean isNoun = false;
             boolean isAdj = false;
             for (E e : pardef.getEElements()) {
-                SElementList attr = e.getRight().getSElements();
-                if (attr.is("mf")) {
-                    isMF = true;
-                }
-                if (attr.is("n")) {
-                    isNoun = true;
-                }
-                if (attr.is("adj")) {
-                    isAdj = true;
+                for (S s : e.getRight().getSymbols()) {
+                  if ("mf".equals(s.getValue())) isMF = true;
+                  if ("n".equals(s.getValue())) isNoun = true;
+                  if ("adj".equals(s.getValue())) isAdj = true;
                 }
             }
             if (isMF && isNoun) {
@@ -263,7 +252,7 @@ public class ConvertMF {
             L lE = e1.getLeft();
             R rE = e1.getRight();
 
-            SElementList attr = lE.getSElements();
+            ArrayList<S> attr = lE.getSymbols();
             if (attr.size() > 0) {
                 S attr0 = attr.get(0);
                 if (attr0 != null) {

@@ -33,12 +33,12 @@ import org.junit.runners.Suite;
       dictools.ReadAndWriteBidixTest.class,
 
       dictools.CrossDictTest.class,
-      dictools.Testmergemorph_equivparadigms.class,
+      dictools.MergemorphEquivparTest.class,
       dictools.DicReaderTest.class,
-      dictools.Testdix2tiny.class,
-      dictools.Testdix2trie.class,
-      dictools.Testreversebil.class,
-      dictools.Testsort.class,
+      dictools.Dix2tinyTest.class,
+      dictools.Dix2trieTest.class,
+      dictools.ReversebilTest.class,
+      dictools.SortTest.class,
       misc.eoen.SubstractBidixTest.class})
 //@Suite.SuiteClasses({dictools.ReadAndWriteMonodixTest.class})
 

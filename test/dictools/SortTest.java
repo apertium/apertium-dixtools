@@ -15,7 +15,7 @@ import org.junit.Test;
  *
  * @author Jacob Nordfalk
  */
-public class Testsort extends TestTools {
+public class SortTest extends TestTools {
 
 
 

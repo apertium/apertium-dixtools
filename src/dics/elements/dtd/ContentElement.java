@@ -24,9 +24,9 @@ import java.io.IOException;
 
 import dics.elements.utils.ElementList;
 import dics.elements.utils.Msg;
-import dics.elements.utils.SElementList;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 
 /**
  * 
@@ -57,14 +57,6 @@ public abstract class ContentElement extends DixElement implements Cloneable {
 
     /**
      * 
-     * @param value
-     */
-    public ContentElement(String value) {
-        setValue(value);
-    }
-
-    /**
-     * 
      * @param cE
      */
     public ContentElement(ContentElement cE) {
@@ -83,8 +75,8 @@ public abstract class ContentElement extends DixElement implements Cloneable {
     /**
      * 
      * @return Undefined         */
-    public SElementList getSElements() {
-        SElementList sEList = new SElementList();
+    public ArrayList<S> getSymbols() {
+        ArrayList<S> sEList = new ArrayList<S>();
         for (DixElement e : children) {
             if (e instanceof S) {
                 S sE = (S) e;
@@ -138,8 +130,8 @@ public abstract class ContentElement extends DixElement implements Cloneable {
      * @param value
      * @return Undefined         */
     public boolean is(String value) {
-        if (getSElements().size() > 0) {
-            S sE = getSElements().get(0);
+        if (getSymbols().size() > 0) {
+            S sE = getSymbols().get(0);
             if (sE != null) {
                 if (sE.is(value)) {
                     return true;
@@ -157,7 +149,7 @@ public abstract class ContentElement extends DixElement implements Cloneable {
      * @return true is the element contains a certain definition ('m', 'adj', etc)
      */
     public boolean contains(String def) {
-        for (S sE : this.getSElements()) {
+        for (S sE : this.getSymbols()) {
             if (sE.getValue().equals(def)) {
                 return true;
             }
@@ -248,7 +240,7 @@ public abstract class ContentElement extends DixElement implements Cloneable {
      */
     public void changeFirstSElement(String value) {
         S sE2 = new S(value);
-        getSElements().set(0, sE2);
+        getSymbols().set(0, sE2);
         int j = 0;
         for (int i = 0; i < children.size(); i++) {
             DixElement e = children.get(i);
@@ -268,7 +260,7 @@ public abstract class ContentElement extends DixElement implements Cloneable {
      * @return Undefined         */
     public String getString() {
         String str = "";
-        for (S s : getSElements()) {
+        for (S s : getSymbols()) {
             str += s.toString();
         }
         return str;
@@ -280,7 +272,7 @@ public abstract class ContentElement extends DixElement implements Cloneable {
     public String getInfo() {
         String str = "(";
         int i = 0;
-        for (S s : getSElements()) {
+        for (S s : getSymbols()) {
             // para que no se considere la primera etiqueta, la de
             // categoria,
             // para encontrar paradigmas equivalentes.
@@ -356,20 +348,6 @@ public abstract class ContentElement extends DixElement implements Cloneable {
         return str;
     }
 
-    /**
-     * 
-     * 
-     */
-    public void print(Msg msg) {
-        msg.log(value + " / ");
-        SElementList sList = getSElements();
-        if (sList != null) {
-            for (S s : getSElements()) {
-                msg.log(s.toString());
-            }
-        }
-        msg.log("\n");
-    }
 
     /**
      * 

@@ -27,7 +27,6 @@ import dics.elements.dtd.S;
 import dics.elements.utils.DicOpts;
 import dics.elements.utils.ElementList;
 import dics.elements.utils.Msg;
-import dics.elements.utils.SElementList;
 import java.io.OutputStreamWriter;
 
 /**
@@ -155,10 +154,10 @@ public class ActionSet extends ArrayList<Action> {
         int nTails = 0;
         CrossAction cA = getCrossAction();
 
-        SElementList e1L = cA.getPattern().getAB().getSElements("L");
-        SElementList e1R = cA.getPattern().getAB().getSElements("R");
-        SElementList e2L = cA.getPattern().getBC().getSElements("L");
-        SElementList e2R = cA.getPattern().getBC().getSElements("R");
+        ArrayList<S> e1L = cA.getPattern().getAB().getSymbols("L");
+        ArrayList<S> e1R = cA.getPattern().getAB().getSymbols("R");
+        ArrayList<S> e2L = cA.getPattern().getBC().getSymbols("L");
+        ArrayList<S> e2R = cA.getPattern().getBC().getSymbols("R");
 
         if (containsTail(e1L)) {
             nTails++;
@@ -181,7 +180,7 @@ public class ActionSet extends ArrayList<Action> {
      * @param list
      * @return Undefined         
      */
-    private boolean containsTail(SElementList list) {
+    private boolean containsTail(ArrayList<S> list) {
         for (S s : list) {
             if (s.getValue().equals("0")) {
                 return true;

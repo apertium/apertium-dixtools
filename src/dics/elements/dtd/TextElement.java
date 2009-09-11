@@ -33,7 +33,7 @@ public class TextElement extends DixElement {
     /**
      * 
      */
-    private String value;
+    private String text;
 
     /**
      * 
@@ -41,7 +41,7 @@ public class TextElement extends DixElement {
      */
     public TextElement(String str) {
         setTagName("");
-        value = str;
+        text = str;
     }
 
     /**
@@ -58,7 +58,7 @@ public class TextElement extends DixElement {
         // so we can't escape > and < !
         // replaceAll("<", "&lt;").replaceAll(">", "&gt;").
 
-        dos.append(value.replace("&", "&amp;").replace("\"", "&apos;"));
+        dos.append(text.replace("&", "&amp;").replace("\"", "&apos;"));
 
         //not necesary: dos.append(appendCharacterData);
     }
@@ -66,23 +66,11 @@ public class TextElement extends DixElement {
     /**
      * 
      * @return Undefined         */
-    @Override
     public String getValue() {
-        return value;
+        return text;
     }
 
-    @Override
     public void setValue(String v) {
-        value = v;
-    }
-
-    /**
-     * 
-     */
-    @Override
-    public String toString() {
-        String str = "";
-        str += getValue();
-        return str;
+        text = v;
     }
 }

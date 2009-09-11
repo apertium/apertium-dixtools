@@ -20,7 +20,7 @@
 package dictools.cmproc;
 
 import dics.elements.dtd.S;
-import dics.elements.utils.SElementList;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -50,9 +50,9 @@ public class Variables extends HashMap<String, Object> {
             if (obj instanceof String) {
                 put(new String(key), new String((String) obj));
             }
-            if (obj instanceof SElementList) {
-                SElementList sEList = (SElementList) obj;
-                put(new String(key), new SElementList(sEList));
+            if (obj instanceof ArrayList) {  // <S>
+                ArrayList<S> sEList = (ArrayList<S>) obj;
+                put(new String(key), new ArrayList<S>(sEList));
             }
         }
     }
@@ -69,9 +69,9 @@ public class Variables extends HashMap<String, Object> {
             if (obj instanceof String) {
                 System.out.println(key + ": " + ((String) obj));
             }
-            if (obj instanceof SElementList) {
+            if (obj instanceof ArrayList) { // <S>
                 System.out.print(key + ": ");
-                for (S e : (SElementList) obj) {
+                for (S e : (ArrayList<S>) obj) {
                     System.out.print(e.getValue() + ", ");
                 }
                 System.out.println("");

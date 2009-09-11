@@ -15,7 +15,7 @@ import org.junit.Test;
  *
  * @author Jacob Nordfalk
  */
-public class Testdix2tiny extends TestTools {
+public class Dix2tinyTest extends TestTools {
 
 @Test
   public void test_dix2tiny() throws Exception {
@@ -27,8 +27,7 @@ public class Testdix2tiny extends TestTools {
 
     dictools.ProcessDics.main(new String[] {"dix2tiny", "test/sample.eo-en.dix", "eo-en", "Esperanto-English", "all"});
 
-    String dir = "regression_test_data/dix2tiny/actual_output";
-    rm(dir);
+    String dir = rm("regression_test_data/dix2tiny/actual_output");
     new File(dir).mkdirs();
     exec("mv eo-en-data.cc "+dir);
     exec("rm -f eo-en-apertium-palm.pdb");

@@ -25,7 +25,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import dics.elements.utils.EElementList;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
@@ -47,7 +46,7 @@ public class Section extends DixElement {
     /**
      * 
      */
-    private EElementList eElements;
+    private ArrayList<E> eElements;
     /**
      * 
      */
@@ -59,7 +58,7 @@ public class Section extends DixElement {
      */
     public Section() {
         setTagName("section");
-        eElements = new EElementList();
+        eElements = new ArrayList<E>();
         includes = new ArrayList<String>();
     }
 
@@ -70,7 +69,7 @@ public class Section extends DixElement {
      */
     public Section(String id, String type) {
         setTagName("section");
-        eElements = new EElementList();
+        eElements = new ArrayList<E>();
         includes = new ArrayList<String>();
         this.id = id;
         this.type = type;
@@ -109,7 +108,7 @@ public class Section extends DixElement {
     /**
      * 
      * @return Undefined         */
-    public EElementList getEElements() {
+    public ArrayList<E> getEElements() {
         return eElements;
     }
 
@@ -196,7 +195,7 @@ public class Section extends DixElement {
      * @param elements
      *                the eElements to set
      */
-    public void setEElements(EElementList elements) {
+    public void setEElements(ArrayList<E> elements) {
         eElements = elements;
     }
 

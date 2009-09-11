@@ -29,8 +29,6 @@ import java.util.Set;
 import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.E;
 import dics.elements.utils.DicSet;
-import dics.elements.utils.EElementList;
-import dics.elements.utils.EElementMap;
 
 /**
  * 
@@ -58,17 +56,17 @@ public class DicTools {
      * 
      * @param entries
      * @return Undefined         */
-    public static EElementMap buildHash(ArrayList<E> entries) {
-        EElementMap entriesMap = new EElementMap();
+    public static HashMap<String, ArrayList<E>> buildHash(ArrayList<E> entries) {
+        HashMap<String, ArrayList<E>> entriesMap = new HashMap<String, ArrayList<E>>();
         for (E e : entries) {
             String value = e.getValue("L");
             String key = DicTools.clearTags(value);
             if (entriesMap.containsKey(key)) {
-                EElementList eList = entriesMap.get(key);
+                ArrayList<E> eList = entriesMap.get(key);
                 eList.add(e);
                 entriesMap.put(key, eList);
             } else {
-                EElementList eList = new EElementList();
+                ArrayList<E> eList = new ArrayList<E>();
                 eList.add(e);
                 entriesMap.put(key, eList);
             }
@@ -81,18 +79,18 @@ public class DicTools {
      * @param entries
      * @param side
      * @return Undefined         */
-    public static EElementMap buildHash(ArrayList<E> entries, String side) {
-        EElementMap entriesMap = new EElementMap();
+    public static HashMap<String, ArrayList<E>> buildHash(ArrayList<E> entries, String side) {
+        HashMap<String, ArrayList<E>> entriesMap = new HashMap<String, ArrayList<E>>();
         for (E e : entries) {
             String value = e.getValue(side);
             String key = DicTools.clearTags(value);
 
             if (entriesMap.containsKey(key)) {
-                EElementList eList = entriesMap.get(key);
+                ArrayList<E> eList = entriesMap.get(key);
                 eList.add(e);
                 entriesMap.put(key, eList);
             } else {
-                EElementList eList = new EElementList();
+                ArrayList<E> eList = new ArrayList<E>();
                 eList.add(e);
                 entriesMap.put(key, eList);
             }
@@ -105,8 +103,8 @@ public class DicTools {
      * @param entries
      * @return Undefined
      */
-    public static EElementMap buildHashMon(ArrayList<E> entries) {
-        EElementMap entriesMap = new EElementMap();
+    public static HashMap<String, ArrayList<E>> buildHashMon(ArrayList<E> entries) {
+        HashMap<String, ArrayList<E>> entriesMap = new HashMap<String, ArrayList<E>>();
 
         for (E e : entries) {
             String lemma = e.getLemma();
@@ -116,11 +114,11 @@ public class DicTools {
             }
             String key = DicTools.clearTags(lemma);
             if (entriesMap.containsKey(key)) {
-                EElementList eList = entriesMap.get(key);
+                ArrayList<E> eList = entriesMap.get(key);
                 eList.add(e);
                 entriesMap.put(key, eList);
             } else {
-                EElementList eList = new EElementList();
+                ArrayList<E> eList = new ArrayList<E>();
                 eList.add(e);
                 entriesMap.put(key, eList);
             }
@@ -204,20 +202,20 @@ public class DicTools {
      * @param monA
      * @param monB
      */
-    public static EElementList[] makeConsistent(Dictionary bilAB,
+    public static ArrayList<E>[] makeConsistent(Dictionary bilAB,
             Dictionary monA, Dictionary monB) {
-        EElementList[] consistentMons = new EElementList[2];
+        ArrayList[] consistentMons = new ArrayList[2];
         ArrayList<E> elements = bilAB.getEntries();
 
-        EElementMap bilABMapL = DicTools.buildHash(elements, "L");
-        EElementMap bilABMapR = DicTools.buildHash(elements, "R");
+        HashMap<String, ArrayList<E>> bilABMapL = DicTools.buildHash(elements, "L");
+        HashMap<String, ArrayList<E>> bilABMapR = DicTools.buildHash(elements, "R");
 
-        EElementMap monAMap = DicTools.buildHashMon(monA.getEntries());
-        EElementMap monBMap = DicTools.buildHashMon(monB.getEntries());
+        HashMap<String, ArrayList<E>> monAMap = DicTools.buildHashMon(monA.getEntries());
+        HashMap<String, ArrayList<E>> monBMap = DicTools.buildHashMon(monB.getEntries());
 
-        EElementList monAConsistent = DicTools.makeConsistent(bilABMapL,"L", monAMap);
+        ArrayList<E> monAConsistent = DicTools.makeConsistent(bilABMapL,"L", monAMap);
 
-        EElementList monBConsistent = DicTools.makeConsistent(bilABMapR, "R", monBMap);
+        ArrayList<E> monBConsistent = DicTools.makeConsistent(bilABMapR, "R", monBMap);
 
         Collections.sort(monAConsistent, E.eElementComparatorL);
         consistentMons[0] = monAConsistent;
@@ -233,14 +231,14 @@ public class DicTools {
      * @param side
      * @param monMap
      */
-    private static EElementList makeConsistent(EElementMap bilABMap, String side, EElementMap monMap) {
-        EElementList consistentMon = new EElementList();
+    private static ArrayList<E> makeConsistent(HashMap<String, ArrayList<E>> bilABMap, String side, HashMap<String, ArrayList<E>> monMap) {
+        ArrayList<E> consistentMon = new ArrayList<E>();
         Set<String> keySet = monMap.keySet();
         Iterator<String> it = keySet.iterator();
 
         while (it.hasNext()) {
             String key = it.next();
-            EElementList eList = monMap.get(key);
+            ArrayList<E> eList = monMap.get(key);
             for (E e : eList) {
                 String lemma = e.getLemma();
                 // in case no lemma is defined

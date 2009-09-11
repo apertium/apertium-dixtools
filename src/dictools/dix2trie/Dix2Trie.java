@@ -23,8 +23,8 @@ import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.E;
 import dics.elements.dtd.L;
 import dics.elements.dtd.R;
+import dics.elements.dtd.S;
 import dics.elements.dtd.Section;
-import dics.elements.utils.SElementList;
 import dictools.xml.DictionaryReader;
 import dictools.dix2trie.utils.Entry;
 import dictools.dix2trie.utils.EntryList;
@@ -33,6 +33,7 @@ import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 
 /**
  *
@@ -124,8 +125,8 @@ public class Dix2Trie {
                 String lemmaLeft = left.getValueNoTags();
                 String lemmaRight = right.getValueNoTags();
 
-                SElementList keyList = left.getSElements();
-                SElementList valueList = right.getSElements();
+                ArrayList<S> keyList = left.getSymbols();
+                ArrayList<S> valueList = right.getSymbols();
 
                 if (!lemmaLeft.equals("") && !lemmaRight.equals("")) {
                     if (dir.equals("lr")) {

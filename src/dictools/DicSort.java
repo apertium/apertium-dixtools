@@ -29,10 +29,10 @@ import java.util.Set;
 import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.E;
 import dics.elements.dtd.E.EElementComparator;
+import dics.elements.dtd.S;
 import dics.elements.dtd.Section;
-import dics.elements.utils.EElementList;
 import dics.elements.utils.Msg;
-import dics.elements.utils.SElementList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeSet;
@@ -113,7 +113,7 @@ public class DicSort  extends AbstractDictTool {
         String par=e.getMainParadigmName();
         String cat=null;
         if (par==null) {
-            SElementList sel=e.getSElements("R");
+            ArrayList<S> sel=e.getSymbols("R");
             if (sel!=null&&sel.size()>0) {
                 cat=sel.get(0).getValue()+"_symbol";
             } else {
@@ -131,12 +131,12 @@ public class DicSort  extends AbstractDictTool {
         return cat;
     }
 
-    private EElementList getEElementListForCat(HashMap<String, EElementList> map, String cat) {
-        EElementList l;
+    private ArrayList<E> getElementListForCat(HashMap<String, ArrayList<E>> map, String cat) {
+        ArrayList<E> l;
         if (map.containsKey(cat)) {
             l=map.get(cat);
         } else {
-            l=new EElementList();
+            l=new ArrayList<E>();
             map.put(cat, l);
         }
         return l;
@@ -181,13 +181,13 @@ public class DicSort  extends AbstractDictTool {
     }
 
 
-    private EElementList sortSectionAccordingToCategory(HashMap<String, EElementList> map, Section section) {
+    private ArrayList<E> sortSectionAccordingToCategory(HashMap<String, ArrayList<E>> map, Section section) {
         if (map.size()>1) {
             msg.err("section \""+section.getID()+ "\" categories: "+map.keySet().toString().replaceAll("[ \\[\\]]", ""));
         }
 
-        EElementList listAll=new EElementList();
-        EElementList categoriesWithOnlyOne=new EElementList();
+        ArrayList<E> listAll=new ArrayList<E>();
+        ArrayList<E> categoriesWithOnlyOne=new ArrayList<E>();
 
         EElementComparator eElementComparator = new EElementComparator(sortAccordingToRightSide ? "R":"L");
         eElementComparator.ignoreCase = ignoreCaseWhenSorting;
@@ -195,7 +195,7 @@ public class DicSort  extends AbstractDictTool {
         Iterator it=map.keySet().iterator();
         while (it.hasNext()) {
             String cat=(String) it.next();
-            EElementList list=map.get(cat);
+            ArrayList<E> list=map.get(cat);
             msg.log(cat+": "+list.size());
             if (list.size()>1) {
                 Collections.sort(list, eElementComparator);
@@ -225,7 +225,7 @@ public class DicSort  extends AbstractDictTool {
             int lrs = 0;
             int rls = 0;
             int n = 0;
-            HashMap<String, EElementList> map = new LinkedHashMap<String, EElementList>();
+            HashMap<String, ArrayList<E>> map = new LinkedHashMap<String, ArrayList<E>>();
 
             for (E e : section.getEElements()) {
                 n++;
@@ -242,7 +242,7 @@ public class DicSort  extends AbstractDictTool {
                 String cat=findCategory(e);
                 String catGrp = groupsOfCategoriesToBeSortedTogether.get(cat);
                 if (catGrp != null) cat = catGrp;
-                EElementList l=getEElementListForCat(map, cat);
+                ArrayList<E> l=getElementListForCat(map, cat);
                 l.add(e);
 
             }
@@ -250,7 +250,7 @@ public class DicSort  extends AbstractDictTool {
             msg.log("LR: " + lrs);
             msg.log("RL: " + rls);
 
-            EElementList listAll=sortSectionAccordingToCategory(map, section);
+            ArrayList<E> listAll=sortSectionAccordingToCategory(map, section);
             section.setEElements(listAll);
         }
         msg.err("(categories are kept order according to appearance in source file,  so you can reorder by");

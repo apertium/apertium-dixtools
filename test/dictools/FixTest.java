@@ -14,7 +14,7 @@ import org.junit.Test;
  *
  * @author Jacob Nordfalk
  */
-public class Testfix extends TestTools {
+public class FixTest extends TestTools {
 
 
 
