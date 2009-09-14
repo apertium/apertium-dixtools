@@ -82,11 +82,11 @@ public class CompleteTranslation {
                             rE.addChild(sE);
                         }
                         if (ee.getP() != null) {
-                            ee.getP().setRElement(rE);
+                            ee.getP().r = (rE);
                         } else {
                             P pE = new P();
-                            pE.setRElement(rE);
-                            pE.setRElement(ee.getRight());
+                            pE.r = (rE);
+                            pE.r = (ee.getRight());
                             I iE = ee.getI();
                             ee.getChildren().remove(iE);
                             ee.addChild(pE);

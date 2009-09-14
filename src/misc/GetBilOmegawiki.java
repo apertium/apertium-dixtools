@@ -268,8 +268,8 @@ public class GetBilOmegawiki  extends AbstractDictTool {
         r.addChild(sR);
 
         P p = new P();
-        p.setLElement(l);
-        p.setRElement(r);
+        p.l = (l);
+        p.r = (r);
         e.addChild(p);
         return e;
     }

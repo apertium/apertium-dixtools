@@ -116,8 +116,8 @@ public class AssignParadigm extends AbstractDictTool {
                     R r = new R();
                     TextElement text = new TextElement(leftNoTags);
                     r.addChild(text);
-                    p.setLElement(l);
-                    p.setRElement(r);
+                    p.l = (l);
+                    p.r = (r);
 
                     dic.addEElement(e);
                 }

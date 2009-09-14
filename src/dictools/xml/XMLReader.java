@@ -671,7 +671,7 @@ public class XMLReader {
                     } else
                     if (childElementName.equals("r")) {
                         R rElement = readRElement(childElement);
-                        pElement.setRElement(rElement);
+                        pElement.r = (rElement);
                     } else
                     System.err.println("readPElement(): Unknown node ignored: " + childElementName);
 

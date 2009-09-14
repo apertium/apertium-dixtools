@@ -1156,7 +1156,7 @@ public class E extends DixElement implements Cloneable {
                 L newLE = new L();
                 R newRE = new R();
                 pE.l = newLE;
-                pE.setRElement(newRE);
+                pE.r = (newRE);
 
                 L lE = ((P) e).getL();
                 R rE = ((P) e).getR();

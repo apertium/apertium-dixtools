@@ -57,18 +57,6 @@ public class P extends DixElement {
         this.r = r;
     }
 
-    public void setLElement(L l) {
-        this.l = l;
-    }
-
-    /**
-     * 
-     * @param r
-     */
-    public void setRElement(R r) {
-        this.r = r;
-    }
-
     /**
      * 
      * @return Undefined         */

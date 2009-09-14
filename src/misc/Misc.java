@@ -118,8 +118,8 @@ public class Misc {
             String right = ee.getValue("R");
             R rE = ee.getRight();
             P pE = new P();
-            pE.setLElement(lE);
-            pE.setRElement(rE);
+            pE.l = (lE);
+            pE.r = (rE);
             trans_n.put(left, pE);
         }
 
@@ -157,11 +157,11 @@ public class Misc {
                         }
                     }
 
-                    pE.setLElement(p.getL());
+                    pE.l = (p.getL());
 
                     //rE.addChild(new TextElement(p.getR().getValueNoTags()));
                     //rE.addChild(new S("n"));
-                    pE.setRElement(p.getR());
+                    pE.r = (p.getR());
 
                     section.addEElement(ne);
                 }

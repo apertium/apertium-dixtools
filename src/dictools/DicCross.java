@@ -616,8 +616,8 @@ public class DicCross  extends AbstractDictTool{
         assignValuesSide(lE2, lE, vars);
         assignValuesSide(rE2, rE, vars);
 
-        pE.setLElement(lE2);
-        pE.setRElement(rE2);
+        pE.l = (lE2);
+        pE.r = (rE2);
         eCrossed.addChild(pE);
         return eCrossed;
     }
