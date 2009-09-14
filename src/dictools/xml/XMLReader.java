@@ -667,7 +667,7 @@ public class XMLReader {
                     String childElementName = childElement.getNodeName();
                     if (childElementName.equals("l")) {
                         L lElement = readLElement(childElement);
-                        pElement.setLElement(lElement);
+                        pElement.l = lElement;
                     } else
                     if (childElementName.equals("r")) {
                         R rElement = readRElement(childElement);

@@ -325,7 +325,7 @@ public class Apertiumizer extends AbstractDictTool {
                     e.setComment(token);
                     //System.out.println(token);
                     P pE = new P();
-                    pE.setLElement(left);
+                    pE.l = left;
                     pE.setRElement(right);
                     e.addChild(pE);
                     return e;
@@ -363,7 +363,7 @@ public class Apertiumizer extends AbstractDictTool {
                     if (!token.equals("")) {
                         right.addChild(new TextElement(token));
                         P pE = new P();
-                        pE.setLElement(left);
+                        pE.l = left;
                         pE.setRElement(right);
                         e.addChild(pE);
                         return e;
@@ -407,7 +407,7 @@ public class Apertiumizer extends AbstractDictTool {
                         left.addChild(sE);
                         right.addChild(sE);
                         P pE = new P();
-                        pE.setLElement(left);
+                        pE.l = left;
                         pE.setRElement(right);
                         e.addChild(pE);
                         return e;
@@ -597,7 +597,7 @@ public class Apertiumizer extends AbstractDictTool {
                         R right = new R();
                         right.addChild(new TextElement(replacePoS(new String(itemRight))));
                         P pE = new P();
-                        pE.setLElement(left);
+                        pE.l = left;
                         pE.setRElement(right);
                         e.addChild(pE);
                         eList.add(e);

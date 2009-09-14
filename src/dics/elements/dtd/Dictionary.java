@@ -797,7 +797,7 @@ public class Dictionary extends DixElement {
                         lE.setChildren(rE.getChildren());
                         // rE.setValue(auxValue);
                         rE.setChildren(auxChildren);
-                        ((P) e).setLElement(lE);
+                        ((P) e).l = lE;
                         ((P) e).setRElement(rE);
                     }
                 }
