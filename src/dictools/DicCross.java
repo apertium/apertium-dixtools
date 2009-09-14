@@ -12,7 +12,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
+ * You should have received author copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
@@ -714,7 +714,7 @@ public class DicCross  extends AbstractDictTool{
 
     /**
      *
-     * @param r
+     * @param restriction
      * @return Undefined     */
     private int getRestrictionCode(String r) {
         if (r != null) {
@@ -820,7 +820,7 @@ public class DicCross  extends AbstractDictTool{
 
     /**
      *
-     * @param i
+     * @param ignore
      * @param j
      * @param value
      */
@@ -1270,7 +1270,7 @@ public class DicCross  extends AbstractDictTool{
         } catch (NullPointerException npe) {
             npe.printStackTrace();
         }
-        //msg.out("[-] " + c + " missing 'lm' atrributes generated\n");
+        //msg.out("[-] " + comment + " missing 'lemma' atrributes generated\n");
         return dic;
     }
 

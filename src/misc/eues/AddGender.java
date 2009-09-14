@@ -94,7 +94,7 @@ public class AddGender {
                         Pardef par = pars.getParadigmDefinition(parName);
                         if (par != null) {
                             for (E eepar : par.getEElements()) {
-                                R r = eepar.getP().getR();
+                                R r = eepar.getP().r;
                                 for (DixElement er : r.getChildren()) {
                                     if (er instanceof S) {
                                         S s = (S) er;

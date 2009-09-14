@@ -139,29 +139,29 @@ public class Misc {
                 System.err.println("Falta " + lemma + " en el bilingüe");
                 P p = trans_n.get(lemma);
                 if (p != null) {
-                    System.err.println("Nuevo: " + p.getR().getValueNoTags() + " / " + lemma);
+                    System.err.println("Nuevo: " + p.r.getValueNoTags() + " / " + lemma);
                     E ne = new E();
                     ne.setComment("check");
                     P pE = new P();
                     ne.addChild(pE);
 
                     R rE = new R();
-                    for (S sE : p.getL().getSymbols()) {
+                    for (S sE : p.l.getSymbols()) {
                         if (sE.getValue().equals("adj")) {
                             sE.setValue("n");
                         }
                     }
-                    for (S sE : p.getR().getSymbols()) {
+                    for (S sE : p.r.getSymbols()) {
                         if (sE.getValue().equals("adj")) {
                             sE.setValue("n");
                         }
                     }
 
-                    pE.l = (p.getL());
+                    pE.l = (p.l);
 
-                    //rE.addChild(new TextElement(p.getR().getValueNoTags()));
+                    //rE.addChild(new TextElement(p.r.getValueNoTags()));
                     //rE.addChild(new S("n"));
-                    pE.r = (p.getR());
+                    pE.r = (p.r);
 
                     section.addEElement(ne);
                 }

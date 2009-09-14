@@ -12,7 +12,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
+ * You should have received author copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
@@ -37,26 +37,25 @@ import java.util.Comparator;
  */
 public class E extends DixElement implements Cloneable {
 
-
     private ElementList children = new ElementList();
 
-    private String r;
+    public String restriction;
 
-    private String slr;
+    public String slr;
     
-    private String srl;
+    public String srl;
     
-    private String lm;
+    public String lemma;
     
-    private String a;
+    public String author;
     
-    private String c;
+    public String comment;
     
-    private String i;
+    public String ignore;
     
-    private String aversion;
+    public String aversion;
     
-    private String alt;
+    public String alt;
     
     private boolean shared = false;
     
@@ -72,7 +71,7 @@ public class E extends DixElement implements Cloneable {
     }
 
     public E(String r, String lm, String a,  String c) {
-        this.r = r;
+        this.restriction = r;
 
         // JimRegan's dubious fix.
         // Should really be in DicFix or somewhere else, and not in the DTD code.
@@ -82,9 +81,9 @@ public class E extends DixElement implements Cloneable {
  //       escapedlm = escapedlm.replaceAll("\\&", "\\&amp;");
   //      this.setLemma(escapedlm);
 
-        this.lm = lm;
-        this.a = a;
-        this.c = c;
+        this.lemma = lm;
+        this.author = a;
+        this.comment = c;
     }
 
 
@@ -97,27 +96,27 @@ public class E extends DixElement implements Cloneable {
     }
 
     public void setLemma(String value) {
-        lm = value;
+        lemma = value;
     }
 
     public String getLemma() {
-        return lm;
+        return lemma;
     }
 
     public void setRestriction(String value) {
-        r = value;
+        restriction = value;
     }
 
     public String getRestriction() {
-        return r;
+        return restriction;
     }
 
     public void setComment(String comment) {
-        c = comment;
+        this.comment = comment;
     }
 
     public String getComment() {
-        return c;
+        return comment;
     }
 
     public String getSlr() {
@@ -136,33 +135,20 @@ public class E extends DixElement implements Cloneable {
         this.srl = srl;
     }
 
-    /*
-    public void setProcessingComments(String value, String side) {
-        for (DixElement e : children) {
-            if (e instanceof I) {
-                ((I) e).setProcessingComments(value);
-            }
-            if (e instanceof P) {
-                ((P) e).setProcessingComments(value, side);
-            }
-        }
-    }*/
-
-
     public void setIgnore(String i) {
-        this.i = i;
+        this.ignore = i;
     }
 
     public String getIgnore() {
-        return this.i;
+        return this.ignore;
     }
 
     public void setAuthor(String value) {
-        a = value;
+        author = value;
     }
 
     public String getAuthor() {
-        return a;
+        return author;
     }
 
     
@@ -175,7 +161,7 @@ public class E extends DixElement implements Cloneable {
     }
 
     /**
-     * Comprueba si dos entradas son iguales (de la lengua comn a los dos
+     * Comprueba si dos entradas son iguales (de la lengua comn author los dos
      * elementos)
      * 
      * @param e
@@ -227,10 +213,10 @@ public class E extends DixElement implements Cloneable {
             }
             if (e instanceof P) {
                 if (side.equals("L")) {
-                    return ((P) e).getL().getValue();
+                    return ((P) e).l.getValue();
                 }
                 if (side.equals("R")) {
-                    return ((P) e).getR().getValue();
+                    return ((P) e).r.getValue();
                 }
             }
         }
@@ -249,10 +235,10 @@ public class E extends DixElement implements Cloneable {
             }
             if (e instanceof P) {
                 if (side.equals("L")) {
-                    return ((P) e).getL().getValueNoTags();
+                    return ((P) e).l.getValueNoTags();
                 }
                 if (side.equals("R")) {
-                    return ((P) e).getR().getValueNoTags();
+                    return ((P) e).r.getValueNoTags();
                 }
             }
         }
@@ -263,9 +249,9 @@ public class E extends DixElement implements Cloneable {
      * Returns the first part of the left or right side of an entry (or the first invariant section).
      * Examples:
      * <pre>
-     * <e><i>Ameriko</i><par n="Barcelono__np"/> </e>   gives 'Ameriko'
-     * <e><i>Al</i><par n="ĝ"/> <i>erio</i><par n="Barcelono__np"/> </e> gives just 'Al'
-     * <e><l>mi</l><r>mi<prn><ref><p1><mf><sg></r></e> give 'mi'
+     * <e><ignore>Ameriko</ignore><par n="Barcelono__np"/> </e>   gives 'Ameriko'
+     * <e><ignore>Al</ignore><par n="ĝ"/> <ignore>erio</ignore><par n="Barcelono__np"/> </e> gives just 'Al'
+     * <e><l>mi</l><restriction>mi<prn><ref><p1><mf><sg></restriction></e> give 'mi'
      * </pre>
      * @param side can be R or L
      * @return A ContentElement object
@@ -277,10 +263,10 @@ public class E extends DixElement implements Cloneable {
             }
             if (e instanceof P) {
                 if (side.equals("L")) {
-                    return ((P) e).getL();
+                    return ((P) e).l;
                 }
                 if (side.equals("R")) {
-                    return ((P) e).getR();
+                    return ((P) e).r;
                 }
             }
         }
@@ -324,10 +310,10 @@ public class E extends DixElement implements Cloneable {
             }
             if (e instanceof P) {
                 if (side.equals("L")) {
-                    return ((P) e).getL().getChildren();
+                    return ((P) e).l.getChildren();
                 }
                 if (side.equals("R")) {
-                    return ((P) e).getR().getChildren();
+                    return ((P) e).r.getChildren();
                 }
             }
         }
@@ -339,7 +325,6 @@ public class E extends DixElement implements Cloneable {
      * 
      * @param side
      * @param value
-     * @return Undefined         */
     public String setValue(String side, String value) {
         for (DixElement e : children) {
             if (e instanceof I) {
@@ -347,22 +332,22 @@ public class E extends DixElement implements Cloneable {
             }
             if (e instanceof P) {
                 if (side.equals("L")) {
-                    ((P) e).getL().setValue(value);
+                    ((P) e).l.setValue(value);
                 }
                 if (side.equals("R")) {
-                    ((P) e).getR().setValue(value);
+                    ((P) e).r.setValue(value);
                 }
             }
         }
 
         return null;
     }
+     * @return Undefined         */
 
     /**
      * 
      * @param side
      * @param value
-     * @return Undefined         */
     public String setChildren(String side, ElementList value) {
         for (DixElement e : children) {
             if (e instanceof I) {
@@ -370,16 +355,17 @@ public class E extends DixElement implements Cloneable {
             }
             if (e instanceof P) {
                 if (side.equals("L")) {
-                    ((P) e).getL().setChildren(value);
+                    ((P) e).l.setChildren(value);
                 }
                 if (side.equals("R")) {
-                    ((P) e).getR().setChildren(value);
+                    ((P) e).r.setChildren(value);
                 }
             }
         }
 
         return null;
     }
+     * @return Undefined         */
 
     /**
      * 
@@ -456,8 +442,8 @@ public class E extends DixElement implements Cloneable {
      */
     private String getAttrString() {
         StringBuilder attributes = new StringBuilder();
-        if (r != null) {
-            attributes.append(" r=\"" + r + "\"");
+        if (restriction != null) {
+            attributes.append(" r=\"" + restriction + "\"");
         }
         if (slr != null) {
             attributes.append(" slr=\"" + slr + "\"");
@@ -465,17 +451,17 @@ public class E extends DixElement implements Cloneable {
         if (srl != null) {
             attributes.append(" srl=\"" + srl + "\"");
         }
-        if (lm != null) {
-            attributes.append(" lm=\"" + lm + "\"");
+        if (lemma != null) {
+            attributes.append(" lm=\"" + lemma + "\"");
         }
-        if (a != null) {
-            attributes.append(" a=\"" + a + "\"");
+        if (author != null) {
+            attributes.append(" a=\"" + author + "\"");
         }
-        if (c != null) {
-            attributes.append(" c=\"" + c + "\"");
+        if (comment != null) {
+            attributes.append(" c=\"" + comment + "\"");
         }
-        if (i != null && !i.isEmpty()) {
-            attributes.append(" i=\"" + i + "\"");
+        if (ignore != null && !ignore.isEmpty()) {
+            attributes.append(" i=\"" + ignore + "\"");
         }
         if (aversion != null) {
             attributes.append(" aversion=\"" + aversion + "\"");
@@ -553,11 +539,11 @@ public class E extends DixElement implements Cloneable {
             if (e instanceof P) {
                 P p = (P) e;
                 if (side.equals("L")) {
-                    L lE = p.getL();
+                    L lE = p.l;
                     return lE.is(value);
                 }
                 if (side.equals("R")) {
-                    R rE = p.getR();
+                    R rE = p.r;
                     return rE.is(value);
                 }
             }
@@ -574,11 +560,11 @@ public class E extends DixElement implements Cloneable {
             if (e instanceof P) {
                 P p = (P) e;
                 if (side.equals("L")) {
-                    L lE = p.getL();
+                    L lE = p.l;
                     return lE.getSymbols().size();
                 }
                 if (side.equals("R")) {
-                    R rE = p.getR();
+                    R rE = p.r;
                     return rE.getSymbols().size();
                 }
             }
@@ -606,7 +592,7 @@ public class E extends DixElement implements Cloneable {
      * 
      * @return Undefined         */
     public boolean isLR() {
-        if (r.equals("LR")) {
+        if (restriction.equals("LR")) {
             return true;
         } else {
             return false;
@@ -617,7 +603,7 @@ public class E extends DixElement implements Cloneable {
      * 
      * @return Undefined         */
     public boolean isRL() {
-        if (r.equals("RL")) {
+        if (restriction.equals("RL")) {
             return true;
         } else {
             return false;
@@ -629,10 +615,10 @@ public class E extends DixElement implements Cloneable {
      * @param value
      * @return Undefined         */
     public boolean hasRestriction(String value) {
-        if (r == null || this.isRestrictionAuto()) {
+        if (restriction == null || this.isRestrictionAuto()) {
             return true;
         } else {
-            if (r.equals(value)) {
+            if (restriction.equals(value)) {
                 return true;
             } else {
                 return false;
@@ -645,10 +631,10 @@ public class E extends DixElement implements Cloneable {
      * 
      * @return Undefined         */
     public boolean hasRestriction() {
-        if (r == null || this.isRestrictionAuto()) {
+        if (restriction == null || this.isRestrictionAuto()) {
             return false;
         } else {
-            if (r.equals("LR") || r.equals("RL")) {
+            if (restriction.equals("LR") || restriction.equals("RL")) {
                 return true;
             }
         }
@@ -659,10 +645,10 @@ public class E extends DixElement implements Cloneable {
      * 
      * @return Undefined         */
     public boolean is_LR_or_LRRL() {
-        if (r == null) {
+        if (restriction == null) {
             return true;
         } else {
-            if (r.equals("LR")) {
+            if (restriction.equals("LR")) {
                 return true;
             }
         }
@@ -673,10 +659,10 @@ public class E extends DixElement implements Cloneable {
      * 
      * @return Undefined         */
     public boolean is_RL_or_LRRL() {
-        if (r == null) {
+        if (restriction == null) {
             return true;
         } else {
-            if (r.equals("RL")) {
+            if (restriction.equals("RL")) {
                 return true;
             }
         }
@@ -693,7 +679,7 @@ public class E extends DixElement implements Cloneable {
         if (elementsA.size() != elementsB.size()) {
             return false;
         } else {
-            int i = 0;
+            int ignore = 0;
             for (S s1 : elementsA) {
                 boolean exists = false;
                 for (S s2 : elementsB) {
@@ -702,10 +688,10 @@ public class E extends DixElement implements Cloneable {
                     }
                 }
                 if (exists) {
-                    i++;
+                    ignore++;
                 }
             }
-            if (i == elementsA.size()) {
+            if (ignore == elementsA.size()) {
                 return true;
             }
         }
@@ -728,11 +714,11 @@ public class E extends DixElement implements Cloneable {
             if (e instanceof P) {
                 P p = (P) e;
                 if (side.equals("L")) {
-                    L lE = p.getL();
+                    L lE = p.l;
                     elementsA = lE.getSymbols();
                 }
                 if (side.equals("R")) {
-                    R rE = p.getR();
+                    R rE = p.r;
                     elementsA = rE.getSymbols();
                 }
             }
@@ -886,11 +872,11 @@ public class E extends DixElement implements Cloneable {
             if (e instanceof P) {
                 P p = (P) e;
                 if (side.equals("L")) {
-                    L lE = p.getL();
+                    L lE = p.l;
                     lE.changeFirstSElement(newCategory);
                 }
                 if (side.equals("R")) {
-                    R rE = p.getR();
+                    R rE = p.r;
                     rE.changeFirstSElement(newCategory);
                 }
             }
@@ -905,8 +891,8 @@ public class E extends DixElement implements Cloneable {
     public String toString() {
         StringBuilder str = new StringBuilder(50);
         str.append("<e");
-        if (this.i != null) {
-            str.append(" i=\"" + i + "\"");
+        if (this.ignore != null) {
+            str.append(" i=\"" + ignore + "\"");
         }
         if (this.hasRestriction()) {
             str.append(" r=\"" + getRestriction() + "\"");
@@ -920,10 +906,10 @@ public class E extends DixElement implements Cloneable {
             if (e instanceof P) {
                 P p = (P) e;
 
-                L lE = p.getL();
+                L lE = p.l;
                 str.append(lE.toString());
 
-                R rE = p.getR();
+                R rE = p.r;
                 str.append(rE.toString());
             }
             if (e instanceof Par) {
@@ -976,10 +962,10 @@ public class E extends DixElement implements Cloneable {
             if (e instanceof P) {
                 P p = (P) e;
 
-                L lE = p.getL();
+                L lE = p.l;
                 str += lE.toString();
 
-                R rE = p.getR();
+                R rE = p.r;
                 str += rE.toString();
             }
             if (e instanceof Re) {
@@ -1005,13 +991,13 @@ public class E extends DixElement implements Cloneable {
         str += getLemma();
         for (DixElement e : children) {
             /*
-             * if (e instanceof I) { I i = (I) e;
-             * str += i.toString(); } if (e instanceof P) { final
+             * if (e instanceof I) { I ignore = (I) e;
+             * str += ignore.toString(); } if (e instanceof P) { final
              * P p = (P) e;
              * 
-             * L lE = p.getL(); str += lE.toString();
+             * L lE = p.l; str += lE.toString();
              * 
-             * R rE = p.getR(); str += rE.toString(); }
+             * R rE = p.restriction; str += rE.toString(); }
              * 
              * if (e instanceof Re) { Re re =
              * (Re) e; str += re.toString(); }
@@ -1022,7 +1008,7 @@ public class E extends DixElement implements Cloneable {
                 String[] parts = parValue.toString().split("__");
                 String category = "";
                 for (String element : parts) {
-                    // System.err.print("(" + parts[i] + ")");
+                    // System.err.print("(" + parts[ignore] + ")");
                     category = element;
                 }
                 str += "/" + category;
@@ -1047,10 +1033,10 @@ public class E extends DixElement implements Cloneable {
             if (e instanceof P) {
                 P p = (P) e;
 
-                L lE = p.getL();
+                L lE = p.l;
                 str += lE.toString2();
                 str += "/";
-                R rE = p.getR();
+                R rE = p.r;
                 str += rE.toString2();
             }
 
@@ -1158,8 +1144,8 @@ public class E extends DixElement implements Cloneable {
                 pE.l = newLE;
                 pE.r = (newRE);
 
-                L lE = ((P) e).getL();
-                R rE = ((P) e).getR();
+                L lE = ((P) e).l;
+                R rE = ((P) e).r;
 
                 ElementList auxChildren = lE.getChildren();
 
@@ -1235,10 +1221,10 @@ public class E extends DixElement implements Cloneable {
      * @return True if restriction will be solved automatically
      */
     public boolean isRestrictionAuto() {
-        if (r == null) {
+        if (restriction == null) {
             return false;
         } else {
-            return this.r.equals("auto");
+            return this.restriction.equals("auto");
         }
     }
 }

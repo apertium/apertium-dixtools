@@ -46,29 +46,14 @@ public class P extends DixElement {
      */
     public P(P pE) {
         setTagName("p");
-        l = (L) pE.getL().clone();
-        // r = new R(pE.getR());
-        r = (R) pE.getR().clone();
+        l = (L) pE.l.clone();
+        r = (R) pE.r.clone();
     }
 
     public P(L l, R r) {
         setTagName("p");
         this.l = l;
         this.r = r;
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    public L getL() {
-        return l;
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    public R getR() {
-        return r;
     }
 
     /**
@@ -138,8 +123,8 @@ public class P extends DixElement {
     public String toString() {
         String str = "";
 
-        str += getL().toString();
-        str += getR().toString();
+        str += l.toString();
+        str += r.toString();
 
         return str;
     }

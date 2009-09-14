@@ -152,11 +152,11 @@ public class DicList {
                     if (e instanceof P) {
                         P p = (P) e;
                         if (side.contentEquals("L")) {
-                            L lE = p.getL();
+                            L lE = p.l;
                             elementsA = lE.getSymbols();
                         }
                         if (side.contentEquals("R")) {
-                            R rE = p.getR();
+                            R rE = p.r;
                             elementsA = rE.getSymbols();
                         }
                     }

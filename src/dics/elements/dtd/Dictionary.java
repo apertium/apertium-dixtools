@@ -789,8 +789,8 @@ public class Dictionary extends DixElement {
 
                 for (DixElement e : children) {
                     if (e instanceof P) {
-                        L lE = ((P) e).getL();
-                        R rE = ((P) e).getR();
+                        L lE = ((P) e).l;
+                        R rE = ((P) e).r;
                         // String auxValue = lE.getValue();
                         ElementList auxChildren = lE.getChildren();
                         // lE.setValue(rE.getValue());
