@@ -32,19 +32,10 @@ import java.io.Writer;
  */
 public class P extends DixElement {
 
-    /**
-     * 
-     */
-    private L l;
-    /**
-     * 
-     */
-    private R r;
+    public L l;
 
-    /**
-     * 
-     * 
-     */
+    public R r;
+    
     public P() {
         setTagName("p");
     }
@@ -55,27 +46,17 @@ public class P extends DixElement {
      */
     public P(P pE) {
         setTagName("p");
-        // l = new L(pE.getL());
         l = (L) pE.getL().clone();
         // r = new R(pE.getR());
         r = (R) pE.getR().clone();
     }
 
-    /**
-     * 
-     * @param l
-     * @param r
-     */
     public P(L l, R r) {
         setTagName("p");
         this.l = l;
         this.r = r;
     }
 
-    /**
-     * 
-     * @param l
-     */
     public void setLElement(L l) {
         this.l = l;
     }

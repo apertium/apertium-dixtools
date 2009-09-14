@@ -444,6 +444,25 @@ public class DicCross  extends AbstractDictTool{
         }
     }
 
+
+    public String getSElementsString(E e, String side) {
+        String str = "";
+            for (S s : e.getSymbols(side)) {
+                str += "<s n=\"" + s.getValue() + "\"/>";
+            }
+        return str;
+    }
+
+    public String getHash(E e) {
+        String str = "";
+        if (e.hasRestriction()) {
+            str += str + e.getRestriction() + "---";
+        }
+        str += e.getValue("L") + "---" + getSElementsString(e,"L") + "---" + e.getValue("R") + "---" + getSElementsString(e,"R");
+        return str;
+    }
+
+
     /**
      * 
      * @param e1
@@ -457,7 +476,7 @@ public class DicCross  extends AbstractDictTool{
                 ArrayList<E> actionEList = cross(e1, e2, dir);
                 if (!actionEList.isEmpty()) {
                     for (E e : actionEList) {
-                        String str = e.getHash();
+                        String str = getHash(e);
 
                         if (!getProcessed().containsKey(str)) {
                             section.addEElement(e);

@@ -37,82 +37,40 @@ import java.util.Comparator;
  */
 public class E extends DixElement implements Cloneable {
 
-    /**
-     * 
-     */
+
     private ElementList children = new ElementList();
-;
-    /**
-     * 
-     */
+
     private String r;
-    /**
-     * 
-     */
+
     private String slr;
-    /**
-     * 
-     */
+    
     private String srl;
-    /**
-     * 
-     */
+    
     private String lm;
-    /**
-     * 
-     */
+    
     private String a;
-    /**
-     * 
-     */
+    
     private String c;
-    /**
-     * 
-     */
+    
     private String i;
-    /**
-     * 
-     */
+    
     private String aversion;
-    /**
-     * 
-     */
+    
     private String alt;
-    /**
-     * 
-     */
+    
     private boolean shared = false;
-    /**
-     * 
-     */
+    
     private boolean common = true;
-    /**
-     * 
-     */
+    
     private boolean foreign = false;
-    /**
-     * 
-     */
+    
     private String patternApplied;
-    /**
-     * 
-     */
+    
     private boolean locked = false;
 
-    /**
-     * 
-     * 
-     */
     public E() {
     }
 
-    /**
-     * 
-     * @param r
-     * @param lm
-     * @param a
-     * @param c
-     */
     public E(String r, String lm, String a,  String c) {
         this.r = r;
 
@@ -124,15 +82,12 @@ public class E extends DixElement implements Cloneable {
  //       escapedlm = escapedlm.replaceAll("\\&", "\\&amp;");
   //      this.setLemma(escapedlm);
 
-
         this.lm = lm;
         this.a = a;
         this.c = c;
     }
 
-    /**
-     * 
-     * @return Undefined         */
+
     public ElementList getChildren() {
         return children;
     }
@@ -141,88 +96,47 @@ public class E extends DixElement implements Cloneable {
         return !(prependCharacterData.trim().isEmpty() && appendCharacterData.trim().isEmpty());
     }
 
-    /**
-     * 
-     * @param value
-     */
     public void setLemma(String value) {
         lm = value;
     }
 
-    /**
-     * 
-     * @return Undefined         */
     public String getLemma() {
         return lm;
     }
 
-    /**
-     * 
-     * @param value
-     */
     public void setRestriction(String value) {
         r = value;
     }
 
-    /**
-     * 
-     * @return Undefined         */
     public String getRestriction() {
         return r;
     }
 
-    /**
-     * 
-     * @param comment
-     */
     public void setComment(String comment) {
         c = comment;
     }
 
-    /**
-     * 
-     * @return Undefined         */
     public String getComment() {
         return c;
     }
 
-    /**
-     * 
-     * @return The 'slr' attribute
-     */
     public String getSlr() {
         return this.slr;
     }
 
-    /**
-     * 
-     * @return The 'srl' attribute
-     */
     public String getSrl() {
         return this.srl;
     }
 
-    /**
-     * 
-     * @param slr
-     */
     public void setSlr(String slr) {
         this.slr = slr;
     }
 
-    /**
-     * 
-     * @param srl
-     */
     public void setSrl(String srl) {
         this.srl = srl;
     }
 
-    /**
-     * 
-     * @param value
-     * @param side
-     */
+    /*
     public void setProcessingComments(String value, String side) {
         for (DixElement e : children) {
             if (e instanceof I) {
@@ -232,70 +146,26 @@ public class E extends DixElement implements Cloneable {
                 ((P) e).setProcessingComments(value, side);
             }
         }
-    }
+    }*/
 
-    /**
-     * 
-     * @param i
-     */
+
     public void setIgnore(String i) {
         this.i = i;
     }
 
-    /**
-     * 
-     * @return 'i' attribute
-     */
     public String getIgnore() {
         return this.i;
     }
 
-    /**
-     * 
-     * @param value
-     */
     public void setAuthor(String value) {
         a = value;
     }
 
-    /**
-     * 
-     * @return Undefined         */
     public String getAuthor() {
         return a;
     }
 
-    /**
-     * @return Undefined         */
-    public String getHash() {
-        String str = "";
-        if (hasRestriction()) {
-            str += str + getRestriction() + "---";
-        }
-        str += getValue("L") + "---" + getSElementsString("L") + "---" + getValue("R") + "---" + getSElementsString("R");
-        return str;
-    }
-
-    /**
-     * 
-     * @param value
-     */
-    public void setTranslation(String value, String side) {
-        for (DixElement e : children) {
-            if (e instanceof I) {
-                ((I) e).setValue(value);
-            }
-            if (e instanceof P) {
-                if (side.equals("L")) {
-                    ((P) e).getL().setValue(value);
-                }
-                if (side.equals("R")) {
-                    ((P) e).getR().setValue(value);
-                }
-            }
-        }
-    }
-
+    
     /**
      * 
      * @param e
@@ -309,7 +179,6 @@ public class E extends DixElement implements Cloneable {
      * elementos)
      * 
      * @param e
-     * @return Undefined         */
     public boolean equalsBil(E e) {
         String value1 = getValue("L");
         String value2 = e.getValue("L");
@@ -319,6 +188,7 @@ public class E extends DixElement implements Cloneable {
         }
         return false;
     }
+     * @return Undefined         */
 
     /**
      * 
@@ -892,17 +762,6 @@ public class E extends DixElement implements Cloneable {
         msg.log("\n");
     }
 
-    /**
-     * 
-     * @param side
-     * @return Undefined         */
-    public String getSElementsString(String side) {
-        String str = "";
-            for (S s : getSymbols(side)) {
-                str += "<s n=\"" + s.getValue() + "\"/>";
-            }
-        return str;
-    }
 
     /**
      * 
