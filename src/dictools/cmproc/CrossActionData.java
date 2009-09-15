@@ -27,13 +27,9 @@ import dictools.crossmodel.CrossAction;
  */
 public class CrossActionData {
 
-    /**
-     * 
-     */
+    
     private CrossAction crossAction;
-    /**
-     * 
-     */
+    
     private Variables vars;
 
     /**

@@ -44,39 +44,22 @@ import dictools.AbstractDictTool;
  */
 public class GetBilOmegawiki  extends AbstractDictTool {
 
-    /**
-     * 
-     */
+    
     private String dbName;
-    /**
-     * 
-     */
+    
     private String user;
-    /**
-     * 
-     */
+    
     private String password;
-    /**
-     * 
-     */
+    
     private Connection con;
-    /**
-     * 
-     */
+    
     private String sl = "es";
-    /**
-     * 
-     */
+    
     private String tl = "eu";
-    /**
-     * 
-     */
+    
     private String outFileName;
 
-    /**
-     * 
-     * 
-     */
+    
     public GetBilOmegawiki(String sl, String tl) {
         if (sl.compareTo(tl) > 0) {
             setSl(tl);
@@ -92,10 +75,7 @@ public class GetBilOmegawiki  extends AbstractDictTool {
         connectDB("omegawiki", "omegawiki", "");
     }
 
-    /**
-     * 
-     * 
-     */
+    
     private void connectDB(String db, String u, String p) {
         setDbName(db);
         setUser(u);
@@ -125,10 +105,7 @@ public class GetBilOmegawiki  extends AbstractDictTool {
 
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public void printDictionary() {
         Dictionary dic = new Dictionary();
         Section section = new Section();

@@ -43,13 +43,9 @@ import dictools.xml.DictionaryReader;
  */
 public class CompleteTranslation {
 
-    /**
-     * 
-     */
+    
     private Dictionary bil;
-    /**
-     * 
-     */
+    
     private HashMap<String, String> translations;
 
     /**
@@ -64,9 +60,7 @@ public class CompleteTranslation {
         bil = dicReader.readDic();
     }
 
-    /**
-     * 
-     */
+    
     public void complete() {
         for (E ee : bil.getAllEntries()) {
             L left = ee.getLeft();

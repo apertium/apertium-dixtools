@@ -34,27 +34,16 @@ import dics.elements.utils.DicOpts;
  */
 public class Section extends DixElement {
 
-    /**
-     * 
-     */
+    
     private String id;
-    /**
-     * 
-     */
+    
     private String type;
-    /**
-     * 
-     */
+    
     private ArrayList<E> eElements;
-    /**
-     * 
-     */
+    
     protected ArrayList<String> includes;
 
-    /**
-     * 
-     * 
-     */
+    
     public Section() {
         super("section");
         eElements = new ArrayList<E>();

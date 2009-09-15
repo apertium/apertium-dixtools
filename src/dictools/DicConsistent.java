@@ -38,62 +38,34 @@ import dics.elements.utils.DicTools;
  */
 public class DicConsistent extends AbstractDictTool {
 
-    /**
-     * 
-     */
+    
     private Dictionary mon1;
-    /**
-     * 
-     */
+    
     private Dictionary mon2;
-    /**
-     * 
-     */
+    
     private Dictionary bil1;
-    /**
-     * 
-     */
+    
     private Dictionary bil2;
-    /**
-     * 
-     */
+    
     private HashMap<String, ArrayList<E>> commonA;
-    /**
-     * 
-     */
+    
     private HashMap<String, ArrayList<E>> commonC;
-    /**
-     * 
-     */
+    
     private HashMap<String, ArrayList<E>> differentA;
-    /**
-     * 
-     */
+    
     private HashMap<String, ArrayList<E>> differentC;
-    /**
-     * 
-     */
+    
     private String notCommonSuffix;
-    /**
-     * 
-     */
+    
     private DicSet dicSet;
-    /**
-     * 
-     */
+    
     private String outDir = "dix/";
 
-    /**
-     * 
-     * 
-     */
+    
     public DicConsistent() {
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public DicConsistent(DicSet dicset) {
         setMon1(dicset.getMon1());
         setMon2(dicset.getMon2());
@@ -106,10 +78,7 @@ public class DicConsistent extends AbstractDictTool {
         setNotCommonSuffix("not-common-");
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public void doConsistent() {
         processArguments();
         actionConsistent("yes");
@@ -129,9 +98,7 @@ public class DicConsistent extends AbstractDictTool {
         markCommonEntries(bilBCMap, bilABMap, monCMap, getCommonC(), getDifferentC());
     }
 
-    /**
-     * 
-     */
+    
     private void buildNotCommonDictionaries() {
         buildNotCommonDictionary(getBil1(),getOpt());
         buildNotCommonDictionary(getBil2(),getOpt());
@@ -224,10 +191,7 @@ public class DicConsistent extends AbstractDictTool {
         }
     }
 
-    /**
-     * 
-     * 
-     */
+    
     private void removeNotShared() {
         getMon1().removeNotCommon();
         getMon2().removeNotCommon();
@@ -351,10 +315,7 @@ public class DicConsistent extends AbstractDictTool {
         return dicConsistent;
     }
 
-    /**
-     * 
-     * 
-     */
+    
     private void processArguments() {
         int nArgs = getArguments().length;
         String sDicMonA, sDicMonC, sDicBilAB, sDicBilBC;
@@ -438,16 +399,12 @@ public class DicConsistent extends AbstractDictTool {
         this.dicSet = dicSet;
     }
 
-    /**
-     * 
-     */
+    
     public void setOutDir(String path) {
         this.outDir = path;
     }
 
-    /**
-     * 
-     */
+    
     public String getOutDir() {
         return this.outDir;
     }

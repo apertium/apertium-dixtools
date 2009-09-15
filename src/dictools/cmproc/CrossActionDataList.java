@@ -29,14 +29,10 @@ import java.util.Iterator;
  */
 public class CrossActionDataList extends HashMap<String, CrossActionData> {
 
-    /**
-     * 
-     */
+    
     private CrossActionData bestActionSet;
 
-    /**
-     * 
-     */
+    
     public CrossActionDataList() {
         super();
     }

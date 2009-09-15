@@ -29,24 +29,16 @@ import dics.elements.dtd.S;
  */
 public class Entry {
 
-    /**
-     * 
-     */
+    
     private String key;
     
-    /**
-     * 
-     */
+    
     private ArrayList<S> keyAttr;
     
-    /**
-     * 
-     */
+    
     private String value;
     
-    /**
-     * 
-     */
+    
     private ArrayList<S> valueAttr;
 
     /**

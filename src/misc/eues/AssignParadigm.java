@@ -39,33 +39,21 @@ import dictools.xml.DictionaryReader;
  */
 public class AssignParadigm extends AbstractDictTool {
 
-    /**
-     * 
-     */
+    
     private String morphDic;
-    /**
-     * 
-     */
+    
     private String bilDic;
-    /**
-     * 
-     */
+    
     private String out;
 
-    /**
-     * 
-     * 
-     */
+    
     public void processArguments() {
         morphDic = arguments[1];
         bilDic = arguments[2];
         out = arguments[3];
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public void doAssignParadigm() {
         processArguments();
 

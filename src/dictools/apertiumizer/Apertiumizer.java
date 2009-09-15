@@ -48,13 +48,9 @@ import dictools.xml.DictionaryReader;
  */
 public class Apertiumizer extends AbstractDictTool {
 
-    /**
-     * 
-     */
+    
     private String fileName;
-    /**
-     * 
-     */
+    
     private String outFileName;
     /**
      * 
@@ -64,9 +60,7 @@ public class Apertiumizer extends AbstractDictTool {
         this.fileName = fileName;
     }
 
-    /**
-     * 
-     */
+    
     public void apertiumize() {
         /*
         DictionaryReader encaReader = new DictionaryReader("apertium-en-ca.en-ca.dix");

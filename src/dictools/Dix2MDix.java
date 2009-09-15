@@ -49,50 +49,28 @@ import dictools.xml.DictionaryReader;
  */
 public class Dix2MDix {
 
-    /**
-     * 
-     */
+    
     private Dictionary dic;
-    /**
-     * 
-     */
+    
     private String bilFileName;
-    /**
-     * 
-     */
+    
     private String[] arguments;
-    /**
-     * 
-     */
+    
     private String outFileName;
-    /**
-     * 
-     */
+    
     private HashMap hm;
-    /**
-     * 
-     */
+    
     private String sltlCode;
-    /**
-     * 
-     */
+    
     private String sltlFull;
-    /**
-     * 
-     */
+    
     private Vector<String> metaInf;
-    /**
-     * 
-     */
+    
     private Vector<String> files;
-    /**
-     *
-     */
+    
     private TinyFilter tinyFilter;
 
-    /**
-     * 
-     */
+    
     public Dix2MDix() {
         files = new Vector<String>();
     }
@@ -102,9 +80,7 @@ public class Dix2MDix {
         this.tinyFilter = filter;
     }
 
-    /**
-     * 
-     */
+    
     public void do_convert() {
         this.processArguments();
 
@@ -287,9 +263,7 @@ public class Dix2MDix {
         }
     }
 
-    /**
-     * 
-     */
+    
     private void processArguments() {
         if (arguments != null) {
             String fileName = this.arguments[1];
@@ -417,23 +391,15 @@ public class Dix2MDix {
         this.sltlFull = sltlFull;
     }
 
-    /**
-     * 
-     */
+    
     private class Entry implements Comparable<Entry> {
 
-        /**
-         * 
-         */
+        
         private String key;
-        /**
-         * 
-         */
+        
         private String value;
 
-        /**
-         * 
-         */
+        
         public Entry() {
         }
 
@@ -482,9 +448,7 @@ public class Dix2MDix {
         }
     }
 
-    /**
-     *
-     */
+    
     public class ZipIt {
 
         private String zipFileName;

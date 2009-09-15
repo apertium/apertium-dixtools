@@ -26,10 +26,7 @@ package dics.elements.dtd;
  */
 public class R extends ContentElement {
 
-    /**
-     * 
-     * 
-     */
+    
     public R() {
         super("r");
     }

@@ -33,22 +33,14 @@ import dics.elements.utils.Msg;
  */
 public class ActionSetList extends HashMap<String, ActionSet> {
 
-    /**
-     * 
-     */
+    
     private static final long serialVersionUID = 1L;
-    /**
-     * 
-     */
+    
     private ActionSet bestActionSet;
-    /**
-     * 
-     */
+    
     private Msg msg;
 
-    /**
-     * 
-     */
+    
     public ActionSetList() {
 
     }
@@ -60,10 +52,7 @@ public class ActionSetList extends HashMap<String, ActionSet> {
         this.msg = msg;
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public void print() {
         Set keySet = keySet();
         Iterator it = keySet.iterator();

@@ -51,17 +51,11 @@ import dics.elements.dtd.Section;
  */
 public class DictionaryReader extends XMLReader {
 
-    /**
-     * 
-     */
+    
     private Dictionary dic;
-    /**
-     * 
-     */
+    
     private boolean readParadigms = true;
-    /**
-     * 
-     */
+    
     private JProgressBar progressBar;
     private double nEntries;
     private double nElements = 0;
@@ -76,10 +70,7 @@ public class DictionaryReader extends XMLReader {
         super(fileName);
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public DictionaryReader() {
 
     }

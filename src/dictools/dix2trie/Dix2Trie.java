@@ -42,25 +42,15 @@ import dictools.xml.DictionaryReader;
  */
 public class Dix2Trie {
 
-    /**
-     * 
-     */
+    
     private Node root;
-    /**
-     * 
-     */
+    
     private EntryList entryList;
-    /**
-     * 
-     */
+    
     private String fileName;
-    /**
-     * 
-     */
+    
     private String dir;
-    /**
-     * 
-     */
+    
     private String outFileName;
 
     /**
@@ -74,18 +64,14 @@ public class Dix2Trie {
         entryList = new EntryList();
     }
 
-    /**
-     * 
-     */
+    
     public void buildTrie() {
         this.readDictionary(fileName, dir);
         this.processEntryList();
         this.printXML();
     }
 
-    /**
-     * 
-     */
+    
     private void processEntryList() {
         root = new Node();
         for (Entry entry : entryList) {
@@ -168,9 +154,7 @@ public class Dix2Trie {
         return this.outFileName;
     }
 
-    /**
-     * 
-     */
+    
     public void printXML() {
         this.printXML("UTF-8");
     }

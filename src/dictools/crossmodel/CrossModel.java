@@ -34,27 +34,16 @@ import dics.elements.utils.DicOpts;
  */
 public class CrossModel {
 
-    /**
-     * 
-     */
+    
     private CrossActionList crossActions;
-    /**
-     * 
-     */
+    
     private String fileName;
-    /**
-     * 
-     */
+    
     private String filePath;
-    /**
-     * 
-     */
+    
     private String encoding = "UTF-8";
 
-    /**
-     * 
-     * 
-     */
+    
     public CrossModel() {
         crossActions = new CrossActionList();
     }
@@ -133,30 +122,22 @@ public class CrossModel {
         }
     }
 
-    /**
-     * 
-     */
+    
     public String getFileName() {
         return this.fileName;
     }
 
-    /**
-     * 
-     */
+    
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
 
-    /**
-     * 
-     */
+    
     public String getFilePath() {
         return this.filePath;
     }
 
-    /**
-     * 
-     */
+    
     public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
@@ -185,9 +166,7 @@ public class CrossModel {
         this.crossActions = crossActions;
     }
 
-    /**
-     * 
-     */
+    
     public void rename() {
         CrossActionList rList = new CrossActionList();
         for (CrossAction cA : this.getCrossActions()) {

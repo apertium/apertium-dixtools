@@ -30,9 +30,7 @@ import dics.elements.utils.DicOpts;
  */
 public class Re extends DixElement {
 
-    /**
-     * 
-     */
+    
     private String value;
 
     /**
@@ -67,9 +65,7 @@ public class Re extends DixElement {
         dos.append( (opt.nowAlign?"":tab(3)) + "<" + TAGNAME + ">" + getValue() + "</" + TAGNAME + ">"+appendCharacterData.trim()+  (opt.nowAlign?"":"\n"));
     }
 
-    /**
-     * 
-     */
+    
     @Override
     public String toString() {
         return getValue();

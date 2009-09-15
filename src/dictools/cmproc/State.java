@@ -34,22 +34,14 @@ import dictools.crossmodel.CrossAction;
  */
 public class State {
 
-    /**
-     * 
-     */
+    
     private String value;
-    /**
-     * 
-     */
+    
     private StateSet states;
-    /**
-     * 
-     */
+    
     private CrossAction crossAction;
 
-    /**
-     * 
-     */
+    
     public State() {
         states = new StateSet();
     }

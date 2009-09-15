@@ -31,23 +31,14 @@ import dics.elements.utils.DicOpts;
  */
 public class S extends DixElement {
 
-    /**
-     * 
-     */
+    
     private static HashMap<String, S> sElementList = new HashMap<String, S>();
-    /**
-     * 
-     */
+    
     private String n;
 
-    /**
-     * 
-     */
+    
     // private String temp;
-    /**
-     * 
-     * 
-     */
+    
     public S() {
         super("s");
     }
@@ -123,9 +114,7 @@ public class S extends DixElement {
         return false;
     }
 
-    /**
-     * 
-     */
+    
     @Override
     public String toString() {
         return "<" + getValue() + ">";

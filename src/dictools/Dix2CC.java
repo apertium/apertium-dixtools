@@ -37,38 +37,22 @@ import dictools.xml.DictionaryReader;
  */
 public class Dix2CC {
 
-    /**
-     * 
-     */
+    
     private Dictionary dic;
-    /**
-     *
-     */
+    
     private String bilFileName;
-    /**
-     *
-     */
+    
     private String sltlCode;
-    /**
-     *
-     */
+    
     private String sltlFull;
-    /**
-     * 
-     */
+    
     private String[] arguments;
-    /**
-     * 
-     */
+    
     private String outFileName;
-    /**
-     *
-     */
+    
     private TinyFilter tinyFilter;
 
-    /**
-     * 
-     */
+    
     public Dix2CC() {
     }
 
@@ -76,9 +60,7 @@ public class Dix2CC {
         this.tinyFilter = tinyFilter;
     }
 
-    /**
-     * 
-     */
+    
     public void do_convert() {
         this.processArguments();
         this.processDic();
@@ -164,9 +146,7 @@ public class Dix2CC {
         }
     }
 
-    /**
-     * 
-     */
+    
     private void processArguments() {
         if (arguments != null) {
             String fileName = this.arguments[1];

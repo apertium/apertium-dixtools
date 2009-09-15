@@ -30,13 +30,9 @@ import dics.elements.utils.DicOpts;
  */
 public class Sdef extends DixElement {
 
-    /**
-     * 
-     */
+    
     public String n;
-    /**
-     * 
-     */
+    
     public String comment;
 
     /**
@@ -73,9 +69,7 @@ public class Sdef extends DixElement {
         dos.append(tab(2) + "<" + TAGNAME + " n=\"" + getValue() + "\" " + commentx + "/> "  +appendCharacterData.trim()+"\n");
     }
 
-    /**
-     * 
-     */
+    
     @Override
     public String toString() {
         String str = "<" + getValue() + ">";

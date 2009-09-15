@@ -47,9 +47,7 @@ public class AbstractDictTool {
         this.opt = opt;
     }
     protected Msg msg = Msg.inst();
-    /**
-     * 
-     */
+    
     protected String[] arguments;
 
     /**

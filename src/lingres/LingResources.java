@@ -27,13 +27,9 @@ import java.util.ArrayList;
  */
 public class LingResources extends ArrayList {
 
-    /**
-     * 
-     */
+    
     private String name;
-    /**
-     * 
-     */
+    
     private String description;
 
     /**

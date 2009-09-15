@@ -30,17 +30,11 @@ import dics.elements.dtd.S;
  */
 public class Word {
 
-    /**
-     * 
-     */
+    
     private String key;
-    /**
-     * 
-     */
+    
     private String value;
-    /**
-     * 
-     */
+    
     private Entry entry;
 
     /**

@@ -30,15 +30,10 @@ import dics.elements.utils.DicOpts;
  */
 public class V extends DixElement {
 
-    /**
-     * 
-     */
+    
     private String n;
 
-    /**
-     * 
-     * 
-     */
+    
     public V() {
         super("v");
     }
@@ -90,9 +85,7 @@ public class V extends DixElement {
         dos.append(appendCharacterData);
     }
 
-    /**
-     * 
-     */
+    
     @Override
     public String toString() {
         return "<" + getValue() + ">";

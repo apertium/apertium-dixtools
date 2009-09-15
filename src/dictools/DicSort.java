@@ -40,22 +40,15 @@ import dictools.xml.DictionaryReader;
  */
 public class DicSort  extends AbstractDictTool {
 
-    /**
-     * 
-     */
+    
     private Dictionary dic;
-    /**
-     * 
-     */
+    
     private String out;
 
     public boolean sortAccordingToRightSide = false;
     private boolean ignoreCaseWhenSorting = false;
 
-    /**
-     * 
-     * 
-     */
+    
     public DicSort() {
         msg.setLogFileName("sort.log");
     }
@@ -79,19 +72,13 @@ public class DicSort  extends AbstractDictTool {
         return dicSorted;
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public void actionSort() {
         Dictionary dicSorted = sort();
         dicSorted.printXML(out,getOpt());
     }
     
-    /**
-     * 
-     * 
-     */
+    
     public void doSort() {
         processArguments();
         actionSort();
@@ -138,10 +125,7 @@ public class DicSort  extends AbstractDictTool {
         return l;
     }
 
-    /**
-     * 
-     * 
-     */
+    
     private void processArguments() {
         int i=1;
         while (i<arguments.length) {

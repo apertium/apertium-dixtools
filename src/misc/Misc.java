@@ -40,21 +40,13 @@ import dictools.xml.DictionaryReader;
  */
 public class Misc {
 
-    /**
-     * 
-     */
+    
     private Dictionary dic1;
-    /**
-     * 
-     */
+    
     private Dictionary dic2;
-    /**
-     * 
-     */
+    
     private Dictionary dic3;
-    /**
-     * 
-     */
+    
     private Dictionary dic4;
 
     /**
@@ -103,9 +95,7 @@ public class Misc {
         morph_n_en.printXML("new-es-nouns.dix", "UTF-8",  dics.elements.utils.DicOpts.STD);
     }
 
-    /**
-     * 
-     */
+    
     public void doMisc7() {
         System.err.println("Begin");
         Dictionary morph_en_adj = this.dic1;
@@ -173,9 +163,7 @@ public class Misc {
 
     }
 
-    /**
-     * 
-     */
+    
     public void doMisc5() {
         Dictionary morph_es = new Dictionary();
         Section s1 = new Section("main", "standard");
@@ -242,9 +230,7 @@ public class Misc {
 
     }
 
-    /**
-     * 
-     */
+    
     public void doMisc4() {
         Dictionary es_pardefs = dic1;
         Dictionary es_adjs = dic2;
@@ -292,9 +278,7 @@ public class Misc {
         en_es_adjs.printXML("new-adjs-mf.dix", "UTF-8", dics.elements.utils.DicOpts.STD);
     }
 
-    /**
-     * 
-     */
+    
     public void doMisc3() {
         Dictionary ca_morph = dic1;
         Dictionary es_morph = dic2;
@@ -329,9 +313,7 @@ public class Misc {
         es_morph.printXML("new-es-morph.dix", "UTF-8", dics.elements.utils.DicOpts.STD);
     }
 
-    /**
-     * 
-     */
+    
     public void doMisc2() {
         HashMap<String, String> nps = new HashMap<String, String>();
         for (E ee : dic1.getAllEntries()) {

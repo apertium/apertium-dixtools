@@ -32,23 +32,14 @@ import dics.elements.utils.ElementList;
  */
 public abstract class ContentElement extends DixElement implements Cloneable {
 
-    /**
-     * 
-     */
+    
     public ElementList children = new ElementList();
-    /**
-     * 
-     */
+    
     protected String value;
-    /**
-     * 
-     */
+    
     protected String sElem;
 
-    /**
-     * 
-     * 
-     */
+    
     public ContentElement(String tagName) {
       super(tagName);
     }
@@ -269,9 +260,7 @@ public abstract class ContentElement extends DixElement implements Cloneable {
         return str;
     }
 
-    /**
-     * 
-     */
+    
     @Override
     public String toString() {
         String str = "";
@@ -310,9 +299,7 @@ public abstract class ContentElement extends DixElement implements Cloneable {
     }
 
 
-    /**
-     * 
-     */
+    
     @Override
     public Object clone() {
         ContentElement cloned = null;

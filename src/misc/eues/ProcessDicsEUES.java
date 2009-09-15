@@ -26,13 +26,9 @@ package misc.eues;
  */
 public class ProcessDicsEUES {
 
-    /**
-     * 
-     */
+    
     private String action;
-    /**
-     * 
-     */
+    
     private String[] arguments;
 
     /**
@@ -53,18 +49,12 @@ public class ProcessDicsEUES {
         setArguments(args);
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public void go() {
         checkAction();
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public void checkAction() {
         if (getArguments().length == 0) {
             System.err.println("Usage: java ProcessDics <action> [options]");

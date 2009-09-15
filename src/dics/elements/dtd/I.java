@@ -27,10 +27,7 @@ package dics.elements.dtd;
  */
 public class I extends ContentElement {
 
-    /**
-     * 
-     * 
-     */
+    
     public I() {
         super("i");
     }

@@ -35,29 +35,17 @@ import dics.elements.utils.Msg;
  */
 public class ActionSet extends ArrayList<Action> {
 
-    /**
-     * 
-     */
+    
     private static final long serialVersionUID = 1L;
-    /**
-     * 
-     */
+    
     private String name;
-    /**
-     * 
-     */
+    
     private int numberOfConstants = 0;
-    /**
-     * 
-     */
+    
     private Integer patternLength = 0;
-    /**
-     * 
-     */
+    
     private HashMap<String, ElementList> tails;
-    /**
-     * 
-     */
+    
     private CrossAction crossAction;
 
     /**
@@ -92,25 +80,17 @@ public class ActionSet extends ArrayList<Action> {
         this.numberOfConstants = numberOfConstants;
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public void incrementNumberOfConstants() {
         numberOfConstants += 1;
     }
 
-    /**
-     * 
-     */
+    
     public void incrementPatternLength() {
         this.patternLength += 1;
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public void print(Msg msg) {
         for (Action action : this) {
             action.print(msg);
@@ -137,9 +117,7 @@ public class ActionSet extends ArrayList<Action> {
         return patternLength;
     }
 
-    /**
-     * 
-     */
+    
     public void calculatePatternLength() {
         // 3 because of 3 <b> tags
         // 2 because of 2 restrictions

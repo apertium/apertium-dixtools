@@ -27,30 +27,20 @@ import dics.elements.dtd.E;
 import dics.elements.dtd.Section;
 import dictools.xml.DictionaryReader;
 
-/**
- *
- * @author Enrique Benimeli Bofarull
+/**1* @author Enrique Benimeli Bofarull
  */
 public class DicFilter  extends AbstractDictTool{
 
-    /**
-     * 
-     */
+    
     private Dictionary dicA;
-    /**
-     * 
-     */
+    
     private Dictionary dicB;
     
     
-    /**
-     * 
-     */
+    
     private String outFileName;
 
-    /**
-     * 
-     */
+    
     public DicFilter() {
         
     }    
@@ -89,9 +79,7 @@ public class DicFilter  extends AbstractDictTool{
         
     }
     
-    /**
-     * 
-     */
+    
     private void processArguments() {
         String fileNameA = this.arguments[1];
         DictionaryReader dicReaderA = new DictionaryReader(fileNameA);

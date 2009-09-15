@@ -30,21 +30,13 @@ import dics.elements.dtd.Dictionary;
  */
 public class DicSet extends ArrayList<Dictionary> {
 
-    /**
-     * 
-     */
+    
     private Dictionary mon1;
-    /**
-     * 
-     */
+    
     private Dictionary bil1;
-    /**
-     * 
-     */
+    
     private Dictionary mon2;
-    /**
-     * 
-     */
+    
     private Dictionary bil2;
 
     /**
@@ -131,10 +123,7 @@ public class DicSet extends ArrayList<Dictionary> {
         return bil2;
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public void reportMetrics() {
         System.err.println("monA");
         mon1.reportMetrics();

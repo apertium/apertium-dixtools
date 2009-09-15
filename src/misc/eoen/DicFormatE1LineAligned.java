@@ -35,9 +35,7 @@ import dictools.AbstractDictTool;
  */
 public class DicFormatE1LineAligned extends AbstractDictTool {
 
-    /**
-     * 
-     */
+    
     private Dictionary dic;
     
   public DicFormatE1LineAligned setAlignP(int attrSpaces) {

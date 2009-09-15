@@ -31,9 +31,7 @@ import dics.elements.dtd.S;
  */
 public class Variables extends HashMap<String, Object> {
 
-    /**
-     * 
-     */
+    
     public Variables() {
         super();
     }
@@ -58,9 +56,7 @@ public class Variables extends HashMap<String, Object> {
         }
     }
 
-    /**
-     * 
-     */
+    
     public void print() {
         Iterator it = this.keySet().iterator();
         System.out.print("{ ");

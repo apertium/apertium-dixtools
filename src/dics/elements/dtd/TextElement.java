@@ -29,9 +29,7 @@ import dics.elements.utils.DicOpts;
  */
 public class TextElement extends DixElement {
 
-    /**
-     * 
-     */
+    
     private String text;
 
     /**

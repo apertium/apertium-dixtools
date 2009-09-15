@@ -31,13 +31,9 @@ import java.util.StringTokenizer;
  */
 public class DicReader {
 
-    /**
-     * 
-     */
+    
     private String fileName;
-    /**
-     * 
-     */
+    
     private EntryList entryList;
 
     /**

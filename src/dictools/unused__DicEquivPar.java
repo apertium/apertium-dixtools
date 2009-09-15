@@ -33,17 +33,11 @@ import dics.elements.utils.DicSet;
  */
 public class unused__DicEquivPar {
 
-    /**
-     * 
-     */
+    
     private DicSet dicSet;
-    /**
-     * 
-     */
+    
     private HashMap<String, ArrayList<Pardef>> equivA;
-    /**
-     * 
-     */
+    
     private HashMap<String, ArrayList<Pardef>> equivC;
 
     /**
@@ -63,10 +57,7 @@ public class unused__DicEquivPar {
         dicSet = ds;
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public void findEquivalents() {
         System.err.println("Searching for equivalents...");
         Dictionary monA = dicSet.getMon1();

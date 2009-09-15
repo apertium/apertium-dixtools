@@ -44,46 +44,26 @@ import org.xml.sax.SAXException;
  */
 public class LingResourcesReader {
 
-    /**
-     * 
-     */
+    
     private DocumentBuilderFactory factory;
-    /**
-     * 
-     */
+    
     private DocumentBuilder builder;
-    /**
-     * 
-     */
+    
     private Document document;
-    /**
-     * 
-     */
+    
     private File dicFile;
-    /**
-     * 
-     */
+    
     private InputStream is;
-    /**
-     * 
-     */
+    
     private boolean urlDic = false;
-    /**
-     * 
-     */
+    
     public static int URL = 0;
-    /**
-     * 
-     */
+    
     public static int FILE = 1;
-    /**
-     * 
-     */
+    
     private LingResources lingRes;
 
-    /**
-     * 
-     */
+    
     public LingResourcesReader(String source, int type) {
         if (type == LingResourcesReader.FILE) {
             setDicFile(new File(source));
@@ -104,9 +84,7 @@ public class LingResourcesReader {
         init();
     }
 
-    /**
-     * 
-     */
+    
     private void init() {
         try {
             setFactory(DocumentBuilderFactory.newInstance());
@@ -119,9 +97,7 @@ public class LingResourcesReader {
         }
     }
 
-    /**
-     * 
-     */
+    
     public void analize() {
         try {
             if (isUrlDic()) {

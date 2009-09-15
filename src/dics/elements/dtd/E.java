@@ -700,9 +700,7 @@ public class E extends DixElement implements Cloneable {
 
     }
 
-    /**
-     * 
-     */
+    
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder(50);
@@ -884,9 +882,7 @@ public class E extends DixElement implements Cloneable {
         return null;
     }
 
-    /**
-     * 
-     */
+    
     @Override
     public Object clone() {
         try {

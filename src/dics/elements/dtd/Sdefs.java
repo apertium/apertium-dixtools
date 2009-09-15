@@ -36,15 +36,10 @@ import dics.elements.utils.DicTools;
  */
 public class Sdefs extends DixElement {
 
-    /**
-     * 
-     */
+    
     private ArrayList<Sdef> sdefsElements;
 
-    /**
-     * 
-     * 
-     */
+    
     public Sdefs() {
         super("sdefs");
         sdefsElements = new ArrayList<Sdef>();
@@ -145,9 +140,7 @@ public class Sdefs extends DixElement {
     }
  */
     
-    /**
-     * 
-     */
+    
     @Override
     public String toString() {
         String str = "";

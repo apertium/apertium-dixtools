@@ -27,13 +27,9 @@ import java.util.ArrayList;
  */
 public class ResourceSet extends ArrayList<Resource> {
 
-    /**
-     * 
-     */
+    
     private String name;
-    /**
-     * 
-     */
+    
     private String description;
 
     /**

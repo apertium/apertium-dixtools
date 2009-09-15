@@ -30,22 +30,15 @@ import dics.elements.dtd.DixElement;
  */
 public class ElementList extends ArrayList<DixElement> implements Cloneable {
 
-    /**
-     *    
-     */
+    
     static final long serialVersionUID = 0;
 
-    /**
-     *    
-     *    
-     */
+    
     public ElementList() {
         super(6);
     }
 
-    /**
-     *    
-     */
+    
     @Override
     public Object clone() {
         try {
@@ -63,9 +56,7 @@ public class ElementList extends ArrayList<DixElement> implements Cloneable {
         }
     }
 
-    /**
-     *    
-     */
+    
     @Override
     public String toString() {
         String str = "";

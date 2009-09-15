@@ -30,21 +30,14 @@ import dics.elements.utils.DicOpts;
  */
 public class Par extends DixElement {
 
-    /**
-     * 
-     */
+    
     private String n;
-    /**
-     * 
-     */
+    
     private String sa;
 
     private String[] prm;
 
-    /**
-     * 
-     * 
-     */
+    
     public Par() {
         super("par");
 
@@ -121,9 +114,7 @@ public class Par extends DixElement {
     }
 
 
-    /**
-     * 
-     */
+    
     @Override
     public String toString() {
         String saAttr = sa==null?"":" sa=\"" + sa + "\" ";

@@ -30,17 +30,11 @@ import dics.elements.utils.DicOpts;
  */
 public class DixElement implements Cloneable, CharacterDataNeighbour {
 
-    /**
-     * 
-     */
+    
     private String value;
-    /**
-     * 
-     */
+    
     private String valueNoTags = "";
-    /**
-     * 
-     */
+    
     public final String TAGNAME;
 
     public DixElement(String tagName) {
@@ -172,9 +166,7 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
         return processingComments;
     }
 
-    /**
-     * 
-     */
+    
     @Override
     public Object clone() {
         try {
@@ -217,9 +209,7 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
         this.valueNoTags = valueNoTags;
     }
 
-    /**
-     * 
-     */
+    
     @Override
     public String toString() {
         String str = "" + getValue();

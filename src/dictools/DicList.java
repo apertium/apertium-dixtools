@@ -46,21 +46,13 @@ import dictools.xml.DictionaryReader;
  */
 public class DicList {
 
-    /**
-     * 
-     */
+    
     private Dictionary dic;
-    /**
-     * 
-     */
+    
     private String action;
-    /**
-     * 
-     */
+    
     private boolean urlDic;
-    /**
-     * 
-     */
+    
     private String url;
 
     protected Msg msg = Msg.inst();
@@ -97,10 +89,7 @@ public class DicList {
         msg.err("# " + nLemmas + " lemmas");
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public void getDefinitions() {
         Dictionary dic = getDic();
 
@@ -196,10 +185,7 @@ public class DicList {
 
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public void doit() {
         if (action.endsWith("paradigms")) {
             getListOfParadigms();

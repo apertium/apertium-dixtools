@@ -44,63 +44,34 @@ public class Dictionary extends DixElement {
     protected Alphabet alphabet;
     protected Sdefs sdefs;
     protected Pardefs pardefs;
-    /**
-     *
-     */
+    
     protected ArrayList<Section> sections;
-    /**
-     *
-     */
+    
     protected int nEntries;
-    /**
-     *
-     */
+    
     protected int nShared;
-    /**
-     *
-     */
+    
     protected int nDifferent;
-    /**
-     *
-     */
+    
     protected HashMap<String, ArrayList<Pardef>> equivPar;
-    /**
-     *
-     */
+    
     private String type;
-    /**
-     *
-     */
+    
     private String fileName;
-    /**
-     *
-     */
+    
     private String filePath;
-    /**
-     *
-     */
+    
     private String leftLanguage;
-    /**
-     *
-     */
+    
     private String rightLanguage;
-    /**
-     *
-     */
+    
     private String folder;
-    /**
-     *
-     */
+    
     private String xmlEncoding = "UTF-8";
-    /**
-     *
-     */
+    
     private String xmlVersion;
 
-    /**
-     *
-     *
-     */
+    
     public Dictionary() {
       super("dictionary");
         sections = new ArrayList<Section>();
@@ -200,16 +171,12 @@ public class Dictionary extends DixElement {
         return fileName;
     }
 
-    /**
-     *
-     */
+    
     public void setFilePath(String path) {
         this.filePath = path;
     }
 
-    /**
-     *
-     */
+    
     public String getFilePath() {
         return this.filePath;
     }
@@ -297,10 +264,7 @@ public class Dictionary extends DixElement {
         this.header = header;
     }
 
-    /**
-     *
-     *
-     */
+    
     public Alphabet getAlphabet() {
         return alphabet;
     }
@@ -590,10 +554,7 @@ public class Dictionary extends DixElement {
         (getEntries()).remove(e);
     }
 
-    /**
-     *
-     *
-     */
+    
     public void countEntries() {
         nEntries = 0;
         nShared = 0;
@@ -632,10 +593,7 @@ public class Dictionary extends DixElement {
         return nDifferent;
     }
 
-    /**
-     *
-     *
-     */
+    
     public void reportMetrics() {
         countEntries();
         System.err.println(nShared + " shared entries.");
@@ -643,10 +601,7 @@ public class Dictionary extends DixElement {
         System.err.println(nEntries + " own entries.");
     }
 
-    /**
-     *
-     *
-     */
+    
     public void removeNotCommon() {
         ArrayList<E> elements = getEntries();
         ArrayList<E> elementsCopy = new ArrayList<E>(elements);
@@ -716,10 +671,7 @@ public class Dictionary extends DixElement {
         return null;
     }
 
-    /**
-     *
-     *
-     */
+    
     public void reverse() {
         for (Section section : getSections()) {
             ArrayList<E> elements = section.getEElements();

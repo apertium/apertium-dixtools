@@ -39,9 +39,7 @@ public class PrepareDic {
     private Dictionary ncBil;
     private HashMap<String, String> missing;
 
-    /**
-     * 
-     */
+    
     public PrepareDic(String missingFileName, String ncBilFileName) {
         DictionaryReader r1 = new DictionaryReader(ncBilFileName);
         ncBil = r1.readDic();
@@ -49,9 +47,7 @@ public class PrepareDic {
         this.prepare();
     }
 
-    /**
-     * 
-     */
+    
     public void prepare() {
         Dictionary dic = new Dictionary();
         Section section = new Section("main", "standard");

@@ -38,27 +38,16 @@ import dics.elements.utils.Msg;
  */
 public class Action {
 
-    /**
-     * 
-     */
+    
     private E e;
-    /**
-     * 
-     */
+    
     private String name;
-    /**
-     * 
-     */
+    
     private Integer patternLength;
-    /**
-     * 
-     */
+    
     private int numberOfConstants = 0;
 
-    /**
-     * 
-     * 
-     */
+    
     public Action() {
 
     }
@@ -79,10 +68,7 @@ public class Action {
         e = action;
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public void print(Msg msg) {
         if (e != null) {
             msg.log("action:\n");
@@ -158,10 +144,7 @@ public class Action {
         this.numberOfConstants = numberOfConstants;
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public void incrementNumberOfConstants() {
         numberOfConstants++;
     }

@@ -114,9 +114,7 @@ public class P extends DixElement {
     }
         
         
-    /**
-     * 
-     */
+    
     @Override
     public String toString() {
         String str = "";

@@ -47,39 +47,22 @@ import dictools.cmproc.Variables;
  */
 public class CrossAction implements Comparable<CrossAction> {
 
-    /**
-     * 
-     */
+    
     private String id;
-    /**
-     * 
-     */
+    
     private Pattern pattern;
-    /**
-     * 
-     */
+    
     private Variables vars;
-    /**
-     * 
-     */
+    
     private ActionSet actionSet;
-    /**
-     * 
-     */
+    
     private int occurrences;
-    /**
-     * 
-     */
+    
     private int x = 0;
-    /**
-     * 
-     */
+    
     private int s = 0;
 
-    /**
-     * 
-     * 
-     */
+    
     public CrossAction() {
         pattern = new Pattern();
         actionSet = new ActionSet();
@@ -117,10 +100,7 @@ public class CrossAction implements Comparable<CrossAction> {
         this.id = id;
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public void print(Msg msg) {
         if (pattern != null) {
             getPattern().print(msg);
@@ -177,17 +157,12 @@ public class CrossAction implements Comparable<CrossAction> {
         this.occurrences = occurrences;
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public void incrementOccurrences() {
         occurrences++;
     }
 
-    /**
-     * 
-     */
+    
     public int compareTo(CrossAction anotherEElement)
             throws ClassCastException {
         if (anotherEElement == null) {
@@ -207,9 +182,7 @@ public class CrossAction implements Comparable<CrossAction> {
         return 1;
     }
 
-    /**
-     * 
-     */
+    
     public CrossAction rename() {
         // Renamed objects
         CrossAction rCrossAction = new CrossAction();

@@ -35,17 +35,11 @@ import dictools.crossmodel.CrossModel;
  */
 public class CrossModelProcessor {
 
-    /**
-     * 
-     */
+    
     private State startState;
-    /**
-     * 
-     */
+    
     private CrossActionData bestAction;
-    /**
-     * 
-     */
+    
     private Msg msg;
 
     /**
@@ -72,9 +66,7 @@ public class CrossModelProcessor {
         }
     }
 
-    /**
-     *
-     */
+    
     private void printSequence(Msg msg, ArrayList<DixElement> ee) {
         msg.log("[]");
         for (DixElement e : ee) {

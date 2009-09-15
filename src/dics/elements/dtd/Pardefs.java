@@ -34,15 +34,10 @@ import dics.elements.utils.DicOpts;
  */
 public class Pardefs extends DixElement {
 
-    /**
-     * 
-     */
+    
     private ArrayList<Pardef> pardefElements;
 
-    /**
-     * 
-     * 
-     */
+    
     public Pardefs() {
       super("pardefs");
         pardefElements = new ArrayList<Pardef>();

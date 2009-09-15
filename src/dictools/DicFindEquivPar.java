@@ -38,36 +38,23 @@ import dictools.xml.DictionaryReader;
  */
 public class DicFindEquivPar  extends AbstractDictTool {
 
-    /**
-     * 
-     */
+    
     private Dictionary dic;
-    /**
-     * 
-     */
+    
     private String outFileName;
 
-    /**
-     * 
-     * 
-     */
+    
     public DicFindEquivPar() {
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public DicFindEquivPar(String fileName) {
         DictionaryReader dicReader = new DictionaryReader(fileName);
         Dictionary dic = dicReader.readDic();
         setDic(dic);
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public void findEquivalents() {
 
         ArrayList<Pardef> pardefs = dic.getPardefsElement().getPardefElements();

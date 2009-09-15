@@ -30,9 +30,7 @@ import dictools.xml.DictionaryReader;
  */
 public class DicFormatE1Line extends AbstractDictTool {
 
-    /**
-     * 
-     */
+    
     private Dictionary dic;
 
     /**

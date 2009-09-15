@@ -32,13 +32,9 @@ import dics.elements.utils.DicOpts;
  */
 public class Pardef extends DixElement {
 
-    /**
-     * 
-     */
+    
     private ArrayList<E> eElements;
-    /**
-     * 
-     */
+    
     private String n;
 
     /**
@@ -132,9 +128,7 @@ public class Pardef extends DixElement {
     }
 
 
-    /**
-     * 
-     */
+    
     @Override
     public String toString() {
         String str = "";

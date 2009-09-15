@@ -30,15 +30,10 @@ import dictools.xml.DictionaryReader;
  */
 public class DicReverse  extends AbstractDictTool {
 
-    /**
-     * 
-     */
+    
     private Dictionary dicOrig;
 
-    /**
-     * 
-     * 
-     */
+    
     public DicReverse() {
 
     }
@@ -68,10 +63,7 @@ public class DicReverse  extends AbstractDictTool {
         return dicOrig;
     }
 
-    /**
-     * 
-     * 
-     */
+    
     private void processArguments() {
         DictionaryReader dicReader = new DictionaryReader(arguments[1]);
         Dictionary bil = dicReader.readDic();
@@ -79,19 +71,13 @@ public class DicReverse  extends AbstractDictTool {
         setDicOrig(bil);
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public void doReverse() {
         processArguments();
         actionReverse();
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public void actionReverse() {
         Dictionary bil = reverse();
         String reverseFileName = "reversed-dic.dix";

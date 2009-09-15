@@ -84,29 +84,17 @@ public class XMLReader {
         System.err.println("s = '" + trimNewlineOnEnd("xxx  \n\n")+"'");
 }*/
 
-    /**
-     * 
-     */
+    
     protected DocumentBuilderFactory factory;
-    /**
-     * 
-     */
+    
     protected DocumentBuilder builder;
-    /**
-     * 
-     */
+    
     protected Document document;
-    /**
-     * 
-     */
+    
     protected File dicFile;
-    /**
-     * 
-     */
+    
     protected InputStream is;
-    /**
-     * 
-     */
+    
     protected boolean urlDic;
 
 
@@ -119,10 +107,7 @@ public class XMLReader {
 
     
     
-    /**
-     * 
-     * 
-     */
+    
     public XMLReader() {
         init();
     }
@@ -136,10 +121,7 @@ public class XMLReader {
         init();
     }
 
-    /**
-     * 
-     * 
-     */
+    
     private void init() {
         // getFactory().setXIncludeAware(true);
         try {
@@ -153,10 +135,7 @@ public class XMLReader {
         }
     }
 
-    /**
-     * 
-     * 
-     */
+    
     protected void analize() {
         try {
             if (isUrlDic()) {

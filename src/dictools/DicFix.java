@@ -39,18 +39,11 @@ import dictools.xml.DictionaryReader;
  */
 public class DicFix  extends AbstractDictTool {
 
-    /**
-     * 
-     */
+    
     private Dictionary dic;
-    /**
-     * 
-     */
+    
     private String out;
-    /**
-     * 
-     * 
-     */
+    
     public DicFix() {
     }
 
@@ -134,10 +127,7 @@ public class DicFix  extends AbstractDictTool {
         return dic;
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public void doFormat() {
         processArguments();
         actionFix();
@@ -150,10 +140,7 @@ public class DicFix  extends AbstractDictTool {
         }
     }
 
-    /**
-     * 
-     * 
-     */
+    
     private void processArguments() {
       
         msg.err("Reading " + arguments[1]);
@@ -164,10 +151,7 @@ public class DicFix  extends AbstractDictTool {
         this.setOut(arguments[2]);
     }
 
-    /**
-     * 
-     * 
-     */
+    
     private void actionFix() {
         Dictionary dicFormatted = fix();
         msg.err("Writing fixed dictonary to " + getOut());

@@ -40,29 +40,17 @@ import dictools.xml.DictionaryReader;
  */
 public class ConvertMF {
 
-    /**
-     * 
-     */
+    
     private String[] arguments;
-    /**
-     * 
-     */
+    
     private String morphDic;
-    /**
-     * 
-     */
+    
     private String bilDic;
-    /**
-     * 
-     */
+    
     private String outFileName;
-    /**
-     * 
-     */
+    
     private HashMap<String, Pardef> mfPardefsNouns;
-    /**
-     * 
-     */
+    
     private HashMap<String, Pardef> mfPardefsAdjs;
 
     /**
@@ -76,9 +64,7 @@ public class ConvertMF {
 
     }
 
-    /**
-     * 
-     */
+    
     public void processArguments() {
         morphDic = arguments[1];
         bilDic = arguments[2];
@@ -92,9 +78,7 @@ public class ConvertMF {
         this.outFileName = outFileName;
     }
 
-    /**
-     * 
-     */
+    
     public void convert() {
         //this.generateMon();
         //this.completeBil();

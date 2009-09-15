@@ -42,37 +42,23 @@ import dictools.xml.DictionaryReader;
  */
 public class AddGender {
 
-    /**
-     * 
-     */
+    
     private String[] arguments;
-    /**
-     * 
-     */
+    
     private String morphDic;
-    /**
-     * 
-     */
+    
     private String bilDic;
-    /**
-     * 
-     */
+    
     private String out;
 
-    /**
-     * 
-     * 
-     */
+    
     public void processArguments() {
         morphDic = arguments[1];
         bilDic = arguments[2];
         out = arguments[3];
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public void doAddGender() {
         processArguments();
 

@@ -30,15 +30,10 @@ import dics.elements.utils.DicOpts;
  */
 public class Alphabet extends DixElement {
 
-    /**
-     * 
-     */
+    
     private String alphabet;
 
-    /**
-     * 
-     * 
-     */
+    
     public Alphabet() {
       super("alphabet");
     }

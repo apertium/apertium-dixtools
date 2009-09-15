@@ -87,9 +87,7 @@ public class DicCross  extends AbstractDictTool{
      * Left-Right and Right-Left restrictions.
      */
     private final int BOTH = 2;
-    /**
-     *
-     */
+    
     private final int NONE = 3;
     /**
      * Bilingual dictionary A-B
@@ -99,87 +97,46 @@ public class DicCross  extends AbstractDictTool{
      * Bilingual dictionary B-C
      */
     private Dictionary bilBC;
-    /**
-     *
-     */
+    
     private HashMap<String, E> processed;
-    /**
-     *
-     */
+    
     private HashMap<String, E> regExProcessed;
-    /**
-     *
-     */
+    
     private CrossModel crossModel;
-    /**
-     * 
-     */
+    
     private CrossModelProcessor crossModelProcessor;
-    /**
-     *
-     */
+    
     private String crossModelFileName;
-    /**
-     *
-     */
+    
     private HashMap<String, CrossAction> nDCrossActions;
-    /**
-     *
-     */
+    
     private CrossModel nDCrossModel;
-    /**
-     *
-     */
+    
     private DicSet dicSet;
-    /**
-     *
-     */
+    
     private int NDcounter;
-    /**
-     *
-     */
+    
     private HashMap<String, Integer> usedPatterns;
-    /**
-     *
-     */
+    
     private int taskOrder;
-    /**
-     *
-     */
+    
     private String outDir = "dix/";
-    /**
-     * 
-     */
+    
     private int completed = 0;
-    /**
-     * 
-     */
+    
     private double nMinElements = 0;
-    /**
-     *
-     */
+    
     private double nCrossedElements = 0;
-    /**
-     * 
-     */
+    
     private JProgressBar progressBar;
-    /**
-     * 
-     */
+    
     private String bilCrossed_path;
-    /**
-     * 
-     */
+    
     private String monACrossed_path;
-    /**
-     * 
-     */
+    
     private String monCCrossed_path;
 
-    /**
-     *
-     *
-     */
+    
     public DicCross() {
         msg.setLogFileName("cross.log");
         rMatrix = new int[3][3];
@@ -192,10 +149,7 @@ public class DicCross  extends AbstractDictTool{
         taskOrder = 1;
     }
 
-    /**
-     *
-     *
-     */
+    
     private void readCrossModel() {
         try {
             msg.out("[" + (taskOrder++) + "] Reading cross model (" + getCrossModelFileName() + ") ...\n");
@@ -228,10 +182,7 @@ public class DicCross  extends AbstractDictTool{
         }
     }
 
-    /**
-     *
-     *
-     */
+    
     private void fillOutRestrictionMatrix() {
         // Note: B-A ^ B-C = A-C
         setRMatrixValue(LR, LR, NONE);
@@ -863,10 +814,7 @@ public class DicCross  extends AbstractDictTool{
         return nDCrossModel;
     }
 
-    /**
-     *
-     *
-     */
+    
     public void doCross() {
             new File("dix").mkdir();
 
@@ -874,9 +822,7 @@ public class DicCross  extends AbstractDictTool{
         actionCross();
     }
 
-    /**
-     * 
-     */
+    
     public void actionCross() {
         DicSet dicSet = getDicSet();
         actionConsistent(dicSet, "yes");
@@ -1348,30 +1294,22 @@ public class DicCross  extends AbstractDictTool{
         this.dicSet = dicSet;
     }
 
-    /**
-     *
-     */
+    
     public void setOutDir(String path) {
         this.outDir = path;
     }
 
-    /**
-     *
-     */
+    
     public String getOutDir() {
         return this.outDir;
     }
 
-    /**
-     * 
-     */
+    
     public int getCompleted() {
         return this.completed;
     }
 
-    /**
-     * 
-     */
+    
     public void setCompleted(int percent) {
         this.completed = percent;
 
@@ -1380,23 +1318,17 @@ public class DicCross  extends AbstractDictTool{
         }
     }
 
-    /**
-     * 
-     */
+    
     public void setNMinElements(double n) {
         this.nMinElements = n;
     }
 
-    /**
-     * 
-     */
+    
     public double getNMinElements() {
         return this.nMinElements;
     }
 
-    /**
-     *
-     */
+    
     public void incrementNCrossedElements() {
         this.nCrossedElements++;
         double compl = ((this.nCrossedElements / this.nMinElements)) * 100;
@@ -1404,30 +1336,22 @@ public class DicCross  extends AbstractDictTool{
         this.setCompleted(perc);
     }
 
-    /**
-     * 
-     */
+    
     public void setProgressBar(JProgressBar progressBar) {
         this.progressBar = progressBar;
     }
 
-    /**
-     * 
-     */
+    
     public String getBilCrossedPath() {
         return this.bilCrossed_path;
     }
 
-    /**
-     * 
-     */
+    
     public String getMonACrossedPath() {
         return this.monACrossed_path;
     }
 
-    /**
-     * 
-     */
+    
     public String getMonCCrossedPath() {
         return this.monCCrossed_path;
     }

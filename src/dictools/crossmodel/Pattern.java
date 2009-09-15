@@ -38,24 +38,15 @@ import dics.elements.utils.Msg;
  */
 public class Pattern {
 
-    /**
-     * 
-     */
+    
     private E e1;
-    /**
-     * 
-     */
+    
     private E e2;
-    /**
-     * 
-     */
+    
     private int length = 0;
     private int nConstants = 0;
 
-    /**
-     * 
-     * 
-     */
+    
     public Pattern() {
 
     }
@@ -112,9 +103,7 @@ public class Pattern {
         getBC().print("R", msg);
     }
 
-    /**
-     * 
-     */
+    
     @Override
     public String toString() {
         String e1 = getAB().toPatternString();
@@ -216,9 +205,7 @@ public class Pattern {
         this.length = length;
     }
 
-    /**
-     * 
-     */
+    
     public void incrementLength() {
         this.length++;
     }
@@ -239,9 +226,7 @@ public class Pattern {
         this.nConstants = nConstants;
     }
 
-    /**
-     * 
-     */
+    
     public void incrementNConstants() {
         this.nConstants++;
     }

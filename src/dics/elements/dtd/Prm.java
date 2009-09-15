@@ -25,9 +25,7 @@ package dics.elements.dtd;
  */
 public class Prm extends DixElement {
 
-    /**
-     * 
-     */
+    
     public Prm() {
         super("prm");
         setValue("<prm/>");

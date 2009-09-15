@@ -33,17 +33,11 @@ import dictools.xml.DictionaryReader;
  */
 public class AddSameGender {
 
-    /**
-     * 
-     */
+    
     private String[] arguments;
-    /**
-     * 
-     */
+    
     private String morphDic;
-    /**
-     * 
-     */
+    
     private String bilDic;
     private Dictionary bil;
 
@@ -58,9 +52,7 @@ public class AddSameGender {
 
     }
 
-    /**
-     * 
-     */
+    
     public void processArguments() {
         morphDic = arguments[1];
         bilDic = arguments[2];
@@ -73,9 +65,7 @@ public class AddSameGender {
     public void setOutFileName(String outFileName) {
     }
 
-    /**
-     * 
-     */
+    
     public void addSameGender() {
         DictionaryReader bilReader = new DictionaryReader(this.bilDic);
         bil = bilReader.readDic();
@@ -84,9 +74,7 @@ public class AddSameGender {
         bil.printXML("dics/apertium-es-ca.es-ca-with-gender.dix", dics.elements.utils.DicOpts.STD);
     }
 
-    /**
-     * 
-     */
+    
     private void process_nouns() {
         DictionaryReader morphReader = new DictionaryReader(this.morphDic);
         Dictionary morph = morphReader.readDic();

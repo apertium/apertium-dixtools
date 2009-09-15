@@ -25,9 +25,7 @@ package dics.elements.dtd;
  */
 public class B extends DixElement {
 
-    /**
-     * 
-     */
+    
     public B() {
         super("b");
         setValue("<b/>");

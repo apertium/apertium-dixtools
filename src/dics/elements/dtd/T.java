@@ -66,9 +66,7 @@ public class T extends DixElement {
         dos.append(appendCharacterData);
     }
 
-    /**
-     * 
-     */
+    
     @Override
     public String toString() {
         return "<" + name + ">";

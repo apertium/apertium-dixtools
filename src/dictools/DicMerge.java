@@ -41,55 +41,30 @@ import dictools.xml.DictionaryReader;
  */
 public class DicMerge  extends AbstractDictTool{
 
-    /**
-     * 
-     */
+    
     private Dictionary bilAB1;
-    /**
-     * 
-     */
+    
     private Dictionary bilAB2;
-    /**
-     * 
-     */
+    
     private Dictionary monA1;
-    /**
-     * 
-     */
+    
     private Dictionary monA2;
-    /**
-     * 
-     */
+    
     private Dictionary monB1;
-    /**
-     * 
-     */
+    
     private Dictionary monB2;
-    /**
-     * 
-     */
+    
     private DicSet dicSet1;
-    /**
-     * 
-     */
+    
     private DicSet dicSet2;
-    /**
-     * 
-     */
+    
     private DicSet merged;
-    /**
-     * 
-     */
+    
     private String sOut;
-    /**
-     * 
-     */
+    
     private HashMap<String, String> paradigmsToRemove;
 
-    /**
-     * 
-     * 
-     */
+    
     public DicMerge() {
         msg.setLogFileName("merge.log");
     }
@@ -440,37 +415,25 @@ public class DicMerge  extends AbstractDictTool{
         return pardefs;
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public void doMerge() {
         processArguments();
         actionMerge();
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public void doMergeMorph() {
         processArgumentsMorph();
         mergeMorph();
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public void doMergeBil() {
         processArgumentsBil();
         mergeBil();
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public void actionMerge() {
         DicSet dicSet = merge();
         // setMerged(dicSet);
@@ -590,10 +553,7 @@ public class DicMerge  extends AbstractDictTool{
 
     }
 
-    /**
-     * 
-     * 
-     */
+    
     private void processArgumentsMorph() {
         int nArgs = getArguments().length;
 
@@ -633,10 +593,7 @@ public class DicMerge  extends AbstractDictTool{
         this.monA2 =(monA2);
     }
 
-    /**
-     * 
-     * 
-     */
+    
     private void processArgumentsBil() {
         int nArgs = getArguments().length;
 
@@ -747,10 +704,7 @@ public class DicMerge  extends AbstractDictTool{
         this.merged = merged;
     }
 
-    /**
-     * 
-     * 
-     */
+    
     public void mergeMorph() {
         Dictionary morph = mergeMonols(monA1, monA2);
         morph.printXML(getSOut(),getOpt());
@@ -764,10 +718,7 @@ public class DicMerge  extends AbstractDictTool{
     }
 
 
-    /**
-     * 
-     * 
-     */
+    
     public void mergeBil() {
         Dictionary bil = mergeBils(bilAB1, bilAB2);
         DicSort dicSort = new DicSort(bil);
