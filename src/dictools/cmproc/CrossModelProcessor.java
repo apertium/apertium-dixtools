@@ -24,6 +24,7 @@ import dics.elements.utils.ElementList;
 import dics.elements.utils.Msg;
 import dictools.crossmodel.CrossAction;
 import dictools.crossmodel.CrossModel;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -71,13 +72,25 @@ public class CrossModelProcessor {
     }
 
     /**
+     *
+     */
+    private void printSequence(Msg msg, ArrayList<DixElement> ee) {
+        msg.log("[]");
+        for (DixElement e : ee) {
+            msg.log("<" + e.getValue() + "> ");
+        }
+        msg.log("]");
+
+    }
+
+    /**
      * 
      * @param eList
      * @param crossAction
      */
     public void add(ElementList eList, CrossAction crossAction) {
         msg.log("Adding pattern '" + crossAction.getId() + "'...");
-        eList.printSequence(msg);
+        printSequence(msg, eList);
         this.startState.add(eList, crossAction, 0);
     }
 
@@ -93,7 +106,7 @@ public class CrossModelProcessor {
         CrossActionDataList crossActionDataList = new CrossActionDataList();
         startState.getActionSetList(patternSequence, 0, crossActionDataList, vars);
         if (crossActionDataList.size() > 0) {
-            entries.getPattern().getSequence().printSequence(msg);
+            printSequence(msg, entries.getPattern().getSequence());
             msg.log("\n" + crossActionDataList.size() + " candidates: ");
             Iterator it = crossActionDataList.keySet().iterator();
             while (it.hasNext()) {

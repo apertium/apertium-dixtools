@@ -132,7 +132,7 @@ public class AddGender {
         int genderNotFound = 0;
         for (Section section : bil.getSections()) {
             for (E ee : section.getEElements()) {
-                if (!ee.isRegEx()) {
+                if (!ee.containsRegEx()) {
                     String parName = ee.getMainParadigmName();
                     if (parName != null) {
                         if (parName.contains("NC")) {

@@ -119,8 +119,8 @@ public class Pattern {
      */
     @Override
     public String toString() {
-        String e1 = getAB().toString2();
-        String e2 = getBC().toString2();
+        String e1 = getAB().toPatternString();
+        String e2 = getBC().toPatternString();
         String str = e1 + "/" + e2;
         return str;
     }

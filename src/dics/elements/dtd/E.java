@@ -1004,7 +1004,7 @@ public class E extends DixElement implements Cloneable {
     /**
      * 
      * @return Undefined         */
-    public String toString2() {
+    public String toPatternString() {
         String str = "";
         for (DixElement e : children) {
             if (e instanceof I) {
@@ -1030,7 +1030,7 @@ public class E extends DixElement implements Cloneable {
     /**
      * 
      * @return Undefined         */
-    public boolean isRegEx() {
+    public boolean containsRegEx() {
         for (DixElement e : children) {
             if (e instanceof Re) {
                 return true;
@@ -1042,7 +1042,7 @@ public class E extends DixElement implements Cloneable {
     /**
      * 
      * @return Undefined         */
-    public Re getRegEx() {
+    public Re getFirstRegEx() {
         for (DixElement e : children) {
             if (e instanceof Re) {
                 return (Re) e;
@@ -1077,7 +1077,7 @@ public class E extends DixElement implements Cloneable {
         @Override
         public int compare(E e1, E anotherEElement) {
             if (anotherEElement == null) return -1;
-            if (e1.isRegEx()) return 0;
+            if (e1.containsRegEx()) return 0;
             if (!(anotherEElement instanceof E))  throw new ClassCastException("An EElement object expected.");
 
 

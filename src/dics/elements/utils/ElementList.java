@@ -106,17 +106,6 @@ public class ElementList extends ArrayList<DixElement> implements Cloneable {
         return cList;
     }
 
-    /**
-     * 
-     */
-    public void printSequence(Msg msg) {
-        msg.log("[]");
-        for (DixElement e : this) {
-            msg.log("<" + e.getValue() + "> ");
-        }
-        msg.log("]");
-
-    }
 }
 
 

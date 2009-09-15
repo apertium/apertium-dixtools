@@ -46,7 +46,7 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
     /**
      * 
      */
-    private String TAGNAME;
+    public final String TAGNAME;
 
     public DixElement(String tagName) {
       TAGNAME = tagName;

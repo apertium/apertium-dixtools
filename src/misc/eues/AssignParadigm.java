@@ -92,7 +92,7 @@ public class AssignParadigm extends AbstractDictTool {
 
         for (Section section : bil.getSections()) {
             for (E ee : section.getEElements()) {
-                if (!ee.isRegEx()) {
+                if (!ee.containsRegEx()) {
                     String left = ee.getSide("L").getValue();
                     String right = ee.getSide("R").getValue();
 

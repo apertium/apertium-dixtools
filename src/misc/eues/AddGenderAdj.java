@@ -133,7 +133,7 @@ public class AddGenderAdj {
         int genderNotFound = 0;
         for (Section section : bil.getSections()) {
             for (E ee : section.getEElements()) {
-                if (!ee.isRegEx()) {
+                if (!ee.containsRegEx()) {
                     ContentElement leftSide = ee.getSide("L");
                     ContentElement rightSide = ee.getSide("R");
 

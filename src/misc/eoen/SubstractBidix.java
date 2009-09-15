@@ -72,7 +72,7 @@ public class SubstractBidix {
       for (E ee : section.getEElements()) {
         //setYesIsAllowed(ee, "LR"); // XXXX
         //setYesIsAllowed(ee, "RL"); // XXXX
-        if (!ee.isRegEx()) {
+        if (!ee.containsRegEx()) {
           ContentElement l=ee.getSide("L");
           ContentElement r=ee.getSide("R");
           //System.err.println("======="+ee.toString()+"========");
@@ -112,7 +112,7 @@ public class SubstractBidix {
       Iterator<E> eei=section.getEElements().iterator();
       while (eei.hasNext()) {
         E ee=eei.next();
-        if (!ee.isRegEx()) {
+        if (!ee.containsRegEx()) {
           String reasonOfRestriction=ee.getTemp();
           ee.setTemp(null);
           if (reasonOfRestriction!=null) {

@@ -429,11 +429,11 @@ public class DicCross  extends AbstractDictTool{
      */
     private void crossSectionsAB(ArrayList<E> elements, HashMap<String, ArrayList<E>> sectionMap, Section section, Dictionary bil, int dir) {
         for (E e : elements) {
-            if (e.isRegEx()) {
-                String key = e.getRegEx().getValue();
+            if (e.containsRegEx()) {
+                String key = e.getFirstRegEx().getValue();
                 if (!getRegExProcessed().containsKey(key)) {
                     section.addEElement(e);
-                    getRegExProcessed().put(e.getRegEx().getValue(), e);
+                    getRegExProcessed().put(e.getFirstRegEx().getValue(), e);
                 }
             } else {
                 ArrayList<E> candidates = getPairs(e, sectionMap);
