@@ -153,7 +153,7 @@ public class TinyFilter {
 
     public final String rename(String tagName) {
         if (this.renamed.containsKey(tagName)) {
-            return (String) this.renamed.get(tagName);
+            return this.renamed.get(tagName);
         } else {
             return tagName;
         }

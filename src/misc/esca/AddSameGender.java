@@ -45,18 +45,6 @@ public class AddSameGender {
      * 
      */
     private String bilDic;
-    /**
-     * 
-     */
-    private String outFileName;
-    /**
-     * 
-     */
-    private HashMap<String, Pardef> pardefsNouns;
-    /**
-     * 
-     */
-    private HashMap<String, Pardef> mfPardefsAdjs;
     private Dictionary bil;
 
     /**
@@ -83,7 +71,6 @@ public class AddSameGender {
      * @param outFileName
      */
     public void setOutFileName(String outFileName) {
-        this.outFileName = outFileName;
     }
 
     /**

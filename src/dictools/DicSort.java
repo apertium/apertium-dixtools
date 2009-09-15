@@ -256,13 +256,6 @@ public class DicSort  extends AbstractDictTool {
     }
 
     /**
-     * @return the out
-     */
-    private String getOut() {
-        return out;
-    }
-
-    /**
      * @return the dic
      */
     public Dictionary getDic() {

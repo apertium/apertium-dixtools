@@ -640,8 +640,8 @@ public class DicMerge  extends AbstractDictTool{
     private void processArgumentsBil() {
         int nArgs = getArguments().length;
 
-        String sDicMonA1, sDicMonA2;
-        sDicMonA1 = sDicMonA2 = null;
+        String sDicMonA1;
+        sDicMonA1 = null;
         String sDicBilAB1, sDicBilAB2;
         sDicBilAB1 = sDicBilAB2 = null;
         boolean bilAB1Reverse, bilAB2Reverse;

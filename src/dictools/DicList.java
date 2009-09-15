@@ -64,8 +64,6 @@ public class DicList {
     private String url;
 
     protected Msg msg = Msg.inst();
-    private ArrayList<S> elementsA;
-
     public DicList(String fileName) {
         DictionaryReader dicReader = new DictionaryReader(fileName);
         Dictionary d = dicReader.readDic();

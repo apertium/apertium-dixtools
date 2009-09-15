@@ -184,13 +184,6 @@ public class DicFindEquivPar  extends AbstractDictTool {
 
 
     /**
-     * @return the dic
-     */
-    private Dictionary getDic() {
-        return dic;
-    }
-
-    /**
      * @param dic
      *                the dic to set
      */

@@ -168,14 +168,6 @@ public class ActionSetList extends HashMap<String, ActionSet> {
 
     /**
      * 
-     * @return Undefined     
-     */
-    private boolean isDefinedBestAction() {
-        return this.bestActionSet != null;
-    }
-
-    /**
-     * 
      * @param action
      */
     private void setBestActionSet(ActionSet action) {

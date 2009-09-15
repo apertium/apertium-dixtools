@@ -58,11 +58,6 @@ public class Apertiumizer extends AbstractDictTool {
     private String outFileName;
     /**
      * 
-     */
-    private HashMap<String, String> en;
-
-    /**
-     * 
      * @param fileName
      */
     public Apertiumizer(String fileName) {

@@ -212,16 +212,6 @@ public class Pardef extends DixElement {
 */
 
     /**
-     * 
-     * @param newCategory
-     */
-    private void changeCategory(String newCategory) {
-        for (E e : eElements) {
-            e.changeCategory("R", newCategory);
-        }
-    }
-
-    /**
      * @return the eElements
      */
     public ArrayList<E> getEElements() {

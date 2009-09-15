@@ -110,7 +110,6 @@ public class Misc {
         System.err.println("Begin");
         Dictionary morph_en_adj = this.dic1;
         Dictionary bil_en_es_adj = this.dic2;
-        Dictionary morph_en_n = this.dic3;
         Dictionary bil_en_es_n = this.dic4;
 
         HashMap<String, P> trans_n = new HashMap<String, P>();

@@ -154,7 +154,7 @@ public class State {
     public final void getActionSetList(ElementList patternSequence, int i, CrossActionDataList cadl, Variables varsSrc) {
         if (i < patternSequence.size()) {
             Variables vars = null;
-            String v = ((DixElement) patternSequence.get(i)).getValue();
+            String v = (patternSequence.get(i)).getValue();
             String state_v = getValue();
 
 
@@ -280,7 +280,7 @@ public class State {
     private final void continue_processing(ElementList patternSequence, int i, CrossActionDataList cadl, Variables vars) {
         Iterator it = states.keySet().iterator();
         while (it.hasNext()) {
-            State st = (State) states.get(it.next());
+            State st = states.get(it.next());
             st.getActionSetList(patternSequence, i + 1, cadl, vars);
         }
     }

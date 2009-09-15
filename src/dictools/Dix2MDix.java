@@ -178,31 +178,6 @@ public class Dix2MDix {
         this.print(vector);
     }
 
-    private E cleanUp(E ee) {
-
-        for (DixElement e : ee.getChildren("L")) {
-            if (e instanceof TextElement) {
-                TextElement tE = (TextElement) e;
-                String v = tE.getValue();
-                v = v.replaceAll("_", " ");
-                tE.setValue(v);
-            }
-
-        }
-        for (DixElement e : ee.getChildren("R")) {
-            if (e instanceof TextElement) {
-                TextElement tE = (TextElement) e;
-                String v = tE.getValue();
-                v = v.replaceAll("_", " ");
-                tE.setValue(v);
-            }
-
-        }
-
-        return ee;
-
-    }
-
     /**
      * 
      * @param vector
