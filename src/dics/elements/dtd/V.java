@@ -87,7 +87,7 @@ public class V extends DixElement {
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
-        dos.append("<" + getTagName() + " n=\"" + getValue() + "\"/>");
+        dos.append("<" + TAGNAME + " n=\"" + getValue() + "\"/>");
         dos.append(appendCharacterData);
     }
 

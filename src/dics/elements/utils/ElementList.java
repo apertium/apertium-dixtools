@@ -75,13 +75,6 @@ public class ElementList extends ArrayList<DixElement> implements Cloneable {
             for (DixElement e : this) {
                 String tmp = "";
 
-                if (e instanceof S) {
-                    tmp = ((S) e).getTemp();
-
-                    if (tmp == null) {
-                        tmp = "";
-                    }
-                }
 
                 str += "<" + e.getValue() + "/" + tmp + ">";
             }

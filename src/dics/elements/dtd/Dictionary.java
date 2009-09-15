@@ -518,13 +518,13 @@ public class Dictionary extends DixElement {
                 if (section.getType() != null) {
                     attributes += " type=\"" + section.getType() + "\"";
                 }
-                dos.append(tab(1) + "<" + section.getTagName() + "" + attributes + ">\n");
+                dos.append(tab(1) + "<" + section.TAGNAME + "" + attributes + ">\n");
                 if (includes != null) {
                     for (String s : includes) {
                         dos.append("\t" + s + "\n");
                     }
                 }
-                dos.append(tab(1) + "</" + section.getTagName() + ">\n");
+                dos.append(tab(1) + "</" + section.TAGNAME + ">\n");
             }
             dos.append("</dictionary>\n");
             fos = null;
@@ -737,7 +737,7 @@ public class Dictionary extends DixElement {
             ArrayList<E> elements = section.getEElements();
 
             for (E ee : elements) {
-                ArrayList<DixElement> children = ee.getChildren();
+                ArrayList<DixElement> children = ee.children;
 
                 if (ee.restriction != null) {
                     if (ee.restriction.equals("LR")) {
@@ -774,11 +774,11 @@ public class Dictionary extends DixElement {
                         L lE = ((P) e).l;
                         R rE = ((P) e).r;
                         // String auxValue = lE.getValue();
-                        ElementList auxChildren = lE.getChildren();
+                        ElementList auxChildren = lE.children;
                         // lE.setValue(rE.getValue());
-                        lE.setChildren(rE.getChildren());
+                        lE.children = rE.children;
                         // rE.setValue(auxValue);
-                        rE.setChildren(auxChildren);
+                        rE.children =auxChildren;
                         ((P) e).l = lE;
                         ((P) e).r = (rE);
                     }

@@ -75,7 +75,7 @@ public class Sdefs extends DixElement {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
         dos.append(makeCommentIfData(processingComments));
-        dos.append(tab(1) + "<" + getTagName() + ">\n");
+        dos.append(tab(1) + "<" + TAGNAME + ">\n");
 
         HashMap<String, String> descriptions = DicTools.getSdefDescriptions();
         for (Sdef e : sdefsElements) {
@@ -85,7 +85,7 @@ public class Sdefs extends DixElement {
             }
             e.printXML(dos, opt);
         }
-        dos.append(tab(1) + "</" + getTagName() + ">\n");
+        dos.append(tab(1) + "</" + TAGNAME + ">\n");
         /*
         if (processingComments != null  && !processingComments.isEmpty()) {
             dos.append(tab(1) + "<!-- \n");

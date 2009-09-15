@@ -145,7 +145,7 @@ public class DicFindEquivPar  extends AbstractDictTool {
         // Now replace paradigms
         HashMap<String, Integer> replacementcounter = new HashMap<String, Integer>();
         for (E ee : allElements) {
-            for (DixElement e : ee.getChildren()) {
+            for (DixElement e : ee.children) {
                 if (e instanceof Par) {
                     Par parE = (Par) e;
                     String name = parE.getValue();

@@ -65,7 +65,7 @@ public class Re extends DixElement {
         
         value = maskNull(value);
 
-        dos.append( (opt.nowAlign?"":tab(3)) + "<" + getTagName() + ">" + getValue() + "</" + getTagName() + ">"+appendCharacterData.trim()+  (opt.nowAlign?"":"\n"));
+        dos.append( (opt.nowAlign?"":tab(3)) + "<" + TAGNAME + ">" + getValue() + "</" + TAGNAME + ">"+appendCharacterData.trim()+  (opt.nowAlign?"":"\n"));
     }
 
     /**

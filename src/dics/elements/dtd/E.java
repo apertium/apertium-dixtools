@@ -60,6 +60,11 @@ public class E extends DixElement implements Cloneable {
     public boolean shared = false;
     
     public String patternApplied;
+
+    /**
+     * For temporary data doring processing
+     */
+    public transient String temp;
     
     public E() {
       super("e");
@@ -229,14 +234,14 @@ public class E extends DixElement implements Cloneable {
     public ElementList getChildren(String side) {
         for (DixElement e : children) {
             if (e instanceof I) {
-                return ((I) e).getChildren();
+                return ((I) e).children;
             }
             if (e instanceof P) {
                 if (side.equals("L")) {
-                    return ((P) e).l.getChildren();
+                    return ((P) e).l.children;
                 }
                 if (side.equals("R")) {
-                    return ((P) e).r.getChildren();
+                    return ((P) e).r.children;
                 }
             }
         }
@@ -961,14 +966,14 @@ public class E extends DixElement implements Cloneable {
                 L lE = ((P) e).l;
                 R rE = ((P) e).r;
 
-                ElementList auxChildren = lE.getChildren();
+                ElementList auxChildren = lE.children;
 
-                eRev.getSide("L").setChildren(rE.getChildren());
-                eRev.getSide("R").setChildren(auxChildren);
+                eRev.getSide("L").children=rE.children;
+                eRev.getSide("R").children=auxChildren;
             }
             if (e instanceof I) {
                 I iE = new I();
-                iE.setChildren(((I) e).getChildren());
+                iE.children = ((I) e).children;
                 eRev.addChild(iE);
             }
         }

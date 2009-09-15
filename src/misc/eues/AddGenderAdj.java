@@ -94,7 +94,7 @@ public class AddGenderAdj {
                         if (par != null) {
                             for (E eepar : par.getEElements()) {
                                 R r = eepar.getFirstP().r;
-                                for (DixElement er : r.getChildren()) {
+                                for (DixElement er : r.children) {
                                     if (er instanceof S) {
                                         S s = (S) er;
                                         String sv = er.getValue();
@@ -160,10 +160,10 @@ public class AddGenderAdj {
                         // and remove par element if NC
 			    /*
                          * ParElement par = null; for (DixElement e :
-                         * ee.getChildren()) { if (e instanceof
+                         * ee.children) { if (e instanceof
                          * ParElement) { par = (ParElement)e; } }
                          * 
-                         * ee.getChildren().remove(par);
+                         * ee.children.remove(par);
                          */
                         } else {
                             genderNotFound++;

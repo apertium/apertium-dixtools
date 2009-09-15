@@ -88,7 +88,7 @@ public class CompleteTranslation {
                             pE.r = (rE);
                             pE.r = (ee.getRight());
                             I iE = ee.getFirstI();
-                            ee.getChildren().remove(iE);
+                            ee.children.remove(iE);
                             ee.addChild(pE);
                         }
                     }

@@ -144,7 +144,7 @@ public class DicList {
 
 
 /* XXXXXX
-                for (DixElement e : ee.getChildren()) {
+                for (DixElement e : ee.children) {
                     if (e instanceof I) {
                         I i = (I) e;
                         elementsA = i.getSymbols();

@@ -278,7 +278,7 @@ public class CrossAction implements Comparable<CrossAction> {
           Logger.getLogger(CrossAction.class.getName()).log(Level.SEVERE, null, ex);
           throw new IllegalStateException(ex);
         }
-        for (DixElement e : source.getChildren()) {
+        for (DixElement e : source.children) {
 
             // text element
             if (e instanceof TextElement) {

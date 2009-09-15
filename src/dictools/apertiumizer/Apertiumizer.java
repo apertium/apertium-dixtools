@@ -179,7 +179,7 @@ public class Apertiumizer extends AbstractDictTool {
             R r = ee.getRight();
             String cat = "";
             int icat = 0;
-            for (DixElement e : l.getChildren()) {
+            for (DixElement e : l.children) {
                 if (e instanceof TextElement) {
                     TextElement tE = (TextElement) e;
                     String v = tE.getValue();
@@ -199,7 +199,7 @@ public class Apertiumizer extends AbstractDictTool {
                 }
             }
             boolean isVerb = false;
-            for (DixElement e : r.getChildren()) {
+            for (DixElement e : r.children) {
                 if (e instanceof TextElement) {
                     TextElement tE = (TextElement) e;
                     String v = tE.getValue();
@@ -225,7 +225,7 @@ public class Apertiumizer extends AbstractDictTool {
             }
             S sE = new S(cat);
             if (!sE.getValue().equals("")) {
-            r.getChildren().add(sE);
+            r.children.add(sE);
             }
             if(isVerb) {
                 if(!ee.getRight().contains("vblex")) {

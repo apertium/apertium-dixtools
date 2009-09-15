@@ -128,7 +128,7 @@ public class Par extends DixElement {
     @Override
     public String toString() {
         String saAttr = sa==null?"":" sa=\"" + sa + "\" ";
-        return "<" + getTagName() + " n=\"" + n + "\"" + prmToString() + saAttr + "/>" ;
+        return "<" + TAGNAME + " n=\"" + n + "\"" + prmToString() + saAttr + "/>" ;
     }
 
   public String[] getPrm() {

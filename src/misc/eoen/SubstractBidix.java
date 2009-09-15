@@ -113,8 +113,8 @@ public class SubstractBidix {
       while (eei.hasNext()) {
         E ee=eei.next();
         if (!ee.containsRegEx()) {
-          String reasonOfRestriction=ee.getTemp();
-          ee.setTemp(null);
+          String reasonOfRestriction=ee.temp;
+          ee.temp=null;
           if (reasonOfRestriction!=null) {
             if ("DELETE".equals(reasonOfRestriction)) {
               if (!ee.hasPrependorAppendData()) {
@@ -211,17 +211,17 @@ public class SubstractBidix {
     
     if (!isAllowed(direction, ee)) return;
 
-    String oldReasonOfRestriction=ee.getTemp();
+    String oldReasonOfRestriction=ee.temp;
     String existingEeStr=existingEe.toString();
     //System.err.println("LR: Dobbelt indgang "+existingEe+"   "+ee);
     if (ee.restriction ==null) {
       assert (oldReasonOfRestriction==null);
-      ee.setTemp(existingEeStr);
+      ee.temp=existingEeStr;
       //ee.restriction=reverseDir(direction));
     } else {
       if (oldReasonOfRestriction == null) {
         //ee.setProcessingComments("Already is "+existingEeStr);
-        ee.setTemp(existingEeStr);
+        ee.temp=existingEeStr;
         
       } else {
         String existingEeStrChop = existingEeStr.substring(existingEeStr.indexOf('<'));
@@ -233,10 +233,10 @@ public class SubstractBidix {
         if (existingEeStrChop.equals(oldReasonOfRestrictionChop)) {
           
           // Exactly the same entry has been before. Just delete
-          ee.setTemp("DELETE");
+          ee.temp="DELETE";
         } else {
           //ee.setProcessingComments("Already are "+existingEeStr+" "+oldReasonOfRestriction);
-          ee.setTemp(existingEeStr+" "+oldReasonOfRestriction);
+          ee.temp=existingEeStr+" "+oldReasonOfRestriction;
         }
       }          
     }

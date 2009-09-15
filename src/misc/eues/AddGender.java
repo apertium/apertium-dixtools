@@ -95,7 +95,7 @@ public class AddGender {
                         if (par != null) {
                             for (E eepar : par.getEElements()) {
                                 R r = eepar.getFirstP().r;
-                                for (DixElement er : r.getChildren()) {
+                                for (DixElement er : r.children) {
                                     if (er instanceof S) {
                                         S s = (S) er;
                                         String sv = er.getValue();
@@ -151,13 +151,13 @@ public class AddGender {
                                 leftSide.addChild(gender);
                                 // and remove par element if NC
                                 Par par = null;
-                                for (DixElement e : ee.getChildren()) {
+                                for (DixElement e : ee.children) {
                                     if (e instanceof Par) {
                                         par = (Par) e;
                                     }
                                 }
 
-                                ee.getChildren().remove(par);
+                                ee.children.remove(par);
                             } else {
                                 genderNotFound++;
                                 System.err.println("(" + genderNotFound + ") I could not find gender for '" + text + "'");

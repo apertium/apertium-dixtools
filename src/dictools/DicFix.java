@@ -107,9 +107,9 @@ public class DicFix  extends AbstractDictTool {
                 if (!eMap.containsKey(e1Key)) {
                     eMap.put(e1Key, ee);
 
-                    for (DixElement irlelem : ee.getChildren()) {
+                    for (DixElement irlelem : ee.children) {
                         if (irlelem instanceof ContentElement) {
-                            for (DixElement child : ((ContentElement)irlelem).getChildren()) {
+                            for (DixElement child : ((ContentElement)irlelem).children) {
                                 if (child instanceof TextElement) {
                                     TextElement tE = (TextElement) child;
                                     String v = tE.getValue();

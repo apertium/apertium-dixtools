@@ -38,10 +38,6 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
     /**
      * 
      */
-    private String temp;
-    /**
-     * 
-     */
     private String valueNoTags = "";
     /**
      * 
@@ -116,7 +112,7 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
         if (!opt.noProcessingComments) dos.append(makeCommentIfData(processingComments));
-        dos.append("<" + getTagName() + "/>");
+        dos.append("<" + TAGNAME + "/>");
         dos.append(appendCharacterData);
     }
 
@@ -141,20 +137,6 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
   }
 
     
-    /**
-     * 
-     * @param value
-    protected void setTagName(String value) {
-        TAGNAME = value;
-    }
-     */
-
-    /**
-     * 
-     * @return Undefined         */
-    protected final String getTagName() {
-        return TAGNAME;
-    }
 
   /**
    * Utility method for masking a null string
@@ -234,21 +216,6 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
      */
     void setValueNoTags(String valueNoTags) {
         this.valueNoTags = valueNoTags;
-    }
-
-    /**
-     * @return the temp
-     */
-    public String getTemp() {
-        return temp;
-    }
-
-    /**
-     * @param temp
-     *                the temp to set
-     */
-    public void setTemp(String temp) {
-        this.temp = temp;
     }
 
     /**

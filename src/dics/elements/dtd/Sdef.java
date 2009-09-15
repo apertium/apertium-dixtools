@@ -62,6 +62,7 @@ public class Sdef extends DixElement {
      * @param dos
      * @throws java.io.IOException
      */
+  @Override
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
@@ -70,7 +71,7 @@ public class Sdef extends DixElement {
         if (this.comment != null) {
             commentx = "\tc=\"" + comment + "\"";
         }
-        dos.append(tab(2) + "<" + getTagName() + " n=\"" + getValue() + "\" " + commentx + "/> "  +appendCharacterData.trim()+"\n");
+        dos.append(tab(2) + "<" + TAGNAME + " n=\"" + getValue() + "\" " + commentx + "/> "  +appendCharacterData.trim()+"\n");
     }
 
     /**

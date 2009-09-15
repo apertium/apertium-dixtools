@@ -202,7 +202,7 @@ public class Action {
      * @param definedVars
      */
     private void getDefinedVarsElement(ContentElement ce, HashMap<String, String> definedVars) {
-        for (DixElement e : ce.getChildren()) {
+        for (DixElement e : ce.children) {
             if (e instanceof TextElement) {
                 String v = ((TextElement) e).getValue();
                 if (v.startsWith("$") || v.startsWith("@")) {

@@ -95,8 +95,8 @@ public class DicProfiler  extends AbstractDictTool {
     // s = "<p><l/><r>%1234</r></p>"
     TextElement te = new TextElement(s);
 
-    if (insert_before) ee.getChildren().add(0, te);
-    else ee.getChildren().add(te);
+    if (insert_before) ee.children.add(0, te);
+    else ee.children.add(te);
   }
 
 

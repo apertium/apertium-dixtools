@@ -157,7 +157,7 @@ public class ConvertMF {
                         for (S sE : sList) {
                             if (sE.is("m")) {
                                 S newSE = new S("mf");
-                                e.getRight().getChildren().remove(sE);
+                                e.getRight().children.remove(sE);
                                 e.getRight().addChild(newSE);
                             }
                         }

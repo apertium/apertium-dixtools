@@ -23,9 +23,6 @@ import dics.elements.utils.DicOpts;
 import java.io.IOException;
 
 import dics.elements.utils.ElementList;
-import dics.elements.utils.Msg;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.util.ArrayList;
 
 /**
@@ -38,7 +35,7 @@ public abstract class ContentElement extends DixElement implements Cloneable {
     /**
      * 
      */
-    protected ElementList children = new ElementList();
+    public ElementList children = new ElementList();
     /**
      * 
      */
@@ -62,7 +59,7 @@ public abstract class ContentElement extends DixElement implements Cloneable {
      */
     public ContentElement(String tagName, ContentElement cE) {
       super(tagName);
-        children = (ElementList) cE.getChildren().clone();
+        children = (ElementList) cE.children.clone();
         value = new String(cE.getValue());
     }
 
@@ -167,7 +164,7 @@ public abstract class ContentElement extends DixElement implements Cloneable {
     @Override
     protected void printXML(Appendable dos, DicOpts opt) throws IOException {
 
-      String tagName = getTagName();
+      String tagName = TAGNAME;
 
         if (!opt.nowAlign) {
                 // write blank lines and processingComments from original file
@@ -223,21 +220,6 @@ public abstract class ContentElement extends DixElement implements Cloneable {
 
     /**
      * 
-     * @return Undefined         */
-    public ElementList getChildren() {
-        return children;
-    }
-
-    /**
-     * 
-     * @param value
-     */
-    public void setChildren(ElementList value) {
-        children = value;
-    }
-
-    /**
-     * 
      * @param value
      */
     public void changeFirstSElement(String value) {
@@ -260,7 +242,7 @@ public abstract class ContentElement extends DixElement implements Cloneable {
     /**
      * 
      * @return Undefined         */
-    public String getString() {
+    private String getSymbolsAsString() {
         String str = "";
         for (S s : getSymbols()) {
             str += s.toString();
@@ -290,40 +272,17 @@ public abstract class ContentElement extends DixElement implements Cloneable {
     /**
      * 
      */
-    public String toStringOld() {
-        String tagName = getTagName();
-        if (tagName == null) {
-            tagName = "";
-        }
-
-        String v = getValue();
-        if (v == null) {
-            v = "";
-        }
-
-        String sList = getString();
-        if (sList == null) {
-            sList = "";
-        }
-
-        String str = "<" + tagName + ">" + v + sList + "</" + tagName + ">";
-        return str;
-    }
-
-    /**
-     * 
-     */
     @Override
     public String toString() {
         String str = "";
 
-        String tagName = getTagName();
+        String tagName = TAGNAME;
         if (tagName == null) {
             tagName = "";
         }
 
         str += "<" + tagName + ">";
-        for (DixElement e : getChildren()) {
+        for (DixElement e : children) {
           if (e==null) continue;
             String v = e.toString();
             str += v;
@@ -338,11 +297,11 @@ public abstract class ContentElement extends DixElement implements Cloneable {
      * 
      * @return Undefined         */
     public String toString2() {
-        String tagName = getTagName();
+        String tagName = TAGNAME;
         if (tagName == null) {
             tagName = "";
         }
-        String sList = getString();
+        String sList = getSymbolsAsString();
         if (sList == null) {
             sList = "";
         }
@@ -421,7 +380,7 @@ public abstract class ContentElement extends DixElement implements Cloneable {
         G gE = (G) e;
         String str = "";
         str += "<g>";
-        for (DixElement e1 : gE.getChildren()) {
+        for (DixElement e1 : gE.children) {
             if (e1 instanceof TextElement) {
                 TextElement tE = (TextElement) e1;
                 str += tE.getValue();

@@ -627,7 +627,7 @@ public class DicCross  extends AbstractDictTool{
      * @param vars
      */
     private void assignValuesSide(ContentElement ceWrite, ContentElement ceRead, Variables vars) {
-        for (DixElement e : ceRead.getChildren()) {
+        for (DixElement e : ceRead.children) {
             if (e instanceof TextElement) {
                 String x = e.getValue();
                 if (vars.containsKey(x)) {

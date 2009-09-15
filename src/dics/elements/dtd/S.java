@@ -95,7 +95,7 @@ public class S extends DixElement {
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         //not strictly necesary for symbols, as they dont have comments: dos.append(prependCharacterData);
-        dos.append("<" + getTagName() + " n=\"" + getValue() + "\"/>");
+        dos.append("<" + TAGNAME + " n=\"" + getValue() + "\"/>");
         //not strictly necesary for symbols, as they dont have comments:  dos.append(appendCharacterData);
     }
 

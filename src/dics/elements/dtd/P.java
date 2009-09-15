@@ -81,14 +81,14 @@ public class P extends DixElement {
         dos.append(prependCharacterData);
         String tab3 = opt.nowAlign?"":tab(3);
 
-        dos.append(tab3 + "<" + getTagName() + ">\n");
+        dos.append(tab3 + "<" + TAGNAME + ">\n");
         if (l != null) {
             l.printXML(dos, opt);
         }
         if (r != null) {
             r.printXML(dos, opt);
         }
-        dos.append(tab3 + "</" + getTagName() + ">"+appendCharacterData.trim()+"\n");
+        dos.append(tab3 + "</" + TAGNAME + ">"+appendCharacterData.trim()+"\n");
     }
 
 
@@ -103,7 +103,7 @@ public class P extends DixElement {
        */
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
-        dos.append("<" + getTagName() + ">");
+        dos.append("<" + TAGNAME + ">");
 
         l.printXML(dos, DicOpts.STD_NOW_1_LINE);
 
@@ -112,7 +112,7 @@ public class P extends DixElement {
           dos.append(spaces.substring(0, Math.min(spaces.length(), neededSpaces)));
         }
         r.printXML(dos, DicOpts.STD_NOW_1_LINE);
-        dos.append("</" + getTagName() + ">"+appendCharacterData.trim());
+        dos.append("</" + TAGNAME + ">"+appendCharacterData.trim());
     }
         
         
