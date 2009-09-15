@@ -45,7 +45,7 @@ public class Sdef extends DixElement {
      * @param value
      */
     public Sdef(String value) {
-        setTagName("sdef");
+        super("sdef");
         n = value;
     }
 

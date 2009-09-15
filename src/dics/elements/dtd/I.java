@@ -34,8 +34,7 @@ public class I extends ContentElement {
      * 
      */
     public I() {
-        super();
-        setTagName("i");
+        super("i");
     }
     
     /**

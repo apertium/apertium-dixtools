@@ -91,7 +91,8 @@ public class Misc {
             E ne = new E();
             ne.setLemma(ee.getValue("R"));
             I iE = new I();
-            iE.setValue(ee.getValue("R"));
+            iE.addChild(new TextElement(ee.getValue("R")));
+
             ne.addChild(iE);
             Par parE = new Par();
             ne.addChild(parE);
@@ -192,7 +193,7 @@ public class Misc {
             E es = new E();
             es.setLemma(ee.getValue("R"));
             I iE = new I();
-            iE.setValue(ee.getValue("R"));
+            iE.addChild(new TextElement(ee.getValue("R")));
             es.addChild(iE);
             Par parE = new Par();
             String par = "";
@@ -206,7 +207,7 @@ public class Misc {
             E en = new E();
             en.setLemma(ee.getValue("L"));
             I iEen = new I();
-            iEen.setValue(ee.getValue("L"));
+            iE.addChild(new TextElement(ee.getValue("L")));
             en.addChild(iEen);
             Par parEen = new Par();
             String cat = "";

@@ -29,7 +29,7 @@ public class Prm extends DixElement {
      * 
      */
     public Prm() {
-        setTagName("prm");
+        super("prm");
         setValue("<prm/>");
         setValueNoTags("");
     }
@@ -38,7 +38,7 @@ public class Prm extends DixElement {
      * Used for tags like prn0, prn1, prn2,... prn 9
      */
     public Prm(String number) {
-        setTagName("prm"+number);
+        super("prm"+number);
         setValue("<prm"+number+"/>");
         setValueNoTags("");
     }

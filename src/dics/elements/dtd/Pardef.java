@@ -47,8 +47,10 @@ public class Pardef extends DixElement {
      * 
      * @param value
      */
-    public Pardef(String value) {
-        n = value;
+    public Pardef(String name)
+    {
+        super("pardef");
+        n = name;
         eElements = new ArrayList<E>();
     }
 
@@ -59,8 +61,7 @@ public class Pardef extends DixElement {
      * @param name
      */
     public Pardef(Pardef orig, String name) {
-        n = name;
-        eElements = new ArrayList<E>();
+      this(name);
 
         for (E e : orig.eElements) {
             E e2 = (E) e.clone();

@@ -41,7 +41,7 @@ public class Alphabet extends DixElement {
      * 
      */
     public Alphabet() {
-
+      super("alphabet");
     }
 
     /**
@@ -49,6 +49,7 @@ public class Alphabet extends DixElement {
      * @param value
      */
     public Alphabet(String value) {
+        super("alphabet");
         alphabet = value;
     }
 
@@ -69,24 +70,13 @@ public class Alphabet extends DixElement {
 
     /**
      * 
-     * @return Undefined         */
-    public boolean isEmpty() {
-        if (getAlphabet() == null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * 
      * @param dos
      * @throws java.io.IOException
      */
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
-        if (isEmpty()) {
+        if (getAlphabet()==null) {
             setAlphabet("");
         }
         dos.append(tab(1) + "<alphabet>" + getAlphabet() + "</alphabet>"+appendCharacterData.trim()+"\n");

@@ -41,7 +41,7 @@ public class Re extends DixElement {
      * @param value
      */
     public Re(String value) {
-        setTagName("re");
+        super("re");
         this.value = value;
     }
 

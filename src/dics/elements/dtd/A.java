@@ -30,7 +30,7 @@ public class A extends DixElement {
      * 
      */
     public A() {
-        setTagName("a");
+        super("a");
         setValue("<a/>");
         setValueNoTags("");
     }

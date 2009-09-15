@@ -44,6 +44,7 @@ public class Pardefs extends DixElement {
      * 
      */
     public Pardefs() {
+      super("pardefs");
         pardefElements = new ArrayList<Pardef>();
     }
 

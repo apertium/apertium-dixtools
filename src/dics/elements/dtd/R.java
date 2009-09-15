@@ -34,8 +34,7 @@ public class R extends ContentElement {
      * 
      */
     public R() {
-        super();
-        setTagName("r");
+        super("r");
     }
 
     /**
@@ -43,7 +42,6 @@ public class R extends ContentElement {
      * @param cE
      */
     public R(ContentElement cE) {
-        super(cE);
-        setTagName("r");
+        super("r",cE);
     }
 }

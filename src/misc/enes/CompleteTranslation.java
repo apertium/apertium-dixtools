@@ -81,13 +81,13 @@ public class CompleteTranslation {
                         for (S sE : left.getSymbols()) {
                             rE.addChild(sE);
                         }
-                        if (ee.getP() != null) {
-                            ee.getP().r = (rE);
+                        if (ee.getFirstP() != null) {
+                            ee.getFirstP().r = (rE);
                         } else {
                             P pE = new P();
                             pE.r = (rE);
                             pE.r = (ee.getRight());
-                            I iE = ee.getI();
+                            I iE = ee.getFirstI();
                             ee.getChildren().remove(iE);
                             ee.addChild(pE);
                         }

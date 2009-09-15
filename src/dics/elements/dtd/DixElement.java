@@ -47,7 +47,11 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
      * 
      */
     private String TAGNAME;
-    
+
+    public DixElement(String tagName) {
+      TAGNAME = tagName;
+    }
+
     /**
      * XML processingComments originating from the processing if the file. Will be added as <!--   --> just before the XML element
      */
@@ -140,10 +144,10 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
     /**
      * 
      * @param value
-     */
     protected void setTagName(String value) {
         TAGNAME = value;
     }
+     */
 
     /**
      * 

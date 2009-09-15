@@ -52,14 +52,16 @@ public abstract class ContentElement extends DixElement implements Cloneable {
      * 
      * 
      */
-    public ContentElement() {
+    public ContentElement(String tagName) {
+      super(tagName);
     }
 
     /**
      * 
      * @param cE
      */
-    public ContentElement(ContentElement cE) {
+    public ContentElement(String tagName, ContentElement cE) {
+      super(tagName);
         children = (ElementList) cE.getChildren().clone();
         value = new String(cE.getValue());
     }
@@ -202,7 +204,6 @@ public abstract class ContentElement extends DixElement implements Cloneable {
     /**
      * 
      * @param value
-     */
     @Override
     public void setValue(String value) {
         boolean textE = false;
@@ -218,6 +219,7 @@ public abstract class ContentElement extends DixElement implements Cloneable {
         }
         this.value = value;
     }
+     */
 
     /**
      * 

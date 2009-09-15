@@ -63,10 +63,6 @@ public class Dictionary extends DixElement {
     /**
      *
      */
-    protected int nForeignEntries;
-    /**
-     *
-     */
     protected int nEntries;
     /**
      *
@@ -118,6 +114,7 @@ public class Dictionary extends DixElement {
      *
      */
     public Dictionary() {
+      super("dictionary");
         sections = new ArrayList<Section>();
     }
 
@@ -126,7 +123,7 @@ public class Dictionary extends DixElement {
      * @param elementMap
      */
     public Dictionary(HashMap<String, ArrayList<E>> elementMap, Dictionary dic) {
-        sections = new ArrayList<Section>();
+      this();
         Section sectionElement = new Section("main", "standard");
         addSection(sectionElement);
         setAlphabet(dic.getAlphabet());
@@ -149,7 +146,7 @@ public class Dictionary extends DixElement {
      * @param dic
      */
     public Dictionary(Dictionary dic) {
-        sections = new ArrayList<Section>();
+        this();
         Section sectionElement = new Section("main", "standard");
         addSection(sectionElement);
         setAlphabet(dic.getAlphabet());
@@ -610,19 +607,12 @@ public class Dictionary extends DixElement {
      *
      */
     public void countEntries() {
-        nForeignEntries = 0;
         nEntries = 0;
         nShared = 0;
         nDifferent = 0;
         ArrayList<E> list = getEntries();
         for (E e : list) {
-            if (e.isForeign()) {
-                nForeignEntries++;
-            } else {
-                if (!e.isForeign()) {
-                    nEntries++;
-                }
-            }
+              nEntries++;
             if (e.isShared()) {
                 nShared++;
             } else {
@@ -631,13 +621,6 @@ public class Dictionary extends DixElement {
                 }
             }
         }
-    }
-
-    /**
-     *
-     * @return Undefined     */
-    public int getNForeignEntries() {
-        return nForeignEntries;
     }
 
     /**
@@ -670,7 +653,6 @@ public class Dictionary extends DixElement {
         System.err.println(nShared + " shared entries.");
         System.err.println(nDifferent + " not shared entries.");
         System.err.println(nEntries + " own entries.");
-        System.err.println(nForeignEntries + " foreign entries.");
     }
 
     /**

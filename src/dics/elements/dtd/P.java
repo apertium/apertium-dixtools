@@ -37,7 +37,7 @@ public class P extends DixElement {
     public R r;
     
     public P() {
-        setTagName("p");
+        super("p");
     }
 
     /**
@@ -45,13 +45,13 @@ public class P extends DixElement {
      * @param pE
      */
     public P(P pE) {
-        setTagName("p");
+        this();
         l = (L) pE.l.clone();
         r = (R) pE.r.clone();
     }
 
     public P(L l, R r) {
-        setTagName("p");
+        this();
         this.l = l;
         this.r = r;
     }

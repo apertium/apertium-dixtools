@@ -47,7 +47,7 @@ public class Par extends DixElement {
      * 
      */
     public Par() {
-        setTagName("par");
+        super("par");
 
     }
 
@@ -56,7 +56,7 @@ public class Par extends DixElement {
      * @param value
      */
     public Par(String value) {
-        setTagName("par");
+      this();
         n = value;
     }
 
@@ -65,6 +65,7 @@ public class Par extends DixElement {
      * @param pE
      */
     public Par(Par pE) {
+      this();
         n = pE.getValue();
     }
 

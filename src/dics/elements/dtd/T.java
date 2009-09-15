@@ -45,7 +45,7 @@ public class T extends DixElement {
      * 
      */
     public T() {
-        setTagName("t");
+        super("t");
     }
 
     /**
@@ -53,7 +53,7 @@ public class T extends DixElement {
      * @param value
      */
     public T(String value) {
-        setTagName("t");
+        this();
         n = value;
     }
 
@@ -61,7 +61,7 @@ public class T extends DixElement {
      * 
      */
     public T(T tE) {
-        setTagName("t");
+        this();
         n = tE.getValue();
     }
 

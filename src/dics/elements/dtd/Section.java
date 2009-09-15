@@ -57,7 +57,7 @@ public class Section extends DixElement {
      * 
      */
     public Section() {
-        setTagName("section");
+        super("section");
         eElements = new ArrayList<E>();
         includes = new ArrayList<String>();
     }
@@ -68,9 +68,7 @@ public class Section extends DixElement {
      * @param type
      */
     public Section(String id, String type) {
-        setTagName("section");
-        eElements = new ArrayList<E>();
-        includes = new ArrayList<String>();
+      this();
         this.id = id;
         this.type = type;
     }

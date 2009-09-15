@@ -34,8 +34,7 @@ public class L extends ContentElement {
      * 
      */
     public L() {
-        super();
-        setTagName("l");
+        super("l");
     }
 
     /**
@@ -43,7 +42,6 @@ public class L extends ContentElement {
      * @param cE
      */
     public L(ContentElement cE) {
-        super(cE);
-        setTagName("l");
+        super("i",cE);
     }
 }

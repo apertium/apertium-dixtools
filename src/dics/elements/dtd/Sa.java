@@ -31,7 +31,7 @@ public class Sa extends DixElement {
      * 
      */
     public Sa() {
-        setTagName("sa");
+        super("sa");
         setValue("<sa/>");
     }
 }

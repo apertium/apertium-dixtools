@@ -47,7 +47,7 @@ public class Sdefs extends DixElement {
      * 
      */
     public Sdefs() {
-        setTagName("sdefs");
+        super("sdefs");
         sdefsElements = new ArrayList<Sdef>();
     }
 
@@ -56,7 +56,6 @@ public class Sdefs extends DixElement {
      * @param value
      */
     public void addSdefElement(Sdef value) {
-        setTagName("sdefs");
         sdefsElements.add(value);
     }
 
@@ -136,7 +135,7 @@ public class Sdefs extends DixElement {
 
     /**
      * 
-     * @return Undefined         */
+     * @return Undefined        
     public ArrayList<String> getAllCategories() {
         ArrayList<String> categories = new ArrayList<String>();
 
@@ -145,7 +144,8 @@ public class Sdefs extends DixElement {
         }
         return categories;
     }
-
+ */
+    
     /**
      * 
      */

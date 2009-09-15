@@ -37,7 +37,7 @@ import java.util.Comparator;
  */
 public class E extends DixElement implements Cloneable {
 
-    private ElementList children = new ElementList();
+    public ElementList children = new ElementList();
 
     public String restriction;
 
@@ -57,9 +57,7 @@ public class E extends DixElement implements Cloneable {
     
     public String alt;
     
-    private boolean shared = false;
-    
-    private boolean common = true;
+    public boolean shared = false;
     
     private boolean foreign = false;
     
@@ -68,9 +66,11 @@ public class E extends DixElement implements Cloneable {
     private boolean locked = false;
 
     public E() {
+      super("e");
     }
 
     public E(String r, String lm, String a,  String c) {
+      this();
         this.restriction = r;
 
         // JimRegan's dubious fix.
@@ -179,7 +179,7 @@ public class E extends DixElement implements Cloneable {
     /**
      * 
      * @return Undefined         */
-    public P getP() {
+    public P getFirstP() {
         for (DixElement e : children) {
             if (e instanceof P) {
                 return (P) e;
@@ -192,7 +192,7 @@ public class E extends DixElement implements Cloneable {
      * 
      * @return Undefined         
      */
-    public I getI() {
+    public I getFirstI() {
         for (DixElement e : children) {
             if (e instanceof I) {
                 return (I) e;
@@ -397,9 +397,6 @@ public class E extends DixElement implements Cloneable {
         // prepend processingComments added in this run
         if (!opt.noProcessingComments) {
             String pc = processingComments;
-            if (!isCommon()) {
-                pc = pc + "\n"+tab(2) + "esta entrada no aparece en el otro morfolgico\n";
-            }
             dos.append(makeCommentIfData(pc));
         }
         
@@ -813,20 +810,6 @@ public class E extends DixElement implements Cloneable {
         return shared;
     }
 
-    /**
-     * 
-     * @param value
-     */
-    public void setCommon(boolean value) {
-        common = value;
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    public boolean isCommon() {
-        return common;
-    }
 
     /**
      * 

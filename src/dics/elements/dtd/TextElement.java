@@ -40,7 +40,7 @@ public class TextElement extends DixElement {
      * @param str
      */
     public TextElement(String str) {
-        setTagName("");
+        super("");
         text = str;
     }
 
