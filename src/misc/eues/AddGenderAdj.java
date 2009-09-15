@@ -86,7 +86,7 @@ public class AddGenderAdj {
 
         for (Section section : dic.getSections()) {
             for (E ee : section.getEElements()) {
-                String lemma = ee.getLemma();
+                String lemma = ee.lemma;
                 if (lemma != null) {
                     String parName = ee.getMainParadigmName();
                     if ((parName != null) && parName.endsWith("__adj")) {
@@ -152,7 +152,7 @@ public class AddGenderAdj {
                                 newGender = new S("mf");
                             }
                             if (gender.getValue().equals("m") || gender.getValue().equals("f")) {
-                                ee.setRestriction("LR");
+                                ee.restriction="LR";
                                 newGender = new S("GD");
                             }
 

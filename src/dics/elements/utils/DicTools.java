@@ -107,7 +107,7 @@ public class DicTools {
         HashMap<String, ArrayList<E>> entriesMap = new HashMap<String, ArrayList<E>>();
 
         for (E e : entries) {
-            String lemma = e.getLemma();
+            String lemma = e.lemma;
             if (lemma == null) {
                 //lemma = e.getValueNoTags();
                 lemma = e.getValue("L");
@@ -240,7 +240,7 @@ public class DicTools {
             String key = it.next();
             ArrayList<E> eList = monMap.get(key);
             for (E e : eList) {
-                String lemma = e.getLemma();
+                String lemma = e.lemma;
                 // in case no lemma is defined
                 if (lemma == null) {
                     lemma = e.getValueNoTags();

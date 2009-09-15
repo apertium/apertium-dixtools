@@ -101,7 +101,7 @@ public class AssignParadigm extends AbstractDictTool {
                     String par = np.get(rightNoTags);
 
                     E e = new E();
-                    e.setComment("auto");
+                    e.comment="auto";
 
                     P p = new P();
                     e.addChild(p);

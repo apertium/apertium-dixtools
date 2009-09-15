@@ -62,19 +62,19 @@ public class SubstractBidixTest {
   public void testIsRestricted() {
     E ee=new E();
 
-    ee.setRestriction("LR");
+    ee.restriction="LR";
     assertEquals(SubstractBidix.isAllowed("LR", ee), true);
     assertEquals(SubstractBidix.isAllowed("RL", ee), false);
 
-    ee.setIgnore("yes");
+    ee.ignore="yes";
     assertEquals(SubstractBidix.isAllowed("LR", ee), false);
     assertEquals(SubstractBidix.isAllowed("RL", ee), false);
 
-    ee.setRestriction(null);
+    ee.restriction=null;
     assertEquals(SubstractBidix.isAllowed("LR", ee), false);
     assertEquals(SubstractBidix.isAllowed("RL", ee), false);
   
-    ee.setIgnore(null);
+    ee.ignore=null;
     assertEquals(SubstractBidix.isAllowed("LR", ee), true);
     assertEquals(SubstractBidix.isAllowed("RL", ee), true);
   }
@@ -86,7 +86,7 @@ public class SubstractBidixTest {
   public void testRemoveRestriction() {
     E ee=new E();
 
-    ee.setIgnore("yes");
+    ee.ignore="yes";
     SubstractBidix.setYesIsAllowed(ee, "LR");
     assertEquals(SubstractBidix.isAllowed("LR", ee), true);
     assertEquals(SubstractBidix.isAllowed("RL", ee), false);

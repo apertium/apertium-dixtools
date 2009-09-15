@@ -87,7 +87,7 @@ public class AddGender {
 
         for (Section section : dic.getSections()) {
             for (E ee : section.getEElements()) {
-                String lemma = ee.getLemma();
+                String lemma = ee.lemma;
                 if (lemma != null) {
                     String parName = ee.getMainParadigmName();
                     if ((parName != null) && parName.endsWith("__n")) {

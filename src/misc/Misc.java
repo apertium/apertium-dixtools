@@ -89,7 +89,7 @@ public class Misc {
 
         for (E ee : bil_n.getAllEntries()) {
             E ne = new E();
-            ne.setLemma(ee.getValue("R"));
+            ne.lemma = ee.getValue("R");
             I iE = new I();
             iE.addChild(new TextElement(ee.getValue("R")));
 
@@ -135,14 +135,14 @@ public class Misc {
         Section section = new Section();
         ndic.addSection(section);
         for (E ee : morph_en_adj.getAllEntries()) {
-            String lemma = ee.getLemma();
+            String lemma = ee.lemma;
             if (!entries.containsKey(lemma)) {
                 System.err.println("Falta " + lemma + " en el bilingüe");
                 P p = trans_n.get(lemma);
                 if (p != null) {
                     System.err.println("Nuevo: " + p.r.getValueNoTags() + " / " + lemma);
                     E ne = new E();
-                    ne.setComment("check");
+                    ne.comment="check";
                     P pE = new P();
                     ne.addChild(pE);
 
@@ -191,7 +191,7 @@ public class Misc {
             System.err.println(ee.getValue("L") + " / " + ee.getValue("R"));
 
             E es = new E();
-            es.setLemma(ee.getValue("R"));
+            es.lemma=ee.getValue("R");
             I iE = new I();
             iE.addChild(new TextElement(ee.getValue("R")));
             es.addChild(iE);
@@ -205,7 +205,7 @@ public class Misc {
             s1.addEElement(es);
 
             E en = new E();
-            en.setLemma(ee.getValue("L"));
+            en.lemma = ee.getValue("L");
             I iEen = new I();
             iE.addChild(new TextElement(ee.getValue("L")));
             en.addChild(iEen);
@@ -270,7 +270,7 @@ public class Misc {
 
         HashMap<String, String> adjpars = new HashMap<String, String>();
         for (E ee : es_adjs.getAllEntries()) {
-            String lemma = ee.getLemma();
+            String lemma = ee.lemma;
             String parName = ee.getMainParadigmName();
             if (mfpars.containsKey(parName)) {
                 adjpars.put(lemma, parName);
@@ -303,9 +303,9 @@ public class Misc {
         HashMap<String, String> pars = new HashMap<String, String>();
 
         for (E ee : ca_morph.getAllEntries()) {
-            String lemma = ee.getLemma();
+            String lemma = ee.lemma;
             if (lemma != null) {
-                Par parE = ee.getParadigm();
+                Par parE = ee.getFirstParadigm();
                 if (parE != null) {
                     if (parE.getValue().equals("Marc__np") || parE.getValue().equals("Maria__np")) {
                         pars.put(lemma, parE.getValue());
@@ -315,9 +315,9 @@ public class Misc {
         }
 
         for (E ee : es_morph.getAllEntries()) {
-            String lemma = ee.getLemma();
+            String lemma = ee.lemma;
             if (lemma != null) {
-                Par parE = ee.getParadigm();
+                Par parE = ee.getFirstParadigm();
                 if (parE != null) {
                     String npar = pars.get(lemma);
                     if (npar != null) {
@@ -357,9 +357,9 @@ public class Misc {
         }
 
         for (E ee : dic3.getAllEntries()) {
-            String lemma = ee.getLemma();
+            String lemma = ee.lemma;
             if (lemma != null) {
-                Par parE = ee.getParadigm();
+                Par parE = ee.getFirstParadigm();
                 if (parE != null) {
                     if (nps.get(lemma) != null) {
                         if (nps.get(lemma).equals("m")) {

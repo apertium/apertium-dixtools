@@ -201,13 +201,13 @@ public class DicConsistent extends AbstractDictTool {
         String k = DicTools.clearTags(str);
         ArrayList<E> list = common.get(k);
         for (E e : list) {
-            e.setShared(true);
+            e.shared=true;
             String trad = e.getValue("R");
             String key = DicTools.clearTags(trad);
             ArrayList<E> monAList = mon.get(key);
             if (monAList != null) {
                 for (E eMon : monAList) {
-                    eMon.setShared(true);
+                    eMon.shared=true;
                 }
             }
         }

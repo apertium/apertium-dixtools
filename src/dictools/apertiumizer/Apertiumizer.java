@@ -110,13 +110,13 @@ public class Apertiumizer extends AbstractDictTool {
                     switch (format) {
                         case 0:
                             E e = readElementFormat_0(strLine);
-                            //e.setComment("priority: " + priority);
+                            //e.comment="priority: " + priority);
                             //System.out.println("Adding: "  + e.getLeft().getValueNoTags());
                             if (e != null) {
                                 section.addEElement(e);
                             }
                             String lm = e.getLeft().getValueNoTags();
-                            String comments = e.getComment();
+                            String comments = e.comment;
                             System.out.println("<e lm=\"" + lm + "\" c=\"" + comments + "\"><i>" + lm + "</i><par n=\"ADN__n\"/></e>");
                             break;
                         case 3:
@@ -322,7 +322,7 @@ public class Apertiumizer extends AbstractDictTool {
                         right.addChild(new TextElement(lV));
                     }
                     token = token.replaceAll("\"", "'");
-                    e.setComment(token);
+                    e.comment=token;
                     //System.out.println(token);
                     P pE = new P();
                     pE.l = left;

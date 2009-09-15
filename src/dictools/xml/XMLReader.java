@@ -280,7 +280,7 @@ public class XMLReader {
         String n = getAttributeValue(e, "n");
         String c = getAttributeValue(e, "c");
         Sdef sdefElement = new Sdef(n);
-        sdefElement.setComment(c);
+        sdefElement.comment=c;
         return sdefElement;
     }
     
@@ -551,11 +551,11 @@ public class XMLReader {
 
 
         E eElement = new E(r, lm, a, c);
-        eElement.setAversion(aversion);
-        eElement.setAlt(alt);
-        eElement.setSlr(slr);
-        eElement.setSrl(srl);
-        eElement.setIgnore(ign);
+        eElement.aversion = aversion;
+        eElement.alt = (alt);
+        eElement.slr = (slr);
+        eElement.srl = (srl);
+        eElement.ignore=ign;
 
         if (e.hasChildNodes()) {
             NodeList children = e.getChildNodes();

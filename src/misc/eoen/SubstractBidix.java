@@ -122,7 +122,7 @@ public class SubstractBidix {
                    System.err.println("DELETE "+ee);
                 } else {
                    System.err.println("Should DELETE "+ee+" but hasPrependorAppendData, so set to ignore instead");
-                   ee.setIgnore("yes");
+                   ee.ignore="yes";
                 }
 
             } else {
@@ -144,8 +144,8 @@ public class SubstractBidix {
   }
 
   public static boolean isAllowed(String direction, E ee) {
-    if ("yes".equals(ee.getIgnore())) return false;
-    String restric = ee.getRestriction();    
+    if ("yes".equals(ee.ignore)) return false;
+    String restric = ee.restriction;    
     if (restric==null) return true;
     if (restric.equals(direction)) return true;
     return false;    
@@ -157,37 +157,37 @@ public class SubstractBidix {
   }
   
   public static void setYesIsAllowed(E ee, String direction) {
-    boolean i = "yes".equals(ee.getIgnore());
-    String restric = ee.getRestriction();    
+    boolean i = "yes".equals(ee.ignore);
+    String restric = ee.restriction;    
 
     if (i) {
        if (restric!=null) throw new IllegalStateException(restric);
-       ee.setRestriction(direction);
-       ee.setIgnore(null);
+       ee.restriction=direction;
+       ee.ignore=null;
        return;
     }
 
     if (reverseDir(direction).equals(restric)) {
-       ee.setRestriction(null);
+       ee.restriction=null;
        return;
     }
   }
 
 
   public static void setNoIsNotAllowed(E ee, String direction) {
-    boolean i = "yes".equals(ee.getIgnore());
-    String restric = ee.getRestriction();    
+    boolean i = "yes".equals(ee.ignore);
+    String restric = ee.restriction;    
 
     if (i) {
        return;
     }
 
     if (direction.equals(restric)) {
-       ee.setIgnore("yes");
-       ee.setRestriction(null);
+       ee.ignore="yes";
+       ee.restriction=null;
        return;
     } else {
-       ee.setRestriction(reverseDir(direction));      
+       ee.restriction=reverseDir(direction);      
     }      
   }
 
@@ -214,10 +214,10 @@ public class SubstractBidix {
     String oldReasonOfRestriction=ee.getTemp();
     String existingEeStr=existingEe.toString();
     //System.err.println("LR: Dobbelt indgang "+existingEe+"   "+ee);
-    if (ee.getRestriction() ==null) {
+    if (ee.restriction ==null) {
       assert (oldReasonOfRestriction==null);
       ee.setTemp(existingEeStr);
-      //ee.setRestriction(reverseDir(direction));
+      //ee.restriction=reverseDir(direction));
     } else {
       if (oldReasonOfRestriction == null) {
         //ee.setProcessingComments("Already is "+existingEeStr);

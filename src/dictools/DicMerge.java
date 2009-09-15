@@ -324,7 +324,7 @@ public class DicMerge  extends AbstractDictTool{
                 sectionElement.addEElement(e2);
                 fromSec2++;
             } else {
-                // System.err.println("'" + e2.getLemma() + "' already
+                // System.err.println("'" + e2.lemma + "' already
                 // exists.");
                 common++;
                 String parName2 = e2.getMainParadigmName();
@@ -335,9 +335,9 @@ public class DicMerge  extends AbstractDictTool{
                     String parName1 = e1.getMainParadigmName();
 
                     if (!parName1.equals(parName2)) {
-                        msg.log("Paradigms for <" + e1.getLemma() + "> : (" + parName1 + ", " + parName2 + ")");
+                        msg.log("Paradigms for <" + e1.lemma + "> : (" + parName1 + ", " + parName2 + ")");
                         // addParadigmToRemove(parName2);
-                        e1.getParadigm().addProcessingComment(
+                        e1.getFirstParadigm().addProcessingComment(
                                 "\n\t<!-- also paradigm '" + parName2 + "' -->");
                     } else {
                     // System.err.println("Paradigms are the same");

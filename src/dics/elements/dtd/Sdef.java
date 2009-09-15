@@ -34,11 +34,11 @@ public class Sdef extends DixElement {
     /**
      * 
      */
-    private String n;
+    public String n;
     /**
      * 
      */
-    private String comment;
+    public String comment;
 
     /**
      * 
@@ -66,12 +66,11 @@ public class Sdef extends DixElement {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
         if (!opt.noProcessingComments) dos.append(makeCommentIfData(processingComments));
-        String comment = "";
+        String commentx = "";
         if (this.comment != null) {
-            comment = "\tc=\"" + getComment() + "\"";
-
+            commentx = "\tc=\"" + comment + "\"";
         }
-        dos.append(tab(2) + "<" + getTagName() + " n=\"" + getValue() + "\" " + comment + "/> "  +appendCharacterData.trim()+"\n");
+        dos.append(tab(2) + "<" + getTagName() + " n=\"" + getValue() + "\" " + commentx + "/> "  +appendCharacterData.trim()+"\n");
     }
 
     /**
@@ -81,20 +80,5 @@ public class Sdef extends DixElement {
     public String toString() {
         String str = "<" + getValue() + ">";
         return str;
-    }
-
-    /**
-     * @return the comment
-     */
-    public String getComment() {
-        return comment;
-    }
-
-    /**
-     * @param comment
-     *                the comment to set
-     */
-    public void setComment(String comment) {
-        this.comment = comment;
     }
 }

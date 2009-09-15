@@ -365,13 +365,13 @@ public class DicCross  extends AbstractDictTool{
                 } else {
                     Sdef sdef1 = sdefList.get(sdef2.getValue());
 
-                    if ((sdef1.getComment() != null) && (sdef2.getComment() == null)) {
-                        sdef2.setComment(sdef1.getComment());
+                    if ((sdef1.comment != null) && (sdef2.comment == null)) {
+                        sdef2.comment=sdef1.comment;
                     }
 
-                    if ((sdef1.getComment() != null) && (sdef2.getComment() != null)) {
-                        if (!sdef1.getComment().equals(sdef2.getComment())) {
-                            sdef2.setComment(sdef1.getComment() + "/" + sdef2.getComment());
+                    if ((sdef1.comment != null) && (sdef2.comment != null)) {
+                        if (!sdef1.comment.equals(sdef2.comment)) {
+                            sdef2.comment=sdef1.comment + "/" + sdef2.comment;
                         }
                     }
                     sdefList.put(sdef2.getValue(), sdef2);
@@ -456,7 +456,7 @@ public class DicCross  extends AbstractDictTool{
     public String getHash(E e) {
         String str = "";
         if (e.hasRestriction()) {
-            str += str + e.getRestriction() + "---";
+            str += str + e.restriction + "---";
         }
         str += e.getValue("L") + "---" + getSElementsString(e,"L") + "---" + e.getValue("R") + "---" + getSElementsString(e,"R");
         return str;
@@ -481,7 +481,7 @@ public class DicCross  extends AbstractDictTool{
                         if (!getProcessed().containsKey(str)) {
                             section.addEElement(e);
                             getProcessed().put(str, e);
-                            String actionID = e.getPatternApplied();
+                            String actionID = e.patternApplied;
                             logUsedPattern(actionID);
                         }
                     }
@@ -557,23 +557,21 @@ public class DicCross  extends AbstractDictTool{
 
         for (Action action : cA.getActionSet()) {
             E eAction = action.getE();
-            int iR = resolveRestriction(e1.getRestriction(), e2.getRestriction());
+            int iR = resolveRestriction(e1.restriction, e2.restriction);
             if (iR != NONE) {
                 E actionE = assignValues(e1, e2, eAction, cad.getVars());
                 String actionID = cad.getCrossAction().getId();
-                actionE.setPatternApplied(actionID);
+                actionE.patternApplied = (actionID);
 
                 // author attribute
-                //String author = mergeAttributes(e1.getAuthor(), e2.getAuthor());
+                //String author = mergeAttributes(e1.author, e2.author);
                 //actionE.setAuthor(author);
 
                 // comment attribute
-                String comment = mergeAttributes(e1.getComment(), e2.getComment());
-                actionE.setComment(comment);
+                actionE.comment=mergeAttributes(e1.comment, e2.comment);
 
                 // alt attribute
-                String alt = mergeAttributes(e1.getAlt(), e2.getAlt());
-                actionE.setAlt(alt);
+                actionE.alt = mergeAttributes(e1.alt, e2.alt);
 
                 actionE.addProcessingComment(actionID);
                 msg.log("Pattern (winner): " + actionID + "\n");
@@ -598,13 +596,13 @@ public class DicCross  extends AbstractDictTool{
         //if (eAction.hasRestriction()) {
         if (!eAction.isRestrictionAuto()) {
             // restriction indicated in cross pattern
-            eCrossed.setProcessingComments("\tforced '" + eAction.getRestriction() + "' restriction\n");
-            eCrossed.setRestriction(eAction.getRestriction());
+            eCrossed.setProcessingComments("\tforced '" + eAction.restriction + "' restriction\n");
+            eCrossed.restriction=eAction.restriction;
         } else {
             // automatically resolved restriction
-            int iR = resolveRestriction(e1.getRestriction(), e2.getRestriction());
+            int iR = resolveRestriction(e1.restriction, e2.restriction);
             String restriction = getRestrictionString(iR);
-            eCrossed.setRestriction(restriction);
+            eCrossed.restriction=restriction;
         }
 
         P pE = new P();
@@ -1245,7 +1243,7 @@ public class DicCross  extends AbstractDictTool{
             for (Section s : dic.getSections()) {
                 if (s.getType().equals("standard")) {
                     for (E ee : s.getEElements()) {
-                        if (ee.getLemma() == null) {
+                        if (ee.lemma == null) {
                             String v = ee.getValueNoTags("L");
                             if (v != null) {
                                 String pv = ee.getMainParadigmName();
@@ -1254,12 +1252,11 @@ public class DicCross  extends AbstractDictTool{
                                     if (parts.length > 1) {
                                         String[] parts2 = parts[1].split("__");
                                         String suffix = parts2[0];
-                                        String nLemma = v + suffix;
+                                        ee.lemma = v + suffix;
                                         c++;
-                                        ee.setLemma(nLemma);
                                     } else {
                                         c++;
-                                        ee.setLemma(v);
+                                        ee.lemma = v;
                                     }
                                 }
                             }

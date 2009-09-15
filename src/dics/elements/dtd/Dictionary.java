@@ -159,7 +159,7 @@ public class Dictionary extends DixElement {
         Section sectionElementMain = dic.getSection("main");
         ArrayList<E> eList = sectionElementMain.getEElements();
         for (E e : eList) {
-            if (!e.isShared()) {
+            if (!e.shared) {
                 addEElement(e);
             }
         }
@@ -613,10 +613,10 @@ public class Dictionary extends DixElement {
         ArrayList<E> list = getEntries();
         for (E e : list) {
               nEntries++;
-            if (e.isShared()) {
+            if (e.shared) {
                 nShared++;
             } else {
-                if (!e.isShared()) {
+                if (!e.shared) {
                     nDifferent++;
                 }
             }
@@ -664,7 +664,7 @@ public class Dictionary extends DixElement {
         ArrayList<E> elementsCopy = new ArrayList<E>(elements);
 
         for (E e : elementsCopy) {
-            if (!e.isShared()) {
+            if (!e.shared) {
                 elements.remove(e);
             }
         }
@@ -716,7 +716,7 @@ public class Dictionary extends DixElement {
         ArrayList<E> elements = getEntries();
 
         for (E e : elements) {
-            String lemma = e.getLemma();
+            String lemma = e.lemma;
             entry = DicTools.clearTags(entry);
 
             if (lemma != null) {
@@ -739,33 +739,33 @@ public class Dictionary extends DixElement {
             for (E ee : elements) {
                 ArrayList<DixElement> children = ee.getChildren();
 
-                if (ee.getRestriction() != null) {
-                    if (ee.getRestriction().equals("LR")) {
-                        ee.setRestriction("RL");
+                if (ee.restriction != null) {
+                    if (ee.restriction.equals("LR")) {
+                        ee.restriction="RL";
                     } else {
-                        if (ee.getRestriction().equals("RL")) {
-                            ee.setRestriction("LR");
+                        if (ee.restriction.equals("RL")) {
+                            ee.restriction="LR";
                         }
                     }
                 }
 
                 String currentSlr = null;
                 String currentSrl = null;
-                if (ee.getSlr() != null) {
-                    currentSlr = ee.getSlr();
-                    ee.setSlr(null);
+                if (ee.slr != null) {
+                    currentSlr = ee.slr;
+                    ee.slr = null;
                 }
-                if (ee.getSrl() != null) {
-                    currentSrl = ee.getSrl();
-                    ee.setSrl(null);
+                if (ee.srl != null) {
+                    currentSrl = ee.srl;
+                    ee.srl = null;
                 }
 
                 if (currentSlr != null) {
-                    ee.setSrl(currentSlr);
+                    ee.srl = currentSlr;
 
                 }
                 if (currentSrl != null) {
-                    ee.setSlr(currentSrl);
+                    ee.slr =currentSrl;
                 }
 
 

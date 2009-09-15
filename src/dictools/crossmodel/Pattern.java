@@ -177,7 +177,7 @@ public class Pattern {
     private ElementList getSequenceR(E ee, ElementList eList) {
         if (ee != null) {
             if (ee.hasRestriction()) {
-                String r = ee.getRestriction();
+                String r = ee.restriction;
                 if (!r.equals("")) {
                     eList.add(new S("^" + r));
                 }

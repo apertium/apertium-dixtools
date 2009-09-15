@@ -93,8 +93,8 @@ public class DicList {
         int nLemmas = 0;
         for (Section section : dic.getSections()) {
             for (E element : section.getEElements()) {
-                if (element.getLemma() != null) {
-                    msg.out(element.getLemma() + "\n");
+                if (element.lemma != null) {
+                    msg.out(element.lemma + "\n");
                     nLemmas++;
                 }
             }
@@ -140,7 +140,7 @@ public class DicList {
 
 
     private void expand(E ee, HashMap<String, Pardef> pardefs) {
-        if ("yes".equals(ee.getIgnore())) return;
+        if ("yes".equals(ee.ignore)) return;
 
 
 /* XXXXXX

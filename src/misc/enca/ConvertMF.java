@@ -104,7 +104,7 @@ public class ConvertMF {
 
         HashMap<String, E> mfElementsNouns = new HashMap<String, E>();
         for (E e : morph.getAllEntries()) {
-            String lemma = e.getLemma();
+            String lemma = e.lemma;
             String parName = e.getMainParadigmName();
             if (mfPardefsNouns.containsKey(parName)) {
                 mfElementsNouns.put(lemma, e);
@@ -113,7 +113,7 @@ public class ConvertMF {
 
         HashMap<String, E> mfElementsAdjs = new HashMap<String, E>();
         for (E e : morph.getAllEntries()) {
-            String lemma = e.getLemma();
+            String lemma = e.lemma;
             String parName = e.getMainParadigmName();
             if (mfPardefsAdjs.containsKey(parName)) {
                 mfElementsAdjs.put(lemma, e);
@@ -146,7 +146,7 @@ public class ConvertMF {
                 }
 
                 if (e.hasRestriction()) {
-                    if (e.getRestriction().equals("RL")) {
+                    if (e.restriction.equals("RL")) {
                         if (isF && isNoun) {
                             toRemove.add(e);
                         }
@@ -235,7 +235,7 @@ public class ConvertMF {
 
         for (E e1 : bil.getAllEntries()) {
             E e = new E();
-            e.setLemma(e1.getValue("L"));
+            e.lemma=(e1.getValue("L"));
             I iE = new I();
             iE.addChild(new TextElement(e1.getValue("L")));
             e.addChild(iE);

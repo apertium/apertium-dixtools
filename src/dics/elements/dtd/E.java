@@ -59,12 +59,8 @@ public class E extends DixElement implements Cloneable {
     
     public boolean shared = false;
     
-    private boolean foreign = false;
+    public String patternApplied;
     
-    private String patternApplied;
-    
-    private boolean locked = false;
-
     public E() {
       super("e");
     }
@@ -77,9 +73,9 @@ public class E extends DixElement implements Cloneable {
         // Should really be in DicFix or somewhere else, and not in the DTD code.
         if (lm != null) lm = lm.replaceAll("\\&", "\\&amp;");
 
-//        String escapedlm = this.getLemma();
+//        String escapedlm = this.lemma;
  //       escapedlm = escapedlm.replaceAll("\\&", "\\&amp;");
-  //      this.setLemma(escapedlm);
+  //      this.lemma(escapedlm);
 
         this.lemma = lm;
         this.author = a;
@@ -94,63 +90,6 @@ public class E extends DixElement implements Cloneable {
     public boolean hasPrependorAppendData() {
         return !(prependCharacterData.trim().isEmpty() && appendCharacterData.trim().isEmpty());
     }
-
-    public void setLemma(String value) {
-        lemma = value;
-    }
-
-    public String getLemma() {
-        return lemma;
-    }
-
-    public void setRestriction(String value) {
-        restriction = value;
-    }
-
-    public String getRestriction() {
-        return restriction;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public String getSlr() {
-        return this.slr;
-    }
-
-    public String getSrl() {
-        return this.srl;
-    }
-
-    public void setSlr(String slr) {
-        this.slr = slr;
-    }
-
-    public void setSrl(String srl) {
-        this.srl = srl;
-    }
-
-    public void setIgnore(String i) {
-        this.ignore = i;
-    }
-
-    public String getIgnore() {
-        return this.ignore;
-    }
-
-    public void setAuthor(String value) {
-        author = value;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
     
     /**
      * 
@@ -159,22 +98,6 @@ public class E extends DixElement implements Cloneable {
     public void addChild(DixElement e) {
         children.add(e);
     }
-
-    /**
-     * Comprueba si dos entradas son iguales (de la lengua comn author los dos
-     * elementos)
-     * 
-     * @param e
-    public boolean equalsBil(E e) {
-        String value1 = getValue("L");
-        String value2 = e.getValue("L");
-
-        if (value1.equals(value2)) {
-            return true;
-        }
-        return false;
-    }
-     * @return Undefined         */
 
     /**
      * 
@@ -220,7 +143,7 @@ public class E extends DixElement implements Cloneable {
                 }
             }
         }
-        return getLemma();
+        return lemma;
     }
 
     /**
@@ -242,7 +165,7 @@ public class E extends DixElement implements Cloneable {
                 }
             }
         }
-        return getLemma();
+        return lemma;
     }
 
     /**
@@ -317,55 +240,9 @@ public class E extends DixElement implements Cloneable {
                 }
             }
         }
-
         return null;
     }
 
-    /**
-     * 
-     * @param side
-     * @param value
-    public String setValue(String side, String value) {
-        for (DixElement e : children) {
-            if (e instanceof I) {
-                ((I) e).setValue(value);
-            }
-            if (e instanceof P) {
-                if (side.equals("L")) {
-                    ((P) e).l.setValue(value);
-                }
-                if (side.equals("R")) {
-                    ((P) e).r.setValue(value);
-                }
-            }
-        }
-
-        return null;
-    }
-     * @return Undefined         */
-
-    /**
-     * 
-     * @param side
-     * @param value
-    public String setChildren(String side, ElementList value) {
-        for (DixElement e : children) {
-            if (e instanceof I) {
-                ((I) e).setChildren(value);
-            }
-            if (e instanceof P) {
-                if (side.equals("L")) {
-                    ((P) e).l.setChildren(value);
-                }
-                if (side.equals("R")) {
-                    ((P) e).r.setChildren(value);
-                }
-            }
-        }
-
-        return null;
-    }
-     * @return Undefined         */
 
     /**
      * 
@@ -784,7 +661,7 @@ public class E extends DixElement implements Cloneable {
     /**
      * 
      * @return Undefined         */
-    public Par getParadigm() {
+    public Par getFirstParadigm() {
         // Returns value of first paradigm
         for (DixElement e : children) {
             if (e instanceof Par) {
@@ -793,52 +670,6 @@ public class E extends DixElement implements Cloneable {
             }
         }
         return null;
-    }
-
-    /**
-     * 
-     * @param value
-     */
-    public void setShared(boolean value) {
-        shared = value;
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    public boolean isShared() {
-        return shared;
-    }
-
-
-    /**
-     * 
-     * @param value
-     */
-    public void setForeign(boolean value) {
-        foreign = value;
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    public boolean isForeign() {
-        return foreign;
-    }
-
-    /**
-     * 
-     * @param value
-     */
-    public void setLocked(boolean value) {
-        locked = value;
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    public boolean isLocked() {
-        return locked;
     }
 
     /**
@@ -878,7 +709,7 @@ public class E extends DixElement implements Cloneable {
             str.append(" i=\"" + ignore + "\"");
         }
         if (this.hasRestriction()) {
-            str.append(" r=\"" + getRestriction() + "\"");
+            str.append(" r=\"" + restriction + "\"");
         }
         str.append(">");
         for (DixElement e : children) {
@@ -917,7 +748,7 @@ public class E extends DixElement implements Cloneable {
         String str = "";
         String r = "";
         if (this.hasRestriction()) {
-            r = " r=\"" + getRestriction() + "\"";
+            r = " r=\"" + restriction + "\"";
         }
         str += "<e" + r + ">";
         for (DixElement e : children) {
@@ -934,7 +765,7 @@ public class E extends DixElement implements Cloneable {
         String str = "";
         String r = "";
         if (this.hasRestriction()) {
-            r = " r=\"" + getRestriction() + "\"";
+            r = " r=\"" + restriction + "\"";
         }
         str += "<e" + r + ">";
         for (DixElement e : children) {
@@ -968,10 +799,10 @@ public class E extends DixElement implements Cloneable {
         String str = "";
         String r = "";
         if (this.hasRestriction()) {
-            r = " r=\"" + getRestriction() + "\"";
+            r = " r=\"" + restriction + "\"";
         }
         str += "<e" + r + ">";
-        str += getLemma();
+        str += lemma;
         for (DixElement e : children) {
             /*
              * if (e instanceof I) { I ignore = (I) e;
@@ -1109,12 +940,12 @@ public class E extends DixElement implements Cloneable {
     public E reverse() {
         // E eRev = (E) this.clone();
         E eRev = new E();
-        if (getRestriction() != null) {
-            if (getRestriction().equals("LR")) {
-                eRev.setRestriction("RL");
+        if (restriction != null) {
+            if (restriction.equals("LR")) {
+                eRev.restriction="RL";
             } else {
-                if (getRestriction().equals("RL")) {
-                    eRev.setRestriction("LR");
+                if (restriction.equals("RL")) {
+                    eRev.restriction="LR";
                 }
             }
         }
@@ -1144,51 +975,6 @@ public class E extends DixElement implements Cloneable {
         return eRev;
     }
 
-    /**
-     * @return the patternApplied
-     */
-    public String getPatternApplied() {
-        return patternApplied;
-    }
-
-    /**
-     * @param patternApplied
-     *                the patternApplied to set
-     */
-    public void setPatternApplied(String patternApplied) {
-        this.patternApplied = patternApplied;
-    }
-
-    /**
-     * @return the aversion
-     */
-    public String getAversion() {
-        return aversion;
-    }
-
-    /**
-     * @param aversion
-     *                the aversion to set
-     */
-    public void setAversion(String aversion) {
-        this.aversion = aversion;
-    }
-
-    /**
-     * 
-     * @return Get attribute 'alt'
-     */
-    public String getAlt() {
-        return this.alt;
-    }
-
-    /**
-     * 
-     * @param alt
-     */
-    public void setAlt(String alt) {
-        this.alt = alt;
-    }
 
     /**
      * 

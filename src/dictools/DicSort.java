@@ -230,7 +230,7 @@ public class DicSort  extends AbstractDictTool {
             for (E e : section.getEElements()) {
                 n++;
                 if (e.hasRestriction()) {
-                    String r = e.getRestriction();
+                    String r = e.restriction;
                     if (r.equals("LR")) {
                         lrs++;
                     }

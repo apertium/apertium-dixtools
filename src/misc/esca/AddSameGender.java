@@ -126,7 +126,7 @@ public class AddSameGender {
 
         HashMap<String, String> lemmaParName = new HashMap<String, String>();
         for (E ee : morph.getAllEntries()) {
-            String lemma = ee.getLemma();
+            String lemma = ee.lemma;
             String parName = ee.getMainParadigmName();
             lemmaParName.put(lemma, parName);
         }
@@ -172,7 +172,7 @@ public class AddSameGender {
 
         HashMap<String, String> lemmaParName = new HashMap<String, String>();
         for (E ee : morph.getAllEntries()) {
-            String lemma = ee.getLemma();
+            String lemma = ee.lemma;
             String parName = ee.getMainParadigmName();
             lemmaParName.put(lemma, parName);
         }
