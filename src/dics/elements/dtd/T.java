@@ -19,10 +19,9 @@
  */
 package dics.elements.dtd;
 
-import dics.elements.utils.DicOpts;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
+
+import dics.elements.utils.DicOpts;
 
 /**
  * 
@@ -31,19 +30,8 @@ import java.io.Writer;
  */
 public class T extends DixElement {
 
-    /**
-     * 
-     */
-    private String n;
+  public String name;
 
-    /**
-     * 
-     */
-    // private String temp;
-    /**
-     * 
-     * 
-     */
     public T() {
         super("t");
     }
@@ -52,9 +40,9 @@ public class T extends DixElement {
      * 
      * @param value
      */
-    public T(String value) {
+    public T(String name) {
         this();
-        n = value;
+        this.name = name;
     }
 
     /*
@@ -62,24 +50,7 @@ public class T extends DixElement {
      */
     public T(T tE) {
         this();
-        n = tE.getValue();
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    @Override
-    public String getValue() {
-        return n;
-    }
-
-    /**
-     * 
-     * @param value
-     */
-    @Override
-    public void setValue(String value) {
-        n = value;
+        name = tE.name;
     }
 
     /**
@@ -91,7 +62,7 @@ public class T extends DixElement {
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
-        dos.append("<" + TAGNAME + " n=\"" + getValue() + "\"/>");
+        dos.append("<" + TAGNAME + " n=\"" + name + "\"/>");
         dos.append(appendCharacterData);
     }
 
@@ -100,7 +71,7 @@ public class T extends DixElement {
      */
     @Override
     public String toString() {
-        return "<" + getValue() + ">";
+        return "<" + name + ">";
     }
 
     /**
@@ -109,6 +80,6 @@ public class T extends DixElement {
      * @return Undefined
      */
     public boolean equals(T tE) {
-        return (getValue().equals(tE.getValue()));
+        return (name).equals(tE.name);
     }
 }

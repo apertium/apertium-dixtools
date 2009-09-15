@@ -19,19 +19,19 @@
  */
 package dics.elements.dtd;
 
-import dics.elements.utils.DicOpts;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
-import dics.elements.utils.ElementList;
-import dictools.unused__DicEquivPar;
+
+import dics.elements.utils.DicOpts;
 import dics.elements.utils.DicTools;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
+import dics.elements.utils.ElementList;
 
 /**
  *
@@ -40,21 +40,9 @@ import java.io.Writer;
  */
 public class Dictionary extends DixElement {
 
-    /**
-     * 
-     */
     protected HeaderElement header;
-    /**
-     *
-     */
     protected Alphabet alphabet;
-    /**
-     *
-     */
     protected Sdefs sdefs;
-    /**
-     *
-     */
     protected Pardefs pardefs;
     /**
      *

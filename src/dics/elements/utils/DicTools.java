@@ -19,7 +19,6 @@
  */
 package dics.elements.utils;
 
-import dictools.xml.DictionaryReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -28,7 +27,7 @@ import java.util.Set;
 
 import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.E;
-import dics.elements.utils.DicSet;
+import dictools.xml.DictionaryReader;
 
 /**
  * 

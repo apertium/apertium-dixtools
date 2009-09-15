@@ -19,23 +19,19 @@
  */
 package dictools;
 
-import dictools.xml.DictionaryReader;
-import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Set;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.E;
-import dics.elements.dtd.E.EElementComparator;
 import dics.elements.dtd.S;
 import dics.elements.dtd.Section;
-import dics.elements.utils.Msg;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.TreeSet;
+import dics.elements.dtd.E.EElementComparator;
+import dictools.xml.DictionaryReader;
 
 /**
  * 

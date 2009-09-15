@@ -19,13 +19,11 @@
  */
 package dics.elements.dtd;
 
-import dics.elements.utils.DicOpts;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import java.io.OutputStreamWriter;
-import java.io.Writer;
+import dics.elements.utils.DicOpts;
 
 /**
  * 

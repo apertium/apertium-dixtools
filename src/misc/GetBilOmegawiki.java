@@ -35,7 +35,6 @@ import dics.elements.dtd.R;
 import dics.elements.dtd.S;
 import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
-import dics.elements.utils.Msg;
 import dictools.AbstractDictTool;
 
 /**

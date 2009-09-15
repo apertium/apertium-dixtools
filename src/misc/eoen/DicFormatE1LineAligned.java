@@ -20,17 +20,8 @@
 
 package misc.eoen;
 
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import dics.elements.dtd.Dictionary;
-import dics.elements.dtd.E;
-import dics.elements.dtd.Section;
-import dics.elements.utils.DicOpts;
 import dictools.AbstractDictTool;
-import dictools.xml.DictionaryReader;
-import java.io.OutputStreamWriter;
 
 /**
  * Prints a dictionaty with elements aligned.

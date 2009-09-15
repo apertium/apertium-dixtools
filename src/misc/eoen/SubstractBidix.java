@@ -22,22 +22,15 @@ package misc.eoen;
 
 
 
-import dics.elements.dtd.ContentElement;
 import java.util.HashMap;
+import java.util.Iterator;
 
+import dics.elements.dtd.ContentElement;
 import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.E;
-import dics.elements.dtd.L;
-import dics.elements.dtd.P;
-import dics.elements.dtd.Par;
-import dics.elements.dtd.R;
 import dics.elements.dtd.Section;
-import dics.elements.dtd.TextElement;
 import dics.elements.utils.DicOpts;
 import dictools.xml.DictionaryReader;
-import java.util.HashSet;
-import java.util.Iterator;
-import misc.DicFormatE1Line;
 
 /**
  *

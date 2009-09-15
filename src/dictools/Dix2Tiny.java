@@ -19,11 +19,12 @@
  */
 package dictools;
 
-import dictools.utils.dicmaker.DictCCDictionary;
-import dictools.utils.dicmaker.DictionaryWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+
+import dictools.utils.dicmaker.DictCCDictionary;
+import dictools.utils.dicmaker.DictionaryWriter;
 
 /**
  *

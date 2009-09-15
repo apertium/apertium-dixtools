@@ -19,9 +19,6 @@
  */
 package dics.elements.dtd;
 
-import dics.elements.utils.DicOpts;
-import java.io.IOException;
-
 /**
  * 
  * @author Enrique Benimeli Bofarull

@@ -19,6 +19,9 @@
  */
 package misc.enca;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.E;
 import dics.elements.dtd.I;
@@ -30,8 +33,6 @@ import dics.elements.dtd.S;
 import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
 import dictools.xml.DictionaryReader;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  *

@@ -27,7 +27,6 @@ import dics.elements.dtd.S;
 import dics.elements.utils.DicOpts;
 import dics.elements.utils.ElementList;
 import dics.elements.utils.Msg;
-import java.io.OutputStreamWriter;
 
 /**
  * 

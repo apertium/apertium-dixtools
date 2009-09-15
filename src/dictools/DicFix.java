@@ -19,21 +19,18 @@
  */
 package dictools;
 
-import dics.elements.dtd.ContentElement;
-import dictools.xml.DictionaryReader;
-import dics.elements.dtd.Dictionary;
-import dics.elements.dtd.E;
-import dics.elements.dtd.DixElement;
-import dics.elements.dtd.I;
-import dics.elements.dtd.L;
-import dics.elements.dtd.Pardef;
-import dics.elements.dtd.R;
-import dics.elements.dtd.Section;
-import dics.elements.dtd.TextElement;
-import dics.elements.utils.Msg;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+
+import dics.elements.dtd.ContentElement;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.DixElement;
+import dics.elements.dtd.E;
+import dics.elements.dtd.Pardef;
+import dics.elements.dtd.Section;
+import dics.elements.dtd.TextElement;
+import dictools.xml.DictionaryReader;
 
 /**
  * 

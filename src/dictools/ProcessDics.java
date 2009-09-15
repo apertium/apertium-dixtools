@@ -20,22 +20,23 @@ package dictools;
  * 02111-1307, USA.
  */
 
-import dics.elements.dtd.Dictionary;
-import dics.elements.utils.DicOpts;
 import java.io.IOException;
-import misc.DicFormatE1Line;
-import misc.GetBilOmegawiki;
-import dictools.xml.DictionaryReader;
-import dictools.apertiumizer.Apertiumizer;
-import dictools.dix2trie.Dix2Trie;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import misc.DicFormatE1Line;
+import misc.GetBilOmegawiki;
 import misc.Misc;
 import misc.enca.ConvertMF;
 import misc.enes.CompleteTranslation;
 import misc.enes.PrepareDic;
 import misc.eoen.DicFormatE1LineAligned;
 import misc.esca.AddSameGender;
+import dics.elements.dtd.Dictionary;
+import dics.elements.utils.DicOpts;
+import dictools.apertiumizer.Apertiumizer;
+import dictools.dix2trie.Dix2Trie;
+import dictools.xml.DictionaryReader;
 
 /**
  *

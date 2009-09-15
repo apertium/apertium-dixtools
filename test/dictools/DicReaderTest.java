@@ -5,10 +5,14 @@
 
 package dictools;
 
-import dics.elements.utils.Msg;
+import java.io.FileOutputStream;
 import java.io.PrintStream;
+
 import junit.framework.Assert;
+
 import org.junit.Test;
+
+import dics.elements.utils.Msg;
 
 /**
  *
@@ -26,7 +30,7 @@ public class DicReaderTest extends TestTools {
 
     // Redirect output
     String actout;
-    Msg.inst().out = new PrintStream(actout=rm("regression_test_data/dic-reader/actual_output.txt"));
+    Msg.inst().out = new PrintStream(new FileOutputStream(actout=rm("regression_test_data/dic-reader/actual_output.txt")));
 
     dictools.ProcessDics.main(new String[] {"list", "paradigms", "test/sample.metadix"});
     dictools.ProcessDics.main(new String[] {"list", "lemmas", "test/sample.metadix"});

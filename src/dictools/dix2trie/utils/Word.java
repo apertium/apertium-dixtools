@@ -19,9 +19,10 @@
  */
 package dictools.dix2trie.utils;
 
-import dics.elements.dtd.S;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+
+import dics.elements.dtd.S;
 
 /**
  *

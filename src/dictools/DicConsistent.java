@@ -19,7 +19,9 @@
  */
 package dictools;
 
-import dics.elements.utils.DicTools;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -27,10 +29,7 @@ import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.E;
 import dics.elements.utils.DicOpts;
 import dics.elements.utils.DicSet;
-import dics.elements.utils.Msg;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
+import dics.elements.utils.DicTools;
 
 /**
  * 

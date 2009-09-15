@@ -20,11 +20,15 @@
 package dictools.crossmodel;
 
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
 
 import dics.elements.dtd.ContentElement;
-import dics.elements.dtd.E;
 import dics.elements.dtd.DixElement;
+import dics.elements.dtd.E;
 import dics.elements.dtd.L;
 import dics.elements.dtd.P;
 import dics.elements.dtd.R;
@@ -35,11 +39,6 @@ import dics.elements.dtd.V;
 import dics.elements.utils.DicOpts;
 import dics.elements.utils.Msg;
 import dictools.cmproc.Variables;
-import java.io.OutputStreamWriter;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.*;
 
 /**
  * 
@@ -321,7 +320,7 @@ public class CrossAction implements Comparable<CrossAction> {
             // 't' element
             if (e instanceof T) {
                 S rSE = new S();
-                String v = ((T) e).getValue();
+                String v = ((T) e).name;
                 if (v == null) {
                     rSE.setValue("*");
                 } else {

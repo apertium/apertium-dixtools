@@ -19,12 +19,13 @@
  */
 package misc.esca;
 
+import java.util.HashMap;
+
 import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.E;
 import dics.elements.dtd.Pardef;
 import dics.elements.dtd.S;
 import dictools.xml.DictionaryReader;
-import java.util.HashMap;
 
 /**
  *

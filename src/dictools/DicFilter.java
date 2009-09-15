@@ -20,11 +20,12 @@
 
 package dictools;
 
-import dictools.xml.DictionaryReader;
+import java.util.HashMap;
+
 import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.E;
 import dics.elements.dtd.Section;
-import java.util.HashMap;
+import dictools.xml.DictionaryReader;
 
 /**
  *

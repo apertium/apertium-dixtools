@@ -19,8 +19,7 @@
  */
 package dictools;
 
-import dics.elements.utils.DicTools;
-import dictools.xml.DictionaryReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import dics.elements.dtd.Alphabet;
@@ -32,8 +31,8 @@ import dics.elements.dtd.Sdef;
 import dics.elements.dtd.Sdefs;
 import dics.elements.dtd.Section;
 import dics.elements.utils.DicSet;
-import dics.elements.utils.Msg;
-import java.util.ArrayList;
+import dics.elements.utils.DicTools;
+import dictools.xml.DictionaryReader;
 
 /**
  * 

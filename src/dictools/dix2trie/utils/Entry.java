@@ -19,8 +19,9 @@
  */
 package dictools.dix2trie.utils;
 
-import dics.elements.dtd.S;
 import java.util.ArrayList;
+
+import dics.elements.dtd.S;
 
 /**
  *

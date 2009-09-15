@@ -20,15 +20,18 @@
 
 package misc.eoen;
 
-import dics.elements.dtd.ContentElement;
-import dics.elements.dtd.E;
+import static org.junit.Assert.assertEquals;
+
 import java.util.HashMap;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import dics.elements.dtd.ContentElement;
+import dics.elements.dtd.E;
 
 /**
  *

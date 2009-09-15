@@ -19,18 +19,6 @@
  */
 package dictools.apertiumizer;
 
-import dics.elements.dtd.Dictionary;
-import dics.elements.dtd.E;
-import dics.elements.dtd.DixElement;
-import dics.elements.dtd.L;
-import dics.elements.dtd.P;
-import dics.elements.dtd.R;
-import dics.elements.dtd.S;
-import dics.elements.dtd.Section;
-import dics.elements.dtd.TextElement;
-import dictools.AbstractDictTool;
-import dictools.DicSort;
-import dictools.xml.DictionaryReader;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
@@ -40,6 +28,19 @@ import java.util.HashMap;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.DixElement;
+import dics.elements.dtd.E;
+import dics.elements.dtd.L;
+import dics.elements.dtd.P;
+import dics.elements.dtd.R;
+import dics.elements.dtd.S;
+import dics.elements.dtd.Section;
+import dics.elements.dtd.TextElement;
+import dictools.AbstractDictTool;
+import dictools.DicSort;
+import dictools.xml.DictionaryReader;
 
 /**
  *

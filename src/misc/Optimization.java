@@ -20,10 +20,8 @@
 
 package misc;
 
-import dictools.cmproc.State;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 
 /**
  *

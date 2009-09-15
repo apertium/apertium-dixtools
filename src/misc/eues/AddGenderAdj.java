@@ -23,8 +23,8 @@ import java.util.HashMap;
 
 import dics.elements.dtd.ContentElement;
 import dics.elements.dtd.Dictionary;
-import dics.elements.dtd.E;
 import dics.elements.dtd.DixElement;
+import dics.elements.dtd.E;
 import dics.elements.dtd.Pardef;
 import dics.elements.dtd.Pardefs;
 import dics.elements.dtd.R;

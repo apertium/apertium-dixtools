@@ -19,18 +19,16 @@
  */
 package dictools;
 
-import dictools.xml.DictionaryReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.E;
-import dics.elements.dtd.DixElement;
-import dics.elements.dtd.I;
 import dics.elements.dtd.L;
-import dics.elements.dtd.P;
 import dics.elements.dtd.Pardef;
 import dics.elements.dtd.Pardefs;
 import dics.elements.dtd.R;
@@ -39,8 +37,7 @@ import dics.elements.dtd.Sdef;
 import dics.elements.dtd.Sdefs;
 import dics.elements.dtd.Section;
 import dics.elements.utils.Msg;
-import java.util.ArrayList;
-import java.util.HashMap;
+import dictools.xml.DictionaryReader;
 
 /**
  * 

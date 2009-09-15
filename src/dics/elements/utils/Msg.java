@@ -19,16 +19,9 @@
  */
 package dics.elements.utils;
 
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 /**
@@ -81,7 +74,7 @@ public class Msg {
      */
     public void setLogFileName(String logFileName) {
         try {
-          log=new PrintStream(logFileName);
+          log=new PrintStream(new FileOutputStream(logFileName));
           log.println("Logging started "+new Date());
           Runtime.getRuntime().addShutdownHook(new Thread() { public void run() {
             log.close();

@@ -21,8 +21,6 @@ package dictools;
 
 import dics.elements.utils.DicOpts;
 import dics.elements.utils.Msg;
-import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  *

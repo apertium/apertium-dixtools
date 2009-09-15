@@ -20,11 +20,8 @@
 
 package dictools.xml;
 
-import dictools.xml.XMLReader;
 import org.w3c.dom.Element;
 
-import dics.elements.dtd.S;
-import dics.elements.dtd.Sdef;
 import dics.elements.dtd.Sdefs;
 
 /**

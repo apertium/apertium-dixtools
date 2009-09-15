@@ -19,9 +19,9 @@
  */
 package dictools;
 
+import dics.elements.dtd.Dictionary;
 import dics.elements.utils.DicTools;
 import dictools.xml.DictionaryReader;
-import dics.elements.dtd.Dictionary;
 
 /**
  * 

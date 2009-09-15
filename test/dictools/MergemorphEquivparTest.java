@@ -5,9 +5,8 @@
 
 package dictools;
 
-import dics.elements.utils.Msg;
-import java.io.PrintStream;
 import junit.framework.Assert;
+
 import org.junit.Test;
 
 /**

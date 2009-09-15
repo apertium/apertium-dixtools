@@ -21,27 +21,19 @@
 package dictools;
 
 
-import dictools.xml.DictionaryReader;
 import java.io.IOException;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import dics.elements.dtd.ContentElement;
 
-import dics.elements.dtd.Dictionary;
-import dics.elements.dtd.E;
-import dics.elements.dtd.DixElement;
-import dics.elements.dtd.Pardef;
-import dics.elements.dtd.Section;
-import dics.elements.utils.DicOpts;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStreamReader;
 import junit.framework.Assert;
 import misc.DicFormatE1Line;
 import misc.eoen.DicFormatE1LineAligned;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import dics.elements.dtd.Dictionary;
+import dics.elements.utils.DicOpts;
+import dictools.xml.DictionaryReader;
 
 
 /**

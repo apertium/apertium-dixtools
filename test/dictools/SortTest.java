@@ -5,10 +5,10 @@
 
 package dictools;
 
-import dics.elements.utils.Msg;
 import java.io.File;
-import java.io.PrintStream;
+
 import junit.framework.Assert;
+
 import org.junit.Test;
 
 /**

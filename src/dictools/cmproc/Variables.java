@@ -19,10 +19,11 @@
  */
 package dictools.cmproc;
 
-import dics.elements.dtd.S;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+
+import dics.elements.dtd.S;
 
 /**
  *

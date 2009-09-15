@@ -19,18 +19,17 @@
  */
 package dictools.crossmodel;
 
-import dics.elements.dtd.ContentElement;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
 
-import dics.elements.dtd.E;
+import dics.elements.dtd.ContentElement;
 import dics.elements.dtd.DixElement;
+import dics.elements.dtd.E;
 import dics.elements.dtd.S;
 import dics.elements.dtd.TextElement;
 import dics.elements.utils.DicOpts;
 import dics.elements.utils.Msg;
-import java.io.OutputStreamWriter;
-import java.util.HashMap;
-import java.util.Iterator;
 
 /**
  * 

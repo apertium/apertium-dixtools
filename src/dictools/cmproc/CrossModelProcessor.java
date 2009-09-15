@@ -19,14 +19,15 @@
  */
 package dictools.cmproc;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+
 import dics.elements.dtd.DixElement;
 import dics.elements.utils.ElementList;
 import dics.elements.utils.Msg;
 import dictools.crossmodel.CrossAction;
 import dictools.crossmodel.CrossModel;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 
 /**
  *

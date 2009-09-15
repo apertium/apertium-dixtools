@@ -19,15 +19,16 @@
  */
 package misc.enes;
 
-import dics.elements.dtd.Dictionary;
-import dics.elements.dtd.E;
-import dics.elements.dtd.Section;
-import dictools.xml.DictionaryReader;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
+
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.Section;
+import dictools.xml.DictionaryReader;
 
 /**
  *

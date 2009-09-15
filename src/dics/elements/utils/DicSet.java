@@ -19,8 +19,9 @@
  */
 package dics.elements.utils;
 
-import dics.elements.dtd.Dictionary;
 import java.util.ArrayList;
+
+import dics.elements.dtd.Dictionary;
 
 /**
  * 

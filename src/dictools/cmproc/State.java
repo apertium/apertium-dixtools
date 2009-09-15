@@ -19,13 +19,14 @@
  */
 package dictools.cmproc;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.regex.Matcher;
+
 import dics.elements.dtd.DixElement;
 import dics.elements.dtd.S;
 import dics.elements.utils.ElementList;
 import dictools.crossmodel.CrossAction;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.regex.Matcher;
 
 /**
  *

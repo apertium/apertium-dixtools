@@ -19,16 +19,13 @@
  */
 package dics.elements.dtd;
 
-import dics.elements.utils.DicOpts;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 
+import dics.elements.utils.DicOpts;
 import dics.elements.utils.ElementList;
 import dics.elements.utils.Msg;
-import java.io.OutputStreamWriter;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.util.Comparator;
 
 /**
  * 
@@ -910,7 +907,6 @@ public class E extends DixElement implements Cloneable {
 
         public boolean ignoreCase=false;
 
-        @Override
         public int compare(E e1, E anotherEElement) {
             if (anotherEElement == null) return -1;
             if (e1.containsRegEx()) return 0;

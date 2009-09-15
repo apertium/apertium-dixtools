@@ -19,13 +19,6 @@
  */
 package dictools;
 
-import dictools.xml.DictionaryReader;
-import dics.elements.dtd.Dictionary;
-import dics.elements.dtd.E;
-import dics.elements.dtd.DixElement;
-import dics.elements.dtd.S;
-import dics.elements.dtd.Section;
-import dics.elements.dtd.TextElement;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -41,6 +34,14 @@ import java.util.Vector;
 import java.util.zip.CRC32;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.DixElement;
+import dics.elements.dtd.E;
+import dics.elements.dtd.S;
+import dics.elements.dtd.Section;
+import dics.elements.dtd.TextElement;
+import dictools.xml.DictionaryReader;
 
 /**
  *

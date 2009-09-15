@@ -18,19 +18,10 @@
  * 02111-1307, USA.
  */
 package dictools;
-import dics.elements.dtd.Dictionary;
-import dics.elements.dtd.E;
-import dics.elements.dtd.Pardef;
-import dics.elements.dtd.Section;
-import dics.elements.dtd.TextElement;
-import dics.elements.utils.DicOpts;
-import dictools.xml.DictionaryReader;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -42,10 +33,16 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.Pardef;
+import dics.elements.dtd.Section;
+import dics.elements.dtd.TextElement;
+import dics.elements.utils.DicOpts;
+import dictools.xml.DictionaryReader;
 
 /**
  * Adds entries like <p><l/><r>%1234</r></p> in the start or end of all entries in a dix files,

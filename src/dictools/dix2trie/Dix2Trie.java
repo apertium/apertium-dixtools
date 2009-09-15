@@ -19,21 +19,22 @@
  */
 package dictools.dix2trie;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+
 import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.E;
 import dics.elements.dtd.L;
 import dics.elements.dtd.R;
 import dics.elements.dtd.S;
 import dics.elements.dtd.Section;
-import dictools.xml.DictionaryReader;
 import dictools.dix2trie.utils.Entry;
 import dictools.dix2trie.utils.EntryList;
 import dictools.dix2trie.utils.Node;
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.util.ArrayList;
+import dictools.xml.DictionaryReader;
 
 /**
  *

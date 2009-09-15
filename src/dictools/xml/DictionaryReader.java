@@ -19,8 +19,14 @@
  */
 package dictools.xml;
 
-import dictools.*;
-import dictools.xml.XMLReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+
+import javax.swing.JProgressBar;
+
+import org.w3c.dom.CharacterData;
+import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -32,28 +38,11 @@ import dics.elements.dtd.Alphabet;
 import dics.elements.dtd.CharacterDataNeighbour;
 import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.E;
-import dics.elements.dtd.G;
 import dics.elements.dtd.HeaderElement;
-import dics.elements.dtd.I;
-import dics.elements.dtd.L;
-import dics.elements.dtd.P;
-import dics.elements.dtd.Par;
 import dics.elements.dtd.Pardef;
 import dics.elements.dtd.Pardefs;
-import dics.elements.dtd.R;
-import dics.elements.dtd.Re;
-import dics.elements.dtd.S;
-import dics.elements.dtd.Sdef;
 import dics.elements.dtd.Sdefs;
 import dics.elements.dtd.Section;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import javax.swing.JProgressBar;
-import org.w3c.dom.Comment;
-import org.w3c.dom.CharacterData;
-import org.w3c.dom.NamedNodeMap;
 
 /**
  * 

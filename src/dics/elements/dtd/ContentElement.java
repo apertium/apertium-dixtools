@@ -19,11 +19,11 @@
  */
 package dics.elements.dtd;
 
-import dics.elements.utils.DicOpts;
 import java.io.IOException;
-
-import dics.elements.utils.ElementList;
 import java.util.ArrayList;
+
+import dics.elements.utils.DicOpts;
+import dics.elements.utils.ElementList;
 
 /**
  * 

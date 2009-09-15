@@ -19,11 +19,12 @@
  */
 package dictools.crossmodel;
 
-import dics.elements.utils.Msg;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
+
+import dics.elements.utils.Msg;
 
 /**
  * 

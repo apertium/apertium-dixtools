@@ -19,16 +19,17 @@
  */
 package dictools;
 
-import dictools.xml.DictionaryReader;
-import dics.elements.dtd.Dictionary;
-import dics.elements.dtd.E;
-import dics.elements.dtd.S;
-import dics.elements.dtd.Section;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.Vector;
+
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.S;
+import dics.elements.dtd.Section;
+import dictools.xml.DictionaryReader;
 
 /**
  *

@@ -19,18 +19,29 @@
  */
 package dictools;
 
-import dics.elements.utils.DicTools;
-import dictools.xml.DictionaryReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.Vector;
+
+import javax.swing.JProgressBar;
+
+import lingres.LingResources;
+import lingres.LingResourcesReader;
+import lingres.Resource;
 import dics.elements.dtd.Alphabet;
 import dics.elements.dtd.B;
 import dics.elements.dtd.ContentElement;
 import dics.elements.dtd.Dictionary;
-import dics.elements.dtd.E;
 import dics.elements.dtd.DixElement;
+import dics.elements.dtd.E;
 import dics.elements.dtd.HeaderElement;
 import dics.elements.dtd.L;
 import dics.elements.dtd.P;
@@ -42,26 +53,16 @@ import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
 import dics.elements.utils.DicOpts;
 import dics.elements.utils.DicSet;
-import dics.elements.utils.Msg;
+import dics.elements.utils.DicTools;
+import dictools.cmproc.CrossActionData;
+import dictools.cmproc.CrossModelProcessor;
+import dictools.cmproc.Variables;
 import dictools.crossmodel.Action;
 import dictools.crossmodel.CrossAction;
 import dictools.crossmodel.CrossModel;
 import dictools.crossmodel.CrossModelReader;
 import dictools.crossmodel.Pattern;
-import dictools.cmproc.CrossActionData;
-import dictools.cmproc.CrossModelProcessor;
-import dictools.cmproc.Variables;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Vector;
-import javax.swing.JProgressBar;
-import lingres.LingResources;
-import lingres.LingResourcesReader;
-import lingres.Resource;
+import dictools.xml.DictionaryReader;
 
 /**
  *
