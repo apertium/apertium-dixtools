@@ -34,7 +34,7 @@ public class S extends DixElement {
     
     private static HashMap<String, S> sElementList = new HashMap<String, S>();
     
-    private String n;
+    private String name;
 
     
     // private String temp;
@@ -49,7 +49,7 @@ public class S extends DixElement {
      */
     public S(String value) {
         this();
-        n = value;
+        name = value;
     }
 
     /*
@@ -57,7 +57,7 @@ public class S extends DixElement {
      */
     public S(S sE) {
         this();
-        n = sE.getValue();
+        name = sE.getValue();
     }
 
     /**
@@ -65,7 +65,7 @@ public class S extends DixElement {
      * @return Undefined         */
     @Override
     public String getValue() {
-        return n;
+        return name;
     }
 
     /**
@@ -74,7 +74,7 @@ public class S extends DixElement {
      */
     @Override
     public void setValue(String value) {
-        n = value;
+        name = value;
     }
 
     /**
@@ -91,24 +91,21 @@ public class S extends DixElement {
 
     /**
      * 
-     * @return Undefined         */
     public boolean isAdj() {
         return is("adj");
     }
 
-    /**
-     * 
-     * @return Undefined         */
     public boolean isN() {
         return is("n");
     }
+*/
 
     /**
      * 
      * @param value
      * @return Undefined         */
     public boolean is(String value) {
-        if (n.equals(value)) {
+        if (name.equals(value)) {
             return true;
         }
         return false;
@@ -123,18 +120,10 @@ public class S extends DixElement {
     /**
      * 
      * @param sE
-     * @return Undefined         */
     public boolean equals(S sE) {
         return (getValue().equals(sE.getValue()));
     }
-
-    /**
-     * 
-     * @param sE
-     */
-    public static void putSElement(S sE) {
-        S.sElementList.put(sE.getValue(), sE);
-    }
+     * @return Undefined         */
 
     /**
      * 
@@ -144,7 +133,7 @@ public class S extends DixElement {
         S sE = S.sElementList.get(str);
         if (sE==null) {
             sE = new S(str);
-            S.putSElement(sE);
+            S.sElementList.put(str, sE);
         }
         return sE;
     }

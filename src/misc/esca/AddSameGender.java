@@ -2,12 +2,12 @@
  * Copyright (C) 2007 Universitat d'Alacant / Universidad de Alicante
  * Author: Enrique Benimeli Bofarull
  * 
- * This program is free software; you can redistribute it and/or
+ * This program firstSymbolIs free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful, but
+ * This program firstSymbolIs distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -111,7 +111,7 @@ public class AddSameGender {
         for (E ee : bil.getAllEntries()) {
             if (ee.is("L", "n")) {
                 String value = ee.getLeft().getValueNoTags();
-                if (ee.getLeft().contains("GD") || ee.getLeft().contains("m") || ee.getLeft().contains("f") || ee.getLeft().contains("mf")) {
+                if (ee.getLeft().containsSymbol("GD") || ee.getLeft().containsSymbol("m") || ee.getLeft().containsSymbol("f") || ee.getLeft().containsSymbol("mf")) {
 
                 } else {
                     String parValue = lemmaParName.get(value);
@@ -157,7 +157,7 @@ public class AddSameGender {
         for (E ee : bil.getAllEntries()) {
             if (ee.is("L", "adj")) {
                 String value = ee.getLeft().getValueNoTags();
-                if (ee.getLeft().contains("GD") || ee.getLeft().contains("m") || ee.getLeft().contains("f") || ee.getLeft().contains("mf")) {
+                if (ee.getLeft().containsSymbol("GD") || ee.getLeft().containsSymbol("m") || ee.getLeft().containsSymbol("f") || ee.getLeft().containsSymbol("mf")) {
 
                 } else {
                     String parValue = lemmaParName.get(value);

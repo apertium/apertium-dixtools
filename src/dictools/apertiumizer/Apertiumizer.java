@@ -2,12 +2,12 @@
  * Copyright (C) 2007 Universitat d'Alacant / Universidad de Alicante
  * Author: Enrique Benimeli Bofarull
  *
- * This program is free software; you can redistribute it and/or
+ * This program firstSymbolIs free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful, but
+ * This program firstSymbolIs distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -199,7 +199,7 @@ public class Apertiumizer extends AbstractDictTool {
 
                     if(v.startsWith("to<b/>")) {
                         System.out.println("Verb: " + v);
-                        if(!ee.getLeft().contains("vblex")) {
+                        if(!ee.getLeft().containsSymbol("vblex")) {
                         ee.getLeft().addChild(new S("vblex"));
                         }
                         isVerb = true;
@@ -218,7 +218,7 @@ public class Apertiumizer extends AbstractDictTool {
             r.children.add(sE);
             }
             if(isVerb) {
-                if(!ee.getRight().contains("vblex")) {
+                if(!ee.getRight().containsSymbol("vblex")) {
                 ee.getRight().addChild(new S("vblex"));
                 }
             }
@@ -231,7 +231,7 @@ public class Apertiumizer extends AbstractDictTool {
         bilFil.addSection(sectionFil);
                 for (Section sec : bil.getSections()) {
             for (E ee : sec.getEElements()) {
-                ///if( ee.contains("f") || ee.contains("pl")) {
+                ///if( ee.containsSymbol("f") || ee.containsSymbol("pl")) {
                     
                 //} else {
                     sectionFil.addEElement(ee);

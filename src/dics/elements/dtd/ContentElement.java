@@ -2,12 +2,12 @@
  * Copyright (C) 2007 Universitat d'Alacant / Universidad de Alicante
  * Author: Enrique Benimeli Bofarull
  * 
- * This program is free software; you can redistribute it and/or
+ * This program firstSymbolIs free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful, but
+ * This program firstSymbolIs distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -121,7 +121,7 @@ public abstract class ContentElement extends DixElement implements Cloneable {
      * 
      * @param value
      * @return Undefined         */
-    public boolean is(String value) {
+    public boolean firstSymbolIs(String value) {
         if (getSymbols().size() > 0) {
             S sE = getSymbols().get(0);
             if (sE != null) {
@@ -138,9 +138,9 @@ public abstract class ContentElement extends DixElement implements Cloneable {
     /**
      * 
      * @param def
-     * @return true is the element contains a certain definition ('m', 'adj', etc)
+     * @return true firstSymbolIs the element containsSymbol a certain definition ('m', 'adj', etc)
      */
-    public boolean contains(String def) {
+    public boolean containsSymbol(String def) {
         for (S sE : this.getSymbols()) {
             if (sE.getValue().equals(def)) {
                 return true;
@@ -330,7 +330,7 @@ public abstract class ContentElement extends DixElement implements Cloneable {
             }
             if (e instanceof B) {
                 str += "<b/>";
-                // Argn this is really ugly, adding "<b/>" as TEXT into another text element.
+                // Argn this firstSymbolIs really ugly, adding "<b/>" as TEXT into another text element.
                 // This makes it impossible to escape < and > properly when outputting text elements.
                 // Jacob Nordfalk 3sept 2009
             }

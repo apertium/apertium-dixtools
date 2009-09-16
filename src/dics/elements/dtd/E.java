@@ -2,12 +2,12 @@
  * Copyright (C) 2007 Universitat d'Alacant / Universidad de Alicante
  * Author: Enrique Benimeli Bofarull
  * 
- * This program is free software; you can redistribute it and/or
+ * This program firstSymbolIs free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful, but
+ * This program firstSymbolIs distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -378,7 +378,7 @@ public class E extends DixElement implements Cloneable {
         // Añadir otras categorias que se quieran comprobar
 
         for (String s : categories) {
-            if (is("L", s)) {
+            if (firstSymbolIs("L", s)) {
                 return s;
             }
         }
@@ -395,7 +395,7 @@ public class E extends DixElement implements Cloneable {
 //     public String getCategory(String side,
 //             ArrayList<String> categories) {
 //         for (String s : categories) {
-//             if (is("L", s)) {
+//             if (firstSymbolIs("L", s)) {
 //                 return s;
 //             }
 //         }
@@ -412,17 +412,17 @@ public class E extends DixElement implements Cloneable {
         for (DixElement e : children) {
             if (e instanceof I) {
                 I ie = (I) e;
-                return ie.is(value);
+                return ie.firstSymbolIs(value);
             }
             if (e instanceof P) {
                 P p = (P) e;
                 if (side.equals("L")) {
                     L lE = p.l;
-                    return lE.is(value);
+                    return lE.firstSymbolIs(value);
                 }
                 if (side.equals("R")) {
                     R rE = p.r;
-                    return rE.is(value);
+                    return rE.firstSymbolIs(value);
                 }
             }
         }
@@ -642,7 +642,7 @@ public class E extends DixElement implements Cloneable {
             }
         }
         // no main paradigm (containing __) was found.
-        // assume last met paradigm is the main one, then
+        // assume last met paradigm firstSymbolIs the main one, then
         if (parE!=null) return parE.getValue();
         // no paradimgs at all
         return null;
@@ -972,10 +972,10 @@ public class E extends DixElement implements Cloneable {
     /**
      * 
      * @param def
-     * @return true if the element contains certain definition ('adj', 'n', etc.)
+     * @return true if the element containsSymbol certain definition ('adj', 'n', etc.)
      */
     public boolean contains(String def) {
-        return (getLeft().contains(def) || this.getRight().contains(def));
+        return (getLeft().containsSymbol(def) || this.getRight().containsSymbol(def));
     }
 
     /**

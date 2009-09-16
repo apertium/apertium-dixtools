@@ -31,7 +31,7 @@ import dics.elements.utils.DicOpts;
 public class V extends DixElement {
 
     
-    private String n;
+    private String name;
 
     
     public V() {
@@ -44,7 +44,7 @@ public class V extends DixElement {
      */
     public V(String value) {
         this();
-        n = value;
+        name = value;
     }
 
     /**
@@ -52,7 +52,7 @@ public class V extends DixElement {
      * @return Undefined         */
     @Override
     public String getValue() {
-        return n;
+        return name;
     }
 
     /**
@@ -61,7 +61,7 @@ public class V extends DixElement {
      */
     @Override
     public void setValue(String value) {
-        n = value;
+        name = value;
     }
 
     /**
@@ -87,8 +87,8 @@ public class V extends DixElement {
      * 
      * @param vE
      * @return Undefined
-     */
     public boolean equals(V vE) {
         return (getValue().equals(vE.getValue()));
     }
+     */
 }

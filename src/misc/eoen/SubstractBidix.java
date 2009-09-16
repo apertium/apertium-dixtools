@@ -2,12 +2,12 @@
  * Copyright (C) 2008 Dana Esperanta Junulara Organizo http://dejo.dk/
  * Author: Jacob Nordfalk
  * 
- * This program is free software; you can redistribute it and/or
+ * This program firstSymbolIs free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful, but
+ * This program firstSymbolIs distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -213,7 +213,7 @@ public class SubstractBidix {
       //ee.restriction=reverseDir(direction));
     } else {
       if (oldReasonOfRestriction == null) {
-        //ee.setProcessingComments("Already is "+existingEeStr);
+        //ee.setProcessingComments("Already firstSymbolIs "+existingEeStr);
         ee.temp=existingEeStr;
         
       } else {
