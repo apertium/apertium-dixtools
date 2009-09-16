@@ -30,8 +30,6 @@ import dics.elements.utils.DicOpts;
  */
 public class V extends DixElement {
 
-    
-    
     public V() {
         super("v");
     }

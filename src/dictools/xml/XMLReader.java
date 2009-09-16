@@ -243,7 +243,7 @@ public class XMLReader {
             String childElementName = childElement.getNodeName();
             if (childElementName.equals("sdef")) {
                 Sdef sdefElement = readSdef(childElement);
-                sdefsElement.sdefsElements.add(sdefElement);
+                sdefsElement.elements.add(sdefElement);
             }
         }
 
@@ -353,13 +353,13 @@ public class XMLReader {
                         Text textNode = (Text) child;
                         String str = textNode.getData().trim();
                         TextElement tE = new TextElement(str);
-                        cElement.addChild(tE);
+                        cElement.children.add(tE);
                     } else {
                         if (!(child instanceof Comment)) {
                             Element childElement = (Element) child;
                             String tag = childElement.getNodeName();
                             dics.elements.dtd.DixElement element = processTagE(tag, child);
-                            cElement.addChild(element);
+                            cElement.children.add(element);
                         }
                     }
                 }
@@ -548,28 +548,28 @@ public class XMLReader {
                     String childElementName = childElement.getNodeName();
                     if (childElementName.equals("i")) {
                         I iElement = readIElement(childElement);
-                        eElement.addChild(iElement);
+                        eElement.children.add(iElement);
 
                         prependOrAppendCharacterData(characterData, iElement, previousElement);
                         previousElement = iElement;
                     } else
                     if (childElementName.equals("p")) {
                         P pElement = readPElement(childElement);
-                        eElement.addChild(pElement);
+                        eElement.children.add(pElement);
 
                         prependOrAppendCharacterData(characterData, pElement, previousElement);
                         previousElement = pElement;
                     } else
                     if (childElementName.equals("par")) {
                         Par parElement = readParElement(childElement);
-                        eElement.addChild(parElement);
+                        eElement.children.add(parElement);
 
                         prependOrAppendCharacterData(characterData, parElement, previousElement);
                         previousElement = parElement;
                     } else
                     if (childElementName.equals("re")) {
                         Re reElement = readReElement(childElement);
-                        eElement.addChild(reElement);
+                        eElement.children.add(reElement);
 
                         prependOrAppendCharacterData(characterData, reElement, previousElement);
                         previousElement = reElement;
@@ -673,7 +673,7 @@ public class XMLReader {
         String n = getAttributeValue(e, "n");
         String sa = getAttributeValue(e, "sa");
         Par parElement = new Par(n);
-        parElement.setSa(sa);
+        parElement.sa = sa;
 
         if (e.hasAttributes()) {
             NamedNodeMap attributes = e.getAttributes();

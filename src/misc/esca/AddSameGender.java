@@ -81,35 +81,35 @@ public class AddSameGender {
 
         HashMap<String, String> parNameGender = new HashMap<String, String>();
 
-        for (Pardef pfe : morph.getPardefsElement().getPardefElements()) {
+        for (Pardef pfe : morph.pardefs.elements) {
             if (pfe.hasCategory("n")) {
-                if ((pfe.contains("m") && pfe.contains("f"))) {
-                    parNameGender.put(pfe.getName(), "GD");
+                if ((pfe.containsSymbol("m") && pfe.containsSymbol("f"))) {
+                    parNameGender.put(pfe.name, "GD");
                 //parNameGender.put(pfe.getName(), "mf");
                 } else {
-                    if (pfe.contains("mf")) {
-                        parNameGender.put(pfe.getName(), "mf");
+                    if (pfe.containsSymbol("mf")) {
+                        parNameGender.put(pfe.name, "mf");
                     }
-                    if (pfe.contains("m")) {
-                        parNameGender.put(pfe.getName(), "m");
+                    if (pfe.containsSymbol("m")) {
+                        parNameGender.put(pfe.name, "m");
                     }
-                    if (pfe.contains("f")) {
-                        parNameGender.put(pfe.getName(), "f");
+                    if (pfe.containsSymbol("f")) {
+                        parNameGender.put(pfe.name, "f");
                     }
                 }
             }
         }
 
         HashMap<String, String> lemmaParName = new HashMap<String, String>();
-        for (E ee : morph.getAllEntries()) {
+        for (E ee : morph.getEntriesInMainSection()) {
             String lemma = ee.lemma;
             String parName = ee.getMainParadigmName();
             lemmaParName.put(lemma, parName);
         }
 
 
-        for (E ee : bil.getAllEntries()) {
-            if (ee.is("L", "n")) {
+        for (E ee : bil.getEntriesInMainSection()) {
+            if (ee.firstSymbolIs("L", "n")) {
                 String value = ee.getLeft().getValueNoTags();
                 if (ee.getLeft().containsSymbol("GD") || ee.getLeft().containsSymbol("m") || ee.getLeft().containsSymbol("f") || ee.getLeft().containsSymbol("mf")) {
 
@@ -137,25 +137,25 @@ public class AddSameGender {
 
         HashMap<String, String> parNameGender = new HashMap<String, String>();
 
-        for (Pardef pfe : morph.getPardefsElement().getPardefElements()) {
+        for (Pardef pfe : morph.pardefs.elements) {
             if (pfe.hasCategory("adj")) {
-                if (pfe.contains("mf")) {
-                    parNameGender.put(pfe.getName(), "mf");
+                if (pfe.containsSymbol("mf")) {
+                    parNameGender.put(pfe.name, "mf");
                 }
             }
         }
 
 
         HashMap<String, String> lemmaParName = new HashMap<String, String>();
-        for (E ee : morph.getAllEntries()) {
+        for (E ee : morph.getEntriesInMainSection()) {
             String lemma = ee.lemma;
             String parName = ee.getMainParadigmName();
             lemmaParName.put(lemma, parName);
         }
 
 
-        for (E ee : bil.getAllEntries()) {
-            if (ee.is("L", "adj")) {
+        for (E ee : bil.getEntriesInMainSection()) {
+            if (ee.firstSymbolIs("L", "adj")) {
                 String value = ee.getLeft().getValueNoTags();
                 if (ee.getLeft().containsSymbol("GD") || ee.getLeft().containsSymbol("m") || ee.getLeft().containsSymbol("f") || ee.getLeft().containsSymbol("mf")) {
 

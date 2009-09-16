@@ -37,12 +37,12 @@ import dics.elements.utils.DicTools;
 public class Sdefs extends DixElement {
 
     
-    public ArrayList<Sdef> sdefsElements;
+    public ArrayList<Sdef> elements;
 
     
     public Sdefs() {
         super("sdefs");
-        sdefsElements = new ArrayList<Sdef>();
+        elements = new ArrayList<Sdef>();
     }
 
     /**
@@ -57,7 +57,7 @@ public class Sdefs extends DixElement {
         dos.append(tab(1) + "<" + TAGNAME + ">\n");
 
         HashMap<String, String> descriptions = DicTools.getSdefDescriptions();
-        for (Sdef e : sdefsElements) {
+        for (Sdef e : elements) {
             String d = descriptions.get(e.getValue());
             if (d != null) {
             // e.setProcessingComments("\t<!-- " + d + "-->");
@@ -121,7 +121,7 @@ public class Sdefs extends DixElement {
     @Override
     public String toString() {
         String str = "";
-        for (Sdef sdef : sdefsElements) {
+        for (Sdef sdef : elements) {
             str += sdef.toString();
         }
         return str;

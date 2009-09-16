@@ -109,7 +109,7 @@ public class GetBilOmegawiki  extends AbstractDictTool {
     public void printDictionary() {
         Dictionary dic = new Dictionary();
         Section section = new Section();
-        dic.addSection(section);
+        dic.sections.add(section);
 
         try {
             Statement stmt = con.createStatement();
@@ -200,7 +200,7 @@ public class GetBilOmegawiki  extends AbstractDictTool {
                     sltext = sltext.replaceAll(" ", "<b/>");
                     tltext = tltext.replaceAll(" ", "<b/>");
                     E e = buildEElement(sltext, tltext, slPoS, tlPoS);
-                    section.addEElement(e);
+                    section.elements.add(e);
                 }
             }
         } catch (SQLException sqle) {
@@ -233,20 +233,20 @@ public class GetBilOmegawiki  extends AbstractDictTool {
         E e = new E();
         L l = new L();
         TextElement lt = new TextElement(sl);
-        l.addChild(lt);
+        l.children.add(lt);
         S sL = new S(slPoS);
-        l.addChild(sL);
+        l.children.add(sL);
 
         R r = new R();
         TextElement rt = new TextElement(tl);
-        r.addChild(rt);
+        r.children.add(rt);
         S sR = new S(tlPoS);
-        r.addChild(sR);
+        r.children.add(sR);
 
         P p = new P();
         p.l = (l);
         p.r = (r);
-        e.addChild(p);
+        e.children.add(p);
         return e;
     }
 

@@ -62,7 +62,7 @@ public class CompleteTranslation {
 
     
     public void complete() {
-        for (E ee : bil.getAllEntries()) {
+        for (E ee : bil.getEntriesInMainSection()) {
             L left = ee.getLeft();
             if (left != null) {
                 System.out.println("Completing " + left.getValueNoTags());
@@ -72,9 +72,9 @@ public class CompleteTranslation {
                     if (translation != null) {
                         R rE = new R();
                         TextElement tE = new TextElement(translation);
-                        rE.addChild(tE);
+                        rE.children.add(tE);
                         for (S sE : left.getSymbols()) {
-                            rE.addChild(sE);
+                            rE.children.add(sE);
                         }
                         if (ee.getFirstP() != null) {
                             ee.getFirstP().r = (rE);
@@ -84,7 +84,7 @@ public class CompleteTranslation {
                             pE.r = (ee.getRight());
                             I iE = ee.getFirstI();
                             ee.children.remove(iE);
-                            ee.addChild(pE);
+                            ee.children.add(pE);
                         }
                     }
                 }

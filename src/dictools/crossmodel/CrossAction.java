@@ -204,14 +204,14 @@ public class CrossAction implements Comparable<CrossAction> {
         E rAB = new E();
         rAB.restriction=this.getPattern().getAB().restriction;
 
-        rAB.addChild(new P(new L(rLeftAB), new R(rRightAB)));
+        rAB.children.add(new P(new L(rLeftAB), new R(rRightAB)));
 
         ContentElement rLeftBC = this.renameContentElement(leftBC, valueMap);
         ContentElement rRightBC = this.renameContentElement(rightBC, valueMap);
         E rBC = new E();
         rBC.restriction=this.getPattern().getBC().restriction;
 
-        rBC.addChild(new P(new L(rLeftBC), new R(rRightBC)));
+        rBC.children.add(new P(new L(rLeftBC), new R(rRightBC)));
 
         rPattern.setAB(rAB);
         rPattern.setBC(rBC);
@@ -230,7 +230,7 @@ public class CrossAction implements Comparable<CrossAction> {
                     rA.restriction=a.getE().restriction;
                 }
             }
-            rA.addChild(new P(new L(rLeftA), new R(rRightA)));
+            rA.children.add(new P(new L(rLeftA), new R(rRightA)));
             rActionSet.add(new Action(rA));
         }
         return rCrossAction;
@@ -268,7 +268,7 @@ public class CrossAction implements Comparable<CrossAction> {
                 } else {
                     tE = new TextElement(v);
                 }
-                rContentElement.addChild(tE);
+                rContentElement.children.add(tE);
             }
 
             // 'v' element
@@ -287,7 +287,7 @@ public class CrossAction implements Comparable<CrossAction> {
                         rSE.setValue(nV);
                     }
                 }
-                rContentElement.addChild(rSE);
+                rContentElement.children.add(rSE);
             }
 
             // 't' element
@@ -306,7 +306,7 @@ public class CrossAction implements Comparable<CrossAction> {
                         rSE.setValue(nV);
                     }
                 }
-                rContentElement.addChild(rSE);
+                rContentElement.children.add(rSE);
             }
 
             // 's' element
@@ -333,7 +333,7 @@ public class CrossAction implements Comparable<CrossAction> {
                     valueMap.put(v, nV);
                     rSE.setValue(nV);
                 }
-                rContentElement.addChild(rSE);
+                rContentElement.children.add(rSE);
             }
         }
         return rContentElement;

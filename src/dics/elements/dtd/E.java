@@ -85,22 +85,10 @@ public class E extends DixElement implements Cloneable {
     }
 
 
-    public ElementList getChildren() {
-        return children;
-    }
-
     public boolean hasPrependorAppendData() {
         return !(prependCharacterData.trim().isEmpty() && appendCharacterData.trim().isEmpty());
     }
     
-    /**
-     * 
-     * @param e
-     */
-    public void addChild(DixElement e) {
-        children.add(e);
-    }
-
     /**
      * 
      * @return Undefined         */
@@ -408,7 +396,7 @@ public class E extends DixElement implements Cloneable {
      * @param value
      * @return Undefined         
      */
-    public boolean is(String side, String value) {
+    public boolean firstSymbolIs(String side, String value) {
         for (DixElement e : children) {
             if (e instanceof I) {
                 I ie = (I) e;
@@ -457,7 +445,7 @@ public class E extends DixElement implements Cloneable {
      * @param side
      * @return Undefined         */
     public boolean isAdj(String side) {
-        return is(side, "adj");
+        return firstSymbolIs(side, "adj");
     }
 
     /**
@@ -465,7 +453,7 @@ public class E extends DixElement implements Cloneable {
      * @param side
      * @return Undefined         */
     public boolean isNoun(String side) {
-        return is(side, "n");
+        return firstSymbolIs(side, "n");
     }
 
     /**
@@ -942,10 +930,10 @@ public class E extends DixElement implements Cloneable {
                 }
             }
         }
-        for (DixElement e : getChildren()) {
+        for (DixElement e : children) {
             if (e instanceof P) {
                 P pE = new P();
-                eRev.addChild(pE);
+                eRev.children.add(pE);
                 L newLE = new L();
                 R newRE = new R();
                 pE.l = newLE;
@@ -962,7 +950,7 @@ public class E extends DixElement implements Cloneable {
             if (e instanceof I) {
                 I iE = new I();
                 iE.children = ((I) e).children;
-                eRev.addChild(iE);
+                eRev.children.add(iE);
             }
         }
         return eRev;
@@ -974,7 +962,7 @@ public class E extends DixElement implements Cloneable {
      * @param def
      * @return true if the element containsSymbol certain definition ('adj', 'n', etc.)
      */
-    public boolean contains(String def) {
+    public boolean containsSymbol(String def) {
         return (getLeft().containsSymbol(def) || this.getRight().containsSymbol(def));
     }
 

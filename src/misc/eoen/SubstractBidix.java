@@ -61,8 +61,8 @@ public class SubstractBidix {
     HashMap<String, E> hmLR=new HashMap<String, E>();
     HashMap<String, E> hmRL=new HashMap<String, E>();
     //HashSet<String> restrics = new HashSet<String>();
-    for (Section section : dic.getSections()) {
-      for (E ee : section.getEElements()) {
+    for (Section section : dic.sections) {
+      for (E ee : section.elements) {
         //setYesIsAllowed(ee, "LR"); // XXXX
         //setYesIsAllowed(ee, "RL"); // XXXX
         if (!ee.containsRegEx()) {
@@ -102,7 +102,7 @@ public class SubstractBidix {
 
 
       // Transfer reasons from temp to comment
-      Iterator<E> eei=section.getEElements().iterator();
+      Iterator<E> eei=section.elements.iterator();
       while (eei.hasNext()) {
         E ee=eei.next();
         if (!ee.containsRegEx()) {

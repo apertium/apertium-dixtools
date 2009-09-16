@@ -112,37 +112,37 @@ public class DicMerge  extends AbstractDictTool{
      */
     private DicSet merge() {
         Dictionary bilAB = mergeBils(bilAB1, bilAB2);
-        String fileName = bilAB1.getFileName();
+        String fileName = bilAB1.fileName;
         fileName = DicTools.removeExtension(fileName);
-        bilAB.setFileName(fileName + "-merged.dix");
+        bilAB.fileName = fileName + "-merged.dix";
 
         bilAB.countEntries();
         bilAB1.countEntries();
         bilAB2.countEntries();
         bilAB.addProcessingComment("\n\tResult of merging 2 dictionaries:");
-        bilAB.addProcessingComment("\t" + bilAB.getNEntries() + " entries (" + bilAB1.getNEntries() + " U " + bilAB2.getNEntries() + ")");
+        bilAB.addProcessingComment("\t" + bilAB.nEntries + " entries (" + bilAB1.nEntries + " U " + bilAB2.nEntries + ")");
 
         Dictionary monA = mergeMonols(monA1, monA2);
-        String monAfn = monA1.getFileName();
+        String monAfn = monA1.fileName;
         monAfn = DicTools.removeExtension(monAfn);
-        monA.setFileName(monAfn + "-merged.dix");
+        monA.fileName = monAfn + "-merged.dix";
 
         monA.countEntries();
         monA1.countEntries();
         monA2.countEntries();
         monA.addProcessingComment("\n\tResult of merging 2 dictionaries:");
-        monA.addProcessingComment("\t" + monA.getNEntries() + " entries (" + monA1.getNEntries() + " U " + monA2.getNEntries() + ")");
+        monA.addProcessingComment("\t" + monA.nEntries + " entries (" + monA1.nEntries + " U " + monA2.nEntries + ")");
 
         Dictionary monB = mergeMonols(monB1, monB2);
-        String monBfn = monB1.getFileName();
+        String monBfn = monB1.fileName;
         monBfn = DicTools.removeExtension(monBfn);
-        monB.setFileName(monBfn + "-merged.dix");
+        monB.fileName = monBfn + "-merged.dix";
 
         monB.countEntries();
         monB1.countEntries();
         monB2.countEntries();
         monB.addProcessingComment("\n\tResult of merging 2 dictionaries:");
-        monB.addProcessingComment("\t" + monB.getNEntries() + " entries (" + monB1.getNEntries() + " U " + monB2.getNEntries() + ")");
+        monB.addProcessingComment("\t" + monB.nEntries + " entries (" + monB1.nEntries + " U " + monB2.nEntries + ")");
 
         DicSet dicSet = new DicSet(bilAB, monA, monB);
         return dicSet;
@@ -156,15 +156,15 @@ public class DicMerge  extends AbstractDictTool{
     private Dictionary mergeBils(Dictionary bAB1, Dictionary bAB2) {
         Dictionary dic = new Dictionary();
 
-        Alphabet alphabet = mergeAlphabetElement(bAB1.getAlphabet(), bAB2.getAlphabet());
-        dic.setAlphabet(alphabet);
+        Alphabet alphabet = mergeAlphabetElement(bAB1.alphabet, bAB2.alphabet);
+        dic.alphabet = alphabet;
 
         Sdefs sdefs = new Sdefs();
-        sdefs = mergeSdefElements(bAB1.getSdefs(), bAB2.getSdefs());
-        dic.setSdefs(sdefs);
+        sdefs = mergeSdefElements(bAB1.sdefs, bAB2.sdefs);
+        dic.sdefs = sdefs;
 
-        Pardefs pardefs1 = bAB1.getPardefsElement();
-        Pardefs pardefs2 = bAB2.getPardefsElement();
+        Pardefs pardefs1 = bAB1.pardefs;
+        Pardefs pardefs2 = bAB2.pardefs;
         Pardefs pardefs;
         if ((pardefs1 != null) && (pardefs2 != null)) {
             pardefs = mergePardefElements(pardefs1, pardefs2);
@@ -175,14 +175,14 @@ public class DicMerge  extends AbstractDictTool{
         } else {
             pardefs = null;
         }
-        dic.setPardefs(pardefs);
+        dic.pardefs = pardefs;
 
-        for (Section section1 : bAB1.getSections()) {
-            Section section2 = bAB2.getSection(section1.getID());
+        for (Section section1 : bAB1.sections) {
+            Section section2 = bAB2.getSection(section1.id);
             if (section2 != null) {
                 Section section = mergeSectionElements(section1,
                         section2);
-                dic.addSection(section);
+                dic.sections.add(section);
             }
         }
         return dic;
@@ -196,22 +196,22 @@ public class DicMerge  extends AbstractDictTool{
      */
     private Dictionary mergeMonols(Dictionary m1, Dictionary m2) {
         Dictionary mon = new Dictionary();
-        Alphabet alphabet = mergeAlphabetElement(m1.getAlphabet(), m2.getAlphabet());
-        mon.setAlphabet(alphabet);
+        Alphabet alphabet = mergeAlphabetElement(m1.alphabet, m2.alphabet);
+        mon.alphabet = alphabet;
 
-        Sdefs sdefs = mergeSdefElements(m1.getSdefs(), m2.getSdefs());
-        mon.setSdefs(sdefs);
+        Sdefs sdefs = mergeSdefElements(m1.sdefs, m2.sdefs);
+        mon.sdefs = sdefs;
 
-        Pardefs pardefs = mergePardefElements(m1.getPardefsElement(), m2.getPardefsElement());
-        mon.setPardefs(pardefs);
+        Pardefs pardefs = mergePardefElements(m1.pardefs, m2.pardefs);
+        mon.pardefs = pardefs;
 
-        for (Section section1 : m1.getSections()) {
-            Section section2 = m2.getSection(section1.getID());
+        for (Section section1 : m1.sections) {
+            Section section2 = m2.getSection(section1.id);
             if (section2 != null) {
                 Section section = mergeSectionElements(section1, section2);
-                mon.addSection(section);
+                mon.sections.add(section);
             } else {
-                msg.err("There's no '" + section1.getID() + "' section in monolingual 2");
+                msg.err("There's no '" + section1.id + "' section in monolingual 2");
             }
         }
         return mon;
@@ -225,18 +225,18 @@ public class DicMerge  extends AbstractDictTool{
      */
     private Section mergeSectionElements( Section sectionE1, Section sectionE2) {
 
-        System.err.println("Merging section '" + sectionE1.getID() + "'...");
+        System.err.println("Merging section '" + sectionE1.id + "'...");
         Section sectionElement = new Section();
         HashMap<String, E> eMap = new HashMap<String, E>();
 
-        sectionElement.setID(sectionE1.getID());
-        sectionElement.setType(sectionE1.getType());
+        sectionElement.id = sectionE1.id;
+        sectionElement.type = sectionE1.type;
 
         int duplicated = 0;
 
         paradigmsToRemove = new HashMap<String, String>();
 
-        ArrayList<E> elements1 = sectionE1.getEElements();
+        ArrayList<E> elements1 = sectionE1.elements;
         System.err.println("  monolingual 1 (" + elements1.size() + " lemmas)");
         int fromSec1 = 0;
         for (E e1 : elements1) {
@@ -244,14 +244,14 @@ public class DicMerge  extends AbstractDictTool{
             String e1Key = e1.toStringAll();
             if (!eMap.containsKey(e1Key)) {
                 eMap.put(e1Key, e1);
-                sectionElement.addEElement(e1);
+                sectionElement.elements.add(e1);
                 fromSec1++;
             } else {
                 duplicated++;
             }
         }
 
-        ArrayList<E> elements2 = sectionE2.getEElements();
+        ArrayList<E> elements2 = sectionE2.elements;
         System.err.println("  monolingual 2 (" + elements2.size() + " lemmas)");
         int common = 0;
         int notin = 0;
@@ -269,7 +269,7 @@ public class DicMerge  extends AbstractDictTool{
                     e2.setProcessingComments("\n\n ====== HERE AND BELOW ARE ADDITIONS FROM SECOND FILE======\n\n");
                     first = false;
                 }
-                sectionElement.addEElement(e2);
+                sectionElement.elements.add(e2);
                 fromSec2++;
             } else {
                 // System.err.println("'" + e2.lemma + "' already
@@ -297,7 +297,7 @@ public class DicMerge  extends AbstractDictTool{
         System.err.println("  " + common + " common lemmas");
         //System.err.println("  " + (fromSec1 - common) + " new lemmas from monol. 1");
         //System.err.println("  " + fromSec2 + " new lemmas from monol. 2");
-        System.err.println("  " + sectionElement.getEElements().size() + " lemmas in merged dictionary");
+        System.err.println("  " + sectionElement.elements.size() + " lemmas in merged dictionary");
 
         // System.err.println(duplicated + " duplicated entries in sections " +
         // sectionE1.getID() + "/" + sectionE2.getID());
@@ -314,19 +314,19 @@ public class DicMerge  extends AbstractDictTool{
         Sdefs sdefs = new Sdefs();
         HashMap<String, Sdef> sdefMap = new HashMap<String, Sdef>();
 
-        for (Sdef sdef1 : sdefs1.sdefsElements) {
+        for (Sdef sdef1 : sdefs1.elements) {
             String sdef1Key = sdef1.toString();
             if (!sdefMap.containsKey(sdef1Key)) {
                 sdefMap.put(sdef1Key, sdef1);
-                sdefs.sdefsElements.add(sdef1);
+                sdefs.elements.add(sdef1);
             }
         }
 
-        for (Sdef sdef2 : sdefs2.sdefsElements) {
+        for (Sdef sdef2 : sdefs2.elements) {
             String sdef2Key = sdef2.toString();
             if (!sdefMap.containsKey(sdef2Key)) {
                 sdefMap.put(sdef2Key, sdef2);
-                sdefs.sdefsElements.add(sdef2);
+                sdefs.elements.add(sdef2);
             }
         }
         return sdefs;
@@ -340,7 +340,7 @@ public class DicMerge  extends AbstractDictTool{
     private static Alphabet mergeAlphabetElement( Alphabet alphabet1, Alphabet alphabet2) {
         Alphabet alphabet = new Alphabet();
         // We take one of them
-        alphabet.setAlphabet(alphabet1.getAlphabet());
+        alphabet.alphabet = alphabet1.alphabet;
         return alphabet;
     }
 
@@ -356,24 +356,24 @@ public class DicMerge  extends AbstractDictTool{
         HashMap<String, Pardef> pardefAllMap = new HashMap<String, Pardef>();
 
 
-        for (Pardef pardef1 : pardefs1.getPardefElements()) {
+        for (Pardef pardef1 : pardefs1.elements) {
             //System.err.println("Paradigm: " + pardef1.getName());
 
-            pardefNameMap.put(pardef1.getName(), pardef1);
+            pardefNameMap.put(pardef1.name, pardef1);
             pardefAllMap.put(pardef1.toString(), pardef1);
-            pardefs.addPardefElement(pardef1);
+            pardefs.elements.add(pardef1);
         }
 
         boolean first = true;
 
-        for (Pardef pardef2 : pardefs2.getPardefElements()) {
+        for (Pardef pardef2 : pardefs2.elements) {
             String pardef2Key = pardef2.toString();
             if (!pardefAllMap.containsKey(pardef2Key)) {
-                System.err.println("Paradigm: " + pardef2.getName());
+                System.err.println("Paradigm: " + pardef2.name);
 
-                while (pardefNameMap.containsKey(pardef2.getName())) {
+                while (pardefNameMap.containsKey(pardef2.name)) {
                     // Rename
-                    pardef2.setName( pardef2.getName()+"___mergeTODO");
+                    pardef2.name = pardef2.name+"___mergeTODO";
                     pardef2Key  = pardef2.toString();
                 }
 
@@ -381,9 +381,9 @@ public class DicMerge  extends AbstractDictTool{
                     pardef2.setProcessingComments("\n\n ====== HERE AND BELOW ARE ADDITIONS FROM SECOND FILE======\n\n");
                     first = false;
                 }
-                pardefNameMap.put(pardef2.getName(), pardef2);
+                pardefNameMap.put(pardef2.name, pardef2);
                 pardefAllMap.put(pardef2Key, pardef2);
-                pardefs.addPardefElement(pardef2);
+                pardefs.elements.add(pardef2);
             }
         }
         return pardefs;
@@ -415,9 +415,9 @@ public class DicMerge  extends AbstractDictTool{
         Dictionary monA = dicSet.getMon1();
         Dictionary monB = dicSet.getMon2();
 
-        bil.printXML(bil.getFileName(),getOpt());
-        monA.printXML(monA.getFileName(),getOpt());
-        monB.printXML(monB.getFileName(),getOpt());
+        bil.printXML(bil.fileName,getOpt());
+        monA.printXML(monA.fileName,getOpt());
+        monB.printXML(monB.fileName,getOpt());
     }
 
     /**

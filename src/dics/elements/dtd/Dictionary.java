@@ -40,36 +40,36 @@ import dics.elements.utils.ElementList;
  */
 public class Dictionary extends DixElement {
 
-    protected HeaderElement header;
-    protected Alphabet alphabet;
-    protected Sdefs sdefs;
-    protected Pardefs pardefs;
+    public HeaderElement header;
+    public Alphabet alphabet;
+    public Sdefs sdefs;
+    public Pardefs pardefs;
     
-    protected ArrayList<Section> sections;
+    public ArrayList<Section> sections;
     
-    protected int nEntries;
+    public int nEntries;
     
-    protected int nShared;
+    public int nShared;
     
-    protected int nDifferent;
+    public int nDifferent;
     
-    protected HashMap<String, ArrayList<Pardef>> equivPar;
+    public HashMap<String, ArrayList<Pardef>> equivPar;
     
-    private String type;
+    public String type;
     
-    private String fileName;
+    public String fileName;
     
-    private String filePath;
+    public String filePath;
     
-    private String leftLanguage;
+    public String leftLanguage;
     
-    private String rightLanguage;
+    public String rightLanguage;
     
-    private String folder;
+    public String folder;
     
-    private String xmlEncoding = "UTF-8";
+    public String xmlEncoding = "UTF-8";
     
-    private String xmlVersion;
+    public String xmlVersion;
 
     
     public Dictionary() {
@@ -109,19 +109,19 @@ public class Dictionary extends DixElement {
     public Dictionary(Dictionary dic) {
         this();
         Section sectionElement = new Section("main", "standard");
-        addSection(sectionElement);
-        setAlphabet(dic.getAlphabet());
-        setSdefs(dic.getSdefs());
+        sections.add(sectionElement);
+        alphabet = dic.alphabet;
+        sdefs = dic.sdefs;
 
         if (dic.isMonol()) {
-            setPardefs(dic.getPardefsElement());
+            pardefs = dic.pardefs;
         }
 
         Section sectionElementMain = dic.getSection("main");
-        ArrayList<E> eList = sectionElementMain.getEElements();
+        ArrayList<E> eList = sectionElementMain.elements;
         for (E e : eList) {
             if (!e.shared) {
-                addEElement(e);
+                (getEntriesInMainSection()).add(e);
             }
         }
     }
@@ -132,90 +132,17 @@ public class Dictionary extends DixElement {
      */
     public void setMainSection(ArrayList<E> eList) {
         for (Section section : sections) {
-            if (section.getID().equals("main")) {
-                Section sectionElementMain = new Section(section.getID(), section.getType());
+            if (section.id.equals("main")) {
+                Section sectionElementMain = new Section(section.id, section.type);
                 sections.remove(section);
                 for (E e : eList) {
-                    sectionElementMain.addEElement(e);
+                    sectionElementMain.elements.add(e);
                 }
-                addSection(sectionElementMain);
+                sections.add(sectionElementMain);
             }
         }
     }
 
-    /**
-     *
-     * @param value
-     */
-    public void setType(String value) {
-        type = value;
-    }
-
-    /**
-     *
-     * @return Undefined     */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     *
-     * @param value
-     */
-    public void setFileName(String value) {
-        fileName = value;
-    }
-
-    /**
-     *
-     * @return Undefined     */
-    public String getFileName() {
-        return fileName;
-    }
-
-    
-    public void setFilePath(String path) {
-        this.filePath = path;
-    }
-
-    
-    public String getFilePath() {
-        return this.filePath;
-    }
-
-    /**
-     *
-     * @param value
-     */
-    public void setLeftLanguage(String value) {
-        leftLanguage = value;
-    }
-
-    /**
-     *
-     * @return Undefined     */
-    public String getLeftLanguage() {
-        return leftLanguage;
-    }
-
-    /**
-     *
-     * @param value
-     */
-    public void setRightLanguage(String value) {
-        rightLanguage = value;
-    }
-
-    /**
-     *
-     * @return Undefined     
-     */
-    public String getRightLanguage() {
-        return rightLanguage;
-    }
-
-    
-    
     public static final String BIL = "BIL";
     public static final String MONOL = "MONOL";
     /**
@@ -223,15 +150,7 @@ public class Dictionary extends DixElement {
      * @return Undefined     
      */
     public boolean isMonol() {
-        if (type != null) {
-            if (type.equals("MONOL")) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
+    	return MONOL.equals(type);
     }
 
     /**
@@ -239,95 +158,7 @@ public class Dictionary extends DixElement {
      * @return Undefined     
      */
     public boolean isBil() {
-        if (type != null) {
-            if (type.equals(BIL)) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * 
-     * @return The header element
-     */
-    public HeaderElement getHeaderElement() {
-        return this.header;
-    }
-
-    /**
-     * 
-     * @param header
-     */
-    public void setHeaderElement(HeaderElement header) {
-        this.header = header;
-    }
-
-    
-    public Alphabet getAlphabet() {
-        return alphabet;
-    }
-
-    /**
-     *
-     * @param value
-     */
-    public void setAlphabet(Alphabet value) {
-        alphabet = value;
-    }
-
-    /**
-     *
-     * @param value
-     */
-    public void setSdefs(Sdefs value) {
-        sdefs = value;
-    }
-
-    /**
-     *
-     * @return Undefined     */
-    public Sdefs getSdefs() {
-        return sdefs;
-    }
-
-    /**
-     *
-     * @param value
-     */
-    public void setPardefs(Pardefs value) {
-        pardefs = value;
-    }
-
-    /**
-     *
-     * @param value
-     */
-    public void addSection(Section value) {
-        sections.add(value);
-    }
-
-    /**
-     *
-     * @return Undefined     */
-    public ArrayList<Section> getSections() {
-        return sections;
-    }
-
-    /**
-     *
-     * @param id
-     * @return Undefined     */
-    public Section getSection(String id) {
-        for (Section section : sections) {
-            if (section.getID().equals(id)) {
-                return section;
-            }
-        }
-        return null;
+    	return BIL.equals(type);
     }
 
     /**
@@ -335,7 +166,7 @@ public class Dictionary extends DixElement {
      * @param fileName
      */
     public void printXML(String fileName, DicOpts opt) {
-        printXML(fileName, this.getXmlEncoding(), opt);
+        printXML(fileName, this.xmlEncoding, opt);
     }
 
     /**
@@ -344,7 +175,7 @@ public class Dictionary extends DixElement {
      * @param encoding
      */
     public void printXML(String fileName, String encoding, DicOpts opt) {
-        setFileName(fileName);
+        fileName = fileName;
         try {
             Writer dos;
               if ("-".equals(fileName)) {
@@ -359,20 +190,20 @@ public class Dictionary extends DixElement {
             dos.append("<!--\n\tDictionary:\n");
             if (sections != null) {
                 if (isBil()) {
-                    dos.append("\tBilingual dictionary: " + getLeftLanguage() + "-" + getRightLanguage() + "\n");
+                    dos.append("\tBilingual dictionary: " + leftLanguage + "-" + rightLanguage + "\n");
                 }
                 dos.append("\tSections: " + sections.size() + "\n");
                 int ne = 0;
                 for (Section section : sections) {
-                    ne += section.getEElements().size();
+                    ne += section.elements.size();
                 }
                 dos.append("\tEntries: " + ne);
             }
             if (sdefs != null) {
-                dos.append("\n\tSdefs: " + sdefs.sdefsElements.size() + "\n");
+                dos.append("\n\tSdefs: " + sdefs.elements.size() + "\n");
             }
             if (pardefs != null) {
-                dos.append("\tParadigms: " + pardefs.getPardefElements().size() + "\n");
+                dos.append("\tParadigms: " + pardefs.elements.size() + "\n");
             }
             if (opt.originalArguments != null) {
                 dos.append("\tLast processed by: apertium-dixtools");
@@ -458,9 +289,9 @@ public class Dictionary extends DixElement {
 
                 sdefs.printXML(getFolder() + "/sdefs.dix", opt);
             }
-            if (pardefs != null) {
-                dos.append("\t" + includeStr + " href=\"" + getFolder() + "/pardefs.dix\"/>\n");
-                pardefs.printXML(getFolder() + "/pardefs.dix", opt);
+            if (elements != null) {
+                dos.append("\t" + includeStr + " href=\"" + getFolder() + "/elements.dix\"/>\n");
+                elements.printXML(getFolder() + "/elements.dix", opt);
             }
 
             for (Section section : sections) {
@@ -498,21 +329,30 @@ public class Dictionary extends DixElement {
      *
      * @return The 'e' elements
      */
-    public ArrayList<E> getEntries() {
-        for (Section s : sections) {
-            if (s.getID().equals("main")) {
-                return s.getEElements();
-            }
-        }
-        return null;
+    public ArrayList<E> getEntriesInMainSection() {
+    	return getSection("main").elements;
     }
+    
+    /**
+    *
+    * @param id
+    * @return Undefined     */
+   public Section getSection(String id) {
+       for (Section section : sections) {
+           if (section.id.equals(id)) {
+               return section;
+           }
+       }
+       return null;
+   }
+
 
     /**
      *
      * @return Undefined     */
-    public ArrayList<E> getAllEntries() {
+    public ArrayList<E> getEntriesInFirstSection() {
         for (Section s : sections) {
-            return s.getEElements();
+            return s.elements;
         }
         return null;
     }
@@ -524,24 +364,16 @@ public class Dictionary extends DixElement {
     public int getNumberOfEntries() {
         int c = 0;
         for (Section s : sections) {
-            c += s.getEElements().size();
+            c += s.elements.size();
         }
         return c;
-    }
-
-    /**
-     *
-     * @param e
-     */
-    public void addEElement(E e) {
-        (getEntries()).add(e);
     }
 
     public void countEntries() {
         nEntries = 0;
         nShared = 0;
         nDifferent = 0;
-        ArrayList<E> list = getEntries();
+        ArrayList<E> list = getEntriesInMainSection();
         for (E e : list) {
               nEntries++;
             if (e.shared) {
@@ -554,28 +386,6 @@ public class Dictionary extends DixElement {
         }
     }
 
-    /**
-     *
-     * @return Undefined     */
-    public int getNEntries() {
-        return nEntries;
-    }
-
-    /**
-     *
-     * @return Undefined     */
-    public int getSharedEntries() {
-        return nShared;
-    }
-
-    /**
-     *
-     * @return Undefined     */
-    public int getDifferentEntries() {
-        return nDifferent;
-    }
-
-    
     public void reportMetrics() {
         countEntries();
         System.err.println(nShared + " shared entries.");
@@ -585,7 +395,7 @@ public class Dictionary extends DixElement {
 
     
     public void removeNotCommon() {
-        ArrayList<E> elements = getEntries();
+        ArrayList<E> elements = getEntriesInMainSection();
         ArrayList<E> elementsCopy = new ArrayList<E>(elements);
 
         for (E e : elementsCopy) {
@@ -595,48 +405,9 @@ public class Dictionary extends DixElement {
         }
     }
 
-    /**
-     *
-     * @return Undefined     */
-    public Pardefs getPardefsElement() {
-        return pardefs;
-    }
-
-    /**
-     * 
-    public void searchEquivalentParadigms() {
-        unused__DicEquivPar dicEquivPar = new unused__DicEquivPar(this);
-        equivPar = dicEquivPar.findEquivalentsA();
-    }
-     */
-
-    /**
-     *
-     * @return Undefined     */
-    public HashMap<String, ArrayList<Pardef>> getEquivalentParadigms() {
-        return equivPar;
-    }
-/*
-    public E getEElement(String entry) {
-        ArrayList<E> elements = getEntries();
-
-        for (E e : elements) {
-            String lemma = e.lemma;
-            entry = DicTools.clearTags(entry);
-
-            if (lemma != null) {
-                if (lemma.equals(entry)) {
-                    return e;
-                }
-            }
-        }
-        return null;
-    }
-*/
-    
     public void reverse() {
-        for (Section section : getSections()) {
-            ArrayList<E> elements = section.getEElements();
+        for (Section section : sections) {
+            ArrayList<E> elements = section.elements;
 
             for (E ee : elements) {
                 ArrayList<DixElement> children = ee.children;
@@ -690,61 +461,10 @@ public class Dictionary extends DixElement {
     }
 
     /**
-     * @return the folder
-     */
-    public String getFolder() {
-        return folder;
-    }
-
-    /**
-     * @param folder
-     *                the folder to set
-     */
-    public void setFolder(String folder) {
-        this.folder = folder;
-    }
-
-    /**
-     * 
-     * @return XML encoding
-     */
-    public String getXmlEncoding() {
-        return xmlEncoding;
-    }
-
-    /**
-     * 
-     * @param xmlEncoding
-     */
-    public void setXmlEncoding(String xmlEncoding) {
-        this.xmlEncoding = xmlEncoding;
-    }
-
-    /**
-     * 
-     * @return XML version of the document
-     */
-    public String getXmlVersion() {
-        return xmlVersion;
-    }
-
-    /**
-     * 
-     * @param xmlVersion
-     */
-    public void setXmlVersion(String xmlVersion) {
-        this.xmlVersion = xmlVersion;
-    }
-
-    /**
      * 
      * @return Is there a header defined?
      */
     public boolean isHeaderDefined() {
         return (header != null);
-    }
-
-    public void setSections(ArrayList<Section> sections) {
-        this.sections = sections;
     }
 }

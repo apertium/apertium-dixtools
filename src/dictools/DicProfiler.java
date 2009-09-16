@@ -61,16 +61,16 @@ public class DicProfiler  extends AbstractDictTool {
   Writer profileKeysDataFile;
 
   public Dictionary generateProfileData(Dictionary dic) throws IOException {
-    if (dic.getPardefsElement() != null)
-    for (Pardef par :  dic.getPardefsElement().getPardefElements()) {
-      for (E ee: par.getEElements()) {
+    if (dic.pardefs != null)
+    for (Pardef par :  dic.pardefs.elements) {
+      for (E ee: par.elements) {
         setProfilerInfo(ee);
       }
     }
 
-    if (dic.getSections() != null)
-    for (Section section : dic.getSections()) {
-      for (E ee: section.getEElements()) {
+    if (dic.sections != null)
+    for (Section section : dic.sections) {
+      for (E ee: section.elements) {
         setProfilerInfo(ee);
       }
     }

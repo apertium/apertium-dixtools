@@ -61,10 +61,10 @@ public class DicList {
 
     public void getListOfParadigms() {
         Dictionary dic = getDic();
-        Pardefs paradigms = dic.getPardefsElement();
+        Pardefs paradigms = dic.pardefs;
 
-        for (Pardef paradigm : paradigms.getPardefElements()) {
-            msg.out(paradigm.getName() + "\n");
+        for (Pardef paradigm : paradigms.elements) {
+            msg.out(paradigm.name + "\n");
         }
     }
 
@@ -72,8 +72,8 @@ public class DicList {
         Dictionary dic = getDic();
 
         int nLemmas = 0;
-        for (Section section : dic.getSections()) {
-            for (E element : section.getEElements()) {
+        for (Section section : dic.sections) {
+            for (E element : section.elements) {
                 if (element.lemma != null) {
                     msg.out(element.lemma + "\n");
                     nLemmas++;
@@ -87,9 +87,9 @@ public class DicList {
     public void getDefinitions() {
         Dictionary dic = getDic();
 
-        Sdefs sdefs = dic.getSdefs();
+        Sdefs sdefs = dic.sdefs;
 
-        for (Sdef sdef : sdefs.sdefsElements) {
+        for (Sdef sdef : sdefs.elements) {
             msg.out(sdef.getValue() + "\n");
         }
     }
@@ -98,8 +98,8 @@ public class DicList {
         Dictionary dic = getDic();
 
         int nLemmas = 0;
-        for (Section section : dic.getSections()) {
-            for (E element : section.getEElements()) {
+        for (Section section : dic.sections) {
+            for (E element : section.elements) {
                 L left = element.getLeft();
                 R right = element.getRight();
 
@@ -147,14 +147,14 @@ public class DicList {
         Dictionary dic = getDic();
         HashMap<String, Pardef> pardefs = new HashMap<String, Pardef>();
 
-        for (Pardef paradigm : dic.getPardefsElement().getPardefElements()) {
-            msg.out(paradigm.getName() + "\n");
-            pardefs.put(paradigm.getName(), paradigm);
+        for (Pardef paradigm : dic.pardefs.elements) {
+            msg.out(paradigm.name + "\n");
+            pardefs.put(paradigm.name, paradigm);
         }
 
         int nLemmas = 0;
-        for (Section section : dic.getSections()) {
-            for (E ee : section.getEElements()) {
+        for (Section section : dic.sections) {
+            for (E ee : section.elements) {
                 expand(ee, pardefs);
             }
         }
@@ -168,8 +168,8 @@ public class DicList {
         Dictionary dic = getDic();
 
         int nLemmas = 0;
-        for (Section section : dic.getSections()) {
-            for (E element : section.getEElements()) {
+        for (Section section : dic.sections) {
+            for (E element : section.elements) {
                 R right = element.getRight();
                 String rightValue = right.getValueNoTags();
                 msg.out(rightValue + ".\n");

@@ -64,18 +64,18 @@ public class ReadAndWriteMonodixTest extends TestTools {
     }
 
 
-    /**
+   /**
    * Test of getDic method, of class DicReader.
    */
   @Test
   public void testGetDic() throws IOException, InterruptedException {
 
-    String pe = dic.getPardefsElement().getPardefElements().get(0).toString();
+    String pe = dic.pardefs.elements.get(0).toString();
     System.err.println("pe = " + pe);
     Assert.assertEquals("<S__encimp><e><l>-en</l><r>en<prn><enc><adv></r></e><e><l>-la</l><r>le<prn><enc><p3><f><sg></r></e>", pe);
 
 
-    String ee = dic.getSections().get(0).getEElements().get(0).toString();
+    String ee = dic.sections.get(0).elements.get(0).toString();
     System.err.println("ee = " + ee);
     Assert.assertEquals("<e><i>am</i><par n=\"ach/e[T]er__vblex\" prm=\"n\"/></e>", ee);
   } 

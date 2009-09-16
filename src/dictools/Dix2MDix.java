@@ -98,7 +98,7 @@ public class Dix2MDix {
         metaInf.add("@sl-full:" + slFull + "$");
         metaInf.add("@tl-full:" + tlFull + "$");
 
-        System.err.println("Processing bilingual dictionary: " + dic.getFileName());
+        System.err.println("Processing bilingual dictionary: " + dic.fileName);
 
         this.outFileName = "sltl";
         this.processDic(dic, "left to right");
@@ -124,8 +124,8 @@ public class Dix2MDix {
         hm = new HashMap<String, Vector<E>>();
         Vector<E> values = null;
 
-        for (Section section : dic.getSections()) {
-            for (E ee : section.getEElements()) {
+        for (Section section : dic.sections) {
+            for (E ee : section.elements) {
                 if (ee.is_LR_or_LRRL() && !ee.isRegularExpr()) {
                     String left = ee.getValueNoTags("L");
                     left = tinyFilter.applyToLemma(left);
@@ -277,7 +277,7 @@ public class Dix2MDix {
         if (this.tinyFilter != null) {
             dic = this.tinyFilter.doFilter(dic);
         }
-        dic.setFileName(this.bilFileName);
+        dic.fileName = this.bilFileName;
     }
 
     /**

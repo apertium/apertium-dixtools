@@ -31,7 +31,7 @@ import dics.elements.utils.DicOpts;
 public class Alphabet extends DixElement {
 
     
-    private String alphabet;
+    public String alphabet;
 
     
     public Alphabet() {
@@ -49,30 +49,15 @@ public class Alphabet extends DixElement {
 
     /**
      * 
-     * @param value
-     */
-    public void setAlphabet(String value) {
-        alphabet = value;
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    public String getAlphabet() {
-        return alphabet;
-    }
-
-    /**
-     * 
      * @param dos
      * @throws java.io.IOException
      */
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
-        if (getAlphabet()==null) {
-            setAlphabet("");
+        if (alphabet==null) {
+            alphabet = "";
         }
-        dos.append(tab(1) + "<alphabet>" + getAlphabet() + "</alphabet>"+appendCharacterData.trim()+"\n");
+        dos.append(tab(1) + "<alphabet>" + alphabet + "</alphabet>"+appendCharacterData.trim()+"\n");
     }
 }

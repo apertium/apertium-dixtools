@@ -69,17 +69,17 @@ public class AddGender {
 
         HashMap<String, S> ng = new HashMap<String, S>();
 
-        Pardefs pars = dic.getPardefsElement();
+        Pardefs pars = dic.pardefs;
 
-        for (Section section : dic.getSections()) {
-            for (E ee : section.getEElements()) {
+        for (Section section : dic.sections) {
+            for (E ee : section.elements) {
                 String lemma = ee.lemma;
                 if (lemma != null) {
                     String parName = ee.getMainParadigmName();
                     if ((parName != null) && parName.endsWith("__n")) {
                         Pardef par = pars.getParadigmDefinition(parName);
                         if (par != null) {
-                            for (E eepar : par.getEElements()) {
+                            for (E eepar : par.elements) {
                                 R r = eepar.getFirstP().r;
                                 for (DixElement er : r.children) {
                                     if (er instanceof S) {
@@ -104,20 +104,20 @@ public class AddGender {
         DictionaryReader reader2 = new DictionaryReader(bilDic);
         Dictionary bil = reader2.readDic();
 
-        Sdefs sdefs = bil.getSdefs();
+        Sdefs sdefs = bil.sdefs;
         Sdef n = new Sdef("n");
         Sdef m = new Sdef("m");
         Sdef f = new Sdef("f");
         Sdef mf = new Sdef("mf");
-        sdefs.sdefsElements.add(n);
-        sdefs.sdefsElements.add(m);
-        sdefs.sdefsElements.add(f);
-        sdefs.sdefsElements.add(mf);
+        sdefs.elements.add(n);
+        sdefs.elements.add(m);
+        sdefs.elements.add(f);
+        sdefs.elements.add(mf);
 
         int genderFound = 0;
         int genderNotFound = 0;
-        for (Section section : bil.getSections()) {
-            for (E ee : section.getEElements()) {
+        for (Section section : bil.sections) {
+            for (E ee : section.elements) {
                 if (!ee.containsRegEx()) {
                     String parName = ee.getMainParadigmName();
                     if (parName != null) {
@@ -132,9 +132,9 @@ public class AddGender {
                                 // gender.getValue() + ")");
                                 genderFound++;
                                 S noun = new S("n");
-                                leftSide.addChild(noun);
-                                rightSide.addChild(noun);
-                                leftSide.addChild(gender);
+                                leftSide.children.add(noun);
+                                rightSide.children.add(noun);
+                                leftSide.children.add(gender);
                                 // and remove par element if NC
                                 Par par = null;
                                 for (DixElement e : ee.children) {

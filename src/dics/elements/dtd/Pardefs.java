@@ -35,20 +35,12 @@ import dics.elements.utils.DicOpts;
 public class Pardefs extends DixElement {
 
     
-    private ArrayList<Pardef> pardefElements;
+    public ArrayList<Pardef> elements;
 
     
     public Pardefs() {
       super("pardefs");
-        pardefElements = new ArrayList<Pardef>();
-    }
-
-    /**
-     * 
-     * @param value
-     */
-    public void addPardefElement(Pardef value) {
-        pardefElements.add(value);
+        elements = new ArrayList<Pardef>();
     }
 
     /**
@@ -61,7 +53,7 @@ public class Pardefs extends DixElement {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
         dos.append(tab(1) + "<pardefs>\n");
-        for (Pardef e : pardefElements) {
+        for (Pardef e : elements) {
             e.printXML(dos, opt);
         }
         dos.append(tab(1) + "</pardefs>"+appendCharacterData.trim()+"\n\n");
@@ -102,18 +94,11 @@ public class Pardefs extends DixElement {
      * @param parName
      * @return Undefined         */
     public Pardef getParadigmDefinition(String parName) {
-        for (Pardef pardefE : pardefElements) {
-            if (pardefE.getName().equals(parName)) {
+        for (Pardef pardefE : elements) {
+            if (pardefE.name.equals(parName)) {
                 return pardefE;
             }
         }
         return null;
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    public ArrayList<Pardef> getPardefElements() {
-        return pardefElements;
     }
 }

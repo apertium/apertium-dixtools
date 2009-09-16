@@ -66,7 +66,7 @@ public class Apertiumizer extends AbstractDictTool {
         DictionaryReader encaReader = new DictionaryReader("apertium-en-ca.en-ca.dix");
         Dictionary enca = encaReader.readDic();
         en = new HashMap<String, String>();
-        for (E e : enca.getAllEntries()) {
+        for (E e : enca.getEntriesInMainSection()) {
         L l = e.getLeft();
         String lv = l.getValueNoTags();
         en.put(lv, lv);
@@ -88,9 +88,9 @@ public class Apertiumizer extends AbstractDictTool {
             String strLine;
 
             Dictionary dic = new Dictionary();
-            dic.setXmlEncoding("UTF-8");
+            dic.xmlEncoding = "UTF-8";
             Section section = new Section("main", "standard");
-            dic.addSection(section);
+            dic.sections.add(section);
 
             int priority = 1;
             int c = 1;
@@ -103,7 +103,7 @@ public class Apertiumizer extends AbstractDictTool {
                             //e.comment="priority: " + priority);
                             //System.out.println("Adding: "  + e.getLeft().getValueNoTags());
                             if (e != null) {
-                                section.addEElement(e);
+                                section.elements.add(e);
                             }
                             String lm = e.getLeft().getValueNoTags();
                             String comments = e.comment;
@@ -112,13 +112,13 @@ public class Apertiumizer extends AbstractDictTool {
                         case 3:
                             E e3 = readElementFormat_3(strLine);
                             if (e3 != null) {
-                                section.addEElement(e3);
+                                section.elements.add(e3);
                             }
                             break;
                         case 2:
                             ArrayList<E> eList = readElementFormat_2(strLine);
                             for (E e1 : eList) {
-                                section.addEElement(e1);
+                                section.elements.add(e1);
                             }
                             break;
                     }
@@ -163,7 +163,7 @@ public class Apertiumizer extends AbstractDictTool {
     }
     private void completeDic(Dictionary bil) {
 
-        for (E ee : bil.getAllEntries()) {
+        for (E ee : bil.getEntriesInMainSection()) {
             //System.out.println("completing... " + ee.getLeft().getValueNoTags());
             L l = ee.getLeft();
             R r = ee.getRight();
@@ -200,7 +200,7 @@ public class Apertiumizer extends AbstractDictTool {
                     if(v.startsWith("to<b/>")) {
                         System.out.println("Verb: " + v);
                         if(!ee.getLeft().containsSymbol("vblex")) {
-                        ee.getLeft().addChild(new S("vblex"));
+                        ee.getLeft().children.add(new S("vblex"));
                         }
                         isVerb = true;
                         v = v.replaceAll("to<b/>", "");
@@ -219,7 +219,7 @@ public class Apertiumizer extends AbstractDictTool {
             }
             if(isVerb) {
                 if(!ee.getRight().containsSymbol("vblex")) {
-                ee.getRight().addChild(new S("vblex"));
+                ee.getRight().children.add(new S("vblex"));
                 }
             }
 
@@ -228,13 +228,13 @@ public class Apertiumizer extends AbstractDictTool {
         
         Dictionary bilFil = new Dictionary();
         Section sectionFil = new Section();
-        bilFil.addSection(sectionFil);
-                for (Section sec : bil.getSections()) {
-            for (E ee : sec.getEElements()) {
+        bilFil.sections.add(sectionFil);
+                for (Section sec : bil.sections) {
+            for (E ee : sec.elements) {
                 ///if( ee.containsSymbol("f") || ee.containsSymbol("pl")) {
                     
                 //} else {
-                    sectionFil.addEElement(ee);
+                    sectionFil.elements.add(ee);
                 //}
                 
             }
@@ -247,8 +247,8 @@ public class Apertiumizer extends AbstractDictTool {
         String prevCat = "";
         Section sectionElement = null;
         Section noneSection = new Section("none", "standard");
-        for (Section sec : sorted.getSections()) {
-            for (E ee : sec.getEElements()) {
+        for (Section sec : sorted.sections) {
+            for (E ee : sec.elements) {
 
                 ArrayList<S> slist = ee.getLeft().getSymbols();
 
@@ -256,18 +256,18 @@ public class Apertiumizer extends AbstractDictTool {
                     S sE = slist.get(0);
                     String currentCat = sE.getValue();
                     if (currentCat.equals(prevCat)) {
-                        sectionElement.addEElement(ee);
+                        sectionElement.elements.add(ee);
                     } else {
                         if (sectionElement != null) {
                             sectionElement.printXMLXInclude(prevCat, "UTF-8",getOpt());
                         }
                         prevCat = currentCat;
                         sectionElement = new Section();
-                        sectionElement.setID(currentCat);
-                        sectionElement.setType("standard");
+                        sectionElement.id = currentCat;
+                        sectionElement.type = "standard";
                     }
                 } else {
-                    noneSection.addEElement(ee);
+                    noneSection.elements.add(ee);
                 }
 
             }
@@ -301,15 +301,15 @@ public class Apertiumizer extends AbstractDictTool {
                 case 0:
                     //lV = token + "<s n=\"n\"/><s n=\"acr\"/>";
                     lV = token;
-                    left.addChild(new TextElement(lV));
+				left.children.add(new TextElement(lV));
                     //System.out.println(lV);
                     break;
                 case 1:
                     if (token.equals("?")) {
-                        right.addChild(new TextElement(""));
+                        right.children.add(new TextElement(""));
 
                     } else {
-                        right.addChild(new TextElement(lV));
+                        right.children.add(new TextElement(lV));
                     }
                     token = token.replaceAll("\"", "'");
                     e.comment=token;
@@ -317,7 +317,7 @@ public class Apertiumizer extends AbstractDictTool {
                     P pE = new P();
                     pE.l = left;
                     pE.r = (right);
-                    e.addChild(pE);
+				e.children.add(pE);
                     return e;
                 case 2:
                     lastToken = true;
@@ -346,16 +346,16 @@ public class Apertiumizer extends AbstractDictTool {
             String token = tokenizer.nextToken();
             switch (i) {
                 case 0:
-                    left.addChild(new TextElement(token));
+				left.children.add(new TextElement(token));
                     break;
                 case 1:
                     lastToken = true;
                     if (!token.equals("")) {
-                        right.addChild(new TextElement(token));
+                        right.children.add(new TextElement(token));
                         P pE = new P();
                         pE.l = left;
                         pE.r = (right);
-                        e.addChild(pE);
+                        e.children.add(pE);
                         return e;
                     } else {
                         return null;
@@ -384,22 +384,22 @@ public class Apertiumizer extends AbstractDictTool {
             String token = tokenizer.nextToken();
             switch (i) {
                 case 0:
-                    left.addChild(new TextElement(token));
+				left.children.add(new TextElement(token));
                     break;
                 case 1:
-                    right.addChild(new TextElement(token));
+				right.children.add(new TextElement(token));
                     break;
                 case 2:
                     if (token.endsWith(":")) {
                         lastToken = true;
                         String newString = token.substring(0, token.length() - 1);
                         S sE = new S(newString);
-                        left.addChild(sE);
-                        right.addChild(sE);
+                        left.children.add(sE);
+                        right.children.add(sE);
                         P pE = new P();
                         pE.l = left;
                         pE.r = (right);
-                        e.addChild(pE);
+                        e.children.add(pE);
                         return e;
                     }
             }
@@ -583,13 +583,13 @@ public class Apertiumizer extends AbstractDictTool {
                     if (itemLeft != null && itemRight != null) {
                         E e = new E();
                         L left = new L();
-                        left.addChild(new TextElement(replacePoS(new String(itemLeft))));
+                        left.children.add(new TextElement(replacePoS(new String(itemLeft))));
                         R right = new R();
-                        right.addChild(new TextElement(replacePoS(new String(itemRight))));
+                        right.children.add(new TextElement(replacePoS(new String(itemRight))));
                         P pE = new P();
                         pE.l = left;
                         pE.r = (right);
-                        e.addChild(pE);
+                        e.children.add(pE);
                         eList.add(e);
                     }
                 }

@@ -90,10 +90,10 @@ public class DicConsistent extends AbstractDictTool {
      * @param entries2
      */
     private void compare() {
-        HashMap<String, ArrayList<E>> bilABMap = DicTools.buildHash(getBil1().getEntries());
-        HashMap<String, ArrayList<E>> bilBCMap = DicTools.buildHash(getBil2().getEntries());
-        HashMap<String, ArrayList<E>> monAMap = DicTools.buildHashMon(getMon1().getEntries());
-        HashMap<String, ArrayList<E>> monCMap = DicTools.buildHashMon(getMon2().getEntries());
+        HashMap<String, ArrayList<E>> bilABMap = DicTools.buildHash(getBil1().getEntriesInMainSection());
+        HashMap<String, ArrayList<E>> bilBCMap = DicTools.buildHash(getBil2().getEntriesInMainSection());
+        HashMap<String, ArrayList<E>> monAMap = DicTools.buildHashMon(getMon1().getEntriesInMainSection());
+        HashMap<String, ArrayList<E>> monCMap = DicTools.buildHashMon(getMon2().getEntriesInMainSection());
         markCommonEntries(bilABMap, bilBCMap, monAMap, getCommonA(), getDifferentA());
         markCommonEntries(bilBCMap, bilABMap, monCMap, getCommonC(), getDifferentC());
     }
@@ -112,7 +112,7 @@ public class DicConsistent extends AbstractDictTool {
      */
     private void buildNotCommonDictionary(Dictionary dic, DicOpts opt) {
         Dictionary dicNotCommon = new Dictionary(dic);
-        String fnDic = dic.getFileName();
+        String fnDic = dic.fileName;
 
         File file = new File(fnDic);
 

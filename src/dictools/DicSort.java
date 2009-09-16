@@ -145,7 +145,7 @@ public class DicSort  extends AbstractDictTool {
 
         DictionaryReader dicReader = new DictionaryReader(arguments[i]);
         Dictionary dic = dicReader.readDic();
-        dic.setFileName(arguments[i]);
+        dic.fileName = arguments[i];
         dicReader = null;
         setDic(dic);
         out = arguments[i+1];
@@ -163,7 +163,7 @@ public class DicSort  extends AbstractDictTool {
 
     private ArrayList<E> sortSectionAccordingToCategory(HashMap<String, ArrayList<E>> map, Section section) {
         if (map.size()>1) {
-            msg.err("section \""+section.getID()+ "\" categories: "+map.keySet().toString().replaceAll("[ \\[\\]]", ""));
+            msg.err("section \""+section.id+ "\" categories: "+map.keySet().toString().replaceAll("[ \\[\\]]", ""));
         }
 
         ArrayList<E> listAll=new ArrayList<E>();
@@ -201,13 +201,13 @@ public class DicSort  extends AbstractDictTool {
 
     
     private Dictionary sortDictionaryAccordingToCategories() {
-        for (Section section : dic.getSections()) {
+        for (Section section : dic.sections) {
             int lrs = 0;
             int rls = 0;
             int n = 0;
             HashMap<String, ArrayList<E>> map = new LinkedHashMap<String, ArrayList<E>>();
 
-            for (E e : section.getEElements()) {
+            for (E e : section.elements) {
                 n++;
                 if (e.hasRestriction()) {
                     String r = e.restriction;
@@ -231,7 +231,7 @@ public class DicSort  extends AbstractDictTool {
             msg.log("RL: " + rls);
 
             ArrayList<E> listAll=sortSectionAccordingToCategory(map, section);
-            section.setEElements(listAll);
+            section.elements = listAll;
         }
         msg.err("(categories are kept order according to appearance in source file,  so you can reorder by");
         msg.err("  putting entries in the top. Categories with only one element will be put in the end)");

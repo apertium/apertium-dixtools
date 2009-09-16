@@ -59,16 +59,16 @@ public class Misc {
     public Misc(String dic1FileName, String dic2FileName, String dic3FileName, String dic4FileName) {
         DictionaryReader dicReader1 = new DictionaryReader(dic1FileName);
         this.dic1 = dicReader1.readDic();
-        System.err.println("dic1.size() = " + dic1.getAllEntries().size());
+        System.err.println("dic1.size() = " + dic1.getEntriesInMainSection().size());
         DictionaryReader dicReader2 = new DictionaryReader(dic2FileName);
         this.dic2 = dicReader2.readDic();
-        System.err.println("dic2.size() = " + dic2.getAllEntries().size());
+        System.err.println("dic2.size() = " + dic2.getEntriesInMainSection().size());
         DictionaryReader dicReader3 = new DictionaryReader(dic3FileName);
         this.dic3 = dicReader3.readDic();
-        System.err.println("dic3.size() = " + dic3.getAllEntries().size());
+        System.err.println("dic3.size() = " + dic3.getEntriesInMainSection().size());
         DictionaryReader dicReader4 = new DictionaryReader(dic4FileName);
         this.dic4 = dicReader4.readDic();
-        System.err.println("dic4.size() = " + dic4.getAllEntries().size());
+        System.err.println("dic4.size() = " + dic4.getEntriesInMainSection().size());
 
     }
 
@@ -78,18 +78,18 @@ public class Misc {
 
         Dictionary morph_n_en = new Dictionary();
         Section section = new Section("main", "standard");
-        morph_n_en.addSection(section);
+        morph_n_en.sections.add(section);
 
-        for (E ee : bil_n.getAllEntries()) {
+        for (E ee : bil_n.getEntriesInMainSection()) {
             E ne = new E();
             ne.lemma = ee.getValue("R");
             I iE = new I();
-            iE.addChild(new TextElement(ee.getValue("R")));
+            iE.children.add(new TextElement(ee.getValue("R")));
 
-            ne.addChild(iE);
+            ne.children.add(iE);
             Par parE = new Par();
-            ne.addChild(parE);
-            section.addEElement(ne);
+            ne.children.add(parE);
+            section.elements.add(ne);
         }
 
         morph_n_en.printXML("new-es-nouns.dix", "UTF-8",  dics.elements.utils.DicOpts.STD);
@@ -103,7 +103,7 @@ public class Misc {
         Dictionary bil_en_es_n = this.dic4;
 
         HashMap<String, P> trans_n = new HashMap<String, P>();
-        for (E ee : bil_en_es_n.getAllEntries()) {
+        for (E ee : bil_en_es_n.getEntriesInMainSection()) {
             String left = ee.getValue("L");
             L lE = ee.getLeft();
             String right = ee.getValue("R");
@@ -116,15 +116,15 @@ public class Misc {
 
 
         HashMap<String, E> entries = new HashMap<String, E>();
-        for (E ee : bil_en_es_adj.getAllEntries()) {
+        for (E ee : bil_en_es_adj.getEntriesInMainSection()) {
             String value = ee.getValue("L");
             entries.put(value, ee);
         }
 
         Dictionary ndic = new Dictionary();
         Section section = new Section();
-        ndic.addSection(section);
-        for (E ee : morph_en_adj.getAllEntries()) {
+        ndic.sections.add(section);
+        for (E ee : morph_en_adj.getEntriesInMainSection()) {
             String lemma = ee.lemma;
             if (!entries.containsKey(lemma)) {
                 System.err.println("Falta " + lemma + " en el bilingüe");
@@ -134,7 +134,7 @@ public class Misc {
                     E ne = new E();
                     ne.comment="check";
                     P pE = new P();
-                    ne.addChild(pE);
+                    ne.children.add(pE);
 
                     R rE = new R();
                     for (S sE : p.l.getSymbols()) {
@@ -154,7 +154,7 @@ public class Misc {
                     //rE.addChild(new S("n"));
                     pE.r = (p.r);
 
-                    section.addEElement(ne);
+                    section.elements.add(ne);
                 }
             }
         }
@@ -167,48 +167,48 @@ public class Misc {
     public void doMisc5() {
         Dictionary morph_es = new Dictionary();
         Section s1 = new Section("main", "standard");
-        morph_es.addSection(s1);
+        morph_es.sections.add(s1);
         Dictionary morph_en = new Dictionary();
         Section s2 = new Section("main", "standard");
-        morph_en.addSection(s2);
+        morph_en.sections.add(s2);
 
 
         Dictionary bil = dic1;
 
-        for (E ee : bil.getAllEntries()) {
+        for (E ee : bil.getEntriesInMainSection()) {
             System.err.println(ee.getValue("L") + " / " + ee.getValue("R"));
 
             E es = new E();
             es.lemma=ee.getValue("R");
             I iE = new I();
-            iE.addChild(new TextElement(ee.getValue("R")));
-            es.addChild(iE);
+            iE.children.add(new TextElement(ee.getValue("R")));
+            es.children.add(iE);
             Par parE = new Par();
             String par = "";
-            if (ee.contains("adv")) {
+            if (ee.containsSymbol("adv")) {
                 par = "ahora__adv";
             }
             parE.setValue(par);
-            es.addChild(parE);
-            s1.addEElement(es);
+            es.children.add(parE);
+            s1.elements.add(es);
 
             E en = new E();
             en.lemma = ee.getValue("L");
             I iEen = new I();
-            iE.addChild(new TextElement(ee.getValue("L")));
-            en.addChild(iEen);
+            iE.children.add(new TextElement(ee.getValue("L")));
+            en.children.add(iEen);
             Par parEen = new Par();
             String cat = "";
-            if (ee.contains("adv")) {
+            if (ee.containsSymbol("adv")) {
                 cat = "maybe__adv";
             }
-            if (ee.contains("n")) {
+            if (ee.containsSymbol("n")) {
                 cat = "house__n";
             }
-            if (ee.contains("adj")) {
+            if (ee.containsSymbol("adj")) {
                 cat = "expensive__adj";
             }
-            if (ee.contains("vblex")) {
+            if (ee.containsSymbol("vblex")) {
                 if (ee.getValue("L").endsWith("e")) {
                     cat = "liv/e__vblex";
                 } else {
@@ -221,8 +221,8 @@ public class Misc {
             }
 
             parEen.setValue(cat);
-            en.addChild(parEen);
-            s2.addEElement(en);
+            en.children.add(parEen);
+            s2.elements.add(en);
         }
 
         morph_es.printXML("es-please-check.dix", "UTF-8", dics.elements.utils.DicOpts.STD);
@@ -237,12 +237,12 @@ public class Misc {
         Dictionary en_es_adjs = dic3;
 
         HashMap<String, String> mfpars = new HashMap<String, String>();
-        for (Pardef pardef : es_pardefs.getPardefsElement().getPardefElements()) {
-            String parName = pardef.getName();
+        for (Pardef pardef : es_pardefs.pardefs.elements) {
+            String parName = pardef.name;
             if (parName != null) {
                 boolean is_mf = false;
-                for (E ee : pardef.getEElements()) {
-                    if (ee.contains("mf")) {
+                for (E ee : pardef.elements) {
+                    if (ee.containsSymbol("mf")) {
                         is_mf = true;
 
                     }
@@ -255,7 +255,7 @@ public class Misc {
         }
 
         HashMap<String, String> adjpars = new HashMap<String, String>();
-        for (E ee : es_adjs.getAllEntries()) {
+        for (E ee : es_adjs.getEntriesInMainSection()) {
             String lemma = ee.lemma;
             String parName = ee.getMainParadigmName();
             if (mfpars.containsKey(parName)) {
@@ -264,12 +264,12 @@ public class Misc {
             }
         }
 
-        for (E ee : en_es_adjs.getAllEntries()) {
+        for (E ee : en_es_adjs.getEntriesInMainSection()) {
             R rE = ee.getRight();
             String rv = rE.getValueNoTags();
             if (adjpars.containsKey(rv)) {
                 if (!rE.containsSymbol("mf")) {
-                    rE.addChild(new S("mf"));
+                    rE.children.add(new S("mf"));
                 }
             }
 
@@ -286,7 +286,7 @@ public class Misc {
 
         HashMap<String, String> pars = new HashMap<String, String>();
 
-        for (E ee : ca_morph.getAllEntries()) {
+        for (E ee : ca_morph.getEntriesInMainSection()) {
             String lemma = ee.lemma;
             if (lemma != null) {
                 Par parE = ee.getFirstParadigm();
@@ -298,7 +298,7 @@ public class Misc {
             }
         }
 
-        for (E ee : es_morph.getAllEntries()) {
+        for (E ee : es_morph.getEntriesInMainSection()) {
             String lemma = ee.lemma;
             if (lemma != null) {
                 Par parE = ee.getFirstParadigm();
@@ -316,7 +316,7 @@ public class Misc {
     
     public void doMisc2() {
         HashMap<String, String> nps = new HashMap<String, String>();
-        for (E ee : dic1.getAllEntries()) {
+        for (E ee : dic1.getEntriesInMainSection()) {
             R re = ee.getRight();
             if (re != null) {
                 if (re.firstSymbolIs("np")) {
@@ -338,7 +338,7 @@ public class Misc {
             }
         }
 
-        for (E ee : dic3.getAllEntries()) {
+        for (E ee : dic3.getEntriesInMainSection()) {
             String lemma = ee.lemma;
             if (lemma != null) {
                 Par parE = ee.getFirstParadigm();

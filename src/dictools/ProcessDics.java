@@ -239,7 +239,7 @@ public class ProcessDics extends AbstractDictTool {
         }
         else if (action.equals("cat") || action.equals("format")) {
             Dictionary dic = new DictionaryReader(args[1]).readDic();
-            dic.setXmlEncoding("UTF-8");
+            dic.xmlEncoding = "UTF-8";
             dic.printXML(args[2], opt);
         }
         else if (action.equals("dix2mdix")) {

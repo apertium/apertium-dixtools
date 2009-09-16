@@ -64,8 +64,8 @@ public class AssignParadigm extends AbstractDictTool {
 
         HashMap<String, String> np = new HashMap<String, String>();
 
-        for (Section section : dic.getSections()) {
-            for (E ee : section.getEElements()) {
+        for (Section section : dic.sections) {
+            for (E ee : section.elements) {
                 String parName = ee.getMainParadigmName();
                 if (parName != null) {
                     String right = ee.getSide("R").getValue();
@@ -78,8 +78,8 @@ public class AssignParadigm extends AbstractDictTool {
         DictionaryReader reader2 = new DictionaryReader(bilDic);
         Dictionary bil = reader2.readDic();
 
-        for (Section section : bil.getSections()) {
-            for (E ee : section.getEElements()) {
+        for (Section section : bil.sections) {
+            for (E ee : section.elements) {
                 if (!ee.containsRegEx()) {
                     String left = ee.getSide("L").getValue();
                     String right = ee.getSide("R").getValue();
@@ -92,22 +92,22 @@ public class AssignParadigm extends AbstractDictTool {
                     e.comment="auto";
 
                     P p = new P();
-                    e.addChild(p);
+                    e.children.add(p);
                     if (par == null) {
                         System.err.println("No paradigm for '" + leftNoTags + "'");
                         par = "";
                     }
                     Par parE = new Par(par);
-                    e.addChild(parE);
+                    e.children.add(parE);
 
                     L l = new L();
                     R r = new R();
                     TextElement text = new TextElement(leftNoTags);
-                    r.addChild(text);
+                    r.children.add(text);
                     p.l = (l);
                     p.r = (r);
 
-                    dic.addEElement(e);
+                    (dic.getEntriesInMainSection()).add(e);
                 }
             }
         }

@@ -189,13 +189,13 @@ public class DicTools {
      */
     public static ArrayList<E>[] makeConsistent(Dictionary bilAB, Dictionary monA, Dictionary monB) {
         ArrayList<E>[] consistentMons = new ArrayList[2];
-        ArrayList<E> elements = bilAB.getEntries();
+        ArrayList<E> elements = bilAB.getEntriesInMainSection();
 
         HashMap<String, ArrayList<E>> bilABMapL = DicTools.buildHash(elements, "L");
         HashMap<String, ArrayList<E>> bilABMapR = DicTools.buildHash(elements, "R");
 
-        HashMap<String, ArrayList<E>> monAMap = DicTools.buildHashMon(monA.getEntries());
-        HashMap<String, ArrayList<E>> monBMap = DicTools.buildHashMon(monB.getEntries());
+        HashMap<String, ArrayList<E>> monAMap = DicTools.buildHashMon(monA.getEntriesInMainSection());
+        HashMap<String, ArrayList<E>> monBMap = DicTools.buildHashMon(monB.getEntriesInMainSection());
 
         ArrayList<E> monAConsistent = DicTools.makeConsistent(bilABMapL, monAMap);
 
@@ -322,7 +322,7 @@ public class DicTools {
     public static Dictionary readMonolingual(String sMonFilename) {
         DictionaryReader dicReader = new DictionaryReader(sMonFilename);
         Dictionary mon = dicReader.readDic();
-        mon.setFileName(sMonFilename);
+        mon.fileName = sMonFilename;
         return mon;
     }
 
@@ -334,19 +334,19 @@ public class DicTools {
     public static Dictionary readBilingual(String sBilFilename,  boolean reverse) {
         DictionaryReader dicReaderBil = new DictionaryReader(sBilFilename);
         Dictionary bil = dicReaderBil.readDic();
-        bil.setFileName(sBilFilename);
-        bil.setType(Dictionary.BIL);
+        bil.fileName = sBilFilename;
+        bil.type = Dictionary.BIL;
 
         if (reverse) {
             bil.reverse();
             String reverseFileName = DicTools.reverseDicName(sBilFilename);
             //bil.printXML(reverseFileName);
-            bil.setFileName(reverseFileName);
+            bil.fileName = reverseFileName;
         }
 
-        String[] st = DicTools.getSourceAndTarget(bil.getFileName());
-        bil.setLeftLanguage(st[0]);
-        bil.setRightLanguage(st[1]);
+        String[] st = DicTools.getSourceAndTarget(bil.fileName);
+        bil.leftLanguage = st[0];
+        bil.rightLanguage = st[1];
         dicReaderBil = null;
         return bil;
     }

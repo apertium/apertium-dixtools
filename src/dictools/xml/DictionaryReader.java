@@ -83,14 +83,14 @@ public class DictionaryReader extends XMLReader {
         analize();
         Dictionary dic = new Dictionary();
         String encoding = getDocument().getInputEncoding();
-        dic.setXmlEncoding(encoding);
+        dic.xmlEncoding = encoding;
 
         Document doc = getDocument();
         String xmlEncoding = doc.getXmlEncoding();
         String xmlVersion = doc.getXmlVersion();
 
-        dic.setXmlEncoding(xmlEncoding);
-        dic.setXmlVersion(xmlVersion);
+        dic.xmlEncoding = xmlEncoding;
+        dic.xmlVersion = xmlVersion;
 
         Element root = doc.getDocumentElement();
 
@@ -115,30 +115,30 @@ public class DictionaryReader extends XMLReader {
                 // Header with meta info about the dictionary
                 if (childElementName.equals("header")) {
                     HeaderElement headerElement = readHeader(childElement);
-                    dic.setHeaderElement(headerElement);
+                    dic.header = headerElement;
                 } else
 
                 // Alphabet
                 if (childElementName.equals("alphabet")) {
                     Alphabet alphabetElement = readAlphabet(childElement);
-                    dic.setAlphabet(alphabetElement);
+                    dic.alphabet = alphabetElement;
                 } else
                   
                 // Symbol definitions
                 if (childElementName.equals("sdefs")) {
                     Sdefs sdefsElement = readSdefs(childElement);
-                    dic.setSdefs(sdefsElement);
+                    dic.sdefs = sdefsElement;
                 } else
 
                 if (childElementName.equals("section")) {
                     Section sectionElement = readSection(childElement);
-                    dic.addSection(sectionElement);
+                    dic.sections.add(sectionElement);
                 } else
 
                 if (childElementName.equals("pardefs")) {
                     if (isReadParadigms()) {
                         Pardefs pardefsElement = readPardefs(childElement);
-                        dic.setPardefs(pardefsElement);
+                        dic.pardefs = pardefsElement;
                     }
                 } else
 
@@ -163,14 +163,14 @@ public class DictionaryReader extends XMLReader {
                         System.err.println("Symbol definitions: " + includeFileNameAndPath);
                         SdefsReader sdefsReader = new SdefsReader(includeFileNameAndPath);
                         Sdefs sdefs = sdefsReader.readSdefs();
-                        dic.setSdefs(sdefs);
+                        dic.sdefs = sdefs;
                     } else
                     if (includeFileName.endsWith("pardefs.dix")) {
                         System.err.println("Paradigm definitions: " + includeFileNameAndPath);
                         DictionaryReader reader = new DictionaryReader(includeFileNameAndPath );
                         Dictionary dic2 = reader.readDic();
-                        Pardefs pardefs = dic2.getPardefsElement();
-                        dic.setPardefs(pardefs);
+                        Pardefs pardefs = dic2.pardefs;
+                        dic.pardefs = pardefs;
                     } else
                     System.err.println("Unknown xi:include href type ignored: " + includeFileName);
                 } else
@@ -271,7 +271,7 @@ public class DictionaryReader extends XMLReader {
                     Element childElement = (Element) child;
                     if (childElementName.equals("pardef")) {
                         Pardef pardefElement = readPardef(childElement);
-                        pardefsElement.addPardefElement(pardefElement);
+                        pardefsElement.elements.add(pardefElement);
                         prependOrAppendCharacterData(characterData, pardefElement, previousElement);
                         previousElement = pardefElement;
                     }
@@ -311,7 +311,7 @@ public class DictionaryReader extends XMLReader {
                     Element childElement = (Element) child;
                     if (childElementName.equals("e")) {
                         E eElement = readEElement(childElement);
-                        pardefElement.addEElement(eElement);
+                        pardefElement.elements.add(eElement);
                         prependOrAppendCharacterData(characterData, eElement, previousElement);
                         previousElement = eElement;
                   } else
@@ -365,7 +365,7 @@ public class DictionaryReader extends XMLReader {
                             } 
                         }
                         E eElement = readEElement(childElement);
-                        sectionElement.addEElement(eElement);
+                        sectionElement.elements.add(eElement);
                         
                         prependOrAppendCharacterData(characterData, eElement, previousElement);
                         previousElement = eElement;
@@ -376,9 +376,9 @@ public class DictionaryReader extends XMLReader {
                         System.err.println("XInclude (" + fileName + ")");
                         DictionaryReader reader = new DictionaryReader(fileName);
                         Dictionary dic = reader.readDic();
-                        ArrayList<E> eList = dic.getAllEntries();
+                        ArrayList<E> eList = dic.getEntriesInFirstSection();
                         for (E e2 : eList) {
-                            sectionElement.addEElement(e2);
+                            sectionElement.elements.add(e2);
                         }
                     } else
                       System.err.println("readSection(): Unknown childElementName = " + childElementName);

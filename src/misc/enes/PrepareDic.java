@@ -51,17 +51,17 @@ public class PrepareDic {
     public void prepare() {
         Dictionary dic = new Dictionary();
         Section section = new Section("main", "standard");
-        dic.addSection(section);
+        dic.sections.add(section);
 
-        int max = ncBil.getAllEntries().size();
+        int max = ncBil.getEntriesInMainSection().size();
         for (int i = 0; i < max; i++) {
-            E ee = ncBil.getAllEntries().get(i);
+            E ee = ncBil.getEntriesInMainSection().get(i);
             //String value = ee.getLeft().getValueNoTags();
             String value = ee.getRight().getValueNoTags();
             System.err.println("checking " + value + " ...");
             if (value != null) {
                 if (missing.containsKey(value)) {
-                    section.addEElement(ee);
+                    section.elements.add(ee);
                     System.err.println("adding " + value + " ...");
                 }
             }

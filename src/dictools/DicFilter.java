@@ -53,8 +53,8 @@ public class DicFilter  extends AbstractDictTool{
         // recorremos en-es
         HashMap<String,E> map = new HashMap<String,E>();
         
-        for(Section section : dicB.getSections()) {
-            for( E ee : section.getEElements()) {
+        for(Section section : dicB.sections) {
+            for( E ee : section.elements) {
                 String key = ee.getLeft().getValueNoTags();
                 System.err.println(key);
                 map.put(key, ee);
@@ -63,13 +63,13 @@ public class DicFilter  extends AbstractDictTool{
 
         Dictionary dicFilt = new Dictionary();
         Section sectionFilt = new Section();
-        dicFilt.addSection(sectionFilt);
+        dicFilt.sections.add(sectionFilt);
         
-        for(Section section : dicA.getSections()) {
-            for( E ee : section.getEElements()) {
+        for(Section section : dicA.sections) {
+            for( E ee : section.elements) {
                 String key = ee.getRight().getValueNoTags();
                 if(map.containsKey(key)) {
-                    sectionFilt.addEElement(ee);
+                    sectionFilt.elements.add(ee);
                 }                
             }            
         }

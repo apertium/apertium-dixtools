@@ -33,9 +33,10 @@ import dics.elements.utils.DicOpts;
 public class Pardef extends DixElement {
 
     
-    private ArrayList<E> eElements;
+    public ArrayList<E> elements;
     
-    private String n;
+    // Is changed when  renaming paradigms when merging
+    public String name;
 
     /**
      * 
@@ -44,28 +45,8 @@ public class Pardef extends DixElement {
     public Pardef(String name)
     {
         super("pardef");
-        n = name;
-        eElements = new ArrayList<E>();
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    public String getName() {
-        return n;
-    }
-
-    // Used for renaming paradigms when merging
-    public void setName(String newName) {
-        n = newName;
-    }
-
-    /**
-     * 
-     * @param value
-     */
-    public void addEElement(E value) {
-        eElements.add(value);
+        this.name = name;
+        elements = new ArrayList<E>();
     }
 
     /**
@@ -79,8 +60,8 @@ public class Pardef extends DixElement {
         dos.append(prependCharacterData);
         if (!opt.noProcessingComments) dos.append(makeCommentIfData(processingComments));
 
-        dos.append((opt.nowAlign?"":tab(2))+ "<pardef n=\"" + n + "\">"+justInsideStartTagCharacterData+"\n");
-        for (E e : eElements) {
+        dos.append((opt.nowAlign?"":tab(2))+ "<pardef n=\"" + name + "\">"+justInsideStartTagCharacterData+"\n");
+        for (E e : elements) {
             e.printXML(dos, opt);
         }
         dos.append((opt.nowAlign?"":tab(2)) + "</pardef>"+appendCharacterData.trim()+"\n");
@@ -91,8 +72,8 @@ public class Pardef extends DixElement {
      * @param pardef2
      * @return Undefined         */
     public boolean contentEquals(Pardef pardef2) {
-        ArrayList<E> eList1 = getEElements();
-        ArrayList<E> eList2 = pardef2.getEElements();
+        ArrayList<E> eList1 = elements;
+        ArrayList<E> eList2 = pardef2.elements;
 
         if (eList1.size() != eList2.size()) {
             return false;
@@ -117,8 +98,8 @@ public class Pardef extends DixElement {
     @Override
     public String toString() {
         String str = "";
-        str += "<" + getName() + ">";
-        for (E e : eElements) {
+        str += "<" + name + ">";
+        for (E e : elements) {
             str += e.toString();
         }
         return str;
@@ -129,7 +110,7 @@ public class Pardef extends DixElement {
      * @param category
      * @return Undefined         */
     public boolean hasCategory(String category) {
-        return (n.endsWith("__" + category));
+        return (name.endsWith("__" + category));
     }
 
     /**
@@ -137,60 +118,12 @@ public class Pardef extends DixElement {
      * @param def
      * @return true if the paradigm contains certain definition ('adj', 'm', etc.)
      */
-    public boolean contains(String def) {
-        for (E e : eElements) {
-            if (e.contains(def)) {
+    public boolean containsSymbol(String def) {
+        for (E e : elements) {
+            if (e.containsSymbol(def)) {
                 return true;
             }
         }
         return false;
-    }
-
-    /**
-     * 
-     * @param e
-     * @param mon
-     * @param category
-     * @param equivCategory
-     * @return Undefined         
-    public static Pardef duplicateParadigm(E e,
-            DictionaryElement mon, String category,
-            String equivCategory) {
-        // Hay que cambiar la categoria (primer "s") en cada elemento 'e' en la
-        // definicin del paradigma
-        Pardef dupPardefE = null;
-        String paradigmValue = e.getMainParadigmName();
-        String dupParadigmValue = e.getMainParadigmName();
-        dupParadigmValue = dupParadigmValue.replaceAll("__" + equivCategory,
-                "__" + category);
-
-        Pardef parDefInMon = mon.getParadigmDefinition(dupParadigmValue);
-
-        if (parDefInMon == null) {
-            Pardef pardefE = mon.getParadigmDefinition(paradigmValue);
-            dupPardefE = new Pardef(pardefE, dupParadigmValue);
-            dupPardefE.addProcessingComment("equivalent to '" + paradigmValue + "'");
-            dupPardefE.changeCategory(category);
-        } else {
-            parDefInMon.changeCategory(category);
-            return parDefInMon;
-        }
-        return dupPardefE;
-    }
-*/
-
-    /**
-     * @return the eElements
-     */
-    public ArrayList<E> getEElements() {
-        return eElements;
-    }
-
-    /**
-     * @param elements
-     *                the eElements to set
-     */
-    public void setEElements(ArrayList<E> elements) {
-        eElements = elements;
     }
 }

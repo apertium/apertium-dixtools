@@ -57,7 +57,7 @@ public class DicFindEquivPar  extends AbstractDictTool {
     
     public void findEquivalents() {
 
-        ArrayList<Pardef> pardefs = dic.getPardefsElement().getPardefElements();
+        ArrayList<Pardef> pardefs = dic.pardefs.elements;
 
         HashMap<String, Pardef> name2pardef = new HashMap<String, Pardef>();
         HashMap<String, String> name2replacementName = new HashMap<String, String>();
@@ -68,24 +68,24 @@ public class DicFindEquivPar  extends AbstractDictTool {
             Pardef par = pi.next();
 
             // remove duplicate names
-            if (name2pardef.containsKey(par.getName())) {
-                Pardef first = name2pardef.get(par.getName());
+            if (name2pardef.containsKey(par.name)) {
+                Pardef first = name2pardef.get(par.name);
                 if (par.contentEquals(first)) {
-                    msg.err("Subsequent instance of " +par.getName() + " deleted");
-                    first.getEElements().addAll(par.getEElements());
+                    msg.err("Subsequent instance of " +par.name + " deleted");
+                    first.elements.addAll(par.elements);
                 } else {
-                    msg.err("WARNING: Subsequent instance of " +par.getName() + " has other contents than original!\nMerging the 2 paradigms (the same way as lt-toolbox would)");
-                    E firstEe = par.getEElements().get(0);
+                    msg.err("WARNING: Subsequent instance of " +par.name + " has other contents than original!\nMerging the 2 paradigms (the same way as lt-toolbox would)");
+                    E firstEe = par.elements.get(0);
                     if (firstEe!=null) {
-                        firstEe.addProcessingComment("Below is content of a subsequent definition of "+par.getName());
-                        first.getEElements().addAll(par.getEElements());
+                        firstEe.addProcessingComment("Below is content of a subsequent definition of "+par.name);
+                        first.elements.addAll(par.elements);
                     }
                 }
                 pi.remove();
                 continue;
             }
             // this pararigm will be retained
-            name2pardef.put(par.getName(), par);
+            name2pardef.put(par.name, par);
         }
 
         // now, start over with a fresh data structure, adding paradigms as we meet them
@@ -98,20 +98,20 @@ public class DicFindEquivPar  extends AbstractDictTool {
             // seach for existing pardef with same content and remove
             for (Pardef existingPardef : name2pardef.values()) {
                 if (par.contentEquals(existingPardef)) {
-                    if (name2replacementName.containsKey(existingPardef.getName())) {
-                        replacementName = name2replacementName.get(existingPardef.getName());
+                    if (name2replacementName.containsKey(existingPardef.name)) {
+                        replacementName = name2replacementName.get(existingPardef.name);
                     } else {
-                        replacementName = existingPardef.getName();
+                        replacementName = existingPardef.name;
                     }
-                    msg.err(par.getName() + " will be replaced with "+replacementName);
-                    name2replacementName.put(par.getName(), replacementName);
+                    msg.err(par.name + " will be replaced with "+replacementName);
+                    name2replacementName.put(par.name, replacementName);
                     pi.remove();
                     continue pardefLoop;
                 }
             }
 
             // this pararigm will be retained
-            name2pardef.put(par.getName(), par);
+            name2pardef.put(par.name, par);
         }
 
 
@@ -119,11 +119,11 @@ public class DicFindEquivPar  extends AbstractDictTool {
         // Iterate throught all paradigm definitions and sections and replace paradigms
         ArrayList<E> allElements = new ArrayList<E>();
 
-        for (Pardef pardef : dic.getPardefsElement().getPardefElements()) {
-            allElements.addAll(pardef.getEElements());
+        for (Pardef pardef : dic.pardefs.elements) {
+            allElements.addAll(pardef.elements);
         }
-        for (Section section : dic.getSections()) {
-            allElements.addAll(section.getEElements());
+        for (Section section : dic.sections) {
+            allElements.addAll(section.elements);
         }
 
         // Now replace paradigms
@@ -154,14 +154,14 @@ public class DicFindEquivPar  extends AbstractDictTool {
             msg.err("'" + key + "' has been replaced " + replacementcounter.get(key) + " times.");
         }
 
-        // find unused pardefs (and delete them)
+        // find unused elements (and delete them)
         for (Iterator<Pardef> pi =  pardefs.iterator(); pi.hasNext(); ) {
             Pardef par = pi.next();
-            if (usagecounter.get(par.getName())==null) {
+            if (usagecounter.get(par.name)==null) {
                 // Wah! We don't want this to happen!
                 // msg.err("Unused paradigm  " +par.getName() + " deleted");
                 // pi.remove();
-                msg.err("Unused paradigm  " +par.getName() + " (could be deleted)");
+                msg.err("Unused paradigm  " +par.name + " (could be deleted)");
             }
         }
 

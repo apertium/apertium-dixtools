@@ -35,18 +35,18 @@ import dics.elements.utils.DicOpts;
 public class Section extends DixElement {
 
     
-    private String id;
+    public String id;
     
-    private String type;
+    public String type;
     
-    private ArrayList<E> eElements;
+    public ArrayList<E> elements;
     
-    protected ArrayList<String> includes;
+    public ArrayList<String> includes;
 
     
     public Section() {
         super("section");
-        eElements = new ArrayList<E>();
+        elements = new ArrayList<E>();
         includes = new ArrayList<String>();
     }
 
@@ -63,51 +63,6 @@ public class Section extends DixElement {
 
     /**
      * 
-     * @param value
-     */
-    public void setID(String value) {
-        id = value;
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    public String getID() {
-        return id;
-    }
-
-    /**
-     * 
-     * @param value
-     */
-    public void setType(String value) {
-        type = value;
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    public ArrayList<E> getEElements() {
-        return eElements;
-    }
-
-    /**
-     * 
-     * @param value
-     */
-    public void addEElement(E value) {
-        eElements.add(value);
-    }
-
-    /**
-     * 
      * @param dos
      * @throws java.io.IOException
      */
@@ -116,17 +71,17 @@ public class Section extends DixElement {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
         String attributes = "";
-        if (getID() != null) {
-            attributes += " id=\"" + getID() + "\"";
+        if (id != null) {
+            attributes += " id=\"" + id + "\"";
         }
-        if (getType() != null) {
-            attributes += " type=\"" + getType() + "\"";
+        if (type != null) {
+            attributes += " type=\"" + type + "\"";
         }
 
         dos.append(tab(1) + "<" + TAGNAME + "" + attributes + ">\n");
 
-        if (eElements != null) {
-            for (E e : eElements) {
+        if (elements != null) {
+            for (E e : elements) {
                 e.printXML(dos, opt);
             }
         }
@@ -152,7 +107,7 @@ public class Section extends DixElement {
 
             dos.append("<dictionary>\n");
             dos.append("<section>\n");
-            for (E e : eElements) {
+            for (E e : elements) {
                 e.printXML(dos, opt);
             }
             dos.append("</section>\n");
@@ -167,28 +122,5 @@ public class Section extends DixElement {
         } catch (Exception eg) {
             eg.printStackTrace();
         }
-    }
-
-    /**
-     * @param elements
-     *                the eElements to set
-     */
-    public void setEElements(ArrayList<E> elements) {
-        eElements = elements;
-    }
-
-    /**
-     * @param includes
-     *                the includes to set
-     */
-    public void setIncludes(ArrayList<String> includes) {
-        this.includes = includes;
-    }
-
-    /**
-     * @return the includes
-     */
-    public ArrayList<String> getIncludes() {
-        return includes;
     }
 }

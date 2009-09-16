@@ -55,12 +55,12 @@ public class DicFix  extends AbstractDictTool {
 
  
         // Check for duplicate entries in paradigm
-        if (dic.getPardefsElement() != null)
-        for (Pardef par :  dic.getPardefsElement().getPardefElements()) {
+        if (dic.pardefs != null)
+        for (Pardef par :  dic.pardefs.elements) {
             HashSet<String> ees = new HashSet<String>();
             E eePrevious = null;
             boolean removed = false;
-            for (Iterator<E> eei = par.getEElements().iterator(); eei.hasNext(); ) {
+            for (Iterator<E> eei = par.elements.iterator(); eei.hasNext(); ) {
                 E ee = eei.next();
                 String s = ee.toStringAll();
                 boolean alreadyThere = !ees.add(s);
@@ -72,17 +72,17 @@ public class DicFix  extends AbstractDictTool {
                     eePrevious = ee;
                 }
             }
-            if (removed) msg.err("Removed duplicate entries in paradigm "+par.getName());
+            if (removed) msg.err("Removed duplicate entries in paradigm "+par.name);
         }
 
         if (dic.isMonol()) DicCross.addMissingLemmas(dic);
 
         HashMap<String, E> eMap = new HashMap<String, E>();
-        for (Section section : dic.getSections()) {
+        for (Section section : dic.sections) {
             int duplicated = 0;
             E eePrevious = null;
 
-            for (Iterator<E> ei =section.getEElements().iterator(); ei.hasNext(); ) {
+            for (Iterator<E> ei =section.elements.iterator(); ei.hasNext(); ) {
                 E ee = ei.next();
 
                 String e1Key = ee.toString();
@@ -112,7 +112,7 @@ public class DicFix  extends AbstractDictTool {
                     ei.remove();
                 }
             }
-            String errorMsg = duplicated + " duplicated entries in section '" + section.getID() + "'\n";
+            String errorMsg = duplicated + " duplicated entries in section '" + section.id + "'\n";
             msg.err(errorMsg);
         }
         dic.printXML(this.getOut(),getOpt());

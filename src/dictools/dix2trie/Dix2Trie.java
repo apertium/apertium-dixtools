@@ -104,8 +104,8 @@ public class Dix2Trie {
         DictionaryReader dicReader = new DictionaryReader(dicFileName);
         Dictionary dic = dicReader.readDic();
 
-        for (Section section : dic.getSections()) {
-            for (E e : section.getEElements()) {
+        for (Section section : dic.sections) {
+            for (E e : section.elements) {
                 L left = e.getLeft();
                 R right = e.getRight();
 

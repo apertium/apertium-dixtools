@@ -75,8 +75,8 @@ public class Dix2CC {
         System.err.println("Building " + this.outFileName + " for Palm...");
         Vector<String> lines = new Vector<String>();
 
-        for (Section section : dic.getSections()) {
-            for (E ee : section.getEElements()) {
+        for (Section section : dic.sections) {
+            for (E ee : section.elements) {
                 StringBuffer sb = new StringBuffer();
                 if (ee.is_LR_or_LRRL() && !ee.isRegularExpr() && this.validLemma(ee.getValueNoTags("L")) && this.validLemma(ee.getValueNoTags("R"))) {
                     String left = ee.getValueNoTags("L");

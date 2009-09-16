@@ -88,7 +88,7 @@ public class ConvertMF {
         findMFParadigms(morph);
 
         HashMap<String, E> mfElementsNouns = new HashMap<String, E>();
-        for (E e : morph.getAllEntries()) {
+        for (E e : morph.getEntriesInMainSection()) {
             String lemma = e.lemma;
             String parName = e.getMainParadigmName();
             if (mfPardefsNouns.containsKey(parName)) {
@@ -97,7 +97,7 @@ public class ConvertMF {
         }
 
         HashMap<String, E> mfElementsAdjs = new HashMap<String, E>();
-        for (E e : morph.getAllEntries()) {
+        for (E e : morph.getEntriesInMainSection()) {
             String lemma = e.lemma;
             String parName = e.getMainParadigmName();
             if (mfPardefsAdjs.containsKey(parName)) {
@@ -122,7 +122,7 @@ public class ConvertMF {
     private void processNouns(HashMap<String, E> mfElementsNouns, Dictionary bil) {
         boolean isF=false, isM=false, isNoun=false;
         ArrayList<E> toRemove = new ArrayList<E>();
-        for (E e : bil.getAllEntries()) {
+        for (E e : bil.getEntriesInMainSection()) {
             if (mfElementsNouns.containsKey(e.getValue("R"))) {
                 for (S s : e.getRight().getSymbols()) {
                   if ("m".equals(s.getValue())) isM = true;
@@ -143,7 +143,7 @@ public class ConvertMF {
                             if (sE.is("m")) {
                                 S newSE = new S("mf");
                                 e.getRight().children.remove(sE);
-                                e.getRight().addChild(newSE);
+                                e.getRight().children.add(newSE);
                             }
                         }
                     }
@@ -157,7 +157,7 @@ public class ConvertMF {
 
         for (int i = 0; i < list.size(); i++) {
             E e = list.get(i);
-            bil.getAllEntries().remove(e);
+            bil.getEntriesInMainSection().remove(e);
         }
 
     }
@@ -168,10 +168,11 @@ public class ConvertMF {
      * @param bil
      */
     private void processAdjs(HashMap<String, E> mfElementsAdjs, Dictionary bil) {
-        for (E e : bil.getAllEntries()) {
+        for (E e : bil.getEntriesInMainSection()) {
             if (mfElementsAdjs.containsKey(e.getValue("R"))) {
                 for (S s : e.getRight().getSymbols()) {
-                  if ("adj".equals(s.getValue())) e.getRight().addChild(new S("mf"));
+                  if ("adj".equals(s.getValue()))
+					e.getRight().children.add(new S("mf"));
                 }
             }
         }
@@ -186,13 +187,13 @@ public class ConvertMF {
     private void findMFParadigms(Dictionary morph) {
         mfPardefsNouns = new HashMap<String, Pardef>();
         mfPardefsAdjs = new HashMap<String, Pardef>();
-        Pardefs pardefs = morph.getPardefsElement();
-        for (Pardef pardef : pardefs.getPardefElements()) {
-            String parName = pardef.getName();
+        Pardefs pardefs = morph.pardefs;
+        for (Pardef pardef : pardefs.elements) {
+            String parName = pardef.name;
             boolean isMF = false;
             boolean isNoun = false;
             boolean isAdj = false;
-            for (E e : pardef.getEElements()) {
+            for (E e : pardef.elements) {
                 for (S s : e.getRight().getSymbols()) {
                   if ("mf".equals(s.getValue())) isMF = true;
                   if ("n".equals(s.getValue())) isNoun = true;
@@ -214,17 +215,17 @@ public class ConvertMF {
 
         Dictionary mon = new Dictionary();
         Section section = new Section();
-        section.setID("main");
-        section.setType("standard");
-        mon.addSection(section);
+        section.id = "main";
+        section.type = "standard";
+        mon.sections.add(section);
 
-        for (E e1 : bil.getAllEntries()) {
+        for (E e1 : bil.getEntriesInMainSection()) {
             E e = new E();
             e.lemma=(e1.getValue("L"));
             I iE = new I();
-            iE.addChild(new TextElement(e1.getValue("L")));
-            e.addChild(iE);
-            section.addEElement(e);
+            iE.children.add(new TextElement(e1.getValue("L")));
+            e.children.add(iE);
+            section.elements.add(e);
         }
         mon.printXML("apertium-de-en.de.dix", dics.elements.utils.DicOpts.STD);
     }
@@ -233,7 +234,7 @@ public class ConvertMF {
         DictionaryReader bilReader = new DictionaryReader(this.bilDic);
         Dictionary bil = bilReader.readDic();
 
-        for (E e1 : bil.getAllEntries()) {
+        for (E e1 : bil.getEntriesInMainSection()) {
             L lE = e1.getLeft();
             R rE = e1.getRight();
 
@@ -243,7 +244,7 @@ public class ConvertMF {
                 if (attr0 != null) {
                     String v = attr0.getValue();
                     S newSE = new S(v);
-                    rE.addChild(newSE);
+                    rE.children.add(newSE);
                 }
             }
         }

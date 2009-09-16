@@ -68,17 +68,17 @@ public class AddGenderAdj {
 
         HashMap<String, S> ng = new HashMap<String, S>();
 
-        Pardefs pars = dic.getPardefsElement();
+        Pardefs pars = dic.pardefs;
 
-        for (Section section : dic.getSections()) {
-            for (E ee : section.getEElements()) {
+        for (Section section : dic.sections) {
+            for (E ee : section.elements) {
                 String lemma = ee.lemma;
                 if (lemma != null) {
                     String parName = ee.getMainParadigmName();
                     if ((parName != null) && parName.endsWith("__adj")) {
                         Pardef par = pars.getParadigmDefinition(parName);
                         if (par != null) {
-                            for (E eepar : par.getEElements()) {
+                            for (E eepar : par.elements) {
                                 R r = eepar.getFirstP().r;
                                 for (DixElement er : r.children) {
                                     if (er instanceof S) {
@@ -103,27 +103,27 @@ public class AddGenderAdj {
         DictionaryReader reader2 = new DictionaryReader(bilDic);
         Dictionary bil = reader2.readDic();
 
-        Sdefs sdefs = bil.getSdefs();
+        Sdefs sdefs = bil.sdefs;
         Sdef n = new Sdef("n");
         Sdef m = new Sdef("m");
         Sdef f = new Sdef("f");
         Sdef mf = new Sdef("mf");
         Sdef gd = new Sdef("GD");
-        sdefs.sdefsElements.add(n);
-        sdefs.sdefsElements.add(m);
-        sdefs.sdefsElements.add(f);
-        sdefs.sdefsElements.add(mf);
-        sdefs.sdefsElements.add(gd);
+        sdefs.elements.add(n);
+        sdefs.elements.add(m);
+        sdefs.elements.add(f);
+        sdefs.elements.add(mf);
+        sdefs.elements.add(gd);
 
         int genderFound = 0;
         int genderNotFound = 0;
-        for (Section section : bil.getSections()) {
-            for (E ee : section.getEElements()) {
+        for (Section section : bil.sections) {
+            for (E ee : section.elements) {
                 if (!ee.containsRegEx()) {
                     ContentElement leftSide = ee.getSide("L");
                     ContentElement rightSide = ee.getSide("R");
 
-                    if (ee.is("L", "adj")) {
+                    if (ee.firstSymbolIs("L", "adj")) {
                         String text = rightSide.getValue();
 
                         S gender = ng.get(text);
@@ -142,7 +142,7 @@ public class AddGenderAdj {
                                 newGender = new S("GD");
                             }
 
-                            rightSide.addChild(newGender);
+                            rightSide.children.add(newGender);
                         // and remove par element if NC
 			    /*
                          * ParElement par = null; for (DixElement e :
