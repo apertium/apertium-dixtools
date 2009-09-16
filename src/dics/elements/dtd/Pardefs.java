@@ -70,14 +70,6 @@ public class Pardefs extends DixElement {
     /**
      * 
      * @param fileName
-     */
-    public void printXML(String fileName, DicOpts opt) {
-        this.printXML(fileName, "UTF-8", opt);
-    }
-
-    /**
-     * 
-     * @param fileName
      * @param encoding
      */
     public void printXML(String fileName, String encoding, DicOpts opt) {
