@@ -109,10 +109,10 @@ public class AddGender {
         Sdef m = new Sdef("m");
         Sdef f = new Sdef("f");
         Sdef mf = new Sdef("mf");
-        sdefs.addSdefElement(n);
-        sdefs.addSdefElement(m);
-        sdefs.addSdefElement(f);
-        sdefs.addSdefElement(mf);
+        sdefs.sdefsElements.add(n);
+        sdefs.sdefsElements.add(m);
+        sdefs.sdefsElements.add(f);
+        sdefs.sdefsElements.add(mf);
 
         int genderFound = 0;
         int genderNotFound = 0;

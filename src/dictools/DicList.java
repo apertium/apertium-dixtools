@@ -89,7 +89,7 @@ public class DicList {
 
         Sdefs sdefs = dic.getSdefs();
 
-        for (Sdef sdef : sdefs.getSdefsElements()) {
+        for (Sdef sdef : sdefs.sdefsElements) {
             msg.out(sdef.getValue() + "\n");
         }
     }

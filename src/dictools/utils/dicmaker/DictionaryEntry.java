@@ -31,9 +31,11 @@ public class DictionaryEntry {
 		this.sourcePhrase = new Phrase(language, sourcePhrase);
 	}
 	
+/* TODO UCdetector: Remove unused code: 
 	public void addTranslation(int language, String phrase) {
 		translations.add(new Phrase(language, phrase));
 	}
+*/
 	
 	public void addTranslation(Phrase phrase) {
 		translations.add(phrase);

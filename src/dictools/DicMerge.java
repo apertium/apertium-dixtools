@@ -314,19 +314,19 @@ public class DicMerge  extends AbstractDictTool{
         Sdefs sdefs = new Sdefs();
         HashMap<String, Sdef> sdefMap = new HashMap<String, Sdef>();
 
-        for (Sdef sdef1 : sdefs1.getSdefsElements()) {
+        for (Sdef sdef1 : sdefs1.sdefsElements) {
             String sdef1Key = sdef1.toString();
             if (!sdefMap.containsKey(sdef1Key)) {
                 sdefMap.put(sdef1Key, sdef1);
-                sdefs.addSdefElement(sdef1);
+                sdefs.sdefsElements.add(sdef1);
             }
         }
 
-        for (Sdef sdef2 : sdefs2.getSdefsElements()) {
+        for (Sdef sdef2 : sdefs2.sdefsElements) {
             String sdef2Key = sdef2.toString();
             if (!sdefMap.containsKey(sdef2Key)) {
                 sdefMap.put(sdef2Key, sdef2);
-                sdefs.addSdefElement(sdef2);
+                sdefs.sdefsElements.add(sdef2);
             }
         }
         return sdefs;
@@ -571,8 +571,6 @@ public class DicMerge  extends AbstractDictTool{
     private void processArgumentsBil() {
         int nArgs = getArguments().length;
 
-        String sDicMonA1;
-        sDicMonA1 = null;
         String sDicBilAB1, sDicBilAB2;
         sDicBilAB1 = sDicBilAB2 = null;
         boolean bilAB1Reverse, bilAB2Reverse;

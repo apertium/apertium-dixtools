@@ -37,27 +37,12 @@ import dics.elements.utils.DicTools;
 public class Sdefs extends DixElement {
 
     
-    private ArrayList<Sdef> sdefsElements;
+    public ArrayList<Sdef> sdefsElements;
 
     
     public Sdefs() {
         super("sdefs");
         sdefsElements = new ArrayList<Sdef>();
-    }
-
-    /**
-     * 
-     * @param value
-     */
-    public void addSdefElement(Sdef value) {
-        sdefsElements.add(value);
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    public ArrayList<Sdef> getSdefsElements() {
-        return sdefsElements;
     }
 
     /**
@@ -144,7 +129,7 @@ public class Sdefs extends DixElement {
     @Override
     public String toString() {
         String str = "";
-        for (Sdef sdef : getSdefsElements()) {
+        for (Sdef sdef : sdefsElements) {
             str += sdef.toString();
         }
         return str;

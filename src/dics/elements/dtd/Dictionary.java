@@ -369,7 +369,7 @@ public class Dictionary extends DixElement {
                 dos.append("\tEntries: " + ne);
             }
             if (sdefs != null) {
-                dos.append("\n\tSdefs: " + sdefs.getSdefsElements().size() + "\n");
+                dos.append("\n\tSdefs: " + sdefs.sdefsElements.size() + "\n");
             }
             if (pardefs != null) {
                 dos.append("\tParadigms: " + pardefs.getPardefElements().size() + "\n");
@@ -421,7 +421,6 @@ public class Dictionary extends DixElement {
      * 
      * @param fileName
      * @param encoding
-     */
     private void printXMLXInclude(String fileName, String encoding, DicOpts opt) {
         BufferedOutputStream bos;
         FileOutputStream fos;
@@ -493,6 +492,7 @@ public class Dictionary extends DixElement {
             eg.printStackTrace();
         }
     }
+     */
 
     /**
      *

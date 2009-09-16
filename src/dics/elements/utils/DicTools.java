@@ -56,21 +56,7 @@ public class DicTools {
      * @param entries
      * @return Undefined         */
     public static HashMap<String, ArrayList<E>> buildHash(ArrayList<E> entries) {
-        HashMap<String, ArrayList<E>> entriesMap = new HashMap<String, ArrayList<E>>();
-        for (E e : entries) {
-            String value = e.getValue("L");
-            String key = DicTools.clearTags(value);
-            if (entriesMap.containsKey(key)) {
-                ArrayList<E> eList = entriesMap.get(key);
-                eList.add(e);
-                entriesMap.put(key, eList);
-            } else {
-                ArrayList<E> eList = new ArrayList<E>();
-                eList.add(e);
-                entriesMap.put(key, eList);
-            }
-        }
-        return entriesMap;
+    	return buildHash(entries, "L");
     }
 
     /**
@@ -201,9 +187,8 @@ public class DicTools {
      * @param monA
      * @param monB
      */
-    public static ArrayList<E>[] makeConsistent(Dictionary bilAB,
-            Dictionary monA, Dictionary monB) {
-        ArrayList[] consistentMons = new ArrayList[2];
+    public static ArrayList<E>[] makeConsistent(Dictionary bilAB, Dictionary monA, Dictionary monB) {
+        ArrayList<E>[] consistentMons = new ArrayList[2];
         ArrayList<E> elements = bilAB.getEntries();
 
         HashMap<String, ArrayList<E>> bilABMapL = DicTools.buildHash(elements, "L");
@@ -212,9 +197,9 @@ public class DicTools {
         HashMap<String, ArrayList<E>> monAMap = DicTools.buildHashMon(monA.getEntries());
         HashMap<String, ArrayList<E>> monBMap = DicTools.buildHashMon(monB.getEntries());
 
-        ArrayList<E> monAConsistent = DicTools.makeConsistent(bilABMapL,"L", monAMap);
+        ArrayList<E> monAConsistent = DicTools.makeConsistent(bilABMapL, monAMap);
 
-        ArrayList<E> monBConsistent = DicTools.makeConsistent(bilABMapR, "R", monBMap);
+        ArrayList<E> monBConsistent = DicTools.makeConsistent(bilABMapR, monBMap);
 
         Collections.sort(monAConsistent, E.eElementComparatorL);
         consistentMons[0] = monAConsistent;
@@ -230,7 +215,7 @@ public class DicTools {
      * @param side
      * @param monMap
      */
-    private static ArrayList<E> makeConsistent(HashMap<String, ArrayList<E>> bilABMap, String side, HashMap<String, ArrayList<E>> monMap) {
+    private static ArrayList<E> makeConsistent(HashMap<String, ArrayList<E>> bilABMap, HashMap<String, ArrayList<E>> monMap) {
         ArrayList<E> consistentMon = new ArrayList<E>();
         Set<String> keySet = monMap.keySet();
         Iterator<String> it = keySet.iterator();

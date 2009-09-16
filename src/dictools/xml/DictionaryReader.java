@@ -105,9 +105,7 @@ public class DictionaryReader extends XMLReader {
              */
 
             if (child instanceof ProcessingInstruction) {
-                ProcessingInstruction pi = (ProcessingInstruction) child;
-                String data = pi.getData();
-            // System.err.println("Data pi: " + data);
+            	// System.err.println("Data pi: " + child);
             } else
 
             if (child instanceof Element) {

@@ -306,12 +306,12 @@ public class DicCross  extends AbstractDictTool{
 
             HashMap<String, Sdef> sdefList = new HashMap<String, Sdef>();
 
-            for (Sdef sdef1 : sdefs1.getSdefsElements()) {
+            for (Sdef sdef1 : sdefs1.sdefsElements) {
                 if (!sdefList.containsKey(sdef1.getValue())) {
                     sdefList.put(sdef1.getValue(), sdef1);
                 }
             }
-            for (Sdef sdef2 : sdefs2.getSdefsElements()) {
+            for (Sdef sdef2 : sdefs2.sdefsElements) {
                 if (!sdefList.containsKey(sdef2.getValue())) {
                     sdefList.put(sdef2.getValue(), sdef2);
                 } else {
@@ -336,7 +336,7 @@ public class DicCross  extends AbstractDictTool{
             while (it.hasNext()) {
                 String str = it.next();
                 Sdef sdef = sdefList.get(str);
-                sdefs.addSdefElement(sdef);
+                sdefs.sdefsElements.add(sdef);
             }
             sdefList = null;
             it = null;

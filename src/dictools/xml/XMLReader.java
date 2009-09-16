@@ -243,8 +243,7 @@ public class XMLReader {
             String childElementName = childElement.getNodeName();
             if (childElementName.equals("sdef")) {
                 Sdef sdefElement = readSdef(childElement);
-                S sE = S.getInstance(sdefElement.getValue());
-                sdefsElement.addSdefElement(sdefElement);
+                sdefsElement.sdefsElements.add(sdefElement);
             }
         }
 
@@ -296,36 +295,38 @@ public class XMLReader {
         return tE;
     }
 
-    /**
-     * 
-     * @param child
-     * @return Undefined         */
-    protected static String loadGElementText(Node child) {
-        String text = "<g>";
-        if (child.hasChildNodes()) {
-            NodeList children = child.getChildNodes();
-            for (int i = 0; i < children.getLength(); i++) {
-                Node node = children.item(i);
-                if (node instanceof Text) {
-                    Text textNode = (Text) node;
-                    text += textNode.getData().trim();
-                } else {
-                    String tag = node.getNodeName();
-                    if (tag.equals("b")) {
-                        text += "<b/>";
-                    }
-                    if (tag.equals("j")) {
-                        text += "<j/>";
-                    }
-                    if (tag.equals("a")) {
-                        text += "<a/>";
-                    }
-                }
-            }
-        }
-        text += "</g>";
-        return text;
-    }
+
+// TODO UCdetector: Remove unused code: 
+//     /**
+//      * 
+//      * @param child
+//      * @return Undefined         */
+//     protected static String loadGElementText(Node child) {
+//         String text = "<g>";
+//         if (child.hasChildNodes()) {
+//             NodeList children = child.getChildNodes();
+//             for (int i = 0; i < children.getLength(); i++) {
+//                 Node node = children.item(i);
+//                 if (node instanceof Text) {
+//                     Text textNode = (Text) node;
+//                     text += textNode.getData().trim();
+//                 } else {
+//                     String tag = node.getNodeName();
+//                     if (tag.equals("b")) {
+//                         text += "<b/>";
+//                     }
+//                     if (tag.equals("j")) {
+//                         text += "<j/>";
+//                     }
+//                     if (tag.equals("a")) {
+//                         text += "<a/>";
+//                     }
+//                 }
+//             }
+//         }
+//         text += "</g>";
+//         return text;
+//     }
 
     /**
      * 
