@@ -37,7 +37,9 @@ public abstract class ContentElement extends DixElement implements Cloneable {
     
     protected String value;
     
+/* TODO UCdetector: Remove unused code: 
     protected String sElem;
+*/
 
     
     public ContentElement(String tagName) {
@@ -209,26 +211,28 @@ public abstract class ContentElement extends DixElement implements Cloneable {
     }
      */
 
-    /**
-     * 
-     * @param value
-     */
-    public void changeFirstSElement(String value) {
-        S sE2 = new S(value);
-        getSymbols().set(0, sE2);
-        int j = 0;
-        for (int i = 0; i < children.size(); i++) {
-            DixElement e = children.get(i);
-            if (e instanceof S) {
-                if (j == 0) {
-                    children.set(i, sE2);
-                    return;
-                }
-                j++;
-            }
 
-        }
-    }
+// TODO UCdetector: Remove unused code: 
+//     /**
+//      * 
+//      * @param value
+//      */
+//     public void changeFirstSElement(String value) {
+//         S sE2 = new S(value);
+//         getSymbols().set(0, sE2);
+//         int j = 0;
+//         for (int i = 0; i < children.size(); i++) {
+//             DixElement e = children.get(i);
+//             if (e instanceof S) {
+//                 if (j == 0) {
+//                     children.set(i, sE2);
+//                     return;
+//                 }
+//                 j++;
+//             }
+// 
+//         }
+//     }
 
     /**
      * 

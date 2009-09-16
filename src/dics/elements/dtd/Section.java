@@ -137,14 +137,6 @@ public class Section extends DixElement {
     /**
      * 
      * @param fileName
-     */
-    public void printXMLXInclude(String fileName, DicOpts opt) {
-        this.printXMLXInclude(fileName, "UTF-8", opt);
-    }
-
-    /**
-     * 
-     * @param fileName
      * @param encoding
      */
     public void printXMLXInclude(String fileName, String encoding, DicOpts opt) {
@@ -191,14 +183,6 @@ public class Section extends DixElement {
      */
     public void setIncludes(ArrayList<String> includes) {
         this.includes = includes;
-    }
-
-    /**
-     * 
-     * @param xinclude
-     */
-    public void addXInclude(String xinclude) {
-        includes.add(xinclude);
     }
 
     /**

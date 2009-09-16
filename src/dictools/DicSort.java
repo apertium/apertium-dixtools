@@ -172,7 +172,7 @@ public class DicSort  extends AbstractDictTool {
         EElementComparator eElementComparator = new EElementComparator(sortAccordingToRightSide ? "R":"L");
         eElementComparator.ignoreCase = ignoreCaseWhenSorting;
 
-        Iterator it=map.keySet().iterator();
+        Iterator<String> it=map.keySet().iterator();
         while (it.hasNext()) {
             String cat=(String) it.next();
             ArrayList<E> list=map.get(cat);

@@ -47,14 +47,6 @@ public class V extends DixElement {
         n = value;
     }
 
-    /*
-     * 
-     */
-    public V(V vE) {
-        this();
-        n = vE.getValue();
-    }
-
     /**
      * 
      * @return Undefined         */

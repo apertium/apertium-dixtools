@@ -101,7 +101,6 @@ public class SubstractBidixTest {
 
   /**
    * Test of checkEarlierAndRestrict method, of class SubstractBidix.
-   */
   @Test
   public void testCheckEarlierAndRestrict() {
     System.err.println("checkEarlierAndRestrict");
@@ -109,9 +108,10 @@ public class SubstractBidixTest {
     ContentElement l=null;
     HashMap<String, E> hmLR=null;
     E ee=null;
-    //SubstractBidix.checkEarlierAndRestrict(direction, l, hmLR, ee);
+    SubstractBidix.checkEarlierAndRestrict(direction, l, hmLR, ee);
     // TODO review the generated test code and remove the default call to fail.
     //fail("The test case is a prototype.");
   }
+   */
 
 }

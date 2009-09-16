@@ -40,15 +40,6 @@ public class DicReverse  extends AbstractDictTool {
 
     /**
      * 
-     * @param dic
-     */
-    public DicReverse(Dictionary dic) {
-        dicOrig = dic;
-
-    }
-
-    /**
-     * 
      * @return Undefined         */
     public Dictionary reverse() {
         getDicOrig().reverse();

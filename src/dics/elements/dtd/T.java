@@ -45,14 +45,6 @@ public class T extends DixElement {
         this.name = name;
     }
 
-    /*
-     * 
-     */
-    public T(T tE) {
-        this();
-        name = tE.name;
-    }
-
     /**
      * 
      * @param dos

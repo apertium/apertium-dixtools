@@ -77,28 +77,30 @@ public class Dictionary extends DixElement {
         sections = new ArrayList<Section>();
     }
 
-    /**
-     *
-     * @param elementMap
-     */
-    public Dictionary(HashMap<String, ArrayList<E>> elementMap, Dictionary dic) {
-      this();
-        Section sectionElement = new Section("main", "standard");
-        addSection(sectionElement);
-        setAlphabet(dic.getAlphabet());
-        setSdefs(dic.getSdefs());
 
-        Set keySet = elementMap.keySet();
-        Iterator it = keySet.iterator();
-
-        while (it.hasNext()) {
-            String key = (String) it.next();
-            ArrayList<E> eList = elementMap.get(key);
-            for (E e : eList) {
-                addEElement(e);
-            }
-        }
-    }
+// TODO UCdetector: Remove unused code: 
+//     /**
+//      *
+//      * @param elementMap
+//      */
+//     public Dictionary(HashMap<String, ArrayList<E>> elementMap, Dictionary dic) {
+//       this();
+//         Section sectionElement = new Section("main", "standard");
+//         addSection(sectionElement);
+//         setAlphabet(dic.getAlphabet());
+//         setSdefs(dic.getSdefs());
+// 
+//         Set keySet = elementMap.keySet();
+//         Iterator it = keySet.iterator();
+// 
+//         while (it.hasNext()) {
+//             String key = (String) it.next();
+//             ArrayList<E> eList = elementMap.get(key);
+//             for (E e : eList) {
+//                 addEElement(e);
+//             }
+//         }
+//     }
 
     /**
      *
@@ -405,20 +407,22 @@ public class Dictionary extends DixElement {
         }
     }
 
-    /**
-     * 
-     * @param fileName
-     */
-    public void printXMLXInclude(String fileName, DicOpts opt) {
-        this.printXMLXInclude(fileName, this.getXmlEncoding(), opt);
-    }
+
+// TODO UCdetector: Remove unused code: 
+//     /**
+//      * 
+//      * @param fileName
+//      */
+//     public void printXMLXInclude(String fileName, DicOpts opt) {
+//         this.printXMLXInclude(fileName, this.getXmlEncoding(), opt);
+//     }
 
     /**
      * 
      * @param fileName
      * @param encoding
      */
-    public void printXMLXInclude(String fileName, String encoding, DicOpts opt) {
+    private void printXMLXInclude(String fileName, String encoding, DicOpts opt) {
         BufferedOutputStream bos;
         FileOutputStream fos;
         OutputStreamWriter dos;
@@ -527,34 +531,12 @@ public class Dictionary extends DixElement {
 
     /**
      *
-     * @param sectionID
-     * @return Undefined     */
-    public ArrayList<E> getEntries(String sectionID) {
-        for (Section s : sections) {
-            if (s.getID().equals(sectionID)) {
-                return s.getEElements();
-            }
-        }
-        return null;
-    }
-
-    /**
-     *
      * @param e
      */
     public void addEElement(E e) {
         (getEntries()).add(e);
     }
 
-    /**
-     *
-     * @param e
-     */
-    public void removeEElement(E e) {
-        (getEntries()).remove(e);
-    }
-
-    
     public void countEntries() {
         nEntries = 0;
         nShared = 0;
@@ -615,22 +597,6 @@ public class Dictionary extends DixElement {
 
     /**
      *
-     * @param parName
-     * @return Undefined     */
-    public Pardef getParadigmDefinition(String parName) {
-        return pardefs.getParadigmDefinition(parName);
-    }
-
-    /**
-     *
-     * @param pardefE
-     */
-    public void addParDef(Pardef pardefE) {
-        pardefs.addPardefElement(pardefE);
-    }
-
-    /**
-     *
      * @return Undefined     */
     public Pardefs getPardefsElement() {
         return pardefs;
@@ -650,11 +616,7 @@ public class Dictionary extends DixElement {
     public HashMap<String, ArrayList<Pardef>> getEquivalentParadigms() {
         return equivPar;
     }
-
-    /**
-     *
-     * @param entry
-     * @return Undefined     */
+/*
     public E getEElement(String entry) {
         ArrayList<E> elements = getEntries();
 
@@ -670,7 +632,7 @@ public class Dictionary extends DixElement {
         }
         return null;
     }
-
+*/
     
     public void reverse() {
         for (Section section : getSections()) {

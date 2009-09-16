@@ -28,6 +28,11 @@ import java.util.Properties;
 public class Resource extends Properties {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * 
      * @return The source
      */

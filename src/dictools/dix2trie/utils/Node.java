@@ -157,12 +157,12 @@ public class Node {
                     word.print(tabs + 1, osw);
                 }
             }
-            Set keySet = nodeList.keySet();
-            Iterator it = keySet.iterator();
+            Set<?> keySet = nodeList.keySet();
+            Iterator<?> it = keySet.iterator();
             while (it.hasNext()) {
                 String key = (String) it.next();
 
-                int l = key.length();
+                //int l = key.length();
                 boolean validKey = true;
                 /*
                 for(int i=0; i<l; i++) {

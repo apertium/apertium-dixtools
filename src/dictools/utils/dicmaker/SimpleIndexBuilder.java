@@ -17,14 +17,3 @@
  */
 
 package dictools.utils.dicmaker;
-
-
-public class SimpleIndexBuilder implements IndexBuilder {
-
-	public static final SimpleIndexBuilder INSTANCE = new SimpleIndexBuilder();
-	
-	public void addIndexEntries(DictionaryEntry target, String phrase) {
-		target.addIndexEntry(phrase);
-	}
-
-}

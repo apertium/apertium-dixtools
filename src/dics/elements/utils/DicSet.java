@@ -31,7 +31,12 @@ import dics.elements.dtd.Dictionary;
 public class DicSet extends ArrayList<Dictionary> {
 
     
-    private Dictionary mon1;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Dictionary mon1;
     
     private Dictionary bil1;
     
@@ -62,19 +67,6 @@ public class DicSet extends ArrayList<Dictionary> {
         this.mon2.setType(Dictionary.MONOL);
         this.bil2 = bil2;
         this.bil2.setType(Dictionary.BIL);
-    }
-
-    /**
-     * 
-     * @param mon1
-     */
-    public DicSet(Dictionary mon1) {
-        this.add(mon1);
-
-        this.mon1 = mon1;
-        bil1 = null;
-        mon2 = null;
-        bil2 = null;
     }
 
     /**
@@ -124,6 +116,7 @@ public class DicSet extends ArrayList<Dictionary> {
     }
 
     
+/* TODO UCdetector: Remove unused code: 
     public void reportMetrics() {
         System.err.println("monA");
         mon1.reportMetrics();
@@ -134,6 +127,7 @@ public class DicSet extends ArrayList<Dictionary> {
         System.err.println("bilBC");
         bil2.reportMetrics();
     }
+*/
 
     /**
      * 

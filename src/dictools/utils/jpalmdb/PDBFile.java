@@ -53,14 +53,6 @@ public class PDBFile {
 		return new String(typeandcreator, "ISO-8859-1");
 	}
 	
-	public PDBFile(String pdbName, byte[] typeandcreator, short version) {
-		this(pdbName, typeandcreator, version, null, null, null);
-	}
-	
-	public PDBFile(byte[] data) throws IOException {
-		this(new ByteArrayInputStream(data), data.length);
-	}
-	
 	public PDBFile(File f) throws IOException {
 		this(new FileInputStream(f), (int)f.length());
 	}

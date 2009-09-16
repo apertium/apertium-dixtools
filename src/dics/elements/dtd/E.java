@@ -351,7 +351,7 @@ public class E extends DixElement implements Cloneable {
     /**
      * 
      * @param side
-     * @return Undefined         */
+     * @return Undefined      
     public String getCategory(String side) {
         ArrayList<String> categories = new ArrayList<String>();
         categories.add("adj");
@@ -384,21 +384,23 @@ public class E extends DixElement implements Cloneable {
         }
         return null;
     }
+   */
 
-    /**
-     * 
-     * @param side
-     * @param categories
-     * @return Undefined         */
-    public String getCategory(String side,
-            ArrayList<String> categories) {
-        for (String s : categories) {
-            if (is("L", s)) {
-                return s;
-            }
-        }
-        return null;
-    }
+// TODO UCdetector: Remove unused code: 
+//     /**
+//      * 
+//      * @param side
+//      * @param categories
+//      * @return Undefined         */
+//     public String getCategory(String side,
+//             ArrayList<String> categories) {
+//         for (String s : categories) {
+//             if (is("L", s)) {
+//                 return s;
+//             }
+//         }
+//         return null;
+//     }
 
     /**
      * 
@@ -427,6 +429,7 @@ public class E extends DixElement implements Cloneable {
         return false;
     }
 
+/* TODO UCdetector: Remove unused code: 
     public int getNumberOfSElements(String side) {
         for (DixElement e : children) {
             if (e instanceof I) {
@@ -447,6 +450,7 @@ public class E extends DixElement implements Cloneable {
         }
         return 0;
     }
+*/
 
     /**
      * 
@@ -483,22 +487,6 @@ public class E extends DixElement implements Cloneable {
             return true;
         } else {
             return false;
-        }
-    }
-
-    /**
-     * 
-     * @param value
-     * @return Undefined         */
-    public boolean hasRestriction(String value) {
-        if (restriction == null || this.isRestrictionAuto()) {
-            return true;
-        } else {
-            if (restriction.equals(value)) {
-                return true;
-            } else {
-                return false;
-            }
         }
     }
 
@@ -674,31 +662,33 @@ public class E extends DixElement implements Cloneable {
         return null;
     }
 
-    /**
-     * 
-     * @param side
-     * @param newCategory
-     */
-    public void changeCategory(String side, String newCategory) {
-        for (DixElement e : children) {
-            if (e instanceof I) {
-                I i = (I) e;
-                i.changeFirstSElement(newCategory);
-            }
-            if (e instanceof P) {
-                P p = (P) e;
-                if (side.equals("L")) {
-                    L lE = p.l;
-                    lE.changeFirstSElement(newCategory);
-                }
-                if (side.equals("R")) {
-                    R rE = p.r;
-                    rE.changeFirstSElement(newCategory);
-                }
-            }
-        }
 
-    }
+// TODO UCdetector: Remove unused code: 
+//     /**
+//      * 
+//      * @param side
+//      * @param newCategory
+//      */
+//     public void changeCategory(String side, String newCategory) {
+//         for (DixElement e : children) {
+//             if (e instanceof I) {
+//                 I i = (I) e;
+//                 i.changeFirstSElement(newCategory);
+//             }
+//             if (e instanceof P) {
+//                 P p = (P) e;
+//                 if (side.equals("L")) {
+//                     L lE = p.l;
+//                     lE.changeFirstSElement(newCategory);
+//                 }
+//                 if (side.equals("R")) {
+//                     R rE = p.r;
+//                     rE.changeFirstSElement(newCategory);
+//                 }
+//             }
+//         }
+// 
+//     }
 
     
     @Override
@@ -758,79 +748,83 @@ public class E extends DixElement implements Cloneable {
         return str;
     }
 
-    /**
-     * 
-     * @return Undefined         */
-    public String toStringNoParadigm() {
-        String str = "";
-        String r = "";
-        if (this.hasRestriction()) {
-            r = " r=\"" + restriction + "\"";
-        }
-        str += "<e" + r + ">";
-        for (DixElement e : children) {
-            if (e instanceof I) {
-                I i = (I) e;
-                str += i.toString();
-            }
-            if (e instanceof P) {
-                P p = (P) e;
 
-                L lE = p.l;
-                str += lE.toString();
+// TODO UCdetector: Remove unused code: 
+//     /**
+//      * 
+//      * @return Undefined         */
+//     public String toStringNoParadigm() {
+//         String str = "";
+//         String r = "";
+//         if (this.hasRestriction()) {
+//             r = " r=\"" + restriction + "\"";
+//         }
+//         str += "<e" + r + ">";
+//         for (DixElement e : children) {
+//             if (e instanceof I) {
+//                 I i = (I) e;
+//                 str += i.toString();
+//             }
+//             if (e instanceof P) {
+//                 P p = (P) e;
+// 
+//                 L lE = p.l;
+//                 str += lE.toString();
+// 
+//                 R rE = p.r;
+//                 str += rE.toString();
+//             }
+//             if (e instanceof Re) {
+//                 Re re = (Re) e;
+//                 str += re.toString();
+//             }
+// 
+//         }
+//         str += "</e>";
+//         return str;
+//     }
 
-                R rE = p.r;
-                str += rE.toString();
-            }
-            if (e instanceof Re) {
-                Re re = (Re) e;
-                str += re.toString();
-            }
 
-        }
-        str += "</e>";
-        return str;
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    public String lemmaAndCategory() {
-        String str = "";
-        String r = "";
-        if (this.hasRestriction()) {
-            r = " r=\"" + restriction + "\"";
-        }
-        str += "<e" + r + ">";
-        str += lemma;
-        for (DixElement e : children) {
-            /*
-             * if (e instanceof I) { I ignore = (I) e;
-             * str += ignore.toString(); } if (e instanceof P) { final
-             * P p = (P) e;
-             * 
-             * L lE = p.l; str += lE.toString();
-             * 
-             * R rE = p.restriction; str += rE.toString(); }
-             * 
-             * if (e instanceof Re) { Re re =
-             * (Re) e; str += re.toString(); }
-             */
-            if (e instanceof Par) {
-                Par par = (Par) e;
-                String parValue = par.getValue();
-                String[] parts = parValue.toString().split("__");
-                String category = "";
-                for (String element : parts) {
-                    // System.err.print("(" + parts[ignore] + ")");
-                    category = element;
-                }
-                str += "/" + category;
-            }
-        }
-        str += "</e>";
-        return str;
-    }
+// TODO UCdetector: Remove unused code: 
+//     /**
+//      * 
+//      * @return Undefined         */
+//     public String lemmaAndCategory() {
+//         String str = "";
+//         String r = "";
+//         if (this.hasRestriction()) {
+//             r = " r=\"" + restriction + "\"";
+//         }
+//         str += "<e" + r + ">";
+//         str += lemma;
+//         for (DixElement e : children) {
+//             /*
+//              * if (e instanceof I) { I ignore = (I) e;
+//              * str += ignore.toString(); } if (e instanceof P) { final
+//              * P p = (P) e;
+//              * 
+//              * L lE = p.l; str += lE.toString();
+//              * 
+//              * R rE = p.restriction; str += rE.toString(); }
+//              * 
+//              * if (e instanceof Re) { Re re =
+//              * (Re) e; str += re.toString(); }
+//              */
+//             if (e instanceof Par) {
+//                 Par par = (Par) e;
+//                 String parValue = par.getValue();
+//                 String[] parts = parValue.toString().split("__");
+//                 String category = "";
+//                 for (String element : parts) {
+//                     // System.err.print("(" + parts[ignore] + ")");
+//                     category = element;
+//                 }
+//                 str += "/" + category;
+//             }
+//         }
+//         str += "</e>";
+//         return str;
+//     }
 
     /**
      * 
@@ -926,9 +920,11 @@ public class E extends DixElement implements Cloneable {
 
     public static final EElementComparator eElementComparatorL = new EElementComparator("L");
 
+/* TODO UCdetector: Remove unused code: 
     public int compareTo(E anotherEElement)  throws ClassCastException {
         return eElementComparatorL.compare(this, anotherEElement);
     }
+*/
 
     /**
      * 

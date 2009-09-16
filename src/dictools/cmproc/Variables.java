@@ -32,7 +32,12 @@ import dics.elements.dtd.S;
 public class Variables extends HashMap<String, Object> {
 
     
-    public Variables() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public Variables() {
         super();
     }
 
@@ -42,14 +47,14 @@ public class Variables extends HashMap<String, Object> {
      */
     public Variables(Variables copy) {
         super();
-        Iterator it = copy.keySet().iterator();
+        Iterator<?> it = copy.keySet().iterator();
         while (it.hasNext()) {
             String key = (String) it.next();
             Object obj = copy.get(key);
             if (obj instanceof String) {
                 put(new String(key), new String((String) obj));
             }
-            if (obj instanceof ArrayList) {  // <S>
+            if (obj instanceof ArrayList<?>) {  // <S>
                 ArrayList<S> sEList = (ArrayList<S>) obj;
                 put(new String(key), new ArrayList<S>(sEList));
             }
@@ -57,6 +62,7 @@ public class Variables extends HashMap<String, Object> {
     }
 
     
+/* TODO UCdetector: Remove unused code: 
     public void print() {
         Iterator it = this.keySet().iterator();
         System.out.print("{ ");
@@ -76,4 +82,5 @@ public class Variables extends HashMap<String, Object> {
         }
         System.out.println(" }");
     }
+*/
 }

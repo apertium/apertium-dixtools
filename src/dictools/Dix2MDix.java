@@ -58,7 +58,7 @@ public class Dix2MDix {
     
     private String outFileName;
     
-    private HashMap hm;
+    private HashMap<String, Vector<E>> hm;
     
     private String sltlCode;
     
@@ -121,8 +121,8 @@ public class Dix2MDix {
      * @param dic
      */
     private void processDic(Dictionary dic, String dir) {
-        hm = new HashMap();
-        Vector values = null;
+        hm = new HashMap<String, Vector<E>>();
+        Vector<E> values = null;
 
         for (Section section : dic.getSections()) {
             for (E ee : section.getEElements()) {
@@ -134,11 +134,11 @@ public class Dix2MDix {
                     if (left.length() > 1) {
                         if (Character.isLetter(left.charAt(0))) {
                             if (hm.containsKey(left)) {
-                                values = (Vector) hm.get(left);
+                                values = (Vector<E>) hm.get(left);
                                 values.add(ee);
                                 hm.put(left, values);
                             } else {
-                                values = new Vector();
+                                values = new Vector<E>();
                                 values.add(ee);
                                 hm.put(left, values);
                             }
@@ -179,7 +179,7 @@ public class Dix2MDix {
             String first = null;
             String last = null;
 
-            Vector<Entry> partial = new Vector();
+            Vector<Entry> partial = new Vector<Entry>();
             for (Entry e : vector) {
                 if (e.getKey().length() == 0) {
                     continue;
@@ -309,17 +309,17 @@ public class Dix2MDix {
      * @param hm
      * @return
      */
-    private Vector map2vector(HashMap hm) {
+    private Vector<Entry> map2vector(HashMap<String, Vector<E>> hm) {
         Vector<Entry> vector = new Vector<Entry>();
 
-        Set keySet = hm.keySet();
-        Iterator it = keySet.iterator();
+        Set<String> keySet = hm.keySet();
+        Iterator<String> it = keySet.iterator();
 
         while (it.hasNext()) {
             Entry entry = new Entry();
             String key = (String) it.next();
             entry.setKey(key);
-            Vector<E> v = (Vector) hm.get(key);
+            Vector<E> v = (Vector<E>) hm.get(key);
             String value = "";
             value = value + "[" + key + "]";
             for (E ee : v) {

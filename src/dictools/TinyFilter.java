@@ -84,8 +84,8 @@ public class TinyFilter {
     }
 
     private final void processProperties() {
-        Set set = props.keySet();
-        Iterator it = set.iterator();
+        Set<?> set = props.keySet();
+        Iterator<?> it = set.iterator();
 
         while (it.hasNext()) {
             String key = (String) it.next();
@@ -160,16 +160,16 @@ public class TinyFilter {
     }
 
     public final String applyToLemma(String lemma) {
-        Set removeKeySet = this.removedCharacters.keySet();
-        Iterator removeIt = removeKeySet.iterator();
+        Set<String> removeKeySet = this.removedCharacters.keySet();
+        Iterator<String> removeIt = removeKeySet.iterator();
         while (removeIt.hasNext()) {
             String key = (String) removeIt.next();
             String v = this.removedCharacters.get(key);
             lemma = lemma.replaceAll(v, "");
         }
 
-        Set replaceKeySet = this.replacedCharactersWithBlank.keySet();
-        Iterator replaceIt = replaceKeySet.iterator();
+        Set<String> replaceKeySet = this.replacedCharactersWithBlank.keySet();
+        Iterator<String> replaceIt = replaceKeySet.iterator();
         while (replaceIt.hasNext()) {
             String key = (String) replaceIt.next();
             String v = this.replacedCharactersWithBlank.get(key);
@@ -179,8 +179,8 @@ public class TinyFilter {
     }
 
     public void printProperties() {
-        Set set = props.keySet();
-        Iterator it = set.iterator();
+        Set<?> set = props.keySet();
+        Iterator<?> it = set.iterator();
 
         while (it.hasNext()) {
             Object key = it.next();

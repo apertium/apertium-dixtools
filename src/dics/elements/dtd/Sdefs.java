@@ -93,7 +93,7 @@ public class Sdefs extends DixElement {
      * 
      * @param fileName
      */
-    public void printXML(String fileName, DicOpts opt) {
+    protected void printXML(String fileName, DicOpts opt) {
         this.printXML(fileName, "UTF-8", opt);
     }
 

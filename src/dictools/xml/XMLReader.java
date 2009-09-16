@@ -371,19 +371,21 @@ public class XMLReader {
         return cElement;
     }
 
-    /**
-     * 
-     * @param tag
-     * @param child
-     * @return Undefined         
-     */
-    protected static String processTagText(String tag, Node child) {
-        String text = "";
-        if (tag.equals("g")) {
-            text = text + loadGElementText(child);
-        }
-        return text;
-    }
+
+// TODO UCdetector: Remove unused code: 
+//     /**
+//      * 
+//      * @param tag
+//      * @param child
+//      * @return Undefined         
+//      */
+//     protected static String processTagText(String tag, Node child) {
+//         String text = "";
+//         if (tag.equals("g")) {
+//             text = text + loadGElementText(child);
+//         }
+//         return text;
+//     }
 
     /**
      * 

@@ -38,35 +38,27 @@ public class P extends DixElement {
         super("p");
     }
 
-    /**
-     * 
-     * @param pE
-     */
-    public P(P pE) {
-        this();
-        l = (L) pE.l.clone();
-        r = (R) pE.r.clone();
-    }
-
     public P(L l, R r) {
         this();
         this.l = l;
         this.r = r;
     }
 
-    /**
-     * 
-     * @param value
-     * @param side
-     */
-    public void setProcessingComments(String value, String side) {
-        if (side.equals("L")) {
-            l.setProcessingComments(value);
-        }
-        if (side.equals("R")) {
-            r.setProcessingComments(value);
-        }
-    }
+
+// TODO UCdetector: Remove unused code: 
+//     /**
+//      * 
+//      * @param value
+//      * @param side
+//      */
+//     public void setProcessingComments(String value, String side) {
+//         if (side.equals("L")) {
+//             l.setProcessingComments(value);
+//         }
+//         if (side.equals("R")) {
+//             r.setProcessingComments(value);
+//         }
+//     }
 
     /**
      * 

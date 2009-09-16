@@ -28,6 +28,11 @@ import java.util.Properties;
 public class HeaderElement extends Properties {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * 
      * @return The type of dictionary: morph or bil
      */
@@ -88,15 +93,5 @@ public class HeaderElement extends Properties {
     public String getTLFull() {
         String tlFull = (String) this.get("tl-full");
         return tlFull;
-    }
-
-    /**
-     * 
-     * @param i
-     * @return Alternative i
-     */
-    public String getAlternative(int i) {
-        String alti = (String) this.get("alt" + i);
-        return alti;
     }
 }

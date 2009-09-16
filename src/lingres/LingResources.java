@@ -25,10 +25,15 @@ import java.util.ArrayList;
  *
  * @author Enrique Benimeli Bofarull
  */
-public class LingResources extends ArrayList {
+public class LingResources extends ArrayList<Object> {
 
     
-    private String name;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private String name;
     
     private String description;
 

@@ -69,68 +69,42 @@ public class DicMerge  extends AbstractDictTool{
         msg.setLogFileName("merge.log");
     }
 
-    /**
-     * 
-     * @param ds1
-     * @param ds2
-     */
-    public DicMerge(DicSet ds1, DicSet ds2) {
-        bilAB1 = ds1.getBil1();
-        monA1 = (ds1.getMon1());
-        monB1 =(ds1.getMon2());
 
-        bilAB2 = (ds2.getBil1());
-        monA1 = (ds2.getMon1());
-        monA2 = (ds2.getMon2());
+// TODO UCdetector: Remove unused code: 
+//     /**
+//      * 
+//      * @param ds1
+//      * @param ds2
+//      */
+//     public DicMerge(DicSet ds1, DicSet ds2) {
+//         bilAB1 = ds1.getBil1();
+//         monA1 = (ds1.getMon1());
+//         monB1 =(ds1.getMon2());
+// 
+//         bilAB2 = (ds2.getBil1());
+//         monA1 = (ds2.getMon1());
+//         monA2 = (ds2.getMon2());
+// 
+//         msg.setLogFileName("merge.log");
+// 
+//     }
 
-        msg.setLogFileName("merge.log");
 
-    }
-
-    /**
-     * 
-     * @param bAB1
-     * @param bAB2
-     */
-    public void setBils(Dictionary bAB1, Dictionary bAB2) {
-        bilAB1 = (bAB1);
-        bilAB2 = (bAB2);
-    }
-
-    /**
-     * 
-     * @param mA1
-     * @param mA2
-     */
-    public void setMonAs(Dictionary mA1, Dictionary mA2) {
-        monA1 = (mA1);
-        monA2 = (mA2);
-    }
-
-    /**
-     * 
-     * @param morph1FileName
-     * @param morph2FileName
-     */
-    public void setMonAs(String morph1FileName,
-            String morph2FileName) {
-        DictionaryReader dicReader1 = new DictionaryReader(morph1FileName);
-        Dictionary morph1 = dicReader1.readDic();
-        DictionaryReader dicReader2 = new DictionaryReader(morph2FileName);
-        Dictionary morph2 = dicReader2.readDic();
-        monA1 = (morph1);
-        monA2 = (morph2);
-    }
-
-    /**
-     * 
-     * @param mB1
-     * @param mB2
-     */
-    public void setMonBs(Dictionary mB1, Dictionary mB2) {
-        monB1 = (mB1);
-        monB2 =(mB2);
-    }
+// TODO UCdetector: Remove unused code: 
+//     /**
+//      * 
+//      * @param morph1FileName
+//      * @param morph2FileName
+//      */
+//     public void setMonAs(String morph1FileName,
+//             String morph2FileName) {
+//         DictionaryReader dicReader1 = new DictionaryReader(morph1FileName);
+//         Dictionary morph1 = dicReader1.readDic();
+//         DictionaryReader dicReader2 = new DictionaryReader(morph2FileName);
+//         Dictionary morph2 = dicReader2.readDic();
+//         monA1 = (morph1);
+//         monA2 = (morph2);
+//     }
 
     /**
      * 
@@ -738,13 +712,5 @@ public class DicMerge  extends AbstractDictTool{
      */
     public HashMap<String, String> getParadigmsToRemove() {
         return paradigmsToRemove;
-    }
-
-    /**
-     * 
-     * @param parName
-     */
-    public void addParadigmToRemove(String parName) {
-        paradigmsToRemove.put(parName, parName);
     }
 }

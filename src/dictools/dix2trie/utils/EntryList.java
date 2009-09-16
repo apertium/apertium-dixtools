@@ -28,6 +28,11 @@ import java.util.ArrayList;
 public class EntryList extends ArrayList<Entry> {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * 
      * @param entry
      * @return The entry

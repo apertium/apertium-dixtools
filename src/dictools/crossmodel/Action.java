@@ -145,10 +145,6 @@ public class Action {
     }
 
     
-    public void incrementNumberOfConstants() {
-        numberOfConstants++;
-    }
-
     /**
      * 
      * @param definedVars
@@ -162,7 +158,7 @@ public class Action {
         getDefinedVarsElement(getE().getLeft(), definedVarsInAction);
         getDefinedVarsElement(getE().getRight(), definedVarsInAction);
 
-        Iterator it = definedVarsInAction.keySet().iterator();
+        Iterator<String> it = definedVarsInAction.keySet().iterator();
         while (it.hasNext()) {
             String key = (String) it.next();
             if (!definedVars.containsKey(key)) {

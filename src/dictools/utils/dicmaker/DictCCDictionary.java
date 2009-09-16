@@ -28,10 +28,6 @@ import java.io.InputStreamReader;
 
 public class DictCCDictionary extends WordTupleDictionary {
 	
-	public DictCCDictionary(File file, String slFull, String tlFull) throws IOException {
-		this(new FileInputStream(file), slFull, tlFull);
-	}
-	
 	public DictCCDictionary(InputStream in, String slFull, String tlFull) throws IOException {
 		super(new String[] {slFull, tlFull}, new IndexBuilder[] {WordIndexBuilder.INSTANCE, WordIndexBuilder.INSTANCE});
 		BufferedReader br = new BufferedReader(new InputStreamReader(in, "ISO-8859-1"));

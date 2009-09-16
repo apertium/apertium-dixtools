@@ -124,12 +124,4 @@ public class Pardefs extends DixElement {
     public ArrayList<Pardef> getPardefElements() {
         return pardefElements;
     }
-
-    /**
-     * 
-     * @param par
-     */
-    public void remove(Pardef par) {
-        getPardefElements().remove(par);
-    }
 }

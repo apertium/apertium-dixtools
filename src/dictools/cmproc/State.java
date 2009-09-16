@@ -27,6 +27,7 @@ import dics.elements.dtd.DixElement;
 import dics.elements.dtd.S;
 import dics.elements.utils.ElementList;
 import dictools.crossmodel.CrossAction;
+import java.util.HashMap;
 
 /**
  *
@@ -37,13 +38,13 @@ public class State {
     
     private String value;
     
-    private StateSet states;
+    private HashMap<String, State> states;
     
     private CrossAction crossAction;
 
     
     public State() {
-        states = new StateSet();
+        states = new HashMap<String, State>();
     }
 
     /**
@@ -52,7 +53,7 @@ public class State {
      */
     public State(String value) {
         this.value = value;
-        states = new StateSet();
+        states = new HashMap<String, State>();
     }
 
     /**
@@ -270,7 +271,7 @@ public class State {
      * @param vars
      */
     private final void continue_processing(ElementList patternSequence, int i, CrossActionDataList cadl, Variables vars) {
-        Iterator it = states.keySet().iterator();
+        Iterator<String> it = states.keySet().iterator();
         while (it.hasNext()) {
             State st = states.get(it.next());
             st.getActionSetList(patternSequence, i + 1, cadl, vars);
@@ -357,7 +358,7 @@ public class State {
      * 
      * @return Next states
      */
-    public StateSet getStates() {
+    public HashMap<String, State> getStates() {
         return states;
     }
 
@@ -365,7 +366,7 @@ public class State {
      * 
      * @param states
      */
-    public void setStates(StateSet states) {
+    public void setStates(HashMap<String, State> states) {
         this.states = states;
     }
 

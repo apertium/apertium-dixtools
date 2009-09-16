@@ -29,8 +29,9 @@ import java.util.Iterator;
  */
 public class CrossActionDataList extends HashMap<String, CrossActionData> {
 
-    
-    private CrossActionData bestActionSet;
+	private static final long serialVersionUID = 1L;
+
+	private CrossActionData bestActionSet;
 
     
     public CrossActionDataList() {
@@ -46,13 +47,13 @@ public class CrossActionDataList extends HashMap<String, CrossActionData> {
         boolean defaultCanBeApplied = false;
         ArrayList<CrossActionData> actionList = new ArrayList<CrossActionData>();
 
-        Iterator it = this.keySet().iterator();
+        Iterator<String> it = this.keySet().iterator();
         while (it.hasNext()) {
             String key = (String) it.next();
             CrossActionData cad = this.get(key);
-            String id = cad.getCrossAction().getId();
-            int l = cad.getCrossAction().getPattern().getLength();
-            int n = cad.getCrossAction().getPattern().getNConstants();
+            //String id = cad.getCrossAction().getId();
+            //int l = cad.getCrossAction().getPattern().getLength();
+            //int n = cad.getCrossAction().getPattern().getNConstants();
             if (cad.getCrossAction().getId().equals("default")) {
                 defaultCanBeApplied = true;
                 defaultCAD = cad;

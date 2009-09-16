@@ -17,12 +17,3 @@
  */
 
 package dictools.utils.dicmaker;
-
-
-public class NullIndexBuilder implements IndexBuilder {
-
-	public static final NullIndexBuilder INSTANCE = new NullIndexBuilder();
-	
-	public void addIndexEntries(DictionaryEntry target, String phrase) {}
-	
-}

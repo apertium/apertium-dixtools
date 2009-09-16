@@ -49,21 +49,6 @@ public class Pardef extends DixElement {
     }
 
     /**
-     * Duplicates paradigm definition
-     * 
-     * @param orig
-     * @param name
-     */
-    public Pardef(Pardef orig, String name) {
-      this(name);
-
-        for (E e : orig.eElements) {
-            E e2 = (E) e.clone();
-            eElements.add(e2);
-        }
-    }
-
-    /**
      * 
      * @return Undefined         */
     public String getName() {
@@ -135,17 +120,6 @@ public class Pardef extends DixElement {
         str += "<" + getName() + ">";
         for (E e : eElements) {
             str += e.toString();
-        }
-        return str;
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    public String toStringNoParName() {
-        String str = "";
-        for (E e : eElements) {
-            str += e.toStringAll();
         }
         return str;
     }

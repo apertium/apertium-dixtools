@@ -28,7 +28,12 @@ import java.util.ArrayList;
 public class ResourceSet extends ArrayList<Resource> {
 
     
-    private String name;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private String name;
     
     private String description;
 

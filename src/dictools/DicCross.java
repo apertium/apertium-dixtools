@@ -1356,22 +1356,24 @@ public class DicCross  extends AbstractDictTool{
         return this.monCCrossed_path;
     }
 
-    /**
-     * This method is on process
-     * @param dicSet
-     * @return The common language
-     */
-    public String getCommonLanguage(DicSet dicSet) {
-        // Sin tener en cuentra el orden. Se resuelve automáticamente
-        if (isMetaInfoComplete(dicSet)) {
-            Vector<Dictionary> dics = new Vector<Dictionary>();
-            HeaderElement d1 = this.dicSet.getMon1().getHeaderElement();
-            HeaderElement d2 = this.dicSet.getMon2().getHeaderElement();
-            HeaderElement d3 = this.dicSet.getBil1().getHeaderElement();
-            HeaderElement d4 = this.dicSet.getBil2().getHeaderElement();
-        }
-        return null;
-    }
+
+// TODO UCdetector: Remove unused code: 
+//     /**
+//      * This method is on process
+//      * @param dicSet
+//      * @return The common language
+//      */
+//     public String getCommonLanguage(DicSet dicSet) {
+//         // Sin tener en cuentra el orden. Se resuelve automáticamente
+//         if (isMetaInfoComplete(dicSet)) {
+//             Vector<Dictionary> dics = new Vector<Dictionary>();
+//             HeaderElement d1 = this.dicSet.getMon1().getHeaderElement();
+//             HeaderElement d2 = this.dicSet.getMon2().getHeaderElement();
+//             HeaderElement d3 = this.dicSet.getBil1().getHeaderElement();
+//             HeaderElement d4 = this.dicSet.getBil2().getHeaderElement();
+//         }
+//         return null;
+//     }
 
     /**
      * 

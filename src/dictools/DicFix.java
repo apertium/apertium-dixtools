@@ -49,14 +49,6 @@ public class DicFix  extends AbstractDictTool {
 
     /**
      * 
-     * @param dic
-     */
-    public DicFix(Dictionary dic) {
-        this.dic = dic;
-    }
-
-    /**
-     * 
      * @return Undefined         
      */
     public Dictionary fix() {

@@ -56,12 +56,6 @@ public class DicList {
     private String url;
 
     protected Msg msg = Msg.inst();
-    public DicList(String fileName) {
-        DictionaryReader dicReader = new DictionaryReader(fileName);
-        Dictionary d = dicReader.readDic();
-        setDic(d);
-    }
-
     public DicList() {
     }
 

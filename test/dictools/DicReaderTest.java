@@ -15,7 +15,6 @@ import org.junit.Test;
 import dics.elements.utils.Msg;
 
 /**
- *
  * @author Jacob Nordfalk
  */
 public class DicReaderTest extends TestTools {

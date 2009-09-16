@@ -54,15 +54,6 @@ public class Par extends DixElement {
 
     /**
      * 
-     * @param pE
-     */
-    public Par(Par pE) {
-      this();
-        n = pE.getValue();
-    }
-
-    /**
-     * 
      * @param value
      */
     @Override

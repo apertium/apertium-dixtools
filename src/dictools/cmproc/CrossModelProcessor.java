@@ -101,7 +101,7 @@ public class CrossModelProcessor {
         if (crossActionDataList.size() > 0) {
             printSequence(msg, entries.getPattern().getSequence());
             msg.log("\n" + crossActionDataList.size() + " candidates: ");
-            Iterator it = crossActionDataList.keySet().iterator();
+            Iterator<?> it = crossActionDataList.keySet().iterator();
             while (it.hasNext()) {
                 String key = (String) it.next();
                 CrossActionData cad = crossActionDataList.get(key);
