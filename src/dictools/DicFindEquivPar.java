@@ -41,7 +41,7 @@ public class DicFindEquivPar  extends AbstractDictTool {
     
     private Dictionary dic;
     
-    private String outFileName;
+    public String outFileName;
 
     
     public DicFindEquivPar() {
@@ -51,7 +51,7 @@ public class DicFindEquivPar  extends AbstractDictTool {
     public DicFindEquivPar(String fileName) {
         DictionaryReader dicReader = new DictionaryReader(fileName);
         Dictionary dic = dicReader.readDic();
-        setDic(dic);
+        this.dic = dic;
     }
 
     
@@ -165,31 +165,7 @@ public class DicFindEquivPar  extends AbstractDictTool {
             }
         }
 
-        dic.printXML(getOutFileName(),getOpt());
+        dic.printXML(outFileName,opt);
 
-    }
-
-
-    /**
-     * @param dic
-     *                the dic to set
-     */
-    private void setDic(Dictionary dic) {
-        this.dic = dic;
-    }
-
-    /**
-     * @return the outFileName
-     */
-    public String getOutFileName() {
-        return outFileName;
-    }
-
-    /**
-     * @param outFileName
-     *                the outFileName to set
-     */
-    public void setOutFileName(String outFileName) {
-        this.outFileName = outFileName;
     }
 }

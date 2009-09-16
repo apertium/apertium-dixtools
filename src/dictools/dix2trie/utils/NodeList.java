@@ -40,13 +40,4 @@ public class NodeList extends HashMap<String, Node> {
     public Node put(Node node) {
         return super.put(node.getValue(), node);
     }
-
-    /**
-     * 
-     * @param key
-     * @return The key
-     */
-    public Node getNode(String key) {
-        return this.get(key);
-    }
 }

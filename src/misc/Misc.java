@@ -106,7 +106,6 @@ public class Misc {
         for (E ee : bil_en_es_n.getEntriesInMainSection()) {
             String left = ee.getValue("L");
             L lE = ee.getLeft();
-            String right = ee.getValue("R");
             R rE = ee.getRight();
             P pE = new P();
             pE.l = (lE);
@@ -136,7 +135,6 @@ public class Misc {
                     P pE = new P();
                     ne.children.add(pE);
 
-                    R rE = new R();
                     for (S sE : p.l.getSymbols()) {
                         if (sE.getValue().equals("adj")) {
                             sE.setValue("n");

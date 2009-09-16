@@ -219,7 +219,7 @@ public class GetBilOmegawiki  extends AbstractDictTool {
             }
         }
         // dic.printXML("apertium-" + sl + "-" + tl + ".dix");
-        dic.printXML(getOutFileName(),getOpt());
+        dic.printXML(getOutFileName(),opt);
     }
 
     /**

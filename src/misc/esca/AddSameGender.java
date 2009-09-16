@@ -34,8 +34,6 @@ import dictools.xml.DictionaryReader;
 public class AddSameGender {
 
     
-    private String[] arguments;
-    
     private String morphDic;
     
     private String bilDic;
@@ -50,19 +48,6 @@ public class AddSameGender {
         this.morphDic = morphDic;
         this.bilDic = bilDic;
 
-    }
-
-    
-    public void processArguments() {
-        morphDic = arguments[1];
-        bilDic = arguments[2];
-    }
-
-    /**
-     * 
-     * @param outFileName
-     */
-    public void setOutFileName(String outFileName) {
     }
 
     

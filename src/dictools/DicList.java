@@ -47,20 +47,20 @@ import dictools.xml.DictionaryReader;
 public class DicList {
 
     
-    private Dictionary dic;
+	public Dictionary dic;
     
-    private String action;
+	public String action;
     
-    private boolean urlDic;
+	public boolean urlDic;
     
-    private String url;
+	public String url;
 
     protected Msg msg = Msg.inst();
+    
     public DicList() {
     }
 
     public void getListOfParadigms() {
-        Dictionary dic = getDic();
         Pardefs paradigms = dic.pardefs;
 
         for (Pardef paradigm : paradigms.elements) {
@@ -69,8 +69,6 @@ public class DicList {
     }
 
     public void getListOfLemmas() {
-        Dictionary dic = getDic();
-
         int nLemmas = 0;
         for (Section section : dic.sections) {
             for (E element : section.elements) {
@@ -85,8 +83,6 @@ public class DicList {
 
     
     public void getDefinitions() {
-        Dictionary dic = getDic();
-
         Sdefs sdefs = dic.sdefs;
 
         for (Sdef sdef : sdefs.elements) {
@@ -95,8 +91,6 @@ public class DicList {
     }
 
     public void getPairs() {
-        Dictionary dic = getDic();
-
         int nLemmas = 0;
         for (Section section : dic.sections) {
             for (E element : section.elements) {
@@ -144,7 +138,6 @@ public class DicList {
     }
 
     private void ltExpand() {
-        Dictionary dic = getDic();
         HashMap<String, Pardef> pardefs = new HashMap<String, Pardef>();
 
         for (Pardef paradigm : dic.pardefs.elements) {
@@ -165,8 +158,6 @@ public class DicList {
 
 
     public void getListWithDot() {
-        Dictionary dic = getDic();
-
         int nLemmas = 0;
         for (Section section : dic.sections) {
             for (E element : section.elements) {
@@ -202,65 +193,13 @@ public class DicList {
     }
 
     /**
-     * @return the dic
-     */
-    public Dictionary getDic() {
-        return dic;
-    }
-
-    /**
-     * @param dic
-     *                the dic to set
-     */
-    public void setDic(Dictionary dic) {
-        this.dic = dic;
-    }
-
-    /**
      * 
      * @param fileName
      */
     public void setDic(String fileName) {
         DictionaryReader dicReader = new DictionaryReader(fileName);
         Dictionary dic = dicReader.readDic();
-        setDic(dic);
-    }
-
-    /**
-     * @return the action
-     */
-    public String getAction() {
-        return action;
-    }
-
-    /**
-     * @param action
-     *                the action to set
-     */
-    public void setAction(String action) {
-        this.action = action;
-    }
-
-    /**
-     * @return the urlDic
-     */
-    public boolean isUrlDic() {
-        return urlDic;
-    }
-
-    /**
-     * @param urlDic
-     *                the urlDic to set
-     */
-    public void setUrlDic(boolean urlDic) {
-        this.urlDic = urlDic;
-    }
-
-    /**
-     * @return the url
-     */
-    public String getUrl() {
-        return url;
+        this.dic = dic;
     }
 
     /**
@@ -273,10 +212,10 @@ public class DicList {
             URL theUrl = new URL(url);
             InputStream is = theUrl.openStream();
             DictionaryReader dicReader = new DictionaryReader();
-            dicReader.setUrlDic(true);
-            dicReader.setIs(is);
+            dicReader.urlDic = true;
+            dicReader.is = is;
             Dictionary dic = dicReader.readDic();
-            setDic(dic);
+            this.dic = dic;
         } catch (MalformedURLException mfue) {
             msg.err("Error: URL not well formed");
             System.exit(-1);

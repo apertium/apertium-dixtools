@@ -93,9 +93,9 @@ public class XMLReader {
     
     protected File dicFile;
     
-    protected InputStream is;
+    public InputStream is;
     
-    protected boolean urlDic;
+    public boolean urlDic;
 
 
     // These tags have no internal data and can therefore be re-used
@@ -117,7 +117,7 @@ public class XMLReader {
      * @param fileName
      */
     public XMLReader(String fileName) {      
-        setDicFile(new File(fileName));
+        this.dicFile = new File(fileName);
         init();
     }
 
@@ -125,9 +125,9 @@ public class XMLReader {
     private void init() {
         // getFactory().setXIncludeAware(true);
         try {
-            setFactory(DocumentBuilderFactory.newInstance());
+            this.factory = DocumentBuilderFactory.newInstance();
             this.factory.setXIncludeAware(true);
-            setBuilder(getFactory().newDocumentBuilder());
+            this.builder = factory.newDocumentBuilder();
         } catch (ParserConfigurationException pce) {
             pce.printStackTrace();
         } catch (Exception e) {
@@ -138,38 +138,38 @@ public class XMLReader {
     
     protected void analize() {
         try {
-            if (isUrlDic()) {
+            if (urlDic) {
                 // case: url
                 System.err.println("Reading URL");
-                setDocument(getBuilder().parse(getIs()));
+                this.document = builder.parse(is);
 
             } else {
                 // case: standard input
-              if (getDicFile().equals(new File("-"))) {
+              if (dicFile.equals(new File("-"))) {
                 System.err.println("Reading from standard input");
-                setDocument(getBuilder().parse(System.in));
+                this.document = builder.parse(System.in);
               } else {
                 // case: file
-                System.err.println("Reading file " + getDicFile());
-                setDocument(getBuilder().parse(getDicFile()));
+                System.err.println("Reading file " + dicFile);
+                this.document = builder.parse(dicFile);
               }
                 
             }
         } catch (FileNotFoundException fnfe) {
-            System.err.println("Error: could not find '" + getDicFile() + "' file.");
+            System.err.println("Error: could not find '" + dicFile + "' file.");
             System.exit(-1);
         } catch (SAXException saxE) {
-            System.err.println("Error: could not parse '" + getDicFile() + "'. " + saxE.getMessage());
+            System.err.println("Error: could not parse '" + dicFile + "'. " + saxE.getMessage());
             System.exit(-1);
         } catch (IOException ioE) {
-            System.err.println("I/O error (" + getDicFile() + "): " + ioE.getMessage());
+            System.err.println("I/O error (" + dicFile + "): " + ioE.getMessage());
             System.exit(-1);
         } catch (Exception e) {
-            System.err.println("Error (" + getDicFile() + "): " + e.getMessage());
+            System.err.println("Error (" + dicFile + "): " + e.getMessage());
             System.exit(-1);
         } finally {
-            setBuilder(null);
-            setFactory(null);
+            this.builder = null;
+            this.factory = null;
         }
     }
 
@@ -715,96 +715,5 @@ public class XMLReader {
         }
         Re reElement = new Re(value);
         return reElement;
-    }
-    
-    
-    /**
-     * @return the builder
-     */
-    protected DocumentBuilder getBuilder() {
-        return builder;
-    }
-
-    /**
-     * @param builder
-     *                the builder to set
-     */
-    protected void setBuilder(DocumentBuilder builder) {
-        this.builder = builder;
-    }
-
-    /**
-     * @return the dicFile
-     */
-    protected File getDicFile() {
-        return dicFile;
-    }
-
-    /**
-     * @param dicFile
-     *                the dicFile to set
-     */
-    protected void setDicFile(File dicFile) {
-        this.dicFile = dicFile;
-    }
-
-    /**
-     * @return the document
-     */
-    protected Document getDocument() {
-        return document;
-    }
-
-    /**
-     * @param document
-     *                the document to set
-     */
-    protected void setDocument(Document document) {
-        this.document = document;
-    }
-
-    /**
-     * @return the factory
-     */
-    protected DocumentBuilderFactory getFactory() {
-        return factory;
-    }
-
-    /**
-     * @param factory
-     *                the factory to set
-     */
-    protected void setFactory(DocumentBuilderFactory factory) {
-        this.factory = factory;
-    }
-
-    /**
-     * @return the firstSymbolIs
-     */
-    public InputStream getIs() {
-        return is;
-    }
-
-    /**
-     * @param firstSymbolIs
-     *                the firstSymbolIs to set
-     */
-    public void setIs(InputStream is) {
-        this.is = is;
-    }
-
-    /**
-     * @return the urlDic
-     */
-    public boolean isUrlDic() {
-        return urlDic;
-    }
-
-    /**
-     * @param urlDic
-     *                the urlDic to set
-     */
-    public void setUrlDic(boolean urlDic) {
-        this.urlDic = urlDic;
     }
 }

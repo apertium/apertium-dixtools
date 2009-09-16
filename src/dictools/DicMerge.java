@@ -411,13 +411,13 @@ public class DicMerge  extends AbstractDictTool{
     public void actionMerge() {
         DicSet dicSet = merge();
         // setMerged(dicSet);
-        Dictionary bil = dicSet.getBil1();
-        Dictionary monA = dicSet.getMon1();
-        Dictionary monB = dicSet.getMon2();
+        Dictionary bil = dicSet.bil1;
+        Dictionary monA = dicSet.mon1;
+        Dictionary monB = dicSet.mon2;
 
-        bil.printXML(bil.fileName,getOpt());
-        monA.printXML(monA.fileName,getOpt());
-        monB.printXML(monB.fileName,getOpt());
+        bil.printXML(bil.fileName,opt);
+        monA.printXML(monA.fileName,opt);
+        monB.printXML(monB.fileName,opt);
     }
 
     /**
@@ -425,7 +425,7 @@ public class DicMerge  extends AbstractDictTool{
      * @param arguments
      */
     private void processArguments() {
-        int nArgs = getArguments().length;
+        int nArgs = arguments.length;
 
         String sDicMonA1, sDicMonA2, sDicMonB1, sDicMonB2;
         sDicMonA1 = sDicMonA2 = sDicMonB1 = sDicMonB2 = null;
@@ -436,45 +436,45 @@ public class DicMerge  extends AbstractDictTool{
         bilAB1Reverse = bilAB2Reverse = false;
 
         for (int i = 1; i < nArgs; i++) {
-            String arg = getArguments()[i];
+            String arg = arguments[i];
             if (arg.equals("-monA1")) {
                 i++;
-                arg = getArguments()[i];
+                arg = arguments[i];
                 sDicMonA1 = arg;
                 System.err.println("Monolingual A1:\t'" + sDicMonA1 + "'");
             }
 
             if (arg.equals("-monA2")) {
                 i++;
-                arg = getArguments()[i];
+                arg = arguments[i];
                 sDicMonA2 = arg;
                 System.err.println("Monolingual A2:\t '" + sDicMonA2 + "'");
             }
 
             if (arg.equals("-out")) {
                 i++;
-                arg = getArguments()[i];
+                arg = arguments[i];
                 sOut = arg;
                 System.err.println("Merged:\t'" + sOut + "'");
             }
 
             if (arg.equals("-monB")) {
                 i++;
-                arg = getArguments()[i];
+                arg = arguments[i];
                 sDicMonB1 = arg;
                 System.err.println("Monolingual B1:\t'" + sDicMonB1 + "'");
             }
 
             if (arg.equals("-monB2")) {
                 i++;
-                arg = getArguments()[i];
+                arg = arguments[i];
                 sDicMonB2 = arg;
                 System.err.println("Monolingual B2:\t'" + sDicMonB2 + "'");
             }
 
             if (arg.equals("-bilAB")) {
                 i++;
-                arg = getArguments()[i];
+                arg = arguments[i];
                 if (arg.equals("-r")) {
                     bilAB1Reverse = true;
                     i++;
@@ -483,14 +483,14 @@ public class DicMerge  extends AbstractDictTool{
                     bilAB1Reverse = false;
                     i++;
                 }
-                arg = getArguments()[i];
+                arg = arguments[i];
                 sDicBilAB1 = arg;
                 System.err.println("Bilingual AB1:\t'" + sDicBilAB1 + "'");
             }
 
             if (arg.equals("-bilAB2")) {
                 i++;
-                arg = getArguments()[i];
+                arg = arguments[i];
                 if (arg.equals("-r")) {
                     bilAB2Reverse = true;
                     i++;
@@ -499,7 +499,7 @@ public class DicMerge  extends AbstractDictTool{
                     bilAB2Reverse = false;
                     i++;
                 }
-                arg = getArguments()[i];
+                arg = arguments[i];
                 sDicBilAB2 = arg;
                 System.err.println("Bilingual AB2:\t'" + sDicBilAB2 + "'");
             }
@@ -510,7 +510,7 @@ public class DicMerge  extends AbstractDictTool{
         Dictionary monA1 = DicTools.readMonolingual(sDicMonA1);
         Dictionary monB1 = DicTools.readMonolingual(sDicMonB1);
         DicSet dicSet1 = new DicSet(bilAB1, monA1, monB1);
-        setDicSet1(dicSet1);
+        this.dicSet1 = dicSet1;
         this.bilAB1 =(bilAB1);
         this.monA1 = (monA1);
         this.monB1 = (monB1);
@@ -523,36 +523,36 @@ public class DicMerge  extends AbstractDictTool{
         this.monA2 = (monA2);
         this.monB2 = (monB2);
 
-        setDicSet2(dicSet2);
+        this.dicSet2 = dicSet2;
 
     }
 
     
     private void processArgumentsMorph() {
-        int nArgs = getArguments().length;
+        int nArgs = arguments.length;
 
         String sDicMonA1, sDicMonA2;
         sDicMonA1 = sDicMonA2 = null;
         
         for (int i = 1; i < nArgs; i++) {
-            String arg = getArguments()[i];
+            String arg = arguments[i];
             if (arg.equals("-monA1")) {
                 i++;
-                arg = getArguments()[i];
+                arg = arguments[i];
                 sDicMonA1 = arg;
                 System.err.println("Monolingual A1:\t'" + sDicMonA1 + "'");
             }
             else
             if (arg.equals("-monA2")) {
                 i++;
-                arg = getArguments()[i];
+                arg = arguments[i];
                 sDicMonA2 = arg;
                 System.err.println("Monolingual A2:\t '" + sDicMonA2 + "'");
             }
             else
             if (arg.equals("-out")) {
                 i++;
-                arg = getArguments()[i];
+                arg = arguments[i];
                 sOut = arg;
                 System.err.println("Merged:\t'" + sOut + "'");
             }
@@ -569,7 +569,7 @@ public class DicMerge  extends AbstractDictTool{
 
     
     private void processArgumentsBil() {
-        int nArgs = getArguments().length;
+        int nArgs = arguments.length;
 
         String sDicBilAB1, sDicBilAB2;
         sDicBilAB1 = sDicBilAB2 = null;
@@ -578,10 +578,10 @@ public class DicMerge  extends AbstractDictTool{
         bilAB1Reverse = bilAB2Reverse = false;
 
         for (int i = 1; i < nArgs; i++) {
-            String arg = getArguments()[i];
+            String arg = arguments[i];
             if (arg.equals("-bilAB1")) {
                 i++;
-                arg = getArguments()[i];
+                arg = arguments[i];
                 if (arg.equals("-r")) {
                     bilAB1Reverse = true;
                     i++;
@@ -590,14 +590,14 @@ public class DicMerge  extends AbstractDictTool{
                     bilAB1Reverse = false;
                     i++;
                 }
-                arg = getArguments()[i];
+                arg = arguments[i];
                 sDicBilAB1 = arg;
                 System.err.println("Bilingual AB1:\t'" + sDicBilAB1 + "'");
             }
 
             if (arg.equals("-bilAB2")) {
                 i++;
-                arg = getArguments()[i];
+                arg = arguments[i];
                 if (arg.equals("-r")) {
                     bilAB2Reverse = true;
                     i++;
@@ -606,14 +606,14 @@ public class DicMerge  extends AbstractDictTool{
                     bilAB2Reverse = false;
                     i++;
                 }
-                arg = getArguments()[i];
+                arg = arguments[i];
                 sDicBilAB2 = arg;
                 System.err.println("Bilingual AB2:\t'" + sDicBilAB2 + "'");
             }
 
             if (arg.equals("-out")) {
                 i++;
-                arg = getArguments()[i];
+                arg = arguments[i];
                 sOut = arg;
                 System.err.println("Merged:\t'" + sOut + "'");
             }
@@ -631,62 +631,16 @@ public class DicMerge  extends AbstractDictTool{
     }
 
 
-    /**
-     * @return the dicSet1
-     */
-    public DicSet getDicSet1() {
-        return dicSet1;
-    }
-
-    /**
-     * @param dicSet1
-     *                the dicSet1 to set
-     */
-    public void setDicSet1(DicSet dicSet1) {
-        this.dicSet1 = dicSet1;
-    }
-
-    /**
-     * @return the dicSet2
-     */
-    public DicSet getDicSet2() {
-        return dicSet2;
-    }
-
-    /**
-     * @param dicSet2
-     *                the dicSet2 to set
-     */
-    public void setDicSet2(DicSet dicSet2) {
-        this.dicSet2 = dicSet2;
-    }
-
-    /**
-     * @return the merged
-     */
-    public DicSet getMerged() {
-        return merged;
-    }
-
-    /**
-     * 
-     * @param merged
-     */
-    public void setMerged(DicSet merged) {
-        this.merged = merged;
-    }
-
-    
     public void mergeMorph() {
         Dictionary morph = mergeMonols(monA1, monA2);
-        morph.printXML(getSOut(),getOpt());
+        morph.printXML(sOut,opt);
     }
 
     public void mergeMorph__OLD_which_sorts_output_but() {
         Dictionary morph = mergeMonols(monA1, monA2);
         DicSort dicSort = new DicSort(morph);
         Dictionary sorted = dicSort.sort();
-        sorted.printXML(getSOut(),getOpt());
+        sorted.printXML(sOut,opt);
     }
 
 
@@ -695,20 +649,6 @@ public class DicMerge  extends AbstractDictTool{
         Dictionary bil = mergeBils(bilAB1, bilAB2);
         DicSort dicSort = new DicSort(bil);
         Dictionary sorted = dicSort.sort();
-        sorted.printXML(getSOut(),getOpt());
-    }
-
-    /**
-     * @return the sOut
-     */
-    private String getSOut() {
-        return sOut;
-    }
-
-    /**
-     * @return the paradigmsToRemove
-     */
-    public HashMap<String, String> getParadigmsToRemove() {
-        return paradigmsToRemove;
+        sorted.printXML(sOut,opt);
     }
 }

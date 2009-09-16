@@ -120,7 +120,6 @@ public class AddGenderAdj {
         for (Section section : bil.sections) {
             for (E ee : section.elements) {
                 if (!ee.containsRegEx()) {
-                    ContentElement leftSide = ee.getSide("L");
                     ContentElement rightSide = ee.getSide("R");
 
                     if (ee.firstSymbolIs("L", "adj")) {

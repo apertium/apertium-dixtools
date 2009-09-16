@@ -36,13 +36,13 @@ public class DicSet extends ArrayList<Dictionary> {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Dictionary mon1;
+	public Dictionary mon1;
     
-    private Dictionary bil1;
+	public Dictionary bil1;
     
-    private Dictionary mon2;
+	public Dictionary mon2;
     
-    private Dictionary bil2;
+	public Dictionary bil2;
 
     /**
      * 
@@ -89,55 +89,13 @@ public class DicSet extends ArrayList<Dictionary> {
 
     /**
      * 
-     * @return Undefined         */
-    public Dictionary getMon1() {
-        return mon1;
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    public Dictionary getMon2() {
-        return mon2;
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    public Dictionary getBil1() {
-        return bil1;
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    public Dictionary getBil2() {
-        return bil2;
-    }
-
-    
-/* TODO UCdetector: Remove unused code: 
-    public void reportMetrics() {
-        System.err.println("monA");
-        mon1.reportMetrics();
-        System.err.println("monC");
-        mon2.reportMetrics();
-        System.err.println("bilAB");
-        bil1.reportMetrics();
-        System.err.println("bilBC");
-        bil2.reportMetrics();
-    }
-*/
-
-    /**
-     * 
      * @param suffix
      */
     public void printXML(String suffix, DicOpts opt) {
         printMonolXML(suffix, opt);
-        getBil1().printXML(suffix + "-bilAB.dix", opt);
+        bil1.printXML(suffix + "-bilAB.dix", opt);
         //DicTools.removeExtension(getBil1().getFileName()) + "-" + suffix + ".dix");
-        getBil2().printXML(suffix + "-bilBC.dix", opt);
+        bil2.printXML(suffix + "-bilBC.dix", opt);
     //	DicTools.removeExtension(getBil2().getFileName()) + "-" + suffix + ".dix");
     }
 
@@ -146,9 +104,9 @@ public class DicSet extends ArrayList<Dictionary> {
      * @param suffix
      */
     public void printMonolXML(String suffix, DicOpts opt) {
-        getMon1().printXML(suffix + "-monA.dix", opt);
+        mon1.printXML(suffix + "-monA.dix", opt);
         //DicTools.removeExtension(getMon1().getFileName()) + "-"		+ suffix + ".dix");
-        getMon2().printXML(suffix + "-monC.dix", opt);
+        mon2.printXML(suffix + "-monC.dix", opt);
     //DicTools.removeExtension(getMon2().getFileName()) + "-"		+ suffix + ".dix");
     }
 }

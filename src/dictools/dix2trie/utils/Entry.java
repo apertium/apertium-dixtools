@@ -61,13 +61,15 @@ public class Entry {
         return this.key;
     }
 
-    /**
-     * 
-     * @param e
-     */
-    public void addKeyAttr(S e) {
-        this.keyAttr.add(e);
-    }
+
+// TODO UCdetector: Remove unused code: 
+//     /**
+//      * 
+//      * @param e
+//      */
+//     public void addKeyAttr(S e) {
+//         this.keyAttr.add(e);
+//     }
 
     /**
      * 
@@ -93,13 +95,15 @@ public class Entry {
         return this.value;
     }
 
-    /**
-     * 
-     * @param e
-     */
-    public void addValueAttr(S e) {
-        this.valueAttr.add(e);
-    }
+
+// TODO UCdetector: Remove unused code: 
+//     /**
+//      * 
+//      * @param e
+//      */
+//     public void addValueAttr(S e) {
+//         this.valueAttr.add(e);
+//     }
 
     /**
      * 

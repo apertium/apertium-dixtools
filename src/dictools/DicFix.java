@@ -40,9 +40,9 @@ import dictools.xml.DictionaryReader;
 public class DicFix  extends AbstractDictTool {
 
     
-    private Dictionary dic;
+	public Dictionary dic;
     
-    private String out;
+    public String out;
     
     public DicFix() {
     }
@@ -115,7 +115,7 @@ public class DicFix  extends AbstractDictTool {
             String errorMsg = duplicated + " duplicated entries in section '" + section.id + "'\n";
             msg.err(errorMsg);
         }
-        dic.printXML(this.getOut(),getOpt());
+        dic.printXML(this.out,opt);
         return dic;
     }
 
@@ -139,37 +139,14 @@ public class DicFix  extends AbstractDictTool {
         DictionaryReader dicReader = new DictionaryReader(arguments[1]);
         Dictionary dic = dicReader.readDic();
         dicReader = null;
-        setDic(dic);
-        this.setOut(arguments[2]);
+        this.dic = dic;
+        this.out = arguments[2];
     }
 
     
     private void actionFix() {
         Dictionary dicFormatted = fix();
-        msg.err("Writing fixed dictonary to " + getOut());
-        dicFormatted.printXML(getOut(),getOpt());
-    }
-
-    /**
-     * @param dicFormatted
-     *                the dicFormatted to set
-     */
-    private void setDic(Dictionary dicFormatted) {
-        this.dic = dicFormatted;
-    }
-
-    /**
-     * @return the out
-     */
-    public String getOut() {
-        return out;
-    }
-
-    /**
-     * @param out
-     *                the out to set
-     */
-    public void setOut(String out) {
-        this.out = out;
+        msg.err("Writing fixed dictonary to " + out);
+        dicFormatted.printXML(out,opt);
     }
 }

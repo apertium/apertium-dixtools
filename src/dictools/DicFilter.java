@@ -38,7 +38,7 @@ public class DicFilter  extends AbstractDictTool{
     
     
     
-    private String outFileName;
+    public String outFileName;
 
     
     public DicFilter() {
@@ -74,7 +74,7 @@ public class DicFilter  extends AbstractDictTool{
             }            
         }
         
-        dicFilt.printXML("apertium-de-en.de-en-basic.dix",getOpt());
+        dicFilt.printXML("apertium-de-en.de-en-basic.dix",opt);
         
         
     }
@@ -92,14 +92,5 @@ public class DicFilter  extends AbstractDictTool{
         System.err.println(fileNameA + "/" + fileNameB);
      
         
-    }
-
-
-    public String getOutFileName() {
-        return outFileName;
-    }
-
-    public void setOutFileName(String outFileName) {
-        this.outFileName = outFileName;
     }
 }

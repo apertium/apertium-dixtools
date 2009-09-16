@@ -152,13 +152,13 @@ public class DicCross  extends AbstractDictTool{
     
     private void readCrossModel() {
         try {
-            msg.out("[" + (taskOrder++) + "] Reading cross model (" + getCrossModelFileName() + ") ...\n");
-            CrossModelReader cmr = new CrossModelReader(getCrossModelFileName());
+            msg.out("[" + (taskOrder++) + "] Reading cross model (" + crossModelFileName + ") ...\n");
+            CrossModelReader cmr = new CrossModelReader(crossModelFileName);
             if (cmr == null) {
                 System.err.println("cmr es null");
             }
             CrossModel cm = cmr.readCrossModel();
-            msg.out("[" + (taskOrder++) + "] Validating cross model (" + getCrossModelFileName() + ") ... ");
+            msg.out("[" + (taskOrder++) + "] Validating cross model (" + crossModelFileName + ") ... ");
             if (!cm.isValid()) {
                 msg.err("\nCross model is not valid!");
                 System.exit(-1);
@@ -169,11 +169,11 @@ public class DicCross  extends AbstractDictTool{
             if (cm != null) {
                 cm.rename();
                 //cm.printXML("cm-renamed.xml");
-                setCrossModel(cm);
-                msg.out("[" + (taskOrder++) + "] Processing patterns in cross model (" + getCrossModelFileName() + ") ... ");
+                this.crossModel = cm;
+                msg.out("[" + (taskOrder++) + "] Processing patterns in cross model (" + crossModelFileName + ") ... ");
                 msg.out(" (" + cm.getCrossActions().size() + " patterns processed).\n");
-                CrossModelProcessor cmp = new CrossModelProcessor(this.getCrossModel(), msg);
-                this.setCrossModelProcessor(cmp);
+                CrossModelProcessor cmp = new CrossModelProcessor(this.crossModel, msg);
+                this.crossModelProcessor = cmp;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -185,17 +185,17 @@ public class DicCross  extends AbstractDictTool{
     
     private void fillOutRestrictionMatrix() {
         // Note: B-A ^ B-C = A-C
-        setRMatrixValue(LR, LR, NONE);
-        setRMatrixValue(LR, RL, RL);
-        setRMatrixValue(LR, BOTH, RL);
+        rMatrix[LR][LR] = NONE;
+        rMatrix[LR][RL] = RL;
+        rMatrix[LR][BOTH] = RL;
 
-        setRMatrixValue(RL, LR, LR);
-        setRMatrixValue(RL, RL, NONE);
-        setRMatrixValue(RL, BOTH, LR);
+        rMatrix[RL][LR] = LR;
+        rMatrix[RL][RL] = NONE;
+        rMatrix[RL][BOTH] = LR;
 
-        setRMatrixValue(BOTH, LR, LR);
-        setRMatrixValue(BOTH, RL, RL);
-        setRMatrixValue(BOTH, BOTH, BOTH);
+        rMatrix[BOTH][LR] = LR;
+        rMatrix[BOTH][RL] = RL;
+        rMatrix[BOTH][BOTH] = BOTH;
     }
 
     /**
@@ -207,16 +207,16 @@ public class DicCross  extends AbstractDictTool{
         Dictionary[] dics = new Dictionary[2];
         readCrossModel();
 
-        Dictionary dic1 = dicSet.getBil1();
-        Dictionary dic2 = dicSet.getBil2();
+        Dictionary dic1 = dicSet.bil1;
+        Dictionary dic2 = dicSet.bil2;
 
         int nDic1 = dic1.getEntriesInMainSection().size();
         int nDic2 = dic2.getEntriesInMainSection().size();
 
-        this.setNMinElements(nDic1 + nDic2);
+        this.nMinElements = nDic1 + nDic2;
 
-        setBilAB(dic1);
-        setBilBC(dic2);
+        this.bilAB = dic1;
+        this.bilBC = dic2;
 
         Dictionary dic = new Dictionary();
 
@@ -243,7 +243,7 @@ public class DicCross  extends AbstractDictTool{
         msg.out("[" + (taskOrder++) + "] Sorting crossed dictionary...\n");
         Collections.sort(dic.getEntriesInMainSection(), E.eElementComparatorL);
 
-        getNDCrossModel().printXML(this.getOutDir() + "patterns-not-detected.xml",getOpt());
+        nDCrossModel.printXML(this.outDir + "patterns-not-detected.xml",opt);
         dics[0] = dic;
         return dics;
     }
@@ -363,9 +363,9 @@ public class DicCross  extends AbstractDictTool{
         ArrayList<E> elements2 = section2.elements;
         HashMap<String, ArrayList<E>> section1Map = DicTools.buildHash(elements1);
         HashMap<String, ArrayList<E>> section2Map = DicTools.buildHash(elements2);
-        crossSectionsAB(elements1, section2Map, section, getBilBC(), 0);
+        crossSectionsAB(elements1, section2Map, section, bilBC, 0);
         section2Map = null;
-        crossSectionsAB(elements2, section1Map, section, getBilAB(), 1);
+        crossSectionsAB(elements2, section1Map, section, bilAB, 1);
         section1Map = null;
         sections[0] = section;
         return sections;
@@ -383,9 +383,9 @@ public class DicCross  extends AbstractDictTool{
         for (E e : elements) {
             if (e.containsRegEx()) {
                 String key = e.getFirstRegEx().getValue();
-                if (!getRegExProcessed().containsKey(key)) {
+                if (!regExProcessed.containsKey(key)) {
                     section.elements.add(e);
-                    getRegExProcessed().put(e.getFirstRegEx().getValue(), e);
+                    regExProcessed.put(e.getFirstRegEx().getValue(), e);
                 }
             } else {
                 ArrayList<E> candidates = getPairs(e, sectionMap);
@@ -430,9 +430,9 @@ public class DicCross  extends AbstractDictTool{
                     for (E e : actionEList) {
                         String str = getHash(e);
 
-                        if (!getProcessed().containsKey(str)) {
+                        if (!processed.containsKey(str)) {
                             section.elements.add(e);
-                            getProcessed().put(str, e);
+                            processed.put(str, e);
                             String actionID = e.patternApplied;
                             logUsedPattern(actionID);
                         }
@@ -481,7 +481,7 @@ public class DicCross  extends AbstractDictTool{
         CrossAction crossAction = new CrossAction();
         Pattern entriesPattern = new Pattern(e1.reverse(), e2);
         crossAction.setPattern(entriesPattern);
-        CrossActionData cad = getCrossModelProcessor().getBestActionSet(crossAction);
+        CrossActionData cad = crossModelProcessor.getBestActionSet(crossAction);
         if (cad != null) {
             String actionID = cad.getCrossAction().getId();
             if (actionID.equals("default")) {
@@ -703,97 +703,6 @@ public class DicCross  extends AbstractDictTool{
     }
 
     /**
-     *
-     * @return Undefined     */
-    private CrossModel getCrossModel() {
-        return crossModel;
-    }
-
-    /**
-     *
-     * @param crossModel
-     */
-    public void setCrossModel(CrossModel crossModel) {
-        this.crossModel = crossModel;
-    }
-
-    /**
-     * @return the processed
-     */
-    private HashMap<String, E> getProcessed() {
-        return processed;
-    }
-
-    /**
-     * @return the regExProcessed
-     */
-    private HashMap<String, E> getRegExProcessed() {
-        return regExProcessed;
-    }
-
-    /**
-     * @return the bilAB
-     */
-    private Dictionary getBilAB() {
-        return bilAB;
-    }
-
-    /**
-     * @param bilAB
-     *                the bilAB to set
-     */
-    private void setBilAB(Dictionary bilAB) {
-        this.bilAB = bilAB;
-    }
-
-    /**
-     * @return the bilBC
-     */
-    private Dictionary getBilBC() {
-        return bilBC;
-    }
-
-    /**
-     * @param bilBC
-     *                the bilBC to set
-     */
-    private void setBilBC(Dictionary bilBC) {
-        this.bilBC = bilBC;
-    }
-
-    /**
-     * @return the rMatrix
-     */
-    private int[][] getRMatrix() {
-        return rMatrix;
-    }
-
-    /**
-     *
-     * @param ignore
-     * @param j
-     * @param value
-     */
-    private void setRMatrixValue(int i, int j, int value) {
-        getRMatrix()[i][j] = value;
-    }
-
-    /**
-     * @return the crossModelFileName
-     */
-    private String getCrossModelFileName() {
-        return crossModelFileName;
-    }
-
-    /**
-     * @param crossModelFileName
-     *                the crossModelFileName to set
-     */
-    public void setCrossModelFileName(String crossModelFileName) {
-        this.crossModelFileName = crossModelFileName;
-    }
-
-    /**
      * @return the ndCrossActions
      */
     private void insertNDCrossAction(CrossAction cA) {
@@ -807,14 +716,6 @@ public class DicCross  extends AbstractDictTool{
         }
     }
 
-    /**
-     * @return the nDCrossModel
-     */
-    private CrossModel getNDCrossModel() {
-        return nDCrossModel;
-    }
-
-    
     public void doCross() {
             new File("dix").mkdir();
 
@@ -824,35 +725,37 @@ public class DicCross  extends AbstractDictTool{
 
     
     public void actionCross() {
-        DicSet dicSet = getDicSet();
         actionConsistent(dicSet, "yes");
-        setCrossModelFileName(getCrossModelFileName());
 
         Dictionary[] bils = crossDictionaries(dicSet);
         Dictionary bilCrossed = bils[0];
-        String sl = dicSet.getBil1().rightLanguage;
-        String tl = dicSet.getBil2().rightLanguage;
+        String sl = dicSet.bil1.rightLanguage;
+        String tl = dicSet.bil2.rightLanguage;
         bilCrossed.type = Dictionary.BIL;
         bilCrossed.leftLanguage = sl;
         bilCrossed.rightLanguage = tl;
         msg.out("[" + (taskOrder++) + "] Making consistent morphological dicionaries ...\n");
 
-        ArrayList<E>[] commonCrossedMons = DicTools.makeConsistent(bilCrossed, dicSet.getMon1(), dicSet.getMon2());
+        ArrayList<E>[] commonCrossedMons = DicTools.makeConsistent(bilCrossed, dicSet.mon1, dicSet.mon2);
         ArrayList<E> crossedMonA = commonCrossedMons[0];
         ArrayList<E> crossedMonB = commonCrossedMons[1];
 
-        Dictionary monACrossed = new Dictionary(dicSet.getMon1());
+        Dictionary monACrossed = new Dictionary(dicSet.mon1);
         monACrossed.setMainSection(crossedMonA);
-        Dictionary monBCrossed = new Dictionary(dicSet.getMon2());
+        Dictionary monBCrossed = new Dictionary(dicSet.mon2);
         monBCrossed.setMainSection(crossedMonB);
 
         ArrayList<Dictionary> dicList = new ArrayList<Dictionary>();
         dicList.add(bilCrossed);
         dicList.add(monACrossed);
         dicList.add(monBCrossed);
-        printXMLCrossed(dicList, sl, tl,getOpt());
+        printXMLCrossed(dicList, sl, tl,opt);
         msg.out("[" + (taskOrder++) + "] Done!\n");
-        this.setCompleted(100);
+        this.completed = 100;
+		
+		if (this.progressBar != null) {
+		    this.progressBar.setValue(100);
+		}
     }
 
     /**
@@ -871,7 +774,7 @@ public class DicCross  extends AbstractDictTool{
         bilCrossed.addProcessingComment("");
         bilCrossed.addProcessingComment("Patterns applied:");
         msg.log("Patterns applied:");
-        for (CrossAction cA : getCrossModel().getCrossActions()) {
+        for (CrossAction cA : crossModel.getCrossActions()) {
             String cAName = cA.getId();
             if (!usedPatterns.containsKey(cAName)) {
                 if (i != 0) {
@@ -890,13 +793,13 @@ public class DicCross  extends AbstractDictTool{
         msg.log("[" + (taskOrder) + "] Patterns never applied: " + patterns + "\n");
         msg.out("[" + (taskOrder) + "] Generating crossed dictionaries ...\n");
         taskOrder = taskOrder + 1;
-        this.bilCrossed_path = this.getOutDir() + "apertium-" + sl + "-" + tl + "." + sl + "-" + tl + "-crossed.dix";
+        this.bilCrossed_path = this.outDir + "apertium-" + sl + "-" + tl + "." + sl + "-" + tl + "-crossed.dix";
         bilCrossed.printXML(this.bilCrossed_path, opt);
 
-        this.monACrossed_path = this.getOutDir() + "apertium-" + sl + "-" + tl + "." + sl + "-crossed.dix";
+        this.monACrossed_path = this.outDir + "apertium-" + sl + "-" + tl + "." + sl + "-crossed.dix";
         monACrossed.printXML(this.monACrossed_path, opt);
 
-        this.monCCrossed_path = this.getOutDir() + "apertium-" + sl + "-" + tl + "." + tl + "-crossed.dix";
+        this.monCCrossed_path = this.outDir + "apertium-" + sl + "-" + tl + "." + tl + "-crossed.dix";
         monBCrossed.printXML(this.monCCrossed_path, opt);
     }
 
@@ -908,7 +811,7 @@ public class DicCross  extends AbstractDictTool{
     private DicConsistent actionConsistent(DicSet dicSet, String removeNotCommon) {
         DicConsistent dicConsistent = new DicConsistent(dicSet);
         dicConsistent.makeConsistentDictionaries(removeNotCommon);
-        dicSet.printXML(this.getOutDir() + "consistent",getOpt());
+        dicSet.printXML(this.outDir + "consistent",opt);
         return dicConsistent;
     }
 
@@ -917,7 +820,7 @@ public class DicCross  extends AbstractDictTool{
      * @param arguments
      */
     private void processArguments() {
-        int nArgs = getArguments().length;
+        int nArgs = arguments.length;
         String sDicMonA;
         String sDicMonC;
         String sDicBilAB;
@@ -932,41 +835,41 @@ public class DicCross  extends AbstractDictTool{
         String sltl = "";
 
         for (int i = 1; i < nArgs; i++) {
-            String arg = getArguments()[i];
+            String arg = arguments[i];
 
             if (arg.equals("-f")) {
                 i++;
-                arg = getArguments()[i];
+                arg = arguments[i];
                 source = arg;
                 type = LingResourcesReader.FILE;
                 i++;
-                sltl = getArguments()[i];
+                sltl = arguments[i];
             }
 
             if (arg.equals("-url")) {
                 i++;
-                arg = getArguments()[i];
+                arg = arguments[i];
                 source = arg;
                 type = LingResourcesReader.URL;
                 i++;
-                sltl = getArguments()[i];
+                sltl = arguments[i];
             }
 
             if (arg.equals("-monA")) {
                 i++;
-                arg = getArguments()[i];
+                arg = arguments[i];
                 sDicMonA = arg;
             }
 
             if (arg.equals("-monC")) {
                 i++;
-                arg = getArguments()[i];
+                arg = arguments[i];
                 sDicMonC = arg;
             }
 
             if (arg.equals("-bilAB")) {
                 i++;
-                arg = getArguments()[i];
+                arg = arguments[i];
                 if (arg.equals("-r")) {
                     bilABReverse = true;
                     i++;
@@ -976,13 +879,13 @@ public class DicCross  extends AbstractDictTool{
                     i++;
                 }
 
-                arg = getArguments()[i];
+                arg = arguments[i];
                 sDicBilAB = arg;
             }
 
             if (arg.equals("-bilBC")) {
                 i++;
-                arg = getArguments()[i];
+                arg = arguments[i];
 
                 if (arg.equals("-r")) {
                     bilBCReverse = true;
@@ -992,14 +895,14 @@ public class DicCross  extends AbstractDictTool{
                     bilBCReverse = false;
                     i++;
                 }
-                arg = getArguments()[i];
+                arg = arguments[i];
                 sDicBilBC = arg;
             }
 
             if (arg.equals("-cross-model")) {
                 i++;
-                arg = getArguments()[i];
-                setCrossModelFileName(arg);
+                arg = arguments[i];
+                this.crossModelFileName = arg;
             }
 
             if (arg.equals("-debug")) {
@@ -1014,7 +917,7 @@ public class DicCross  extends AbstractDictTool{
             LingResourcesReader lrr = new LingResourcesReader(source, type);
             LingResources lingRes = lrr.readLingResources();
             DicSet theDicSet = this.getDicSetForCrossing(lingRes, sltl);
-            setDicSet(theDicSet);
+            this.dicSet = theDicSet;
         } else {
             msg.out("[" + (taskOrder++) + "] Loading bilingual AB (" + sDicBilAB + ")\n");
             Dictionary bil1 = DicTools.readBilingual(sDicBilAB, bilABReverse);
@@ -1025,7 +928,7 @@ public class DicCross  extends AbstractDictTool{
             msg.out("[" + (taskOrder++) + "] Loading monolingual C (" + sDicMonC + ")\n");
             Dictionary mon2 = DicTools.readMonolingual(sDicMonC);
             DicSet theDicSet = new DicSet(mon1, bil1, mon2, bil2);
-            setDicSet(theDicSet);
+            this.dicSet = theDicSet;
         }
     }
 
@@ -1060,7 +963,7 @@ public class DicCross  extends AbstractDictTool{
             if (r.isUseForCrossing()) {
                 if (r.isCrossModel() && r.isSL(sl) && r.isTL(tl)) {
                     msg.out("[" + (taskOrder++) + "] Loading cross model (" + r.getSource() + ")\n");
-                    this.setCrossModelFileName(r.getSource());
+                    this.crossModelFileName = r.getSource();
                     CMok = true;
                 }
                 if (r.isMorphological() && r.isSL(sl)) {
@@ -1252,8 +1155,8 @@ public class DicCross  extends AbstractDictTool{
                 URL url = new URL(source);
                 InputStream is = url.openStream();
                 DictionaryReader dicReader = new DictionaryReader();
-                dicReader.setUrlDic(true);
-                dicReader.setIs(is);
+                dicReader.urlDic = true;
+                dicReader.is = is;
                 dic = dicReader.readDic();
                 dic.fileName = source;
             } catch (MalformedURLException mfue) {
@@ -1279,102 +1182,18 @@ public class DicCross  extends AbstractDictTool{
     }
 
 
-    /**
-     * @return the dicSet
-     */
-    private DicSet getDicSet() {
-        return dicSet;
-    }
-
-    /**
-     * @param dicSet
-     *                the dicSet to set
-     */
-    public void setDicSet(DicSet dicSet) {
-        this.dicSet = dicSet;
-    }
-
-    
-    public void setOutDir(String path) {
-        this.outDir = path;
-    }
-
-    
-    public String getOutDir() {
-        return this.outDir;
-    }
-
-    
-    public int getCompleted() {
-        return this.completed;
-    }
-
-    
-    public void setCompleted(int percent) {
-        this.completed = percent;
-
-        if (progressBar != null) {
-            progressBar.setValue(percent);
-        }
-    }
-
-    
-    public void setNMinElements(double n) {
-        this.nMinElements = n;
-    }
-
-    
-    public double getNMinElements() {
-        return this.nMinElements;
-    }
-
-    
     public void incrementNCrossedElements() {
         this.nCrossedElements++;
         double compl = ((this.nCrossedElements / this.nMinElements)) * 100;
         int perc = (int) compl;
-        this.setCompleted(perc);
+        this.completed = perc;
+		
+		if (this.progressBar != null) {
+		    this.progressBar.setValue(perc);
+		}
     }
 
     
-    public void setProgressBar(JProgressBar progressBar) {
-        this.progressBar = progressBar;
-    }
-
-    
-    public String getBilCrossedPath() {
-        return this.bilCrossed_path;
-    }
-
-    
-    public String getMonACrossedPath() {
-        return this.monACrossed_path;
-    }
-
-    
-    public String getMonCCrossedPath() {
-        return this.monCCrossed_path;
-    }
-
-
-// TODO UCdetector: Remove unused code: 
-//     /**
-//      * This method firstSymbolIs on process
-//      * @param dicSet
-//      * @return The common language
-//      */
-//     public String getCommonLanguage(DicSet dicSet) {
-//         // Sin tener en cuentra el orden. Se resuelve automáticamente
-//         if (isMetaInfoComplete(dicSet)) {
-//             Vector<Dictionary> dics = new Vector<Dictionary>();
-//             HeaderElement d1 = this.dicSet.getMon1().getHeaderElement();
-//             HeaderElement d2 = this.dicSet.getMon2().getHeaderElement();
-//             HeaderElement d3 = this.dicSet.getBil1().getHeaderElement();
-//             HeaderElement d4 = this.dicSet.getBil2().getHeaderElement();
-//         }
-//         return null;
-//     }
-
     /**
      * 
      * @param dicSet
@@ -1387,21 +1206,5 @@ public class DicCross  extends AbstractDictTool{
             }
         }
         return true;
-    }
-
-    /**
-     * 
-     * @return The cross model processor
-     */
-    public CrossModelProcessor getCrossModelProcessor() {
-        return crossModelProcessor;
-    }
-
-    /**
-     * 
-     * @param crossModelProcessor
-     */
-    public void setCrossModelProcessor(CrossModelProcessor crossModelProcessor) {
-        this.crossModelProcessor = crossModelProcessor;
     }
 }

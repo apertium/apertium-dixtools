@@ -45,7 +45,7 @@ public class CrossModelReader extends XMLReader {
     public CrossModel readCrossModel() {
         analize();
         CrossModel crossModel = new CrossModel();
-        Element root = getDocument().getDocumentElement();
+        Element root = document.getDocumentElement();
         for (Element childElement : readChildren(root)) {
             String childElementName = childElement.getNodeName();
             if (childElementName.equals("cross-action")) {
@@ -54,7 +54,7 @@ public class CrossModelReader extends XMLReader {
             }
         }
         root = null;
-        setDocument(null);
+        this.document = null;
         return crossModel;
     }
 

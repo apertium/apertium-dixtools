@@ -31,41 +31,9 @@ public class AbstractDictTool {
     /**
      * Options
      */
-    protected DicOpts opt = DicOpts.STD;
+    public DicOpts opt = DicOpts.STD;
 
-    /**
-     * Options
-     */
-    public DicOpts getOpt() {
-        return opt;
-    }
-
-    /**
-     * Options
-     */
-    public void setOpt(DicOpts opt) {
-        this.opt = opt;
-    }
     protected Msg msg = Msg.inst();
     
     protected String[] arguments;
-
-    /**
-     * @return the arguments
-     */
-    public String[] getArguments() {
-        return arguments;
-    }
-
-    /**
-     * @param arguments
-     *                the arguments to set
-     */
-    public void setArguments(String[] arguments) {
-        this.arguments = arguments;
-    }
-    /*
-    -align 10 55
-    -pardef
-     */
 }

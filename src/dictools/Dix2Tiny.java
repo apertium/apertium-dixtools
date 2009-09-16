@@ -72,9 +72,9 @@ public class Dix2Tiny extends AbstractDictTool {
             dix2mdix = new Dix2MDix(new TinyFilter());
 
         }
-        dix2mdix.setBilFileName(bilFileName);
-        dix2mdix.setSltlCode(sltlCode);
-        dix2mdix.setSltlFull(sltlFull);
+        dix2mdix.bilFileName = bilFileName;
+        dix2mdix.sltlCode = sltlCode;
+        dix2mdix.sltlFull = sltlFull;
 
         dix2mdix.do_convert();
 
@@ -91,11 +91,11 @@ public class Dix2Tiny extends AbstractDictTool {
             System.err.println("Filter: default");
             dix2cc = new Dix2CC(new TinyFilter());
         }
-        dix2cc.setBilFileName(bilFileName);
-        dix2cc.setSltlCode(sltlCode);
-        dix2cc.setSltlFull(sltlFull);
+        dix2cc.bilFileName = bilFileName;
+        dix2cc.sltlCode = sltlCode;
+        dix2cc.sltlFull = sltlFull;
         String outFileName = this.sltlCode + "-data.cc";
-        dix2cc.setOutFileName(outFileName);
+        dix2cc.outFileName = outFileName;
 
         // check Exception
         String[] langs = this.sltlFull.split("-");
@@ -117,14 +117,14 @@ public class Dix2Tiny extends AbstractDictTool {
 
     private void processArguments() {
         if (this.arguments.length >= 5) {
-            bilFileName = this.getArguments()[1];
-            this.sltlCode = this.getArguments()[2];
-            this.sltlFull = this.getArguments()[3];
-            this.platform = this.getArguments()[4];
+            bilFileName = this.arguments[1];
+            this.sltlCode = this.arguments[2];
+            this.sltlFull = this.arguments[3];
+            this.platform = this.arguments[4];
         }
         if (this.arguments.length > 5) {
 
-            this.filter = this.getArguments()[5];
+            this.filter = this.arguments[5];
         System.out.println("Filter: " +  filter);
         }
     }

@@ -40,15 +40,15 @@ public class Dix2CC {
     
     private Dictionary dic;
     
-    private String bilFileName;
+    public String bilFileName;
     
-    private String sltlCode;
+    public String sltlCode;
     
-    private String sltlFull;
+    public String sltlFull;
     
-    private String[] arguments;
+    public String[] arguments;
     
-    private String outFileName;
+    public String outFileName;
     
     private TinyFilter tinyFilter;
 
@@ -150,7 +150,7 @@ public class Dix2CC {
     private void processArguments() {
         if (arguments != null) {
             String fileName = this.arguments[1];
-            this.setBilFileName(fileName);
+            this.bilFileName = fileName;
             this.outFileName = this.arguments[2];
         }
         if (this.bilFileName != null) {
@@ -165,80 +165,6 @@ public class Dix2CC {
 
 
     //dic.reverse();
-    }
-
-    /**
-     * 
-     * @return the  argumentss
-     */
-    public String[] getArguments() {
-        return arguments;
-    }
-
-    /**
-     * 
-     * @param arguments
-     */
-    public void setArguments(String[] arguments) {
-        this.arguments = arguments;
-    }
-
-    /**
-     * 
-     * @return Out file name
-     */
-    public String getOutFileName() {
-        return outFileName;
-    }
-
-    /**
-     * 
-     * @param outFileName
-     */
-    public void setOutFileName(String outFileName) {
-        this.outFileName = outFileName;
-    }
-
-    /**
-     * @return the bilFileName
-     */
-    public String getBilFileName() {
-        return bilFileName;
-    }
-
-    /**
-     * @param bilFileName the bilFileName to set
-     */
-    public void setBilFileName(String bilFileName) {
-        this.bilFileName = bilFileName;
-    }
-
-    /**
-     * @return the sltlCode
-     */
-    public String getSltlCode() {
-        return sltlCode;
-    }
-
-    /**
-     * @param sltlCode the sltlCode to set
-     */
-    public void setSltlCode(String sltlCode) {
-        this.sltlCode = sltlCode;
-    }
-
-    /**
-     * @return the sltlFull
-     */
-    public String getSltlFull() {
-        return sltlFull;
-    }
-
-    /**
-     * @param sltlFull the sltlFull to set
-     */
-    public void setSltlFull(String sltlFull) {
-        this.sltlFull = sltlFull;
     }
 }
 

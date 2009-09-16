@@ -40,14 +40,4 @@ public class EntryList extends ArrayList<Entry> {
     public boolean add(Entry entry) {
         return super.add(entry);
     }
-
-    /**
-     * 
-     * @param key
-     * @param value
-     */
-    public void add(String key, String value) {
-        Entry entry = new Entry(key, value);
-        this.add(entry);
-    }
 }

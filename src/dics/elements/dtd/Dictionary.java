@@ -53,8 +53,6 @@ public class Dictionary extends DixElement {
     
     public int nDifferent;
     
-    public HashMap<String, ArrayList<Pardef>> equivPar;
-    
     public String type;
     
     public String fileName;
@@ -62,15 +60,11 @@ public class Dictionary extends DixElement {
     public String filePath;
     
     public String leftLanguage;
-    
     public String rightLanguage;
     
     public String folder;
     
     public String xmlEncoding = "UTF-8";
-    
-    public String xmlVersion;
-
     
     public Dictionary() {
       super("dictionary");
@@ -175,7 +169,7 @@ public class Dictionary extends DixElement {
      * @param encoding
      */
     public void printXML(String fileName, String encoding, DicOpts opt) {
-        fileName = fileName;
+        this.fileName = fileName;
         try {
             Writer dos;
               if ("-".equals(fileName)) {

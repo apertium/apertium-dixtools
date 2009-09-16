@@ -42,19 +42,11 @@ public class DicReverse  extends AbstractDictTool {
      * 
      * @return Undefined         */
     public Dictionary reverse() {
-        getDicOrig().reverse();
+        dicOrig.reverse();
         // Collections.sort(getDicOrig().getEntries());
-        return getDicOrig();
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    private Dictionary getDicOrig() {
         return dicOrig;
     }
 
-    
     private void processArguments() {
         DictionaryReader dicReader = new DictionaryReader(arguments[1]);
         Dictionary bil = dicReader.readDic();
@@ -72,13 +64,13 @@ public class DicReverse  extends AbstractDictTool {
     public void actionReverse() {
         Dictionary bil = reverse();
         String reverseFileName = "reversed-dic.dix";
-        if (getArguments().length == 3) {
-            if (getArguments()[2].equals("out.dix")) {
+        if (arguments.length == 3) {
+            if (arguments[2].equals("out.dix")) {
                 reverseFileName = DicTools.reverseDicName(arguments[1]);
             } else {
-                reverseFileName = getArguments()[2];
+                reverseFileName = arguments[2];
             }
-            bil.printXML(reverseFileName,getOpt());
+            bil.printXML(reverseFileName,opt);
         }
     }
 

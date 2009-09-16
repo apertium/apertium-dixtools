@@ -58,7 +58,7 @@ public class AssignParadigm extends AbstractDictTool {
         processArguments();
 
         DictionaryReader reader = new DictionaryReader(morphDic);
-        reader.setReadParadigms(false);
+        reader.readParadigms = false;
         System.err.println("Reading morphological '" + morphDic + "'");
         Dictionary dic = reader.readDic();
 

@@ -36,7 +36,7 @@ public class TinyFilter {
 
     private String xmlFileName;
     private Properties props;
-    private boolean ignoreNotListedTags = false;
+    boolean ignoreNotListedTags = false;
     private HashMap<String, String> preservedTags;
     private HashMap<String, String> ignoredTags;
     private HashMap<String, String> removedCharacters;
@@ -93,9 +93,9 @@ public class TinyFilter {
 
             if (key.equals("ignoreNotListedTags")) {
                 if (value.equals("no")) {
-                    this.setIgnoreNotListedTags(false);
+                    this.ignoreNotListedTags = false;
                 } else {
-                    this.setIgnoreNotListedTags(true);
+                    this.ignoreNotListedTags = true;
                 }
             }
 
@@ -136,10 +136,6 @@ public class TinyFilter {
         return (this.ignoredTags.containsKey(tagName));
     }
 
-    public final boolean isCharRemoved(String character) {
-        return (this.removedCharacters.containsKey(character));
-    }
-
     public final boolean isCharReplacedWithBlank(String character) {
         return (this.replacedCharactersWithBlank.containsKey(character));
     }
@@ -147,7 +143,7 @@ public class TinyFilter {
     public final boolean preserve(String tagName) {
         boolean preserve = isTagPreserved(tagName);
         boolean ignore = isTagIgnored(tagName);
-        boolean ignoreNotListed = isIgnoreNotListedTags();
+        boolean ignoreNotListed = ignoreNotListedTags;
         return (preserve || (!ignore && !preserve && !ignoreNotListed));
     }
 
@@ -187,19 +183,5 @@ public class TinyFilter {
             String value = (String) props.get(key);
             System.err.println("(" + key + "," + value + ")");
         }
-    }
-
-    /**
-     * @return the ignoreNotListedTags
-     */
-    public boolean isIgnoreNotListedTags() {
-        return ignoreNotListedTags;
-    }
-
-    /**
-     * @param ignoreNotListedTags the ignoreNotListedTags to set
-     */
-    public void setIgnoreNotListedTags(boolean ignoreNotListedTags) {
-        this.ignoreNotListedTags = ignoreNotListedTags;
     }
 }

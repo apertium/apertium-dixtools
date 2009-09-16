@@ -65,19 +65,6 @@ public class CrossModel {
 
     /**
      * 
-     * @param id
-     * @return Undefined         */
-    public CrossAction getCrossAction(String id) {
-        for (CrossAction ca : getCrossActions()) {
-            if (ca.getId().equals(id)) {
-                return ca;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * 
      * @param fileName
      */
     public void printXML(String fileName, DicOpts opt) {

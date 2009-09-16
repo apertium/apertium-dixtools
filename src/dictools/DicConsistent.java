@@ -39,27 +39,27 @@ import dics.elements.utils.DicTools;
 public class DicConsistent extends AbstractDictTool {
 
     
-    private Dictionary mon1;
+    public Dictionary mon1;
     
-    private Dictionary mon2;
+    public Dictionary mon2;
     
-    private Dictionary bil1;
+    public Dictionary bil1;
     
-    private Dictionary bil2;
+    public Dictionary bil2;
     
-    private HashMap<String, ArrayList<E>> commonA;
+    public HashMap<String, ArrayList<E>> commonA;
     
-    private HashMap<String, ArrayList<E>> commonC;
+    public HashMap<String, ArrayList<E>> commonC;
     
-    private HashMap<String, ArrayList<E>> differentA;
+    public HashMap<String, ArrayList<E>> differentA;
     
-    private HashMap<String, ArrayList<E>> differentC;
+    public HashMap<String, ArrayList<E>> differentC;
     
-    private String notCommonSuffix;
+    public String notCommonSuffix;
     
-    private DicSet dicSet;
+    public DicSet dicSet;
     
-    private String outDir = "dix/";
+    public String outDir = "dix/";
 
     
     public DicConsistent() {
@@ -67,15 +67,15 @@ public class DicConsistent extends AbstractDictTool {
 
     
     public DicConsistent(DicSet dicset) {
-        setMon1(dicset.getMon1());
-        setMon2(dicset.getMon2());
-        setBil1(dicset.getBil1());
-        setBil2(dicset.getBil2());
+        this.mon1 = dicset.mon1;
+        this.mon2 = dicset.mon2;
+        this.bil1 = dicset.bil1;
+        this.bil2 = dicset.bil2;
         differentA = new HashMap<String, ArrayList<E>>();
         differentC = new HashMap<String, ArrayList<E>>();
         commonA = new HashMap<String, ArrayList<E>>();
         commonC = new HashMap<String, ArrayList<E>>();
-        setNotCommonSuffix("not-common-");
+        this.notCommonSuffix = "not-common-";
     }
 
     
@@ -90,20 +90,20 @@ public class DicConsistent extends AbstractDictTool {
      * @param entries2
      */
     private void compare() {
-        HashMap<String, ArrayList<E>> bilABMap = DicTools.buildHash(getBil1().getEntriesInMainSection());
-        HashMap<String, ArrayList<E>> bilBCMap = DicTools.buildHash(getBil2().getEntriesInMainSection());
-        HashMap<String, ArrayList<E>> monAMap = DicTools.buildHashMon(getMon1().getEntriesInMainSection());
-        HashMap<String, ArrayList<E>> monCMap = DicTools.buildHashMon(getMon2().getEntriesInMainSection());
-        markCommonEntries(bilABMap, bilBCMap, monAMap, getCommonA(), getDifferentA());
-        markCommonEntries(bilBCMap, bilABMap, monCMap, getCommonC(), getDifferentC());
+        HashMap<String, ArrayList<E>> bilABMap = DicTools.buildHash(bil1.getEntriesInMainSection());
+        HashMap<String, ArrayList<E>> bilBCMap = DicTools.buildHash(bil2.getEntriesInMainSection());
+        HashMap<String, ArrayList<E>> monAMap = DicTools.buildHashMon(mon1.getEntriesInMainSection());
+        HashMap<String, ArrayList<E>> monCMap = DicTools.buildHashMon(mon2.getEntriesInMainSection());
+        markCommonEntries(bilABMap, bilBCMap, monAMap, commonA, differentA);
+        markCommonEntries(bilBCMap, bilABMap, monCMap, commonC, differentC);
     }
 
     
     private void buildNotCommonDictionaries() {
-        buildNotCommonDictionary(getBil1(),getOpt());
-        buildNotCommonDictionary(getBil2(),getOpt());
-        buildNotCommonDictionary(getMon1(),getOpt());
-        buildNotCommonDictionary(getMon2(),getOpt());
+        buildNotCommonDictionary(bil1,opt);
+        buildNotCommonDictionary(bil2,opt);
+        buildNotCommonDictionary(mon1,opt);
+        buildNotCommonDictionary(mon2,opt);
     }
 
     /**
@@ -123,7 +123,7 @@ public class DicConsistent extends AbstractDictTool {
         fnDic = fnDic.replaceAll("/dics/", "/dix/");
 
         //dicNotCommon.printXML(fnDic + getNotCommonSuffix());
-        dicNotCommon.printXML(this.getOutDir() + getNotCommonSuffix() + fileName, opt);
+        dicNotCommon.printXML(this.outDir + notCommonSuffix + fileName, opt);
         dicNotCommon = null;
 
     }
@@ -193,114 +193,10 @@ public class DicConsistent extends AbstractDictTool {
 
     
     private void removeNotShared() {
-        getMon1().removeNotCommon();
-        getMon2().removeNotCommon();
-        getBil1().removeNotCommon();
-        getBil2().removeNotCommon();
-    }
-
-    /**
-     * 
-     * @return Undefined
-     */
-    public HashMap<String, ArrayList<E>> getDifferentA() {
-        return differentA;
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    public HashMap<String, ArrayList<E>> getDifferentC() {
-        return differentC;
-    }
-
-    /**
-     * @return Undefined Undefined the bil1
-     */
-    public Dictionary getBil1() {
-        return bil1;
-    }
-
-    /**
-     * @param bil1
-     *                the bil1 to set
-     */
-    public void setBil1(Dictionary bil1) {
-        this.bil1 = bil1;
-    }
-
-    /**
-     * @return Undefined Undefined the bil2
-     */
-    public Dictionary getBil2() {
-        return bil2;
-    }
-
-    /**
-     * @param bil2
-     *                the bil2 to set
-     */
-    public void setBil2(Dictionary bil2) {
-        this.bil2 = bil2;
-    }
-
-    /**
-     * @return the mon1
-     */
-    public Dictionary getMon1() {
-        return mon1;
-    }
-
-    /**
-     * @param mon1
-     *                the mon1 to set
-     */
-    private void setMon1(Dictionary mon1) {
-        this.mon1 = mon1;
-    }
-
-    /**
-     * @return the mon2
-     */
-    public Dictionary getMon2() {
-        return mon2;
-    }
-
-    /**
-     * @param mon2
-     *                the mon2 to set
-     */
-    private void setMon2(Dictionary mon2) {
-        this.mon2 = mon2;
-    }
-
-    /**
-     * @return the commonA
-     */
-    public HashMap<String, ArrayList<E>> getCommonA() {
-        return commonA;
-    }
-
-    /**
-     * @return the commonC
-     */
-    public HashMap<String, ArrayList<E>> getCommonC() {
-        return commonC;
-    }
-
-    /**
-     * @return the notCommonSuffix
-     */
-    public String getNotCommonSuffix() {
-        return notCommonSuffix;
-    }
-
-    /**
-     * @param notCommonSuffix
-     *                the notCommonSuffix to set
-     */
-    private void setNotCommonSuffix(String notCommonSuffix) {
-        this.notCommonSuffix = notCommonSuffix;
+        mon1.removeNotCommon();
+        mon2.removeNotCommon();
+        bil1.removeNotCommon();
+        bil2.removeNotCommon();
     }
 
     /**
@@ -309,39 +205,39 @@ public class DicConsistent extends AbstractDictTool {
      * @return Undefined
      */
     private DicConsistent actionConsistent(String removeNotCommon) {
-        DicConsistent dicConsistent = new DicConsistent(getDicSet());
+        DicConsistent dicConsistent = new DicConsistent(dicSet);
         dicConsistent.makeConsistentDictionaries(removeNotCommon);
-        dicSet.printXML("consistent",getOpt());
+        dicSet.printXML("consistent",opt);
         return dicConsistent;
     }
 
     
     private void processArguments() {
-        int nArgs = getArguments().length;
+        int nArgs = arguments.length;
         String sDicMonA, sDicMonC, sDicBilAB, sDicBilBC;
         sDicMonA = sDicMonC = sDicBilAB = sDicBilBC = null;
         boolean bilABReverse, bilBCReverse;
         bilABReverse = bilBCReverse = false;
 
         for (int i = 1; i < nArgs; i++) {
-            String arg = getArguments()[i];
+            String arg = arguments[i];
             if (arg.equals("-monA")) {
                 i++;
-                arg = getArguments()[i];
+                arg = arguments[i];
                 sDicMonA = arg;
                 msg.err("Monolingual A: '" + sDicMonA + "'");
             }
 
             if (arg.equals("-monC")) {
                 i++;
-                arg = getArguments()[i];
+                arg = arguments[i];
                 sDicMonC = arg;
                 msg.err("Monolingual C: '" + sDicMonC + "'");
             }
 
             if (arg.equals("-bilAB")) {
                 i++;
-                arg = getArguments()[i];
+                arg = arguments[i];
                 if (arg.equals("-r")) {
                     bilABReverse = true;
                     i++;
@@ -351,14 +247,14 @@ public class DicConsistent extends AbstractDictTool {
                     i++;
                 }
 
-                arg = getArguments()[i];
+                arg = arguments[i];
                 sDicBilAB = arg;
                 msg.err("Bilingual A-B: '" + sDicBilAB + "'");
             }
 
             if (arg.equals("-bilBC")) {
                 i++;
-                arg = getArguments()[i];
+                arg = arguments[i];
 
                 if (arg.equals("-r")) {
                     bilBCReverse = true;
@@ -368,7 +264,7 @@ public class DicConsistent extends AbstractDictTool {
                     bilBCReverse = false;
                     i++;
                 }
-                arg = getArguments()[i];
+                arg = arguments[i];
                 sDicBilBC = arg;
                 msg.err("Bilingual B-C: '" + sDicBilBC + "'");
             }
@@ -381,31 +277,6 @@ public class DicConsistent extends AbstractDictTool {
         Dictionary mon2 = DicTools.readMonolingual(sDicMonC);
 
         DicSet dicSet = new DicSet(mon1, bil1, mon2, bil2);
-        setDicSet(dicSet);
-    }
-
-    /**
-     * @return the dicSet
-     */
-    private DicSet getDicSet() {
-        return dicSet;
-    }
-
-    /**
-     * @param dicSet
-     *                the dicSet to set
-     */
-    private void setDicSet(DicSet dicSet) {
         this.dicSet = dicSet;
-    }
-
-    
-    public void setOutDir(String path) {
-        this.outDir = path;
-    }
-
-    
-    public String getOutDir() {
-        return this.outDir;
     }
 }

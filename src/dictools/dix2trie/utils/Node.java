@@ -117,14 +117,6 @@ public class Node {
     }
 
     /**
-     * Adds a word
-     * @param word
-     */
-    public void addWord(Word word) {
-        this.wordList.put(word);
-    }
-
-    /**
      * Gets the list of words
      * @return The list of words
      */

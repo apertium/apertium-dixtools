@@ -44,7 +44,7 @@ public class SdefsReader extends XMLReader {
      * @return Undefined         */
     public Sdefs readSdefs() {
         analize();
-        Element root = getDocument().getDocumentElement();
+        Element root = document.getDocumentElement();
         String elementName = root.getNodeName();
         Sdefs sdefsElement = null;
 
@@ -54,7 +54,7 @@ public class SdefsReader extends XMLReader {
         }
 
         root = null;
-        setDocument(null);
+        this.document = null;
         return sdefsElement;
     }
 }

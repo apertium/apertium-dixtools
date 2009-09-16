@@ -75,7 +75,7 @@ public class DicSort  extends AbstractDictTool {
     
     public void actionSort() {
         Dictionary dicSorted = sort();
-        dicSorted.printXML(out,getOpt());
+        dicSorted.printXML(out,opt);
     }
     
     
@@ -147,17 +147,8 @@ public class DicSort  extends AbstractDictTool {
         Dictionary dic = dicReader.readDic();
         dic.fileName = arguments[i];
         dicReader = null;
-        setDic(dic);
-        out = arguments[i+1];
-    }
-
-
-    /**
-     * @param dicFormatted
-     *                the dicFormatted to set
-     */
-    private void setDic(Dictionary dic) {
         this.dic = dic;
+        out = arguments[i+1];
     }
 
 
@@ -237,20 +228,5 @@ public class DicSort  extends AbstractDictTool {
         msg.err("  putting entries in the top. Categories with only one element will be put in the end)");
 
         return dic;
-    }
-
-    /**
-     * @return the dic
-     */
-    public Dictionary getDic() {
-        return dic;
-    }
-
-    /**
-     * 
-     * @param out
-     */
-    public void setOut(String out) {
-        this.out = out;
     }
 }

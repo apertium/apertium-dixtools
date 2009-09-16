@@ -52,12 +52,12 @@ import dics.elements.dtd.Section;
 public class DictionaryReader extends XMLReader {
 
     
-    private Dictionary dic;
+	public Dictionary dic;
     
-    private boolean readParadigms = true;
+	public boolean readParadigms = true;
     
-    private JProgressBar progressBar;
-    private double nEntries;
+    public JProgressBar progressBar;
+    public double nEntries;
     private double nElements = 0;
     private int perc = 0;
     private int oldPerc = 0;
@@ -82,15 +82,14 @@ public class DictionaryReader extends XMLReader {
     public Dictionary readDic() {
         analize();
         Dictionary dic = new Dictionary();
-        String encoding = getDocument().getInputEncoding();
+        String encoding = document.getInputEncoding();
         dic.xmlEncoding = encoding;
 
-        Document doc = getDocument();
+        Document doc = document;
         String xmlEncoding = doc.getXmlEncoding();
         String xmlVersion = doc.getXmlVersion();
 
         dic.xmlEncoding = xmlEncoding;
-        dic.xmlVersion = xmlVersion;
 
         Element root = doc.getDocumentElement();
 
@@ -136,7 +135,7 @@ public class DictionaryReader extends XMLReader {
                 } else
 
                 if (childElementName.equals("pardefs")) {
-                    if (isReadParadigms()) {
+                    if (readParadigms) {
                         Pardefs pardefsElement = readPardefs(childElement);
                         dic.pardefs = pardefsElement;
                     }
@@ -144,7 +143,7 @@ public class DictionaryReader extends XMLReader {
 
                 if (childElementName.equals("xi:include")) {
                     String includeFileName = getAttributeValue(childElement, "href");
-                    File f = getDicFile();
+                    File f = dicFile;
                     String parent = f.getParent();
                     if (parent == null) parent = ".";
                     String includeFileNameAndPath = parent+File.separator+ includeFileName;
@@ -179,8 +178,8 @@ public class DictionaryReader extends XMLReader {
             }
         }
         root = null;
-        setDocument(null);
-        setDic(dic);
+        this.document = null;
+        this.dic = dic;
         return dic;
     }
 
@@ -201,7 +200,7 @@ public class DictionaryReader extends XMLReader {
                     String value = getAttributeValue(element, "value");
                     header.put(name, value);
                     if (name.equals("size")) {
-                        this.setNEntries((new Double(value)).doubleValue());
+                        this.nEntries = (new Double(value)).doubleValue();
                     }
                 }
             }
@@ -399,64 +398,5 @@ public class DictionaryReader extends XMLReader {
         this.progressBar.setValue(100);
         }
         return sectionElement;
-    }
-
-    
-
-    
-    
-       
-
-    /**
-     * 
-     * @param e
-     * @return Undefined         */
-
-
-
-    /**
-     * @return the dic
-     */
-    public Dictionary getDic() {
-        return dic;
-    }
-
-    /**
-     * @param dic
-     *                the dic to set
-     */
-    public void setDic(Dictionary dic) {
-        this.dic = dic;
-    }
-
-    /**
-     * @return the readParadigms
-     */
-    public boolean isReadParadigms() {
-        return readParadigms;
-    }
-
-    /**
-     * @param readParadigms
-     *                the readParadigms to set
-     */
-    public void setReadParadigms(boolean readParadigms) {
-        this.readParadigms = readParadigms;
-    }
-
-    public JProgressBar getProgressBar() {
-        return progressBar;
-    }
-
-    public void setProgressBar(JProgressBar progressBar) {
-        this.progressBar = progressBar;
-    }
-
-    public double getNEntries() {
-        return nEntries;
-    }
-
-    public void setNEntries(double nEntries) {
-        this.nEntries = nEntries;
     }
 }

@@ -40,7 +40,7 @@ public class DicFormatE1Line extends AbstractDictTool {
     public DicFormatE1Line(String dicFileName) {
         DictionaryReader dicReader = new DictionaryReader(dicFileName);
         dic = dicReader.readDic();
-        setOpt(dics.elements.utils.DicOpts.STD_1_LINE);
+        this.opt = dics.elements.utils.DicOpts.STD_1_LINE;
     }
 
     
@@ -50,7 +50,7 @@ public class DicFormatE1Line extends AbstractDictTool {
      */
     public DicFormatE1Line(Dictionary dic) {
         this.dic = dic;
-        setOpt(dics.elements.utils.DicOpts.STD_1_LINE);
+        this.opt = dics.elements.utils.DicOpts.STD_1_LINE;
     }
 
     /**

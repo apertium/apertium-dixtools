@@ -52,17 +52,17 @@ public class Dix2MDix {
     
     private Dictionary dic;
     
-    private String bilFileName;
+    public String bilFileName;
     
-    private String[] arguments;
+    public String[] arguments;
     
     private String outFileName;
     
     private HashMap<String, Vector<E>> hm;
     
-    private String sltlCode;
+    public String sltlCode;
     
-    private String sltlFull;
+    public String sltlFull;
     
     private Vector<String> metaInf;
     
@@ -88,10 +88,10 @@ public class Dix2MDix {
         files.add("meta.inf");
 
 
-        String slCode = getSltlCode().split("-")[0];
-        String tlCode = getSltlCode().split("-")[1];
-        String slFull = getSltlFull().split("-")[0];
-        String tlFull = getSltlFull().split("-")[1];
+        String slCode = sltlCode.split("-")[0];
+        String tlCode = sltlCode.split("-")[1];
+        String slFull = sltlFull.split("-")[0];
+        String tlFull = sltlFull.split("-")[1];
 
         metaInf.add("@sl-code:" + slCode + "$");
         metaInf.add("@tl-code:" + tlCode + "$");
@@ -108,7 +108,7 @@ public class Dix2MDix {
 
         this.printMetaInfFile(metaInf);
 
-        String zipFileName = getSltlCode() + "-data.zip";
+        String zipFileName = sltlCode + "-data.zip";
         System.err.println("Building " + zipFileName + " for apertium-tinylex...");
         ZipIt zipIt = new ZipIt(files, zipFileName);
         zipIt.zip();
@@ -181,14 +181,14 @@ public class Dix2MDix {
 
             Vector<Entry> partial = new Vector<Entry>();
             for (Entry e : vector) {
-                if (e.getKey().length() == 0) {
+                if (e.key.length() == 0) {
                     continue;
                 }
                 if (n < block) {
                     if (first == null) {
-                        first = e.getKey();
+                        first = e.key;
                     }
-                    last = e.getKey();
+                    last = e.key;
                     n++;
                     partial.add(e);
                 } else {
@@ -197,7 +197,7 @@ public class Dix2MDix {
                     fileInfo.add(new String("@" + fileName + ":" + content + "$"));
                     dos.append("@size:" + n + "$\n");
                     for (Entry pe : partial) {
-                        dos.append(pe.getValue());
+                        dos.append(pe.value);
                     }
                     dos.flush();
                     dos.close();
@@ -217,7 +217,7 @@ public class Dix2MDix {
             }
             dos.append("@size:" + n + "$\n");
             for (Entry pe : partial) {
-                dos.append(pe.getValue());
+                dos.append(pe.value);
             }
             dos.flush();
             dos.close();
@@ -267,10 +267,10 @@ public class Dix2MDix {
     private void processArguments() {
         if (arguments != null) {
             String fileName = this.arguments[1];
-            this.setBilFileName(fileName);
+            this.bilFileName = fileName;
             //dic.reverse();
-            this.setSltlCode(this.arguments[2]);
-            this.setSltlFull(this.arguments[3]);
+            this.sltlCode = this.arguments[2];
+            this.sltlFull = this.arguments[3];
         }
         DictionaryReader dicReader = new DictionaryReader(this.bilFileName);
         dic = dicReader.readDic();
@@ -278,30 +278,6 @@ public class Dix2MDix {
             dic = this.tinyFilter.doFilter(dic);
         }
         dic.fileName = this.bilFileName;
-    }
-
-    /**
-     * 
-     * @return the arguments
-     */
-    public String[] getArguments() {
-        return arguments;
-    }
-
-    /**
-     * 
-     * @param arguments
-     */
-    public void setArguments(String[] arguments) {
-        this.arguments = arguments;
-    }
-
-    public String getOutFileName() {
-        return outFileName;
-    }
-
-    public void setOutFileName(String outFileName) {
-        this.outFileName = outFileName;
     }
 
     /**
@@ -318,7 +294,7 @@ public class Dix2MDix {
         while (it.hasNext()) {
             Entry entry = new Entry();
             String key = (String) it.next();
-            entry.setKey(key);
+            entry.key = key;
             Vector<E> v = (Vector<E>) hm.get(key);
             String value = "";
             value = value + "[" + key + "]";
@@ -343,95 +319,24 @@ public class Dix2MDix {
                 value = value + ";";
             }
             value = value + "$\n";
-            entry.setValue(value);
+            entry.value = value;
             vector.add(entry);
         }
         return vector;
     }
 
-    /**
-     * @return the bilFileName
-     */
-    public String getBilFileName() {
-        return bilFileName;
-    }
-
-    /**
-     * @param bilFileName the bilFileName to set
-     */
-    public void setBilFileName(String bilFileName) {
-        this.bilFileName = bilFileName;
-    }
-
-    /**
-     * @return the sltlCode
-     */
-    public String getSltlCode() {
-        return sltlCode;
-    }
-
-    /**
-     * @param sltlCode the sltlCode to set
-     */
-    public void setSltlCode(String sltlCode) {
-        this.sltlCode = sltlCode;
-    }
-
-    /**
-     * @return the sltlFull
-     */
-    public String getSltlFull() {
-        return sltlFull;
-    }
-
-    /**
-     * @param sltlFull the sltlFull to set
-     */
-    public void setSltlFull(String sltlFull) {
-        this.sltlFull = sltlFull;
-    }
-
-    
     private class Entry implements Comparable<Entry> {
 
         
-        private String key;
+    	public String key;
         
-        private String value;
+    	public String value;
 
         
-        public Entry() {
-        }
-
-        /**
-         * 
-         * @param key
-         * @param value
-         */
-        public Entry(String key, String value) {
-            this.key = key;
-            this.value = value;
-        }
-
-        public String getKey() {
-            return key;
-        }
-
-        public void setKey(String key) {
-            this.key = key;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        public void setValue(String value) {
-            this.value = value;
-        }
 
         public int compareTo(Entry anotherEntry) {
-            String lemma2 = anotherEntry.getKey();
-            String lemma1 = this.getKey();
+            String lemma2 = anotherEntry.key;
+            String lemma1 = this.key;
 
             if (lemma1 == null || lemma2 == null) {
                 return 0;

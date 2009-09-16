@@ -48,11 +48,6 @@ public class DicFormatE1LineAligned extends AbstractDictTool {
     return this;
   }
 
-  public DicFormatE1LineAligned setDic(Dictionary dic) {
-    this.dic=dic;
-    return this;
-  }
-
     
     
     /**
@@ -61,7 +56,7 @@ public class DicFormatE1LineAligned extends AbstractDictTool {
      */
     public DicFormatE1LineAligned(Dictionary dic) {
         this.dic = dic;
-        setOpt(dics.elements.utils.DicOpts.STD_ALIGNED);
+        this.opt = dics.elements.utils.DicOpts.STD_ALIGNED;
     }
 
     /**

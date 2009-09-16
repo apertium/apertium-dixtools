@@ -41,13 +41,10 @@ public class Section extends DixElement {
     
     public ArrayList<E> elements;
     
-    public ArrayList<String> includes;
-
-    
     public Section() {
         super("section");
         elements = new ArrayList<E>();
-        includes = new ArrayList<String>();
+        //includes = new ArrayList<String>();
     }
 
     /**
