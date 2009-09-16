@@ -190,7 +190,7 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
      * 
      * @param value
      */
-    protected void setValue(String value) {
+    public void setValue(String value) {
         this.value = value;
     }
 

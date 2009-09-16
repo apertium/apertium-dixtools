@@ -31,37 +31,15 @@ import dics.elements.utils.DicOpts;
 public class V extends DixElement {
 
     
-    private String name;
-
     
     public V() {
         super("v");
     }
 
-    /**
-     * 
-     * @param value
-     */
+
     public V(String value) {
-        this();
-        name = value;
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    @Override
-    public String getValue() {
-        return name;
-    }
-
-    /**
-     * 
-     * @param value
-     */
-    @Override
-    public void setValue(String value) {
-        name = value;
+        super("v");
+        setValue(value);
     }
 
     /**

@@ -31,7 +31,7 @@ import dics.elements.utils.DicOpts;
 public class Re extends DixElement {
 
     
-    private String value;
+    private String expression;
 
     /**
      * 
@@ -39,7 +39,7 @@ public class Re extends DixElement {
      */
     public Re(String value) {
         super("re");
-        this.value = value;
+        this.expression = value;
     }
 
     /**
@@ -47,7 +47,7 @@ public class Re extends DixElement {
      * @return Undefined         */
     @Override
     public String getValue() {
-        return value;
+        return expression;
     }
 
     /**
@@ -60,7 +60,7 @@ public class Re extends DixElement {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
         
-        value = maskNull(value);
+        expression = maskNull(expression);
 
         dos.append( (opt.nowAlign?"":tab(3)) + "<" + TAGNAME + ">" + getValue() + "</" + TAGNAME + ">"+appendCharacterData.trim()+  (opt.nowAlign?"":"\n"));
     }

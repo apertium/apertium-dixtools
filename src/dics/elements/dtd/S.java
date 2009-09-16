@@ -34,8 +34,6 @@ public class S extends DixElement {
     
     private static HashMap<String, S> sElementList = new HashMap<String, S>();
     
-    private String name;
-
     
     // private String temp;
     
@@ -49,7 +47,7 @@ public class S extends DixElement {
      */
     public S(String value) {
         this();
-        name = value;
+        setValue(value);
     }
 
     /*
@@ -57,24 +55,7 @@ public class S extends DixElement {
      */
     public S(S sE) {
         this();
-        name = sE.getValue();
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    @Override
-    public String getValue() {
-        return name;
-    }
-
-    /**
-     * 
-     * @param value
-     */
-    @Override
-    public void setValue(String value) {
-        name = value;
+        setValue(sE.getValue());
     }
 
     /**
@@ -105,7 +86,7 @@ public class S extends DixElement {
      * @param value
      * @return Undefined         */
     public boolean is(String value) {
-        if (name.equals(value)) {
+        if (getValue().equals(value)) {
             return true;
         }
         return false;

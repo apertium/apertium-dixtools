@@ -35,7 +35,6 @@ public abstract class ContentElement extends DixElement implements Cloneable {
     
     public ElementList children = new ElementList();
     
-    protected String value;
     
 /* TODO UCdetector: Remove unused code: 
     protected String sElem;
@@ -51,9 +50,8 @@ public abstract class ContentElement extends DixElement implements Cloneable {
      * @param cE
      */
     public ContentElement(String tagName, ContentElement cE) {
-      super(tagName);
+        super(tagName);
         children = (ElementList) cE.children.clone();
-        value = new String(cE.getValue());
     }
 
     /**

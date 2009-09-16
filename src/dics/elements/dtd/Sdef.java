@@ -31,8 +31,6 @@ import dics.elements.utils.DicOpts;
 public class Sdef extends DixElement {
 
     
-    public String n;
-    
     public String comment;
 
     /**
@@ -41,15 +39,7 @@ public class Sdef extends DixElement {
      */
     public Sdef(String value) {
         super("sdef");
-        n = value;
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    @Override
-    public String getValue() {
-        return n;
+        setValue(value);
     }
 
     /**

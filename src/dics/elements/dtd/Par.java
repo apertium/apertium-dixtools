@@ -31,8 +31,6 @@ import dics.elements.utils.DicOpts;
 public class Par extends DixElement {
 
     
-    private String n;
-    
     private String sa;
 
     private String[] prm;
@@ -49,25 +47,13 @@ public class Par extends DixElement {
      */
     public Par(String value) {
       this();
-        n = value;
+       setValue(value);
     }
 
     /**
      * 
      * @param value
      */
-    @Override
-    public void setValue(String value) {
-        n = value;
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    @Override
-    public String getValue() {
-        return n;
-    }
 
     /**
      * 
@@ -109,7 +95,7 @@ public class Par extends DixElement {
     @Override
     public String toString() {
         String saAttr = sa==null?"":" sa=\"" + sa + "\" ";
-        return "<" + TAGNAME + " n=\"" + n + "\"" + prmToString() + saAttr + "/>" ;
+        return "<" + TAGNAME + " n=\"" + getValue() + "\"" + prmToString() + saAttr + "/>" ;
     }
 
   public String[] getPrm() {
