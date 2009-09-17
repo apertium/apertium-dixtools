@@ -36,9 +36,6 @@ public class DicFilter  extends AbstractDictTool{
     
     private Dictionary dicB;
     
-    
-    
-    public String outFileName;
 
     
     public DicFilter() {

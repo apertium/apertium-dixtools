@@ -54,15 +54,15 @@ public class DicMerge  extends AbstractDictTool{
     
     private Dictionary monB2;
     
-    private DicSet dicSet1;
+//    private DicSet dicSet1;
     
-    private DicSet dicSet2;
+//    private DicSet dicSet2;
     
-    private DicSet merged;
+//    private DicSet merged;
     
     private String sOut;
     
-    private HashMap<String, String> paradigmsToRemove;
+//    private HashMap<String, String> paradigmsToRemove;
 
     
     public DicMerge() {
@@ -234,7 +234,7 @@ public class DicMerge  extends AbstractDictTool{
 
         int duplicated = 0;
 
-        paradigmsToRemove = new HashMap<String, String>();
+        //paradigmsToRemove = new HashMap<String, String>();
 
         ArrayList<E> elements1 = sectionE1.elements;
         System.err.println("  monolingual 1 (" + elements1.size() + " lemmas)");
@@ -510,7 +510,7 @@ public class DicMerge  extends AbstractDictTool{
         Dictionary monA1 = DicTools.readMonolingual(sDicMonA1);
         Dictionary monB1 = DicTools.readMonolingual(sDicMonB1);
         DicSet dicSet1 = new DicSet(bilAB1, monA1, monB1);
-        this.dicSet1 = dicSet1;
+        //this.dicSet1 = dicSet1;
         this.bilAB1 =(bilAB1);
         this.monA1 = (monA1);
         this.monB1 = (monB1);
@@ -523,7 +523,7 @@ public class DicMerge  extends AbstractDictTool{
         this.monA2 = (monA2);
         this.monB2 = (monB2);
 
-        this.dicSet2 = dicSet2;
+        //this.dicSet2 = dicSet2;
 
     }
 

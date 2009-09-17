@@ -221,7 +221,7 @@ public class DicCross  extends AbstractDictTool{
         Dictionary dic = new Dictionary();
 
         // encoding
-        String encoding = crossXmlEncodings(dic1.xmlEncoding, dic2.xmlEncoding);
+        String encoding = "UTF-8";
         dic.xmlEncoding = encoding;
 
         // alphabet
@@ -246,15 +246,6 @@ public class DicCross  extends AbstractDictTool{
         nDCrossModel.printXML(this.outDir + "patterns-not-detected.xml",opt);
         dics[0] = dic;
         return dics;
-    }
-
-    /**
-     *
-     * @param encoding1
-     * @param encoding2
-     */
-    private String crossXmlEncodings(String encoding1, String encoding2) {
-        return "UTF-8";
     }
 
     /**

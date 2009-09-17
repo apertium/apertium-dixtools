@@ -74,35 +74,37 @@ public class Sdefs extends DixElement {
         dos.append(appendCharacterData.trim());
     }
 
-    /**
-     * 
-     * @param fileName
-     * @param encoding
-     */
-    public void printXML(String fileName, String encoding, DicOpts opt) {
-        BufferedOutputStream bos;
-        FileOutputStream fos;
-        OutputStreamWriter dos;
 
-        try {
-            fos = new FileOutputStream(fileName);
-            bos = new BufferedOutputStream(fos);
-            dos = new OutputStreamWriter(bos, encoding);
-            dos.append("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
-            dos.append("<dictionary>\n");
-            printXML(dos, DicOpts.STD);
-            dos.append("</dictionary>\n");
-
-            fos = null;
-            bos = null;
-            dos.close();
-            dos = null;
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception eg) {
-            eg.printStackTrace();
-        }
-    }
+// TODO UCdetector: Remove unused code: 
+//     /**
+//      * 
+//      * @param fileName
+//      * @param encoding
+//      */
+//     public void printXML(String fileName, String encoding, DicOpts opt) {
+//         BufferedOutputStream bos;
+//         FileOutputStream fos;
+//         OutputStreamWriter dos;
+// 
+//         try {
+//             fos = new FileOutputStream(fileName);
+//             bos = new BufferedOutputStream(fos);
+//             dos = new OutputStreamWriter(bos, encoding);
+//             dos.append("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
+//             dos.append("<dictionary>\n");
+//             printXML(dos, DicOpts.STD);
+//             dos.append("</dictionary>\n");
+// 
+//             fos = null;
+//             bos = null;
+//             dos.close();
+//             dos = null;
+//         } catch (IOException e) {
+//             e.printStackTrace();
+//         } catch (Exception eg) {
+//             eg.printStackTrace();
+//         }
+//     }
 
     /**
      * 

@@ -42,8 +42,6 @@ public class Dix2CC {
     
     public String bilFileName;
     
-    public String sltlCode;
-    
     public String sltlFull;
     
     public String[] arguments;

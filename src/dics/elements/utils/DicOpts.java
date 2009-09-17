@@ -79,7 +79,6 @@ public class DicOpts implements Cloneable {
    echo "    -stripEmptyLines    removes empty lines originating from original file"
    echo "    -noProcComments    don't add comments telling which processing was done"
   */
-  public boolean debug = false;
   public boolean stripEmptyLines = false;
   public boolean noProcessingComments = false;
 

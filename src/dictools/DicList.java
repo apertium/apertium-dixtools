@@ -51,11 +51,7 @@ public class DicList {
     
 	public String action;
     
-	public boolean urlDic;
-    
-	public String url;
-
-    protected Msg msg = Msg.inst();
+	protected Msg msg = Msg.inst();
     
     public DicList() {
     }
@@ -207,7 +203,6 @@ public class DicList {
      *                the url to set
      */
     public void setUrl(String url) {
-        this.url = url;
         try {
             URL theUrl = new URL(url);
             InputStream is = theUrl.openStream();

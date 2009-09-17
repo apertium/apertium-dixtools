@@ -57,12 +57,10 @@ public class Dictionary extends DixElement {
     
     public String fileName;
     
-    public String filePath;
     
     public String leftLanguage;
     public String rightLanguage;
     
-    public String folder;
     
     public String xmlEncoding = "UTF-8";
     

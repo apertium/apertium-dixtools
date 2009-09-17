@@ -83,7 +83,6 @@ public class ProcessDics extends AbstractDictTool {
 
           boolean align=false, alignPardef=false;
           if (arg.equals("-debug")) {
-            opt.debug=true;
             msg.setDebug(true);
           } else if (arg.equalsIgnoreCase("-noProcComments")) {
             opt.noProcessingComments=true;
@@ -513,7 +512,6 @@ public class ProcessDics extends AbstractDictTool {
             DicList tool = new DicList();
             tool.action = arguments[1];
             if (arguments[2].equals("-url")) {
-                tool.urlDic = true;
                 tool.setUrl(arguments[3]);
                 System.err.println("URL: " + arguments[3]);
             } else {

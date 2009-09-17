@@ -92,8 +92,6 @@ public class Dix2Tiny extends AbstractDictTool {
             dix2cc = new Dix2CC(new TinyFilter());
         }
         dix2cc.bilFileName = bilFileName;
-        dix2cc.sltlCode = sltlCode;
-        dix2cc.sltlFull = sltlFull;
         String outFileName = this.sltlCode + "-data.cc";
         dix2cc.outFileName = outFileName;
 
