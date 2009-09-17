@@ -62,7 +62,7 @@ public class DicFix  extends AbstractDictTool {
             boolean removed = false;
             for (Iterator<E> eei = par.elements.iterator(); eei.hasNext(); ) {
                 E ee = eei.next();
-                String s = ee.toStringAll();
+                String s = ee.toString();
                 boolean alreadyThere = !ees.add(s);
                 if (alreadyThere) { // remove if this entry already existed
                     moveCommentsToPrevious(eePrevious, ee);

@@ -646,24 +646,6 @@ public class E extends DixElement implements Cloneable {
         return str.toString();
     }
 
-    /**
-     * 
-     * @return Undefined         
-     */
-    public String toStringAll() {
-        String str = "";
-        String r = "";
-        if (this.hasRestriction()) {
-            r = " r=\"" + restriction + "\"";
-        }
-        str += "<e" + r + ">";
-        for (DixElement e : children) {
-            str += e.toString();
-        }
-        str += "</e>";
-        return str;
-    }
-
 
 // TODO UCdetector: Remove unused code: 
 //     /**

@@ -82,11 +82,11 @@ public class Pardef extends DixElement {
         HashMap<String, E> elementsPardef1 = new HashMap<String, E>();
 
         for (E element1 : eList1) {
-            elementsPardef1.put(element1.toStringAll(), element1);
+            elementsPardef1.put(element1.toString(), element1);
         }
 
         for (E element2 : eList2) {
-            if (!elementsPardef1.containsKey(element2.toStringAll())) {
+            if (!elementsPardef1.containsKey(element2.toString())) {
                 return false;
             }
         }

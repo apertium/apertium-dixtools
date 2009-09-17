@@ -242,7 +242,7 @@ public class DicMerge  extends AbstractDictTool{
         int fromSec1 = 0;
         for (E e1 : elements1) {
             //String e1Key = e1.lemmaAndCategory();
-            String e1Key = e1.toStringAll();
+            String e1Key = e1.toString();
             if (!eMap.containsKey(e1Key)) {
                 eMap.put(e1Key, e1);
                 sectionElement.elements.add(e1);
@@ -261,7 +261,7 @@ public class DicMerge  extends AbstractDictTool{
         for (E e2 : elements2) {
             // String e2Key = e2.toStringNoParadigm();
             //String e2Key = e2.lemmaAndCategory();
-            String e2Key = e2.toStringAll();
+            String e2Key = e2.toString();
             if (!eMap.containsKey(e2Key)) {
                 notin++;
                 msg.log("[" + notin + "] section 1 doesn't contain: " + e2Key);
