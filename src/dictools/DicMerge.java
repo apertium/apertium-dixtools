@@ -61,6 +61,7 @@ public class DicMerge  extends AbstractDictTool{
 //    private DicSet merged;
     
     private String sOut;
+  private DicSet dicSet2;
     
 //    private HashMap<String, String> paradigmsToRemove;
 
@@ -515,15 +516,10 @@ public class DicMerge  extends AbstractDictTool{
         this.monA1 = (monA1);
         this.monB1 = (monB1);
 
-        Dictionary bilAB2 = DicTools.readBilingual(sDicBilAB2, bilAB2Reverse);
-        Dictionary monA2 = DicTools.readMonolingual(sDicMonA2);
-        Dictionary monB2 = DicTools.readMonolingual(sDicMonB2);
-        DicSet dicSet2 = new DicSet(bilAB2, monA2, monB2);
-        this.bilAB2 = (bilAB2);
-        this.monA2 = (monA2);
-        this.monB2 = (monB2);
-
-        //this.dicSet2 = dicSet2;
+        bilAB2 = DicTools.readBilingual(sDicBilAB2, bilAB2Reverse);
+        monA2 = DicTools.readMonolingual(sDicMonA2);
+        monB2 = DicTools.readMonolingual(sDicMonB2);
+        dicSet2 = new DicSet(bilAB2, monA2, monB2);
 
     }
 
