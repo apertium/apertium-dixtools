@@ -90,8 +90,8 @@ public class DicList {
         int nLemmas = 0;
         for (Section section : dic.sections) {
             for (E element : section.elements) {
-                L left = element.getLeft();
-                R right = element.getRight();
+                L left = element.getFirstPartAsLeft();
+                R right = element.getFirstPartAsRight();
 
                 String leftValue = left.getValueNoTags();
                 String rightValue = right.getValueNoTags();
@@ -157,7 +157,7 @@ public class DicList {
         int nLemmas = 0;
         for (Section section : dic.sections) {
             for (E element : section.elements) {
-                R right = element.getRight();
+                R right = element.getFirstPartAsRight();
                 String rightValue = right.getValueNoTags();
                 msg.out(rightValue + ".\n");
                 nLemmas++;

@@ -67,7 +67,7 @@ public class Apertiumizer extends AbstractDictTool {
         Dictionary enca = encaReader.readDic();
         en = new HashMap<String, String>();
         for (E e : enca.getEntriesInMainSection()) {
-        L l = e.getLeft();
+        L l = e.getFirstPartAsLeft();
         String lv = l.getValueNoTags();
         en.put(lv, lv);
         }
@@ -101,11 +101,11 @@ public class Apertiumizer extends AbstractDictTool {
                         case 0:
                             E e = readElementFormat_0(strLine);
                             //e.comment="priority: " + priority);
-                            //System.out.println("Adding: "  + e.getLeft().getValueNoTags());
+                            //System.out.println("Adding: "  + e.getFirstPartAsLeft().getValueNoTags());
                             if (e != null) {
                                 section.elements.add(e);
                             }
-                            String lm = e.getLeft().getValueNoTags();
+                            String lm = e.getFirstPartAsLeft().getValueNoTags();
                             String comments = e.comment;
                             System.out.println("<e lm=\"" + lm + "\" c=\"" + comments + "\"><i>" + lm + "</i><par n=\"ADN__n\"/></e>");
                             break;
@@ -164,19 +164,19 @@ public class Apertiumizer extends AbstractDictTool {
     private void completeDic(Dictionary bil) {
 
         for (E ee : bil.getEntriesInMainSection()) {
-            //System.out.println("completing... " + ee.getLeft().getValueNoTags());
-            L l = ee.getLeft();
-            R r = ee.getRight();
+            //System.out.println("completing... " + ee.getFirstPartAsLeft().getValueNoTags());
+            L l = ee.getFirstPartAsLeft();
+            R r = ee.getFirstPartAsRight();
             String cat = "";
             int icat = 0;
             for (DixElement e : l.children) {
                 if (e instanceof TextElement) {
                     TextElement tE = (TextElement) e;
-                    String v = tE.getValue();
+                    String v = tE.text;
                     //System.out.println(v);
                     v = v.replaceAll("[\\s]", "<b/>");
                     v = v.replaceAll("\\&", "\\&amp;");
-                    tE.setValue(v);
+                    tE.text = v;
                 }
                 if (e instanceof S) {
                     S sE = (S) e;
@@ -192,15 +192,15 @@ public class Apertiumizer extends AbstractDictTool {
             for (DixElement e : r.children) {
                 if (e instanceof TextElement) {
                     TextElement tE = (TextElement) e;
-                    String v = tE.getValue();
+                    String v = tE.text;
                     v = this.removeForms(v);
                     v = v.replaceAll("[ ]", "<b/>");
                     v = v.replaceAll("\\&", "\\&amp;");
 
                     if(v.startsWith("to<b/>")) {
                         System.out.println("Verb: " + v);
-                        if(!ee.getLeft().containsSymbol("vblex")) {
-                        ee.getLeft().children.add(new S("vblex"));
+                        if(!ee.getFirstPartAsLeft().containsSymbol("vblex")) {
+                        ee.getFirstPartAsLeft().children.add(new S("vblex"));
                         }
                         isVerb = true;
                         v = v.replaceAll("to<b/>", "");
@@ -208,7 +208,7 @@ public class Apertiumizer extends AbstractDictTool {
                         System.out.println("NVerb: " + v);
                         
                     }
-                    tE.setValue(v);
+                    tE.text = v;
                     //System.out.println(v);
                     //tE.setValue(v);
                 }
@@ -218,8 +218,8 @@ public class Apertiumizer extends AbstractDictTool {
             r.children.add(sE);
             }
             if(isVerb) {
-                if(!ee.getRight().containsSymbol("vblex")) {
-                ee.getRight().children.add(new S("vblex"));
+                if(!ee.getFirstPartAsRight().containsSymbol("vblex")) {
+                ee.getFirstPartAsRight().children.add(new S("vblex"));
                 }
             }
 
@@ -250,7 +250,7 @@ public class Apertiumizer extends AbstractDictTool {
         for (Section sec : sorted.sections) {
             for (E ee : sec.elements) {
 
-                ArrayList<S> slist = ee.getLeft().getSymbols();
+                ArrayList<S> slist = ee.getFirstPartAsLeft().getSymbols();
 
                 if (slist.size() > 0) {
                     S sE = slist.get(0);

@@ -108,7 +108,7 @@ public class ConvertMF {
         ArrayList<E> toRemove = new ArrayList<E>();
         for (E e : bil.getEntriesInMainSection()) {
             if (mfElementsNouns.containsKey(e.getValue("R"))) {
-                for (S s : e.getRight().getSymbols()) {
+                for (S s : e.getFirstPartAsRight().getSymbols()) {
                   if ("m".equals(s.getValue())) isM = true;
                   if ("n".equals(s.getValue())) isNoun = true;
                   if ("f".equals(s.getValue())) isF = true;
@@ -122,12 +122,12 @@ public class ConvertMF {
                     }
                 } else {
                     if (isM && isNoun) {
-                        ArrayList<S> sList = e.getRight().getSymbols();
+                        ArrayList<S> sList = e.getFirstPartAsRight().getSymbols();
                         for (S sE : sList) {
                             if (sE.is("m")) {
                                 S newSE = new S("mf");
-                                e.getRight().children.remove(sE);
-                                e.getRight().children.add(newSE);
+                                e.getFirstPartAsRight().children.remove(sE);
+                                e.getFirstPartAsRight().children.add(newSE);
                             }
                         }
                     }
@@ -154,9 +154,9 @@ public class ConvertMF {
     private void processAdjs(HashMap<String, E> mfElementsAdjs, Dictionary bil) {
         for (E e : bil.getEntriesInMainSection()) {
             if (mfElementsAdjs.containsKey(e.getValue("R"))) {
-                for (S s : e.getRight().getSymbols()) {
+                for (S s : e.getFirstPartAsRight().getSymbols()) {
                   if ("adj".equals(s.getValue()))
-					e.getRight().children.add(new S("mf"));
+					e.getFirstPartAsRight().children.add(new S("mf"));
                 }
             }
         }
@@ -178,7 +178,7 @@ public class ConvertMF {
             boolean isNoun = false;
             boolean isAdj = false;
             for (E e : pardef.elements) {
-                for (S s : e.getRight().getSymbols()) {
+                for (S s : e.getFirstPartAsRight().getSymbols()) {
                   if ("mf".equals(s.getValue())) isMF = true;
                   if ("n".equals(s.getValue())) isNoun = true;
                   if ("adj".equals(s.getValue())) isAdj = true;
@@ -219,8 +219,8 @@ public class ConvertMF {
         Dictionary bil = bilReader.readDic();
 
         for (E e1 : bil.getEntriesInMainSection()) {
-            L lE = e1.getLeft();
-            R rE = e1.getRight();
+            L lE = e1.getFirstPartAsLeft();
+            R rE = e1.getFirstPartAsRight();
 
             ArrayList<S> attr = lE.getSymbols();
             if (attr.size() > 0) {

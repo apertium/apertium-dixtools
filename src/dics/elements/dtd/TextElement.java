@@ -30,7 +30,7 @@ import dics.elements.utils.DicOpts;
 public class TextElement extends DixElement {
 
     
-    private String text;
+    public String text;
 
     /**
      * 
@@ -70,4 +70,10 @@ public class TextElement extends DixElement {
     public void setValue(String v) {
         text = v;
     }
+
+    @Override
+    public String toString() {
+        return text;
+    }
+
 }

@@ -94,9 +94,7 @@ public class DicFix  extends AbstractDictTool {
                             for (DixElement child : ((ContentElement)irlelem).children) {
                                 if (child instanceof TextElement) {
                                     TextElement tE = (TextElement) child;
-                                    String v = tE.getValue();
-                                    v = v.replaceAll("\\s", "<b/>");
-                                    tE.setValue(v);
+                                    tE.text = tE.text.replaceAll("\\s", "<b/>");
                                 }
                             }
                         }

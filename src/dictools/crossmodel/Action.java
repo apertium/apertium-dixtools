@@ -155,8 +155,8 @@ public class Action {
         boolean errorsFound = false;
         HashMap<String, String> definedVarsInAction = new HashMap<String, String>();
 
-        getDefinedVarsElement(getE().getLeft(), definedVarsInAction);
-        getDefinedVarsElement(getE().getRight(), definedVarsInAction);
+        getDefinedVarsElement(getE().getFirstPartAsLeft(), definedVarsInAction);
+        getDefinedVarsElement(getE().getFirstPartAsRight(), definedVarsInAction);
 
         Iterator<String> it = definedVarsInAction.keySet().iterator();
         while (it.hasNext()) {
@@ -182,7 +182,7 @@ public class Action {
     private void getDefinedVarsElement(ContentElement ce, HashMap<String, String> definedVars) {
         for (DixElement e : ce.children) {
             if (e instanceof TextElement) {
-                String v = ((TextElement) e).getValue();
+                String v = ((TextElement) e).text;
                 if (v.startsWith("$") || v.startsWith("@")) {
                     definedVars.put(v, v);
                 }

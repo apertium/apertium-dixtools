@@ -56,8 +56,8 @@ public class PrepareDic {
         int max = ncBil.getEntriesInMainSection().size();
         for (int i = 0; i < max; i++) {
             E ee = ncBil.getEntriesInMainSection().get(i);
-            //String value = ee.getLeft().getValueNoTags();
-            String value = ee.getRight().getValueNoTags();
+            //String value = ee.getFirstPartAsLeft().getValueNoTags();
+            String value = ee.getFirstPartAsRight().getValueNoTags();
             System.err.println("checking " + value + " ...");
             if (value != null) {
                 if (missing.containsKey(value)) {

@@ -122,8 +122,8 @@ public class AddGender {
                     String parName = ee.getMainParadigmName();
                     if (parName != null) {
                         if (parName.contains("NC")) {
-                            ContentElement leftSide = ee.getSide("L");
-                            ContentElement rightSide = ee.getSide("R");
+                            ContentElement leftSide = ee.getFirstPart("L");
+                            ContentElement rightSide = ee.getFirstPart("R");
                             String text = leftSide.getValue();
 
                             S gender = ng.get(text);

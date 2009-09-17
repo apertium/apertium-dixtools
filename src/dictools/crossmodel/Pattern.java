@@ -130,10 +130,10 @@ public class Pattern {
      */
     public ElementList getElementList() {
         ElementList list = new ElementList();
-        list.add(e1.getLeft());
-        list.add(e1.getRight());
-        list.add(e2.getLeft());
-        list.add(e2.getRight());
+        list.add(e1.getFirstPartAsLeft());
+        list.add(e1.getFirstPartAsRight());
+        list.add(e2.getFirstPartAsLeft());
+        list.add(e2.getFirstPartAsRight());
         return list;
     }
 
@@ -145,12 +145,12 @@ public class Pattern {
         ElementList eList = new ElementList();
 
         eList = this.getSequenceR(this.getAB(), eList);
-        eList = this.getSequenceCE(this.getAB().getLeft(), eList);
-        eList = this.getSequenceCE(this.getAB().getRight(), eList);
+        eList = this.getSequenceCE(this.getAB().getFirstPartAsLeft(), eList);
+        eList = this.getSequenceCE(this.getAB().getFirstPartAsRight(), eList);
 
         eList = this.getSequenceR(this.getBC(), eList);
-        eList = this.getSequenceCE(this.getBC().getLeft(), eList);
-        eList = this.getSequenceCE(this.getBC().getRight(), eList);
+        eList = this.getSequenceCE(this.getBC().getFirstPartAsLeft(), eList);
+        eList = this.getSequenceCE(this.getBC().getFirstPartAsRight(), eList);
 
         eList.add(new S("^end"));
         return eList;
@@ -246,10 +246,10 @@ public class Pattern {
     public HashMap<String, String> getDefinedVariables() {
         HashMap<String, String> definedVars = new HashMap<String, String>();
 
-        getDefinedVarsElement(getAB().getLeft(), definedVars);
-        getDefinedVarsElement(getAB().getRight(), definedVars);
-        getDefinedVarsElement(getBC().getLeft(), definedVars);
-        getDefinedVarsElement(getBC().getRight(), definedVars);
+        getDefinedVarsElement(getAB().getFirstPartAsLeft(), definedVars);
+        getDefinedVarsElement(getAB().getFirstPartAsRight(), definedVars);
+        getDefinedVarsElement(getBC().getFirstPartAsLeft(), definedVars);
+        getDefinedVarsElement(getBC().getFirstPartAsRight(), definedVars);
 
         return definedVars;
     }
@@ -262,7 +262,7 @@ public class Pattern {
     private void getDefinedVarsElement(ContentElement ce, HashMap<String, String> definedVars) {
         for (DixElement e : ce.children) {
             if (e instanceof TextElement) {
-                String v = ((TextElement) e).getValue();
+                String v = ((TextElement) e).text;
                 if (v.startsWith("$") || v.startsWith("@")) {
                     definedVars.put(v, v);
                 }

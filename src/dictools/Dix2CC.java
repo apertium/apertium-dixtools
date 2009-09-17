@@ -76,7 +76,7 @@ public class Dix2CC {
         for (Section section : dic.sections) {
             for (E ee : section.elements) {
                 StringBuffer sb = new StringBuffer();
-                if (ee.is_LR_or_LRRL() && !ee.isRegularExpr() && this.validLemma(ee.getValueNoTags("L")) && this.validLemma(ee.getValueNoTags("R"))) {
+                if (ee.is_LR_or_LRRL() && !ee.containsRegexpr() && this.validLemma(ee.getValueNoTags("L")) && this.validLemma(ee.getValueNoTags("R"))) {
                     String left = ee.getValueNoTags("L");
                     left = tinyFilter.applyToLemma(left);
                     sb.append(left + " ");

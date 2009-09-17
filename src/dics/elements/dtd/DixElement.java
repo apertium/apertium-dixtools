@@ -212,7 +212,7 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
     
     @Override
     public String toString() {
-        String str = "" + getValue();
-        return str;
+        //String str = "" + getValue();
+        return value;
     }
 }

@@ -68,7 +68,7 @@ public class AssignParadigm extends AbstractDictTool {
             for (E ee : section.elements) {
                 String parName = ee.getMainParadigmName();
                 if (parName != null) {
-                    String right = ee.getSide("R").getValue();
+                    String right = ee.getFirstPart("R").getValue();
                     np.put(right, parName);
                 }
             }
@@ -81,8 +81,8 @@ public class AssignParadigm extends AbstractDictTool {
         for (Section section : bil.sections) {
             for (E ee : section.elements) {
                 if (!ee.containsRegEx()) {
-                    String left = ee.getSide("L").getValue();
-                    String right = ee.getSide("R").getValue();
+                    String left = ee.getFirstPart("L").getValue();
+                    String right = ee.getFirstPart("R").getValue();
 
                     String leftNoTags = cleanTags(left);
                     String rightNoTags = cleanTags(right);

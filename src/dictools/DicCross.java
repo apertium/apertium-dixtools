@@ -549,8 +549,8 @@ public class DicCross  extends AbstractDictTool{
         }
 
         P pE = new P();
-        ContentElement lE = eAction.getSide("L");
-        ContentElement rE = eAction.getSide("R");
+        ContentElement lE = eAction.getFirstPart("L");
+        ContentElement rE = eAction.getFirstPart("R");
         L lE2 = new L();
         R rE2 = new R();
 

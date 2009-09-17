@@ -66,8 +66,8 @@ public class SubstractBidix {
         //setYesIsAllowed(ee, "LR"); // XXXX
         //setYesIsAllowed(ee, "RL"); // XXXX
         if (!ee.containsRegEx()) {
-          ContentElement l=ee.getSide("L");
-          ContentElement r=ee.getSide("R");
+          ContentElement l=ee.getFirstPart("L");
+          ContentElement r=ee.getFirstPart("R");
           //System.err.println("======="+ee.toString()+"========");
           // L -> R
           checkEarlierAndRestrict("LR", l, hmLR, ee);

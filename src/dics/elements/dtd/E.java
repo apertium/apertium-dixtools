@@ -162,14 +162,13 @@ public class E extends DixElement implements Cloneable {
      * Returns the first part of the left or right side of an entry (or the first invariant section).
      * Examples:
      * <pre>
-     * <e><ignore>Ameriko</ignore><par n="Barcelono__np"/> </e>   gives 'Ameriko'
-     * <e><ignore>Al</ignore><par n="ĝ"/> <ignore>erio</ignore><par n="Barcelono__np"/> </e> gives just 'Al'
-     * <e><l>mi</l><restriction>mi<prn><ref><p1><mf><sg></restriction></e> give 'mi'
+     * <e><i>Ameriko</i><par n="Barcelono__np"/> </e>   gives 'Ameriko'
+     * <e><i>Al</i><par n="ĝ"/> <i>erio</i><par n="Barcelono__np"/> </e> gives just 'Al'
+     * <e><p><l>mi</l><r>mi<prn><ref><p1><mf><sg></r></p></e> give 'mi'
      * </pre>
      * @param side can be R or L
-     * @return A ContentElement object
      */
-    public ContentElement getSide(String side) {
+    public ContentElement getFirstPart(String side) {
         for (DixElement e : children) {
             if (e instanceof I) {
                 return ((I) e);
@@ -186,58 +185,25 @@ public class E extends DixElement implements Cloneable {
         return null;
     }
 
-    /**
-     * 
-     * @return Undefined         */
-    public L getLeft() {
-        ContentElement cE = getSide("L");
-        L lE = null;
-        if (cE instanceof I) {
-            lE = new L(cE);
-            return lE;
+    public L getFirstPartAsLeft() {
+        ContentElement cE = getFirstPart("L");
+        if (cE instanceof L) {
+            return (L) cE;
         }
-        return (L) cE;
+        return new L(cE);
     }
 
-    /**
-     * 
-     * @return Undefined         */
-    public R getRight() {
-        ContentElement cE = getSide("R");
-        R rE = null;
-        if (cE instanceof I) {
-            rE = new R(cE);
-            return rE;
+    public R getFirstPartAsRight() {
+        ContentElement cE = getFirstPart("R");
+        if (cE instanceof R) {
+            return (R) cE;
         }
-        return (R) cE;
-    }
-
-    /**
-     * 
-     * @param side
-     * @return Undefined         */
-    public ElementList getChildren(String side) {
-        for (DixElement e : children) {
-            if (e instanceof I) {
-                return ((I) e).children;
-            }
-            if (e instanceof P) {
-                if (side.equals("L")) {
-                    return ((P) e).l.children;
-                }
-                if (side.equals("R")) {
-                    return ((P) e).r.children;
-                }
-            }
-        }
-        return null;
+        return new R(cE);
     }
 
 
-    /**
-     * 
-     * @return Undefined         */
-    public boolean isRegularExpr() {
+
+    public boolean containsRegexpr() {
         for (DixElement e : children) {
             if (e instanceof Re) {
                 return true;
@@ -246,12 +212,9 @@ public class E extends DixElement implements Cloneable {
         return false;
     }
 
+
     private static String spaces = "                                                                                                                 ";
-    /**
-     * 
-     * @param dos
-     * @throws java.io.IOException
-     */
+
     @Override
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
@@ -456,26 +419,12 @@ public class E extends DixElement implements Cloneable {
         return firstSymbolIs(side, "n");
     }
 
-    /**
-     * 
-     * @return Undefined         */
     public boolean isLR() {
-        if (restriction.equals("LR")) {
-            return true;
-        } else {
-            return false;
-        }
+        return (restriction.equals("LR"));
     }
 
-    /**
-     * 
-     * @return Undefined         */
     public boolean isRL() {
-        if (restriction.equals("RL")) {
-            return true;
-        } else {
-            return false;
-        }
+        return (restriction.equals("RL"));
     }
 
     /**
@@ -595,7 +544,7 @@ public class E extends DixElement implements Cloneable {
      * @param msg
      */
     public void print(String side, Msg msg) {
-        msg.log(getSide(side).getValue() + " / ");
+        msg.log(getFirstPart(side).getValue() + " / ");
         printSElements(side, msg);
         msg.log("\n");
     }
@@ -691,28 +640,7 @@ public class E extends DixElement implements Cloneable {
         }
         str.append(">");
         for (DixElement e : children) {
-            if (e instanceof I) {
-                I i = (I) e;
-                str.append(i.toString());
-            }
-            if (e instanceof P) {
-                P p = (P) e;
-
-                L lE = p.l;
-                str.append(lE.toString());
-
-                R rE = p.r;
-                str.append(rE.toString());
-            }
-            if (e instanceof Par) {
-                Par par = (Par) e;
-                str.append(par.toString());
-            }
-            if (e instanceof Re) {
-                Re re = (Re) e;
-                str.append(re.toString());
-            }
-
+          str.append(e.toString());
         }
         str.append("</e>");
         return str.toString();
@@ -822,18 +750,17 @@ public class E extends DixElement implements Cloneable {
         for (DixElement e : children) {
             if (e instanceof I) {
                 I i = (I) e;
-                str += i.toString2();
+                str += i.getSymbolsAsString();
                 str += "/";
-                str += i.toString2();
+                str += i.getSymbolsAsString();
             }
             if (e instanceof P) {
                 P p = (P) e;
-
                 L lE = p.l;
-                str += lE.toString2();
+                str += lE.getSymbolsAsString();
                 str += "/";
                 R rE = p.r;
-                str += rE.toString2();
+                str += rE.getSymbolsAsString();
             }
 
         }
@@ -944,8 +871,8 @@ public class E extends DixElement implements Cloneable {
 
                 ElementList auxChildren = lE.children;
 
-                eRev.getSide("L").children=rE.children;
-                eRev.getSide("R").children=auxChildren;
+                eRev.getFirstPart("L").children=rE.children;
+                eRev.getFirstPart("R").children=auxChildren;
             }
             if (e instanceof I) {
                 I iE = new I();
@@ -963,7 +890,7 @@ public class E extends DixElement implements Cloneable {
      * @return true if the element containsSymbol certain definition ('adj', 'n', etc.)
      */
     public boolean containsSymbol(String def) {
-        return (getLeft().containsSymbol(def) || this.getRight().containsSymbol(def));
+        return (getFirstPartAsLeft().containsSymbol(def) || this.getFirstPartAsRight().containsSymbol(def));
     }
 
     /**

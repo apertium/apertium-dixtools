@@ -63,7 +63,7 @@ public class CompleteTranslation {
     
     public void complete() {
         for (E ee : bil.getEntriesInMainSection()) {
-            L left = ee.getLeft();
+            L left = ee.getFirstPartAsLeft();
             if (left != null) {
                 System.out.println("Completing " + left.getValueNoTags());
                 String source = left.getValueNoTags();
@@ -81,7 +81,7 @@ public class CompleteTranslation {
                         } else {
                             P pE = new P();
                             pE.r = (rE);
-                            pE.r = (ee.getRight());
+                            pE.r = (ee.getFirstPartAsRight());
                             I iE = ee.getFirstI();
                             ee.children.remove(iE);
                             ee.children.add(pE);

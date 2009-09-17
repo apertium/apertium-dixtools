@@ -79,7 +79,7 @@ public abstract class ContentElement extends DixElement implements Cloneable {
             if (!(e instanceof S)) {
                 if (e instanceof TextElement) {
                     TextElement tE = (TextElement) e;
-                    str += tE.getValue();
+                    str += tE.text;
                 } else {
                     str += e.getValueNoTags();
                 }
@@ -227,7 +227,7 @@ public abstract class ContentElement extends DixElement implements Cloneable {
     /**
      * 
      * @return Undefined         */
-    private String getSymbolsAsString() {
+    public String getSymbolsAsString() {
         String str = "";
         for (S s : getSymbols()) {
             str += s.toString();
@@ -259,39 +259,16 @@ public abstract class ContentElement extends DixElement implements Cloneable {
     public String toString() {
         String str = "";
 
-        String tagName = TAGNAME;
-        if (tagName == null) {
-            tagName = "";
-        }
-
-        str += "<" + tagName + ">";
+        str += "<" + TAGNAME + ">";
         for (DixElement e : children) {
           if (e==null) continue;
             String v = e.toString();
             str += v;
         }
-        str += "</" + tagName + ">";
+        str += "</" + TAGNAME + ">";
 
         return str;
     }
-
-    /**
-     * toString() without lemma
-     * 
-     * @return Undefined         */
-    public String toString2() {
-        String tagName = TAGNAME;
-        if (tagName == null) {
-            tagName = "";
-        }
-        String sList = getSymbolsAsString();
-        if (sList == null) {
-            sList = "";
-        }
-        String str = sList;
-        return str;
-    }
-
 
     
     @Override
@@ -364,7 +341,7 @@ public abstract class ContentElement extends DixElement implements Cloneable {
         for (DixElement e1 : gE.children) {
             if (e1 instanceof TextElement) {
                 TextElement tE = (TextElement) e1;
-                str += tE.getValue();
+                str += tE.text;
             }
             if (e1 instanceof B) {
                 str += "<b/>";

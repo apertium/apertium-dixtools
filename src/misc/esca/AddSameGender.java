@@ -22,10 +22,14 @@ package misc.esca;
 import java.util.HashMap;
 
 import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.DixElement;
 import dics.elements.dtd.E;
+import dics.elements.dtd.I;
+import dics.elements.dtd.P;
 import dics.elements.dtd.Pardef;
 import dics.elements.dtd.S;
 import dictools.xml.DictionaryReader;
+import java.util.ArrayList;
 
 /**
  *
@@ -95,8 +99,8 @@ public class AddSameGender {
 
         for (E ee : bil.getEntriesInMainSection()) {
             if (ee.firstSymbolIs("L", "n")) {
-                String value = ee.getLeft().getValueNoTags();
-                if (ee.getLeft().containsSymbol("GD") || ee.getLeft().containsSymbol("m") || ee.getLeft().containsSymbol("f") || ee.getLeft().containsSymbol("mf")) {
+                String value = ee.getFirstPartAsLeft().getValueNoTags();
+                if (ee.getFirstPartAsLeft().containsSymbol("GD") || ee.getFirstPartAsLeft().containsSymbol("m") || ee.getFirstPartAsLeft().containsSymbol("f") || ee.getFirstPartAsLeft().containsSymbol("mf")) {
 
                 } else {
                     String parValue = lemmaParName.get(value);
@@ -105,16 +109,32 @@ public class AddSameGender {
                         String genderValue = parNameGender.get(parValue);
                         if (genderValue != null) {
                             System.out.println(value + " is '" + genderValue + "'");
-                            ee.getChildren("L").add(new S(genderValue));
+                            getFirstPartsChildren(ee, "L").add(new S(genderValue));
                         }
                     }
                 }
             }
         }
-
-
-
     }
+
+
+    public ArrayList<DixElement> getFirstPartsChildren(E ee, String side) {
+        for (DixElement e : ee.children) {
+            if (e instanceof I) {
+                return ((I) e).children;
+            }
+            if (e instanceof P) {
+                if (side.equals("L")) {
+                    return ((P) e).l.children;
+                }
+                if (side.equals("R")) {
+                    return ((P) e).r.children;
+                }
+            }
+        }
+        return null;
+    }
+
 
     private void process_adjs() {
         DictionaryReader morphReader = new DictionaryReader(this.morphDic);
@@ -141,8 +161,8 @@ public class AddSameGender {
 
         for (E ee : bil.getEntriesInMainSection()) {
             if (ee.firstSymbolIs("L", "adj")) {
-                String value = ee.getLeft().getValueNoTags();
-                if (ee.getLeft().containsSymbol("GD") || ee.getLeft().containsSymbol("m") || ee.getLeft().containsSymbol("f") || ee.getLeft().containsSymbol("mf")) {
+                String value = ee.getFirstPartAsLeft().getValueNoTags();
+                if (ee.getFirstPartAsLeft().containsSymbol("GD") || ee.getFirstPartAsLeft().containsSymbol("m") || ee.getFirstPartAsLeft().containsSymbol("f") || ee.getFirstPartAsLeft().containsSymbol("mf")) {
 
                 } else {
                     String parValue = lemmaParName.get(value);
@@ -151,7 +171,7 @@ public class AddSameGender {
                         String genderValue = parNameGender.get(parValue);
                         if (genderValue != null) {
                             System.out.println(value + " is '" + genderValue + "'");
-                            ee.getChildren("L").add(new S(genderValue));
+                            getFirstPartsChildren(ee, "L").add(new S(genderValue));
                         }
                     }
                 }

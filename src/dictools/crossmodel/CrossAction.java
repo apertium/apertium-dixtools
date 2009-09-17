@@ -193,10 +193,10 @@ public class CrossAction implements Comparable<CrossAction> {
         rCrossAction.setActionSet(rActionSet);
 
         HashMap<String, String> valueMap = new HashMap<String, String>();
-        ContentElement leftAB = this.getPattern().getAB().getLeft();
-        ContentElement rightAB = this.getPattern().getAB().getRight();
-        ContentElement leftBC = this.getPattern().getBC().getLeft();
-        ContentElement rightBC = this.getPattern().getBC().getRight();
+        ContentElement leftAB = this.getPattern().getAB().getFirstPartAsLeft();
+        ContentElement rightAB = this.getPattern().getAB().getFirstPartAsRight();
+        ContentElement leftBC = this.getPattern().getBC().getFirstPartAsLeft();
+        ContentElement rightBC = this.getPattern().getBC().getFirstPartAsRight();
 
         // Rename patterns
         ContentElement rLeftAB = this.renameContentElement(leftAB, valueMap);
@@ -218,8 +218,8 @@ public class CrossAction implements Comparable<CrossAction> {
 
         // Rename actions
         for (Action a : this.getActionSet()) {
-            ContentElement leftA = a.getE().getLeft();
-            ContentElement rightA = a.getE().getRight();
+            ContentElement leftA = a.getE().getFirstPartAsLeft();
+            ContentElement rightA = a.getE().getFirstPartAsRight();
             ContentElement rLeftA = this.renameContentElement(leftA, valueMap);
             ContentElement rRightA = this.renameContentElement(rightA, valueMap);
             E rA = new E();
@@ -254,11 +254,11 @@ public class CrossAction implements Comparable<CrossAction> {
 
             // text element
             if (e instanceof TextElement) {
-                String v = ((TextElement) e).getValue();
+                String v = ((TextElement) e).text;
                 TextElement tE = new TextElement("");
                 if (v.startsWith("$")) {
                     if (valueMap.containsKey(v)) {
-                        tE.setValue(valueMap.get(v));
+                        tE.text = valueMap.get(v);
                     } else {
                         String nV = "X" + x;
                         x++;

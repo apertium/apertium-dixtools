@@ -105,8 +105,8 @@ public class Misc {
         HashMap<String, P> trans_n = new HashMap<String, P>();
         for (E ee : bil_en_es_n.getEntriesInMainSection()) {
             String left = ee.getValue("L");
-            L lE = ee.getLeft();
-            R rE = ee.getRight();
+            L lE = ee.getFirstPartAsLeft();
+            R rE = ee.getFirstPartAsRight();
             P pE = new P();
             pE.l = (lE);
             pE.r = (rE);
@@ -263,7 +263,7 @@ public class Misc {
         }
 
         for (E ee : en_es_adjs.getEntriesInMainSection()) {
-            R rE = ee.getRight();
+            R rE = ee.getFirstPartAsRight();
             String rv = rE.getValueNoTags();
             if (adjpars.containsKey(rv)) {
                 if (!rE.containsSymbol("mf")) {
@@ -315,7 +315,7 @@ public class Misc {
     public void doMisc2() {
         HashMap<String, String> nps = new HashMap<String, String>();
         for (E ee : dic1.getEntriesInMainSection()) {
-            R re = ee.getRight();
+            R re = ee.getFirstPartAsRight();
             if (re != null) {
                 if (re.firstSymbolIs("np")) {
                     String lemma = re.getValueNoTags();
