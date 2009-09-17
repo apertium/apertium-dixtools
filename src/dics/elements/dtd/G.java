@@ -33,7 +33,6 @@ public class G extends ContentElement {
     
     public G() {
         super("g");
-        setValueNoTags("");
     }
 
     /**

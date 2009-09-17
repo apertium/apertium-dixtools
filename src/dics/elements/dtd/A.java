@@ -29,6 +29,5 @@ public class A extends DixElement {
     public A() {
         super("a");
         setValue("<a/>");
-        setValueNoTags("");
     }
 }

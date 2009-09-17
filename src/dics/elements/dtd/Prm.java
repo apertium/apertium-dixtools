@@ -29,7 +29,6 @@ public class Prm extends DixElement {
     public Prm() {
         super("prm");
         setValue("<prm/>");
-        setValueNoTags("");
     }
 
     /**
@@ -38,6 +37,5 @@ public class Prm extends DixElement {
     public Prm(String number) {
         super("prm"+number);
         setValue("<prm"+number+"/>");
-        setValueNoTags("");
     }
 }

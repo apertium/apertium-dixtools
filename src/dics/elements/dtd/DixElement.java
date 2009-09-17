@@ -96,11 +96,6 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
     }
 
    
-    /**
-     * 
-     * @param dos
-     * @throws java.io.IOException
-     */
     protected void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
@@ -109,18 +104,7 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
         dos.append(appendCharacterData);
     }
 
-    /**
-     * 
-     * @param nTabs
-     * @return Undefined         */
     protected static String tab(int nTabs) {
-        /*
-        String sTabs = "";
-        for (int i = 0; i < nTabs; i++) {
-            sTabs += "  ";
-        }
-        return sTabs;
-         */
         return "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t".substring(0,nTabs);
     }
 
@@ -178,33 +162,18 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
 
     }
 
-    /**
-     * 
-     * @return Undefined         
-     */
     public String getValue() {
         return value;
     }
 
-    /**
-     * 
-     * @param value
-     */
     public void setValue(String value) {
         this.value = value;
     }
 
-    /**
-     * 
-     * @return Undefined         */
     public String getValueNoTags() {
         return valueNoTags;
     }
 
-    /**
-     * 
-     * @param valueNoTags
-     */
     void setValueNoTags(String valueNoTags) {
         this.valueNoTags = valueNoTags;
     }
@@ -212,7 +181,6 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
     
     @Override
     public String toString() {
-        //String str = "" + getValue();
         return value;
     }
 }

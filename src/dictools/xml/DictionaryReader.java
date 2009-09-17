@@ -22,9 +22,6 @@ package dictools.xml;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-
-import javax.swing.JProgressBar;
-
 import org.w3c.dom.CharacterData;
 import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
@@ -56,12 +53,6 @@ public class DictionaryReader extends XMLReader {
     
 	public boolean readParadigms = true;
     
-    public JProgressBar progressBar;
-    public double nEntries;
-    private double nElements = 0;
-    private int perc = 0;
-    private int oldPerc = 0;
-
     /**
      * 
      * @param fileName
@@ -72,7 +63,6 @@ public class DictionaryReader extends XMLReader {
 
     
     public DictionaryReader() {
-
     }
 
     /**
@@ -166,7 +156,7 @@ public class DictionaryReader extends XMLReader {
                     } else
                     if (includeFileName.endsWith("pardefs.dix")) {
                         System.err.println("Paradigm definitions: " + includeFileNameAndPath);
-                        DictionaryReader reader = new DictionaryReader(includeFileNameAndPath );
+                        DictionaryReader reader = new DictionaryReader(includeFileNameAndPath);
                         Dictionary dic2 = reader.readDic();
                         Pardefs pardefs = dic2.pardefs;
                         dic.pardefs = pardefs;
@@ -199,9 +189,6 @@ public class DictionaryReader extends XMLReader {
                     String name = getAttributeValue(element, "name");
                     String value = getAttributeValue(element, "value");
                     header.put(name, value);
-                    if (name.equals("size")) {
-                        this.nEntries = (new Double(value)).doubleValue();
-                    }
                 }
             }
         }
@@ -209,11 +196,11 @@ public class DictionaryReader extends XMLReader {
     }
 
 
-    static class InsideTag implements CharacterDataNeighbour {
+    static class CharacterDataInsideTag implements CharacterDataNeighbour {
 
         dics.elements.dtd.DixElement enclosingElement;
 
-        public InsideTag(dics.elements.dtd.DixElement enclosingElement) {
+        public CharacterDataInsideTag(dics.elements.dtd.DixElement enclosingElement) {
             this.enclosingElement=enclosingElement;
         }
 
@@ -299,7 +286,7 @@ public class DictionaryReader extends XMLReader {
         Pardef pardefElement = new Pardef(n);
 
         StringBuilder characterData = new StringBuilder();
-        dics.elements.dtd.CharacterDataNeighbour previousElement = new InsideTag(pardefElement);
+        dics.elements.dtd.CharacterDataNeighbour previousElement = new CharacterDataInsideTag(pardefElement);
 
         if (e.hasChildNodes()) {
             NodeList children = e.getChildNodes();
@@ -352,17 +339,6 @@ public class DictionaryReader extends XMLReader {
                     Element childElement = (Element) child;
                     String childElementName = childElement.getNodeName();
                     if (childElementName.equals("e")) {
-                        if (this.progressBar != null) {
-                            this.nElements++;
-                            double compl = ((this.nElements / this.nEntries)) * 100;
-                            perc = (int) compl;
-                            if(perc > oldPerc) {
-                                if(nElements%10 == 0) {
-                            this.progressBar.setValue(perc);
-                                }
-                            oldPerc = perc;
-                            } 
-                        }
                         E eElement = readEElement(childElement);
                         sectionElement.elements.add(eElement);
                         
@@ -393,9 +369,6 @@ public class DictionaryReader extends XMLReader {
             }
 
             prependOrAppendCharacterData(characterData, null, previousElement);
-        }
-        if(this.progressBar!= null) {
-        this.progressBar.setValue(100);
         }
         return sectionElement;
     }

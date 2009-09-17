@@ -65,12 +65,7 @@ public class Sdefs extends DixElement {
             e.printXML(dos, opt);
         }
         dos.append(tab(1) + "</" + TAGNAME + ">\n");
-        /*
-        if (processingComments != null  && !processingComments.isEmpty()) {
-            dos.append(tab(1) + "<!-- \n");
-            dos.append(tab(1) + getProcessingComments());
-            dos.append(tab(1) + " -->\n");
-        }*/
+
         dos.append(appendCharacterData.trim());
     }
 
@@ -122,10 +117,6 @@ public class Sdefs extends DixElement {
     
     @Override
     public String toString() {
-        String str = "";
-        for (Sdef sdef : elements) {
-            str += sdef.toString();
-        }
-        return str;
+      return elements.toString();
     }
 }

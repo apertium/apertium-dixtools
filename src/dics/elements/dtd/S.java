@@ -70,16 +70,6 @@ public class S extends DixElement {
         //not strictly necesary for symbols, as they dont have comments:  dos.append(appendCharacterData);
     }
 
-    /**
-     * 
-    public boolean isAdj() {
-        return is("adj");
-    }
-
-    public boolean isN() {
-        return is("n");
-    }
-*/
 
     /**
      * 
@@ -98,13 +88,6 @@ public class S extends DixElement {
         return "<" + getValue() + ">";
     }
 
-    /**
-     * 
-     * @param sE
-    public boolean equals(S sE) {
-        return (getValue().equals(sE.getValue()));
-    }
-     * @return Undefined         */
 
     /**
      * 

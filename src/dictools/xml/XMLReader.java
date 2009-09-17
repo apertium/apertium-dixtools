@@ -204,31 +204,10 @@ public class XMLReader {
      * @param e
      * @param attrName
      * @return Undefined         */
-    protected static String getAttributeValue(Element e, String attrName) {
-      
+    protected static String getAttributeValue(Element e, String attrName) {      
       Attr attr = e.getAttributeNode(attrName);
       if (attr==null) return null;
       return attr.getValue();
-/*      
-      String value1 = null;
-      if (e.hasAttribute(attrName)) value1 = e.getAttribute(attrName);
-      return value1;
-*/       
- /*       
-        String value = "";
-        if (e.hasAttributes()) {
-            NamedNodeMap attributes = e.getAttributes();
-            for (int i = 0; i < attributes.getLength(); i++) {
-                Node attribute = attributes.item(i);
-                String name = attribute.getNodeName();
-                value = attribute.getNodeValue();
-                if (name.equals(attrName)) {
-                    return value;
-                } // end-if
-            } // end-for
-        } // end-if
-        return null;
-  */
     }
 
     
@@ -343,7 +322,7 @@ public class XMLReader {
      * @param e
      * @return Undefined         
      */
-    protected static ContentElement readContentElement(Element e,  ContentElement cElement) {
+    protected static ContentElement readContentElement(Element e,  final ContentElement cElement) {
         try {
             if (e.hasChildNodes()) {
                 NodeList children = e.getChildNodes();
@@ -627,8 +606,7 @@ public class XMLReader {
      * @return Undefined         
      */
     protected static G readGElement(Element e) {
-        G gElement = new G();
-        G gE = (G) readContentElement(e, gElement);
+        G gE = (G) readContentElement(e, new G());
         return gE;
     }
 
