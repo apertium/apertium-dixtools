@@ -2,12 +2,12 @@
  * Copyright (C) 2007 Universitat d'Alacant / Universidad de Alicante
  * Author: Enrique Benimeli Bofarull
  * 
- * This program firstSymbolIs free software; you can redistribute it and/or
+ * This program isFirstSymbol free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * This program firstSymbolIs distributed in the hope that it will be useful, but
+ * This program isFirstSymbol distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -246,7 +246,7 @@ public class Misc {
                     }
                 }
                 if (is_mf) {
-                    //System.err.println(parName + " firstSymbolIs mf");
+                    //System.err.println(parName + " isFirstSymbol mf");
                     mfpars.put(parName, parName);
                 }
             }
@@ -317,7 +317,7 @@ public class Misc {
         for (E ee : dic1.getEntriesInMainSection()) {
             R re = ee.getFirstPartAsRight();
             if (re != null) {
-                if (re.firstSymbolIs("np")) {
+                if (re.isFirstSymbol("np")) {
                     String lemma = re.getValueNoTags();
                     if (re.containsSymbol("f")) {
                         System.err.println(lemma + " is 'f'");
@@ -329,7 +329,7 @@ public class Misc {
                     }
                 /*
                 if (re.containsSymbol("mf")) {
-                System.err.println(lemma + " firstSymbolIs 'mf'");
+                System.err.println(lemma + " isFirstSymbol 'mf'");
                 }
                  */
                 }

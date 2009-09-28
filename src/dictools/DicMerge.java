@@ -267,7 +267,8 @@ public class DicMerge  extends AbstractDictTool{
                 msg.log("[" + notin + "] section 1 doesn't contain: " + e2Key);
                 eMap.put(e2Key, e2);
                 if (first) {
-                    e2.setProcessingComments("\n\n ====== HERE AND BELOW ARE ADDITIONS FROM SECOND FILE======\n\n");
+                    e2.prependCharacterData +="\n\n<!-- ====== HERE AND BELOW ARE ADDITIONS FROM SECOND FILE====== -->\n\n";
+                    //e2.processingComments += "\n\n ====== HERE AND BELOW ARE ADDITIONS FROM SECOND FILE======\n\n";
                     first = false;
                 }
                 sectionElement.elements.add(e2);
@@ -379,7 +380,7 @@ public class DicMerge  extends AbstractDictTool{
                 }
 
                 if (first) {
-                    pardef2.setProcessingComments("\n\n ====== HERE AND BELOW ARE ADDITIONS FROM SECOND FILE======\n\n");
+                    pardef2.prependCharacterData +="\n\n<!-- ====== HERE AND BELOW ARE ADDITIONS FROM SECOND FILE====== -->\n\n";
                     first = false;
                 }
                 pardefNameMap.put(pardef2.name, pardef2);

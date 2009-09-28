@@ -2,12 +2,12 @@
  * Copyright (C) 2008 Dana Esperanta Junulara Organizo http://dejo.dk/
  * Author: Jacob Nordfalk
  * 
- * This program firstSymbolIs free software; you can redistribute it and/or
+ * This program isFirstSymbol free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * This program firstSymbolIs distributed in the hope that it will be useful, but
+ * This program isFirstSymbol distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -38,23 +38,6 @@ import dictools.xml.DictionaryReader;
  */
 public class SubstractBidix {
 
-      public static void main(final String[] args) {
-        DicOpts opt  = DicOpts.STD_ALIGNED;
-        //Dictionary dic = new DictionaryReader("../apertium-eo-en/apertium-lille.eo-en.dix").readDic();
-        Dictionary dic = new DictionaryReader("../apertium-eo-en/apertium-eo-en.eo-en.dix").readDic();
-        //Dictionary dic = new DictionaryReader("../apertium-eo-en/slet.eo-en.dix").readDic();
-        dic.reportMetrics();
-        dic.printXML("before-clean.dix", opt);
-        
-        boolean verbose = true;
-        boolean liftUnneededRestrictions = true;
-        SubstractBidix.reviseRestrictions(dic, verbose, liftUnneededRestrictions);
-               
-        //System.err.println("Updated morphological dictionary: '" + out + "'");
-        //dic.printXML(out);
-        
-        dic.printXML("after-clean.dix", opt);
-      }
 
   public static void reviseRestrictions(Dictionary dic, boolean verbose, boolean alsoLiftUnneededRestrictions) {
 
@@ -62,28 +45,28 @@ public class SubstractBidix {
     HashMap<String, E> hmRL=new HashMap<String, E>();
     //HashSet<String> restrics = new HashSet<String>();
     for (Section section : dic.sections) {
-      for (E ee : section.elements) {
+      for (E e : section.elements) {
         //setYesIsAllowed(ee, "LR"); // XXXX
         //setYesIsAllowed(ee, "RL"); // XXXX
-        if (!ee.containsRegEx()) {
-          ContentElement l=ee.getFirstPart("L");
-          ContentElement r=ee.getFirstPart("R");
+        if (!e.containsRegEx()) {
+          ContentElement leftContent=e.getFirstPart("L");
+          ContentElement rightContent=e.getFirstPart("R");
           //System.err.println("======="+ee.toString()+"========");
           // L -> R
-          checkEarlierAndRestrict("LR", l, hmLR, ee);
+          checkEarlierAndRestrict("LR", leftContent, hmLR, e);
 
           // R -> L
-          checkEarlierAndRestrict("RL", r, hmRL, ee);
+          checkEarlierAndRestrict("RL", rightContent, hmRL, e);
         }
       }
 
-      for (E ee : hmLR.values()) {
-        if (!isAllowed("LR", ee)) {
+      for (E e : hmLR.values()) {
+        if (!isAllowed("LR", e)) {
           if (verbose) {
-            System.err.println("LR restic can be lifted "+ee);
+            System.err.println("LR restic can be lifted "+e);
           }
           if (alsoLiftUnneededRestrictions) {
-            setYesIsAllowed(ee, "LR");
+            setYesIsAllowed(e, "LR");
           }
         }
       }
@@ -119,13 +102,10 @@ public class SubstractBidix {
                 }
 
             } else {
-              String c="Already is "+reasonOfRestriction;
-              System.err.println("x "+c);
-              if (ee.getProcessingComments()!=null && !ee.getProcessingComments().trim().isEmpty()) {
-                c=c+" ; "+ee.getProcessingComments();
-              }
-              System.err.println("x "+c);
-              ee.setProcessingComments(c);
+              if (ee.processingComments.length()>0) ee.processingComments += " ; ";
+
+              ee.processingComments +="Already is "+reasonOfRestriction;
+              System.err.println("x "+ee.processingComments);
             }
           }
         }
@@ -187,34 +167,36 @@ public class SubstractBidix {
   
   
       
-  public static void checkEarlierAndRestrict(String direction, ContentElement l, HashMap<String, E> hmLR, E ee) {
+  private static void checkEarlierAndRestrict(String direction, ContentElement contentElement, HashMap<String, E> hmLR, E entry) {
     //if (isAllowed(direction, ee)) return;
     
-    String key=l.toString();
-    E existingEe=hmLR.get(key);
-    if (existingEe==null) {
-      hmLR.put(key, ee);
-      return;
-    } 
-    
-    if (!isAllowed(direction, existingEe) && isAllowed(direction, ee)) {
-      hmLR.put(key, ee);
-      return;
-    } 
-    
-    if (!isAllowed(direction, ee)) return;
+    String key=contentElement.toString();
 
-    String oldReasonOfRestriction=ee.temp;
-    String existingEeStr=existingEe.toString();
+    E existingEntry=hmLR.get(key);
+    if (existingEntry==null) {
+      hmLR.put(key, entry);
+      return;
+    } 
+    
+    if (!isAllowed(direction, existingEntry) && isAllowed(direction, entry)) {
+      hmLR.put(key, entry);
+      return;
+    } 
+    
+    if (!isAllowed(direction, entry)) return;
+
+    String oldReasonOfRestriction=entry.temp;
+    String existingEeStr=existingEntry.toString();
+
     //System.err.println("LR: Dobbelt indgang "+existingEe+"   "+ee);
-    if (ee.restriction ==null) {
+    if (entry.restriction ==null) {
       assert (oldReasonOfRestriction==null);
-      ee.temp=existingEeStr;
+      entry.temp=existingEeStr;
       //ee.restriction=reverseDir(direction));
     } else {
       if (oldReasonOfRestriction == null) {
-        //ee.setProcessingComments("Already firstSymbolIs "+existingEeStr);
-        ee.temp=existingEeStr;
+        //ee.setProcessingComments("Already isFirstSymbol "+existingEeStr);
+        entry.temp=existingEeStr;
         
       } else {
         String existingEeStrChop = existingEeStr.substring(existingEeStr.indexOf('<'));
@@ -226,13 +208,13 @@ public class SubstractBidix {
         if (existingEeStrChop.equals(oldReasonOfRestrictionChop)) {
           
           // Exactly the same entry has been before. Just delete
-          ee.temp="DELETE";
+          entry.temp="DELETE";
         } else {
           //ee.setProcessingComments("Already are "+existingEeStr+" "+oldReasonOfRestriction);
-          ee.temp=existingEeStr+" "+oldReasonOfRestriction;
+          entry.temp=existingEeStr+" "+oldReasonOfRestriction;
         }
       }          
     }
-    setNoIsNotAllowed(ee,direction);
+    setNoIsNotAllowed(entry,direction);
   }
 }

@@ -26,19 +26,14 @@ import misc.eoen.SubstractBidix;
 
 import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.E;
-import dics.elements.dtd.L;
-import dics.elements.dtd.P;
 import dics.elements.dtd.Par;
-import dics.elements.dtd.R;
 import dics.elements.dtd.Section;
-import dics.elements.dtd.TextElement;
+import dics.elements.utils.DicOpts;
 import dictools.xml.DictionaryReader;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-import misc.DicFormatE1Line;
-import misc.eoen.DicFormatE1LineAligned;
 
 /**
  *
@@ -46,16 +41,17 @@ import misc.eoen.DicFormatE1LineAligned;
  */
 public class RiparuEoEnBidix {
 
+
       public static void main(final String[] args) throws IOException {
-        //Dictionary dic = new DictionaryReader("../apertium-eo-en/apertium-lille.eo-en.dix").readDic();
-        Dictionary dic = new DictionaryReader("../apertium-eo-en/apertium-eo-en.eo-en.dix").readDic();
+        String pado = "../apertium-eo-en/";
+
+        Dictionary dic = new DictionaryReader(pado+"apertium-eo-en.eo-en.dix").readDic();
         dic.reportMetrics();
-        new DicFormatE1LineAligned(dic).printXML("before-clean.dix");
+        dic.printXML(pado+"before-clean.dix", "UTF-8", dics.elements.utils.DicOpts.STD_ALIGNED);
 
-        Set<String> esperanto_nouns_with_gender = new HashSet<String>(Iloj.leguTekstDosieron("res/esperanto_nouns_with_gender.txt"));
-        
-
-        
+        /*
+        Set<String> esperanto_nouns_with_gender = new HashSet<String>(Iloj.leguTekstDosieron(pado+"res/esperanto_nouns_with_gender.txt"));
+      
         HashMap<String, E> hm=new HashMap<String, E>();
 
         
@@ -90,21 +86,13 @@ public class RiparuEoEnBidix {
             }
           }
         }
-          
-        
-        
+        */
+                
         
         SubstractBidix.reviseRestrictions(dic, false, true);
 
-        
-        
-        
-        //System.out.println("Updated morphological dictionary: '" + out + "'");
-        //dic.printXML(out);
-        
-        new DicFormatE1LineAligned(dic).setAlignP(10).setAlignR(55).printXML("after-clean.dix");
-        //new DicFormatE1LineAligned(dic).printXML("after-clean.dix");
-        //new DicFormatE1LineAligned(dic).setAlignP(10).setAlignR(60).printXML("slet.dix");        
+
+        dic.printXML(pado+"after-clean.dix", "UTF-8", dics.elements.utils.DicOpts.STD_ALIGNED);
       }
 
   private static boolean equals(String paradigmValue, String paradigmValue0) {

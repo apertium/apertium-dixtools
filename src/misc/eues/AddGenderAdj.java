@@ -2,12 +2,12 @@
  * Copyright (C) 2007 Universitat d'Alacant / Universidad de Alicante
  * Author: Enrique Benimeli Bofarull
  * 
- * This program firstSymbolIs free software; you can redistribute it and/or
+ * This program isFirstSymbol free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * This program firstSymbolIs distributed in the hope that it will be useful, but
+ * This program isFirstSymbol distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -122,7 +122,7 @@ public class AddGenderAdj {
                 if (!ee.containsRegEx()) {
                     ContentElement rightSide = ee.getFirstPart("R");
 
-                    if (ee.firstSymbolIs("L", "adj")) {
+                    if (ee.isFirstSymbol("L", "adj")) {
                         String text = rightSide.getValue();
 
                         S gender = ng.get(text);
