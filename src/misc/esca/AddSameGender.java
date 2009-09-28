@@ -99,8 +99,8 @@ public class AddSameGender {
 
         for (E ee : bil.getEntriesInMainSection()) {
             if (ee.isFirstSymbol("L", "n")) {
-                String value = ee.getFirstPartAsLeft().getValueNoTags();
-                if (ee.getFirstPartAsLeft().containsSymbol("GD") || ee.getFirstPartAsLeft().containsSymbol("m") || ee.getFirstPartAsLeft().containsSymbol("f") || ee.getFirstPartAsLeft().containsSymbol("mf")) {
+                String value = ee.getFirstPartAsL().getValueNoTags();
+                if (ee.getFirstPartAsL().containsSymbol("GD") || ee.getFirstPartAsL().containsSymbol("m") || ee.getFirstPartAsL().containsSymbol("f") || ee.getFirstPartAsL().containsSymbol("mf")) {
 
                 } else {
                     String parValue = lemmaParName.get(value);
@@ -161,8 +161,8 @@ public class AddSameGender {
 
         for (E ee : bil.getEntriesInMainSection()) {
             if (ee.isFirstSymbol("L", "adj")) {
-                String value = ee.getFirstPartAsLeft().getValueNoTags();
-                if (ee.getFirstPartAsLeft().containsSymbol("GD") || ee.getFirstPartAsLeft().containsSymbol("m") || ee.getFirstPartAsLeft().containsSymbol("f") || ee.getFirstPartAsLeft().containsSymbol("mf")) {
+                String value = ee.getFirstPartAsL().getValueNoTags();
+                if (ee.getFirstPartAsL().containsSymbol("GD") || ee.getFirstPartAsL().containsSymbol("m") || ee.getFirstPartAsL().containsSymbol("f") || ee.getFirstPartAsL().containsSymbol("mf")) {
 
                 } else {
                     String parValue = lemmaParName.get(value);

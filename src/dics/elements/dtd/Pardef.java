@@ -58,7 +58,7 @@ public class Pardef extends DixElement {
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
-        if (!opt.noProcessingComments) dos.append(makeCommentIfData(processingComments));
+        if (!opt.noProcessingComments) dos.append(makeTabbedCommentIfData(processingComments));
 
         dos.append((opt.nowAlign?"":tab(2))+ "<pardef n=\"" + name + "\">"+justInsideStartTagCharacterData+"\n");
         for (E e : elements) {

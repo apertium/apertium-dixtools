@@ -193,10 +193,10 @@ public class CrossAction implements Comparable<CrossAction> {
         rCrossAction.setActionSet(rActionSet);
 
         HashMap<String, String> valueMap = new HashMap<String, String>();
-        ContentElement leftAB = this.getPattern().getAB().getFirstPartAsLeft();
-        ContentElement rightAB = this.getPattern().getAB().getFirstPartAsRight();
-        ContentElement leftBC = this.getPattern().getBC().getFirstPartAsLeft();
-        ContentElement rightBC = this.getPattern().getBC().getFirstPartAsRight();
+        ContentElement leftAB = this.getPattern().getAB().getFirstPartAsL();
+        ContentElement rightAB = this.getPattern().getAB().getFirstPartAsR();
+        ContentElement leftBC = this.getPattern().getBC().getFirstPartAsL();
+        ContentElement rightBC = this.getPattern().getBC().getFirstPartAsR();
 
         // Rename patterns
         ContentElement rLeftAB = this.renameContentElement(leftAB, valueMap);
@@ -218,8 +218,8 @@ public class CrossAction implements Comparable<CrossAction> {
 
         // Rename actions
         for (Action a : this.getActionSet()) {
-            ContentElement leftA = a.getE().getFirstPartAsLeft();
-            ContentElement rightA = a.getE().getFirstPartAsRight();
+            ContentElement leftA = a.getE().getFirstPartAsL();
+            ContentElement rightA = a.getE().getFirstPartAsR();
             ContentElement rLeftA = this.renameContentElement(leftA, valueMap);
             ContentElement rRightA = this.renameContentElement(rightA, valueMap);
             E rA = new E();

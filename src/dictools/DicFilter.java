@@ -52,7 +52,7 @@ public class DicFilter  extends AbstractDictTool{
         
         for(Section section : dicB.sections) {
             for( E ee : section.elements) {
-                String key = ee.getFirstPartAsLeft().getValueNoTags();
+                String key = ee.getFirstPartAsL().getValueNoTags();
                 System.err.println(key);
                 map.put(key, ee);
             }            
@@ -64,7 +64,7 @@ public class DicFilter  extends AbstractDictTool{
         
         for(Section section : dicA.sections) {
             for( E ee : section.elements) {
-                String key = ee.getFirstPartAsRight().getValueNoTags();
+                String key = ee.getFirstPartAsR().getValueNoTags();
                 if(map.containsKey(key)) {
                     sectionFilt.elements.add(ee);
                 }                

@@ -130,10 +130,10 @@ public class Pattern {
      */
     public ElementList getElementList() {
         ElementList list = new ElementList();
-        list.add(e1.getFirstPartAsLeft());
-        list.add(e1.getFirstPartAsRight());
-        list.add(e2.getFirstPartAsLeft());
-        list.add(e2.getFirstPartAsRight());
+        list.add(e1.getFirstPartAsL());
+        list.add(e1.getFirstPartAsR());
+        list.add(e2.getFirstPartAsL());
+        list.add(e2.getFirstPartAsR());
         return list;
     }
 
@@ -145,12 +145,12 @@ public class Pattern {
         ElementList eList = new ElementList();
 
         eList = this.getSequenceR(this.getAB(), eList);
-        eList = this.getSequenceCE(this.getAB().getFirstPartAsLeft(), eList);
-        eList = this.getSequenceCE(this.getAB().getFirstPartAsRight(), eList);
+        eList = this.getSequenceCE(this.getAB().getFirstPartAsL(), eList);
+        eList = this.getSequenceCE(this.getAB().getFirstPartAsR(), eList);
 
         eList = this.getSequenceR(this.getBC(), eList);
-        eList = this.getSequenceCE(this.getBC().getFirstPartAsLeft(), eList);
-        eList = this.getSequenceCE(this.getBC().getFirstPartAsRight(), eList);
+        eList = this.getSequenceCE(this.getBC().getFirstPartAsL(), eList);
+        eList = this.getSequenceCE(this.getBC().getFirstPartAsR(), eList);
 
         eList.add(new S("^end"));
         return eList;
@@ -246,10 +246,10 @@ public class Pattern {
     public HashMap<String, String> getDefinedVariables() {
         HashMap<String, String> definedVars = new HashMap<String, String>();
 
-        getDefinedVarsElement(getAB().getFirstPartAsLeft(), definedVars);
-        getDefinedVarsElement(getAB().getFirstPartAsRight(), definedVars);
-        getDefinedVarsElement(getBC().getFirstPartAsLeft(), definedVars);
-        getDefinedVarsElement(getBC().getFirstPartAsRight(), definedVars);
+        getDefinedVarsElement(getAB().getFirstPartAsL(), definedVars);
+        getDefinedVarsElement(getAB().getFirstPartAsR(), definedVars);
+        getDefinedVarsElement(getBC().getFirstPartAsL(), definedVars);
+        getDefinedVarsElement(getBC().getFirstPartAsR(), definedVars);
 
         return definedVars;
     }

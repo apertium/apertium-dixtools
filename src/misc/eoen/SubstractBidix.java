@@ -25,12 +25,9 @@ package misc.eoen;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import dics.elements.dtd.ContentElement;
 import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.E;
 import dics.elements.dtd.Section;
-import dics.elements.utils.DicOpts;
-import dictools.xml.DictionaryReader;
 
 /**
  *
@@ -41,26 +38,26 @@ public class SubstractBidix {
 
   public static void reviseRestrictions(Dictionary dic, boolean verbose, boolean alsoLiftUnneededRestrictions) {
 
-    HashMap<String, E> hmLR=new HashMap<String, E>();
-    HashMap<String, E> hmRL=new HashMap<String, E>();
+    HashMap<String, E> emapLtoR=new HashMap<String, E>();
+    HashMap<String, E> emapRtoL=new HashMap<String, E>();
     //HashSet<String> restrics = new HashSet<String>();
     for (Section section : dic.sections) {
       for (E e : section.elements) {
         //setYesIsAllowed(ee, "LR"); // XXXX
         //setYesIsAllowed(ee, "RL"); // XXXX
         if (!e.containsRegEx()) {
-          ContentElement leftContent=e.getFirstPart("L");
-          ContentElement rightContent=e.getFirstPart("R");
+          String leftContent=  e.getValue("L") + e.getFirstParadigm(); // e.getFirstPart("L");
+          String rightContent= e.getValue("R") + e.getFirstParadigm(); // e.getFirstPart("R");
           //System.err.println("======="+ee.toString()+"========");
           // L -> R
-          checkEarlierAndRestrict("LR", leftContent, hmLR, e);
+          checkEarlierAndRestrict("LR", leftContent, emapLtoR, e);
 
           // R -> L
-          checkEarlierAndRestrict("RL", rightContent, hmRL, e);
+          checkEarlierAndRestrict("RL", rightContent, emapRtoL, e);
         }
       }
 
-      for (E e : hmLR.values()) {
+      for (E e : emapLtoR.values()) {
         if (!isAllowed("LR", e)) {
           if (verbose) {
             System.err.println("LR restic can be lifted "+e);
@@ -71,7 +68,7 @@ public class SubstractBidix {
         }
       }
 
-      for (E ee : hmRL.values()) {
+      for (E ee : emapRtoL.values()) {
         if (!isAllowed("RL", ee)) {
           if (verbose) {
             System.err.println("RL restic can be lifted "+ee);
@@ -148,12 +145,8 @@ public class SubstractBidix {
 
 
   public static void setNoIsNotAllowed(E ee, String direction) {
-    boolean i = "yes".equals(ee.ignore);
+    if ("yes".equals(ee.ignore)) return;
     String restric = ee.restriction;    
-
-    if (i) {
-       return;
-    }
 
     if (direction.equals(restric)) {
        ee.ignore="yes";
@@ -167,19 +160,19 @@ public class SubstractBidix {
   
   
       
-  private static void checkEarlierAndRestrict(String direction, ContentElement contentElement, HashMap<String, E> hmLR, E entry) {
+  private static void checkEarlierAndRestrict(String direction, String contentElementKey, HashMap<String, E> entryMap, E entry) {
     //if (isAllowed(direction, ee)) return;
     
-    String key=contentElement.toString();
+    String key=contentElementKey;
 
-    E existingEntry=hmLR.get(key);
+    E existingEntry=entryMap.get(key);
     if (existingEntry==null) {
-      hmLR.put(key, entry);
+      entryMap.put(key, entry);
       return;
     } 
     
     if (!isAllowed(direction, existingEntry) && isAllowed(direction, entry)) {
-      hmLR.put(key, entry);
+      entryMap.put(key, entry);
       return;
     } 
     
@@ -203,7 +196,7 @@ public class SubstractBidix {
         String oldReasonOfRestrictionChop = oldReasonOfRestriction.substring(oldReasonOfRestriction.indexOf('<'));
         
 
-        System.err.println(existingEeStrChop+ ".equals? " +oldReasonOfRestrictionChop);
+        //System.err.println(existingEeStrChop+ ".equals? " +oldReasonOfRestrictionChop);
 
         if (existingEeStrChop.equals(oldReasonOfRestrictionChop)) {
           

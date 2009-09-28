@@ -185,7 +185,7 @@ public class E extends DixElement implements Cloneable {
         return null;
     }
 
-    public L getFirstPartAsLeft() {
+    public L getFirstPartAsL() {
         ContentElement cE = getFirstPart("L");
         if (cE instanceof L) {
             return (L) cE;
@@ -193,7 +193,7 @@ public class E extends DixElement implements Cloneable {
         return new L(cE);
     }
 
-    public R getFirstPartAsRight() {
+    public R getFirstPartAsR() {
         ContentElement cE = getFirstPart("R");
         if (cE instanceof R) {
             return (R) cE;
@@ -858,7 +858,7 @@ public class E extends DixElement implements Cloneable {
      * @return true if the element containsSymbol certain definition ('adj', 'n', etc.)
      */
     public boolean containsSymbol(String def) {
-        return (getFirstPartAsLeft().containsSymbol(def) || this.getFirstPartAsRight().containsSymbol(def));
+        return (getFirstPartAsL().containsSymbol(def) || this.getFirstPartAsR().containsSymbol(def));
     }
 
     /**

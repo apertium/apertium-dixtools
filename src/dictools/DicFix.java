@@ -104,14 +104,13 @@ public class DicFix  extends AbstractDictTool {
                 } else {
                     String left = ee.getValue("L");
                     String right = ee.getValue("R");
-                    msg.err("Duplicated: " + left + "/" + right + "\n");
+                    msg.err("Duplicated: " + left + "/" + right);
                     duplicated++;
                     moveCommentsToPrevious(eePrevious, ee);
                     ei.remove();
                 }
             }
-            String errorMsg = duplicated + " duplicated entries in section '" + section.id + "'\n";
-            msg.err(errorMsg);
+            msg.err(duplicated + " duplicated entries in section '" + section.id);
         }
         dic.printXML(this.out,opt);
         return dic;

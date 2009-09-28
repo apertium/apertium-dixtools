@@ -53,7 +53,7 @@ public class Sdefs extends DixElement {
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
-        dos.append(makeCommentIfData(processingComments));
+        dos.append(makeTabbedCommentIfData(processingComments));
         dos.append(tab(1) + "<" + TAGNAME + ">\n");
 
         HashMap<String, String> descriptions = DicTools.getSdefDescriptions();

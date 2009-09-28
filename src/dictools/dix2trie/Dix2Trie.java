@@ -106,8 +106,8 @@ public class Dix2Trie {
 
         for (Section section : dic.sections) {
             for (E e : section.elements) {
-                L left = e.getFirstPartAsLeft();
-                R right = e.getFirstPartAsRight();
+                L left = e.getFirstPartAsL();
+                R right = e.getFirstPartAsR();
 
                 String lemmaLeft = left.getValueNoTags();
                 String lemmaRight = right.getValueNoTags();

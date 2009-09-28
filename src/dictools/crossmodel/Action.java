@@ -155,8 +155,8 @@ public class Action {
         boolean errorsFound = false;
         HashMap<String, String> definedVarsInAction = new HashMap<String, String>();
 
-        getDefinedVarsElement(getE().getFirstPartAsLeft(), definedVarsInAction);
-        getDefinedVarsElement(getE().getFirstPartAsRight(), definedVarsInAction);
+        getDefinedVarsElement(getE().getFirstPartAsL(), definedVarsInAction);
+        getDefinedVarsElement(getE().getFirstPartAsR(), definedVarsInAction);
 
         Iterator<String> it = definedVarsInAction.keySet().iterator();
         while (it.hasNext()) {
