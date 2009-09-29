@@ -30,6 +30,7 @@ import dics.elements.dtd.E;
 import dics.elements.dtd.Pardef;
 import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
+import dics.elements.utils.DicOpts;
 import dictools.xml.DictionaryReader;
 import java.util.ArrayList;
 import java.util.ListIterator;
@@ -39,21 +40,10 @@ import java.util.ListIterator;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class DicFix  extends AbstractDictTool {
+public class DicFix extends AbstractDictTool {
 
-    
-	public Dictionary dic;
-    
-    public String out;
-    
-    public DicFix() {
-    }
 
-    /**
-     * 
-     * @return Undefined         
-     */
-    public Dictionary fix() {
+    public void fix(Dictionary dic) {
       if (dic.isMonol()) DicCross.addMissingLemmas(dic);
 
       // replace whitespace " " with <b/>
@@ -69,16 +59,18 @@ public class DicFix  extends AbstractDictTool {
 
       for (Section par :  dic.sections)
           removeExactDuplicates(par.elements, "section "+par.id);
-
-
-      dic.printXML(this.out,opt);
-      return dic;
     }
 
     
     public void doFormat() {
-        processArguments();
-        actionFix();
+        Dictionary dic = new DictionaryReader(arguments[1]).readDic();
+
+        String out = arguments[2];
+
+        fix(dic);
+
+        msg.err("Writing fixed dictonary to " + out);
+        dic.printXML(out,opt);
     }
 
     private static void moveCommentsToPrevious(E eePrevious, E ee) {
@@ -88,23 +80,6 @@ public class DicFix  extends AbstractDictTool {
         }
     }
 
-    
-    private void processArguments() {
-      
-        msg.err("Reading " + arguments[1]);
-        DictionaryReader dicReader = new DictionaryReader(arguments[1]);
-        Dictionary dic = dicReader.readDic();
-        dicReader = null;
-        this.dic = dic;
-        this.out = arguments[2];
-    }
-
-    
-    private void actionFix() {
-        Dictionary dicFormatted = fix();
-        msg.err("Writing fixed dictonary to " + out);
-        dicFormatted.printXML(out,opt);
-    }
 
 
     public static void replaceSpaceWithB(E ee) {
@@ -123,7 +98,6 @@ public class DicFix  extends AbstractDictTool {
     private void removeExactDuplicates(ArrayList<E> elements, String context) {
       HashSet<String> ees=new HashSet<String>();
       E eePrevious=null;
-      boolean removed=false;
 
       for (ListIterator<E> eei=elements.listIterator(); eei.hasNext();) {
         E ee=eei.next();
@@ -140,4 +114,6 @@ public class DicFix  extends AbstractDictTool {
         }
       }
     }
+
+
 }

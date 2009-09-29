@@ -29,7 +29,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.Vector;
 
 import javax.swing.JProgressBar;
 
@@ -42,7 +41,6 @@ import dics.elements.dtd.ContentElement;
 import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.DixElement;
 import dics.elements.dtd.E;
-import dics.elements.dtd.HeaderElement;
 import dics.elements.dtd.L;
 import dics.elements.dtd.P;
 import dics.elements.dtd.R;
