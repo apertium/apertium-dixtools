@@ -97,21 +97,42 @@ public class DicFix extends AbstractDictTool {
     }
 
     private void removeExactDuplicates(ArrayList<E> elements, String context) {
-      HashSet<String> ees=new HashSet<String>();
-      E eePrevious=null;
+      HashMap<String,E> existingEntries=new HashMap<String,E>();
+      E ePrevious=null;
 
-      for (ListIterator<E> eei=elements.listIterator(); eei.hasNext();) {
-        E ee=eei.next();
-        String s=ee.toString();
+      for (ListIterator<E> eIterator=elements.listIterator(); eIterator.hasNext();) {
+        E e=eIterator.next();
 
-        boolean alreadyThere=!ees.add(s);
-        if (alreadyThere) {
-          // remove if this entry already existed
-          moveCommentsToPrevious(eePrevious, ee);
-          eei.remove();
-          msg.err("Removed duplicate "+s+" in "+context);
+        StringBuilder str = new StringBuilder(50);
+        for (DixElement de : e.children) {
+          str.append(de.toString());
+        }
+
+        String key=str.toString();
+
+        E eExisting = existingEntries.get(key);
+        if (eExisting != null) {
+
+          if (!eExisting.toString().equals(e.toString())) {
+            // Entries differ somehow, find out how
+            if ("yes".equals(eExisting.ignore)) continue; // leave new
+            if ("yes".equals(e.ignore)) continue; // leave new
+
+            if (eExisting.restriction == null) ; // Use existing, remove new
+            else if (eExisting.restriction == e.restriction) ;  // Use existing, remove new
+            else if (e.restriction == null) eExisting.restriction = null; // Use existing w/o restric, remove new
+            else if (eExisting.isLR() && e.isRL()) eExisting.restriction = null; // Use existing w/o restric, remove new
+            else if (eExisting.isRL() && e.isLR()) eExisting.restriction = null; // Use existing w/o restric, remove new
+            else throw new IllegalStateException("Should not happen "+ eExisting + "  " + e);
+          }
+
+          // remove entry
+          moveCommentsToPrevious(ePrevious, e);
+          eIterator.remove();
+          msg.err("Removed duplicate "+key+" in "+context);
         } else {
-          eePrevious=ee;
+          existingEntries.put(key, e);
+          ePrevious=e;
         }
       }
     }

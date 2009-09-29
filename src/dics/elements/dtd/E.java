@@ -612,7 +612,7 @@ public class E extends DixElement implements Cloneable {
           if (e instanceof P) {
             str.append( ((P) e).getSide(side));
           }
-          str.append(e.toString());
+          else str.append(e.toString());
         }
         str.append("</e>");
         return str.toString();

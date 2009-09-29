@@ -20,20 +20,11 @@
 
 package misc.eoen;
 
-import dics.elements.dtd.ContentElement;
 import java.io.IOException;
-import misc.eoen.SubstractBidix;
 
 import dics.elements.dtd.Dictionary;
-import dics.elements.dtd.E;
-import dics.elements.dtd.Par;
-import dics.elements.dtd.Section;
-import dictools.utils.DicOpts;
+import dictools.DicFix;
 import dictools.utils.DictionaryReader;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
 
 /**
  *
@@ -47,7 +38,12 @@ public class RiparuEoEnBidix {
 
         Dictionary dic = new DictionaryReader(pado+"apertium-eo-en.eo-en.dix").readDic();
         dic.reportMetrics();
+
         dic.printXML(pado+"before-clean.dix", "UTF-8", dictools.utils.DicOpts.STD_ALIGNED);
+
+        new DicFix().fix(dic);
+
+        dic.printXML(pado+"after-fix.dix", "UTF-8", dictools.utils.DicOpts.STD_ALIGNED);
 
         /*
         Set<String> esperanto_nouns_with_gender = new HashSet<String>(Iloj.leguTekstDosieron(pado+"res/esperanto_nouns_with_gender.txt"));
@@ -91,7 +87,7 @@ public class RiparuEoEnBidix {
          */
                 
         
-        SubstractBidix.reviseRestrictions(dic, false, false);
+        SubstractBidix.reviseRestrictions(dic, false, true);
 
 
         dic.printXML(pado+"after-clean.dix", "UTF-8", dictools.utils.DicOpts.STD_ALIGNED);
