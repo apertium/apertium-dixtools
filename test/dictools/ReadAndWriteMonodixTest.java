@@ -32,7 +32,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import dics.elements.dtd.Dictionary;
-import dictools.xml.DictionaryReader;
+import dictools.utils.DictionaryReader;
 
 
 /**
@@ -114,7 +114,7 @@ public class ReadAndWriteMonodixTest extends TestTools {
   @Test
   public void testprintXML_std() throws IOException, InterruptedException {
     String outfile = rm("tmp_testprintXML_std.xml");
-    dic.printXML(outfile, dics.elements.utils.DicOpts.STD);
+    dic.printXML(outfile, dictools.utils.DicOpts.STD);
     String diff=exec( "diff test/correct_output_DicFormat.xml "+outfile);
     Assert.assertTrue("Difference: "+diff, diff.isEmpty());
     rm(outfile);
@@ -132,7 +132,7 @@ public class ReadAndWriteMonodixTest extends TestTools {
   @Test
   public void testprintXML_std1line() throws IOException, InterruptedException {
     String outfile = rm("tmp_testprintXML_std1line.xml");
-    dic.printXML(outfile, dics.elements.utils.DicOpts.STD_1_LINE);
+    dic.printXML(outfile, dictools.utils.DicOpts.STD_1_LINE);
     String diff=exec( "diff -b test/correct_output_DicFormatE1Line.xml "+outfile);
     Assert.assertTrue("Difference: "+diff, diff.isEmpty());
     rm(outfile);

@@ -23,9 +23,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-import dics.elements.utils.DicOpts;
-import dics.elements.utils.ElementList;
-import dics.elements.utils.Msg;
+import dictools.utils.DicOpts;
+import dictools.utils.ElementList;
+import dictools.utils.Msg;
 
 /**
  * 

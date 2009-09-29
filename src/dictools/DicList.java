@@ -36,8 +36,8 @@ import dics.elements.dtd.S;
 import dics.elements.dtd.Sdef;
 import dics.elements.dtd.Sdefs;
 import dics.elements.dtd.Section;
-import dics.elements.utils.Msg;
-import dictools.xml.DictionaryReader;
+import dictools.utils.Msg;
+import dictools.utils.DictionaryReader;
 
 /**
  * 

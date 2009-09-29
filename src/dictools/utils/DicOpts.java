@@ -18,7 +18,7 @@
  * 02111-1307, USA.
  */
 
-package dics.elements.utils;
+package dictools.utils;
 
 
 /**

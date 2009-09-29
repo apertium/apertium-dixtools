@@ -30,9 +30,9 @@ import dics.elements.dtd.Pardefs;
 import dics.elements.dtd.Sdef;
 import dics.elements.dtd.Sdefs;
 import dics.elements.dtd.Section;
-import dics.elements.utils.DicSet;
-import dics.elements.utils.DicTools;
-import dictools.xml.DictionaryReader;
+import dictools.utils.DicSet;
+import dictools.utils.DicTools;
+import dictools.utils.DictionaryReader;
 
 /**
  * 

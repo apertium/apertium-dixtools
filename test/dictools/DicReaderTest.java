@@ -12,7 +12,7 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import dics.elements.utils.Msg;
+import dictools.utils.Msg;
 
 /**
  * @author Jacob Nordfalk

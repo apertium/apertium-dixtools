@@ -25,7 +25,7 @@ import java.util.HashMap;
 import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.E;
 import dics.elements.dtd.Section;
-import dictools.xml.DictionaryReader;
+import dictools.utils.DictionaryReader;
 
 /**1* @author Enrique Benimeli Bofarull
  */

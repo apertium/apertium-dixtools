@@ -40,7 +40,7 @@ import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
 import dictools.AbstractDictTool;
 import dictools.DicSort;
-import dictools.xml.DictionaryReader;
+import dictools.utils.DictionaryReader;
 
 /**
  *

@@ -22,8 +22,8 @@ package dics.elements.dtd;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import dics.elements.utils.DicOpts;
-import dics.elements.utils.ElementList;
+import dictools.utils.DicOpts;
+import dictools.utils.ElementList;
 
 /**
  * 

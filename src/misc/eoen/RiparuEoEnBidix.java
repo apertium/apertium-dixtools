@@ -28,8 +28,8 @@ import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.E;
 import dics.elements.dtd.Par;
 import dics.elements.dtd.Section;
-import dics.elements.utils.DicOpts;
-import dictools.xml.DictionaryReader;
+import dictools.utils.DicOpts;
+import dictools.utils.DictionaryReader;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -47,7 +47,7 @@ public class RiparuEoEnBidix {
 
         Dictionary dic = new DictionaryReader(pado+"apertium-eo-en.eo-en.dix").readDic();
         dic.reportMetrics();
-        dic.printXML(pado+"before-clean.dix", "UTF-8", dics.elements.utils.DicOpts.STD_ALIGNED);
+        dic.printXML(pado+"before-clean.dix", "UTF-8", dictools.utils.DicOpts.STD_ALIGNED);
 
         /*
         Set<String> esperanto_nouns_with_gender = new HashSet<String>(Iloj.leguTekstDosieron(pado+"res/esperanto_nouns_with_gender.txt"));
@@ -94,7 +94,7 @@ public class RiparuEoEnBidix {
         SubstractBidix.reviseRestrictions(dic, false, false);
 
 
-        dic.printXML(pado+"after-clean.dix", "UTF-8", dics.elements.utils.DicOpts.STD_ALIGNED);
+        dic.printXML(pado+"after-clean.dix", "UTF-8", dictools.utils.DicOpts.STD_ALIGNED);
       }
 
   private static boolean equals(String paradigmValue, String paradigmValue0) {

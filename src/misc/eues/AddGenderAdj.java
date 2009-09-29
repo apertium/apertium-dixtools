@@ -32,7 +32,7 @@ import dics.elements.dtd.S;
 import dics.elements.dtd.Sdef;
 import dics.elements.dtd.Sdefs;
 import dics.elements.dtd.Section;
-import dictools.xml.DictionaryReader;
+import dictools.utils.DictionaryReader;
 
 /**
  * 
@@ -163,7 +163,7 @@ public class AddGenderAdj {
         System.err.println("I could not find gender for " + genderNotFound + " lemmas (see addgender.err).");
 
         System.err.println("Updated bilingual dictionary: '" + out + "'");
-        bil.printXML(out, dics.elements.utils.DicOpts.STD);
+        bil.printXML(out, dictools.utils.DicOpts.STD);
     }
 
     /**

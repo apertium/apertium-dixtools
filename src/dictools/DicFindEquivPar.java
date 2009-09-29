@@ -29,7 +29,7 @@ import dics.elements.dtd.E;
 import dics.elements.dtd.Par;
 import dics.elements.dtd.Pardef;
 import dics.elements.dtd.Section;
-import dictools.xml.DictionaryReader;
+import dictools.utils.DictionaryReader;
 
 /**
  * 

@@ -25,8 +25,8 @@ import java.util.regex.Matcher;
 
 import dics.elements.dtd.DixElement;
 import dics.elements.dtd.S;
-import dics.elements.utils.ElementList;
-import dictools.crossmodel.CrossAction;
+import dictools.utils.ElementList;
+import dictools.cross.CrossAction;
 import java.util.HashMap;
 
 /**

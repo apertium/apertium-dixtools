@@ -17,12 +17,12 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-package dictools.crossmodel;
+package dictools.cross;
 
 import org.w3c.dom.Element;
 
 import dics.elements.dtd.E;
-import dictools.xml.XMLReader;
+import dictools.utils.XMLReader;
 
 /**
  * 

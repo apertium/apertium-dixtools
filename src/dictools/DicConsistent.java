@@ -27,9 +27,9 @@ import java.util.Set;
 
 import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.E;
-import dics.elements.utils.DicOpts;
-import dics.elements.utils.DicSet;
-import dics.elements.utils.DicTools;
+import dictools.utils.DicOpts;
+import dictools.utils.DicSet;
+import dictools.utils.DicTools;
 
 /**
  * 

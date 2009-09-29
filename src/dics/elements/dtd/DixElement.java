@@ -21,7 +21,7 @@ package dics.elements.dtd;
 
 import java.io.IOException;
 
-import dics.elements.utils.DicOpts;
+import dictools.utils.DicOpts;
 
 /**
  * 
@@ -99,7 +99,7 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
     protected void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
-        if (!opt.noProcessingComments) dos.append(makeCommentIfData(processingComments));
+        if (!opt.noProcessingComments) dos.append(makeTabbedCommentIfData(processingComments));
         dos.append("<" + TAGNAME + "/>");
         dos.append(appendCharacterData);
     }
@@ -108,7 +108,7 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
         return "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t".substring(0,nTabs);
     }
 
-    public static String makeCommentIfData(String commentContent) {
+    public static String makeTabbedCommentIfData(String commentContent) {
     if (commentContent.isEmpty()) return "";
     return tab(2)+"<!-- "+commentContent.trim()+" -->\n";
   }

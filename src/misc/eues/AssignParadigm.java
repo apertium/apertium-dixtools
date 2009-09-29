@@ -30,7 +30,7 @@ import dics.elements.dtd.R;
 import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
 import dictools.AbstractDictTool;
-import dictools.xml.DictionaryReader;
+import dictools.utils.DictionaryReader;
 
 /**
  * 
@@ -112,7 +112,7 @@ public class AssignParadigm extends AbstractDictTool {
             }
         }
         System.err.println("Updated morphological dictionary: '" + out + "'");
-        dic.printXML(out, dics.elements.utils.DicOpts.STD);
+        dic.printXML(out, dictools.utils.DicOpts.STD);
     }
 
     /**

@@ -31,10 +31,10 @@ import dics.elements.dtd.L;
 import dics.elements.dtd.R;
 import dics.elements.dtd.S;
 import dics.elements.dtd.Section;
-import dictools.dix2trie.utils.Entry;
-import dictools.dix2trie.utils.EntryList;
-import dictools.dix2trie.utils.Node;
-import dictools.xml.DictionaryReader;
+import dictools.dix2trie.Entry;
+import dictools.dix2trie.EntryList;
+import dictools.dix2trie.Node;
+import dictools.utils.DictionaryReader;
 
 /**
  *

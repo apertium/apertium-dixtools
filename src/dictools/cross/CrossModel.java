@@ -17,7 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-package dictools.crossmodel;
+package dictools.cross;
 
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.Collections;
 
-import dics.elements.utils.DicOpts;
+import dictools.utils.DicOpts;
 
 /**
  * 

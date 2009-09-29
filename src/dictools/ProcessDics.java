@@ -20,6 +20,7 @@ package dictools;
  * 02111-1307, USA.
  */
 
+import dictools.cross.DicCross;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,10 +34,10 @@ import misc.enes.PrepareDic;
 import misc.eoen.DicFormatE1LineAligned;
 import misc.esca.AddSameGender;
 import dics.elements.dtd.Dictionary;
-import dics.elements.utils.DicOpts;
+import dictools.utils.DicOpts;
 import dictools.apertiumizer.Apertiumizer;
 import dictools.dix2trie.Dix2Trie;
-import dictools.xml.DictionaryReader;
+import dictools.utils.DictionaryReader;
 
 /**
  *

@@ -35,7 +35,7 @@ import dics.elements.dtd.P;
 import dics.elements.dtd.R;
 import dics.elements.dtd.S;
 import dics.elements.dtd.TextElement;
-import dictools.xml.DictionaryReader;
+import dictools.utils.DictionaryReader;
 
 /**
  *
@@ -91,7 +91,7 @@ public class CompleteTranslation {
             }
 
         }
-        bil.printXML("trans-completed-2.dix", dics.elements.utils.DicOpts.STD);
+        bil.printXML("trans-completed-2.dix", dictools.utils.DicOpts.STD);
     }
 
     /**

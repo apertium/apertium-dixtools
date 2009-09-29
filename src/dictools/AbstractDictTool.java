@@ -19,8 +19,8 @@
  */
 package dictools;
 
-import dics.elements.utils.DicOpts;
-import dics.elements.utils.Msg;
+import dictools.utils.DicOpts;
+import dictools.utils.Msg;
 
 /**
  *

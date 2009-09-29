@@ -24,10 +24,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import dics.elements.dtd.DixElement;
-import dics.elements.utils.ElementList;
-import dics.elements.utils.Msg;
-import dictools.crossmodel.CrossAction;
-import dictools.crossmodel.CrossModel;
+import dictools.utils.ElementList;
+import dictools.utils.Msg;
+import dictools.cross.CrossAction;
+import dictools.cross.CrossModel;
 
 /**
  *

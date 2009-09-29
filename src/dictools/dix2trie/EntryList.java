@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2007 Universitat d'Alacant / Universidad de Alicante
  * Author: Enrique Benimeli Bofarull
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
@@ -17,44 +17,27 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
+package dictools.dix2trie;
 
-package dictools.xml;
-
-import org.w3c.dom.Element;
-
-import dics.elements.dtd.Sdefs;
+import java.util.ArrayList;
 
 /**
- * 
+ *
  * @author Enrique Benimeli Bofarull
- * 
  */
-public class SdefsReader extends XMLReader {
+public class EntryList extends ArrayList<Entry> {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * 
-     * @param fileName
+     * @param entry
+     * @return The entry
      */
-    public SdefsReader(String fileName) {
-        super(fileName);
-    }
-
-    /**
-     * 
-     * @return Undefined         */
-    public Sdefs readSdefs() {
-        analize();
-        Element root = document.getDocumentElement();
-        String elementName = root.getNodeName();
-        Sdefs sdefsElement = null;
-
-        // Symbol definitions
-        if (elementName.equals("sdefs")) {
-            sdefsElement = readSdefs(root);
-        }
-
-        root = null;
-        this.document = null;
-        return sdefsElement;
+    public boolean add(Entry entry) {
+        return super.add(entry);
     }
 }

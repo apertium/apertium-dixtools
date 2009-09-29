@@ -26,8 +26,8 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import dics.elements.utils.DicOpts;
-import dics.elements.utils.DicTools;
+import dictools.utils.DicOpts;
+import dictools.utils.DicTools;
 
 /**
  * 

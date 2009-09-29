@@ -17,7 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-package dictools.dix2trie.utils;
+package dictools.cross;
 
 import java.util.ArrayList;
 
@@ -25,19 +25,47 @@ import java.util.ArrayList;
  *
  * @author Enrique Benimeli Bofarull
  */
-public class EntryList extends ArrayList<Entry> {
+public class ResourceSet extends ArrayList<Resource> {
 
+    
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	/**
+	private String name;
+    
+    private String description;
+
+    /**
      * 
-     * @param entry
-     * @return The entry
+     * @return The name of the resource set
      */
-    public boolean add(Entry entry) {
-        return super.add(entry);
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * 
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * 
+     * @return The description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * 
+     * @param description
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

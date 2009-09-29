@@ -28,7 +28,7 @@ import java.util.HashMap;
 import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.E;
 import dics.elements.dtd.Section;
-import dictools.xml.DictionaryReader;
+import dictools.utils.DictionaryReader;
 
 /**
  *
@@ -66,7 +66,7 @@ public class PrepareDic {
                 }
             }
         }
-        dic.printXML("not-common-en-ca-filtered.dix", dics.elements.utils.DicOpts.STD);
+        dic.printXML("not-common-en-ca-filtered.dix", dictools.utils.DicOpts.STD);
     }
 
     /**

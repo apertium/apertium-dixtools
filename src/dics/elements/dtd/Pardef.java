@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import dics.elements.utils.DicOpts;
+import dictools.utils.DicOpts;
 
 /**
  * 

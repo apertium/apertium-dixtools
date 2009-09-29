@@ -56,7 +56,7 @@ public class DicFormatE1LineAligned extends AbstractDictTool {
      */
     public DicFormatE1LineAligned(Dictionary dic) {
         this.dic = dic;
-        this.opt = dics.elements.utils.DicOpts.STD_ALIGNED;
+        this.opt = dictools.utils.DicOpts.STD_ALIGNED;
     }
 
     /**

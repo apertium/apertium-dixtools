@@ -21,7 +21,7 @@ package misc;
 
 import dics.elements.dtd.Dictionary;
 import dictools.AbstractDictTool;
-import dictools.xml.DictionaryReader;
+import dictools.utils.DictionaryReader;
 
 /**
  * 
@@ -40,7 +40,7 @@ public class DicFormatE1Line extends AbstractDictTool {
     public DicFormatE1Line(String dicFileName) {
         DictionaryReader dicReader = new DictionaryReader(dicFileName);
         dic = dicReader.readDic();
-        this.opt = dics.elements.utils.DicOpts.STD_1_LINE;
+        this.opt = dictools.utils.DicOpts.STD_1_LINE;
     }
 
     
@@ -50,7 +50,7 @@ public class DicFormatE1Line extends AbstractDictTool {
      */
     public DicFormatE1Line(Dictionary dic) {
         this.dic = dic;
-        this.opt = dics.elements.utils.DicOpts.STD_1_LINE;
+        this.opt = dictools.utils.DicOpts.STD_1_LINE;
     }
 
     /**

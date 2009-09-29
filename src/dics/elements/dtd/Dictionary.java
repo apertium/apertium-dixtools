@@ -29,9 +29,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
-import dics.elements.utils.DicOpts;
-import dics.elements.utils.DicTools;
-import dics.elements.utils.ElementList;
+import dictools.utils.DicOpts;
+import dictools.utils.DicTools;
+import dictools.utils.ElementList;
 
 /**
  *

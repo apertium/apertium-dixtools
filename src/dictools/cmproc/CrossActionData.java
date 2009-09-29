@@ -19,7 +19,7 @@
  */
 package dictools.cmproc;
 
-import dictools.crossmodel.CrossAction;
+import dictools.cross.CrossAction;
 
 /**
  *

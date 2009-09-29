@@ -17,8 +17,9 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-package dictools;
+package dictools.cross;
 
+import dictools.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,9 +33,9 @@ import java.util.Set;
 
 import javax.swing.JProgressBar;
 
-import lingres.LingResources;
-import lingres.LingResourcesReader;
-import lingres.Resource;
+import dictools.cross.LingResources;
+import dictools.cross.LingResourcesReader;
+import dictools.cross.Resource;
 import dics.elements.dtd.Alphabet;
 import dics.elements.dtd.B;
 import dics.elements.dtd.ContentElement;
@@ -49,18 +50,18 @@ import dics.elements.dtd.Sdef;
 import dics.elements.dtd.Sdefs;
 import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
-import dics.elements.utils.DicOpts;
-import dics.elements.utils.DicSet;
-import dics.elements.utils.DicTools;
+import dictools.utils.DicOpts;
+import dictools.utils.DicSet;
+import dictools.utils.DicTools;
 import dictools.cmproc.CrossActionData;
 import dictools.cmproc.CrossModelProcessor;
 import dictools.cmproc.Variables;
-import dictools.crossmodel.Action;
-import dictools.crossmodel.CrossAction;
-import dictools.crossmodel.CrossModel;
-import dictools.crossmodel.CrossModelReader;
-import dictools.crossmodel.Pattern;
-import dictools.xml.DictionaryReader;
+import dictools.cross.Action;
+import dictools.cross.CrossAction;
+import dictools.cross.CrossModel;
+import dictools.cross.CrossModelReader;
+import dictools.cross.Pattern;
+import dictools.utils.DictionaryReader;
 
 /**
  *

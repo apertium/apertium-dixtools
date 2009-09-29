@@ -41,8 +41,8 @@ import dics.elements.dtd.E;
 import dics.elements.dtd.Pardef;
 import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
-import dics.elements.utils.DicOpts;
-import dictools.xml.DictionaryReader;
+import dictools.utils.DicOpts;
+import dictools.utils.DictionaryReader;
 
 /**
  * Adds entries like <p><l/><r>%1234</r></p> in the start or end of all entries in a dix files,

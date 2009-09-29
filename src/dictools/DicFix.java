@@ -19,6 +19,7 @@
  */
 package dictools;
 
+import dictools.cross.DicCross;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -30,8 +31,8 @@ import dics.elements.dtd.E;
 import dics.elements.dtd.Pardef;
 import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
-import dics.elements.utils.DicOpts;
-import dictools.xml.DictionaryReader;
+import dictools.utils.DicOpts;
+import dictools.utils.DictionaryReader;
 import java.util.ArrayList;
 import java.util.ListIterator;
 

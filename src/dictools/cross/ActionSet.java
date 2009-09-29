@@ -17,16 +17,16 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-package dictools.crossmodel;
+package dictools.cross;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import dics.elements.dtd.S;
-import dics.elements.utils.DicOpts;
-import dics.elements.utils.ElementList;
-import dics.elements.utils.Msg;
+import dictools.utils.DicOpts;
+import dictools.utils.ElementList;
+import dictools.utils.Msg;
 
 /**
  * 

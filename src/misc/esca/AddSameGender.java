@@ -28,7 +28,7 @@ import dics.elements.dtd.I;
 import dics.elements.dtd.P;
 import dics.elements.dtd.Pardef;
 import dics.elements.dtd.S;
-import dictools.xml.DictionaryReader;
+import dictools.utils.DictionaryReader;
 import java.util.ArrayList;
 
 /**
@@ -60,7 +60,7 @@ public class AddSameGender {
         bil = bilReader.readDic();
         this.process_nouns();
         this.process_adjs();
-        bil.printXML("dics/apertium-es-ca.es-ca-with-gender.dix", dics.elements.utils.DicOpts.STD);
+        bil.printXML("dics/apertium-es-ca.es-ca-with-gender.dix", dictools.utils.DicOpts.STD);
     }
 
     

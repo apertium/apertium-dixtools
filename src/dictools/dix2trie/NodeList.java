@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2007 Universitat d'Alacant / Universidad de Alicante
  * Author: Enrique Benimeli Bofarull
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
@@ -17,17 +17,27 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-package dictools.crossmodel;
+package dictools.dix2trie;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
- * 
+ *
  * @author Enrique Benimeli Bofarull
- * 
  */
-public class CrossActionList extends ArrayList<CrossAction> {
+public class NodeList extends HashMap<String, Node> {
 
-    
-    static final long serialVersionUID = 0;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+     * 
+     * @param node
+     * @return The node
+     */
+    public Node put(Node node) {
+        return super.put(node.getValue(), node);
+    }
 }
