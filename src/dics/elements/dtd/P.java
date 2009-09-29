@@ -109,11 +109,12 @@ public class P extends DixElement {
     
     @Override
     public String toString() {
-        String str = "";
+        return l.toString() + r.toString();
+    }
 
-        str += l.toString();
-        str += r.toString();
-
-        return str;
+    public ContentElement getSide(String side) {
+      if (side.equals("L")) return l;
+      if (side.equals("R")) return r;
+      throw new IllegalArgumentException("Side must be L or R. Was: "+side);
     }
 }

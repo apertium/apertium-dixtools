@@ -31,6 +31,8 @@ import dics.elements.dtd.Pardef;
 import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
 import dictools.xml.DictionaryReader;
+import java.util.ArrayList;
+import java.util.ListIterator;
 
 /**
  * 
@@ -52,68 +54,25 @@ public class DicFix  extends AbstractDictTool {
      * @return Undefined         
      */
     public Dictionary fix() {
+      if (dic.isMonol()) DicCross.addMissingLemmas(dic);
 
- 
-        // Check for duplicate entries in paradigm
-        if (dic.pardefs != null)
-        for (Pardef par :  dic.pardefs.elements) {
-            HashSet<String> ees = new HashSet<String>();
-            E eePrevious = null;
-            boolean removed = false;
-            for (Iterator<E> eei = par.elements.iterator(); eei.hasNext(); ) {
-                E ee = eei.next();
-                String s = ee.toString();
-                boolean alreadyThere = !ees.add(s);
-                if (alreadyThere) { // remove if this entry already existed
-                    moveCommentsToPrevious(eePrevious, ee);
-                    eei.remove();
-                    removed = true;
-                }  else {
-                    eePrevious = ee;
-                }
-            }
-            if (removed) msg.err("Removed duplicate entries in paradigm "+par.name);
-        }
+      // replace whitespace " " with <b/>
+      for (Pardef par :  dic.pardefs.elements)
+        for (E ee : par.elements) replaceSpaceWithB(ee);
 
-        if (dic.isMonol()) DicCross.addMissingLemmas(dic);
+      for (Section par :  dic.sections)
+        for (E ee : par.elements) replaceSpaceWithB(ee);
 
-        HashMap<String, E> eMap = new HashMap<String, E>();
-        for (Section section : dic.sections) {
-            int duplicated = 0;
-            E eePrevious = null;
+      // Check for duplicate entries in paradigm and in each section
+      for (Pardef par :  dic.pardefs.elements)
+          removeExactDuplicates(par.elements, "paradigm "+par.name);
 
-            for (Iterator<E> ei =section.elements.iterator(); ei.hasNext(); ) {
-                E ee = ei.next();
+      for (Section par :  dic.sections)
+          removeExactDuplicates(par.elements, "section "+par.id);
 
-                String e1Key = ee.toString();
-                if (!eMap.containsKey(e1Key)) {
-                    eMap.put(e1Key, ee);
 
-                    for (DixElement irlelem : ee.children) {
-                        if (irlelem instanceof ContentElement) {
-                            for (DixElement child : ((ContentElement)irlelem).children) {
-                                if (child instanceof TextElement) {
-                                    TextElement tE = (TextElement) child;
-                                    tE.text = tE.text.replaceAll("\\s", "<b/>");
-                                }
-                            }
-                        }
-                    }
-
-                    eePrevious = ee;
-                } else {
-                    String left = ee.getValue("L");
-                    String right = ee.getValue("R");
-                    msg.err("Duplicated: " + left + "/" + right);
-                    duplicated++;
-                    moveCommentsToPrevious(eePrevious, ee);
-                    ei.remove();
-                }
-            }
-            msg.err(duplicated + " duplicated entries in section '" + section.id);
-        }
-        dic.printXML(this.out,opt);
-        return dic;
+      dic.printXML(this.out,opt);
+      return dic;
     }
 
     
@@ -122,7 +81,7 @@ public class DicFix  extends AbstractDictTool {
         actionFix();
     }
 
-    private void moveCommentsToPrevious(E eePrevious, E ee) {
+    private static void moveCommentsToPrevious(E eePrevious, E ee) {
         // remove if this entry already existed
         if (eePrevious!=null&&!(ee.getPrependCharacterData()+ee.getAppendCharacterData()).trim().isEmpty()) {
             eePrevious.addAppendCharacterData("\n"+ee.getPrependCharacterData()+ee.getAppendCharacterData());
@@ -145,5 +104,40 @@ public class DicFix  extends AbstractDictTool {
         Dictionary dicFormatted = fix();
         msg.err("Writing fixed dictonary to " + out);
         dicFormatted.printXML(out,opt);
+    }
+
+
+    public static void replaceSpaceWithB(E ee) {
+      for (DixElement irlelem : ee.children) {
+        if (irlelem instanceof ContentElement) {
+          for (DixElement child : ((ContentElement) irlelem).children) {
+            if (child instanceof TextElement) {
+              TextElement tE=(TextElement) child;
+              tE.text=tE.text.replaceAll("\\s", "<b/>");
+            }
+          }
+        }
+      }
+    }
+
+    private void removeExactDuplicates(ArrayList<E> elements, String context) {
+      HashSet<String> ees=new HashSet<String>();
+      E eePrevious=null;
+      boolean removed=false;
+
+      for (ListIterator<E> eei=elements.listIterator(); eei.hasNext();) {
+        E ee=eei.next();
+        String s=ee.toString();
+
+        boolean alreadyThere=!ees.add(s);
+        if (alreadyThere) {
+          // remove if this entry already existed
+          moveCommentsToPrevious(eePrevious, ee);
+          eei.remove();
+          msg.err("Removed duplicate "+s+" in "+context);
+        } else {
+          eePrevious=ee;
+        }
+      }
     }
 }

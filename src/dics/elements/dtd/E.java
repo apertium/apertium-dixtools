@@ -261,6 +261,13 @@ public class E extends DixElement implements Cloneable {
         }
     }
 
+  static void appendXmlAttr(StringBuilder sb, String attrName, String attrValue) {
+        if (attrValue != null) {
+            //sb.append(" "+attrName+"=\"" + attrValue + "\"");
+            sb.append(' ').append(attrName).append("=\"").append(attrValue).append('"');
+        }
+  }
+
     
     /**
      * 
@@ -268,33 +275,15 @@ public class E extends DixElement implements Cloneable {
      */
     private String getAttrString() {
         StringBuilder attributes = new StringBuilder();
-        if (restriction != null) {
-            attributes.append(" r=\"" + restriction + "\"");
-        }
-        if (slr != null) {
-            attributes.append(" slr=\"" + slr + "\"");
-        }
-        if (srl != null) {
-            attributes.append(" srl=\"" + srl + "\"");
-        }
-        if (lemma != null) {
-            attributes.append(" lm=\"" + lemma + "\"");
-        }
-        if (author != null) {
-            attributes.append(" a=\"" + author + "\"");
-        }
-        if (comment != null) {
-            attributes.append(" c=\"" + comment + "\"");
-        }
-        if (ignore != null && !ignore.isEmpty()) {
-            attributes.append(" i=\"" + ignore + "\"");
-        }
-        if (aversion != null) {
-            attributes.append(" aversion=\"" + aversion + "\"");
-        }
-        if (alt != null) {
-            attributes.append(" alt=\"" + alt + "\"");
-        }
+        appendXmlAttr(attributes, "r", restriction);
+        appendXmlAttr(attributes, "slr", slr);
+        appendXmlAttr(attributes, "srl", srl);
+        appendXmlAttr(attributes, "lm", lemma);
+        appendXmlAttr(attributes, "a", author);
+        appendXmlAttr(attributes, "c", comment);
+        appendXmlAttr(attributes, "i", ignore);
+        appendXmlAttr(attributes, "aversion", aversion);
+        appendXmlAttr(attributes, "alt", alt);
         return attributes.toString();
     }
 
@@ -513,25 +502,11 @@ public class E extends DixElement implements Cloneable {
         return elementsA;
     }
 
-    /**
-     * 
-     * @param side
-     * @param msg
-     */
-    public void printSElements(String side, Msg msg) {
-            for (S s : getSymbols(side)) {
-                msg.log(s.toString());
-            }
-    }
-
-    /**
-     * 
-     * @param side
-     * @param msg
-     */
     public void print(String side, Msg msg) {
         msg.log(getFirstPart(side).getValue() + " / ");
-        printSElements(side, msg);
+        for (S s : getSymbols(side)) {
+            msg.log(s.toString());
+        }
         msg.log("\n");
     }
 
@@ -618,14 +593,25 @@ public class E extends DixElement implements Cloneable {
     public String toString() {
         StringBuilder str = new StringBuilder(50);
         str.append("<e");
-        if (this.ignore != null) {
-            str.append(" i=\"" + ignore + "\"");
-        }
-        if (this.hasRestriction()) {
-            str.append(" r=\"" + restriction + "\"");
-        }
+        appendXmlAttr(str, "i", ignore);
+        appendXmlAttr(str, "r", restriction);
+
         str.append(">");
         for (DixElement e : children) {
+          str.append(e.toString());
+        }
+        str.append("</e>");
+        return str.toString();
+    }
+
+    public String toStringForSide(String side) {
+        StringBuilder str = new StringBuilder(50);
+        str.append("<e");
+        str.append(">");
+        for (DixElement e : children) {
+          if (e instanceof P) {
+            str.append( ((P) e).getSide(side));
+          }
           str.append(e.toString());
         }
         str.append("</e>");
@@ -866,10 +852,6 @@ public class E extends DixElement implements Cloneable {
      * @return True if restriction will be solved automatically
      */
     public boolean isRestrictionAuto() {
-        if (restriction == null) {
-            return false;
-        } else {
-            return this.restriction.equals("auto");
-        }
+      return "auto".equals(restriction);
     }
 }

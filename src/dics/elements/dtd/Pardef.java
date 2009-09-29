@@ -31,9 +31,8 @@ import dics.elements.utils.DicOpts;
  * 
  */
 public class Pardef extends DixElement {
-
     
-    public ArrayList<E> elements;
+    public ArrayList<E> elements = new ArrayList<E>();
     
     // Is changed when  renaming paradigms when merging
     public String name;
@@ -46,7 +45,6 @@ public class Pardef extends DixElement {
     {
         super("pardef");
         this.name = name;
-        elements = new ArrayList<E>();
     }
 
     /**

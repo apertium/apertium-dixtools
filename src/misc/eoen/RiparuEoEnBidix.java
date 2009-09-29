@@ -91,7 +91,7 @@ public class RiparuEoEnBidix {
          */
                 
         
-        SubstractBidix.reviseRestrictions(dic, false, true);
+        SubstractBidix.reviseRestrictions(dic, false, false);
 
 
         dic.printXML(pado+"after-clean.dix", "UTF-8", dics.elements.utils.DicOpts.STD_ALIGNED);

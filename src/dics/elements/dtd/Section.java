@@ -35,15 +35,14 @@ import dics.elements.utils.DicOpts;
 public class Section extends DixElement {
 
     
+    public ArrayList<E> elements = new ArrayList<E>();
+
     public String id;
     
     public String type;
     
-    public ArrayList<E> elements;
-    
     public Section() {
         super("section");
-        elements = new ArrayList<E>();
         //includes = new ArrayList<String>();
     }
 

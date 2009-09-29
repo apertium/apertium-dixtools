@@ -88,10 +88,6 @@ public abstract class ContentElement extends DixElement implements Cloneable {
         return str;
     }
 
-    /**
-     * 
-     * @return Undefined         
-     */
     @Override
     public String getValue() {
         String str = "";
