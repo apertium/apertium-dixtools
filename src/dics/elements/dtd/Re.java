@@ -70,4 +70,9 @@ public class Re extends DixElement {
     public String toString() {
         return getValue();
     }
+
+  @Override
+  public String getStreamContent() {
+     return "[REGEXP"+expression+"]";
+  }
 }

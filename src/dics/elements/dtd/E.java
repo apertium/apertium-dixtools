@@ -203,15 +203,6 @@ public class E extends DixElement implements Cloneable {
 
 
 
-    public boolean containsRegexpr() {
-        for (DixElement e : children) {
-            if (e instanceof Re) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 
     private static String spaces = "                                                                                                                 ";
 
@@ -604,17 +595,14 @@ public class E extends DixElement implements Cloneable {
         return str.toString();
     }
 
-    public String toStringForSide(String side) {
+    public String getStreamContentForSide(String side) {
         StringBuilder str = new StringBuilder(50);
-        str.append("<e");
-        str.append(">");
         for (DixElement e : children) {
           if (e instanceof P) {
-            str.append( ((P) e).getSide(side));
+            str.append( ((P) e).getSide(side).getStreamContent());
           }
-          else str.append(e.toString());
+          else str.append(e.getStreamContent());
         }
-        str.append("</e>");
         return str.toString();
     }
 
@@ -721,15 +709,9 @@ public class E extends DixElement implements Cloneable {
         return str;
     }
 
-    /**
-     * 
-     * @return Undefined         */
     public boolean containsRegEx() {
-        for (DixElement e : children) {
-            if (e instanceof Re) {
-                return true;
-            }
-        }
+        for (DixElement e : children)
+          if (e instanceof Re) return true;
         return false;
     }
 

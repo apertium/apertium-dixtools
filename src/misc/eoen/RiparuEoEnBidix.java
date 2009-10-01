@@ -23,8 +23,12 @@ package misc.eoen;
 import java.io.IOException;
 
 import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.Section;
 import dictools.DicFix;
+import dictools.utils.DicOpts;
 import dictools.utils.DictionaryReader;
+import java.util.Iterator;
 
 /**
  *
@@ -44,6 +48,19 @@ public class RiparuEoEnBidix {
         new DicFix().fix(dic);
 
         dic.printXML(pado+"after-fix.dix", "UTF-8", dictools.utils.DicOpts.STD_ALIGNED);
+
+
+      for (Section par :  dic.sections)
+        for (Iterator<E> iee = par.elements.iterator(); iee.hasNext(); ) {
+          E ee = iee.next();
+          if (ee.containsSymbol("np") && !ee.containsRegEx() && ee.getStreamContentForSide("L").equals(ee.getStreamContentForSide("R"))) {
+            System.err.println("ee = " + ee);
+            System.err.println( ee.getStreamContentForSide("L") +".equals?"+ee.getStreamContentForSide("R"));
+            if (iee.hasNext())
+              iee.remove();
+          }
+        }
+
 
         /*
         Set<String> esperanto_nouns_with_gender = new HashSet<String>(Iloj.leguTekstDosieron(pado+"res/esperanto_nouns_with_gender.txt"));
@@ -87,10 +104,11 @@ public class RiparuEoEnBidix {
          */
                 
         
-        SubstractBidix.reviseRestrictions(dic, false, true);
+        SubstractBidix.reviseRestrictions(dic, true, true);
 
-
-        dic.printXML(pado+"after-clean.dix", "UTF-8", dictools.utils.DicOpts.STD_ALIGNED);
+        DicOpts opt =  dictools.utils.DicOpts.STD_ALIGNED.copy();
+        //opt.noProcessingComments = true;
+        dic.printXML(pado+"after-clean.dix", "UTF-8", opt);
       }
 
   private static boolean equals(String paradigmValue, String paradigmValue0) {

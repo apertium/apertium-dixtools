@@ -92,4 +92,9 @@ public class Par extends DixElement {
         }
         return prms;
     }
+
+  @Override
+  public String getStreamContent() {
+    return toString();
+  }
 }

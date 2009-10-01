@@ -31,9 +31,9 @@ import dictools.utils.DicOpts;
  */
 public class S extends DixElement {
 
-    
     private static HashMap<String, S> sElementList = new HashMap<String, S>();
     
+    public String name;
     
     // private String temp;
     
@@ -47,6 +47,7 @@ public class S extends DixElement {
      */
     public S(String value) {
         this();
+        name = value;
         setValue(value);
     }
 
@@ -55,6 +56,7 @@ public class S extends DixElement {
      */
     public S(S sE) {
         this();
+        name = sE.name;
         setValue(sE.getValue());
     }
 
@@ -101,4 +103,9 @@ public class S extends DixElement {
         }
         return sE;
     }
+
+  @Override
+  public String getStreamContent() {
+    return "<"+name+">";
+  }
 }

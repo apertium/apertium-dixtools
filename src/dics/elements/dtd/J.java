@@ -30,4 +30,9 @@ public class J extends DixElement {
         super("j");
         setValue("<j/>");
     }
+
+  @Override
+  public String getStreamContent() {
+    return "+";
+  }
 }

@@ -31,4 +31,9 @@ public class B extends DixElement {
         setValue("<b/>");
         setValueNoTags(" ");
     }
+
+  @Override
+  public String getStreamContent() {
+    return " ";
+  }
 }

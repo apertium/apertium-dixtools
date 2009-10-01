@@ -26,7 +26,9 @@ import dictools.utils.DicOpts;
 /**
  * 
  * @author Enrique Benimeli Bofarull
- * 
+ *<jimregan> <t/> and <v/> are only in crossdix
+<jimregan> t = template, v = variable
+ * <jimregan> t matches any single tag, v is like + in regexes (0 or more)
  */
 public class T extends DixElement {
 

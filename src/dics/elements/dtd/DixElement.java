@@ -174,6 +174,12 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
         return valueNoTags;
     }
 
+  /** returns the stream format. F.eks. "naŭdek unu<num>" */
+  public String getStreamContent() {
+    System.err.println("WARN: getStreamContent() called on non-stream tag");
+    return toString();
+  }
+
     void setValueNoTags(String valueNoTags) {
         this.valueNoTags = valueNoTags;
     }

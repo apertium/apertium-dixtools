@@ -60,4 +60,5 @@ public class Alphabet extends DixElement {
         }
         dos.append(tab(1) + "<alphabet>" + alphabet + "</alphabet>"+appendCharacterData.trim()+"\n");
     }
+
 }

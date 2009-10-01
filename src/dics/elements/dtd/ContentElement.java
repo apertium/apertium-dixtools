@@ -266,6 +266,17 @@ public abstract class ContentElement extends DixElement implements Cloneable {
         return str;
     }
 
+
+    public String getStreamContent() {
+        String str = "";
+
+        for (DixElement e : children) {
+            String v = e.getStreamContent();
+            str += v;
+        }
+        return str;
+    }
+
     
     @Override
     public Object clone() {

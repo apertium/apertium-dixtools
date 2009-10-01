@@ -46,8 +46,8 @@ public class SubstractBidix {
         //setYesIsAllowed(ee, "LR"); // XXXX
         //setYesIsAllowed(ee, "RL"); // XXXX
         if (!e.containsRegEx()) {
-          String leftContent=  e.toStringForSide("L"); // e.getFirstPart("L");
-          String rightContent= e.toStringForSide("R"); // e.getFirstPart("L");
+          String leftContent=  e.getStreamContentForSide("L"); // e.getFirstPart("L");
+          String rightContent= e.getStreamContentForSide("R"); // e.getFirstPart("L");
           //System.err.println("======="+ee.toString()+"========");
           // L -> R
           checkEarlierAndRestrict("LR", leftContent, emapLtoR, e);

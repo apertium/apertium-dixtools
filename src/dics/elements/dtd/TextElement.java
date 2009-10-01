@@ -76,4 +76,9 @@ public class TextElement extends DixElement {
         return text;
     }
 
+  @Override
+  public String getStreamContent() {
+    return text;
+  }
+
 }

@@ -126,7 +126,7 @@ public class Dix2MDix {
 
         for (Section section : dic.sections) {
             for (E ee : section.elements) {
-                if (ee.is_LR_or_LRRL() && !ee.containsRegexpr()) {
+                if (ee.is_LR_or_LRRL() && !ee.containsRegEx()) {
                     String left = ee.getValueNoTags("L");
                     left = tinyFilter.applyToLemma(left);
                     left = left.toLowerCase();
