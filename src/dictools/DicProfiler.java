@@ -53,8 +53,10 @@ public class DicProfiler  extends AbstractDictTool {
   public boolean insert_before = false;
   public boolean direction_lr = true;
   public static final String prepend = "%"; // §
-  public static final String append  = " ";
-  private static final String appendRegex = "[ \n$]"; // space or newline (in case the space is trimmed away)
+  public static final String append  = "%";
+  private static final String appendRegex = "%";
+  //public static final String append  = "  ";
+  //private static final String appendRegex = "[ \n$]"; // space or newline (in case the space is trimmed away)
 
   public int sequence;
 
@@ -64,14 +66,16 @@ public class DicProfiler  extends AbstractDictTool {
     if (dic.pardefs != null)
     for (Pardef par :  dic.pardefs.elements) {
       for (E ee: par.elements) {
-        setProfilerInfo(ee);
+        if (!ee.containsRegEx())
+          setProfilerInfo(ee);
       }
     }
 
     if (dic.sections != null)
     for (Section section : dic.sections) {
       for (E ee: section.elements) {
-        setProfilerInfo(ee);
+        if (!ee.containsRegEx())
+          setProfilerInfo(ee);
       }
     }
     return dic;
@@ -113,8 +117,10 @@ public class DicProfiler  extends AbstractDictTool {
       dixfiles = new ArrayList<String>();
       for (String f : d.list()) if (f.startsWith("apertium-") && (f.endsWith("dix") || f.endsWith("dix.xml")) && !f.contains("post-")) dixfiles.add(f);
     }
+    msg.err("Will process dixfiles: " + dixfiles);
 
-    profileKeysDataFile = new OutputStreamWriter(new FileOutputStream(new File(profiler_dir, "profilekeys.txt")),"UTF-8");
+    profileKeysDataFile = new OutputStreamWriter(new FileOutputStream(new File(d, "dixtools-profilekeys.txt")),"UTF-8");
+    msg.err("Creating key file: " + new File(d, "dixtools-profilekeys.txt"));
 
     for (String f : dixfiles) {
       String dixtype =  f.split("\\.")[1]; // Gives eo-en for ex "apertium-eo-en.eo-en.dix"

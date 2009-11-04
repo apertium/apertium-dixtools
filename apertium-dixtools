@@ -142,7 +142,7 @@ function sort() {
       echo "Usage: apertium-dixtools sort [-group <symbol list>] [-right] [-ignorecase] <dic.dix> <out.dix>";
       echo "";
       echo "";
-      echo "  -ignorecase will sort according to value on right side (useful bidixes)";
+      echo "  -ignorecase ignore case when sorting";
       echo "";
       echo "  -right  will sort according to value on right side (useful bidixes)";
       echo "";
@@ -481,6 +481,11 @@ function profilecollect() {
 function profilecreate() {
    	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
 }
+
+function profileresult() {
+   	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
+}
+
 
 
 

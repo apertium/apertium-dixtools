@@ -70,6 +70,9 @@ public class ProcessDics extends AbstractDictTool {
        //System.err.println(Arrays.toString(State.freq));
     }
 
+  private static String usage =  "Usage: apertium-dixtools ";
+
+
     /**
      * Processes generic arguments applyable to all tools, like -debug and -align
      * @param args
@@ -174,12 +177,25 @@ public class ProcessDics extends AbstractDictTool {
             this.process_fix();
         }
         else if (action.toLowerCase().startsWith("profilecreate")) {
+            if (arguments.length<3) {
+              msg.err(usage + "profilecreate language_dir direction [.dix files]\nF.eks: profilecreate apertium-eo-en eo-en\nprofilecreate apertium-eo-en en-eo apertium-eo-en.eo.dix.xml");
+              System.exit(-1);
+            }
             DicProfiler p = new DicProfiler();
             //p.createProfilerdirectory("../apertium-eo-en/", "en-eo", null);
-            p.createProfilerdirectory(arguments[1], arguments[2], null);
-            Dictionary dic = new DictionaryReader(arguments[1]).readDic();
-            p.generateProfileData(dic);
-            dic.printXML(arguments[2],opt);
+            ArrayList<String> dixfiles = null;
+            if (arguments.length>3) {
+              dixfiles = new ArrayList<String>();
+              for (int i = 3; i<arguments.length; i++) {
+                dixfiles.add(arguments[i]);
+              }
+            }
+            p.createProfilerdirectory(arguments[1], arguments[2], dixfiles);
+
+            // Creating profile data for a single .dix currently not supported, as direction and insert_before must be deduced
+            //Dictionary dic = new DictionaryReader(arguments[1]).readDic();
+            //p.generateProfileData(dic);
+            //dic.printXML(arguments[2],opt);
         }
         else if (action.equals("profilecollect")) {
             DicProfiler p = new DicProfiler();
@@ -188,11 +204,10 @@ public class ProcessDics extends AbstractDictTool {
         }
         else if (action.equals("profileresult")) {
             DicProfiler p = new DicProfiler();
-            if (arguments.length>1) p.createResultOfProfilingDix(
-                arguments.length>1?arguments[1]:"profilekeys.txt",
+            p.createResultOfProfilingDix(
+                arguments.length>1?arguments[1]:"dixtools-profilekeys.txt",
                 arguments.length>2?arguments[2]:"dixtools-profiledata.txt",
                 arguments.length>3?arguments[3]:"dixtools-profileresult.txt");
-            else p.collectProfileData("dixtools-profiledata.txt");
         }
         else if (action.equals("sort")) {
             this.process_sort();
