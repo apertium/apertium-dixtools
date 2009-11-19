@@ -184,7 +184,7 @@ public class LingResourcesReader {
     /**
      * 
      * @param element
-     * @return resouce element
+     * @return resource element
      */
     private Resource readResourceElement(Element element) {
         Resource resourceElement = new Resource();
