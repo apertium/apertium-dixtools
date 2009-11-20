@@ -77,7 +77,7 @@ public class Speling extends AbstractDictTool {
      * @param symbols
      */
     private void add_symbols (String symbols) {
-        String[] symbollist = symbols.split("\\.");
+        String[] symbollist = symbols.split(".");
         for (String s : symbollist) {
             if (!this.symbols.contains(s))
                 this.symbols.add(s);
@@ -94,6 +94,7 @@ public class Speling extends AbstractDictTool {
     }
 
     private void proc_line(String line) {
+        System.err.println("proc_line: " + line);
         String[] input = line.split(";");
         String lemma = input[0].trim();
         String flexion = input[1].trim();
@@ -129,26 +130,30 @@ public class Speling extends AbstractDictTool {
 
             Dictionary dic = new Dictionary();
             dic.xmlEncoding = "UTF-8";
-            dic.sdefs = build_sdefs();
+            dic.sdefs = new Sdefs();
             Pardefs pardefs = new Pardefs();
             dic.pardefs = pardefs;
             Section section = new Section("main", "standard");
             dic.sections.add(section);
 
             while ((strLine = br.readLine()) != null) {
+                System.err.println("Calling proc_line");
                 proc_line(strLine);
             }
             // Don't forget the last one!
             lemmata.add(current);
 
             for (SpelingParadigm p : lemmata) {
-                pardefs.elements.add(p.toPardef());
-                section.elements.add(p.toE());
+                System.err.println(p.lemma + " - " + p.pos);
+                dic.pardefs.elements.add(p.toPardef());
+                dic.sections.get(0).elements.add(p.toE());
             }
+            dic.sdefs = build_sdefs();
             dic.printXML(outFileName, opt);
 
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

@@ -35,11 +35,11 @@ import dics.elements.dtd.S;
  */
 
 public class SpelingParadigm {
-    String lemma;
-    String pos;
+    String lemma = "";
+    String pos = "";
     ArrayList<SpelingEntry> entries;
 
-    private String name;
+    private String name = "";
     private String stem = "";
     private String sfx = "";
     private ArrayList<String> suffixes;
