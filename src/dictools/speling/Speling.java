@@ -100,7 +100,7 @@ public class Speling extends AbstractDictTool {
     }
 
     private void proc_line(String line) {
-        System.err.println("proc_line: " + line);
+        //System.err.println("proc_line: " + line);
         boolean readfirst = false;
         String[] input = line.split(";");
         String lemma = input[0].trim();

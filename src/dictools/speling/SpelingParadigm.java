@@ -116,7 +116,7 @@ public class SpelingParadigm {
 
     private String shortest () {
         ArrayList<String> lem = new ArrayList<String>();
-        if (!entries.isEmpty()) {
+        if (entries != null && !entries.isEmpty()) {
             for (SpelingEntry e : entries) {
                 lem.add(find_stem(lemma, e.surface));
             }
