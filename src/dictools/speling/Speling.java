@@ -67,6 +67,10 @@ public class Speling extends AbstractDictTool {
         this.fileName = fileName;
     }
 
+    public Speling (String fileName, String outName) {
+        this.fileName = fileName;
+        this.outFileName = outName;
+    }
 
     /**
      * Add to the list of symbols
