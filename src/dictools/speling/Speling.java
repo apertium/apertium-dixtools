@@ -140,7 +140,9 @@ public class Speling extends AbstractDictTool {
             current.lemma = lemma;
             current.pos = pos;
             System.err.println("Current: " + flexion + " / " + full);
-            current.entries.add(new SpelingEntry(flexion, full));
+            SpelingEntry entry = new SpelingEntry(flexion, full);
+            System.err.println("se: " + entry.pos +" "+ entry.surface);
+            current.entries.add(entry);
         }
 
     }

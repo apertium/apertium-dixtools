@@ -95,7 +95,7 @@ public class SpelingParadigm {
         return shortest;
     }
 
-    public void SpelingParadigm () {
+    public SpelingParadigm () {
         lemma = "";
         pos = "";
         entries = new ArrayList<SpelingEntry> ();
