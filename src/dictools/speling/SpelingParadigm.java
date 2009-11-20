@@ -27,6 +27,7 @@ import dics.elements.dtd.Par;
 import dics.elements.dtd.Pardef;
 import dics.elements.dtd.R;
 import dics.elements.dtd.S;
+import dics.elements.dtd.TextElement;
 
 
 /**
@@ -42,6 +43,7 @@ public class SpelingParadigm {
     private String name = "";
     private String stem = "";
     private String sfx = "";
+    private String psfx = "";
     private ArrayList<String> suffixes;
 
     /**
@@ -91,6 +93,7 @@ public class SpelingParadigm {
         lemma = "";
         pos = "";
         entries = new ArrayList<SpelingEntry> ();
+        suffixes = new ArrayList<String>();
     }
 
     /**
@@ -121,11 +124,13 @@ public class SpelingParadigm {
 
     private void set_stem () {
         stem = shortest();
+        psfx = strip_stem(stem, lemma);
     }
 
     private void setSuffixes () {
         if (entries != null && !entries.isEmpty()) {
             for (SpelingEntry e : entries) {
+                System.err.println("Entry:" + stem);
                 suffixes.add(strip_stem (stem, e.surface));
             }
         }
@@ -139,17 +144,18 @@ public class SpelingParadigm {
         if (suffixes == null || suffixes.isEmpty()) {
             return "";
         }
-        if (suffixes.get(0).equals("")) {
-            tmp = suffixes.get(0);
+        if (psfx.equals("")) {
+            tmp = lemma;
         } else {
-            tmp = stem + "/" + suffixes.get(0);
+            tmp = stem + "/" + psfx;
         }
         return tmp + "__" + pos.replaceAll(".", "_");
     }
 
     public Pardef toPardef () {
         if (suffixes == null || suffixes.isEmpty()) {
-            return null;
+            // Maybe there's a better exception...
+            throw new IndexOutOfBoundsException("Suffix array not set");
         }
 
         Pardef out = new Pardef(pardef_name());
@@ -162,8 +168,8 @@ public class SpelingParadigm {
             if (entries.get(i).isLR) {
                 cur.restriction = "LR";
             }
-            l.setValue(suffixes.get(i));
-            r.setValue(suffixes.get(0));
+            l.children.add (new TextElement (suffixes.get(i)));
+            r.children.add (new TextElement (psfx));
             for (String str : entries.get(i).pos.split("\\.")) {
                 S s = new S();
                 s.setValue(str);
@@ -180,17 +186,21 @@ public class SpelingParadigm {
 
     public E toE() {
         if (suffixes == null || suffixes.isEmpty()) {
-            return null;
+            // Maybe there's a better exception...
+            throw new IndexOutOfBoundsException("Suffix array not set");
         }
 
         E e = new E();
         e.lemma = stem + suffixes.get(0);
+        System.err.println(e.lemma);
         I i = new I();
-        i.setValue(stem);
+        i.children.add(new TextElement(stem));
         Par par = new Par();
         par.setValue(pardef_name());
         e.children.add(i);
         e.children.add(par);
+        System.err.println(e.toString());
+
         return e;
     }
 }

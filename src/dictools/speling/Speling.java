@@ -86,10 +86,11 @@ public class Speling extends AbstractDictTool {
      * @param symbols
      */
     private void add_symbols (String symbols) {
-        System.err.println("Symbols: " + symbols);
+        //System.err.println("Symbols: " + symbols);
         for (String s : symbols.split("\\.")) {
-            if (!this.symbols.contains(s))
+            if (!this.symbols.contains(s)) {
                 this.symbols.add(s);
+            }
         }
     }
 
@@ -97,10 +98,9 @@ public class Speling extends AbstractDictTool {
         Sdefs sdefs = new Sdefs();
         for (String s : this.symbols) {
             Sdef sdef = new Sdef(s);
-            System.err.println("sdef: " + sdef.toString() + s);
             sdefs.elements.add(sdef);
         }
-        System.err.println("sdefs: " + sdefs.toString());
+        //System.err.println("sdefs: " + sdefs.toString());
         return sdefs;
     }
 
@@ -162,9 +162,7 @@ public class Speling extends AbstractDictTool {
             Dictionary dic = new Dictionary();
             dic.xmlEncoding = "UTF-8";
             Pardefs pardefs = new Pardefs();
-            dic.pardefs = pardefs;
             Section section = new Section("main", "standard");
-            dic.sections.add(section);
 
             while ((strLine = br.readLine()) != null) {
                 if (!strLine.contains(";")) {
@@ -177,10 +175,14 @@ public class Speling extends AbstractDictTool {
             lemmata.add(current);
 
             for (SpelingParadigm p : lemmata) {
-                //System.err.println(p.lemma + " - " + p.pos);
-                dic.pardefs.elements.add(p.toPardef());
-                dic.sections.get(0).elements.add(p.toE());
+                pardefs.elements.add(p.toPardef());
+                section.elements.add(p.toE());
+                //System.err.println("entries: " + " - " + p.toE().toString());
             }
+            //dic.pardefs = pardefs;
+            System.err.println("pardefs: " + " - " + pardefs.toString());
+            //dic.sections.add(section);
+            System.err.println("section: " + " - " + section.toString());
             dic.sdefs = build_sdefs();
             dic.printXML(outFileName, opt);
 
