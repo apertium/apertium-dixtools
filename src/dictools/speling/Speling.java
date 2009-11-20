@@ -114,35 +114,37 @@ public class Speling extends AbstractDictTool {
         add_symbols(full);
 
         if (readfirst) {
-            System.err.println("Current: " + lemma + " / " + pos);
             if (last_lemma.equals(lemma) && last_pos.equals(pos)) {
                 if (last_tags.equals(tags)) {
+                    System.err.println ("Same tags as last: " + tags + "/" + last_tags);
                     current.entries.add(new SpelingEntry(flexion, full, true));
+                    last_tags = tags;
                 } else {
+                    System.err.println ("Same lemma/pos: " + lemma + "/" + pos);
                     current.entries.add(new SpelingEntry(flexion, full));
+                    last_tags = tags;
                 }
             } else {
-                if (!current.lemma.equals("")) {
-                    lemmata.add(current);
-                }
+                System.err.println ("New lemma/pos: " + lemma + "/" + pos);
+                lemmata.add(current);
                 current.purge();
-                System.err.println("Current: " + lemma + " / " + pos);
                 current.lemma = lemma;
                 current.pos = pos;
                 current.entries.add(new SpelingEntry(flexion, full));
                 last_lemma = lemma;
                 last_pos = pos;
+                last_tags = tags;
             }
         } else {
+            // Reading first line
+            System.err.println ("First line: " + lemma + "/" + pos);
             readfirst = true;
             last_lemma = lemma;
             last_pos = pos;
+            last_tags = tags;
             current.lemma = lemma;
             current.pos = pos;
-            System.err.println("Current: " + flexion + " / " + full);
-            SpelingEntry entry = new SpelingEntry(flexion, full);
-            System.err.println("se: " + entry.pos +" "+ entry.surface);
-            current.entries.add(entry);
+            current.entries.add(new SpelingEntry(flexion, full));
         }
 
     }
