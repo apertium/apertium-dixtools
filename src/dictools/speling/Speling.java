@@ -126,8 +126,9 @@ public class Speling extends AbstractDictTool {
                 }
             } else {
                 System.err.println ("New lemma/pos: " + lemma + "/" + pos);
+                System.err.println ("lemmata.add() " + current.lemma);
                 lemmata.add(current);
-                current.purge();
+                current = new SpelingParadigm();
                 current.lemma = lemma;
                 current.pos = pos;
                 current.entries.add(new SpelingEntry(flexion, full));
@@ -171,6 +172,7 @@ public class Speling extends AbstractDictTool {
                 proc_line(strLine);
             }
             // Don't forget the last one!
+            System.err.println ("lemmata.add() " + current.lemma);
             lemmata.add(current);
 
             for (SpelingParadigm p : lemmata) {

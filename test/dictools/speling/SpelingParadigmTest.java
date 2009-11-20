@@ -54,19 +54,6 @@ public class SpelingParadigmTest {
     }
 
     /**
-     * Test of purge method, of class SpelingParadigm.
-     */
-    @Test
-    public void testPurge() {
-        System.out.println("purge");
-        SpelingParadigm instance = new SpelingParadigm();
-        instance.entries.add(new SpelingEntry());
-        instance.purge();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of find_stem method, of class SpelingParadigm.
      */
     @Test

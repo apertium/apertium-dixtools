@@ -44,14 +44,6 @@ public class SpelingParadigm {
     private String sfx = "";
     private ArrayList<String> suffixes;
 
-    void purge () {
-        lemma = "";
-        pos = "";
-        if (!entries.isEmpty()){
-            entries.clear();
-        }
-    }
-
     /**
      * Finds the common stem between a lemma and an inflected form
      *
