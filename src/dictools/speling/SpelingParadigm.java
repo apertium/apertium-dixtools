@@ -132,24 +132,34 @@ public class SpelingParadigm {
     }
 
     private void setSuffixes () {
-        for (SpelingEntry e : entries) {
-            suffixes.add(strip_stem (stem, e.surface));
+        if (entries != null && !entries.isEmpty()) {
+            for (SpelingEntry e : entries) {
+                suffixes.add(strip_stem (stem, e.surface));
+            }
         }
     }
 
     private String pardef_name () {
         set_stem();
+        setSuffixes();
         String tmp="";
 
+        if (suffixes == null || suffixes.isEmpty()) {
+            return "";
+        }
         if (suffixes.get(0).equals("")) {
             tmp = suffixes.get(0);
         } else {
             tmp = stem + "/" + suffixes.get(0);
         }
-        return tmp + "__" + pos.replaceAll("\\.", "_");
+        return tmp + "__" + pos.replaceAll(".", "_");
     }
 
     public Pardef toPardef () {
+        if (suffixes == null || suffixes.isEmpty()) {
+            return null;
+        }
+
         Pardef out = new Pardef(pardef_name());
         ArrayList<E> elist = new ArrayList<E>(entries.size());
         for (int i=0;i<=entries.size();i++) {
@@ -177,6 +187,10 @@ public class SpelingParadigm {
     }
 
     public E toE() {
+        if (suffixes == null || suffixes.isEmpty()) {
+            return null;
+        }
+
         E e = new E();
         e.lemma = stem + suffixes.get(0);
         I i = new I();
