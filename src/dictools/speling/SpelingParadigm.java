@@ -53,7 +53,7 @@ public class SpelingParadigm {
      * @param flexion Inflected form
      * @return Common stem of both words
      */
-    public String find_stem (String lemma, String flexion) {
+    public String getStem (String lemma, String flexion) {
         String mystem = "";
         if (lemma.charAt(0) != flexion.charAt(0))
             return "";
@@ -71,7 +71,7 @@ public class SpelingParadigm {
      * @param list The list of strings
      * @return The shortest string
      */
-    public String get_shortest (String[] list) {
+    public String getShortest (String[] list) {
         String shortest = "";
         for (int i=0;i<list.length;i++) {
             if (list[i].equals("")) {
@@ -113,11 +113,11 @@ public class SpelingParadigm {
         ArrayList<String> lem = new ArrayList<String>();
         if (entries != null && !entries.isEmpty()) {
             for (SpelingEntry e : entries) {
-                lem.add(find_stem(lemma, e.surface));
+                lem.add(getStem(lemma, e.surface));
             }
             String[] list = new String[lem.size()];
             list = lem.toArray(list);
-            return get_shortest(list);
+            return getShortest(list);
         }
         return "";
     }
@@ -132,7 +132,7 @@ public class SpelingParadigm {
             throw new IndexOutOfBoundsException("Entries array not set: " + entries.size());
         }
         for (SpelingEntry e : entries) {
-            System.err.println("Entry:" + stem +"/"+e.surface);
+            //System.err.println("Entry:" + stem +"/"+e.surface);
             suffixes.add(strip_stem (stem, e.surface));
         }
     }
@@ -197,7 +197,6 @@ public class SpelingParadigm {
         par.setValue(pardef_name());
         e.children.add(i);
         e.children.add(par);
-        System.err.println(e.toString());
 
         return e;
     }

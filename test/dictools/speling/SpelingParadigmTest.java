@@ -63,12 +63,12 @@ public class SpelingParadigmTest {
         String lemma = "index";
         String flexion = "indices";
         String expResult = "ind";
-        String result = instance.find_stem(lemma, flexion);
+        String result = instance.getStem(lemma, flexion);
         assertEquals(expResult, result);
         String lemma2 = "go";
         String flexion2 = "went";
         String expResult2 = "";
-        String result2 = instance.find_stem(lemma2, flexion2);
+        String result2 = instance.getStem(lemma2, flexion2);
         assertEquals(expResult2, result2);
     }
 
@@ -97,7 +97,7 @@ public class SpelingParadigmTest {
         System.out.println("get_shortest");
         String[] list = {"aaa", "aa", "a", "aa"};
         String expResult = "a";
-        String result = instance.get_shortest(list);
+        String result = instance.getShortest(list);
         assertEquals(expResult, result);
     }
 

@@ -23,20 +23,18 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import dics.elements.dtd.Dictionary;
-import dics.elements.dtd.DixElement;
+import dics.elements.dtd.Alphabet;
 import dics.elements.dtd.Sdef;
 import dics.elements.dtd.Sdefs;
 import dics.elements.dtd.Pardefs;
 import dics.elements.dtd.Section;
-import dics.elements.dtd.TextElement;
 import dictools.AbstractDictTool;
 import dictools.DicSort;
 import dictools.utils.DictionaryReader;
-
+import java.lang.Character;
 
 /**
  *
@@ -58,6 +56,7 @@ public class Speling extends AbstractDictTool {
     private ArrayList<SpelingParadigm> lemmata;
 
     private ArrayList<String> symbols;
+    private ArrayList<Character> alpha;
     private boolean readfirst;
     
     /**
@@ -69,6 +68,7 @@ public class Speling extends AbstractDictTool {
         current = new SpelingParadigm();
         lemmata = new ArrayList<SpelingParadigm>();
         symbols = new ArrayList<String>();
+        alpha = new ArrayList<Character>();
         readfirst = false;
     }
 
@@ -78,6 +78,7 @@ public class Speling extends AbstractDictTool {
         current = new SpelingParadigm();
         lemmata = new ArrayList<SpelingParadigm>();
         symbols = new ArrayList<String>();
+        alpha = new ArrayList<Character>();
         readfirst = false;
     }
 
@@ -104,6 +105,32 @@ public class Speling extends AbstractDictTool {
         return sdefs;
     }
 
+    private void collectAlpha (String s) {
+        for (Character c : s.toCharArray()) {
+            if (Character.isLetter(c)) {
+                if (!alpha.contains(c)) {
+                    alpha.add(c);
+                }
+                if (Character.isLowerCase(c) && !alpha.contains(Character.toUpperCase(c))) {
+                    alpha.add(Character.toUpperCase(c));
+                } else if (!alpha.contains(Character.toLowerCase(c))) {
+                    alpha.add(Character.toUpperCase(c));
+                }
+            } else {
+                continue;
+            }
+        }
+    }
+
+    private Alphabet getAlpha () {
+        String alphabet = "";
+        for (Character c : alpha) {
+            alphabet += c;
+        }
+        Alphabet a = new Alphabet(alphabet);
+        return a;
+    }
+
     private void proc_line(String line) {
         //System.err.println("proc_line: " + line);
         String[] input = line.split(";");
@@ -113,6 +140,12 @@ public class Speling extends AbstractDictTool {
         String pos = input[3].trim();
         //System.err.println(lemma + "/" + flexion + "/" + tags +"/" + pos);
         String full = pos + "." + tags;
+        if (!lemma.equals("")) {
+            collectAlpha(lemma);
+        }
+        if (!flexion.equals("")) {
+            collectAlpha(flexion);
+        }
         add_symbols(full);
 
         if (readfirst) {
@@ -181,6 +214,7 @@ public class Speling extends AbstractDictTool {
                 section.elements.add(p.toE());
                 //System.err.println("entries: " + " - " + p.toE().toString());
             }
+            dic.alphabet = getAlpha();
             dic.pardefs = pardefs;
             //System.err.println("pardefs: " + " - " + pardefs.toString());
             dic.sections.add(section);
