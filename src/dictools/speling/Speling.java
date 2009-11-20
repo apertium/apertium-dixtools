@@ -25,8 +25,6 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.StringTokenizer;
 
 import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.DixElement;
@@ -127,6 +125,7 @@ public class Speling extends AbstractDictTool {
 
             Dictionary dic = new Dictionary();
             dic.xmlEncoding = "UTF-8";
+            dic.sdefs = build_sdefs();
             Pardefs pardefs = new Pardefs();
             dic.pardefs = pardefs;
             Section section = new Section("main", "standard");
@@ -137,10 +136,12 @@ public class Speling extends AbstractDictTool {
             }
             // Don't forget the last one!
             lemmata.add(current);
+
             for (SpelingParadigm p : lemmata) {
                 pardefs.elements.add(p.toPardef());
                 section.elements.add(p.toE());
             }
+            dic.printXML(outFileName, opt);
 
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
