@@ -25,9 +25,9 @@ package dictools.speling;
  */
 
 public class SpelingEntry {
-    String surface;
-    String pos;
-    boolean isLR;
+    public String surface;
+    public String pos;
+    public boolean isLR;
 
     SpelingEntry () {
         this.surface = "";
@@ -46,5 +46,6 @@ public class SpelingEntry {
         this.pos = tags;
         this.isLR = lr;
     }
+
 }
 

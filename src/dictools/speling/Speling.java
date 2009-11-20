@@ -58,6 +58,7 @@ public class Speling extends AbstractDictTool {
     private ArrayList<SpelingParadigm> lemmata;
 
     private ArrayList<String> symbols;
+    private boolean readfirst;
     
     /**
      *
@@ -68,6 +69,7 @@ public class Speling extends AbstractDictTool {
         current = new SpelingParadigm();
         lemmata = new ArrayList<SpelingParadigm>();
         symbols = new ArrayList<String>();
+        readfirst = false;
     }
 
     public Speling (String fileName, String outName) {
@@ -76,6 +78,7 @@ public class Speling extends AbstractDictTool {
         current = new SpelingParadigm();
         lemmata = new ArrayList<SpelingParadigm>();
         symbols = new ArrayList<String>();
+        readfirst = false;
     }
 
     /**
@@ -101,16 +104,17 @@ public class Speling extends AbstractDictTool {
 
     private void proc_line(String line) {
         //System.err.println("proc_line: " + line);
-        boolean readfirst = false;
         String[] input = line.split(";");
         String lemma = input[0].trim();
         String flexion = input[1].trim();
         String tags = input[2].trim();
         String pos = input[3].trim();
+        //System.err.println(lemma + "/" + flexion + "/" + tags +"/" + pos);
         String full = pos + "." + tags;
         add_symbols(full);
 
         if (readfirst) {
+            System.err.println("Current: " + lemma + " / " + pos);
             if (last_lemma.equals(lemma) && last_pos.equals(pos)) {
                 if (last_tags.equals(tags)) {
                     current.entries.add(new SpelingEntry(flexion, full, true));
@@ -122,6 +126,7 @@ public class Speling extends AbstractDictTool {
                     lemmata.add(current);
                 }
                 current.purge();
+                System.err.println("Current: " + lemma + " / " + pos);
                 current.lemma = lemma;
                 current.pos = pos;
                 current.entries.add(new SpelingEntry(flexion, full));
@@ -132,6 +137,10 @@ public class Speling extends AbstractDictTool {
             readfirst = true;
             last_lemma = lemma;
             last_pos = pos;
+            current.lemma = lemma;
+            current.pos = pos;
+            System.err.println("Current: " + flexion + " / " + full);
+            current.entries.add(new SpelingEntry(flexion, full));
         }
 
     }
@@ -152,7 +161,6 @@ public class Speling extends AbstractDictTool {
             dic.sections.add(section);
 
             while ((strLine = br.readLine()) != null) {
-                System.err.println("Calling proc_line");
                 if (!strLine.contains(";")) {
                     continue;
                 }
