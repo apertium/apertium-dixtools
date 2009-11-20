@@ -65,11 +65,17 @@ public class Speling extends AbstractDictTool {
      */
     public Speling (String fileName) {
         this.fileName = fileName;
+        current = new SpelingParadigm();
+        lemmata = new ArrayList<SpelingParadigm>();
+        symbols = new ArrayList<String>();
     }
 
     public Speling (String fileName, String outName) {
         this.fileName = fileName;
         this.outFileName = outName;
+        current = new SpelingParadigm();
+        lemmata = new ArrayList<SpelingParadigm>();
+        symbols = new ArrayList<String>();
     }
 
     /**
@@ -95,6 +101,7 @@ public class Speling extends AbstractDictTool {
 
     private void proc_line(String line) {
         System.err.println("proc_line: " + line);
+        boolean readfirst = false;
         String[] input = line.split(";");
         String lemma = input[0].trim();
         String flexion = input[1].trim();
@@ -103,20 +110,28 @@ public class Speling extends AbstractDictTool {
         String full = pos + "." + tags;
         add_symbols(full);
 
-        if (last_lemma.equals(lemma) && last_pos.equals(pos)) {
-            if (last_tags.equals(tags)) {
-                current.entries.add(new SpelingEntry(flexion, full, true));
+        if (!readfirst) {
+            if (last_lemma.equals(lemma) && last_pos.equals(pos)) {
+                if (last_tags.equals(tags)) {
+                    current.entries.add(new SpelingEntry(flexion, full, true));
+                } else {
+                    current.entries.add(new SpelingEntry(flexion, full));
+                }
             } else {
+                if (!current.lemma.equals("")) {
+                    lemmata.add(current);
+                }
+                current.purge();
+                current.lemma = lemma;
+                current.pos = pos;
                 current.entries.add(new SpelingEntry(flexion, full));
+                last_lemma = lemma;
+                last_pos = pos;
             }
         } else {
-            if (!current.lemma.equals("")) {
-                lemmata.add(current);
-            }
-            current.purge();
-            current.lemma = lemma;
-            current.pos = pos;
-            current.entries.add(new SpelingEntry(flexion, full));
+            readfirst = true;
+            last_lemma = lemma;
+            last_pos = pos;
         }
 
     }

@@ -47,7 +47,9 @@ public class SpelingParadigm {
     void purge () {
         lemma = "";
         pos = "";
-        entries.clear();
+        if (!entries.isEmpty()){
+            entries.clear();
+        }
     }
 
     /**
@@ -96,6 +98,7 @@ public class SpelingParadigm {
     public void SpelingParadigm () {
         lemma = "";
         pos = "";
+        entries = new ArrayList<SpelingEntry> ();
     }
 
     private String strip_stem (String stem, String in) {
