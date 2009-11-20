@@ -175,14 +175,16 @@ public class Speling extends AbstractDictTool {
             lemmata.add(current);
 
             for (SpelingParadigm p : lemmata) {
+                p.setStem();
+                p.setSuffixes();
                 pardefs.elements.add(p.toPardef());
                 section.elements.add(p.toE());
                 //System.err.println("entries: " + " - " + p.toE().toString());
             }
-            //dic.pardefs = pardefs;
-            System.err.println("pardefs: " + " - " + pardefs.toString());
-            //dic.sections.add(section);
-            System.err.println("section: " + " - " + section.toString());
+            dic.pardefs = pardefs;
+            //System.err.println("pardefs: " + " - " + pardefs.toString());
+            dic.sections.add(section);
+            //System.err.println("section: " + " - " + section.toString());
             dic.sdefs = build_sdefs();
             dic.printXML(outFileName, opt);
 

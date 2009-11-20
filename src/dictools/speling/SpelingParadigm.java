@@ -122,45 +122,42 @@ public class SpelingParadigm {
         return "";
     }
 
-    private void set_stem () {
+    public void setStem () {
         stem = shortest();
         psfx = strip_stem(stem, lemma);
     }
 
-    private void setSuffixes () {
-        if (entries != null && !entries.isEmpty()) {
-            for (SpelingEntry e : entries) {
-                System.err.println("Entry:" + stem);
-                suffixes.add(strip_stem (stem, e.surface));
-            }
+    public void setSuffixes () {
+        if (entries == null || entries.isEmpty()) {
+            throw new IndexOutOfBoundsException("Entries array not set: " + entries.size());
+        }
+        for (SpelingEntry e : entries) {
+            System.err.println("Entry:" + stem +"/"+e.surface);
+            suffixes.add(strip_stem (stem, e.surface));
         }
     }
 
     private String pardef_name () {
-        set_stem();
-        setSuffixes();
+        setStem();
         String tmp="";
 
-        if (suffixes == null || suffixes.isEmpty()) {
-            return "";
-        }
         if (psfx.equals("")) {
             tmp = lemma;
         } else {
             tmp = stem + "/" + psfx;
         }
-        return tmp + "__" + pos.replaceAll(".", "_");
+        return tmp + "__" + pos.replaceAll("\\.", "_");
     }
 
     public Pardef toPardef () {
         if (suffixes == null || suffixes.isEmpty()) {
             // Maybe there's a better exception...
-            throw new IndexOutOfBoundsException("Suffix array not set");
+            throw new IndexOutOfBoundsException("Suffix array not set: " + suffixes.size());
         }
 
         Pardef out = new Pardef(pardef_name());
         ArrayList<E> elist = new ArrayList<E>(entries.size());
-        for (int i=0;i<=entries.size();i++) {
+        for (int i=0;i<entries.size();i++) {
             E cur = new E();
             P p = new P();
             L l = new L();
@@ -181,13 +178,14 @@ public class SpelingParadigm {
             cur.children.add(r);
             elist.add(cur);
         }
+        out.elements = elist;
         return out;
     }
 
     public E toE() {
         if (suffixes == null || suffixes.isEmpty()) {
             // Maybe there's a better exception...
-            throw new IndexOutOfBoundsException("Suffix array not set");
+            throw new IndexOutOfBoundsException("Suffix array not set: " + suffixes.size());
         }
 
         E e = new E();
