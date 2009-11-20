@@ -60,6 +60,7 @@ public class SpelingParadigmTest {
     public void testPurge() {
         System.out.println("purge");
         SpelingParadigm instance = new SpelingParadigm();
+        instance.entries.add(new SpelingEntry());
         instance.purge();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -81,6 +82,22 @@ public class SpelingParadigmTest {
         String flexion2 = "went";
         String expResult2 = "";
         String result2 = instance.find_stem(lemma2, flexion2);
+        assertEquals(expResult2, result2);
+    }
+
+    @Test
+    public void testStrip_stem() {
+        SpelingParadigm instance = new SpelingParadigm();
+        System.out.println("find_stem");
+        String in1 = "index";
+        String stem1 = "ind";
+        String expResult = "ex";
+        String result = instance.strip_stem(stem1, in1);
+        assertEquals(expResult, result);
+        String in2 = "go";
+        String stem2 = "went";
+        String expResult2 = in2;
+        String result2 = instance.strip_stem(stem2, in2);
         assertEquals(expResult2, result2);
     }
 

@@ -110,7 +110,7 @@ public class Speling extends AbstractDictTool {
         String full = pos + "." + tags;
         add_symbols(full);
 
-        if (!readfirst) {
+        if (readfirst) {
             if (last_lemma.equals(lemma) && last_pos.equals(pos)) {
                 if (last_tags.equals(tags)) {
                     current.entries.add(new SpelingEntry(flexion, full, true));
@@ -153,6 +153,9 @@ public class Speling extends AbstractDictTool {
 
             while ((strLine = br.readLine()) != null) {
                 System.err.println("Calling proc_line");
+                if (!strLine.contains(";")) {
+                    continue;
+                }
                 proc_line(strLine);
             }
             // Don't forget the last one!

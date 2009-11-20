@@ -101,29 +101,34 @@ public class SpelingParadigm {
         entries = new ArrayList<SpelingEntry> ();
     }
 
-    private String strip_stem (String stem, String in) {
+    /**
+     * Remove the stem from a string
+     * @param stem The stem
+     * @param in The string to remove it from
+     * @return The string ith stem removed, or in unchanged
+     */
+    public String strip_stem (String stem, String in) {
         if (!in.startsWith(stem)) {
             return in;
         }
-        return (in.substring(0, stem.length()-1));
+        return (in.substring(stem.length()));
     }
 
     private String shortest () {
         ArrayList<String> lem = new ArrayList<String>();
-        for (SpelingEntry e : entries) {
-            lem.add(find_stem(lemma, e.surface));
+        if (!entries.isEmpty()) {
+            for (SpelingEntry e : entries) {
+                lem.add(find_stem(lemma, e.surface));
+            }
+            String[] list = new String[lem.size()];
+            list = lem.toArray(list);
+            return get_shortest(list);
         }
-        String[] list = new String[lem.size()];
-        list = lem.toArray(list);
-        return get_shortest(list);
+        return "";
     }
 
     private void set_stem () {
         stem = shortest();
-    }
-
-    private void stripstems () {
-        set_stem();
     }
 
     private void setSuffixes () {
@@ -133,7 +138,7 @@ public class SpelingParadigm {
     }
 
     private String pardef_name () {
-        stripstems();
+        set_stem();
         String tmp="";
 
         if (suffixes.get(0).equals("")) {
