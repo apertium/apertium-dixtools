@@ -350,7 +350,7 @@ public class AldonuCxiujnVortojn {
 
           if (!p.radikoJamEkzistas_en) {
             enDixAldono.add(p.apertiumEn());
-          };
+          }
 
           if (!p.radikoJamEkzistas_eo) {
             eoDixAldono.add(p.apertiumEo());
