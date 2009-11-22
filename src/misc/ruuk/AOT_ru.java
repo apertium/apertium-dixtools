@@ -26,7 +26,7 @@ import java.util.Hashtable;
  * @author jimregan
  */
 public class AOT_ru {
-    private Hashtable tagmap = new Hashtable ();
+    private Hashtable<String, String> tagmap = new Hashtable<String, String> ();
 
     private void myput (String key, String val) {
         tagmap.put (new String(key), new String (val));
