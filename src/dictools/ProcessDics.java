@@ -197,7 +197,7 @@ public class ProcessDics extends AbstractDictTool {
             // Creating profile data for a single .dix currently not supported, as direction and insert_before must be deduced
             //Dictionary dic = new DictionaryReader(arguments[1]).readDic();
             //p.generateProfileData(dic);
-            //dic.printXML(arguments[2],opt);
+            //dic.printXMLToFile(arguments[2],opt);
         }
         else if (action.equals("profilecollect")) {
             DicProfiler p = new DicProfiler();
@@ -252,12 +252,12 @@ public class ProcessDics extends AbstractDictTool {
             //opt.copyAlignSettings(DicOpts.STD_1_LINE);
             //Dictionary dic = new DictionaryReader(args[1]).readDic();
             //dic.setXmlEncoding("UTF-8");
-            //dic.printXML(args[2], opt);
+            //dic.printXMLToFile(args[2], opt);
         }
         else if (action.equals("cat") || action.equals("format")) {
             Dictionary dic = new DictionaryReader(args[1]).readDic();
             dic.xmlEncoding = "UTF-8";
-            dic.printXML(args[2], opt);
+            dic.printXMLToFile(args[2], opt);
         }
         else if (action.equals("dix2mdix")) {
             this.process_dix2mdix();
@@ -556,7 +556,7 @@ public class ProcessDics extends AbstractDictTool {
             Dictionary equiv = new Dictionary();
             //tool.outFileName = arguments[2];
             equiv = tool.findEquivalents();
-            equiv.printXML(arguments[2], opt);
+            equiv.printXMLToFile(arguments[2], opt);
         }
 
     }
@@ -586,7 +586,7 @@ public class ProcessDics extends AbstractDictTool {
             Dictionary equiv = new Dictionary();
             //tool.outFileName = arguments[2];
             equiv = tool.findEquivalents();
-            equiv.printXML(arguments[2], opt);
+            equiv.printXMLToFile(arguments[2], opt);
         }
 
     }

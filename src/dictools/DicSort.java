@@ -75,7 +75,7 @@ public class DicSort  extends AbstractDictTool {
     
     public void actionSort() {
         Dictionary dicSorted = sort();
-        dicSorted.printXML(out,opt);
+        dicSorted.printXMLToFile(out,opt);
     }
     
     

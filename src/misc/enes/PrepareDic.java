@@ -66,7 +66,7 @@ public class PrepareDic {
                 }
             }
         }
-        dic.printXML("not-common-en-ca-filtered.dix", dictools.utils.DicOpts.STD);
+        dic.printXMLToFile("not-common-en-ca-filtered.dix", dictools.utils.DicOpts.STD);
     }
 
     /**

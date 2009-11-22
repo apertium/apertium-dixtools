@@ -83,9 +83,9 @@ public class ReadAndWriteMonodixTest extends TestTools {
 /*   
   @Test
   public void testDicFormatE1LineAligned() throws IOException, InterruptedException {
-    //new DicFormatE1LineAligned(dic).printXML("tmp_test.xml") 
+    //new DicFormatE1LineAligned(dic).printXMLToFile("tmp_test.xml")
     String outfile = rm("tmp_testDicFormatE1LineAligned.xml");
-    new DicFormatE1LineAligned(dic).printXML(outfile);
+    new DicFormatE1LineAligned(dic).printXMLToFile(outfile);
     String diff=exec( "diff -wbB test/sample.metadix "+outfile);
     Assert.assertTrue("Difference: "+diff, diff.isEmpty());
     rm(outfile);
@@ -101,7 +101,7 @@ public class ReadAndWriteMonodixTest extends TestTools {
     DicFix df = new DicFix(dic);
     df.setOut(outfile);
     Dictionary dicFormatted = df.fix();
-    //dicFormatted.printXML(outfile,df.getOpt());
+    //dicFormatted.printXMLToFile(outfile,df.getOpt());
     String diff=exec( "diff test/correct_output_DicFormat.xml "+outfile);    
 
     // dic is changes
@@ -114,7 +114,7 @@ public class ReadAndWriteMonodixTest extends TestTools {
   @Test
   public void testprintXML_std() throws IOException, InterruptedException {
     String outfile = rm("tmp_testprintXML_std.xml");
-    dic.printXML(outfile, dictools.utils.DicOpts.STD);
+    dic.printXMLToFile(outfile, dictools.utils.DicOpts.STD);
     String diff=exec( "diff test/correct_output_DicFormat.xml "+outfile);
     Assert.assertTrue("Difference: "+diff, diff.isEmpty());
     rm(outfile);
@@ -132,7 +132,7 @@ public class ReadAndWriteMonodixTest extends TestTools {
   @Test
   public void testprintXML_std1line() throws IOException, InterruptedException {
     String outfile = rm("tmp_testprintXML_std1line.xml");
-    dic.printXML(outfile, dictools.utils.DicOpts.STD_1_LINE);
+    dic.printXMLToFile(outfile, dictools.utils.DicOpts.STD_1_LINE);
     String diff=exec( "diff -b test/correct_output_DicFormatE1Line.xml "+outfile);
     Assert.assertTrue("Difference: "+diff, diff.isEmpty());
     rm(outfile);

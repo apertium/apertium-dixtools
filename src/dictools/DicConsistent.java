@@ -122,8 +122,8 @@ public class DicConsistent extends AbstractDictTool {
         fnDic = fnDic.replaceAll("\\.metadix", "");
         fnDic = fnDic.replaceAll("/dics/", "/dix/");
 
-        //dicNotCommon.printXML(fnDic + getNotCommonSuffix());
-        dicNotCommon.printXML(this.outDir + notCommonSuffix + fileName, opt);
+        //dicNotCommon.printXMLToFile(fnDic + getNotCommonSuffix());
+        dicNotCommon.printXMLToFile(this.outDir + notCommonSuffix + fileName, opt);
         dicNotCommon = null;
 
     }

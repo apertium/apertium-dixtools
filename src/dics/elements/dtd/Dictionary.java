@@ -153,20 +153,47 @@ public class Dictionary extends DixElement {
     	return BIL.equals(type);
     }
 
+
+
     /**
      * 
      * @param fileName
      */
-    public void printXML(String fileName, DicOpts opt) {
-        printXML(fileName, this.xmlEncoding, opt);
+    public void printXMLToFile(String fileName, DicOpts opt) {
+        printXMLToFile(fileName, this.xmlEncoding, opt);
     }
+
+
+
+   @Override
+    public void printXML(Appendable dos, DicOpts opt) throws IOException {
+        dos.append("<dictionary>\n");
+        if (alphabet != null) {
+            alphabet.printXML(dos, opt);
+        }
+        if (sdefs != null) {
+            sdefs.printXML(dos, opt);
+        }
+        if (pardefs != null) {
+            DicOpts optNow = (opt.pardefAlignOpts==null?opt.copy():opt.pardefAlignOpts).setNowAlign(opt.pardefElementsAligned);
+            pardefs.printXML(dos, optNow);
+        }
+        if (sections != null) {
+            DicOpts optNow = opt.copy().setNowAlign(opt.sectionElementsAligned);
+            for (Section s : sections) {
+                s.printXML(dos, optNow);
+            }
+        }
+        dos.append("</dictionary>\n");
+    }
+
 
     /**
      * 
      * @param fileName
      * @param encoding
      */
-    public void printXML(String fileName, String encoding, DicOpts opt) {
+    public void printXMLToFile(String fileName, String encoding, DicOpts opt) {
         this.fileName = fileName;
         try {
             Writer dos;
@@ -205,24 +232,7 @@ public class Dictionary extends DixElement {
             dos.append(processingComments);
 
             dos.append("\n-->\n");
-            dos.append("<dictionary>\n");
-            if (alphabet != null) {
-                alphabet.printXML(dos, opt);
-            }
-            if (sdefs != null) {
-                sdefs.printXML(dos, opt);
-            }
-            if (pardefs != null) {
-                DicOpts optNow = (opt.pardefAlignOpts==null?opt.copy():opt.pardefAlignOpts).setNowAlign(opt.pardefElementsAligned);
-                pardefs.printXML(dos, optNow);
-            }
-            if (sections != null) {
-                DicOpts optNow = opt.copy().setNowAlign(opt.sectionElementsAligned);
-                for (Section s : sections) {
-                    s.printXML(dos, optNow);
-                }
-            }
-            dos.append("</dictionary>\n");
+            this.printXML(dos, opt);
             dos.close();
             dos = null;
         } catch (Exception eg) {
@@ -273,17 +283,17 @@ public class Dictionary extends DixElement {
             dos.append("\n-->\n");
             dos.append("<dictionary>\n");
             if (alphabet != null) {
-                alphabet.printXML(dos, opt);
+                alphabet.printXMLToFile(dos, opt);
             }
             String includeStr = "<xi:include xmlns:xi=\"http://www.w3.org/2001/XInclude\"";
             if (sdefs != null) {
                 dos.append("\t" + includeStr + " href=\"" + getFolder() + "/sdefs.dix\"/>\n");
 
-                sdefs.printXML(getFolder() + "/sdefs.dix", opt);
+                sdefs.printXMLToFile(getFolder() + "/sdefs.dix", opt);
             }
             if (elements != null) {
                 dos.append("\t" + includeStr + " href=\"" + getFolder() + "/elements.dix\"/>\n");
-                elements.printXML(getFolder() + "/elements.dix", opt);
+                elements.printXMLToFile(getFolder() + "/elements.dix", opt);
             }
 
             for (Section section : sections) {

@@ -167,7 +167,7 @@ public class DicCross  extends AbstractDictTool{
             }
             if (cm != null) {
                 cm.rename();
-                //cm.printXML("cm-renamed.xml");
+                //cm.printXMLToFile("cm-renamed.xml");
                 this.crossModel = cm;
                 msg.out("[" + (taskOrder++) + "] Processing patterns in cross model (" + crossModelFileName + ") ... ");
                 msg.out(" (" + cm.getCrossActions().size() + " patterns processed).\n");
@@ -784,13 +784,13 @@ public class DicCross  extends AbstractDictTool{
         msg.out("[" + (taskOrder) + "] Generating crossed dictionaries ...\n");
         taskOrder = taskOrder + 1;
         this.bilCrossed_path = this.outDir + "apertium-" + sl + "-" + tl + "." + sl + "-" + tl + "-crossed.dix";
-        bilCrossed.printXML(this.bilCrossed_path, opt);
+        bilCrossed.printXMLToFile(this.bilCrossed_path, opt);
 
         this.monACrossed_path = this.outDir + "apertium-" + sl + "-" + tl + "." + sl + "-crossed.dix";
-        monACrossed.printXML(this.monACrossed_path, opt);
+        monACrossed.printXMLToFile(this.monACrossed_path, opt);
 
         this.monCCrossed_path = this.outDir + "apertium-" + sl + "-" + tl + "." + tl + "-crossed.dix";
-        monBCrossed.printXML(this.monCCrossed_path, opt);
+        monBCrossed.printXMLToFile(this.monCCrossed_path, opt);
     }
 
     /**

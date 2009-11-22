@@ -112,7 +112,7 @@ public class AssignParadigm extends AbstractDictTool {
             }
         }
         System.err.println("Updated morphological dictionary: '" + out + "'");
-        dic.printXML(out, dictools.utils.DicOpts.STD);
+        dic.printXMLToFile(out, dictools.utils.DicOpts.STD);
     }
 
     /**

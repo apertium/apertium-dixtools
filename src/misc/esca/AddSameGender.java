@@ -60,7 +60,7 @@ public class AddSameGender {
         bil = bilReader.readDic();
         this.process_nouns();
         this.process_adjs();
-        bil.printXML("dics/apertium-es-ca.es-ca-with-gender.dix", dictools.utils.DicOpts.STD);
+        bil.printXMLToFile("dics/apertium-es-ca.es-ca-with-gender.dix", dictools.utils.DicOpts.STD);
     }
 
     

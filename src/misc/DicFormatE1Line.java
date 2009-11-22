@@ -68,6 +68,6 @@ public class DicFormatE1Line extends AbstractDictTool {
      */
     public void printXML(String fileName, String encoding) {
         dic.fileName = fileName;
-        dic.printXML(fileName, opt);
+        dic.printXMLToFile(fileName, opt);
    }
  }

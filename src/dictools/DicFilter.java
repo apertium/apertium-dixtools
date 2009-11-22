@@ -71,7 +71,7 @@ public class DicFilter  extends AbstractDictTool{
             }            
         }
         
-        dicFilt.printXML("apertium-de-en.de-en-basic.dix",opt);
+        dicFilt.printXMLToFile("apertium-de-en.de-en-basic.dix",opt);
         
         
     }

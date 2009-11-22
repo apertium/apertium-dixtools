@@ -22,6 +22,8 @@ package dics.elements.dtd;
 import java.io.IOException;
 
 import dictools.utils.DicOpts;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * 
@@ -104,6 +106,19 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
         dos.append(appendCharacterData);
     }
 
+    @Override
+    public String toString() {
+      try {
+        StringBuilder b=new StringBuilder();
+        printXML(b, DicOpts.STD_COMPACT.setNowAlign(true));
+        while (b.length()>0 && Character.isWhitespace(b.charAt(b.length()-1))) b.deleteCharAt(b.length()-1);
+        return b.toString();
+      } catch (IOException ex) {
+        ex.printStackTrace();
+        return ex.toString();
+      }
+    }
+
     protected static String tab(int nTabs) {
         return "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t".substring(0,nTabs);
     }
@@ -182,11 +197,5 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
 
     void setValueNoTags(String valueNoTags) {
         this.valueNoTags = valueNoTags;
-    }
-
-    
-    @Override
-    public String toString() {
-        return value;
     }
 }

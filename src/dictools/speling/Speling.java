@@ -230,6 +230,6 @@ public class Speling extends AbstractDictTool {
     }
 
     public void write(Dictionary dic) {
-        dic.printXML(outFileName, opt);
+        dic.printXMLToFile(outFileName, opt);
     }
 }

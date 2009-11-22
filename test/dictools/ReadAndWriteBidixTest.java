@@ -55,7 +55,7 @@ public class ReadAndWriteBidixTest extends TestTools {
   @Test
   public void testprintXML_std() throws IOException, InterruptedException {
     String outfile = rm("tmp_testprintXML_std-eo-en.xml");
-    dic.printXML(outfile, dictools.utils.DicOpts.STD);
+    dic.printXMLToFile(outfile, dictools.utils.DicOpts.STD);
     String diff=exec( "diff test/correct_output_DicFormat-eo-en.xml "+outfile);
     Assert.assertEquals("Difference", "", diff);
     rm(outfile);
@@ -75,7 +75,7 @@ public class ReadAndWriteBidixTest extends TestTools {
   @Test
   public void testprintXML_std1line() throws IOException, InterruptedException {
     String outfile = rm("tmp_testprintXML_std1line-eo-en.xml");
-    dic.printXML(outfile, dictools.utils.DicOpts.STD_1_LINE);
+    dic.printXMLToFile(outfile, dictools.utils.DicOpts.STD_1_LINE);
     String diff=exec( "diff test/correct_output_DicFormatE1Line-eo-en.xml "+outfile);
     Assert.assertEquals("Difference", "", diff);
     rm(outfile);
@@ -95,7 +95,7 @@ public class ReadAndWriteBidixTest extends TestTools {
   @Test
   public void testprintXML_stdaligned1line() throws IOException, InterruptedException {
     String outfile = rm("tmp_testprintXML_stdaligned1line-eo-en.xml");
-    dic.printXML(outfile, dictools.utils.DicOpts.STD_ALIGNED);
+    dic.printXMLToFile(outfile, dictools.utils.DicOpts.STD_ALIGNED);
     String diff=exec( "diff test/correct_output_DicFormatE1LineAligned-eo-en.xml "+outfile);
     Assert.assertEquals("Difference", "", diff);
     rm(outfile);
@@ -107,7 +107,7 @@ public class ReadAndWriteBidixTest extends TestTools {
   public void testprintXML_aligned20_80_also_pardefs() throws IOException, InterruptedException {
     String outfile = rm("tmp_aligned20_80_also_pardefs.xml");
     DicOpts opt = new DicOpts(true, true, 0, 20, 80);
-    dic.printXML(outfile, opt);
+    dic.printXMLToFile(outfile, opt);
     String diff=exec( "diff test/correct_output_aligned20_80_also_pardefs.xml "+outfile);
     Assert.assertEquals("Difference", "", diff);
     rm(outfile);

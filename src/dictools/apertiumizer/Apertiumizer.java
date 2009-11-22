@@ -130,7 +130,7 @@ public class Apertiumizer extends AbstractDictTool {
             }
             in.close();
 
-            dic.printXML(this.getOutFileName(), "UTF-8",opt);
+            dic.printXMLToFile(this.getOutFileName(), "UTF-8",opt);
         DictionaryReader reader = new DictionaryReader("dic.tmp");
         Dictionary bil = reader.readDic();
         this.completeDic(bil);
@@ -277,7 +277,7 @@ public class Apertiumizer extends AbstractDictTool {
         }
         noneSection.printXMLXInclude("none.xml", "UTF-8",opt);
 
-        sorted.printXML(this.getOutFileName(), "UTF-8",opt);
+        sorted.printXMLToFile(this.getOutFileName(), "UTF-8",opt);
 
     }
 

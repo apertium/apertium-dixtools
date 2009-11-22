@@ -64,7 +64,7 @@ public class AddGenderAdj {
         DictionaryReader reader = new DictionaryReader(morphDic);
         System.err.println("Reading morphological '" + morphDic + "'");
         Dictionary dic = reader.readDic();
-        // dic.printXML("morf-es.dix");
+        // dic.printXMLToFile("morf-es.dix");
 
         HashMap<String, S> ng = new HashMap<String, S>();
 
@@ -163,7 +163,7 @@ public class AddGenderAdj {
         System.err.println("I could not find gender for " + genderNotFound + " lemmas (see addgender.err).");
 
         System.err.println("Updated bilingual dictionary: '" + out + "'");
-        bil.printXML(out, dictools.utils.DicOpts.STD);
+        bil.printXMLToFile(out, dictools.utils.DicOpts.STD);
     }
 
     /**

@@ -91,7 +91,7 @@ public class CompleteTranslation {
             }
 
         }
-        bil.printXML("trans-completed-2.dix", dictools.utils.DicOpts.STD);
+        bil.printXMLToFile("trans-completed-2.dix", dictools.utils.DicOpts.STD);
     }
 
     /**

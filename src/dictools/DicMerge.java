@@ -417,9 +417,9 @@ public class DicMerge  extends AbstractDictTool{
         Dictionary monA = dicSet.mon1;
         Dictionary monB = dicSet.mon2;
 
-        bil.printXML(bil.fileName,opt);
-        monA.printXML(monA.fileName,opt);
-        monB.printXML(monB.fileName,opt);
+        bil.printXMLToFile(bil.fileName,opt);
+        monA.printXMLToFile(monA.fileName,opt);
+        monB.printXMLToFile(monB.fileName,opt);
     }
 
     /**
@@ -630,14 +630,14 @@ public class DicMerge  extends AbstractDictTool{
 
     public void mergeMorph() {
         Dictionary morph = mergeMonols(monA1, monA2);
-        morph.printXML(sOut,opt);
+        morph.printXMLToFile(sOut,opt);
     }
 
     public void mergeMorph__OLD_which_sorts_output_but() {
         Dictionary morph = mergeMonols(monA1, monA2);
         DicSort dicSort = new DicSort(morph);
         Dictionary sorted = dicSort.sort();
-        sorted.printXML(sOut,opt);
+        sorted.printXMLToFile(sOut,opt);
     }
 
 
@@ -646,6 +646,6 @@ public class DicMerge  extends AbstractDictTool{
         Dictionary bil = mergeBils(bilAB1, bilAB2);
         DicSort dicSort = new DicSort(bil);
         Dictionary sorted = dicSort.sort();
-        sorted.printXML(sOut,opt);
+        sorted.printXMLToFile(sOut,opt);
     }
 }

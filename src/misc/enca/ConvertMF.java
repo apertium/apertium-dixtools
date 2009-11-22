@@ -94,7 +94,7 @@ public class ConvertMF {
         this.processNouns(mfElementsNouns, bil);
         this.processAdjs(mfElementsAdjs, bil);
 
-        bil.printXML(this.outFileName, dictools.utils.DicOpts.STD);
+        bil.printXMLToFile(this.outFileName, dictools.utils.DicOpts.STD);
 
     }
 
@@ -211,7 +211,7 @@ public class ConvertMF {
             e.children.add(iE);
             section.elements.add(e);
         }
-        mon.printXML("apertium-de-en.de.dix", dictools.utils.DicOpts.STD);
+        mon.printXMLToFile("apertium-de-en.de.dix", dictools.utils.DicOpts.STD);
     }
 
     private void completeBil() {
@@ -232,7 +232,7 @@ public class ConvertMF {
                 }
             }
         }
-        bil.printXML("apertium-de-en.de-en.dix", dictools.utils.DicOpts.STD);
+        bil.printXMLToFile("apertium-de-en.de-en.dix", dictools.utils.DicOpts.STD);
 
 
     }

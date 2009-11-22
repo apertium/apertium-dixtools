@@ -340,7 +340,7 @@ public class DicTools {
         if (reverse) {
             bil.reverse();
             String reverseFileName = DicTools.reverseDicName(sBilFilename);
-            //bil.printXML(reverseFileName);
+            //bil.printXMLToFile(reverseFileName);
             bil.fileName = reverseFileName;
         }
 

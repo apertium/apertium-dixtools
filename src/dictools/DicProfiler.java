@@ -133,7 +133,7 @@ public class DicProfiler  extends AbstractDictTool {
       msg.err("Processing "+f+" in direction "+(direction_lr?"LR":"RL"));
       Dictionary dic = new DictionaryReader(new File(d,f).getPath()).readDic();
       generateProfileData(dic);
-      dic.printXML(new File(profiler_dir,f).getPath(),DicOpts.STD_ALIGNED_MONODIX);
+      dic.printXMLToFile(new File(profiler_dir,f).getPath(),DicOpts.STD_ALIGNED_MONODIX);
     }
 
     profileKeysDataFile.close();
@@ -237,7 +237,7 @@ public class DicProfiler  extends AbstractDictTool {
     /*
     Dictionary dic = new DictionaryReader("../apertium-eo-en/apertium-eo-en.eo.dix.xml").readDic();
     p.generateProfileData(dic);
-    dic.printXML("../apertium-eo-en/profiler/apertium-eo-en.eo.dix.xml",DicOpts.STD_ALIGNED_MONODIX);
+    dic.printXMLToFile("../apertium-eo-en/profiler/apertium-eo-en.eo.dix.xml",DicOpts.STD_ALIGNED_MONODIX);
      */
     //p.createProfilerdirectory("../apertium-eo-en/", "en-eo", null);
 

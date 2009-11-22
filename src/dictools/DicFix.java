@@ -71,7 +71,7 @@ public class DicFix extends AbstractDictTool {
         fix(dic);
 
         msg.err("Writing fixed dictonary to " + out);
-        dic.printXML(out,opt);
+        dic.printXMLToFile(out,opt);
     }
 
     private static void moveCommentsToPrevious(E eePrevious, E ee) {

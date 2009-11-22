@@ -93,9 +93,9 @@ public class DicSet extends ArrayList<Dictionary> {
      */
     public void printXML(String suffix, DicOpts opt) {
         printMonolXML(suffix, opt);
-        bil1.printXML(suffix + "-bilAB.dix", opt);
+        bil1.printXMLToFile(suffix + "-bilAB.dix", opt);
         //DicTools.removeExtension(getBil1().getFileName()) + "-" + suffix + ".dix");
-        bil2.printXML(suffix + "-bilBC.dix", opt);
+        bil2.printXMLToFile(suffix + "-bilBC.dix", opt);
     //	DicTools.removeExtension(getBil2().getFileName()) + "-" + suffix + ".dix");
     }
 
@@ -104,9 +104,9 @@ public class DicSet extends ArrayList<Dictionary> {
      * @param suffix
      */
     public void printMonolXML(String suffix, DicOpts opt) {
-        mon1.printXML(suffix + "-monA.dix", opt);
+        mon1.printXMLToFile(suffix + "-monA.dix", opt);
         //DicTools.removeExtension(getMon1().getFileName()) + "-"		+ suffix + ".dix");
-        mon2.printXML(suffix + "-monC.dix", opt);
+        mon2.printXMLToFile(suffix + "-monC.dix", opt);
     //DicTools.removeExtension(getMon2().getFileName()) + "-"		+ suffix + ".dix");
     }
 }

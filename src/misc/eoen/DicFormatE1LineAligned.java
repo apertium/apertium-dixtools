@@ -27,7 +27,7 @@ import dictools.AbstractDictTool;
  * Prints a dictionaty with elements aligned.
  * Quick exampled of use:
  * <pre>
- * new DicFormatE1LineAligned(dic).setAlignP(11).setAlignR(60).printXML("after-clean.dix");
+ * new DicFormatE1LineAligned(dic).setAlignP(11).setAlignR(60).printXMLToFile("after-clean.dix");
  * </pre>
  * 
  * @author Enrique Benimeli Bofarull
@@ -74,6 +74,6 @@ public class DicFormatE1LineAligned extends AbstractDictTool {
      */
     public void printXML(String fileName, String encoding) {
         dic.fileName = fileName;
-        dic.printXML(fileName, opt);
+        dic.printXMLToFile(fileName, opt);
     }
 }
