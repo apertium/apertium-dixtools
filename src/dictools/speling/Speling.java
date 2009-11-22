@@ -185,7 +185,7 @@ public class Speling extends AbstractDictTool {
 
     }
 
-    public void read_speling() {
+    public Dictionary read_speling() {
         try {
             FileInputStream fstream = new FileInputStream(fileName);
             DataInputStream in = new DataInputStream(fstream);
@@ -220,7 +220,7 @@ public class Speling extends AbstractDictTool {
             dic.sections.add(section);
             //System.err.println("section: " + " - " + section.toString());
             dic.sdefs = build_sdefs();
-            dic.printXML(outFileName, opt);
+            return dic;
 
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
@@ -228,4 +228,7 @@ public class Speling extends AbstractDictTool {
         }
     }
 
+    public void write(Dictionary dic) {
+        dic.printXML(outFileName, opt);
+    }
 }

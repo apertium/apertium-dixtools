@@ -270,6 +270,9 @@ public class ProcessDics extends AbstractDictTool {
         else if (action.equals("speling")) {
             this.process_speling();
         }
+        else if (action.equals("speling-pruned")) {
+            this.process_speling_pruned();
+        }
         else {
             this.show_help();
             System.exit(-1);
@@ -563,7 +566,26 @@ public class ProcessDics extends AbstractDictTool {
             System.exit(-1);
         } else {
             Speling speling = new Speling (arguments[1], arguments[2]);
-            speling.read_speling();
+            Dictionary dic = new Dictionary();
+            dic = speling.read_speling();
+            speling.write(dic);
+        }
+
+    }
+
+    private void process_speling_pruned() {
+        if (arguments.length != 3) {
+            msg.err("Usage: java -jar path/to/apertium-dixtools.jar speling-pruned <speling> <dic-out>");
+            System.exit(-1);
+        } else {
+            Speling speling = new Speling (arguments[1], arguments[2]);
+            Dictionary dic = new Dictionary();
+            dic = speling.read_speling();
+            DicFindEquivPar tool = new DicFindEquivPar(dic);
+            Dictionary equiv = new Dictionary();
+            //tool.outFileName = arguments[2];
+            equiv = tool.findEquivalents();
+            equiv.printXML(arguments[2], opt);
         }
 
     }
