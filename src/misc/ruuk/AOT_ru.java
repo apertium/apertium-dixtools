@@ -87,4 +87,18 @@ public class AOT_ru {
         tagmap.put("вн", "mf.sg");
 
     }
+    
+    private String getTags (String in) {
+        Object o = tagmap.get(in);
+        if (o instanceof String) {
+            return (String) o;
+        }
+        return null;
+    }
+
+    public static void main (String[] args) {
+        AOT a = new AOT(args[0]);
+        System.err.println("Filename: " + args[0]);
+        a.read_aot("Cp1251");
+    }
 }

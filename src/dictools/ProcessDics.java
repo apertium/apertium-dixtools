@@ -38,6 +38,7 @@ import dictools.utils.DicOpts;
 import dictools.apertiumizer.Apertiumizer;
 import dictools.dix2trie.Dix2Trie;
 import dictools.utils.DictionaryReader;
+import dictools.speling.Speling;
 
 /**
  *
@@ -265,6 +266,9 @@ public class ProcessDics extends AbstractDictTool {
         }
         else if (action.equals("dix2tiny")) {
             this.process_dix2tiny();
+        }
+        else if (action.equals("speling")) {
+            this.process_speling();
         }
         else {
             this.show_help();
@@ -546,13 +550,23 @@ public class ProcessDics extends AbstractDictTool {
         } else {
             DicFindEquivPar tool = new DicFindEquivPar(arguments[1]);
             Dictionary equiv = new Dictionary();
-            tool.outFileName = arguments[2];
+            //tool.outFileName = arguments[2];
             equiv = tool.findEquivalents();
             equiv.printXML(arguments[2], opt);
         }
 
     }
 
+    private void process_speling() {
+        if (arguments.length != 3) {
+            msg.err("Usage: java -jar path/to/apertium-dixtools.jar speling <speling> <dic-out>");
+            System.exit(-1);
+        } else {
+            Speling speling = new Speling (arguments[1], arguments[2]);
+            speling.read_speling();
+        }
+
+    }
     
     private void process_dix2trie() {
         if (arguments.length < 3) {
