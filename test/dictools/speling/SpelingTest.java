@@ -24,7 +24,9 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import junit.framework.Assert;
+import dics.elements.dtd.Dictionary;
+import dictools.utils.DictionaryReader;
 
 /**
  *
@@ -59,10 +61,16 @@ public class SpelingTest {
         System.out.println("read_speling");
         String infile = "regression_test_data/speling/speling-test";
         String outfile = "regression_test_data/speling/speling_out.dix";
+        String control = "regression_test_data/speling/expected-output.dix";
         Speling instance = new Speling (infile, outfile);
-        instance.read_speling();
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        Dictionary in = new Dictionary();
+        Dictionary out = new Dictionary();
+        DictionaryReader readin = new DictionaryReader(control);
+        in = readin.readDic();
+        out = instance.read_speling();
+        System.err.println(in.toString());
+        System.err.println(out.toString());
+        Assert.assertEquals(in.toString(), out.toString());
     }
 
 }
