@@ -55,7 +55,7 @@ public class DicFindEquivPar  extends AbstractDictTool {
     }
 
     
-    public void findEquivalents() {
+    public Dictionary findEquivalents() {
 
         ArrayList<Pardef> pardefs = dic.pardefs.elements;
 
@@ -165,7 +165,7 @@ public class DicFindEquivPar  extends AbstractDictTool {
             }
         }
 
-        dic.printXML(outFileName,opt);
+        return dic;
 
     }
 }

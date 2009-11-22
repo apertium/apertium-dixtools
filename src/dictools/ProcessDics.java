@@ -545,8 +545,10 @@ public class ProcessDics extends AbstractDictTool {
             System.exit(-1);
         } else {
             DicFindEquivPar tool = new DicFindEquivPar(arguments[1]);
+            Dictionary equiv = new Dictionary();
             tool.outFileName = arguments[2];
-            tool.findEquivalents();
+            equiv = tool.findEquivalents();
+            equiv.printXML(arguments[2], opt);
         }
 
     }
