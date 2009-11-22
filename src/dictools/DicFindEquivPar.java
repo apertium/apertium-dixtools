@@ -54,6 +54,9 @@ public class DicFindEquivPar  extends AbstractDictTool {
         this.dic = dic;
     }
 
+    public DicFindEquivPar(Dictionary read_dic) {
+        this.dic = read_dic;
+    }
     
     public Dictionary findEquivalents() {
 
