@@ -53,6 +53,7 @@ public class ProcessDics extends AbstractDictTool {
      * @param args
      */
     public static void main(final String[] args) throws IOException {
+      //com.sun.org.apache.xalan.internal.xsltc.cmdline.getopt.GetOpt getopt = new com.sun.org.apache.xalan.internal.xsltc.cmdline.getopt.GetOpt(args,null);
         
         //System.err.println(ProcessDics.class.getName()+".main(\"" + Arrays.toString(args).replaceAll(", ", "\", \"")+"\");");
         //System.err.println(System.getProperties());
