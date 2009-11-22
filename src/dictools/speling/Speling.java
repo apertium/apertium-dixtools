@@ -186,16 +186,17 @@ public class Speling extends AbstractDictTool {
     }
 
     public Dictionary read_speling() {
+        Dictionary dic = new Dictionary();
+        dic.xmlEncoding = "UTF-8";
+        Pardefs pardefs = new Pardefs();
+        Section section = new Section("main", "standard");
+
         try {
             FileInputStream fstream = new FileInputStream(fileName);
             DataInputStream in = new DataInputStream(fstream);
             BufferedReader br = new BufferedReader(new InputStreamReader(in, "UTF-8"));
             String strLine = "";
 
-            Dictionary dic = new Dictionary();
-            dic.xmlEncoding = "UTF-8";
-            Pardefs pardefs = new Pardefs();
-            Section section = new Section("main", "standard");
 
             while ((strLine = br.readLine()) != null) {
                 if (!strLine.contains(";")) {
@@ -220,12 +221,12 @@ public class Speling extends AbstractDictTool {
             dic.sections.add(section);
             //System.err.println("section: " + " - " + section.toString());
             dic.sdefs = build_sdefs();
-            return dic;
 
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
             e.printStackTrace();
         }
+        return dic;
     }
 
     public void write(Dictionary dic) {
