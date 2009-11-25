@@ -89,15 +89,31 @@ public class AOT_ru {
         myput("вл", "n.mf.pl.prp");
         myput("вм", "m");
         myput("вн", "mf.sg");
+        myput("во", "n.mf.sg.nom.arch");
+        myput("вп", "n.mf.sg.gen.arch");
+        myput("вр", "n.mf.sg.dat.arch");
+        myput("вс", "n.mf.sg.acc.arch");
+        myput("вт", "n.mf.sg.ins.arch");
+        myput("ву", "n.mf.sg.prp.arch");
+        myput("вф", "n.mf.pl.nom.arch");
+        myput("вх", "n.mf.pl.gen.arch");
+        myput("вц", "n.mf.pl.dat.arch");
+        myput("вч", "n.mf.pl.acc.arch");
+        myput("вш", "n.mf.pl.ins.arch");
+        myput("вщ", "n.mf.pl.prp.arch");
 
     }
     
-    private String getTags (String in) {
+    public String getTags (String in) {
         Object o = tagmap.get(in);
         if (o instanceof String) {
             return (String) o;
         }
         return null;
+    }
+
+    public void AOT_ru () {
+        this.fill_tags();
     }
 
     public static void main (String[] args) {
