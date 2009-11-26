@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Dictionary:
+	Sections: 1
+	Entries: 3
+	Sdefs: 3
+	Paradigms: 1
+	Last processed by: apertium-dixtools speling-pruned regression_test_data/speling/speling-prune-test prune.dix
+
+-->
+<dictionary>
+	<alphabet>hHoOuUsSeEcCaAtTdDgG</alphabet>
+	<sdefs>
+		<sdef n="n" /> 
+		<sdef n="sg" /> 
+		<sdef n="pl" /> 
+	</sdefs>
+	<pardefs>
+		<pardef n="house__n">
+		<e>
+				<l></l>
+				<r><s n="n"/><s n="sg"/></r>
+		</e>
+
+		<e>
+				<l>s</l>
+				<r><s n="n"/><s n="pl"/></r>
+		</e>
+
+		</pardef>
+	</pardefs>
+
+	<section id="main" type="standard">
+		<e lm="house">
+				<i>house</i>
+				<par n="house__n"/> 
+		</e>
+
+		<e lm="cat">
+				<i>cat</i>
+		<!-- cat__n' was replaced -->
+				<par n="house__n"/> 
+		</e>
+
+		<e lm="dog">
+				<i>dog</i>
+		<!-- dog__n' was replaced -->
+				<par n="house__n"/> 
+		</e>
+
+	</section>
+</dictionary>
