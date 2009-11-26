@@ -28,6 +28,7 @@ import dics.elements.dtd.ContentElement;
 import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.DixElement;
 import dics.elements.dtd.E;
+import dics.elements.dtd.Par;
 import dics.elements.dtd.Pardef;
 import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
@@ -56,10 +57,14 @@ public class DicFix extends AbstractDictTool {
 
       // Check for duplicate entries in paradigm and in each section
       for (Pardef par :  dic.pardefs.elements)
-          removeExactDuplicates(par.elements, "paradigm "+par.name);
+          removeDuplicates(par.elements, "paradigm "+par.name, false, null);
 
-      for (Section par :  dic.sections)
-          removeExactDuplicates(par.elements, "section "+par.id);
+      
+      HashMap<String, E> existingEntries=null;
+
+      for (Section par :  dic.sections) {
+          existingEntries = removeDuplicates(par.elements, "section "+par.id, true, existingEntries);
+      }
     }
 
     
@@ -96,15 +101,27 @@ public class DicFix extends AbstractDictTool {
       }
     }
 
-    private void removeExactDuplicates(ArrayList<E> elements, String context) {
-      HashMap<String,E> existingEntries=new HashMap<String,E>();
+    private HashMap<String,E> removeDuplicates(ArrayList<E> elements, String context, boolean hackyRemoval, HashMap<String,E> existingEntries) {
+      if (existingEntries==null) existingEntries=new HashMap<String,E>();
       E ePrevious=null;
+      int removed = 0;
 
       for (ListIterator<E> eIterator=elements.listIterator(); eIterator.hasNext();) {
         E e=eIterator.next();
 
         StringBuilder str = new StringBuilder(50);
+
+        if (hackyRemoval) {
+          str.append(e.lemma);
+          if (e.comment != null) continue;
+        }
+
         for (DixElement de : e.children) {
+          if (hackyRemoval && de instanceof Par) {
+            String parName = e.getMainParadigmName();
+            if (parName != null && parName.endsWith("__n"))
+              continue;
+          }
           str.append(de.toString());
         }
 
@@ -130,11 +147,17 @@ public class DicFix extends AbstractDictTool {
           moveCommentsToPrevious(ePrevious, e);
           eIterator.remove();
           msg.err("Removed duplicate "+key+" in "+context);
+          removed++;
         } else {
           existingEntries.put(key, e);
           ePrevious=e;
         }
       }
+
+      if (removed>2)
+        msg.err("Removed "+removed+" entries in "+context);
+
+      return existingEntries;
     }
 
 
