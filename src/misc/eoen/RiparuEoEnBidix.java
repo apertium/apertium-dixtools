@@ -43,11 +43,11 @@ public class RiparuEoEnBidix {
         Dictionary dic = new DictionaryReader(pado+"apertium-eo-en.eo-en.dix").readDic();
         dic.reportMetrics();
 
-        dic.printXMLToFile(pado+"before-clean.dix", "UTF-8", dictools.utils.DicOpts.STD_ALIGNED);
+        dic.printXMLToFile(pado+"before-clean.dix", dictools.utils.DicOpts.STD_ALIGNED);
 
         new DicFix().fix(dic);
 
-        dic.printXMLToFile(pado+"after-fix.dix", "UTF-8", dictools.utils.DicOpts.STD_ALIGNED);
+        dic.printXMLToFile(pado+"after-fix.dix", dictools.utils.DicOpts.STD_ALIGNED);
 
 
       for (Section par :  dic.sections)
@@ -108,7 +108,7 @@ public class RiparuEoEnBidix {
 
         DicOpts opt =  dictools.utils.DicOpts.STD_ALIGNED.copy();
         //opt.noProcessingComments = true;
-        dic.printXMLToFile(pado+"after-clean.dix", "UTF-8", opt);
+        dic.printXMLToFile(pado+"after-clean.dix", opt);
       }
 
   private static boolean equals(String paradigmValue, String paradigmValue0) {

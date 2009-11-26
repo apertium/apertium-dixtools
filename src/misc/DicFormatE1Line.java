@@ -58,15 +58,6 @@ public class DicFormatE1Line extends AbstractDictTool {
      * @param fileName
      */
     public void printXML(String fileName) {
-        this.printXML(fileName, "UTF-8");
-        dic.xmlEncoding = "UTF-8";
-    }
-
-    /**
-     * 
-     * @param fileName
-     */
-    public void printXML(String fileName, String encoding) {
         dic.fileName = fileName;
         dic.printXMLToFile(fileName, opt);
    }

@@ -219,10 +219,6 @@ public class DicCross  extends AbstractDictTool{
 
         Dictionary dic = new Dictionary();
 
-        // encoding
-        String encoding = "UTF-8";
-        dic.xmlEncoding = encoding;
-
         // alphabet
         Alphabet alphabet = crossAlphabets(dic1.alphabet, dic2.alphabet);
         dic.alphabet = alphabet;

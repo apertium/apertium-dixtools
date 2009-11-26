@@ -155,16 +155,6 @@ public class Dictionary extends DixElement {
 
 
 
-    /**
-     * 
-     * @param fileName
-     */
-    public void printXMLToFile(String fileName, DicOpts opt) {
-        printXMLToFile(fileName, this.xmlEncoding, opt);
-    }
-
-
-
    @Override
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         dos.append("<dictionary>\n");
@@ -193,7 +183,7 @@ public class Dictionary extends DixElement {
      * @param fileName
      * @param encoding
      */
-    public void printXMLToFile(String fileName, String encoding, DicOpts opt) {
+    public void printXMLToFile(String fileName,DicOpts opt) {
         this.fileName = fileName;
         try {
             Writer dos;
@@ -203,9 +193,9 @@ public class Dictionary extends DixElement {
                 System.err.println("Writing file " + fileName);
                 FileOutputStream fos = new FileOutputStream(fileName);
                 BufferedOutputStream bos = new BufferedOutputStream(fos);
-                dos = new OutputStreamWriter(bos, encoding);
+                dos = new OutputStreamWriter(bos, xmlEncoding);
               }
-            dos.append("<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n");
+            dos.append("<?xml version=\"1.0\" encoding=\"" + xmlEncoding + "\"?>\n");
             dos.append("<!--\n\tDictionary:\n");
             if (sections != null) {
                 if (isBil()) {
