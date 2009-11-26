@@ -72,16 +72,14 @@ public class DictionaryReader extends XMLReader {
     public Dictionary readDic() {
         analize();
         Dictionary dic = new Dictionary();
-        String encoding = document.getInputEncoding();
-        dic.xmlEncoding = encoding;
 
-        Document doc = document;
-        String xmlEncoding = doc.getXmlEncoding();
-        String xmlVersion = doc.getXmlVersion();
+        String encoding = document.getXmlEncoding();
+        if (encoding==null) encoding = document.getInputEncoding();
+        //System.err.println("encoding = " + encoding);
+        // default to UTF-8 in case of no encoding specified
+        if (encoding!=null) dic.xmlEncoding = encoding;
 
-        dic.xmlEncoding = xmlEncoding;
-
-        Element root = doc.getDocumentElement();
+        Element root = document.getDocumentElement();
 
         NodeList children = root.getChildNodes();
         for (int i = 0; i < children.getLength(); i++) {
