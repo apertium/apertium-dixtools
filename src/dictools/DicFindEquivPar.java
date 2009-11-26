@@ -57,8 +57,13 @@ public class DicFindEquivPar  extends AbstractDictTool {
     public DicFindEquivPar(Dictionary read_dic) {
         this.dic = read_dic;
     }
-    
+
     public Dictionary findEquivalents() {
+        return findEquivalents("");
+    }
+
+
+    public Dictionary findEquivalents(String filter) {
 
         ArrayList<Pardef> pardefs = dic.pardefs.elements;
 
@@ -69,6 +74,9 @@ public class DicFindEquivPar  extends AbstractDictTool {
 
         for (Iterator<Pardef> pi =  pardefs.iterator(); pi.hasNext(); ) {
             Pardef par = pi.next();
+            if (!(filter.equals("")) && !(par.name.matches(filter))) {
+                continue;
+            }
 
             // remove duplicate names
             if (name2pardef.containsKey(par.name)) {
