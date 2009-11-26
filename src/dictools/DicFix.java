@@ -59,11 +59,12 @@ public class DicFix extends AbstractDictTool {
       for (Pardef par :  dic.pardefs.elements)
           removeDuplicates(par.elements, "paradigm "+par.name, false, null);
 
-      
+
+      // retain list of existingEntries to remove duplicates across different sections of the dictionary
       HashMap<String, E> existingEntries=null;
 
       for (Section par :  dic.sections) {
-          existingEntries = removeDuplicates(par.elements, "section "+par.id, true, existingEntries);
+          existingEntries = removeDuplicates(par.elements, "section "+par.id, false, existingEntries);
       }
     }
 
