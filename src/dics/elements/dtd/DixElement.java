@@ -37,7 +37,7 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
     
     private String valueNoTags = "";
 
-    private boolean useTabs = false;
+    private static boolean useTabs = false;
     
     public final String TAGNAME;
 
@@ -122,7 +122,7 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
     }
 
     protected static String indent(int num) {
-        if (this.useTabs)
+        if (useTabs)
             return "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t".substring(0,num);
         else
             return "                                                                                            ".substring(0,num*2);
@@ -190,12 +190,12 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
         this.value = value;
     }
 
-    public boolean getUseTabs() {
-        return this.useTabs;
+    public static boolean getUseTabs() {
+        return useTabs;
     }
 
-    public void setUseTabs(boolean tab) {
-        this.useTabs = tab;
+    public static void setUseTabs(boolean tab) {
+        useTabs = tab;
     }
 
     public String getValueNoTags() {
