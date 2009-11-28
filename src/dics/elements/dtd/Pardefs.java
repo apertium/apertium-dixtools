@@ -49,11 +49,11 @@ public class Pardefs extends DixElement {
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
-        dos.append(tab(1) + "<pardefs>\n");
+        dos.append(indent(1) + "<pardefs>\n");
         for (Pardef e : elements) {
             e.printXML(dos, opt);
         }
-        dos.append(tab(1) + "</pardefs>"+appendCharacterData.trim()+"\n\n");
+        dos.append(indent(1) + "</pardefs>"+appendCharacterData.trim()+"\n\n");
     }
 
 

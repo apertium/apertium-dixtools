@@ -150,7 +150,7 @@ public abstract class ContentElement extends DixElement implements Cloneable {
                 dos.append(prependCharacterData);
                 // write blank lines and processingComments from original file
                 if (!opt.noProcessingComments) dos.append(makeTabbedCommentIfData(processingComments));
-                dos.append(tab(4) + "<" + tagName + ">");  
+                dos.append(indent(4) + "<" + tagName + ">");
         } else {
                 dos.append(prependCharacterData.trim()); 
                   // write blank lines and processingComments from original file

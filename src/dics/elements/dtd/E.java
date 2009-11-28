@@ -222,13 +222,13 @@ public class E extends DixElement implements Cloneable {
         
         String attributes = this.getAttrString();
         if (!opt.nowAlign) {
-            dos.append(tab(2) + "<e" + attributes + ">\n");
+            dos.append(indent(2) + "<e" + attributes + ">\n");
 
             for (DixElement e : children) {
                 e.printXML(dos, opt);
             }
 
-            dos.append(tab(2) + "</e>"+appendCharacterData+"\n\n");
+            dos.append(indent(2) + "</e>"+appendCharacterData+"\n\n");
         } else { 
             StringBuilder dosy = new StringBuilder(120);
             dosy.append(spaces.substring(0,opt.alignE));

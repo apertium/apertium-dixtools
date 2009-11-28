@@ -56,7 +56,7 @@ public class Sdef extends DixElement {
         if (this.comment != null) {
             commentx = "\tc=\"" + comment + "\"";
         }
-        dos.append(tab(2) + "<" + TAGNAME + " n=\"" + getValue() + "\" " + commentx + "/> "  +appendCharacterData.trim()+"\n");
+        dos.append(indent(2) + "<" + TAGNAME + " n=\"" + getValue() + "\" " + commentx + "/> "  +appendCharacterData.trim()+"\n");
     }
 
     

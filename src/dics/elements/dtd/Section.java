@@ -74,7 +74,7 @@ public class Section extends DixElement {
             attributes += " type=\"" + type + "\"";
         }
 
-        dos.append(tab(1) + "<" + TAGNAME + "" + attributes + ">\n");
+        dos.append(indent(1) + "<" + TAGNAME + "" + attributes + ">\n");
 
         if (elements != null) {
             for (E e : elements) {
@@ -82,7 +82,7 @@ public class Section extends DixElement {
             }
         }
 
-        dos.append(tab(1) + "</" + TAGNAME + ">"+appendCharacterData.trim()+"\n");
+        dos.append(indent(1) + "</" + TAGNAME + ">"+appendCharacterData.trim()+"\n");
     }
 
     /**

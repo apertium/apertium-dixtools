@@ -64,7 +64,7 @@ public class Par extends DixElement {
         if (opt.nowAlign) {
           dos.append(toString());
         } else {
-          dos.append(tab(4) + toString() +  " \n");
+          dos.append(indent(4) + toString() +  " \n");
         }
     }
 

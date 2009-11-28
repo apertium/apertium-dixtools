@@ -58,11 +58,11 @@ public class Pardef extends DixElement {
         dos.append(prependCharacterData);
         if (!opt.noProcessingComments) dos.append(makeTabbedCommentIfData(processingComments));
 
-        dos.append((opt.nowAlign?"":tab(2))+ "<pardef n=\"" + name + "\">"+justInsideStartTagCharacterData+"\n");
+        dos.append((opt.nowAlign?"":indent(2))+ "<pardef n=\"" + name + "\">"+justInsideStartTagCharacterData+"\n");
         for (E e : elements) {
             e.printXML(dos, opt);
         }
-        dos.append((opt.nowAlign?"":tab(2)) + "</pardef>"+appendCharacterData.trim()+"\n");
+        dos.append((opt.nowAlign?"":indent(2)) + "</pardef>"+appendCharacterData.trim()+"\n");
     }
 
     /**

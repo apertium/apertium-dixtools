@@ -58,7 +58,7 @@ public class Alphabet extends DixElement {
         if (alphabet==null) {
             alphabet = "";
         }
-        dos.append(tab(1) + "<alphabet>" + alphabet + "</alphabet>"+appendCharacterData.trim()+"\n");
+        dos.append(indent(1) + "<alphabet>" + alphabet + "</alphabet>"+appendCharacterData.trim()+"\n");
     }
 
 }

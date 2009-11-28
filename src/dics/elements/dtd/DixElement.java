@@ -36,6 +36,8 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
     private String value;
     
     private String valueNoTags = "";
+
+    private boolean useTabs = false;
     
     public final String TAGNAME;
 
@@ -119,13 +121,16 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
       }
     }
 
-    protected static String tab(int nTabs) {
-        return "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t".substring(0,nTabs);
+    protected static String indent(int num) {
+        if (this.useTabs)
+            return "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t".substring(0,num);
+        else
+            return "                                                                                            ".substring(0,num*2);
     }
 
     public static String makeTabbedCommentIfData(String commentContent) {
     if (commentContent.isEmpty()) return "";
-    return tab(2)+"<!-- "+commentContent.trim()+" -->\n";
+    return indent(2)+"<!-- "+commentContent.trim()+" -->\n";
   }
 
     
@@ -147,7 +152,7 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
      * @param value data to be added
      */
     public void addProcessingComment(String value) {
-        processingComments += tab(3) + value + "\n";
+        processingComments += indent(3) + value + "\n";
     }
 
     /**
@@ -183,6 +188,14 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public boolean getUseTabs() {
+        return this.useTabs;
+    }
+
+    public void setUseTabs(boolean tab) {
+        this.useTabs = tab;
     }
 
     public String getValueNoTags() {
