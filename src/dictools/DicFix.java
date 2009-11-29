@@ -69,7 +69,7 @@ public class DicFix extends AbstractDictTool {
     }
 
     
-    public void doFormat() {
+    public void doFix() {
         Dictionary dic = new DictionaryReader(arguments[1]).readDic();
 
         String out = arguments[2];

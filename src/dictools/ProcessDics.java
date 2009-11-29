@@ -444,7 +444,7 @@ public class ProcessDics extends AbstractDictTool {
             DicFix tool = new DicFix();
             tool.opt = opt;
             tool.arguments = arguments;
-            tool.doFormat();
+            tool.doFix();
         }
 
     }

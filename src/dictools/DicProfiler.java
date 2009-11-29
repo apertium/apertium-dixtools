@@ -63,7 +63,6 @@ public class DicProfiler  extends AbstractDictTool {
   Writer profileKeysDataFile;
 
   public Dictionary generateProfileData(Dictionary dic) throws IOException {
-    if (dic.pardefs != null)
     for (Pardef par :  dic.pardefs.elements) {
       for (E ee: par.elements) {
         if (!ee.containsRegEx())

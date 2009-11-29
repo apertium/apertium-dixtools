@@ -164,7 +164,7 @@ public class Dictionary extends DixElement {
         if (sdefs != null) {
             sdefs.printXML(dos, opt);
         }
-        if (pardefs != null) {
+        if (pardefs != null && pardefs.elements.size()>0) {
             DicOpts optNow = (opt.pardefAlignOpts==null?opt.copy():opt.pardefAlignOpts).setNowAlign(opt.pardefElementsAligned);
             pardefs.printXML(dos, optNow);
         }
@@ -211,7 +211,7 @@ public class Dictionary extends DixElement {
             if (sdefs != null) {
                 dos.append("\n\tSdefs: " + sdefs.elements.size() + "\n");
             }
-            if (pardefs != null) {
+            if (pardefs!=null && pardefs.elements.size()>0) {
                 dos.append("\tParadigms: " + pardefs.elements.size() + "\n");
             }
             if (opt.originalArguments != null) {
