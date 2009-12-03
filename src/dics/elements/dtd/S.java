@@ -23,6 +23,9 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import dictools.utils.DicOpts;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 
@@ -102,6 +105,15 @@ public class S extends DixElement {
             S.sElementList.put(str, sE);
         }
         return sE;
+    }
+
+
+    /**
+     *
+     * @param str
+     * @return Undefined         */
+    public static Set<String> getKnownSymbols() {
+      return new HashSet(S.sElementList.keySet());
     }
 
   @Override

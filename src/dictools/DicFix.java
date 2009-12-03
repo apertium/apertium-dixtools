@@ -30,12 +30,15 @@ import dics.elements.dtd.DixElement;
 import dics.elements.dtd.E;
 import dics.elements.dtd.Par;
 import dics.elements.dtd.Pardef;
+import dics.elements.dtd.S;
+import dics.elements.dtd.Sdef;
 import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
 import dictools.utils.DicOpts;
 import dictools.utils.DictionaryReader;
 import java.util.ArrayList;
 import java.util.ListIterator;
+import java.util.Set;
 
 /**
  * 
@@ -47,6 +50,13 @@ public class DicFix extends AbstractDictTool {
 
     public void fix(Dictionary dic) {
       if (dic.isMonol()) DicCross.addMissingLemmas(dic);
+
+      Set<String> missingSymbols = S.getKnownSymbols();
+      for (Sdef sdef : dic.sdefs.elements) { missingSymbols.remove(sdef.getValue()); }
+      if (!missingSymbols.isEmpty()) msg.err("Adding missing symbols: "+missingSymbols);
+      for (String s : missingSymbols) {
+        dic.sdefs.elements.add(new Sdef(s));
+      }
 
       // replace whitespace " " with <b/>
       for (Pardef par :  dic.pardefs.elements)
