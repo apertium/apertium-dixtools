@@ -58,6 +58,10 @@ public class HitParade implements FrequencyDict {
         calcFrequencies();
     }
 
+    /**
+     *
+     * @notimplemented
+     */
     @Override
     public String[] rankall (String[] choices) {
         return choices;
