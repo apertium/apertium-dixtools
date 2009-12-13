@@ -19,6 +19,7 @@
 
 package dictools.frequency;
 import java.util.HashMap;
+import java.util.TreeMap;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.io.FileReader;
@@ -64,7 +65,15 @@ public class HitParade implements FrequencyDict {
      */
     @Override
     public String[] rankall (String[] choices) {
-        return choices;
+        HashMap<Double, String> list = new HashMap<Double, String>();
+        for (String s : choices) {
+            Double d = this.freq.get(s);
+            list.put(d, s);
+        }
+        TreeMap<Double, String> sorted = new TreeMap<Double, String>(list);
+        String[] ret = new String[choices.length];
+        ret = sorted.values().toArray();
+        return ret;
     }
 
     @Override
