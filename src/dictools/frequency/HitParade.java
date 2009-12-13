@@ -25,7 +25,16 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 
 /**
+ * FrequencyDict implementation for 'hitparade.txt'
+ * ('hitparade.txt' is a common apertium convention for frequency lists,
+ * based on a mail of May 17, 2007 by Mikel Forcada:
+ * "It is quite easy to make a crude "hit parade" of words using a simple
+ * Unix command sequence (a single line)
  *
+ * cat mybigrepresentative.txt | tr ' ' '\012' | sort -f | uniq -c | sort -nr > hitparade.txt
+ *
+ * [I took this from Unix for Poets I think]"
+ * Usually, Wikipedia dumps are used.
  * @author jimregan
  */
 public class HitParade implements FrequencyDict {
