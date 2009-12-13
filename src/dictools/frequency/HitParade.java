@@ -71,9 +71,7 @@ public class HitParade implements FrequencyDict {
             list.put(d, s);
         }
         TreeMap<Double, String> sorted = new TreeMap<Double, String>(list);
-        String[] ret = new String[choices.length];
-        ret = sorted.values().toArray();
-        return ret;
+        return (String[]) sorted.values().toArray();
     }
 
     @Override
