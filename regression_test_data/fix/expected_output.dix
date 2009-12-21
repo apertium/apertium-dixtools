@@ -3,7 +3,7 @@
 	Dictionary:
 	Sections: 1
 	Entries: 6
-	Sdefs: 26
+	Sdefs: 30
 	Paradigms: 7
 	Last processed by: apertium-dixtools fix test/sample.metadix regression_test_data/fix/actual_output.dix
 
@@ -37,6 +37,10 @@
 		<sdef n="vaux" /> 
 		<sdef n="vblex" /> 
 		<sdef n="ND" /> 
+		<sdef n="imp" /> 
+		<sdef n="ifi" /> 
+		<sdef n="pl" /> 
+		<sdef n="enc" /> 
 	</sdefs>
 	<pardefs>
     <!-- comment before pardef -->
