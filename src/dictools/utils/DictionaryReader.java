@@ -167,6 +167,7 @@ public class DictionaryReader extends XMLReader {
         }
         root = null;
         if (dic.pardefs==null) dic.pardefs=new Pardefs();
+        if (dic.sdefs==null) dic.sdefs=new Sdefs();
         this.document = null;
         this.dic = dic;
         return dic;

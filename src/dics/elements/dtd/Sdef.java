@@ -51,12 +51,12 @@ public class Sdef extends DixElement {
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
-        if (!opt.noProcessingComments) dos.append(makeTabbedCommentIfData(processingComments));
+        if (!opt.noProcessingComments) dos.append(makeTabbedCommentIfData(processingComments,opt));
         String commentx = "";
         if (this.comment != null) {
             commentx = "\tc=\"" + comment + "\"";
         }
-        dos.append(indent(2) + "<" + TAGNAME + " n=\"" + getValue() + "\" " + commentx + "/> "  +appendCharacterData.trim()+"\n");
+        dos.append(indent(2,opt) + "<" + TAGNAME + " n=\"" + getValue() + "\" " + commentx + "/> "  +appendCharacterData.trim()+"\n");
     }
 
     

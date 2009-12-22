@@ -58,13 +58,13 @@ public class Par extends DixElement {
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
-        if (!opt.noProcessingComments) dos.append(makeTabbedCommentIfData(processingComments));
+        if (!opt.noProcessingComments) dos.append(makeTabbedCommentIfData(processingComments,opt));
 
 
         if (opt.nowAlign) {
           dos.append(toString());
         } else {
-          dos.append(indent(4) + toString() +  " \n");
+          dos.append(indent(4,opt) + toString() +  " \n");
         }
     }
 

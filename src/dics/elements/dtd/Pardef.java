@@ -56,13 +56,13 @@ public class Pardef extends DixElement {
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
-        if (!opt.noProcessingComments) dos.append(makeTabbedCommentIfData(processingComments));
+        if (!opt.noProcessingComments) dos.append(makeTabbedCommentIfData(processingComments,opt));
 
-        dos.append((opt.nowAlign?"":indent(2))+ "<pardef n=\"" + name + "\">"+justInsideStartTagCharacterData+"\n");
+        dos.append((opt.nowAlign?"":indent(2,opt))+ "<pardef n=\"" + name + "\">"+justInsideStartTagCharacterData+"\n");
         for (E e : elements) {
             e.printXML(dos, opt);
         }
-        dos.append((opt.nowAlign?"":indent(2)) + "</pardef>"+appendCharacterData.trim()+"\n");
+        dos.append((opt.nowAlign?"":indent(2,opt)) + "</pardef>"+appendCharacterData.trim()+"\n");
     }
 
     /**

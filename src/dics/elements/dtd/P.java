@@ -69,7 +69,7 @@ public class P extends DixElement {
     public void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
-        String tab3 = opt.nowAlign?"":indent(3);
+        String tab3 = opt.nowAlign?"":indent(3,opt);
 
         dos.append(tab3 + "<" + TAGNAME + ">\n");
         if (l != null) {

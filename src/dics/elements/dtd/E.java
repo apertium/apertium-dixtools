@@ -217,18 +217,18 @@ public class E extends DixElement implements Cloneable {
         
         // prepend processingComments added in this run
         if (!opt.noProcessingComments) {
-            dos.append(makeTabbedCommentIfData(processingComments));
+            dos.append(makeTabbedCommentIfData(processingComments,opt));
         }
         
         String attributes = this.getAttrString();
         if (!opt.nowAlign) {
-            dos.append(indent(2) + "<e" + attributes + ">\n");
+            dos.append(indent(2,opt) + "<e" + attributes + ">\n");
 
             for (DixElement e : children) {
                 e.printXML(dos, opt);
             }
 
-            dos.append(indent(2) + "</e>"+appendCharacterData+"\n\n");
+            dos.append(indent(2,opt) + "</e>"+appendCharacterData+"\n\n");
         } else { 
             StringBuilder dosy = new StringBuilder(120);
             dosy.append(spaces.substring(0,opt.alignE));

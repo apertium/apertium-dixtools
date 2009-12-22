@@ -37,8 +37,6 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
     
     private String valueNoTags = "";
 
-    private static boolean useTabs = false;
-    
     public final String TAGNAME;
 
     public DixElement(String tagName) {
@@ -103,7 +101,7 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
     protected void printXML(Appendable dos, DicOpts opt) throws IOException {
         // write blank lines and processingComments from original file
         dos.append(prependCharacterData);
-        if (!opt.noProcessingComments) dos.append(makeTabbedCommentIfData(processingComments));
+        if (!opt.noProcessingComments) dos.append(makeTabbedCommentIfData(processingComments,opt));
         dos.append("<" + TAGNAME + "/>");
         dos.append(appendCharacterData);
     }
@@ -121,16 +119,16 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
       }
     }
 
-    protected static String indent(int num) {
-        if (useTabs)
+    protected static String indent(int num,DicOpts opt) {
+        if (opt.useTabs)
             return "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t".substring(0,num);
         else
             return "                                                                                            ".substring(0,num*2);
     }
 
-    public static String makeTabbedCommentIfData(String commentContent) {
+    public static String makeTabbedCommentIfData(String commentContent,DicOpts opt) {
     if (commentContent.isEmpty()) return "";
-    return indent(2)+"<!-- "+commentContent.trim()+" -->\n";
+    return indent(2,opt)+"<!-- "+commentContent.trim()+" -->\n";
   }
 
     
@@ -152,7 +150,7 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
      * @param value data to be added
      */
     public void addProcessingComment(String value) {
-        processingComments += indent(3) + value + "\n";
+        processingComments += indent(3,DicOpts.STD) + value + "\n";
     }
 
     /**
@@ -188,14 +186,6 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
 
     public void setValue(String value) {
         this.value = value;
-    }
-
-    public static boolean getUseTabs() {
-        return useTabs;
-    }
-
-    public static void setUseTabs(boolean tab) {
-        useTabs = tab;
     }
 
     public String getValueNoTags() {
