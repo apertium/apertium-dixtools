@@ -184,6 +184,13 @@ public class Dictionary extends DixElement {
      * @param encoding
      */
     public void printXMLToFile(String fileName,DicOpts opt) {
+        if (opt.detectAlignmentFromSource) {
+          System.err.println("NOTE: You didnt specify any alignment options, so a good alignment will be detected from the data.\n"+"Use -noalign to get the old unaligned behaviour (multiline-XML-ish)");
+          opt = opt.copy();
+          opt.detectAlignmentFromSource = false;
+          detectAlignmentFromSource(opt);
+        }
+
         this.fileName = fileName;
         try {
             Writer dos;
@@ -459,4 +466,19 @@ public class Dictionary extends DixElement {
     public boolean isHeaderDefined() {
         return (header != null);
     }
+
+   /** Will attempt to detect best alignment based on how many pardefs and entries with lemmas are present */
+  private void detectAlignmentFromSource(DicOpts opt) {
+    int lemma=0, total=0;
+    for (Section sec : sections) for (E e : sec.elements) {
+      total++;
+      if (e.lemma!=null) lemma++;
+    }
+
+    if (lemma>total/2 && pardefs!=null && pardefs.elements !=null && pardefs.elements.size()>5) {
+      opt.copyAlignSettings(DicOpts.STD_ALIGNED_MONODIX);
+    } else {
+      opt.copyAlignSettings(DicOpts.STD_ALIGNED_BIDIX);
+    }
+  }
 }

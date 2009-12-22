@@ -53,9 +53,9 @@ public class ReadAndWriteBidixTest extends TestTools {
   }
 
   @Test
-  public void testprintXML_std() throws IOException, InterruptedException {
+  public void testprintXML_nonaligned() throws IOException, InterruptedException {
     String outfile = rm("tmp_testprintXML_std-eo-en.xml");
-    dic.printXMLToFile(outfile, dictools.utils.DicOpts.STD);
+    dic.printXMLToFile(outfile, dictools.utils.DicOpts.STD_NONALIGNED_XML);
     String diff=exec( "diff test/correct_output_DicFormat-eo-en.xml "+outfile);
     Assert.assertEquals("Difference", "", diff);
     rm(outfile);

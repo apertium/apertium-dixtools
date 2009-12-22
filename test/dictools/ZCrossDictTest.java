@@ -30,7 +30,7 @@ import org.junit.Test;
  *
  * @author j
  */
-public class CrossDictTest extends TestTools {
+public class ZCrossDictTest extends TestTools {
   
   @Test
   public void testBigCrossing() throws Exception {

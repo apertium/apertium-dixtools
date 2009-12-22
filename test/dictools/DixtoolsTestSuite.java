@@ -32,7 +32,7 @@ import org.junit.runners.Suite;
       dictools.ReadAndWriteMonodixTest.class,
       dictools.ReadAndWriteBidixTest.class,
 
-      dictools.CrossDictTest.class,
+      dictools.ZCrossDictTest.class,
       dictools.MergemorphEquivparTest.class,
       dictools.DicReaderTest.class,
       dictools.Dix2tinyTest.class,

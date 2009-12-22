@@ -112,9 +112,9 @@ public class ReadAndWriteMonodixTest extends TestTools {
    }
 */
   @Test
-  public void testprintXML_std() throws IOException, InterruptedException {
+  public void testprintXML_nonaligned() throws IOException, InterruptedException {
     String outfile = rm("tmp_testprintXML_std.xml");
-    dic.printXMLToFile(outfile, dictools.utils.DicOpts.STD);
+    dic.printXMLToFile(outfile, dictools.utils.DicOpts.STD_NONALIGNED_XML);
     String diff=exec( "diff test/correct_output_DicFormat.xml "+outfile);
     Assert.assertTrue("Difference: "+diff, diff.isEmpty());
     rm(outfile);

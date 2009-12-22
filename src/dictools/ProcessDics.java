@@ -100,7 +100,12 @@ public class ProcessDics extends AbstractDictTool {
             opt.copyAlignSettings(DicOpts.STD_ALIGNED_BIDIX);
           } else  if (arg.equalsIgnoreCase("-align")) {
             align = opt.sectionElementsAligned = true;
+            opt.detectAlignmentFromSource = false;
           } else if (arg.startsWith("-alignpar")) {
+            alignPardef = opt.pardefElementsAligned = true;
+            opt.detectAlignmentFromSource = false;
+          } else if (arg.startsWith("-alignxml") || arg.startsWith("-noalign")) {
+            opt.copyAlignSettings(DicOpts.STD_NONALIGNED_XML);
             alignPardef = opt.pardefElementsAligned = true;
           } else {
             unprocessed.add(args[i]);

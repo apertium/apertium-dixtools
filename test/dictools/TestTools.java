@@ -29,12 +29,12 @@ public class TestTools {
 
   public static String exec(String cmd) throws IOException, InterruptedException, IOException {
     Process p=Runtime.getRuntime().exec(cmd);
-    String output="";
+    StringBuilder output=new StringBuilder();
     String s;
     BufferedReader br=new BufferedReader(new InputStreamReader(p.getInputStream()));
-    while ((s=br.readLine())!=null)  output=output+s+"\n";
+    while ((s=br.readLine())!=null)  output.append(s).append("\n");
     br=new BufferedReader(new InputStreamReader(p.getErrorStream()));
-    while ((s=br.readLine())!=null)  output=output+s+"\n";
+    while ((s=br.readLine())!=null)  output.append(s).append("\n");
     //p.waitFor();
     //if (p.exitValue()!=0) Assert.fail(cmd+" reported an error");
     if (output.length()>0) {
@@ -42,7 +42,7 @@ public class TestTools {
       System.err.println("output: " + output);
       return cmd+"\n"+output;
     }
-    return output;
+    return output.toString();
   }
 
 

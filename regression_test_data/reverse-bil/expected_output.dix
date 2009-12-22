@@ -5,7 +5,7 @@
 	Entries: 42
 	Sdefs: 13
 	Paradigms: 1
-	Last processed by: apertium-dixtools reverse-bil ../../test/sample.eo-en.dix actual_output.dix
+	Last processed by: apertium-dixtools reverse-bil test/sample.eo-en.dix regression_test_data/reverse-bil/actual_output.dix
 
 -->
 <dictionary>
@@ -26,335 +26,76 @@
 		<sdef n="guio" /> 
 	</sdefs>
 	<pardefs>
-		<pardef n="MF_GD">
-		<e r="RL">
-			<p>
-				<l><s n="GD"/></l>
-				<r></r>
-			</p>
-		</e>
+<pardef n="MF_GD">
+  <e r="RL"><p><l><s n="GD"/></l><r></r></p></e>
 
+  <e r="LR"><p><l><s n="f"/></l><r></r></p></e>
 
-		<e r="LR">
-			<p>
-				<l><s n="f"/></l>
-				<r></r>
-			</p>
-		</e>
-
-
-		<e r="LR">
-			<p>
-				<l><s n="m"/></l>
-				<r></r>
-			</p>
-		</e>
-
-		</pardef>
+  <e r="LR"><p><l><s n="m"/></l><r></r></p></e>
+</pardef>
 	</pardefs>
 
 	<section id="main" type="standard">
 
     <!-- Numerals -->
-		<e>
-			<p>
-				<l>zero<s n="num"/></l>
-				<r>nulo<s n="num"/></r>
-			</p>
-		</e>
+<e>       <p><l>zero<s n="num"/></l>                   <r>nulo<s n="num"/></r></p></e>
+<e>       <p><l>one<s n="num"/></l>                    <r>unu<s n="num"/></r></p></e>
+<e>       <p><l>two<s n="num"/></l>                    <r>du<s n="num"/></r></p></e>
+<e>       <p><l>three<s n="num"/></l>                  <r>tri<s n="num"/></r></p></e>
+<e>       <p><l>four<s n="num"/></l>                   <r>kvar<s n="num"/></r></p></e>
+<e>       <p><l>five<s n="num"/></l>                   <r>kvin<s n="num"/></r></p></e>
 
-		<e>
-			<p>
-				<l>one<s n="num"/></l>
-				<r>unu<s n="num"/></r>
-			</p>
-		</e>
+<e>       <p><l>eleven<s n="num"/></l>                 <r>dek<b/>unu<s n="num"/></r></p></e>
+<e>       <p><l>twelve<s n="num"/></l>                 <r>dek<b/>du<s n="num"/></r></p></e>
+<e>       <p><l>thirteen<s n="num"/></l>               <r>dek<b/>tri<s n="num"/></r></p></e>
+<e>       <p><l>fourteen<s n="num"/></l>               <r>dek<b/>kvar<s n="num"/></r></p></e>
+<e>       <p><l>fifteen<s n="num"/></l>                <r>dek<b/>kvin<s n="num"/></r></p></e>
 
-		<e>
-			<p>
-				<l>two<s n="num"/></l>
-				<r>du<s n="num"/></r>
-			</p>
-		</e>
+<e>       <p><l>twenty<s n="num"/></l>                 <r>dudek<s n="num"/></r></p></e>
+<e>       <p><l>thirty<s n="num"/></l>                 <r>tridek<s n="num"/></r></p></e>
+<e>       <p><l>forty<s n="num"/></l>                  <r>kvardek<s n="num"/></r></p></e>
+<e>       <p><l>fifty<s n="num"/></l>                  <r>kvindek<s n="num"/></r></p></e>
 
-		<e>
-			<p>
-				<l>three<s n="num"/></l>
-				<r>tri<s n="num"/></r>
-			</p>
-		</e>
-
-		<e>
-			<p>
-				<l>four<s n="num"/></l>
-				<r>kvar<s n="num"/></r>
-			</p>
-		</e>
-
-		<e>
-			<p>
-				<l>five<s n="num"/></l>
-				<r>kvin<s n="num"/></r>
-			</p>
-		</e>
+<e>       <p><l>Zapatista<b/>National<b/>Liberation<b/>Army<s n="np"/><s n="al"/></l><r>Zapatista<b/>Armeo<b/>de<b/>Nacia<b/>Liberiĝo<s n="np"/><s n="al"/></r></p></e>
+<e>       <i>ABC<b/>News<s n="np"/><s n="al"/></i></e>
 
 
-		<e>
-			<p>
-				<l>eleven<s n="num"/></l>
-				<r>dek<b/>unu<s n="num"/></r>
-			</p>
-		</e>
+<e>       <p><l>Manuel<s n="np"/></l>                  <r>Manuelo<s n="np"/></r></p></e>
+<e>       <p><l>María<s n="np"/></l>                   <r>Maria<s n="np"/></r></p></e>
+<e>       <p><l>Marta<s n="np"/></l>                   <r>Marta<s n="np"/></r></p></e>
+<e>       <p><l>Martín<s n="np"/></l>                  <r>Marteno<s n="np"/></r></p></e>
 
-		<e>
-			<p>
-				<l>twelve<s n="num"/></l>
-				<r>dek<b/>du<s n="num"/></r>
-			</p>
-		</e>
-
-		<e>
-			<p>
-				<l>thirteen<s n="num"/></l>
-				<r>dek<b/>tri<s n="num"/></r>
-			</p>
-		</e>
-
-		<e>
-			<p>
-				<l>fourteen<s n="num"/></l>
-				<r>dek<b/>kvar<s n="num"/></r>
-			</p>
-		</e>
-
-		<e>
-			<p>
-				<l>fifteen<s n="num"/></l>
-				<r>dek<b/>kvin<s n="num"/></r>
-			</p>
-		</e>
-
-
-		<e>
-			<p>
-				<l>twenty<s n="num"/></l>
-				<r>dudek<s n="num"/></r>
-			</p>
-		</e>
-
-		<e>
-			<p>
-				<l>thirty<s n="num"/></l>
-				<r>tridek<s n="num"/></r>
-			</p>
-		</e>
-
-		<e>
-			<p>
-				<l>forty<s n="num"/></l>
-				<r>kvardek<s n="num"/></r>
-			</p>
-		</e>
-
-		<e>
-			<p>
-				<l>fifty<s n="num"/></l>
-				<r>kvindek<s n="num"/></r>
-			</p>
-		</e>
-
-
-		<e>
-			<p>
-				<l>Zapatista<b/>National<b/>Liberation<b/>Army<s n="np"/><s n="al"/></l>
-				<r>Zapatista<b/>Armeo<b/>de<b/>Nacia<b/>Liberiĝo<s n="np"/><s n="al"/></r>
-			</p>
-		</e>
-
-		<e>
-				<i>ABC<b/>News<s n="np"/><s n="al"/></i>
-		</e>
-
-
-
-		<e>
-			<p>
-				<l>Manuel<s n="np"/></l>
-				<r>Manuelo<s n="np"/></r>
-			</p>
-		</e>
-
-		<e>
-			<p>
-				<l>María<s n="np"/></l>
-				<r>Maria<s n="np"/></r>
-			</p>
-		</e>
-
-		<e>
-			<p>
-				<l>Marta<s n="np"/></l>
-				<r>Marta<s n="np"/></r>
-			</p>
-		</e>
-
-		<e>
-			<p>
-				<l>Martín<s n="np"/></l>
-				<r>Marteno<s n="np"/></r>
-			</p>
-		</e>
-
-
-		<e>
-				<i>Jaime<s n="np"/><s n="ant"/></i>
-		</e>
-
-		<e>
-				<i>Gerardo<s n="np"/><s n="ant"/></i>
-		</e>
-
-		<e>
-				<i>Paris<s n="np"/><s n="ant"/></i>
-		</e>
-
-		<e>
-				<i>Robert<s n="np"/><s n="ant"/></i>
-		</e>
-
+<e>       <i>Jaime<s n="np"/><s n="ant"/></i></e>
+<e>       <i>Gerardo<s n="np"/><s n="ant"/></i></e>
+<e>       <i>Paris<s n="np"/><s n="ant"/></i></e>
+<e>       <i>Robert<s n="np"/><s n="ant"/></i></e>
 
 
     <!-- Nouns with gender in Esperanto but not in English -->
 
-		<e>
-			<p>
-				<l>Muslim<s n="n"/></l>
-				<r>islamano<s n="n"/></r>
-			</p>
-				<par n="MF_GD"/> 
-		</e>
+<e>       <p><l>Muslim<s n="n"/></l>                   <r>islamano<s n="n"/></r></p><par n="MF_GD"/></e>
+<e>       <p><l>Catholic<s n="n"/></l>                 <r>katoliko<s n="n"/></r></p><par n="MF_GD"/></e>
+<e>       <p><l>Christian<s n="n"/></l>                <r>kristano<s n="n"/></r></p><par n="MF_GD"/></e>
+<e>       <p><l>Protestant<s n="n"/></l>               <r>protestanto<s n="n"/></r></p><par n="MF_GD"/></e>
 
-		<e>
-			<p>
-				<l>Catholic<s n="n"/></l>
-				<r>katoliko<s n="n"/></r>
-			</p>
-				<par n="MF_GD"/> 
-		</e>
+<e>       <p><l>face<s n="n"/></l>                     <r>vizaĝo<s n="n"/></r></p></e>
+<e r="RL"><p><l>face<s n="n"/></l>                     <r>supraĵo<s n="n"/></r></p></e>
+<e r="RL"><p><l>face<s n="vblex"/></l>                 <r>defii<s n="vblex"/></r></p></e>
+<e r="RL"><p><l>face<s n="vblex"/></l>                 <r>maleviti<s n="vblex"/></r></p></e>
 
-		<e>
-			<p>
-				<l>Christian<s n="n"/></l>
-				<r>kristano<s n="n"/></r>
-			</p>
-				<par n="MF_GD"/> 
-		</e>
-
-		<e>
-			<p>
-				<l>Protestant<s n="n"/></l>
-				<r>protestanto<s n="n"/></r>
-			</p>
-				<par n="MF_GD"/> 
-		</e>
-
-
-		<e>
-			<p>
-				<l>face<s n="n"/></l>
-				<r>vizaĝo<s n="n"/></r>
-			</p>
-		</e>
-
-		<e r="RL">
-			<p>
-				<l>face<s n="n"/></l>
-				<r>supraĵo<s n="n"/></r>
-			</p>
-		</e>
-
-		<e r="RL">
-			<p>
-				<l>face<s n="vblex"/></l>
-				<r>defii<s n="vblex"/></r>
-			</p>
-		</e>
-
-		<e r="RL">
-			<p>
-				<l>face<s n="vblex"/></l>
-				<r>maleviti<s n="vblex"/></r>
-			</p>
-		</e>
-
-
-		<e>
-			<p>
-				<l>hesitate<s n="vblex"/></l>
-				<r>heziti<s n="vblex"/></r>
-			</p>
-		</e>
-
-		<e r="RL">
-			<p>
-				<l>hesitate<s n="vblex"/></l>
-				<r>malvoli<s n="vblex"/></r>
-			</p>
-		</e>
-
-		<e r="RL">
-			<p>
-				<l>hesitate<s n="vblex"/></l>
-				<r>domaĝi<s n="vblex"/></r>
-			</p>
-		</e>
-
-		<e r="RL">
-			<p>
-				<l>hide<s n="vblex"/></l>
-				<r>malvidigi<s n="vblex"/></r>
-			</p>
-		</e>
-
-		<e r="LR">
-			<p>
-				<l>hide<s n="vblex"/></l>
-				<r>kaŝi<s n="vblex"/></r>
-			</p>
-		</e>
-
-		<e>
-			<p>
-				<l>hide<s n="n"/></l>
-				<r>felo<s n="n"/></r>
-			</p>
-		</e>
-
+<e>       <p><l>hesitate<s n="vblex"/></l>             <r>heziti<s n="vblex"/></r></p></e>
+<e r="RL"><p><l>hesitate<s n="vblex"/></l>             <r>malvoli<s n="vblex"/></r></p></e>
+<e r="RL"><p><l>hesitate<s n="vblex"/></l>             <r>domaĝi<s n="vblex"/></r></p></e>
+<e r="RL"><p><l>hide<s n="vblex"/></l>                 <r>malvidigi<s n="vblex"/></r></p></e>
+<e r="LR"><p><l>hide<s n="vblex"/></l>                 <r>kaŝi<s n="vblex"/></r></p></e>
+<e>       <p><l>hide<s n="n"/></l>                     <r>felo<s n="n"/></r></p></e>
 
 <!-- Already is <e><l>unuavice<adv></l><r>primarily<adv></r></e>-->
-		<e i="yes">
-			<p>
-				<l>primarily<s n="adv"/></l>
-				<r>ĉefe<s n="adv"/></r>
-			</p>
-		</e>
-
+<e i="yes"><p><l>primarily<s n="adv"/></l>             <r>ĉefe<s n="adv"/></r></p></e>
 
 <!-- Already is <e><l>ĉiaokaze<adv></l><r>regardless<adv></r></e>-->
-		<e r="RL" c="añadir también 'regardless of' como 'a pesar de'">
-			<p>
-				<l>regardless<s n="adv"/></l>
-				<r>ĉiakoste<s n="adv"/></r>
-			</p>
-		</e>
-
-		<e>
-			<p>
-				<l>weekly<s n="adv"/></l>
-				<r>ĉiusemajne<s n="adv"/></r>
-			</p>
-		</e>
-
+<e r="RL" c="añadir también 'regardless of' como 'a pesar de'"><p><l>regardless<s n="adv"/></l><r>ĉiakoste<s n="adv"/></r></p></e>
+<e>       <p><l>weekly<s n="adv"/></l>                 <r>ĉiusemajne<s n="adv"/></r></p></e>
 
 	</section>
 </dictionary>

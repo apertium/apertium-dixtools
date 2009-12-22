@@ -31,7 +31,7 @@ public class AbstractDictTool {
     /**
      * Options
      */
-    public DicOpts opt = DicOpts.STD;
+    public DicOpts opt = DicOpts.STD.copy();
 
     protected Msg msg = Msg.inst();
     

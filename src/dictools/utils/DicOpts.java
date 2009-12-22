@@ -43,7 +43,12 @@ public class DicOpts implements Cloneable {
   public int alignR = 55;
 
   public DicOpts pardefAlignOpts = null; // null = Use same alignment for pardefs as for other entries
-    public String[] originalArguments;
+
+  public String[] originalArguments;
+
+  /** This will try to detect alignment settings by looking at the data */
+  public boolean detectAlignmentFromSource = true;
+
     public void copyAlignSettings(DicOpts source) {
         sectionElementsAligned = source.sectionElementsAligned;
         pardefElementsAligned = source.pardefElementsAligned;
@@ -51,19 +56,25 @@ public class DicOpts implements Cloneable {
         alignE = source.alignE;
         alignP = source.alignP;
         alignR = source.alignR;
+        detectAlignmentFromSource = false;
     }
 
     public DicOpts setPardefAlign(DicOpts pardefAlignOpts) {
       this.pardefAlignOpts = pardefAlignOpts;
+      detectAlignmentFromSource = false;
       return this;
    }
 
 
   /**
-   * Standard XML-like format with separate line and indent for each element
+   * Standard format is autodetected
    */
   public static final DicOpts STD = new DicOpts();
 
+  /**
+   * Standard XML-like format with separate line and indent for each element
+   */
+  public static final DicOpts STD_NONALIGNED_XML = new DicOpts(false,false,0,10,55 );
   public static final DicOpts STD_ALIGNED_BIDIX = new DicOpts(true, true, 0, 10, 55).setPardefAlign(new DicOpts(true, true, 2, 12, 32));
   public static final DicOpts STD_ALIGNED_MONODIX = new DicOpts(true, true, 0, 25, 45).setPardefAlign(new DicOpts(true, true, 2, 12, 32));
   
@@ -95,6 +106,7 @@ public class DicOpts implements Cloneable {
     this.alignE = alignmentE;
     this.alignP = alignmentP;
     this.alignR = alignmentR;
+    detectAlignmentFromSource = false;
   }
 
   
@@ -109,6 +121,11 @@ public class DicOpts implements Cloneable {
 
   public DicOpts setNowAlign(boolean b) {
     nowAlign = b;
+    return this;
+  }
+
+  public DicOpts setDetectAlignmentFromSource(boolean b) {
+    detectAlignmentFromSource = b;
     return this;
   }
 }
