@@ -83,7 +83,7 @@ public class DicOpts implements Cloneable {
   /** Compact alignment (no spaces). Used for toString() */
   public static final DicOpts STD_COMPACT= new DicOpts(true, true, 0, 0, 0).setNowAlign(true);
 
-  public static final DicOpts STD_1_LINE = new DicOpts(false, true, 2, 0, 0);
+  public static final DicOpts STD_1_LINE = new DicOpts(false, true, 4, 0, 0);
   public static final DicOpts STD_NOW_1_LINE = STD_1_LINE.copy().setNowAlign(true);
 
   
@@ -94,7 +94,7 @@ public class DicOpts implements Cloneable {
   */
   public boolean stripEmptyLines = false;
   public boolean noProcessingComments = false;
-  public boolean useTabs = true;
+  public boolean useTabs = false;
 
   
   public  DicOpts() {

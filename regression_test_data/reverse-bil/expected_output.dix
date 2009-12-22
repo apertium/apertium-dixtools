@@ -9,23 +9,23 @@
 
 -->
 <dictionary>
-	<alphabet></alphabet>
-	<sdefs>
-		<sdef n="pron" /> 
-		<sdef n="web" /> 
-		<sdef n="GD" /> 
-		<sdef n="f" /> 
-		<sdef n="m" /> 
-		<sdef n="num" /> 
-		<sdef n="np" /> 
-		<sdef n="al" /> 
-		<sdef n="ant" /> 
-		<sdef n="n" /> 
-		<sdef n="vblex" /> 
-		<sdef n="adv" /> 
-		<sdef n="guio" /> 
-	</sdefs>
-	<pardefs>
+  <alphabet></alphabet>
+  <sdefs>
+    <sdef n="pron" /> 
+    <sdef n="web" /> 
+    <sdef n="GD" /> 
+    <sdef n="f" /> 
+    <sdef n="m" /> 
+    <sdef n="num" /> 
+    <sdef n="np" /> 
+    <sdef n="al" /> 
+    <sdef n="ant" /> 
+    <sdef n="n" /> 
+    <sdef n="vblex" /> 
+    <sdef n="adv" /> 
+    <sdef n="guio" /> 
+  </sdefs>
+  <pardefs>
 <pardef n="MF_GD">
   <e r="RL"><p><l><s n="GD"/></l><r></r></p></e>
 
@@ -33,9 +33,9 @@
 
   <e r="LR"><p><l><s n="m"/></l><r></r></p></e>
 </pardef>
-	</pardefs>
+  </pardefs>
 
-	<section id="main" type="standard">
+  <section id="main" type="standard">
 
     <!-- Numerals -->
 <e>       <p><l>zero<s n="num"/></l>                   <r>nulo<s n="num"/></r></p></e>
@@ -97,5 +97,5 @@
 <e r="RL" c="añadir también 'regardless of' como 'a pesar de'"><p><l>regardless<s n="adv"/></l><r>ĉiakoste<s n="adv"/></r></p></e>
 <e>       <p><l>weekly<s n="adv"/></l>                 <r>ĉiusemajne<s n="adv"/></r></p></e>
 
-	</section>
+  </section>
 </dictionary>

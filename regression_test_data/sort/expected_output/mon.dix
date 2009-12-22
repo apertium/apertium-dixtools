@@ -9,36 +9,36 @@
 
 -->
 <dictionary>
-	<alphabet>·ÀÁÂÄÇÈÉÊËÌÍÎÏÑÒÓÔÖÙÚÛÜàáâäçèéêëìíîïñòóôöùúûüABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</alphabet>
-	<sdefs>
-		<sdef n="adj" /> 
-		<sdef n="adv" /> 
-		<sdef n="def" /> 
-		<sdef n="det" /> 
-		<sdef n="f" /> 
-		<sdef n="gen" /> 
-		<sdef n="ger" /> 
-		<sdef n="ind" /> 
-		<sdef n="m" /> 
-		<sdef n="mf" /> 
-		<sdef n="n" /> 
-		<sdef n="nn" /> 
-		<sdef n="np" /> 
-		<sdef n="nt" /> 
-		<sdef n="p1" /> 
-		<sdef n="p2" /> 
-		<sdef n="p3" /> 
-		<sdef n="pr" /> 
-		<sdef n="prn" /> 
-		<sdef n="rpar" /> 
-		<sdef n="sg" /> 
-		<sdef n="sp" /> 
-		<sdef n="tn" /> 
-		<sdef n="vaux" /> 
-		<sdef n="vblex" /> 
-		<sdef n="ND" /> 
-	</sdefs>
-	<pardefs>
+  <alphabet>·ÀÁÂÄÇÈÉÊËÌÍÎÏÑÒÓÔÖÙÚÛÜàáâäçèéêëìíîïñòóôöùúûüABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</alphabet>
+  <sdefs>
+    <sdef n="adj" /> 
+    <sdef n="adv" /> 
+    <sdef n="def" /> 
+    <sdef n="det" /> 
+    <sdef n="f" /> 
+    <sdef n="gen" /> 
+    <sdef n="ger" /> 
+    <sdef n="ind" /> 
+    <sdef n="m" /> 
+    <sdef n="mf" /> 
+    <sdef n="n" /> 
+    <sdef n="nn" /> 
+    <sdef n="np" /> 
+    <sdef n="nt" /> 
+    <sdef n="p1" /> 
+    <sdef n="p2" /> 
+    <sdef n="p3" /> 
+    <sdef n="pr" /> 
+    <sdef n="prn" /> 
+    <sdef n="rpar" /> 
+    <sdef n="sg" /> 
+    <sdef n="sp" /> 
+    <sdef n="tn" /> 
+    <sdef n="vaux" /> 
+    <sdef n="vblex" /> 
+    <sdef n="ND" /> 
+  </sdefs>
+  <pardefs>
     <!-- comment before pardef -->
 <pardef n="S__encimp">
     <!-- comment before e -->
@@ -73,12 +73,12 @@
   <e>       <p><l><prm1/>î</l>  <r>i<prm2/></r></p><i><prm/></i><par n="luî/mes__vblex"/></e>
   <e>       <i>i<prm3/></i><par n="lui/re__vblex"/></e>
 </pardef>
-	</pardefs>
+  </pardefs>
 
-	<section id="main" type="standard">
-		<!-- ******************************
-			    group vblex
-			****************************** -->
+  <section id="main" type="standard">
+    <!-- ******************************
+          group vblex
+      ****************************** -->
 <e lm="acheter">         <i>ach</i><par n="ach/e[T]er__vblex" prm="t"/></e>
 <e lm="acheter">         <i>ach</i><par n="ach/e[T]er__vblex" prm="t"/></e>
 <e lm="comment">         <i>ach</i><par n="comach/e[T]er__vblex" prm="t"/></e><!-- bla bla -->
@@ -128,5 +128,5 @@
     </e>
 -->
 <e lm="enlever">         <i>enl</i><par n="ach/e[T]er__vblex" prm="v"/></e>
-	</section>
+  </section>
 </dictionary>

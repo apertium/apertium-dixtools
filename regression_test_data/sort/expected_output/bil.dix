@@ -9,23 +9,23 @@
 
 -->
 <dictionary>
-	<alphabet></alphabet>
-	<sdefs>
-		<sdef n="pron" /> 
-		<sdef n="web" /> 
-		<sdef n="GD" /> 
-		<sdef n="f" /> 
-		<sdef n="m" /> 
-		<sdef n="num" /> 
-		<sdef n="np" /> 
-		<sdef n="al" /> 
-		<sdef n="ant" /> 
-		<sdef n="n" /> 
-		<sdef n="vblex" /> 
-		<sdef n="adv" /> 
-		<sdef n="guio" /> 
-	</sdefs>
-	<pardefs>
+  <alphabet></alphabet>
+  <sdefs>
+    <sdef n="pron" /> 
+    <sdef n="web" /> 
+    <sdef n="GD" /> 
+    <sdef n="f" /> 
+    <sdef n="m" /> 
+    <sdef n="num" /> 
+    <sdef n="np" /> 
+    <sdef n="al" /> 
+    <sdef n="ant" /> 
+    <sdef n="n" /> 
+    <sdef n="vblex" /> 
+    <sdef n="adv" /> 
+    <sdef n="guio" /> 
+  </sdefs>
+  <pardefs>
 <pardef n="MF_GD">
   <e r="RL"><p><l><s n="GD"/></l><r></r></p></e>
 
@@ -33,12 +33,12 @@
 
   <e r="LR"><p><l><s n="m"/></l><r></r></p></e>
 </pardef>
-	</pardefs>
+  </pardefs>
 
-	<section id="main" type="standard">
-		<!-- ******************************
-			    group num_symbol
-			****************************** -->
+  <section id="main" type="standard">
+    <!-- ******************************
+          group num_symbol
+      ****************************** -->
 <e>       <p><l>dek<b/>du<s n="num"/></l>              <r>twelve<s n="num"/></r></p></e>
 <e>       <p><l>dek<b/>kvar<s n="num"/></l>            <r>fourteen<s n="num"/></r></p></e>
 <e>       <p><l>dek<b/>kvin<s n="num"/></l>            <r>fifteen<s n="num"/></r></p></e>
@@ -58,9 +58,9 @@
 <e>       <p><l>tri<s n="num"/></l>                    <r>three<s n="num"/></r></p></e>
 <e>       <p><l>tridek<s n="num"/></l>                 <r>thirty<s n="num"/></r></p></e>
 <e>       <p><l>unu<s n="num"/></l>                    <r>one<s n="num"/></r></p></e>
-		<!-- ******************************
-			    group np_symbol
-			****************************** -->
+    <!-- ******************************
+          group np_symbol
+      ****************************** -->
 <e>       <i>ABC<b/>News<s n="np"/><s n="al"/></i></e>
 <e>       <i>Gerardo<s n="np"/><s n="ant"/></i></e>
 
@@ -79,23 +79,23 @@
 
     <!-- Nouns with gender in Esperanto but not in English -->
 
-		<!-- ******************************
-			    group MF_GD
-			****************************** -->
+    <!-- ******************************
+          group MF_GD
+      ****************************** -->
 <e>       <p><l>islamano<s n="n"/></l>                 <r>Muslim<s n="n"/></r></p><par n="MF_GD"/></e>
 <e>       <p><l>katoliko<s n="n"/></l>                 <r>Catholic<s n="n"/></r></p><par n="MF_GD"/></e>
 <e>       <p><l>kristano<s n="n"/></l>                 <r>Christian<s n="n"/></r></p><par n="MF_GD"/></e>
 <e>       <p><l>protestanto<s n="n"/></l>              <r>Protestant<s n="n"/></r></p><par n="MF_GD"/></e>
-		<!-- ******************************
-			    group n_symbol
-			****************************** -->
+    <!-- ******************************
+          group n_symbol
+      ****************************** -->
 <e>       <p><l>felo<s n="n"/></l>                     <r>hide<s n="n"/></r></p></e>
 <e r="LR"><p><l>supraĵo<s n="n"/></l>                  <r>face<s n="n"/></r></p></e>
 
 <e>       <p><l>vizaĝo<s n="n"/></l>                   <r>face<s n="n"/></r></p></e>
-		<!-- ******************************
-			    group vblex_symbol
-			****************************** -->
+    <!-- ******************************
+          group vblex_symbol
+      ****************************** -->
 <e r="LR"><p><l>defii<s n="vblex"/></l>                <r>face<s n="vblex"/></r></p></e>
 <e r="LR"><p><l>domaĝi<s n="vblex"/></l>               <r>hesitate<s n="vblex"/></r></p></e>
 
@@ -106,14 +106,14 @@
 <e r="LR"><p><l>malvoli<s n="vblex"/></l>              <r>hesitate<s n="vblex"/></r></p></e>
 
 <!-- Already is <e><l>unuavice<adv></l><r>primarily<adv></r></e>-->
-		<!-- ******************************
-			    group adv_symbol
-			****************************** -->
+    <!-- ******************************
+          group adv_symbol
+      ****************************** -->
 <e i="yes"><p><l>ĉefe<s n="adv"/></l>                  <r>primarily<s n="adv"/></r></p></e>
 
 <!-- Already is <e><l>ĉiaokaze<adv></l><r>regardless<adv></r></e>-->
 <e r="LR" c="añadir también 'regardless of' como 'a pesar de'"><p><l>ĉiakoste<s n="adv"/></l><r>regardless<s n="adv"/></r></p></e>
 <e>       <p><l>ĉiusemajne<s n="adv"/></l>             <r>weekly<s n="adv"/></r></p></e>
 
-	</section>
+  </section>
 </dictionary>

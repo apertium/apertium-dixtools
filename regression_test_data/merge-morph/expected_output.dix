@@ -9,36 +9,36 @@
 
 -->
 <dictionary>
-	<alphabet>·ÀÁÂÄÇÈÉÊËÌÍÎÏÑÒÓÔÖÙÚÛÜàáâäçèéêëìíîïñòóôöùúûüABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</alphabet>
-	<sdefs>
-		<sdef n="adj" /> 
-		<sdef n="adv" /> 
-		<sdef n="def" /> 
-		<sdef n="det" /> 
-		<sdef n="f" /> 
-		<sdef n="gen" /> 
-		<sdef n="ger" /> 
-		<sdef n="ind" /> 
-		<sdef n="m" /> 
-		<sdef n="mf" /> 
-		<sdef n="n" /> 
-		<sdef n="nn" /> 
-		<sdef n="np" /> 
-		<sdef n="nt" /> 
-		<sdef n="p1" /> 
-		<sdef n="p2" /> 
-		<sdef n="p3" /> 
-		<sdef n="pr" /> 
-		<sdef n="prn" /> 
-		<sdef n="rpar" /> 
-		<sdef n="sg" /> 
-		<sdef n="sp" /> 
-		<sdef n="tn" /> 
-		<sdef n="vaux" /> 
-		<sdef n="vblex" /> 
-		<sdef n="ND" /> 
-	</sdefs>
-	<pardefs>
+  <alphabet>·ÀÁÂÄÇÈÉÊËÌÍÎÏÑÒÓÔÖÙÚÛÜàáâäçèéêëìíîïñòóôöùúûüABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</alphabet>
+  <sdefs>
+    <sdef n="adj" /> 
+    <sdef n="adv" /> 
+    <sdef n="def" /> 
+    <sdef n="det" /> 
+    <sdef n="f" /> 
+    <sdef n="gen" /> 
+    <sdef n="ger" /> 
+    <sdef n="ind" /> 
+    <sdef n="m" /> 
+    <sdef n="mf" /> 
+    <sdef n="n" /> 
+    <sdef n="nn" /> 
+    <sdef n="np" /> 
+    <sdef n="nt" /> 
+    <sdef n="p1" /> 
+    <sdef n="p2" /> 
+    <sdef n="p3" /> 
+    <sdef n="pr" /> 
+    <sdef n="prn" /> 
+    <sdef n="rpar" /> 
+    <sdef n="sg" /> 
+    <sdef n="sp" /> 
+    <sdef n="tn" /> 
+    <sdef n="vaux" /> 
+    <sdef n="vblex" /> 
+    <sdef n="ND" /> 
+  </sdefs>
+  <pardefs>
     <!-- comment before pardef -->
 <pardef n="S__encimp">
     <!-- comment before e -->
@@ -92,9 +92,9 @@
   <e>       <p><l><prm/>è</l>   <r>e<prm/></r></p><par n="achèt/e__vblex"/></e>
   <e>       <i>e<prm/></i><par n="achet/er__vblex"/></e>
 </pardef>
-	</pardefs>
+  </pardefs>
 
-	<section id="main" type="standard">
+  <section id="main" type="standard">
 
     <!-- ======== IMPORTANT ============
       When editing this file, please be EXTREMELY CAREFUL about following the existing format.
@@ -118,5 +118,5 @@
 
 <e lm="yyamener">        <i>yyam</i><par n="yyach/e[T]er__vblex" prm="n"/></e>
 <e lm="yyacheter">       <i>ach</i><par n="yyach/e[T]er__vblex" prm="t"/></e>
-	</section>
+  </section>
 </dictionary>

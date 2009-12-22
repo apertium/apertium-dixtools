@@ -7,11 +7,13 @@ mv -f tmp_testDicFormatE1Line-eo-en.xml           test/correct_output_DicFormatE
 mv -f tmp_testDicFormat.xml                       test/correct_output_DicFormat.xml
 mv -f tmp_testprintXML_std1line.xml               test/correct_output_DicFormatE1Line.xml
 mv -f tmp_testprintXML_stdaligned1line-eo-en.xml  test/correct_output_DicFormatE1LineAligned-eo-en.xml
+mv -f tmp_testprintXML_std-eo-en.xml test/correct_output_DicFormat-eo-en.xml 
+mv -f tmp_testprintXML_std1line-eo-en.xml test/correct_output_DicFormatE1Line-eo-en.xml
+mv -f tmp_testprintXML_std.xml test/correct_output_DicFormat.xml 
+
+mv -f dix/* regression_test_data/crossdict/expected_output/
 
 cd regression_test_data/
-cd crossdict/
-mv -f actual_output/* expected_output/
-cd ..
 cd dic-reader/
 mv -f actual_output.txt expected_output.txt 
 cd ..

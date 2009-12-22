@@ -104,9 +104,11 @@ public class ProcessDics extends AbstractDictTool {
           } else if (arg.startsWith("-alignpar")) {
             alignPardef = opt.pardefElementsAligned = true;
             opt.detectAlignmentFromSource = false;
-          } else if (arg.startsWith("-alignxml") || arg.startsWith("-noalign")) {
+          } else if (arg.startsWith("-noalign")) {
             opt.copyAlignSettings(DicOpts.STD_NONALIGNED_XML);
             alignPardef = opt.pardefElementsAligned = true;
+          } else if (arg.startsWith("-usetabs")) {
+            opt.useTabs = true;
           } else {
             unprocessed.add(args[i]);
           }
