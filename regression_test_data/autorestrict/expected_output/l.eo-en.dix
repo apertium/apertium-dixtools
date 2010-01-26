@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dictionary>
+  <sdefs>
+    <sdef n="n" /> 
+    <sdef n="vblex" /> 
+    <sdef n="adv" /> 
+  </sdefs>
+  <section id="main" type="standard">
+<e>       <p><l>vizaĝo<s n="n"/></l>                   <r>visage<s n="n"/></r></p></e>
+<e>       <p><l>vizaĝo<s n="n"/></l>                   <r>face<s n="n"/></r></p></e>
+    <!-- autorestricted (<e><l>vizaĝo<n></l><r>face<n></r></e>). -->
+<e r="LR"><p><l>supraĵo<s n="n"/></l>                  <r>face<s n="n"/></r></p></e>
+
+<e>       <p><l>defii<s n="vblex"/></l>                <r>face<s n="vblex"/></r></p></e>
+    <!-- autorestricted (<e><l>defii<vblex></l><r>face<vblex></r></e>). -->
+<e r="LR"><p><l>maleviti<s n="vblex"/></l>             <r>face<s n="vblex"/></r></p></e>
+
+    <!-- autorestricted (<e><l>heziti<vblex></l><r>hesitate<vblex></r></e>). -->
+<e r="LR"><p><l>malvoli<s n="vblex"/></l>              <r>hesitate<s n="vblex"/></r></p></e>
+    <!-- autorestricted (<e><l>malvoli<vblex></l><r>hesitate<vblex></r></e>). -->
+<e r="LR"><p><l>domaĝi<s n="vblex"/></l>               <r>hesitate<s n="vblex"/></r></p></e>
+<e>       <p><l>heziti<s n="vblex"/></l>               <r>hesitate<s n="vblex"/></r></p></e>
+
+    <!-- autorestricted (<e><l>kaŝi<vblex></l><r>hide<vblex></r></e>). -->
+<e r="LR"><p><l>malvidigi<s n="vblex"/></l>            <r>hide<s n="vblex"/></r></p></e>
+<e>       <p><l>kaŝi<s n="vblex"/></l>                 <r>hide<s n="vblex"/></r></p></e>
+
+<e>       <p><l>semajne<s n="adv"/></l>                <r>weekly<s n="adv"/></r></p></e>
+    <!-- autorestricted (<e><l>semajne<adv></l><r>weekly<adv></r></e>). -->
+<e r="LR"><p><l>ĉiusemajne<s n="adv"/></l>             <r>weekly<s n="adv"/></r></p></e>
+  </section>
+</dictionary>

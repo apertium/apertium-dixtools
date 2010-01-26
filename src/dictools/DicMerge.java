@@ -39,7 +39,7 @@ import dictools.utils.DictionaryReader;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class DicMerge  extends AbstractDictTool{
+public class DicMerge  extends AbstractDictTool {
 
     
     private Dictionary bilAB1;

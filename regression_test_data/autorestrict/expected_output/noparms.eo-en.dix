@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Dictionary:
+	Sections: 1
+	Entries: 12
+	Sdefs: 3
+	Last processed by: apertium-dixtools autorestrict test/missing_restrictions.eo-en.dix regression_test_data/autorestrict/actual_output/noparms.eo-en.dix
+
+-->
 <dictionary>
   <sdefs>
     <sdef n="n" /> 

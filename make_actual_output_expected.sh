@@ -27,3 +27,7 @@ cd sort/
 mv actual_output.dix expected_output.dix 
 mv -f actual_output/* expected_output/
 cd ..
+cd autorestrict
+mv -f actual_output/* expected_output/
+cd ..
+

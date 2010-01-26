@@ -606,6 +606,24 @@ public class E extends DixElement implements Cloneable {
         return str.toString();
     }
 
+    public String getLemmaForSide(String side) {
+        StringBuilder str = new StringBuilder(50);
+        for (DixElement e : children) {
+          if (e instanceof P) {
+            str.append( ((P) e).getSide(side).getValueNoTags());
+          }
+          else if (e instanceof Par) {
+            if (((Par) e).name.length()==1) {
+              // assume its a par containing a letter, like <par n="ü">
+              str.append( ((Par) e).name);
+            } else {
+              // hmmm.... ignore it
+            }
+          }
+          else str.append(e.getStreamContent());
+        }
+        return str.toString();
+    }
 
 // TODO UCdetector: Remove unused code: 
 //     /**

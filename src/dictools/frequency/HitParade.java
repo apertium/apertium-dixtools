@@ -18,12 +18,15 @@
  */
 
 package dictools.frequency;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.TreeMap;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * FrequencyDict implementation for 'hitparade.txt'
@@ -38,74 +41,62 @@ import java.io.BufferedReader;
  * Usually, Wikipedia dumps are used.
  * @author jimregan
  */
-public class HitParade implements FrequencyDict {
-
-
-    private HashMap<String, Double> freq;
-    private BufferedReader br;
-
-
-    void FrequencyDict() {
-        freq = new HashMap<String, Double>();
-    }
-
-    @Override
-    public void load (String filename) {
-        try {
-            this.br = new BufferedReader(new FileReader(filename));
-       	} catch (IOException ex) {
-	    ex.printStackTrace();
-	}
-        calcFrequencies();
-    }
+public class HitParade  {
 
     /**
-     *
-     * @notimplemented
+     * Rank an array of words against a frequency dictionary
+     * @param choices An array of words to be ranked
+     * @return choices ranked by frequency. Most frequent will be first in the list
      */
-    @Override
-    public String[] rankall (String[] choices) {
+    public String[] rankWords (String[] choices) {
         HashMap<Double, String> list = new HashMap<Double, String>();
         for (String s : choices) {
-            Double d = this.freq.get(s);
+            Double d = this.frequencies.get(s);
             list.put(d, s);
         }
         TreeMap<Double, String> sorted = new TreeMap<Double, String>(list);
-        return sorted.values().toArray(new String[sorted.size()]);
-    }
+        ArrayList<String> al = new ArrayList(sorted.values());
+        Collections.reverse(al);
 
-    @Override
-    public HashMap<String, Double> getFrequencies() {
-        return freq;
+        System.err.println("list = " + list);
+        System.err.println("al = " + al);
+        return (String[]) al.toArray(new String[al.size()]);
     }
 
     /**
-     *
-     * @author j
+     * All words and their frequencies (a hashmap of all words with their frequency)
      */
-    private void calcFrequencies() {
-	String linio;
+    public HashMap<String,Double> frequencies;
 
-	LinkedHashMap<String,Double> listo = new LinkedHashMap<String, Double>(50002);
-	try {
-	    double maxfreq = -1;
-	    while ((linio = br.readLine()) != null) {
-		String[] s = linio.trim().split("\\s+");
-		if (s.length < 2)
-		    continue;
-		double lfreq = Integer.parseInt(s[0]);
-		if (maxfreq == -1) {
-		    maxfreq = lfreq;
-		}
-		listo.put(s[1], lfreq / maxfreq);
-
-	    }
-	    br.close();
-	} catch (IOException ex) {
-	    ex.printStackTrace();
-	}
-	//montruHashMap(listo);
-	this.freq = listo;
+    public HitParade(String file) throws IOException {
+      frequencies = readHitparadeFile(file);
     }
+
+
+
+  public static HashMap<String, Double> readHitparadeFile(String dosiernomo) throws IOException {
+    //System.out.println("Legas "+dosiernomo);
+    BufferedReader br;
+    String linio;
+
+    LinkedHashMap<String, Double> listo=new LinkedHashMap<String, Double>(50002);
+    br=new BufferedReader(new FileReader(dosiernomo));
+    double maxfreq=-1;
+    while ((linio=br.readLine())!=null) {
+      String[] s=linio.trim().split("\\s+");
+      if (s.length<2) {
+        continue;
+      }
+      double freq=Integer.parseInt(s[0]);
+      if (maxfreq==-1) {
+        maxfreq=freq;
+      }
+      listo.put(s[1], freq/maxfreq);
+
+    }
+    br.close();
+    //montruHashMap(listo);
+    return listo;
+  }
 
 }

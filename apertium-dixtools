@@ -451,6 +451,7 @@ function show_help() {
    echo "    -debug              print extra debugging information"
    echo "    -useTabs          use tabs (instead of default 2 spaces) when indenting"
    echo "    -noProcComments     don't add processing comments (telling what was done)"
+   echo "    -noHeader           don't put header comment with a summary in the top"
    echo "    -stripEmptyLines    removes empty lines (originating from original file)"
    echo "    -alignBidix         align a bidix (<p> or <i> at col 10, <r> at col 55)"
    echo "    -alignMonodix       align a monodix (pardef 10, 30, other entries 25, 45)"

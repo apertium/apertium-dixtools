@@ -30,6 +30,7 @@ import dictools.utils.DicOpts;
  */
 public class Par extends DixElement {
 
+    public String name;
     
     public String sa;
 
@@ -46,7 +47,13 @@ public class Par extends DixElement {
      */
     public Par(String value) {
       this();
+      name = value;
        setValue(value);
+    }
+
+    public void setValue(String value) {
+        super.setValue(value);
+        name = value;
     }
 
     /**
@@ -73,7 +80,7 @@ public class Par extends DixElement {
     @Override
     public String toString() {
         String saAttr = sa==null?"":" sa=\"" + sa + "\" ";
-        return "<" + TAGNAME + " n=\"" + getValue() + "\"" + prmToString() + saAttr + "/>" ;
+        return "<" + TAGNAME + " n=\"" + name + "\"" + prmToString() + saAttr + "/>" ;
     }
 
   public void setPrm(int n, String v) {

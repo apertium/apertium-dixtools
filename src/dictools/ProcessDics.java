@@ -39,6 +39,7 @@ import dictools.apertiumizer.Apertiumizer;
 import dictools.dix2trie.Dix2Trie;
 import dictools.utils.DictionaryReader;
 import dictools.speling.Speling;
+import dictools.AutorestrictBidix;
 
 /**
  *
@@ -90,6 +91,8 @@ public class ProcessDics extends AbstractDictTool {
           boolean align=false, alignPardef=false;
           if (arg.equals("-debug")) {
             msg.setDebug(true);
+          } else if (arg.equalsIgnoreCase("-noHeader")) {
+            opt.noHeaderAtTop=true;
           } else if (arg.equalsIgnoreCase("-noProcComments")) {
             opt.noProcessingComments=true;
           } else if (arg.equalsIgnoreCase("-stripEmptyLines")) {
@@ -163,6 +166,9 @@ public class ProcessDics extends AbstractDictTool {
         } 
         else if (action.equals("consistent")) {
             this.process_consistent();
+        }
+        else if (action.equals("autorestrict")) {
+          new AutorestrictBidix().executeTool(opt, arguments);
         }
         else if (action.equals("merge")) {
             this.process_merge();
@@ -322,7 +328,6 @@ public class ProcessDics extends AbstractDictTool {
             tool.arguments = arguments;
             tool.doConsistent();
         }
-
     }
 
     

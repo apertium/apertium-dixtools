@@ -6,7 +6,7 @@
     <sdef n="adv" /> 
   </sdefs>
   <section id="main" type="standard">
-<e>       <p><l>vizaĝo<s n="n"/></l>                   <r>visage<s n="n"/></r></p></e>
+<e r="RL"><p><l>vizaĝo<s n="n"/></l>                   <r>visage<s n="n"/></r></p></e><!--  autorestricted (<e><l>vizaĝo<n></l><r>face<n></r></e>).-->
 <e>       <p><l>vizaĝo<s n="n"/></l>                   <r>face<s n="n"/></r></p></e>
 <e>       <p><l>supraĵo<s n="n"/></l>                  <r>face<s n="n"/></r></p></e>
 

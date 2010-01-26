@@ -21,6 +21,8 @@ package dictools;
 
 import dictools.utils.DicOpts;
 import dictools.utils.Msg;
+import java.io.IOException;
+import java.util.Arrays;
 
 /**
  *
@@ -36,4 +38,30 @@ public class AbstractDictTool {
     protected Msg msg = Msg.inst();
     
     protected String[] arguments;
+
+
+  public void executeTool(DicOpts opt, String[] arguments) throws IOException {
+     this.opt = opt;
+     this.arguments = arguments;
+     this.executeTool();
+  }
+
+  /** To be overridden by children */
+  public void executeTool() throws IOException {
+    throw new UnsupportedOperationException("Not yet implemented for this tool");
+  }
+
+  protected void failWrongNumberOfArguments(String[] remainingarguments) {
+    msg.err("Usage: apertium-dixtools "+toolHelp());
+    if (remainingarguments.length==1)
+      throw new IllegalArgumentException("Missing some more arguments.");
+    else
+      throw new IllegalArgumentException("One of these arguments had a problem: "+ Arrays.toString(remainingarguments));
+  }
+
+
+  /** To be overridden by children */
+  public String toolHelp() {
+    throw new UnsupportedOperationException("Not yet implemented for this tool");
+  }
 }

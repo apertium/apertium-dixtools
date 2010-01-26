@@ -23,7 +23,7 @@ package misc.eoen;
 
 import dics.elements.dtd.ContentElement;
 import java.io.IOException;
-import misc.eoen.SubstractBidix;
+import dictools.AutorestrictBidix;
 
 import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.E;
@@ -276,7 +276,7 @@ public class KompletiguEoDix {
 */
 
 
-    //SubstractBidix.reviseRestrictions(dic, false, true);
+    //AutorestrictBidix.reviseRestrictions(dic, false, true);
 
 
 

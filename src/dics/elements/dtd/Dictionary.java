@@ -185,7 +185,8 @@ public class Dictionary extends DixElement {
      */
     public void printXMLToFile(String fileName,DicOpts opt) {
         if (opt.detectAlignmentFromSource) {
-          System.err.println("NOTE: You didnt specify any alignment options, so a good alignment will be detected from the data.\n"+"Use -noalign to get the old unaligned behaviour (multiline-XML-ish)");
+          System.err.println("Note: You didnt specify any alignment options, so a good alignment will be detected from the data.\n"+
+                                    "      (use -noalign to get the old unaligned multiline-XML-ish behaviour)");
           opt = opt.copy();
           opt.detectAlignmentFromSource = false;
           detectAlignmentFromSource(opt);
@@ -203,32 +204,34 @@ public class Dictionary extends DixElement {
                 dos = new OutputStreamWriter(bos, xmlEncoding);
               }
             dos.append("<?xml version=\"1.0\" encoding=\"" + xmlEncoding + "\"?>\n");
-            dos.append("<!--\n\tDictionary:\n");
-            if (sections != null) {
-                if (isBil()) {
-                    dos.append("\tBilingual dictionary: " + leftLanguage + "-" + rightLanguage + "\n");
-                }
-                dos.append("\tSections: " + sections.size() + "\n");
-                int ne = 0;
-                for (Section section : sections) {
-                    ne += section.elements.size();
-                }
-                dos.append("\tEntries: " + ne);
-            }
-            if (sdefs != null) {
-                dos.append("\n\tSdefs: " + sdefs.elements.size() + "\n");
-            }
-            if (pardefs!=null && pardefs.elements.size()>0) {
-                dos.append("\tParadigms: " + pardefs.elements.size() + "\n");
-            }
-            if (opt.originalArguments != null) {
-                dos.append("\tLast processed by: apertium-dixtools");
-                for (String s : opt.originalArguments) dos.append(' ').append(s);
-                dos.append("\n");
-            }
-            dos.append(processingComments);
+            if (!opt.noHeaderAtTop) {
+              dos.append("<!--\n\tDictionary:\n");
+              if (sections != null) {
+                  if (isBil()) {
+                      dos.append("\tBilingual dictionary: " + leftLanguage + "-" + rightLanguage + "\n");
+                  }
+                  dos.append("\tSections: " + sections.size() + "\n");
+                  int ne = 0;
+                  for (Section section : sections) {
+                      ne += section.elements.size();
+                  }
+                  dos.append("\tEntries: " + ne);
+              }
+              if (sdefs != null) {
+                  dos.append("\n\tSdefs: " + sdefs.elements.size() + "\n");
+              }
+              if (pardefs!=null && pardefs.elements.size()>0) {
+                  dos.append("\tParadigms: " + pardefs.elements.size() + "\n");
+              }
+              if (opt.originalArguments != null) {
+                  dos.append("\tLast processed by: apertium-dixtools");
+                  for (String s : opt.originalArguments) dos.append(' ').append(s);
+                  dos.append("\n");
+              }
+              dos.append(processingComments);
 
-            dos.append("\n-->\n");
+              dos.append("\n-->\n");
+            }
             this.printXML(dos, opt);
             dos.close();
             dos = null;

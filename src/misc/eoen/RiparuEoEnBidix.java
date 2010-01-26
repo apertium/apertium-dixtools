@@ -20,6 +20,7 @@
 
 package misc.eoen;
 
+import dictools.AutorestrictBidix;
 import java.io.IOException;
 
 import dics.elements.dtd.Dictionary;
@@ -83,8 +84,8 @@ public class RiparuEoEnBidix {
               
               if (exEe == null) hm.put(k, ee);
               else {
-                if (SubstractBidix.isAllowed("LR", ee) && SubstractBidix.isAllowed("LR", exEe) ||
-                    SubstractBidix.isAllowed("RL", ee) && SubstractBidix.isAllowed("RL", exEe)) {
+                if (AutorestrictBidix.isAllowed("LR", ee) && AutorestrictBidix.isAllowed("LR", exEe) ||
+                    AutorestrictBidix.isAllowed("RL", ee) && AutorestrictBidix.isAllowed("RL", exEe)) {
                   System.out.println("======="+exEe + "    og    " + ee.toString()+"======== hmm!!!");
                 //} else if (!equals(exEe.getMainParadigmName(), ee.getMainParadigmName())) {
                 //  System.out.println(k+" ======="+exEe + "    og    " + ee.toString()+"======== PARhmm!!!");
@@ -104,7 +105,7 @@ public class RiparuEoEnBidix {
          */
                 
         
-        SubstractBidix.reviseRestrictions(dic, true, true);
+        new AutorestrictBidix().reviseRestrictions(dic, true, true);
 
         DicOpts opt =  dictools.utils.DicOpts.STD_ALIGNED.copy();
         //opt.noProcessingComments = true;

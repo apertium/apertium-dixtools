@@ -49,6 +49,9 @@ public class DicOpts implements Cloneable {
   /** This will try to detect alignment settings by looking at the data */
   public boolean detectAlignmentFromSource = true;
 
+  /**  -noHeader           don't put header comment with a summary in the top */
+  public boolean noHeaderAtTop = false;
+
     public void copyAlignSettings(DicOpts source) {
         sectionElementsAligned = source.sectionElementsAligned;
         pardefElementsAligned = source.pardefElementsAligned;

@@ -39,7 +39,7 @@ import org.junit.runners.Suite;
       dictools.Dix2trieTest.class,
       dictools.ReversebilTest.class,
       dictools.SortTest.class,
-      misc.eoen.SubstractBidixTest.class})
+      dictools.AutorestrictBidixTest.class})
 //@Suite.SuiteClasses({dictools.ReadAndWriteMonodixTest.class})
 
 public class DixtoolsTestSuite
