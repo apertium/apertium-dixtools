@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dictionary>
-  <alphabet></alphabet>
   <sdefs>
-    <sdef n="pron" /> 
-    <sdef n="web" /> 
-    <sdef n="GD" /> 
     <sdef n="f" /> 
-    <sdef n="m" /> 
+    <sdef n="GD" /> 
     <sdef n="num" /> 
     <sdef n="np" /> 
-    <sdef n="al" /> 
-    <sdef n="ant" /> 
     <sdef n="n" /> 
+    <sdef n="m" /> 
+    <sdef n="ant" /> 
     <sdef n="vblex" /> 
     <sdef n="adv" /> 
-    <sdef n="guio" /> 
   </sdefs>
   <pardefs>
 <pardef n="MF_GD">
