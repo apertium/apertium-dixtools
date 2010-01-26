@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dictionary>
+  <alphabet></alphabet>
+  <sdefs>
+    <sdef n="pron" /> 
+    <sdef n="web" /> 
+    <sdef n="GD" /> 
+    <sdef n="f" /> 
+    <sdef n="m" /> 
+    <sdef n="num" /> 
+    <sdef n="np" /> 
+    <sdef n="al" /> 
+    <sdef n="ant" /> 
+    <sdef n="n" /> 
+    <sdef n="vblex" /> 
+    <sdef n="adv" /> 
+    <sdef n="guio" /> 
+  </sdefs>
+  <pardefs>
+<pardef n="MF_GD">
+  <e r="RL"><p><l><s n="GD"/></l><r></r></p></e>
+  <e r="LR"><p><l><s n="f"/></l><r></r></p></e>
+  <e r="LR"><p><l><s n="m"/></l><r></r></p></e>
+</pardef>
+  </pardefs>
+
+  <section id="main" type="standard">
+
+<e>       <p><l>tridek<s n="num"/></l>                 <r>thirty<s n="num"/></r></p></e>
+<e>       <p><l>kvardek<s n="num"/></l>                <r>forty<s n="num"/></r></p></e>
+<e>       <p><l>kvindek<s n="num"/></l>                <r>fifty<s n="num"/></r></p></e>
+
+<e>       <p><l>Manuelo<s n="np"/></l>                 <r>Manuel<s n="np"/></r></p></e>
+<e>       <p><l>Marta<s n="np"/></l>                   <r>Marta<s n="np"/></r></p></e>
+
+<e>       <i>Jaime<s n="np"/><s n="ant"/></i></e>
+<e>       <i>Gerardo<s n="np"/><s n="ant"/></i></e>
+<e>       <i>Paris<s n="np"/><s n="ant"/></i></e>
+
+<e>       <p><l>islamano<s n="n"/></l>                 <r>Muslim<s n="n"/></r></p><par n="MF_GD"/></e>
+<e>       <p><l>katoliko<s n="n"/></l>                 <r>Catholic<s n="n"/></r></p><par n="MF_GD"/></e>
+
+<e>       <p><l>vizaĝo<s n="n"/></l>                   <r>visage<s n="n"/></r></p></e>
+<e>       <p><l>vizaĝo<s n="n"/></l>                   <r>face<s n="n"/></r></p></e>
+<e>       <p><l>supraĵo<s n="n"/></l>                  <r>face<s n="n"/></r></p></e>
+
+<e>       <p><l>defii<s n="vblex"/></l>                <r>face<s n="vblex"/></r></p></e>
+<e>       <p><l>maleviti<s n="vblex"/></l>             <r>face<s n="vblex"/></r></p></e>
+
+<e>       <p><l>heziti<s n="vblex"/></l>               <r>hesitate<s n="vblex"/></r></p></e>
+<e>       <p><l>malvoli<s n="vblex"/></l>              <r>hesitate<s n="vblex"/></r></p></e>
+<e>       <p><l>domaĝi<s n="vblex"/></l>               <r>hesitate<s n="vblex"/></r></p></e>
+
+<e>       <p><l>malvidigi<s n="vblex"/></l>            <r>hide<s n="vblex"/></r></p></e>
+<e>       <p><l>kaŝi<s n="vblex"/></l>                 <r>hide<s n="vblex"/></r></p></e>
+
+<e>       <p><l>felo<s n="n"/></l>                     <r>hide<s n="n"/></r></p></e>
+
+<e>       <p><l>ĉefe<s n="adv"/></l>                   <r>primarily<s n="adv"/></r></p></e>
+
+<e>       <p><l>semajne<s n="adv"/></l>                <r>weekly<s n="adv"/></r></p></e>
+<e>       <p><l>ĉiusemajne<s n="adv"/></l>             <r>weekly<s n="adv"/></r></p></e>
+
+  </section>
+</dictionary>
