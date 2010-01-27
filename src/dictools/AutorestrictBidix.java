@@ -159,7 +159,7 @@ public class AutorestrictBidix extends AbstractDictTool {
       for (E e : emapLtoR.values()) {
         if (!isAllowed("LR", e)) {
           if (verbose) {
-            System.err.println("LR restic can be lifted "+e);
+            System.err.println("LR can be allowed "+e);
           }
           if (alsoLiftUnneededRestrictions) {
             setYesIsAllowed(e, "LR");
@@ -170,7 +170,7 @@ public class AutorestrictBidix extends AbstractDictTool {
       for (E e : emapRtoL.values()) {
         if (!isAllowed("RL", e)) {
           if (verbose) {
-            System.err.println("RL restic can be lifted "+e);
+            System.err.println("RL can be allowed "+e);
           }
           if (alsoLiftUnneededRestrictions) {
             setYesIsAllowed(e, "RL");
@@ -179,7 +179,7 @@ public class AutorestrictBidix extends AbstractDictTool {
       }
 
 
-
+ 
       // Transfer reasons from temp to comment
       Iterator<E> eei=section.elements.iterator();
       while (eei.hasNext()) {
@@ -246,16 +246,18 @@ public class AutorestrictBidix extends AbstractDictTool {
   }
 
 
-  public static void setNoIsNotAllowed(E ee, String direction) {
-    if ("yes".equals(ee.ignore)) return;
-    String restric = ee.restriction;    
+  public static boolean setNoIsNotAllowed(E ee, String direction) {
+    if ("yes".equals(ee.ignore)) return false;
 
-    if (direction.equals(restric)) {
+    if (direction.equals(ee.restriction)) {
        ee.ignore="yes";
        ee.restriction=null;
-       return;
+       return true;
     } else {
-       ee.restriction=reverseDir(direction);      
+      String res = reverseDir(direction);
+      if (res.equals(ee.restriction)) return false;
+      ee.restriction=res;
+      return true;
     }      
   }
 
@@ -313,29 +315,34 @@ public class AutorestrictBidix extends AbstractDictTool {
 
   private static void restrictAndUnrestrict(E entryToBeRemoved, E entryToRetain, String direction) {
 
-    setNoIsNotAllowed(entryToBeRemoved, direction);
     setYesIsAllowed(entryToRetain, direction); // needed if redoRestrictions==true
 
 
-    String oldReasonOfRestriction=entryToBeRemoved.temp;
-    String existingEeStr=entryToRetain.toString();
-    //System.err.println("LR: Dobbelt indgang "+existingEe+"   "+ee);
-    if (entryToBeRemoved.restriction==null) {
-      assert (oldReasonOfRestriction==null);
-      entryToBeRemoved.temp=existingEeStr;
-      //ee.restriction=reverseDir(direction));
-    } else {
-      if (oldReasonOfRestriction==null) {
+    System.err.println("      entryToBeRemoved = " + entryToBeRemoved);
+    boolean changed = setNoIsNotAllowed(entryToBeRemoved, direction);
+
+    System.err.println(changed+" entryToBeRemoved = " + entryToBeRemoved);
+    if (changed) {
+      String oldReasonOfRestriction=entryToBeRemoved.temp;
+      String existingEeStr=entryToRetain.toString();
+      //System.err.println("LR: Dobbelt indgang "+existingEe+"   "+ee);
+      if (entryToBeRemoved.restriction==null) {
+        assert (oldReasonOfRestriction==null);
         entryToBeRemoved.temp=existingEeStr;
+        //ee.restriction=reverseDir(direction));
       } else {
-        String existingEeStrChop=existingEeStr.substring(existingEeStr.indexOf('<'));
-        String oldReasonOfRestrictionChop=oldReasonOfRestriction.substring(oldReasonOfRestriction.indexOf('<'));
-        //System.err.println(existingEeStrChop+ ".equals? " +oldReasonOfRestrictionChop);
-        if (existingEeStrChop.equals(oldReasonOfRestrictionChop)) {
-          // Exactly the same entry has been before. Just delete it
-          entryToBeRemoved.temp="DELETE";
+        if (oldReasonOfRestriction==null) {
+          entryToBeRemoved.temp=existingEeStr;
         } else {
-          entryToBeRemoved.temp=existingEeStr+" "+oldReasonOfRestriction;
+          String existingEeStrChop=existingEeStr.substring(existingEeStr.indexOf('<'));
+          String oldReasonOfRestrictionChop=oldReasonOfRestriction.substring(oldReasonOfRestriction.indexOf('<'));
+          //System.err.println(existingEeStrChop+ ".equals? " +oldReasonOfRestrictionChop);
+          if (existingEeStrChop.equals(oldReasonOfRestrictionChop)) {
+            // Exactly the same entry has been before. Just delete it
+            entryToBeRemoved.temp="DELETE";
+          } else {
+            entryToBeRemoved.temp=existingEeStr+" "+oldReasonOfRestriction;
+          }
         }
       }
     }

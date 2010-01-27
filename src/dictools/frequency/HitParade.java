@@ -83,15 +83,14 @@ public class HitParade  {
     br=new BufferedReader(new FileReader(dosiernomo));
     double maxfreq=-1;
     while ((linio=br.readLine())!=null) {
-      String[] s=linio.trim().split("\\s+");
-      if (s.length<2) {
-        continue;
-      }
-      double freq=Integer.parseInt(s[0]);
+      linio = linio.trim();
+      int n = linio.indexOf(' ');
+      if (n==-1) continue;
+      double freq=Integer.parseInt(linio.substring(0, n));
       if (maxfreq==-1) {
         maxfreq=freq;
       }
-      listo.put(s[1], freq/maxfreq);
+      listo.put(linio.substring(n+1), freq/maxfreq);
 
     }
     br.close();
