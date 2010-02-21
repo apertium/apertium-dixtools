@@ -1,7 +1,5 @@
 AUTOMAKE_OPTIONS = foreign subdir-objects no-dependencies
 
-JAVACFLAGS = -g
-
 TESTFLAGS =
 
 bin_PROGRAMS=dixtools

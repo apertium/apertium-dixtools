@@ -30,6 +30,6 @@ if test "$JAR" = "" ; then
   AC_MSG_ERROR([jar not installed])
 fi
 
-JAVACFLAGS=-g
+JAVACFLAGS=-g:none
 
 AC_OUTPUT([Makefile src/Makefile])
