@@ -6,9 +6,10 @@ AC_CANONICAL_SYSTEM
 
 AM_INIT_AUTOMAKE([apertium-dixtools], [0.1.0], no-define)
 
-#AC_LANG_C
 AC_PROG_CC
 AC_PROG_CXX
+AC_ISC_POSIX
+AC_HEADER_STDC
 
 AC_CHECK_PROGS(GCJ, gcj, gcj)
 if test -z "$GCJ" ; then
