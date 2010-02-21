@@ -1,5 +1,7 @@
-#!/bin/sh 
+#!/bin/sh
 
+echo "- libtoolize."            && \
+if test x$(uname -s) = xDarwin; then glibtoolize --force; else libtoolize --force; fi && \
 echo "- aclocal."		&& \
 aclocal				&& \
 echo "- autoconf."		&& \

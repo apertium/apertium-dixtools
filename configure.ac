@@ -6,6 +6,7 @@ AC_CANONICAL_SYSTEM
 
 AM_INIT_AUTOMAKE([apertium-dixtools], [0.1.0], no-define)
 
+AC_LANG_C
 AC_PROG_CC
 AC_PROG_CXX
 
@@ -15,6 +16,10 @@ JAVAC=${JAVAC-javac}
 AC_SUBST(JAVAC)
 
 AM_PROG_GCJ
+
+AM_PROG_LIBTOOL
+AC_PATH_PROGS(GCJ, gcj)
+AC_PATH_PROGS(GCJH, gcjh)
 
 AC_SET_MAKE
 
@@ -33,3 +38,4 @@ fi
 JAVACFLAGS=-g:none
 
 AC_OUTPUT([Makefile src/Makefile])
+
