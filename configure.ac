@@ -19,7 +19,7 @@ else
 
      have_gcj=yes
      #if test "x${GCJFLAGS-unset}" = xunset; then
-        GCJFLAGS="-g -O2"
+        GCJFLAGS="-g -O2 -Wno-unused"
      #fi
      AC_SUBST(GCJFLAGS)
 fi
