@@ -28,7 +28,23 @@ AC_PROG_JAR
 AC_PROG_JAVADOC
 AC_JAVA_OPTIONS
 
+AC_ARG_ENABLE([native],
+              AS_HELP_STRING([--enable-native],
+                             [enable generation of native binaries]),
+                             [enable_native=$enableval],
+                             [enable_native=yes])
+
+if test "x${enable_native}" = "xno"; then
+  echo "Native compilation disabled."
+else
+  if test "x${GCJ}" = "xfalse"; then
+    enable_native=no
+    echo "Native compilation disabled as gcj has not been found"
+  fi
+fi
+
+AM_CONDITIONAL([ENABLE_NATIVE], [test x${enable_native} = xyes])
+
 AC_SET_MAKE
 
 AC_OUTPUT([Makefile src/Makefile])
-
