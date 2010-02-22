@@ -43,16 +43,11 @@ TOP_BUILDDIR=`pwd`
 
 case ${with_gcj} in
   yes)
-    test -z "$enable_kawa_frontend" && enable_kawa_frontend="yes"
-    test -z "${with_gcj_dbtool}" && with_gcj_dbtool=no
-
     GCJ_COMPILED_SELECTED=ENABLE_GCJ_COMPILED
     GCJ_SELECTED=WITH_GCJ
     JAVA=${JAVA-gij}
     JAVAC=${JAVAC-"gcj -C"}
 
-    # AM_PROG_GCJ isn't good enough, we have to roll our own.
-    # AC_CHECK_TOOL(GCJ, gcj)
     LT_AC_PROG_GCJ
     test -z "$GCJ" && AC_MSG_ERROR([no acceptable gcj found in \$PATH])
     if test "x${GCJFLAGS-unset}" = xunset; then
@@ -67,7 +62,6 @@ case ${with_gcj} in
     GCJ_SELECTED=WITHOUT_GCJ
     JAVA=${JAVA-java}
     JAVAC=${JAVAC-javac}
-    dnl needed to match _AM_DEPENDENCIES
     am__fastdepGCJ_TRUE='#'
     ;;
 esac
