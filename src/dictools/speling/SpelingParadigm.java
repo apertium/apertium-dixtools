@@ -180,8 +180,7 @@ public class SpelingParadigm {
             }
             p.l = l;
             p.r = r;
-            cur.children.add(l);
-            cur.children.add(r);
+            cur.children.add(p);
             elist.add(cur);
         }
         out.elements = elist;
