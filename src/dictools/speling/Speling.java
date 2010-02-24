@@ -114,7 +114,7 @@ public class Speling extends AbstractDictTool {
                 if (Character.isLowerCase(c) && !alpha.contains(Character.toUpperCase(c))) {
                     alpha.add(Character.toUpperCase(c));
                 } else if (!alpha.contains(Character.toLowerCase(c))) {
-                    alpha.add(Character.toUpperCase(c));
+                    alpha.add(Character.toLowerCase(c));
                 }
             } else {
                 continue;
