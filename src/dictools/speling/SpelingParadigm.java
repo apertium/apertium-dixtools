@@ -55,8 +55,14 @@ public class SpelingParadigm {
      */
     public String getStem (String lemma, String flexion) {
         String mystem = "";
+        int len;
         if (lemma.charAt(0) != flexion.charAt(0))
             return "";
+        if (lemma.length() <= flexion.length()) {
+            len = lemma.length();
+        } else {
+            len = flexion.length();
+        }
         for (int i=0; i<lemma.length();i++) {
             if (lemma.charAt(i) == flexion.charAt(i)) {
                 mystem += lemma.charAt(i);
