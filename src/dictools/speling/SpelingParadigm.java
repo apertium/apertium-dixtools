@@ -63,7 +63,7 @@ public class SpelingParadigm {
         } else {
             len = flexion.length();
         }
-        for (int i=0; i<lemma.length();i++) {
+        for (int i=0; i<len;i++) {
             if (lemma.charAt(i) == flexion.charAt(i)) {
                 mystem += lemma.charAt(i);
             }
