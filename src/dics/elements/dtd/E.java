@@ -73,7 +73,7 @@ public class E extends DixElement implements Cloneable {
 
         // JimRegan's dubious fix.
         // Should really be in DicFix or somewhere else, and not in the DTD code.
-        if (lm != null) lm = lm.replaceAll("\\&", "\\&amp;");
+        if (lm != null) lm = lm.replaceAll("\\&", "\\&amp;").replaceAll("\"", "\\&quot;").replaceAll("\'", "\\&apos;");
 
 //        String escapedlm = this.lemma;
  //       escapedlm = escapedlm.replaceAll("\\&", "\\&amp;");
