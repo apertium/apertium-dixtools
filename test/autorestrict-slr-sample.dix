@@ -1,0 +1,14 @@
+<dictionary>
+  <alphabet/>
+  <sdefs>
+    <sdef n="n"/>
+    <sdef n="m"/>
+    <sdef n="f"/>
+  </sdefs>
+  <section id="main" type="standard">
+    <e slr="energia"><p><l>power<s n="n"/></l><r>energia<s n="n"/><s n="f"/></r></p></e>
+    <e slr="potere D" r="LR"><p><l>power<s n="n"/></l><r>potere<s n="n"/><s n="m"/></r></p></e>
+    <e slr="potenza"><p><l>power<s n="n"/></l><r>potenza<s n="n"/><s n="f"/></r></p></e>
+  </section>
+</dictionary>
+

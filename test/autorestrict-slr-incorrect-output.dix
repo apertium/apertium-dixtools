@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Dictionary:
+	Sections: 1
+	Entries: 3
+	Sdefs: 3
+	Last processed by: apertium-dixtools -standard autorestrict -l /dev/null -r /dev/null test-autorestrict.dix out.dix
+
+-->
+<dictionary>
+  <alphabet></alphabet>
+  <sdefs>
+    <sdef n="n" /> 
+    <sdef n="m" /> 
+    <sdef n="f" /> 
+  </sdefs>
+  <section id="main" type="standard">
+    <e slr="energia"><p><l>power<s n="n"/></l><r>energia<s n="n"/><s n="f"/></r></p></e>
+    <e slr="potere D" i="yes"><p><l>power<s n="n"/></l><r>potere<s n="n"/><s n="m"/></r></p></e><!--  autorestricted (<e><l>power<n></l><r>energia<n><f></r></e>).-->
+    <e r="RL" slr="potenza"><p><l>power<s n="n"/></l><r>potenza<s n="n"/><s n="f"/></r></p></e><!--  autorestricted (<e><l>power<n></l><r>energia<n><f></r></e>).-->
+  </section>
+</dictionary>
