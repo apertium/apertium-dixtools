@@ -55,7 +55,7 @@ public class TextElement extends DixElement {
         // so we can't escape > and < !
         // replaceAll("<", "&lt;").replaceAll(">", "&gt;").
 
-        dos.append(text.replace("&", "&amp;").replace("\"", "&apos;"));
+        dos.append(text.replace("&", "&amp;").replace("\"", "&quot;").replace("\'", "&apos;"));
 
         //not necesary: dos.append(appendCharacterData);
     }
