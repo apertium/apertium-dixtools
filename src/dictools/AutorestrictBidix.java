@@ -217,12 +217,11 @@ public class AutorestrictBidix extends AbstractDictTool {
 
   public static boolean isAllowed(String direction, E ee) {
     if ("yes".equals(ee.ignore)) return false;
-    if (ee.isAnyLR() && ee.isAnyRL()) return false;
-    if("LR".equals(direction) && ee.isAnyRL()) return false;
-    if("RL".equals(direction) && ee.isAnyLR()) return false;
-    String restric = ee.restriction;    
+    if("LR".equals(direction) && ee.isAnyLR()) return false;
+    if("RL".equals(direction) && ee.isAnyRL()) return false;
+    String restric = ee.restriction;
     if (restric==null) return true;
-    if (restric.equals(direction)) return true;
+    if (restric.equals(restric)) return true;
     return false;    
   }
 
