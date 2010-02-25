@@ -54,6 +54,12 @@ public class E extends DixElement implements Cloneable {
     
     public String alt;
     
+    public String vl;
+    
+    public String vr;
+
+    public String v;
+
     public boolean shared = false;
     
     public String patternApplied;
@@ -275,6 +281,9 @@ public class E extends DixElement implements Cloneable {
         appendXmlAttr(attributes, "i", ignore);
         appendXmlAttr(attributes, "aversion", aversion);
         appendXmlAttr(attributes, "alt", alt);
+        appendXmlAttr(attributes, "vl", vl);
+        appendXmlAttr(attributes, "vr", vr);
+        appendXmlAttr(attributes, "v", v);
         return attributes.toString();
     }
 
@@ -404,6 +413,20 @@ public class E extends DixElement implements Cloneable {
 
     public boolean isRL() {
         return "RL".equals(restriction);
+    }
+
+    public boolean isAnyLR() {
+        if ("LR".equals(restriction)) return true;
+        if (vl != null && !"".equals(vl)) return true;
+        if (slr != null && !"".equals(slr)) return true;
+        return false;
+    }
+
+    public boolean isAnyRL() {
+        if ("RL".equals(restriction)) return true;
+        if (vr != null && !"".equals(vr)) return true;
+        if (srl != null && !"".equals(srl)) return true;
+        return false;
     }
 
     /**
