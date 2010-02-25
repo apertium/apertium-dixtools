@@ -289,13 +289,13 @@ public class AutorestrictBidix extends AbstractDictTool {
       return;  // No former entry - nothing to bother
     } 
 
-    // existing entry restircted in this direction - nothing to bother
+    // existing entry restricted in this direction - nothing to bother
     if (!redoRestrictions && !isAllowed(direction, oldEntry) && isAllowed(direction, entry)) {
       entryMap.put(key, entry); 
       return;
     } 
 
-    // new entry restircted in this direction - nothing to bother
+    // new entry restricted in this direction - nothing to bother
     if (!redoRestrictions && !isAllowed(direction, entry)) return;
 
     String entrylem = entry.getLemmaForSide(targetSide);
