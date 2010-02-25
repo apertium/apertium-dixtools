@@ -65,7 +65,7 @@ public class E extends DixElement implements Cloneable {
     public String patternApplied;
 
     /**
-     * For temporary data doring processing
+     * For temporary data during processing
      */
     public transient String temp;
     
@@ -80,10 +80,6 @@ public class E extends DixElement implements Cloneable {
         // JimRegan's dubious fix.
         // Should really be in DicFix or somewhere else, and not in the DTD code.
         if (lm != null) lm = lm.replaceAll("\\&", "\\&amp;").replaceAll("\"", "\\&quot;").replaceAll("\'", "\\&apos;");
-
-//        String escapedlm = this.lemma;
- //       escapedlm = escapedlm.replaceAll("\\&", "\\&amp;");
-  //      this.lemma(escapedlm);
 
         this.lemma = lm;
         this.author = a;
