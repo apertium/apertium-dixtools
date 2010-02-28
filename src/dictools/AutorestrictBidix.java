@@ -45,6 +45,16 @@ public class AutorestrictBidix extends AbstractDictTool {
 
 
 
+//bunzip2 -c corpa/eowiki-granda.crp.txt.bz2 | apertium-destxt | lt-proc eo-en.automorf.bin | tr '^' '\012' | cut -d/ -f2 | cut -d'<' -f1 | sed -e 's/\W//g' | sort | uniq -c | sort -nr > hitparade-eo-granda.txt
+
+
+
+
+//bunzip2 -c corpa/enwiki.crp.txt.bz2 | apertium-destxt | lt-proc en-eo.automorf.bin | tr '^' '\012' | cut -d/ -f2 | cut -d'<' -f1 | sed -e 's/[^[:alpha:][:space:]]//g' | sort | uniq -c | sort -nr > hitparade-en-granda.txt
+
+
+//(zcat corpa/en.crp.txt.gz_2; bunzip2 -c corpa/enwiki.crp.txt.bz2; zcat corpa/en.crp.txt.gz_org_reuters) | apertium-destxt | lt-proc en-eo.automorf.bin | apertium-pretransfer | tr '^' '\012' | sed -e 's/^.*\///g' | tr '$' '<' | cut -d'<' -f1 | sed -e 's/\*//g' | sed -e 's/\W*$//g' | sed -e 's/# / /g' | sort | uniq -c | sort -nr > hitparade-en-granda.txt
+
   /** argument pair was removed, ajust rest of args accordingly
    * @param i index
    * @param n number of elements to remove
