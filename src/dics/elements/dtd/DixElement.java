@@ -24,6 +24,7 @@ import java.io.IOException;
 import dictools.utils.DicOpts;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.lang.StringBuilder;
 
 /**
  * 
