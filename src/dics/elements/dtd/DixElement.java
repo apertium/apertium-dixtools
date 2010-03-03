@@ -72,12 +72,15 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
 
 
     /**
-     * blanks, newlines and XML processingComments originating from a original loaded file. Will be added after the XML elemen (before processingComments)
+     * blanks, newlines and XML processingComments originating from a original 
+     * loaded file. Will be added after the XML element (before
+     * processingComments)
      */
     public String appendCharacterData="";
     
     /**
-     * XML processingComments, blanks and newlines originating from a loaded file. Will be added after the XML elemen (before processingComments)
+     * XML processingComments, blanks and newlines originating from a loaded 
+     * file. Will be added after the XML element (before processingComments)
      */
     public void setAppendCharacterData(String appendCharacterData) {
       this.appendCharacterData = appendCharacterData;
@@ -90,7 +93,9 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
 
 
    /**
-     * blanks, newlines and XML processingComments originating from a original loaded file. Will be added inside the XML element (before processingComments)
+     * blanks, newlines and XML processingComments originating from the
+     * original loaded file. Will be added inside the XML element (before
+     * processingComments)
      */
     public String justInsideStartTagCharacterData="";
 
