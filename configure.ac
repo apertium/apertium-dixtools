@@ -21,6 +21,7 @@ AM_PROG_LIBTOOL
 
 JAVAC=javac
 CLASSPATH+=":lib/junit.jar:lib/ant-junit.jar"
+
 AC_SUBST(JAVAC)
 AC_SUBST(CLASSPATH)
 
@@ -44,8 +45,6 @@ if test "x$CLASSPATH" = "x"; then
    CLASSPATH=.
 fi
 
-
-
 AC_ARG_ENABLE([native],
               AS_HELP_STRING([--enable-native],
                              [enable generation of native binaries]),
@@ -63,28 +62,7 @@ fi
 
 AM_CONDITIONAL([ENABLE_NATIVE], [test x${enable_native} = xyes])
 
-AC_ARG_ENABLE(static,
-  AC_HELP_STRING([--enable-static],
-                 [Build a static library and binaries.]),
-  [
-    if test "$enableval" = "yes" ; then
-      AM_CFLAGS="-static $AM_CFLAGS"
-    fi
-])
-
 AC_SUBST(AM_CFLAGS)
-
-AC_ARG_ENABLE(maintainer-mode,
-AC_HELP_STRING([--enable-maintainer-mode],
-               [Turn on debugging and extra compile time warnings]),
-[
-  if test "$enableval" = "yes" ; then
-    if test "$GCC" = "yes"; then
-      CFLAGS="$CFLAGS -Wall -Werror -Wpointer-arith -Wwrite-strings"
-    fi
-    CFLAGS="$CFLAGS -g"
-  fi
-])
 
 AC_SET_MAKE
 
