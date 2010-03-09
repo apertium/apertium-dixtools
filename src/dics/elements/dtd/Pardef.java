@@ -66,9 +66,10 @@ public class Pardef extends DixElement {
     }
 
     /**
-     * Equals method. Check on equality of pardef elements, regardless to order.
+     * Equals method. Check equality of pardef elements, regardless of order.
      * @param pardef2
-     * @return Undefined         */
+     * @return Undefined
+     */
     public boolean contentEquals(Pardef pardef2) {
         ArrayList<E> eList1 = elements;
         ArrayList<E> eList2 = pardef2.elements;
@@ -106,7 +107,8 @@ public class Pardef extends DixElement {
     /**
      * 
      * @param category
-     * @return Undefined         */
+     * @return Undefined
+     */
     public boolean hasCategory(String category) {
         return (name.endsWith("__" + category));
     }
