@@ -32,13 +32,7 @@ import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
 
 import dics.elements.dtd.CharacterDataNeighbour;
-import dics.elements.dtd.Dictionary;
-import dics.elements.dtd.E;
 import dics.elements.dtd.HeaderElement;
-import dics.elements.dtd.Pardef;
-import dics.elements.dtd.Pardefs;
-import dics.elements.dtd.Sdefs;
-import dics.elements.dtd.Section;
 import dictools.utils.XMLReader;
 
 /**
@@ -69,13 +63,13 @@ public class ConfigReader extends XMLReader {
      */
     public Config readConfig() {
         analize();
-        Config form = new Config();
+        Config cfg = new Config();
 
         String encoding = document.getXmlEncoding();
         if (encoding==null) encoding = document.getInputEncoding();
         //System.err.println("encoding = " + encoding);
         // default to UTF-8 in case of no encoding specified
-        if (encoding!=null) form.xmlEncoding = encoding;
+        if (encoding!=null) cfg.xmlEncoding = encoding;
 
         Element root = document.getDocumentElement();
 
@@ -100,12 +94,11 @@ public class ConfigReader extends XMLReader {
                 // Header with meta info about the dictionary
                 if (childElementName.equals("header")) {
                     HeaderElement headerElement = readHeader(childElement);
-                    tpl.header = headerElement;
+                    cfg.header = headerElement;
                 } else
 
-                // Alphabet
-                if (childElementName.equals("templates")) {
-                    Templates tpls = readTemplates(childElement);
+                if (childElementName.equals("webforms")) {
+                    Templates tpls = readConf(childElement);
                     tpl = tpls;
                 } else
                   
@@ -133,7 +126,7 @@ public class ConfigReader extends XMLReader {
         }
         root = null;
         this.document = null;
-        return templates;
+        return cfg;
     }
 
     /**
@@ -158,6 +151,26 @@ public class ConfigReader extends XMLReader {
         return header;
     }
 
+    /**
+     *
+     * @param e
+     * @return Undefined
+     */
+    public static String readLogfile(Element e) {
+        String logfile = "";
+        if (e.hasChildNodes()) {
+            NodeList nodeList = e.getChildNodes();
+            for (int j = 0; j < nodeList.getLength(); j++) {
+                Node node = nodeList.item(j);
+                if (node instanceof Text) {
+                    Text textNode = (Text) node;
+                    logfile = textNode.getData().trim();
+                }
+            }
+        }
+        System.err.print("logfile: " + logfile + "\n");
+        return logfile;
+    }
 
     static class CharacterDataInsideTag implements CharacterDataNeighbour {
 
@@ -179,167 +192,5 @@ public class ConfigReader extends XMLReader {
         }
     }
 
-    /**
-     * 
-     * @param e
-     */
-    public static Templates readTemplates(Element e) {
-        Templates tpl = new Templates();
-
-        StringBuilder characterData = new StringBuilder();
-        dics.elements.dtd.DixElement previousElement = null;
-        
-        if (e.hasChildNodes()) {
-            NodeList children = e.getChildNodes();
-            for (int i = 0; i < children.getLength(); i++) {
-                Node child = children.item(i);
-                String childElementName = child.getNodeName();
-                if (child instanceof Element) {
-                    Element childElement = (Element) child;
-                    if (childElementName.equals("left")) {
-                        Left l = readLeft(childElement);
-                        tpl.lefts.add(l);
-                        prependOrAppendCharacterData(characterData, l, previousElement);
-                        previousElement = l;
-                    }
-                    else System.err.println("readPardefs(): Unknown node ignored: " + childElementName);
-                } else
-                if (child instanceof Comment) {
-                  characterData.append("<!--").append(child.getNodeValue()).append("-->");
-                } else
-                if (child instanceof CharacterData) {
-                  characterData.append(child.getNodeValue());              
-                } else
-                  System.err.println("Unhandled child = " + child);
-            }
-        }
-
-        prependOrAppendCharacterData(characterData, null, previousElement);
-        return tpl;
-    }
-
-    /**
-     * 
-     * @param e
-     */
-    public static Left readLeft(Element e) {
-        String id = getAttributeValue(e, "id");
-        Left l = new Left(id);
-
-        StringBuilder characterData = new StringBuilder();
-        dics.elements.dtd.CharacterDataNeighbour previousElement = new CharacterDataInsideTag(l);
-
-        if (e.hasChildNodes()) {
-            NodeList children = e.getChildNodes();
-            for (int i = 0; i < children.getLength(); i++) {
-                Node child = children.item(i);
-                String childElementName = child.getNodeName();
-                if (child instanceof Element) {
-                    Element childElement = (Element) child;
-                    if (childElementName.equals("right")) {
-                        Right r = readRight(childElement);
-                        l.rlist.add(r);
-                        prependOrAppendCharacterData(characterData, r, previousElement);
-                        previousElement = r;
-                  } else
-                    System.err.println("Unhandled child = " + child);
-                } else
-                if (child instanceof Comment) {
-                  characterData.append("<!--").append(child.getNodeValue()).append("-->");
-
-                } else
-                if (child instanceof CharacterData) {
-                  characterData.append(child.getNodeValue());              
-                } else
-                  System.err.println("Unhandled child = " + child);
-            }
-        }
-        prependOrAppendCharacterData(characterData, null, previousElement);
-
-        return l;
-    }
-
-
-    /**
-     *
-     * @param e
-     */
-    public static Right readRight(Element e) {
-        String id = getAttributeValue(e, "id");
-        Right r = new Right(id);
-
-        StringBuilder characterData = new StringBuilder();
-        dics.elements.dtd.CharacterDataNeighbour previousElement = new CharacterDataInsideTag(r);
-
-        if (e.hasChildNodes()) {
-            NodeList children = e.getChildNodes();
-            for (int i = 0; i < children.getLength(); i++) {
-                Node child = children.item(i);
-                String childElementName = child.getNodeName();
-                if (child instanceof Element) {
-                    Element childElement = (Element) child;
-                    if (childElementName.equals("template")) {
-                        Template tpl = readTemplate(childElement);
-                        r.templates.add(tpl);
-                        prependOrAppendCharacterData(characterData, tpl, previousElement);
-                        previousElement = tpl;
-                  } else
-                    System.err.println("Unhandled child = " + child);
-                } else
-                if (child instanceof Comment) {
-                  characterData.append("<!--").append(child.getNodeValue()).append("-->");
-
-                } else
-                if (child instanceof CharacterData) {
-                  characterData.append(child.getNodeValue());
-                } else
-                  System.err.println("Unhandled child = " + child);
-            }
-        }
-        prependOrAppendCharacterData(characterData, null, previousElement);
-
-        return r;
-    }
-
-
-    /**
-     *
-     * @param e
-     */
-    public static Template readTemplate(Element e) {
-        Template tpl = new Template();
-
-        StringBuilder characterData = new StringBuilder();
-        dics.elements.dtd.CharacterDataNeighbour previousElement = new CharacterDataInsideTag(tpl);
-
-        if (e.hasChildNodes()) {
-            NodeList children = e.getChildNodes();
-            for (int i = 0; i < children.getLength(); i++) {
-                Node child = children.item(i);
-                String childElementName = child.getNodeName();
-                if (child instanceof Element) {
-                    Element childElement = (Element) child;
-                    if (childElementName.equals("e")) {
-                        E elem = readEElement(childElement);
-                        tpl.elements.add(elem);
-                        prependOrAppendCharacterData(characterData, tpl, previousElement);
-                        previousElement = tpl;
-                  } else
-                    System.err.println("Unhandled child = " + child);
-                } else
-                if (child instanceof Comment) {
-                  characterData.append("<!--").append(child.getNodeValue()).append("-->");
-
-                } else
-                if (child instanceof CharacterData) {
-                  characterData.append(child.getNodeValue());
-                } else
-                  System.err.println("Unhandled child = " + child);
-            }
-        }
-        prependOrAppendCharacterData(characterData, null, previousElement);
-
-        return tpl;
-    }
 
 }
