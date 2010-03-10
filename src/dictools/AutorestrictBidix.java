@@ -55,7 +55,7 @@ public class AutorestrictBidix extends AbstractDictTool {
 
 //(zcat corpa/en.crp.txt.gz_2; bunzip2 -c corpa/enwiki.crp.txt.bz2; zcat corpa/en.crp.txt.gz_org_reuters) | apertium-destxt | lt-proc en-eo.automorf.bin | apertium-pretransfer | tr '^' '\012' | sed -e 's/^.*\///g' | tr '$' '<' | cut -d'<' -f1 | sed -e 's/\*//g' | sed -e 's/\W*$//g' | sed -e 's/# / /g' | sort | uniq -c | sort -nr > hitparade-en-granda.txt
 
-  /** argument pair was removed, ajust rest of args accordingly
+  /** argument pair was removed, adjust rest of args accordingly
    * @param i index
    * @param n number of elements to remove
    */
