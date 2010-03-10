@@ -36,6 +36,6 @@ public class L extends ContentElement {
      * @param cE
      */
     public L(ContentElement cE) {
-        super("i",cE);
+        super("l",cE);
     }
 }
