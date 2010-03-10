@@ -17,11 +17,10 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-package dics.elements.dtd;
+package dictools.formserver.templates;
 
-import java.io.IOException;
+import dics.elements.dtd.DixElement;
 import java.util.ArrayList;
-import dictools.utils.DicOpts;
 
 /**
  *

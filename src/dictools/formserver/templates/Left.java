@@ -17,7 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-package dics.elements.dtd;
+package dictools.formserver.templates;
+import dics.elements.dtd.DixElement;
 import java.util.ArrayList;
 import java.io.IOException;
 
@@ -31,12 +32,14 @@ import dictools.utils.DicOpts;
 public class Left extends DixElement {
 
     public ArrayList<Right> rlist = new ArrayList<Right>();
+    public String id;
     /**
      *
      * @param id
      */
     public Left(String id) {
         super("left");
+        this.id = id;
         setValue(id);
     }
 }
