@@ -52,7 +52,7 @@ public class Right extends DixElement {
                 t.printXML(dos, optNow);
             }
         }
-        dos.append("</templates>\n");
+        dos.append("</right>\n");
     }
 
 }
