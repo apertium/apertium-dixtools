@@ -35,6 +35,7 @@ import dictools.AbstractDictTool;
 import dictools.DicSort;
 import dictools.utils.DictionaryReader;
 import java.lang.Character;
+import java.io.IOException;
 
 /**
  *
@@ -58,28 +59,40 @@ public class Speling extends AbstractDictTool {
     private ArrayList<String> symbols;
     private ArrayList<Character> alpha;
     private boolean readfirst;
+
+    @Override
+    public String toolHelp() {
+        return "speling input.txt output.dix\n\n" +
+                "Converts a file in speling format to a monolingual dictionary\n";
+    }
+
+    @Override
+    public void executeTool() throws IOException {
+        if (arguments.length != 3) failWrongNumberOfArguments(arguments);
+
+        new Speling(arguments[1], arguments[2]);
+        Dictionary dic = new Dictionary();
+        dic = this.read_speling();
+        this.write(dic);
+    }
     
-    /**
-     *
-     * @param fileName
-     */
-    public Speling (String fileName) {
-        this.fileName = fileName;
+
+    public Speling () {
         current = new SpelingParadigm();
         lemmata = new ArrayList<SpelingParadigm>();
         symbols = new ArrayList<String>();
         alpha = new ArrayList<Character>();
-        readfirst = false;
+        readfirst = false;        
+    }
+    
+    public Speling (String fileName) {
+        this();
+        this.fileName = fileName;
     }
 
     public Speling (String fileName, String outName) {
-        this.fileName = fileName;
+        this(fileName);
         this.outFileName = outName;
-        current = new SpelingParadigm();
-        lemmata = new ArrayList<SpelingParadigm>();
-        symbols = new ArrayList<String>();
-        alpha = new ArrayList<Character>();
-        readfirst = false;
     }
 
     /**
