@@ -99,7 +99,12 @@ public class ConfigReader extends XMLReader {
                 } else
 
                 if (childElementName.equals("log-file")) {
-                    cfg.logfile = readLogfile(childElement);
+                    cfg.logfile = readTextElement(childElement);
+                    if (debug) System.err.println("log-file: " + cfg.logfile);
+                } else
+
+                if (childElementName.equals("directories")) {
+                    if (debug) System.err.println("directories");
                 } else
                   
                 if (childElementName.equals("xi:include")) {
@@ -152,25 +157,26 @@ public class ConfigReader extends XMLReader {
     }
 
     /**
-     *
+     * Reads the content of a simple text element:
+     * <eg>content</eg>
      * @param e
-     * @return Path of the logfile
+     * @return The content of the element
      */
-    public static String readLogfile(Element e) {
-        String logfile = "";
+    public static String readTextElement(Element e) {
+        String content = "";
         if (e.hasChildNodes()) {
             NodeList nodeList = e.getChildNodes();
             for (int j = 0; j < nodeList.getLength(); j++) {
                 Node node = nodeList.item(j);
                 if (node instanceof Text) {
                     Text textNode = (Text) node;
-                    logfile = textNode.getData().trim();
+                    content = textNode.getData().trim();
                 }
             }
         }
-        System.err.print("logfile: " + logfile + "\n");
-        return logfile;
+        return content;
     }
+
 
     static class CharacterDataInsideTag implements CharacterDataNeighbour {
 
