@@ -106,7 +106,8 @@ public class TemplatesReader extends XMLReader {
 
                 // Alphabet
                 if (childElementName.equals("templates")) {
-                    Templates tpls = new Templates();
+                    Templates tpls = readTemplates(childElement);
+                    tpl = tpls;
                 } else
                   
                 if (childElementName.equals("xi:include")) {
