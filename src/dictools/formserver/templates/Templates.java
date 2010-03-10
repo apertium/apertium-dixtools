@@ -68,13 +68,11 @@ public class Templates extends DixElement {
 
     /**
      *
-     * @param dic
+     * @param tpls
      */
-    public Templates(Templates dic) {
+    public Templates(Templates tpls) {
         this();
-        Left sectionElement = new Left("");
-        lefts.add(sectionElement);
-
+        lefts.addAll(tpls.lefts);
     }
 
     /**
