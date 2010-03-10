@@ -41,7 +41,7 @@ public class Template extends DixElement {
 
 
     /**
-     * Equals method. Check equality of pardef elements, regardless of order.
+     * Equals method. Check equality of template elements, regardless of order.
      * @param pardef2
      * @return Undefined
      */
@@ -72,7 +72,7 @@ public class Template extends DixElement {
     /**
      * 
      * @param def
-     * @return true if the paradigm contains certain definition ('adj', 'm', etc.)
+     * @return true if the paradigm contains a certain definition ('adj', 'm', etc.)
      */
     public boolean containsSymbol(String def) {
         for (E e : elements) {

@@ -18,7 +18,7 @@
  * 02111-1307, USA.
  */
 package dics.elements.dtd;
-
+import java.util.ArrayList;
 import java.io.IOException;
 
 import dictools.utils.DicOpts;
@@ -30,7 +30,7 @@ import dictools.utils.DicOpts;
  */
 public class Left extends DixElement {
 
-
+    public ArrayList<Right> rlist = new ArrayList<Right>();
     /**
      *
      * @param id

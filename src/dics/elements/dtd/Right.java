@@ -20,7 +20,7 @@
 package dics.elements.dtd;
 
 import java.io.IOException;
-
+import java.util.ArrayList;
 import dictools.utils.DicOpts;
 
 /**
@@ -30,7 +30,7 @@ import dictools.utils.DicOpts;
  */
 public class Right extends DixElement {
 
-
+    public ArrayList<Template> templates = new ArrayList<Template>();
     /**
      *
      * @param id
