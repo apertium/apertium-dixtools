@@ -41,7 +41,8 @@ public class CrossModelReader extends XMLReader {
 
     /**
      * 
-     * @return Undefined         */
+     * @return Undefined
+     */
     public CrossModel readCrossModel() {
         analize();
         CrossModel crossModel = new CrossModel();
