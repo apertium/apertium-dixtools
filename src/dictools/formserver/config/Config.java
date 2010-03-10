@@ -31,7 +31,12 @@ import java.util.ArrayList;
  */
 public class Config {
     public HeaderElement header;
+    
     public String logfile;
+    public String workdir;
+    public String cache;
+    public String templates;
+    
     public String fileName;
     public String outFileName;
     public String xmlEncoding = "UTF-8";

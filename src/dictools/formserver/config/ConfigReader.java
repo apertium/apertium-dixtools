@@ -43,7 +43,6 @@ import dictools.utils.XMLReader;
 public class ConfigReader extends XMLReader {
 
     
-    public Templates tpl;
     private static boolean debug = false;
         
     /**
@@ -105,6 +104,31 @@ public class ConfigReader extends XMLReader {
 
                 if (childElementName.equals("directories")) {
                     if (debug) System.err.println("directories");
+                    if (childElement.hasChildNodes()) {
+                        NodeList grandkids = childElement.getChildNodes();
+                        for (int j = 0; j < grandkids.getLength(); j++) {
+                           Node n = grandkids.item(j);
+                           if (n instanceof Element) {
+                               Element cElement = (Element) n;
+                               String cElementName = cElement.getNodeName();
+                               if (cElementName.equals("wd")) {
+                                   cfg.workdir = readTextElement(cElement);
+                                   if (debug) System.err.println("wd: " + cfg.workdir);
+                               } else
+                               if (cElementName.equals("cache")) {
+                                   cfg.cache = readTextElement(cElement);
+                                   if (debug) System.err.println("cache: " + cfg.cache);
+                               } else
+                               if (cElementName.equals("templates")) {
+                                   cfg.templates = readTextElement(cElement);
+                                   if (debug) System.err.println("templates: " + cfg.templates);
+                               } else {
+                                   System.err.println("Unknown node ignored: " + cElementName);
+                               }
+
+                           }
+                        }
+                    }
                 } else
                   
                 if (childElementName.equals("xi:include")) {
