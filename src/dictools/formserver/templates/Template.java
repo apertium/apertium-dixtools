@@ -84,4 +84,17 @@ public class Template extends DixElement {
         }
         return false;
     }
+
+   @Override
+    public void printXML(Appendable dos, DicOpts opt) throws IOException {
+        dos.append("<right>\n");
+        if (elements != null) {
+            DicOpts optNow = opt.copy().setNowAlign(opt.sectionElementsAligned);
+            for (E e : elements) {
+                e.printXML(dos, optNow);
+            }
+        }
+        dos.append("</template>\n");
+    }
+
 }

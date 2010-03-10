@@ -21,6 +21,8 @@ package dictools.formserver.templates;
 
 import dics.elements.dtd.DixElement;
 import java.util.ArrayList;
+import dictools.utils.DicOpts;
+import java.io.IOException;
 
 /**
  *
@@ -30,12 +32,27 @@ import java.util.ArrayList;
 public class Right extends DixElement {
 
     public ArrayList<Template> templates = new ArrayList<Template>();
+    public String id;
     /**
      *
      * @param id
      */
     public Right(String id) {
         super("right");
+        this.id = id;
         setValue(id);
     }
+
+   @Override
+    public void printXML(Appendable dos, DicOpts opt) throws IOException {
+        dos.append("<right id=\"" + this.id + "\">\n");
+        if (templates != null) {
+            DicOpts optNow = opt.copy().setNowAlign(opt.sectionElementsAligned);
+            for (Template t : templates) {
+                t.printXML(dos, optNow);
+            }
+        }
+        dos.append("</templates>\n");
+    }
+
 }

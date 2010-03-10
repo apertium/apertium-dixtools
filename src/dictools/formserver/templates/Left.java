@@ -42,4 +42,17 @@ public class Left extends DixElement {
         this.id = id;
         setValue(id);
     }
+
+   @Override
+    public void printXML(Appendable dos, DicOpts opt) throws IOException {
+        dos.append("<left id=\"" + this.id + "\">\n");
+        if (rlist != null) {
+            DicOpts optNow = opt.copy().setNowAlign(opt.sectionElementsAligned);
+            for (Right r : rlist) {
+                r.printXML(dos, optNow);
+            }
+        }
+        dos.append("</left>\n");
+    }
+
 }
