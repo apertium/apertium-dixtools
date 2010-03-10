@@ -34,7 +34,7 @@ public class Logfile {
 
     public void print(OutputStreamWriter osw) {
         try {
-            osw.write("  <log-file>" + file + "</logfile>\n");
+            osw.write("  <log-file>" + file + "</log-file>\n");
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }

@@ -26,14 +26,36 @@ import java.io.OutputStreamWriter;
  * @author jimregan
  */
 public class Dictionary {
-    public String name = "";
+    public String name;
     public String side;
-    public String format = "dix";
+    public String format;
     public String file;
 
 
     public void Dictionary (String name) {
         this.name = name;
+        this.format = "dix";
+    }
+
+    public void Dictionary (String name, String side, String format, String file) {
+        this.name = name;
+        this.side = side;
+        this.format = format;
+        this.file = file;
+    }
+
+    public void Dictionary (String side, String format, String file) {
+        this.name = "";
+        this.side = side;
+        this.format = format;
+        this.file = file;
+    }
+
+    public void Dictionary (String side, String file) {
+        this.name = "";
+        this.side = side;
+        this.format = "dix";
+        this.file = file;
     }
 
     public void print(OutputStreamWriter osw) {

@@ -18,10 +18,26 @@
  */
 package dictools.formserver.config;
 
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+
 /**
  *
  * @author jimregan
  */
-public class Webforms {
-    public Logfile log;
+public class Templates {
+    public String file;
+
+    public void Templates (String filename) {
+        this.file = filename;
+    }
+
+    public void print(OutputStreamWriter osw) {
+        try {
+            osw.write("    <templates>" + file + "</templates>\n");
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
+
 }
