@@ -31,7 +31,7 @@ import java.util.ArrayList;
  */
 public class Config {
     public HeaderElement header;
-    public Logfile log;
+    public String logfile;
     public String fileName;
     public String outFileName;
     public String xmlEncoding = "UTF-8";
@@ -56,6 +56,7 @@ public class Config {
 
             osw.append("<?xml version=\"1.0\" encoding=\"" + xmlEncoding + "\"?>\n");
             osw.append("<webforms>\n");
+            osw.append("  <log-file>" + logfile + "</logfile>\n");
             osw.append("</webforms>\n");
         } catch (IOException ioe) {
             ioe.printStackTrace();

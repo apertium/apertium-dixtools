@@ -44,6 +44,7 @@ public class ConfigReader extends XMLReader {
 
     
     public Templates tpl;
+    private static boolean debug = false;
         
     /**
      * 
@@ -97,9 +98,8 @@ public class ConfigReader extends XMLReader {
                     cfg.header = headerElement;
                 } else
 
-                if (childElementName.equals("webforms")) {
-                    Templates tpls = readConf(childElement);
-                    tpl = tpls;
+                if (childElementName.equals("log-file")) {
+                    cfg.logfile = readLogfile(childElement);
                 } else
                   
                 if (childElementName.equals("xi:include")) {
@@ -154,7 +154,7 @@ public class ConfigReader extends XMLReader {
     /**
      *
      * @param e
-     * @return Undefined
+     * @return Path of the logfile
      */
     public static String readLogfile(Element e) {
         String logfile = "";
