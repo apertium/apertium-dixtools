@@ -37,7 +37,7 @@ import dictools.utils.XMLReader;
 
 /**
  * 
- * @author Enrique Benimeli Bofarull
+ * @author jimregan
  * 
  */
 public class ConfigReader extends XMLReader {

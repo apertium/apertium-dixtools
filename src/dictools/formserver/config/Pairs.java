@@ -23,6 +23,6 @@ package dictools.formserver.config;
  *
  * @author jimregan
  */
-public class Directories {
+public class Pairs {
 
 }
