@@ -97,7 +97,7 @@ public class Templates extends DixElement {
             }
             osw = new OutputStreamWriter(bos, this.xmlEncoding);
 
-            osw.append("<?xml version=\"1.0\"?>\n");
+            osw.append("<?xml version=\"1.0\" encoding=\"" + xmlEncoding + "\"?>\n");
             osw.append("<templates>\n");
             if (lefts != null) {
                 for (Left l : lefts) {

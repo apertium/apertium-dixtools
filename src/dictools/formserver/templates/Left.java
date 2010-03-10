@@ -43,6 +43,7 @@ public class Left extends DixElement {
         setValue(id);
     }
 
+
     public void printXML(Appendable dos) throws IOException {
         dos.append("<left id=\"" + this.id + "\">\n");
         if (rlist != null) {
