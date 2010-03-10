@@ -147,7 +147,7 @@ public class DicFix extends AbstractDictTool {
             if ("yes".equals(e.ignore)) continue; // leave new
 
             if (eExisting.restriction == null) ; // Use existing, remove new
-            else if (eExisting.restriction == e.restriction) ;  // Use existing, remove new
+            else if (eExisting.restriction.equals(e.restriction)) ;  // Use existing, remove new
             else if (e.restriction == null) eExisting.restriction = null; // Use existing w/o restric, remove new
             else if (eExisting.isLR() && e.isRL()) eExisting.restriction = null; // Use existing w/o restric, remove new
             else if (eExisting.isRL() && e.isLR()) eExisting.restriction = null; // Use existing w/o restric, remove new
