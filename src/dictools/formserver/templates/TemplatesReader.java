@@ -30,7 +30,6 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
 
-import dics.elements.dtd.Alphabet;
 import dics.elements.dtd.CharacterDataNeighbour;
 import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.E;
@@ -39,7 +38,6 @@ import dics.elements.dtd.Pardef;
 import dics.elements.dtd.Pardefs;
 import dics.elements.dtd.Sdefs;
 import dics.elements.dtd.Section;
-import dictools.utils.SdefsReader;
 import dictools.utils.XMLReader;
 
 /**
@@ -50,7 +48,7 @@ import dictools.utils.XMLReader;
 public class TemplatesReader extends XMLReader {
 
     
-	public Dictionary dic;
+	public Templates tpl;
     
 	public boolean readParadigms = true;
     
@@ -70,15 +68,15 @@ public class TemplatesReader extends XMLReader {
      * 
      * @return The Dictionary object
      */
-    public Dictionary readDic() {
+    public Templates readTpl() {
         analize();
-        Dictionary dic = new Dictionary();
+        Templates templates = new Templates();
 
         String encoding = document.getXmlEncoding();
         if (encoding==null) encoding = document.getInputEncoding();
         //System.err.println("encoding = " + encoding);
         // default to UTF-8 in case of no encoding specified
-        if (encoding!=null) dic.xmlEncoding = encoding;
+        if (encoding!=null) templates.xmlEncoding = encoding;
 
         Element root = document.getDocumentElement();
 
@@ -103,33 +101,14 @@ public class TemplatesReader extends XMLReader {
                 // Header with meta info about the dictionary
                 if (childElementName.equals("header")) {
                     HeaderElement headerElement = readHeader(childElement);
-                    dic.header = headerElement;
+                    tpl.header = headerElement;
                 } else
 
                 // Alphabet
-                if (childElementName.equals("alphabet")) {
-                    Alphabet alphabetElement = readAlphabet(childElement);
-                    dic.alphabet = alphabetElement;
+                if (childElementName.equals("templates")) {
+                    Templates tpls = new Templates();
                 } else
                   
-                // Symbol definitions
-                if (childElementName.equals("sdefs")) {
-                    Sdefs sdefsElement = readSdefs(childElement);
-                    dic.sdefs = sdefsElement;
-                } else
-
-                if (childElementName.equals("section")) {
-                    Section sectionElement = readSection(childElement);
-                    dic.sections.add(sectionElement);
-                } else
-
-                if (childElementName.equals("pardefs")) {
-                    if (readParadigms) {
-                        Pardefs pardefsElement = readPardefs(childElement);
-                        dic.pardefs = pardefsElement;
-                    }
-                } else
-
                 if (childElementName.equals("xi:include")) {
                     String includeFileName = getAttributeValue(childElement, "href");
                     File f = dicFile;
@@ -147,31 +126,14 @@ public class TemplatesReader extends XMLReader {
                         continue;
                     }
 
-                    if (includeFileName.endsWith("sdefs.dix") || includeFileName.endsWith("symbols.xml")) {
-                        System.err.println("Symbol definitions: " + includeFileNameAndPath);
-                        SdefsReader sdefsReader = new SdefsReader(includeFileNameAndPath);
-                        Sdefs sdefs = sdefsReader.readSdefs();
-                        dic.sdefs = sdefs;
-                    } else
-                    if (includeFileName.endsWith("pardefs.dix")) {
-                        System.err.println("Paradigm definitions: " + includeFileNameAndPath);
-                        TemplatesReader reader = new TemplatesReader(includeFileNameAndPath);
-                        Dictionary dic2 = reader.readDic();
-                        Pardefs pardefs = dic2.pardefs;
-                        dic.pardefs = pardefs;
-                    } else
-                    System.err.println("Unknown xi:include href type ignored: " + includeFileName);
                 } else
 
                 System.err.println("Unknown node ignored: " + childElementName);
             }
         }
         root = null;
-        if (dic.pardefs==null) dic.pardefs=new Pardefs();
-        if (dic.sdefs==null) dic.sdefs=new Sdefs();
         this.document = null;
-        this.dic = dic;
-        return dic;
+        return templates;
     }
 
     /**
@@ -220,31 +182,9 @@ public class TemplatesReader extends XMLReader {
     /**
      * 
      * @param e
-     * @return Undefined         */
-    public static Alphabet readAlphabet(Element e) {
-        String alphabet = "";
-        if (e.hasChildNodes()) {
-            NodeList nodeList = e.getChildNodes();
-            for (int j = 0; j < nodeList.getLength(); j++) {
-                Node node = nodeList.item(j);
-                if (node instanceof Text) {
-                    Text textNode = (Text) node;
-                    alphabet = textNode.getData().trim();
-                }
-            }
-        }
-        Alphabet alphabetElement = new Alphabet(alphabet);
-
-        return alphabetElement;
-    }
-
-
-    /**
-     * 
-     * @param e
      */
-    public static Pardefs readPardefs(Element e) {
-        Pardefs pardefsElement = new Pardefs();
+    public static Templates readTemplates(Element e) {
+        Templates tpl = new Templates();
 
         StringBuilder characterData = new StringBuilder();
         dics.elements.dtd.DixElement previousElement = null;
@@ -256,11 +196,11 @@ public class TemplatesReader extends XMLReader {
                 String childElementName = child.getNodeName();
                 if (child instanceof Element) {
                     Element childElement = (Element) child;
-                    if (childElementName.equals("pardef")) {
-                        Pardef pardefElement = readPardef(childElement);
-                        pardefsElement.elements.add(pardefElement);
-                        prependOrAppendCharacterData(characterData, pardefElement, previousElement);
-                        previousElement = pardefElement;
+                    if (childElementName.equals("left")) {
+                        Left l = readLeft(childElement);
+                        tpl.lefts.add(l);
+                        prependOrAppendCharacterData(characterData, l, previousElement);
+                        previousElement = l;
                     }
                     else System.err.println("readPardefs(): Unknown node ignored: " + childElementName);
                 } else
@@ -275,19 +215,19 @@ public class TemplatesReader extends XMLReader {
         }
 
         prependOrAppendCharacterData(characterData, null, previousElement);
-        return pardefsElement;
+        return tpl;
     }
 
     /**
      * 
      * @param e
      */
-    public static Pardef readPardef(Element e) {
-        String n = getAttributeValue(e, "n");
-        Pardef pardefElement = new Pardef(n);
+    public static Left readLeft(Element e) {
+        String id = getAttributeValue(e, "id");
+        Left l = new Left(id);
 
         StringBuilder characterData = new StringBuilder();
-        dics.elements.dtd.CharacterDataNeighbour previousElement = new CharacterDataInsideTag(pardefElement);
+        dics.elements.dtd.CharacterDataNeighbour previousElement = new CharacterDataInsideTag(l);
 
         if (e.hasChildNodes()) {
             NodeList children = e.getChildNodes();
@@ -296,11 +236,11 @@ public class TemplatesReader extends XMLReader {
                 String childElementName = child.getNodeName();
                 if (child instanceof Element) {
                     Element childElement = (Element) child;
-                    if (childElementName.equals("e")) {
-                        E eElement = readEElement(childElement);
-                        pardefElement.elements.add(eElement);
-                        prependOrAppendCharacterData(characterData, eElement, previousElement);
-                        previousElement = eElement;
+                    if (childElementName.equals("right")) {
+                        Right r = readRight(childElement);
+                        l.rlist.add(r);
+                        prependOrAppendCharacterData(characterData, r, previousElement);
+                        previousElement = r;
                   } else
                     System.err.println("Unhandled child = " + child);
                 } else
@@ -316,61 +256,90 @@ public class TemplatesReader extends XMLReader {
         }
         prependOrAppendCharacterData(characterData, null, previousElement);
 
-        return pardefElement;
+        return l;
     }
 
-    /**
-     * 
-     * @param e
-     * @return Undefined         */
-    public Section readSection(Element e) {
-        String id = getAttributeValue(e, "id");
-        String type = getAttributeValue(e, "type");
-        Section sectionElement = new Section(id, type);
-        
-        StringBuilder characterData = new StringBuilder();
-        dics.elements.dtd.DixElement previousElement = null;
 
-        // Si contiene elementos 'e'
+    /**
+     *
+     * @param e
+     */
+    public static Right readRight(Element e) {
+        String id = getAttributeValue(e, "id");
+        Right r = new Right(id);
+
+        StringBuilder characterData = new StringBuilder();
+        dics.elements.dtd.CharacterDataNeighbour previousElement = new CharacterDataInsideTag(r);
+
         if (e.hasChildNodes()) {
             NodeList children = e.getChildNodes();
             for (int i = 0; i < children.getLength(); i++) {
                 Node child = children.item(i);
+                String childElementName = child.getNodeName();
                 if (child instanceof Element) {
                     Element childElement = (Element) child;
-                    String childElementName = childElement.getNodeName();
-                    if (childElementName.equals("e")) {
-                        E eElement = readEElement(childElement);
-                        sectionElement.elements.add(eElement);
-                        
-                        prependOrAppendCharacterData(characterData, eElement, previousElement);
-                        previousElement = eElement;
-                        
-                    } else
-                    if (childElementName.equals("xi:include")) {
-                        String fileName = getAttributeValue(childElement, "href");
-                        System.err.println("XInclude (" + fileName + ")");
-                        TemplatesReader reader = new TemplatesReader(fileName);
-                        Dictionary dic = reader.readDic();
-                        ArrayList<E> eList = dic.getEntriesInFirstSection();
-                        for (E e2 : eList) {
-                            sectionElement.elements.add(e2);
-                        }
-                    } else
-                      System.err.println("readSection(): Unknown childElementName = " + childElementName);
+                    if (childElementName.equals("template")) {
+                        Template tpl = readTemplate(childElement);
+                        r.templates.add(tpl);
+                        prependOrAppendCharacterData(characterData, tpl, previousElement);
+                        previousElement = tpl;
+                  } else
+                    System.err.println("Unhandled child = " + child);
                 } else
                 if (child instanceof Comment) {
                   characterData.append("<!--").append(child.getNodeValue()).append("-->");
-                  
+
                 } else
                 if (child instanceof CharacterData) {
-                  characterData.append(child.getNodeValue());              
+                  characterData.append(child.getNodeValue());
                 } else
                   System.err.println("Unhandled child = " + child);
             }
-
-            prependOrAppendCharacterData(characterData, null, previousElement);
         }
-        return sectionElement;
+        prependOrAppendCharacterData(characterData, null, previousElement);
+
+        return r;
     }
+
+
+    /**
+     *
+     * @param e
+     */
+    public static Template readTemplate(Element e) {
+        Template tpl = new Template();
+
+        StringBuilder characterData = new StringBuilder();
+        dics.elements.dtd.CharacterDataNeighbour previousElement = new CharacterDataInsideTag(tpl);
+
+        if (e.hasChildNodes()) {
+            NodeList children = e.getChildNodes();
+            for (int i = 0; i < children.getLength(); i++) {
+                Node child = children.item(i);
+                String childElementName = child.getNodeName();
+                if (child instanceof Element) {
+                    Element childElement = (Element) child;
+                    if (childElementName.equals("e")) {
+                        E elem = readEElement(childElement);
+                        tpl.elements.add(elem);
+                        prependOrAppendCharacterData(characterData, tpl, previousElement);
+                        previousElement = tpl;
+                  } else
+                    System.err.println("Unhandled child = " + child);
+                } else
+                if (child instanceof Comment) {
+                  characterData.append("<!--").append(child.getNodeValue()).append("-->");
+
+                } else
+                if (child instanceof CharacterData) {
+                  characterData.append(child.getNodeValue());
+                } else
+                  System.err.println("Unhandled child = " + child);
+            }
+        }
+        prependOrAppendCharacterData(characterData, null, previousElement);
+
+        return tpl;
+    }
+
 }

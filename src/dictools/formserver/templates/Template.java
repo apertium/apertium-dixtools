@@ -85,11 +85,10 @@ public class Template extends DixElement {
         return false;
     }
 
-   @Override
-    public void printXML(Appendable dos, DicOpts opt) throws IOException {
+    public void printXML(Appendable dos) throws IOException {
         dos.append("<template>\n");
         if (elements != null) {
-            DicOpts optNow = opt.copy().setNowAlign(opt.sectionElementsAligned);
+            DicOpts optNow = new DicOpts();
             for (E e : elements) {
                 e.printXML(dos, optNow);
             }

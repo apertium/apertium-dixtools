@@ -1,6 +1,5 @@
 /*
- * Copyright (C) 2007 Universitat d'Alacant / Universidad de Alicante
- * Author: Enrique Benimeli Bofarull
+ * Copyright (C) 2010 Jimmy O'Regan
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -17,40 +16,28 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-package dictools.formserver.templates;
+package dictools.formserver.config;
 
-import dics.elements.dtd.DixElement;
-import java.util.ArrayList;
-import dictools.utils.DicOpts;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 /**
  *
  * @author jimregan
- *
  */
-public class Right extends DixElement {
+public class Logfile {
+    public String file;
 
-    public ArrayList<Template> templates = new ArrayList<Template>();
-    public String id;
-    /**
-     *
-     * @param id
-     */
-    public Right(String id) {
-        super("right");
-        this.id = id;
-        setValue(id);
+    public void Logfile (String filename) {
+        this.file = filename;
     }
 
-    public void printXML(Appendable dos) throws IOException {
-        dos.append("<right id=\"" + this.id + "\">\n");
-        if (templates != null) {
-            for (Template t : templates) {
-                t.printXML(dos);
-            }
+    public void print(OutputStreamWriter osw) {
+        try {
+            osw.write("  <log-file>" + file + "</logfile>\n");
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
         }
-        dos.append("</right>\n");
     }
 
 }

@@ -50,6 +50,7 @@ public class Templates extends DixElement {
     public String type;
     
     public String fileName;
+    public String outFileName;
     
     
     public String leftLanguage;
@@ -76,17 +77,41 @@ public class Templates extends DixElement {
 
     }
 
-   @Override
-    public void printXML(Appendable dos, DicOpts opt) throws IOException {
-        dos.append("<templates>\n");
-        if (lefts != null) {
-            DicOpts optNow = opt.copy().setNowAlign(opt.sectionElementsAligned);
-            for (Left l : lefts) {
-                // FIXME
-                //l.printXML(dos, optNow);
+    /**
+     *
+     * @return The out file name
+     */
+    public String getOutFileName() {
+        return this.outFileName;
+    }
+
+    public void printXML() throws IOException {
+        BufferedOutputStream bos;
+        FileOutputStream fos;
+        OutputStreamWriter osw;
+
+        try {
+            if (this.getOutFileName() != null) {
+                fos = new FileOutputStream(this.getOutFileName());
+                bos = new BufferedOutputStream(fos);
+            } else {
+                bos = new BufferedOutputStream(System.out);
             }
+            osw = new OutputStreamWriter(bos, this.xmlEncoding);
+
+            osw.append("<?xml version=\"1.0\"?>\n");
+            osw.append("<templates>\n");
+            if (lefts != null) {
+                for (Left l : lefts) {
+                    l.printXML(osw);
+                }
+            }
+            osw.append("</templates>\n");
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        dos.append("</templates>\n");
     }
 
 

@@ -1,6 +1,5 @@
 /*
- * Copyright (C) 2007 Universitat d'Alacant / Universidad de Alicante
- * Author: Enrique Benimeli Bofarull
+ * Copyright (C) 2010 Jimmy O'Regan
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -17,40 +16,39 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-package dictools.formserver.templates;
-import dics.elements.dtd.DixElement;
-import java.util.ArrayList;
-import java.io.IOException;
+package dictools.formserver.config;
 
-import dictools.utils.DicOpts;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 /**
  *
  * @author jimregan
- *
  */
-public class Left extends DixElement {
+public class Dictionary {
+    public String name = "";
+    public String side;
+    public String format = "dix";
+    public String file;
 
-    public ArrayList<Right> rlist = new ArrayList<Right>();
-    public String id;
-    /**
-     *
-     * @param id
-     */
-    public Left(String id) {
-        super("left");
-        this.id = id;
-        setValue(id);
+
+    public void Dictionary (String name) {
+        this.name = name;
     }
 
-    public void printXML(Appendable dos) throws IOException {
-        dos.append("<left id=\"" + this.id + "\">\n");
-        if (rlist != null) {
-            for (Right r : rlist) {
-                r.printXML(dos);
+    public void print(OutputStreamWriter osw) {
+        try {
+            osw.write("        <dictionary");
+            if (!name.equals("")) {
+                osw.write(" n=\"" + name + "\"");
             }
+            osw.write(" side=\"" + side + "\"");
+            osw.write(" format=\"" + format + "\"");
+            osw.write(" file=\"" + file + "\"");
+            osw.write(">\n");
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
         }
-        dos.append("</left>\n");
     }
 
 }
