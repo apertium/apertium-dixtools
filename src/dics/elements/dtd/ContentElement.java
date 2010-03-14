@@ -54,11 +54,12 @@ public abstract class ContentElement extends DixElement implements Cloneable {
         children = (ElementList) cE.children.clone();
     }
 
-    /**
-     * 
-     * @return Undefined         */
+
     public ArrayList<S> getSymbols() {
-        ArrayList<S> sEList = new ArrayList<S>();
+        return getSymbols(new ArrayList<S>());
+    }
+
+    public ArrayList<S> getSymbols(ArrayList<S> sEList) {
         for (DixElement e : children) {
             if (e instanceof S) {
                 S sE = (S) e;

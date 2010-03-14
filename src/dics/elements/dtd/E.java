@@ -79,7 +79,8 @@ public class E extends DixElement implements Cloneable {
 
         // JimRegan's dubious fix.
         // Should really be in DicFix or somewhere else, and not in the DTD code.
-        if (lm != null) lm = lm.replaceAll("\\&", "\\&amp;").replaceAll("\"", "\\&quot;").replaceAll("\'", "\\&apos;");
+      // don't replace("\'", "&apos;")  - we want entries like  <r>that's<b/>why , not <r>that&apos;s<b/>why
+        if (lm != null) lm = lm.replaceAll("\\&", "\\&amp;").replaceAll("\"", "\\&quot;");
 
         this.lemma = lm;
         this.author = a;
@@ -491,21 +492,21 @@ public class E extends DixElement implements Cloneable {
      * @return Undefined         
      */
     public ArrayList<S> getSymbols(String side) {
-        ArrayList<S> elementsA = null;
+        ArrayList<S> elementsA = new ArrayList<S>();
         for (DixElement e : children) {
             if (e instanceof I) {
                 I i = (I) e;
-                elementsA = i.getSymbols();
+                elementsA = i.getSymbols(elementsA);
             }
             if (e instanceof P) {
                 P p = (P) e;
                 if (side.equals("L")) {
                     L lE = p.l;
-                    elementsA = lE.getSymbols();
+                    elementsA = lE.getSymbols(elementsA);
                 }
                 if (side.equals("R")) {
                     R rE = p.r;
-                    elementsA = rE.getSymbols();
+                    elementsA = rE.getSymbols(elementsA);
                 }
             }
         }

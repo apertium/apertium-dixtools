@@ -284,6 +284,7 @@ public class DictionaryReader extends XMLReader {
     public static Pardef readPardef(Element e) {
         String n = getAttributeValue(e, "n");
         Pardef pardefElement = new Pardef(n);
+        pardefElement.comment = getAttributeValue(e, "c");
 
         StringBuilder characterData = new StringBuilder();
         dics.elements.dtd.CharacterDataNeighbour previousElement = new CharacterDataInsideTag(pardefElement);

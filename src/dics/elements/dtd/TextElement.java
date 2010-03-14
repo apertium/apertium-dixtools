@@ -55,8 +55,8 @@ public class TextElement extends DixElement {
         // so we can't escape > and < !
         // replaceAll("<", "&lt;").replaceAll(">", "&gt;").
 
-      // don't .replace("\"", "&quot;")   - we want entries like  <r>that's<b/>why , not <r>that&apos;s<b/>why
-        dos.append(text.replace("&", "&amp;").replace("\'", "&apos;"));
+      // don't replace("\'", "&apos;")  - we want entries like  <r>that's<b/>why , not <r>that&apos;s<b/>why
+        dos.append(text.replace("&", "&amp;").replace("\"", "&quot;") );
 
         //not necesary: dos.append(appendCharacterData);
     }

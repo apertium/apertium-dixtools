@@ -37,6 +37,8 @@ public class Pardef extends DixElement {
     // Is changed when  renaming paradigms when merging
     public String name;
 
+    public String comment;
+
     /**
      * 
      * @param value
@@ -58,7 +60,10 @@ public class Pardef extends DixElement {
         dos.append(prependCharacterData);
         if (!opt.noProcessingComments) dos.append(makeTabbedCommentIfData(processingComments,opt));
 
-        dos.append((opt.nowAlign?"":indent(2,opt))+ "<pardef n=\"" + name + "\">"+justInsideStartTagCharacterData+"\n");
+        StringBuilder attributes = new StringBuilder();
+        E.appendXmlAttr(attributes, "c", comment);
+
+        dos.append((opt.nowAlign?"":indent(2,opt))+ "<pardef n=\"" + name + "\""+(attributes)+ ">"+justInsideStartTagCharacterData+"\n");
         for (E e : elements) {
             e.printXML(dos, opt);
         }
