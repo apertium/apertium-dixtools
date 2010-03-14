@@ -10,99 +10,99 @@
 
 -->
 <dictionary>
-	<alphabet>·ÀÁÂÄÇÈÉÊËÌÍÎÏÑÒÓÔÖÙÚÛÜàáâäçèéêëìíîïñòóôöùúûüABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</alphabet>
-	<sdefs>
-		<sdef n="comp" /> 
-		<sdef n="acr" /> 
-		<sdef n="predet" /> 
-		<sdef n="qnt" /> 
-		<sdef n="detnt" /> 
-		<sdef n="loc" /> 
-		<sdef n="ant" /> 
-		<sdef n="al" /> 
-		<sdef n="cog" /> 
-		<sdef n="atn" /> 
-		<sdef n="enc" /> 
-		<sdef n="pro" /> 
-		<sdef n="tn" /> 
-		<sdef n="n" /> 
-		<sdef n="np" /> 
-		<sdef n="adj" /> 
-		<sdef n="adjant" /> 
-		<sdef n="f" /> 
-		<sdef n="m" /> 
-		<sdef n="mf" /> 
-		<sdef n="sg" /> 
-		<sdef n="pl" /> 
-		<sdef n="adv" /> 
-		<sdef n="preadv" /> 
-		<sdef n="pr" /> 
-		<sdef n="prn" /> 
-		<sdef n="rel" /> 
-		<sdef n="nn" /> 
-		<sdef n="an" /> 
-		<sdef n="aa" /> 
-		<sdef n="ind" /> 
-		<sdef n="itg" /> 
-		<sdef n="det" /> 
-		<sdef n="dem" /> 
-		<sdef n="def" /> 
-		<sdef n="cnjcoo" /> 
-		<sdef n="cnjsub" /> 
-		<sdef n="cnjadv" /> 
-		<sdef n="nt" /> 
-		<sdef n="vbser" /> 
-		<sdef n="vbhaver" /> 
-		<sdef n="vblex" /> 
-		<sdef n="vbmod" /> 
-		<sdef n="inf" /> 
-		<sdef n="pres" /> 
-		<sdef n="ger" /> 
-		<sdef n="pp" /> 
-		<sdef n="pprs" /> 
-		<sdef n="subs" /> 
-		<sdef n="pri" /> 
-		<sdef n="p1" /> 
-		<sdef n="p2" /> 
-		<sdef n="p3" /> 
-		<sdef n="pii" /> 
-		<sdef n="ifi" /> 
-		<sdef n="fti" /> 
-		<sdef n="cni" /> 
-		<sdef n="prs" /> 
-		<sdef n="pis" /> 
-		<sdef n="imp" /> 
-		<sdef n="pos" /> 
-		<sdef n="sp" /> 
-		<sdef n="ref" /> 
-		<sdef n="sup" /> 
-		<sdef n="num" /> 
-		<sdef n="ij" /> 
-		<sdef n="sent" /> 
-		<sdef n="cm" /> 
-		<sdef n="lpar" /> 
-		<sdef n="rpar" /> 
-		<sdef n="lquest" /> 
-		<sdef n="ND" /> 
-		<sdef n="GD" /> 
-		<sdef n="web" /> 
-		<sdef n="past" /> 
-		<sdef n="subj" /> 
-		<sdef n="obj" /> 
-		<sdef n="ord" /> 
-		<sdef n="gen" /> 
-		<sdef n="guio" /> 
-		<sdef n="vbdo" /> 
-		<sdef n="sint" /> 
-		<sdef n="unc" /> 
-		<sdef n="sep" /> 
-		<sdef n="vaux" /> 
-		<sdef n="pron" /> 
-		<sdef n="apos" /> 
-		<sdef n="percent" /> 
-		<sdef n="mon" /> 
-	</sdefs>
-	<pardefs>
+  <alphabet>·ÀÁÂÄÇÈÉÊËÌÍÎÏÑÒÓÔÖÙÚÛÜàáâäçèéêëìíîïñòóôöùúûüABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</alphabet>
+  <sdefs>
+    <sdef n="comp" /> 
+    <sdef n="acr" /> 
+    <sdef n="predet" /> 
+    <sdef n="qnt" /> 
+    <sdef n="detnt" /> 
+    <sdef n="loc" /> 
+    <sdef n="ant" /> 
+    <sdef n="al" /> 
+    <sdef n="cog" /> 
+    <sdef n="atn" /> 
+    <sdef n="enc" /> 
+    <sdef n="pro" /> 
+    <sdef n="tn" /> 
+    <sdef n="n" /> 
+    <sdef n="np" /> 
+    <sdef n="adj" /> 
+    <sdef n="adjant" /> 
+    <sdef n="f" /> 
+    <sdef n="m" /> 
+    <sdef n="mf" /> 
+    <sdef n="sg" /> 
+    <sdef n="pl" /> 
+    <sdef n="adv" /> 
+    <sdef n="preadv" /> 
+    <sdef n="pr" /> 
+    <sdef n="prn" /> 
+    <sdef n="rel" /> 
+    <sdef n="nn" /> 
+    <sdef n="an" /> 
+    <sdef n="aa" /> 
+    <sdef n="ind" /> 
+    <sdef n="itg" /> 
+    <sdef n="det" /> 
+    <sdef n="dem" /> 
+    <sdef n="def" /> 
+    <sdef n="cnjcoo" /> 
+    <sdef n="cnjsub" /> 
+    <sdef n="cnjadv" /> 
+    <sdef n="nt" /> 
+    <sdef n="vbser" /> 
+    <sdef n="vbhaver" /> 
+    <sdef n="vblex" /> 
+    <sdef n="vbmod" /> 
+    <sdef n="inf" /> 
+    <sdef n="pres" /> 
+    <sdef n="ger" /> 
+    <sdef n="pp" /> 
+    <sdef n="pprs" /> 
+    <sdef n="subs" /> 
+    <sdef n="pri" /> 
+    <sdef n="p1" /> 
+    <sdef n="p2" /> 
+    <sdef n="p3" /> 
+    <sdef n="pii" /> 
+    <sdef n="ifi" /> 
+    <sdef n="fti" /> 
+    <sdef n="cni" /> 
+    <sdef n="prs" /> 
+    <sdef n="pis" /> 
+    <sdef n="imp" /> 
+    <sdef n="pos" /> 
+    <sdef n="sp" /> 
+    <sdef n="ref" /> 
+    <sdef n="sup" /> 
+    <sdef n="num" /> 
+    <sdef n="ij" /> 
+    <sdef n="sent" /> 
+    <sdef n="cm" /> 
+    <sdef n="lpar" /> 
+    <sdef n="rpar" /> 
+    <sdef n="lquest" /> 
+    <sdef n="ND" /> 
+    <sdef n="GD" /> 
+    <sdef n="web" /> 
+    <sdef n="past" /> 
+    <sdef n="subj" /> 
+    <sdef n="obj" /> 
+    <sdef n="ord" /> 
+    <sdef n="gen" /> 
+    <sdef n="guio" /> 
+    <sdef n="vbdo" /> 
+    <sdef n="sint" /> 
+    <sdef n="unc" /> 
+    <sdef n="sep" /> 
+    <sdef n="vaux" /> 
+    <sdef n="pron" /> 
+    <sdef n="apos" /> 
+    <sdef n="percent" /> 
+    <sdef n="mon" /> 
+  </sdefs>
+  <pardefs>
 <pardef n="two__num">
   <e r="RL"><p><l><s n="num"/></l><r><s n="num"/><s n="m"/></r></p></e>
 
@@ -227,9 +227,9 @@
   <e>       <p><l>-nine<b/>hundred<s n="num"/></l><r><b/>mil<b/>nou-cents<s n="num"/><s n="GD"/></r></p></e>
 
 </pardef>
-	</pardefs>
+  </pardefs>
 
-	<section id="main" type="standard">
+  <section id="main" type="standard">
 
 <e>       <p><l>enumerable<s n="adj"/><s n="mf"/></l>  <r>enumerable<s n="adj"/></r></p></e>
 
@@ -2271,8 +2271,8 @@
 <e>       <p><l>endossar<s n="vblex"/></l>             <r>lumber<g><b/>with</g><s n="vblex"/></r></p></e>
 <e r="RL" srl="balancejar D"><p><l>balancejar<s n="vblex"/></l><r>swing<s n="vblex"/></r></p></e>
 <e r="RL" srl="abaixar"><p><l>abaixar<s n="vblex"/></l><r>drop<s n="vblex"/></r></p></e>
-	</section>
-	<section id="regexp" type="standard">
+  </section>
+  <section id="regexp" type="standard">
 
 
 
@@ -2298,7 +2298,7 @@
 
 
 <e>       <re>[0-9]+[.:][0-5][0-9](pm|PM|am|AM)</re><p><l><s n="num"/></l><r><s n="num"/></r></p></e>
-	</section>
-	<section id="regexp2" type="standard">
-	</section>
+  </section>
+  <section id="regexp2" type="standard">
+  </section>
 </dictionary>

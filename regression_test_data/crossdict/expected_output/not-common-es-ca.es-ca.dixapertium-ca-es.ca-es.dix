@@ -7,79 +7,79 @@
 
 -->
 <dictionary>
-	<alphabet></alphabet>
-	<sdefs>
-		<sdef n="v2" /> 
-		<sdef n="acr" /> 
-		<sdef n="predet" /> 
-		<sdef n="detnt" /> 
-		<sdef n="loc" /> 
-		<sdef n="ant" /> 
-		<sdef n="al" /> 
-		<sdef n="atn" /> 
-		<sdef n="enc" /> 
-		<sdef n="pro" /> 
-		<sdef n="tn" /> 
-		<sdef n="n" /> 
-		<sdef n="np" /> 
-		<sdef n="adj" /> 
-		<sdef n="f" /> 
-		<sdef n="m" /> 
-		<sdef n="mf" /> 
-		<sdef n="sg" /> 
-		<sdef n="pl" /> 
-		<sdef n="adv" /> 
-		<sdef n="preadv" /> 
-		<sdef n="pr" /> 
-		<sdef n="prn" /> 
-		<sdef n="rel" /> 
-		<sdef n="nn" /> 
-		<sdef n="an" /> 
-		<sdef n="aa" /> 
-		<sdef n="ind" /> 
-		<sdef n="itg" /> 
-		<sdef n="det" /> 
-		<sdef n="dem" /> 
-		<sdef n="def" /> 
-		<sdef n="cnjcoo" /> 
-		<sdef n="cnjsub" /> 
-		<sdef n="cnjadv" /> 
-		<sdef n="nt" /> 
-		<sdef n="vbser" /> 
-		<sdef n="vbhaver" /> 
-		<sdef n="vblex" /> 
-		<sdef n="vbmod" /> 
-		<sdef n="inf" /> 
-		<sdef n="ger" /> 
-		<sdef n="pp" /> 
-		<sdef n="pri" /> 
-		<sdef n="p1" /> 
-		<sdef n="p2" /> 
-		<sdef n="p3" /> 
-		<sdef n="pii" /> 
-		<sdef n="ifi" /> 
-		<sdef n="fti" /> 
-		<sdef n="cni" /> 
-		<sdef n="prs" /> 
-		<sdef n="pis" /> 
-		<sdef n="fts" /> 
-		<sdef n="imp" /> 
-		<sdef n="pos" /> 
-		<sdef n="sp" /> 
-		<sdef n="ref" /> 
-		<sdef n="sup" /> 
-		<sdef n="num" /> 
-		<sdef n="ij" /> 
-		<sdef n="sent" /> 
-		<sdef n="cm" /> 
-		<sdef n="lpar" /> 
-		<sdef n="rpar" /> 
-		<sdef n="lquest" /> 
-		<sdef n="ND" /> 
-		<sdef n="GD" /> 
-		<sdef n="web" /> 
-	</sdefs>
-	<section id="main" type="standard">
+  <alphabet></alphabet>
+  <sdefs>
+    <sdef n="v2" /> 
+    <sdef n="acr" /> 
+    <sdef n="predet" /> 
+    <sdef n="detnt" /> 
+    <sdef n="loc" /> 
+    <sdef n="ant" /> 
+    <sdef n="al" /> 
+    <sdef n="atn" /> 
+    <sdef n="enc" /> 
+    <sdef n="pro" /> 
+    <sdef n="tn" /> 
+    <sdef n="n" /> 
+    <sdef n="np" /> 
+    <sdef n="adj" /> 
+    <sdef n="f" /> 
+    <sdef n="m" /> 
+    <sdef n="mf" /> 
+    <sdef n="sg" /> 
+    <sdef n="pl" /> 
+    <sdef n="adv" /> 
+    <sdef n="preadv" /> 
+    <sdef n="pr" /> 
+    <sdef n="prn" /> 
+    <sdef n="rel" /> 
+    <sdef n="nn" /> 
+    <sdef n="an" /> 
+    <sdef n="aa" /> 
+    <sdef n="ind" /> 
+    <sdef n="itg" /> 
+    <sdef n="det" /> 
+    <sdef n="dem" /> 
+    <sdef n="def" /> 
+    <sdef n="cnjcoo" /> 
+    <sdef n="cnjsub" /> 
+    <sdef n="cnjadv" /> 
+    <sdef n="nt" /> 
+    <sdef n="vbser" /> 
+    <sdef n="vbhaver" /> 
+    <sdef n="vblex" /> 
+    <sdef n="vbmod" /> 
+    <sdef n="inf" /> 
+    <sdef n="ger" /> 
+    <sdef n="pp" /> 
+    <sdef n="pri" /> 
+    <sdef n="p1" /> 
+    <sdef n="p2" /> 
+    <sdef n="p3" /> 
+    <sdef n="pii" /> 
+    <sdef n="ifi" /> 
+    <sdef n="fti" /> 
+    <sdef n="cni" /> 
+    <sdef n="prs" /> 
+    <sdef n="pis" /> 
+    <sdef n="fts" /> 
+    <sdef n="imp" /> 
+    <sdef n="pos" /> 
+    <sdef n="sp" /> 
+    <sdef n="ref" /> 
+    <sdef n="sup" /> 
+    <sdef n="num" /> 
+    <sdef n="ij" /> 
+    <sdef n="sent" /> 
+    <sdef n="cm" /> 
+    <sdef n="lpar" /> 
+    <sdef n="rpar" /> 
+    <sdef n="lquest" /> 
+    <sdef n="ND" /> 
+    <sdef n="GD" /> 
+    <sdef n="web" /> 
+  </sdefs>
+  <section id="main" type="standard">
 
 <e a="prompsit"><p><l>àbac<s n="n"/></l>               <r>ábaco<s n="n"/></r></p></e>
 <e a="prompsit2uoc"><p><l>abadia<s n="n"/></l>         <r>abadía<s n="n"/></r></p></e>
@@ -3370,5 +3370,5 @@
 <e a="prompsit"><p><l>zoologia<s n="n"/></l>           <r>zoología<s n="n"/></r></p></e>
 <e a="prompsit2uoc"><p><l>zoom<s n="n"/></l>           <r>zoom<s n="n"/></r></p></e>
 <e r="RL" a="prompsit2uoc"><p><l>zoom<s n="n"/></l>    <r>zum<s n="n"/></r></p></e>
-	</section>
+  </section>
 </dictionary>

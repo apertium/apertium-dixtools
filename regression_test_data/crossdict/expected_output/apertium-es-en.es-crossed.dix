@@ -9,77 +9,77 @@
 
 -->
 <dictionary>
-	<alphabet>ÀÁÂÄÇÈÉÊËÌÍÎÏÑÒÓÔÖÙÚÛÜàáâäçèéêëìíîïñòóôöùúûüABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</alphabet>
-	<sdefs>
-		<sdef n="acr" /> 
-		<sdef n="v2" /> 
-		<sdef n="predet" /> 
-		<sdef n="detnt" /> 
-		<sdef n="loc" /> 
-		<sdef n="ant" /> 
-		<sdef n="al" /> 
-		<sdef n="atn" /> 
-		<sdef n="enc" /> 
-		<sdef n="pro" /> 
-		<sdef n="tn" /> 
-		<sdef n="n" /> 
-		<sdef n="np" /> 
-		<sdef n="adj" /> 
-		<sdef n="f" /> 
-		<sdef n="m" /> 
-		<sdef n="mf" /> 
-		<sdef n="sg" /> 
-		<sdef n="pl" /> 
-		<sdef n="adv" /> 
-		<sdef n="preadv" /> 
-		<sdef n="pr" /> 
-		<sdef n="prn" /> 
-		<sdef n="rel" /> 
-		<sdef n="nn" /> 
-		<sdef n="an" /> 
-		<sdef n="aa" /> 
-		<sdef n="ind" /> 
-		<sdef n="itg" /> 
-		<sdef n="det" /> 
-		<sdef n="dem" /> 
-		<sdef n="def" /> 
-		<sdef n="cnjcoo" /> 
-		<sdef n="cnjsub" /> 
-		<sdef n="cnjadv" /> 
-		<sdef n="nt" /> 
-		<sdef n="vbser" /> 
-		<sdef n="vbhaver" /> 
-		<sdef n="vblex" /> 
-		<sdef n="vbmod" /> 
-		<sdef n="inf" /> 
-		<sdef n="ger" /> 
-		<sdef n="pp" /> 
-		<sdef n="pri" /> 
-		<sdef n="p1" /> 
-		<sdef n="p2" /> 
-		<sdef n="p3" /> 
-		<sdef n="pii" /> 
-		<sdef n="ifi" /> 
-		<sdef n="fti" /> 
-		<sdef n="cni" /> 
-		<sdef n="prs" /> 
-		<sdef n="pis" /> 
-		<sdef n="fts" /> 
-		<sdef n="imp" /> 
-		<sdef n="pos" /> 
-		<sdef n="sp" /> 
-		<sdef n="ref" /> 
-		<sdef n="sup" /> 
-		<sdef n="num" /> 
-		<sdef n="ij" /> 
-		<sdef n="sent" /> 
-		<sdef n="cm" /> 
-		<sdef n="lpar" /> 
-		<sdef n="rpar" /> 
-		<sdef n="lquest" /> 
-		<sdef n="web" /> 
-	</sdefs>
-	<pardefs>
+  <alphabet>ÀÁÂÄÇÈÉÊËÌÍÎÏÑÒÓÔÖÙÚÛÜàáâäçèéêëìíîïñòóôöùúûüABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</alphabet>
+  <sdefs>
+    <sdef n="acr" /> 
+    <sdef n="v2" /> 
+    <sdef n="predet" /> 
+    <sdef n="detnt" /> 
+    <sdef n="loc" /> 
+    <sdef n="ant" /> 
+    <sdef n="al" /> 
+    <sdef n="atn" /> 
+    <sdef n="enc" /> 
+    <sdef n="pro" /> 
+    <sdef n="tn" /> 
+    <sdef n="n" /> 
+    <sdef n="np" /> 
+    <sdef n="adj" /> 
+    <sdef n="f" /> 
+    <sdef n="m" /> 
+    <sdef n="mf" /> 
+    <sdef n="sg" /> 
+    <sdef n="pl" /> 
+    <sdef n="adv" /> 
+    <sdef n="preadv" /> 
+    <sdef n="pr" /> 
+    <sdef n="prn" /> 
+    <sdef n="rel" /> 
+    <sdef n="nn" /> 
+    <sdef n="an" /> 
+    <sdef n="aa" /> 
+    <sdef n="ind" /> 
+    <sdef n="itg" /> 
+    <sdef n="det" /> 
+    <sdef n="dem" /> 
+    <sdef n="def" /> 
+    <sdef n="cnjcoo" /> 
+    <sdef n="cnjsub" /> 
+    <sdef n="cnjadv" /> 
+    <sdef n="nt" /> 
+    <sdef n="vbser" /> 
+    <sdef n="vbhaver" /> 
+    <sdef n="vblex" /> 
+    <sdef n="vbmod" /> 
+    <sdef n="inf" /> 
+    <sdef n="ger" /> 
+    <sdef n="pp" /> 
+    <sdef n="pri" /> 
+    <sdef n="p1" /> 
+    <sdef n="p2" /> 
+    <sdef n="p3" /> 
+    <sdef n="pii" /> 
+    <sdef n="ifi" /> 
+    <sdef n="fti" /> 
+    <sdef n="cni" /> 
+    <sdef n="prs" /> 
+    <sdef n="pis" /> 
+    <sdef n="fts" /> 
+    <sdef n="imp" /> 
+    <sdef n="pos" /> 
+    <sdef n="sp" /> 
+    <sdef n="ref" /> 
+    <sdef n="sup" /> 
+    <sdef n="num" /> 
+    <sdef n="ij" /> 
+    <sdef n="sent" /> 
+    <sdef n="cm" /> 
+    <sdef n="lpar" /> 
+    <sdef n="rpar" /> 
+    <sdef n="lquest" /> 
+    <sdef n="web" /> 
+  </sdefs>
+  <pardefs>
 <pardef n="numeros">
   <e>       <re>[0-9]+([.,][0-9]+)?</re><p><l></l><r><s n="num"/></r></p></e>
 </pardef>
@@ -113,7 +113,7 @@
   <e>       <re>(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]?[0-9])(.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]?[0-9]))(.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]?[0-9]))(.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]?[0-9]))</re><p><l></l><r><s n="web"/></r></p></e>
 </pardef>
 
-<pardef n="S__cantándome">
+<pardef n="S__cantándome" c="2o pronombre tras me/nos">
 
   <e>       <p><l>les</l>       <r>le<s n="prn"/><s n="enc"/><s n="p3"/><s n="mf"/><s n="pl"/></r></p></e>
   <e>       <p><l>le</l>        <r>le<s n="prn"/><s n="enc"/><s n="p3"/><s n="mf"/><s n="sg"/></r></p></e>
@@ -123,7 +123,7 @@
   <e>       <p><l>lo</l>        <r>lo<s n="prn"/><s n="enc"/><s n="p3"/><s n="m"/><s n="sg"/></r></p></e>
   <e>       <p><l>lo</l>        <r>lo<s n="prn"/><s n="enc"/><s n="p3"/><s n="nt"/></r></p></e>
 </pardef>
-<pardef n="S__cantándote">
+<pardef n="S__cantándote" c="2o pronombre tras te/os">
 
   <e>       <p><l>me</l>        <r>me<s n="prn"/><s n="enc"/><s n="p1"/><s n="mf"/><s n="sg"/></r></p></e>
   <e>       <p><l>nos</l>       <r>nos<s n="prn"/><s n="enc"/><s n="p1"/><s n="mf"/><s n="pl"/></r></p></e>
@@ -135,7 +135,7 @@
   <e>       <p><l>lo</l>        <r>lo<s n="prn"/><s n="enc"/><s n="p3"/><s n="m"/><s n="sg"/></r></p></e>
   <e>       <p><l>lo</l>        <r>lo<s n="prn"/><s n="enc"/><s n="p3"/><s n="nt"/></r></p></e>
 </pardef>
-<pardef n="S__cantándose">
+<pardef n="S__cantándose" c="2o pronombre tras 'se' reflexivo">
 
   <e>       <p><l>me</l>        <r>me<s n="prn"/><s n="enc"/><s n="p1"/><s n="mf"/><s n="sg"/></r></p></e>
   <e>       <p><l>nos</l>       <r>nos<s n="prn"/><s n="enc"/><s n="p1"/><s n="mf"/><s n="pl"/></r></p></e>
@@ -149,7 +149,7 @@
   <e>       <p><l>lo</l>        <r>lo<s n="prn"/><s n="enc"/><s n="p3"/><s n="m"/><s n="sg"/></r></p></e>
   <e>       <p><l>lo</l>        <r>lo<s n="prn"/><s n="enc"/><s n="p3"/><s n="nt"/></r></p></e>
 </pardef>
-<pardef n="S__cantárse">
+<pardef n="S__cantárse" c="segundo pronombre tras 'se' 3a persona">
 
   <e>       <p><l>las</l>       <r>lo<s n="prn"/><s n="enc"/><s n="p3"/><s n="f"/><s n="pl"/></r></p></e>
   <e>       <p><l>la</l>        <r>lo<s n="prn"/><s n="enc"/><s n="p3"/><s n="f"/><s n="sg"/></r></p></e>
@@ -157,7 +157,7 @@
   <e>       <p><l>lo</l>        <r>lo<s n="prn"/><s n="enc"/><s n="p3"/><s n="m"/><s n="sg"/></r></p></e>
   <e>       <p><l>lo</l>        <r>lo<s n="prn"/><s n="enc"/><s n="p3"/><s n="nt"/></r></p></e>
 </pardef>
-<pardef n="S__cantándo">
+<pardef n="S__cantándo" c="Para gerundios e imperativo 3a singular y plural (pueden llevar pronombre 'se' reflexivo)">
 
   <e>       <p><l>me</l>        <r>me<s n="prn"/><s n="enc"/><s n="p1"/><s n="mf"/><s n="sg"/></r></p></e>
   <e>       <p><l>me</l>        <r>me<s n="prn"/><s n="enc"/><s n="p1"/><s n="mf"/><s n="sg"/><j/></r></p><par n="S__cantándome"/></e>
@@ -180,7 +180,7 @@
   <e>       <p><l>se</l>        <r>se<s n="prn"/><s n="enc"/><s n="ref"/><s n="p3"/><s n="mf"/><s n="sp"/></r></p></e>
   <e>       <p><l>se</l>        <r>se<s n="prn"/><s n="enc"/><s n="ref"/><s n="p3"/><s n="mf"/><s n="sp"/><j/></r></p><par n="S__cantándose"/></e>
 </pardef>
-<pardef n="S__cánta">
+<pardef n="S__cánta" c="Para imperativo 2a singular (no puede llevar pronombre 'se' reflexivo)">
 
   <e>       <p><l>me</l>        <r>me<s n="prn"/><s n="enc"/><s n="p1"/><s n="mf"/><s n="sg"/></r></p></e>
   <e>       <p><l>me</l>        <r>me<s n="prn"/><s n="enc"/><s n="p1"/><s n="mf"/><s n="sg"/><j/></r></p><par n="S__cantándome"/></e>
@@ -199,7 +199,7 @@
   <e>       <p><l>lo</l>        <r>lo<s n="prn"/><s n="enc"/><s n="p3"/><s n="m"/><s n="sg"/></r></p></e>
   <e>       <p><l>lo</l>        <r>lo<s n="prn"/><s n="enc"/><s n="p3"/><s n="nt"/></r></p></e>
 </pardef>
-<pardef n="S__haz">
+<pardef n="S__haz" c="Para imperativo 2a singular verbo hacer 1 enclítico (no puede llevar pronombre 'se' reflexivo)">
 
   <e>       <p><l>me</l>        <r>me<s n="prn"/><s n="enc"/><s n="p1"/><s n="mf"/><s n="sg"/></r></p></e>
   <e>       <p><l>nos</l>       <r>nos<s n="prn"/><s n="enc"/><s n="p1"/><s n="mf"/><s n="pl"/></r></p></e>
@@ -212,7 +212,7 @@
   <e>       <p><l>lo</l>        <r>lo<s n="prn"/><s n="enc"/><s n="p3"/><s n="m"/><s n="sg"/></r></p></e>
   <e>       <p><l>lo</l>        <r>lo<s n="prn"/><s n="enc"/><s n="p3"/><s n="nt"/></r></p></e>
 </pardef>
-<pardef n="S__ház">
+<pardef n="S__ház" c="Para imperativo 2a singular verbo hacer 2 enclíticos (no puede llevar pronombre 'se' reflexivo)">
   <e>       <p><l>me</l>        <r>me<s n="prn"/><s n="enc"/><s n="p1"/><s n="mf"/><s n="sg"/><j/></r></p><par n="S__cantándome"/></e>
   <e>       <p><l>nos</l>       <r>nos<s n="prn"/><s n="enc"/><s n="p1"/><s n="mf"/><s n="pl"/><j/></r></p><par n="S__cantándome"/></e>
   <e>       <p><l>te</l>        <r>te<s n="prn"/><s n="enc"/><s n="p2"/><s n="mf"/><s n="sg"/><j/></r></p><par n="S__cantándote"/></e>
@@ -358,11 +358,11 @@
 </pardef>
 
 
-<pardef n="abundante__adj">
+<pardef n="abundante__adj" c="igual que 'pobr/e__adj' pero sin formas superlativas">
   <e>       <p><l>s</l>         <r><s n="adj"/><s n="mf"/><s n="pl"/></r></p></e>
   <e>       <p><l></l>          <r><s n="adj"/><s n="mf"/><s n="sg"/></r></p></e>
 </pardef>
-<pardef n="pobr/e__adj">
+<pardef n="pobr/e__adj" c="igual que 'abundante__adj' pero con formas superlativas">
   <e>       <p><l>es</l>        <r>e<s n="adj"/><s n="mf"/><s n="pl"/></r></p></e>
   <e>       <p><l>e</l>         <r>e<s n="adj"/><s n="mf"/><s n="sg"/></r></p></e>
   <e>       <p><l>ísimas</l>    <r>e<s n="adj"/><s n="sup"/><s n="f"/><s n="pl"/></r></p></e>
@@ -423,13 +423,13 @@
   <e>       <p><l>n</l>         <r>n<s n="adj"/><s n="m"/><s n="sg"/></r></p></e>
 </pardef>
     
-<pardef n="absolut/o__adj">
+<pardef n="absolut/o__adj" c="sin formas superlativas">
   <e>       <p><l>as</l>        <r>o<s n="adj"/><s n="f"/><s n="pl"/></r></p></e>
   <e>       <p><l>a</l>         <r>o<s n="adj"/><s n="f"/><s n="sg"/></r></p></e>
   <e>       <p><l>os</l>        <r>o<s n="adj"/><s n="m"/><s n="pl"/></r></p></e>
   <e>       <p><l>o</l>         <r>o<s n="adj"/><s n="m"/><s n="sg"/></r></p></e>
 </pardef>
-<pardef n="abstract/o__adj">
+<pardef n="abstract/o__adj" c="igual que absolut/o pero con formas superlativas">
   <e>       <p><l>as</l>        <r>o<s n="adj"/><s n="f"/><s n="pl"/></r></p></e>
   <e>       <p><l>a</l>         <r>o<s n="adj"/><s n="f"/><s n="sg"/></r></p></e>
   <e>       <p><l>os</l>        <r>o<s n="adj"/><s n="m"/><s n="pl"/></r></p></e>
@@ -3835,9 +3835,9 @@
   <e>       <p><l>sean</l>      <r>ser<s n="vbser"/><s n="prs"/><s n="p3"/><s n="pl"/></r></p></e>
   <e lm="sea"><p><l>sea</l>     <r>ser<s n="vbser"/><s n="prs"/><s n="p3"/><s n="sg"/></r></p></e>
 </pardef>
-	</pardefs>
+  </pardefs>
 
-	<section id="main" type="standard">
+  <section id="main" type="standard">
 <e lm="Filadelfia" a="prompsit2uoc"><i>Filadelfia</i><par n="Afganistán__np"/></e>
 <e lm="Irán" a="prompsit2uoc"><i>Irán</i><par n="Afganistán__np"/></e>
 <e lm="Misisipi" a="prompsit2uoc"><i>Misisipi</i><par n="Afganistán__np"/></e>
@@ -4780,5 +4780,5 @@
 <e lm="éter" a="prompsit2uoc"><i>éter</i><par n="abril__n"/></e>
 <e lm="étimo" a="prompsit2uoc"><i>étimo</i><par n="abismo__n"/></e>
 <e lm="óhmico" a="prompsit2uoc"><i>óhmic</i><par n="absolut/o__adj"/></e>
-	</section>
+  </section>
 </dictionary>

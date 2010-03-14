@@ -3,20 +3,20 @@
 <cross-model>
 <cross-action id="ND-0">
 	<pattern>
-		<e>
-			<p>
-				<l>aberrante<s n="adj"/></l>
-				<r>aberrant<s n="adj"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>aberrante<s n="adj"/></l>
+        <r>aberrant<s n="adj"/></r>
+      </p>
+    </e>
 
 
-		<e>
-			<p>
-				<l>aberrant<s n="adj"/><s n="mf"/></l>
-				<r>aberrant<s n="adj"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>aberrant<s n="adj"/><s n="mf"/></l>
+        <r>aberrant<s n="adj"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -27,20 +27,20 @@
 
 <cross-action id="ND-1">
 	<pattern>
-		<e>
-			<p>
-				<l>acético<s n="adj"/></l>
-				<r>acètic<s n="adj"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>acético<s n="adj"/></l>
+        <r>acètic<s n="adj"/></r>
+      </p>
+    </e>
 
 
-		<e>
-			<p>
-				<l>acètic<s n="adj"/></l>
-				<r>acetic<s n="adj"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>acètic<s n="adj"/></l>
+        <r>acetic<s n="adj"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -51,19 +51,19 @@
 
 <cross-action id="ND-2">
 	<pattern>
-		<e>
-			<p>
-				<l>acrónimo<s n="n"/></l>
-				<r>acrònim<s n="n"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>acrónimo<s n="n"/></l>
+        <r>acrònim<s n="n"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>acrònim<s n="n"/><s n="m"/></l>
-				<r>acronym<s n="n"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>acrònim<s n="n"/><s n="m"/></l>
+        <r>acronym<s n="n"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -74,19 +74,19 @@
 
 <cross-action id="ND-3">
 	<pattern>
-		<e>
-			<p>
-				<l>abjuración<s n="n"/></l>
-				<r>abjuració<s n="n"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>abjuración<s n="n"/></l>
+        <r>abjuració<s n="n"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>abjuració<s n="n"/><s n="f"/></l>
-				<r>abjuration<s n="n"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>abjuració<s n="n"/><s n="f"/></l>
+        <r>abjuration<s n="n"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -97,19 +97,19 @@
 
 <cross-action id="ND-4">
 	<pattern>
-		<e>
-			<p>
-				<l>a<b/>vuelta<b/>de<b/>correo<s n="adv"/></l>
-				<r>a<b/>correu<b/>seguit<s n="adv"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>a<b/>vuelta<b/>de<b/>correo<s n="adv"/></l>
+        <r>a<b/>correu<b/>seguit<s n="adv"/></r>
+      </p>
+    </e>
 
-		<e r="RL">
-			<p>
-				<l>a<b/>correu<b/>seguit<s n="adv"/></l>
-				<r>by<b/>return<b/>mail<s n="adv"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>a<b/>correu<b/>seguit<s n="adv"/></l>
+        <r>by<b/>return<b/>mail<s n="adv"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -120,19 +120,19 @@
 
 <cross-action id="ND-5">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>bajar<s n="vblex"/></l>
-				<r>abaixar<s n="vblex"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>bajar<s n="vblex"/></l>
+        <r>abaixar<s n="vblex"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>abaixar<s n="vblex"/></l>
-				<r>lower<s n="vblex"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>abaixar<s n="vblex"/></l>
+        <r>lower<s n="vblex"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -143,19 +143,19 @@
 
 <cross-action id="ND-6">
 	<pattern>
-		<e>
-			<p>
-				<l>Apia<s n="np"/></l>
-				<r>Apia<s n="np"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>Apia<s n="np"/></l>
+        <r>Apia<s n="np"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>Apia<s n="np"/><s n="loc"/><s n="f"/></l>
-				<r>Apia<s n="np"/><s n="loc"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>Apia<s n="np"/><s n="loc"/><s n="f"/></l>
+        <r>Apia<s n="np"/><s n="loc"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -166,19 +166,19 @@
 
 <cross-action id="ND-7">
 	<pattern>
-		<e>
-			<p>
-				<l>Belice<s n="np"/></l>
-				<r>Belize<s n="np"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>Belice<s n="np"/></l>
+        <r>Belize<s n="np"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>Belize<s n="np"/><s n="loc"/><s n="m"/></l>
-				<r>Belize<s n="np"/><s n="loc"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>Belize<s n="np"/><s n="loc"/><s n="m"/></l>
+        <r>Belize<s n="np"/><s n="loc"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -189,19 +189,19 @@
 
 <cross-action id="ND-8">
 	<pattern>
-		<e>
-			<p>
-				<l>vasco<s n="n"/></l>
-				<r>basc<s n="n"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>vasco<s n="n"/></l>
+        <r>basc<s n="n"/></r>
+      </p>
+    </e>
 
-		<e c="doncs aquí poso GD, caldria unificar">
-			<p>
-				<l>basc<s n="n"/><s n="GD"/></l>
-				<r>Basque<s n="n"/></r>
-			</p>
-		</e>
+    <e c="doncs aquí poso GD, caldria unificar">
+      <p>
+        <l>basc<s n="n"/><s n="GD"/></l>
+        <r>Basque<s n="n"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -212,19 +212,19 @@
 
 <cross-action id="ND-9">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>cese<s n="n"/><s n="m"/></l>
-				<r>cessació<s n="n"/><s n="f"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>cese<s n="n"/><s n="m"/></l>
+        <r>cessació<s n="n"/><s n="f"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>cessació<s n="n"/><s n="f"/></l>
-				<r>cessation<s n="n"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>cessació<s n="n"/><s n="f"/></l>
+        <r>cessation<s n="n"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -235,19 +235,19 @@
 
 <cross-action id="ND-10">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>tos<s n="n"/><s n="f"/><s n="sg"/></l>
-				<r>tos<s n="n"/><s n="f"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>tos<s n="n"/><s n="f"/><s n="sg"/></l>
+        <r>tos<s n="n"/><s n="f"/><s n="sp"/></r>
+      </p>
+    </e>
 
-		<e r="RL">
-			<p>
-				<l>tos<s n="n"/><s n="f"/></l>
-				<r>coughing<s n="n"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>tos<s n="n"/><s n="f"/></l>
+        <r>coughing<s n="n"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -258,19 +258,19 @@
 
 <cross-action id="ND-11">
 	<pattern>
-		<e>
-			<p>
-				<l>agrio<s n="adj"/><s n="m"/><s n="sg"/></l>
-				<r>agre<s n="adj"/><s n="m"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>agrio<s n="adj"/><s n="m"/><s n="sg"/></l>
+        <r>agre<s n="adj"/><s n="m"/><s n="sg"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>agre<s n="adj"/></l>
-				<r>cold-short<s n="adj"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>agre<s n="adj"/></l>
+        <r>cold-short<s n="adj"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -281,19 +281,19 @@
 
 <cross-action id="ND-12">
 	<pattern>
-		<e>
-			<p>
-				<l>agrio<s n="adj"/><s n="f"/><s n="sg"/></l>
-				<r>agre<s n="adj"/><s n="f"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>agrio<s n="adj"/><s n="f"/><s n="sg"/></l>
+        <r>agre<s n="adj"/><s n="f"/><s n="sg"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>agre<s n="adj"/></l>
-				<r>cold-short<s n="adj"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>agre<s n="adj"/></l>
+        <r>cold-short<s n="adj"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -304,19 +304,19 @@
 
 <cross-action id="ND-13">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>agrio<s n="adj"/><s n="m"/><s n="pl"/></l>
-				<r>agre<s n="adj"/><s n="mf"/><s n="pl"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>agrio<s n="adj"/><s n="m"/><s n="pl"/></l>
+        <r>agre<s n="adj"/><s n="mf"/><s n="pl"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>agre<s n="adj"/></l>
-				<r>cold-short<s n="adj"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>agre<s n="adj"/></l>
+        <r>cold-short<s n="adj"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -327,19 +327,19 @@
 
 <cross-action id="ND-14">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>agrio<s n="adj"/><s n="f"/><s n="pl"/></l>
-				<r>agre<s n="adj"/><s n="mf"/><s n="pl"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>agrio<s n="adj"/><s n="f"/><s n="pl"/></l>
+        <r>agre<s n="adj"/><s n="mf"/><s n="pl"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>agre<s n="adj"/></l>
-				<r>cold-short<s n="adj"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>agre<s n="adj"/></l>
+        <r>cold-short<s n="adj"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -350,19 +350,19 @@
 
 <cross-action id="ND-15">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>agrio<s n="adj"/><s n="GD"/><s n="pl"/></l>
-				<r>agre<s n="adj"/><s n="mf"/><s n="pl"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>agrio<s n="adj"/><s n="GD"/><s n="pl"/></l>
+        <r>agre<s n="adj"/><s n="mf"/><s n="pl"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>agre<s n="adj"/></l>
-				<r>cold-short<s n="adj"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>agre<s n="adj"/></l>
+        <r>cold-short<s n="adj"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -373,20 +373,20 @@
 
 <cross-action id="ND-16">
 	<pattern>
-		<e>
-			<p>
-				<l>antipático<s n="adj"/></l>
-				<r>antipàtic<s n="adj"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>antipático<s n="adj"/></l>
+        <r>antipàtic<s n="adj"/></r>
+      </p>
+    </e>
 
 
-		<e>
-			<p>
-				<l>antipàtic<s n="adj"/></l>
-				<r>unkind<s n="adj"/><s n="sint"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>antipàtic<s n="adj"/></l>
+        <r>unkind<s n="adj"/><s n="sint"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -397,19 +397,19 @@
 
 <cross-action id="ND-17">
 	<pattern>
-		<e>
-			<p>
-				<l>vasco<s n="n"/></l>
-				<r>basc<s n="n"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>vasco<s n="n"/></l>
+        <r>basc<s n="n"/></r>
+      </p>
+    </e>
 
-		<e r="LR">
-			<p>
-				<l>basc<s n="n"/></l>
-				<r>Basque<s n="n"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>basc<s n="n"/></l>
+        <r>Basque<s n="n"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -420,20 +420,20 @@
 
 <cross-action id="ND-18">
 	<pattern>
-		<e>
-			<p>
-				<l>el<b/>cual<s n="rel"/></l>
-				<r>el<b/>qual<s n="rel"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>el<b/>cual<s n="rel"/></l>
+        <r>el<b/>qual<s n="rel"/></r>
+      </p>
+    </e>
 
 
-		<e r="RL">
-			<p>
-				<l>el<b/>qual<s n="rel"/><s n="nn"/><s n="GD"/><s n="ND"/></l>
-				<r>which<s n="rel"/><s n="nn"/><s n="mf"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>el<b/>qual<s n="rel"/><s n="nn"/><s n="GD"/><s n="ND"/></l>
+        <r>which<s n="rel"/><s n="nn"/><s n="mf"/><s n="sp"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -444,20 +444,20 @@
 
 <cross-action id="ND-19">
 	<pattern>
-		<e>
-			<p>
-				<l>el<b/>cual<s n="rel"/></l>
-				<r>el<b/>qual<s n="rel"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>el<b/>cual<s n="rel"/></l>
+        <r>el<b/>qual<s n="rel"/></r>
+      </p>
+    </e>
 
 
-		<e r="LR">
-			<p>
-				<l>el<b/>qual<s n="rel"/><s n="nn"/><s n="m"/><s n="sg"/></l>
-				<r>which<s n="rel"/><s n="nn"/><s n="mf"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>el<b/>qual<s n="rel"/><s n="nn"/><s n="m"/><s n="sg"/></l>
+        <r>which<s n="rel"/><s n="nn"/><s n="mf"/><s n="sp"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -468,19 +468,19 @@
 
 <cross-action id="ND-20">
 	<pattern>
-		<e>
-			<p>
-				<l>el<b/>cual<s n="rel"/></l>
-				<r>el<b/>qual<s n="rel"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>el<b/>cual<s n="rel"/></l>
+        <r>el<b/>qual<s n="rel"/></r>
+      </p>
+    </e>
 
-		<e r="LR">
-			<p>
-				<l>el<b/>qual<s n="rel"/><s n="nn"/><s n="m"/><s n="pl"/></l>
-				<r>which<s n="rel"/><s n="nn"/><s n="mf"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>el<b/>qual<s n="rel"/><s n="nn"/><s n="m"/><s n="pl"/></l>
+        <r>which<s n="rel"/><s n="nn"/><s n="mf"/><s n="sp"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -491,19 +491,19 @@
 
 <cross-action id="ND-21">
 	<pattern>
-		<e>
-			<p>
-				<l>el<b/>cual<s n="rel"/></l>
-				<r>el<b/>qual<s n="rel"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>el<b/>cual<s n="rel"/></l>
+        <r>el<b/>qual<s n="rel"/></r>
+      </p>
+    </e>
 
-		<e r="LR">
-			<p>
-				<l>el<b/>qual<s n="rel"/><s n="nn"/><s n="f"/><s n="sg"/></l>
-				<r>which<s n="rel"/><s n="nn"/><s n="mf"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>el<b/>qual<s n="rel"/><s n="nn"/><s n="f"/><s n="sg"/></l>
+        <r>which<s n="rel"/><s n="nn"/><s n="mf"/><s n="sp"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -514,19 +514,19 @@
 
 <cross-action id="ND-22">
 	<pattern>
-		<e>
-			<p>
-				<l>el<b/>cual<s n="rel"/></l>
-				<r>el<b/>qual<s n="rel"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>el<b/>cual<s n="rel"/></l>
+        <r>el<b/>qual<s n="rel"/></r>
+      </p>
+    </e>
 
-		<e r="LR">
-			<p>
-				<l>el<b/>qual<s n="rel"/><s n="nn"/><s n="f"/><s n="pl"/></l>
-				<r>which<s n="rel"/><s n="nn"/><s n="mf"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>el<b/>qual<s n="rel"/><s n="nn"/><s n="f"/><s n="pl"/></l>
+        <r>which<s n="rel"/><s n="nn"/><s n="mf"/><s n="sp"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -537,19 +537,19 @@
 
 <cross-action id="ND-23">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>fondo<s n="n"/><s n="m"/><s n="ND"/></l>
-				<r>fons<s n="n"/><s n="m"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>fondo<s n="n"/><s n="m"/><s n="ND"/></l>
+        <r>fons<s n="n"/><s n="m"/><s n="sp"/></r>
+      </p>
+    </e>
 
-		<e slr="background">
-			<p>
-				<l>fons<s n="n"/><s n="m"/></l>
-				<r>background<s n="n"/></r>
-			</p>
-		</e>
+    <e slr="background">
+      <p>
+        <l>fons<s n="n"/><s n="m"/></l>
+        <r>background<s n="n"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -560,19 +560,19 @@
 
 <cross-action id="ND-24">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>fondo<s n="n"/><s n="m"/><s n="pl"/></l>
-				<r>fons<s n="n"/><s n="m"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>fondo<s n="n"/><s n="m"/><s n="pl"/></l>
+        <r>fons<s n="n"/><s n="m"/><s n="sp"/></r>
+      </p>
+    </e>
 
-		<e slr="background">
-			<p>
-				<l>fons<s n="n"/><s n="m"/></l>
-				<r>background<s n="n"/></r>
-			</p>
-		</e>
+    <e slr="background">
+      <p>
+        <l>fons<s n="n"/><s n="m"/></l>
+        <r>background<s n="n"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -583,19 +583,19 @@
 
 <cross-action id="ND-25">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>fondo<s n="n"/><s n="m"/><s n="sg"/></l>
-				<r>fons<s n="n"/><s n="m"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>fondo<s n="n"/><s n="m"/><s n="sg"/></l>
+        <r>fons<s n="n"/><s n="m"/><s n="sp"/></r>
+      </p>
+    </e>
 
-		<e slr="background">
-			<p>
-				<l>fons<s n="n"/><s n="m"/></l>
-				<r>background<s n="n"/></r>
-			</p>
-		</e>
+    <e slr="background">
+      <p>
+        <l>fons<s n="n"/><s n="m"/></l>
+        <r>background<s n="n"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -606,24 +606,24 @@
 
 <cross-action id="ND-26">
 	<pattern>
-		<e>
-			<p>
-				<l>Antònia<s n="np"/></l>
-				<r>Antònia<s n="np"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>Antònia<s n="np"/></l>
+        <r>Antònia<s n="np"/></r>
+      </p>
+    </e>
 
 
 
 <!-- Antroponims-->
 
 
-		<e>
-			<p>
-				<l>Antònia<s n="np"/></l>
-				<r>Antònia<s n="np"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>Antònia<s n="np"/></l>
+        <r>Antònia<s n="np"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -634,19 +634,19 @@
 
 <cross-action id="ND-27">
 	<pattern>
-		<e>
-			<p>
-				<l>cualquiera<s n="prn"/></l>
-				<r>qualsevol<s n="prn"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>cualquiera<s n="prn"/></l>
+        <r>qualsevol<s n="prn"/></r>
+      </p>
+    </e>
 
-		<e slr="anyone D" c="afirmatives">
-			<p>
-				<l>qualsevol<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></l>
-				<r>anyone<s n="prn"/><s n="tn"/><s n="m"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e slr="anyone D" c="afirmatives">
+      <p>
+        <l>qualsevol<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></l>
+        <r>anyone<s n="prn"/><s n="tn"/><s n="m"/><s n="sg"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -657,19 +657,19 @@
 
 <cross-action id="ND-28">
 	<pattern>
-		<e>
-			<p>
-				<l>cualquiera<s n="prn"/></l>
-				<r>qualsevol<s n="prn"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>cualquiera<s n="prn"/></l>
+        <r>qualsevol<s n="prn"/></r>
+      </p>
+    </e>
 
-		<e r="RL" c="frases afirmatives">
-			<p>
-				<l>qualsevol<s n="prn"/><s n="tn"/><s n="mf"/><s n="ND"/></l>
-				<r>any<s n="prn"/><s n="tn"/><s n="mf"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="RL" c="frases afirmatives">
+      <p>
+        <l>qualsevol<s n="prn"/><s n="tn"/><s n="mf"/><s n="ND"/></l>
+        <r>any<s n="prn"/><s n="tn"/><s n="mf"/><s n="sp"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -680,19 +680,19 @@
 
 <cross-action id="ND-29">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>euskera<s n="adj"/><s n="mf"/></l>
-				<r>basc<s n="adj"/><s n="GD"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>euskera<s n="adj"/><s n="mf"/></l>
+        <r>basc<s n="adj"/><s n="GD"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>basc<s n="adj"/></l>
-				<r>Basque<s n="adj"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>basc<s n="adj"/></l>
+        <r>Basque<s n="adj"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -703,19 +703,19 @@
 
 <cross-action id="ND-30">
 	<pattern>
-		<e>
-			<p>
-				<l>delincuente<s n="n"/></l>
-				<r>delinqüent<s n="n"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>delincuente<s n="n"/></l>
+        <r>delinqüent<s n="n"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>delinqüent<s n="n"/><s n="mf"/></l>
-				<r>criminal<s n="n"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>delinqüent<s n="n"/><s n="mf"/></l>
+        <r>criminal<s n="n"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -726,19 +726,19 @@
 
 <cross-action id="ND-31">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>por<b/>eso<b/>es<b/>por<b/>lo<b/>que<s n="cnjadv"/></l>
-				<r>és<b/>per<b/>això<b/>que<s n="cnjadv"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>por<b/>eso<b/>es<b/>por<b/>lo<b/>que<s n="cnjadv"/></l>
+        <r>és<b/>per<b/>això<b/>que<s n="cnjadv"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>és<b/>per<b/>això<b/>que<s n="cnjadv"/></l>
-				<r>that's<b/>why<s n="cnjadv"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>és<b/>per<b/>això<b/>que<s n="cnjadv"/></l>
+        <r>that's<b/>why<s n="cnjadv"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -749,19 +749,19 @@
 
 <cross-action id="ND-32">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>fondo<s n="n"/><s n="m"/><s n="ND"/></l>
-				<r>fons<s n="n"/><s n="m"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>fondo<s n="n"/><s n="m"/><s n="ND"/></l>
+        <r>fons<s n="n"/><s n="m"/><s n="sp"/></r>
+      </p>
+    </e>
 
-		<e r="LR" slr="bottom D">
-			<p>
-				<l>fons<s n="n"/><s n="m"/><s n="sp"/></l>
-				<r>bottom<s n="n"/><s n="ND"/></r>
-			</p>
-		</e>
+    <e r="LR" slr="bottom D">
+      <p>
+        <l>fons<s n="n"/><s n="m"/><s n="sp"/></l>
+        <r>bottom<s n="n"/><s n="ND"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -772,19 +772,19 @@
 
 <cross-action id="ND-33">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>fondo<s n="n"/><s n="m"/><s n="pl"/></l>
-				<r>fons<s n="n"/><s n="m"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>fondo<s n="n"/><s n="m"/><s n="pl"/></l>
+        <r>fons<s n="n"/><s n="m"/><s n="sp"/></r>
+      </p>
+    </e>
 
-		<e r="LR" slr="bottom D">
-			<p>
-				<l>fons<s n="n"/><s n="m"/><s n="sp"/></l>
-				<r>bottom<s n="n"/><s n="ND"/></r>
-			</p>
-		</e>
+    <e r="LR" slr="bottom D">
+      <p>
+        <l>fons<s n="n"/><s n="m"/><s n="sp"/></l>
+        <r>bottom<s n="n"/><s n="ND"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -795,19 +795,19 @@
 
 <cross-action id="ND-34">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>fondo<s n="n"/><s n="m"/><s n="sg"/></l>
-				<r>fons<s n="n"/><s n="m"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>fondo<s n="n"/><s n="m"/><s n="sg"/></l>
+        <r>fons<s n="n"/><s n="m"/><s n="sp"/></r>
+      </p>
+    </e>
 
-		<e r="LR" slr="bottom D">
-			<p>
-				<l>fons<s n="n"/><s n="m"/><s n="sp"/></l>
-				<r>bottom<s n="n"/><s n="ND"/></r>
-			</p>
-		</e>
+    <e r="LR" slr="bottom D">
+      <p>
+        <l>fons<s n="n"/><s n="m"/><s n="sp"/></l>
+        <r>bottom<s n="n"/><s n="ND"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -818,19 +818,19 @@
 
 <cross-action id="ND-35">
 	<pattern>
-		<e>
-			<p>
-				<l>frambuesa<s n="n"/><s n="f"/></l>
-				<r>gerd<s n="n"/><s n="m"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>frambuesa<s n="n"/><s n="f"/></l>
+        <r>gerd<s n="n"/><s n="m"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>gerd<s n="n"/><s n="m"/></l>
-				<r>raspberry<s n="n"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>gerd<s n="n"/><s n="m"/></l>
+        <r>raspberry<s n="n"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -841,19 +841,19 @@
 
 <cross-action id="ND-36">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>tos<s n="n"/><s n="f"/><s n="pl"/></l>
-				<r>tos<s n="n"/><s n="f"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>tos<s n="n"/><s n="f"/><s n="pl"/></l>
+        <r>tos<s n="n"/><s n="f"/><s n="sp"/></r>
+      </p>
+    </e>
 
-		<e r="RL">
-			<p>
-				<l>tos<s n="n"/><s n="f"/></l>
-				<r>coughing<s n="n"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>tos<s n="n"/><s n="f"/></l>
+        <r>coughing<s n="n"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -864,19 +864,19 @@
 
 <cross-action id="ND-37">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>tristeza<s n="n"/></l>
-				<r>tristor<s n="n"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>tristeza<s n="n"/></l>
+        <r>tristor<s n="n"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>tristor<s n="n"/><s n="f"/><s n="sg"/></l>
-				<r>sadness<s n="n"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>tristor<s n="n"/><s n="f"/><s n="sg"/></l>
+        <r>sadness<s n="n"/><s n="sg"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -887,19 +887,19 @@
 
 <cross-action id="ND-38">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>tristeza<s n="n"/></l>
-				<r>tristor<s n="n"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>tristeza<s n="n"/></l>
+        <r>tristor<s n="n"/></r>
+      </p>
+    </e>
 
-		<e r="LR" c="MG: uncount">
-			<p>
-				<l>tristor<s n="n"/><s n="f"/><s n="pl"/></l>
-				<r>sadness<s n="n"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e r="LR" c="MG: uncount">
+      <p>
+        <l>tristor<s n="n"/><s n="f"/><s n="pl"/></l>
+        <r>sadness<s n="n"/><s n="sg"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -910,19 +910,19 @@
 
 <cross-action id="ND-39">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>bajar<s n="vblex"/></l>
-				<r>abaixar<s n="vblex"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>bajar<s n="vblex"/></l>
+        <r>abaixar<s n="vblex"/></r>
+      </p>
+    </e>
 
-		<e r="RL">
-			<p>
-				<l>abaixar<s n="vblex"/></l>
-				<r>bring<g><b/>down</g><s n="vblex"/><s n="sep"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>abaixar<s n="vblex"/></l>
+        <r>bring<g><b/>down</g><s n="vblex"/><s n="sep"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -933,19 +933,19 @@
 
 <cross-action id="ND-40">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>euskera<s n="n"/><s n="mf"/></l>
-				<r>basc<s n="n"/><s n="GD"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>euskera<s n="n"/><s n="mf"/></l>
+        <r>basc<s n="n"/><s n="GD"/></r>
+      </p>
+    </e>
 
-		<e c="doncs aquí poso GD, caldria unificar">
-			<p>
-				<l>basc<s n="n"/><s n="GD"/></l>
-				<r>Basque<s n="n"/></r>
-			</p>
-		</e>
+    <e c="doncs aquí poso GD, caldria unificar">
+      <p>
+        <l>basc<s n="n"/><s n="GD"/></l>
+        <r>Basque<s n="n"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -956,19 +956,19 @@
 
 <cross-action id="ND-41">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>euskera<s n="n"/><s n="mf"/></l>
-				<r>basc<s n="n"/><s n="GD"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>euskera<s n="n"/><s n="mf"/></l>
+        <r>basc<s n="n"/><s n="GD"/></r>
+      </p>
+    </e>
 
-		<e r="LR">
-			<p>
-				<l>basc<s n="n"/></l>
-				<r>Basque<s n="n"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>basc<s n="n"/></l>
+        <r>Basque<s n="n"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -979,20 +979,20 @@
 
 <cross-action id="ND-42">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>derechista<s n="adj"/><s n="mf"/></l>
-				<r>dretà<s n="adj"/><s n="m"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>derechista<s n="adj"/><s n="mf"/></l>
+        <r>dretà<s n="adj"/><s n="m"/></r>
+      </p>
+    </e>
 
 
-		<e r="RL">
-			<p>
-				<l>dretà<s n="adj"/></l>
-				<r>dexter<s n="adj"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>dretà<s n="adj"/></l>
+        <r>dexter<s n="adj"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1003,20 +1003,20 @@
 
 <cross-action id="ND-43">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>derechista<s n="adj"/><s n="mf"/></l>
-				<r>dretà<s n="adj"/><s n="f"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>derechista<s n="adj"/><s n="mf"/></l>
+        <r>dretà<s n="adj"/><s n="f"/></r>
+      </p>
+    </e>
 
 
-		<e r="RL">
-			<p>
-				<l>dretà<s n="adj"/></l>
-				<r>dexter<s n="adj"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>dretà<s n="adj"/></l>
+        <r>dexter<s n="adj"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1027,22 +1027,22 @@
 
 <cross-action id="ND-44">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>bastante<s n="preadv"/></l>
-				<r>força<s n="preadv"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>bastante<s n="preadv"/></l>
+        <r>força<s n="preadv"/></r>
+      </p>
+    </e>
 
 
 
 
-		<e r="LR">
-			<p>
-				<l>força<s n="preadv"/></l>
-				<r>quite<s n="preadv"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>força<s n="preadv"/></l>
+        <r>quite<s n="preadv"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1053,19 +1053,19 @@
 
 <cross-action id="ND-45">
 	<pattern>
-		<e>
-			<p>
-				<l>cualquiera<s n="prn"/></l>
-				<r>qualsevol<s n="prn"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>cualquiera<s n="prn"/></l>
+        <r>qualsevol<s n="prn"/></r>
+      </p>
+    </e>
 
-		<e r="LR">
-			<p>
-				<l>qualsevol<s n="prn"/><s n="tn"/><s n="mf"/><s n="pl"/></l>
-				<r>any<b/>one<s n="prn"/><s n="tn"/><s n="m"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>qualsevol<s n="prn"/><s n="tn"/><s n="mf"/><s n="pl"/></l>
+        <r>any<b/>one<s n="prn"/><s n="tn"/><s n="m"/><s n="sg"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1076,19 +1076,19 @@
 
 <cross-action id="ND-46">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>quien<s n="rel"/><s n="nn"/><s n="mf"/><s n="ND"/></l>
-				<r>qui<s n="rel"/><s n="nn"/><s n="mf"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>quien<s n="rel"/><s n="nn"/><s n="mf"/><s n="ND"/></l>
+        <r>qui<s n="rel"/><s n="nn"/><s n="mf"/><s n="sp"/></r>
+      </p>
+    </e>
 
-		<e r="RL" c="amb qui - with whom">
-			<p>
-				<l>qui<s n="rel"/><s n="nn"/></l>
-				<r>whom<s n="rel"/><s n="an"/></r>
-			</p>
-		</e>
+    <e r="RL" c="amb qui - with whom">
+      <p>
+        <l>qui<s n="rel"/><s n="nn"/></l>
+        <r>whom<s n="rel"/><s n="an"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1099,19 +1099,19 @@
 
 <cross-action id="ND-47">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>quien<s n="rel"/><s n="nn"/><s n="mf"/><s n="sg"/></l>
-				<r>qui<s n="rel"/><s n="nn"/><s n="mf"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>quien<s n="rel"/><s n="nn"/><s n="mf"/><s n="sg"/></l>
+        <r>qui<s n="rel"/><s n="nn"/><s n="mf"/><s n="sp"/></r>
+      </p>
+    </e>
 
-		<e r="RL" c="amb qui - with whom">
-			<p>
-				<l>qui<s n="rel"/><s n="nn"/></l>
-				<r>whom<s n="rel"/><s n="an"/></r>
-			</p>
-		</e>
+    <e r="RL" c="amb qui - with whom">
+      <p>
+        <l>qui<s n="rel"/><s n="nn"/></l>
+        <r>whom<s n="rel"/><s n="an"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1122,19 +1122,19 @@
 
 <cross-action id="ND-48">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>tos<s n="n"/><s n="f"/><s n="sg"/></l>
-				<r>tos<s n="n"/><s n="f"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>tos<s n="n"/><s n="f"/><s n="sg"/></l>
+        <r>tos<s n="n"/><s n="f"/><s n="sp"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>tos<s n="n"/><s n="f"/><s n="sg"/></l>
-				<r>cough<s n="n"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>tos<s n="n"/><s n="f"/><s n="sg"/></l>
+        <r>cough<s n="n"/><s n="sg"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1145,19 +1145,19 @@
 
 <cross-action id="ND-49">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>tos<s n="n"/><s n="f"/><s n="sg"/></l>
-				<r>tos<s n="n"/><s n="f"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>tos<s n="n"/><s n="f"/><s n="sg"/></l>
+        <r>tos<s n="n"/><s n="f"/><s n="sp"/></r>
+      </p>
+    </e>
 
-		<e r="RL">
-			<p>
-				<l>tos<s n="n"/><s n="f"/><s n="sg"/></l>
-				<r>cough<s n="n"/><s n="pl"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>tos<s n="n"/><s n="f"/><s n="sg"/></l>
+        <r>cough<s n="n"/><s n="pl"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1168,19 +1168,19 @@
 
 <cross-action id="ND-50">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>tos<s n="n"/><s n="f"/><s n="sg"/></l>
-				<r>tos<s n="n"/><s n="f"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>tos<s n="n"/><s n="f"/><s n="sg"/></l>
+        <r>tos<s n="n"/><s n="f"/><s n="sp"/></r>
+      </p>
+    </e>
 
-		<e r="LR">
-			<p>
-				<l>tos<s n="n"/><s n="f"/><s n="sp"/></l>
-				<r>cough<s n="n"/><s n="ND"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>tos<s n="n"/><s n="f"/><s n="sp"/></l>
+        <r>cough<s n="n"/><s n="ND"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1191,19 +1191,19 @@
 
 <cross-action id="ND-51">
 	<pattern>
-		<e>
-			<p>
-				<l>aleluya<s n="n"/><s n="mf"/></l>
-				<r>al·leluia<s n="n"/><s n="m"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>aleluya<s n="n"/><s n="mf"/></l>
+        <r>al·leluia<s n="n"/><s n="m"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>al·leluia<s n="n"/><s n="f"/></l>
-				<r>hallelujah<s n="n"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>al·leluia<s n="n"/><s n="f"/></l>
+        <r>hallelujah<s n="n"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1214,19 +1214,19 @@
 
 <cross-action id="ND-52">
 	<pattern>
-		<e>
-			<p>
-				<l>Bahamas<s n="np"/></l>
-				<r>Bahames<s n="np"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>Bahamas<s n="np"/></l>
+        <r>Bahames<s n="np"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>Bahames<s n="np"/><s n="loc"/><s n="f"/><s n="pl"/></l>
-				<r>Bahamas<s n="np"/><s n="loc"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>Bahames<s n="np"/><s n="loc"/><s n="f"/><s n="pl"/></l>
+        <r>Bahamas<s n="np"/><s n="loc"/><s n="sg"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1237,19 +1237,19 @@
 
 <cross-action id="ND-53">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>ninguno<s n="prn"/><s n="tn"/><s n="GD"/><s n="sg"/></l>
-				<r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>ninguno<s n="prn"/><s n="tn"/><s n="GD"/><s n="sg"/></l>
+        <r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
+      </p>
+    </e>
 
-		<e r="LR" c="preguntes, negatives. EN-CA: per trànsfer (fr negatives)">
-			<p>
-				<l>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></l>
-				<r>any<s n="prn"/><s n="tn"/><s n="mf"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="LR" c="preguntes, negatives. EN-CA: per trànsfer (fr negatives)">
+      <p>
+        <l>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></l>
+        <r>any<s n="prn"/><s n="tn"/><s n="mf"/><s n="sp"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1260,19 +1260,19 @@
 
 <cross-action id="ND-54">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>ninguno<s n="prn"/><s n="tn"/><s n="GD"/><s n="sg"/></l>
-				<r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>ninguno<s n="prn"/><s n="tn"/><s n="GD"/><s n="sg"/></l>
+        <r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
+      </p>
+    </e>
 
-		<e r="RL">
-			<p>
-				<l>cap<s n="prn"/></l>
-				<r>either<s n="prn"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>cap<s n="prn"/></l>
+        <r>either<s n="prn"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1283,19 +1283,19 @@
 
 <cross-action id="ND-55">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>ninguno<s n="prn"/><s n="tn"/><s n="GD"/><s n="sg"/></l>
-				<r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>ninguno<s n="prn"/><s n="tn"/><s n="GD"/><s n="sg"/></l>
+        <r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
+      </p>
+    </e>
 
-		<e r="RL">
-			<p>
-				<l>cap<s n="prn"/><s n="tn"/><s n="mf"/></l>
-				<r>none<s n="prn"/><s n="tn"/><s n="nt"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>cap<s n="prn"/><s n="tn"/><s n="mf"/></l>
+        <r>none<s n="prn"/><s n="tn"/><s n="nt"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1306,19 +1306,19 @@
 
 <cross-action id="ND-56">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>ninguno<s n="prn"/><s n="tn"/><s n="f"/><s n="pl"/></l>
-				<r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>ninguno<s n="prn"/><s n="tn"/><s n="f"/><s n="pl"/></l>
+        <r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
+      </p>
+    </e>
 
-		<e r="LR" c="preguntes, negatives. EN-CA: per trànsfer (fr negatives)">
-			<p>
-				<l>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></l>
-				<r>any<s n="prn"/><s n="tn"/><s n="mf"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="LR" c="preguntes, negatives. EN-CA: per trànsfer (fr negatives)">
+      <p>
+        <l>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></l>
+        <r>any<s n="prn"/><s n="tn"/><s n="mf"/><s n="sp"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1329,19 +1329,19 @@
 
 <cross-action id="ND-57">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>ninguno<s n="prn"/><s n="tn"/><s n="f"/><s n="pl"/></l>
-				<r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>ninguno<s n="prn"/><s n="tn"/><s n="f"/><s n="pl"/></l>
+        <r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
+      </p>
+    </e>
 
-		<e r="RL">
-			<p>
-				<l>cap<s n="prn"/></l>
-				<r>either<s n="prn"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>cap<s n="prn"/></l>
+        <r>either<s n="prn"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1352,19 +1352,19 @@
 
 <cross-action id="ND-58">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>ninguno<s n="prn"/><s n="tn"/><s n="f"/><s n="pl"/></l>
-				<r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>ninguno<s n="prn"/><s n="tn"/><s n="f"/><s n="pl"/></l>
+        <r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
+      </p>
+    </e>
 
-		<e r="RL">
-			<p>
-				<l>cap<s n="prn"/><s n="tn"/><s n="mf"/></l>
-				<r>none<s n="prn"/><s n="tn"/><s n="nt"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>cap<s n="prn"/><s n="tn"/><s n="mf"/></l>
+        <r>none<s n="prn"/><s n="tn"/><s n="nt"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1375,19 +1375,19 @@
 
 <cross-action id="ND-59">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>ninguno<s n="prn"/><s n="tn"/><s n="f"/><s n="sg"/></l>
-				<r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>ninguno<s n="prn"/><s n="tn"/><s n="f"/><s n="sg"/></l>
+        <r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
+      </p>
+    </e>
 
-		<e r="LR" c="preguntes, negatives. EN-CA: per trànsfer (fr negatives)">
-			<p>
-				<l>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></l>
-				<r>any<s n="prn"/><s n="tn"/><s n="mf"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="LR" c="preguntes, negatives. EN-CA: per trànsfer (fr negatives)">
+      <p>
+        <l>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></l>
+        <r>any<s n="prn"/><s n="tn"/><s n="mf"/><s n="sp"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1398,19 +1398,19 @@
 
 <cross-action id="ND-60">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>ninguno<s n="prn"/><s n="tn"/><s n="f"/><s n="sg"/></l>
-				<r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>ninguno<s n="prn"/><s n="tn"/><s n="f"/><s n="sg"/></l>
+        <r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
+      </p>
+    </e>
 
-		<e r="RL">
-			<p>
-				<l>cap<s n="prn"/></l>
-				<r>either<s n="prn"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>cap<s n="prn"/></l>
+        <r>either<s n="prn"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1421,19 +1421,19 @@
 
 <cross-action id="ND-61">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>ninguno<s n="prn"/><s n="tn"/><s n="f"/><s n="sg"/></l>
-				<r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>ninguno<s n="prn"/><s n="tn"/><s n="f"/><s n="sg"/></l>
+        <r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
+      </p>
+    </e>
 
-		<e r="RL">
-			<p>
-				<l>cap<s n="prn"/><s n="tn"/><s n="mf"/></l>
-				<r>none<s n="prn"/><s n="tn"/><s n="nt"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>cap<s n="prn"/><s n="tn"/><s n="mf"/></l>
+        <r>none<s n="prn"/><s n="tn"/><s n="nt"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1444,19 +1444,19 @@
 
 <cross-action id="ND-62">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>ninguno<s n="prn"/><s n="tn"/><s n="m"/><s n="pl"/></l>
-				<r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>ninguno<s n="prn"/><s n="tn"/><s n="m"/><s n="pl"/></l>
+        <r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
+      </p>
+    </e>
 
-		<e r="LR" c="preguntes, negatives. EN-CA: per trànsfer (fr negatives)">
-			<p>
-				<l>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></l>
-				<r>any<s n="prn"/><s n="tn"/><s n="mf"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="LR" c="preguntes, negatives. EN-CA: per trànsfer (fr negatives)">
+      <p>
+        <l>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></l>
+        <r>any<s n="prn"/><s n="tn"/><s n="mf"/><s n="sp"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1467,19 +1467,19 @@
 
 <cross-action id="ND-63">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>ninguno<s n="prn"/><s n="tn"/><s n="m"/><s n="pl"/></l>
-				<r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>ninguno<s n="prn"/><s n="tn"/><s n="m"/><s n="pl"/></l>
+        <r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
+      </p>
+    </e>
 
-		<e r="RL">
-			<p>
-				<l>cap<s n="prn"/></l>
-				<r>either<s n="prn"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>cap<s n="prn"/></l>
+        <r>either<s n="prn"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1490,19 +1490,19 @@
 
 <cross-action id="ND-64">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>ninguno<s n="prn"/><s n="tn"/><s n="m"/><s n="pl"/></l>
-				<r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>ninguno<s n="prn"/><s n="tn"/><s n="m"/><s n="pl"/></l>
+        <r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
+      </p>
+    </e>
 
-		<e r="RL">
-			<p>
-				<l>cap<s n="prn"/><s n="tn"/><s n="mf"/></l>
-				<r>none<s n="prn"/><s n="tn"/><s n="nt"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>cap<s n="prn"/><s n="tn"/><s n="mf"/></l>
+        <r>none<s n="prn"/><s n="tn"/><s n="nt"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1513,19 +1513,19 @@
 
 <cross-action id="ND-65">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>ninguno<s n="prn"/><s n="tn"/><s n="m"/><s n="sg"/></l>
-				<r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>ninguno<s n="prn"/><s n="tn"/><s n="m"/><s n="sg"/></l>
+        <r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
+      </p>
+    </e>
 
-		<e r="LR" c="preguntes, negatives. EN-CA: per trànsfer (fr negatives)">
-			<p>
-				<l>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></l>
-				<r>any<s n="prn"/><s n="tn"/><s n="mf"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="LR" c="preguntes, negatives. EN-CA: per trànsfer (fr negatives)">
+      <p>
+        <l>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></l>
+        <r>any<s n="prn"/><s n="tn"/><s n="mf"/><s n="sp"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1536,19 +1536,19 @@
 
 <cross-action id="ND-66">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>ninguno<s n="prn"/><s n="tn"/><s n="m"/><s n="sg"/></l>
-				<r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>ninguno<s n="prn"/><s n="tn"/><s n="m"/><s n="sg"/></l>
+        <r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
+      </p>
+    </e>
 
-		<e r="RL">
-			<p>
-				<l>cap<s n="prn"/></l>
-				<r>either<s n="prn"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>cap<s n="prn"/></l>
+        <r>either<s n="prn"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1559,19 +1559,19 @@
 
 <cross-action id="ND-67">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>ninguno<s n="prn"/><s n="tn"/><s n="m"/><s n="sg"/></l>
-				<r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>ninguno<s n="prn"/><s n="tn"/><s n="m"/><s n="sg"/></l>
+        <r>cap<s n="prn"/><s n="tn"/><s n="mf"/><s n="sg"/></r>
+      </p>
+    </e>
 
-		<e r="RL">
-			<p>
-				<l>cap<s n="prn"/><s n="tn"/><s n="mf"/></l>
-				<r>none<s n="prn"/><s n="tn"/><s n="nt"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>cap<s n="prn"/><s n="tn"/><s n="mf"/></l>
+        <r>none<s n="prn"/><s n="tn"/><s n="nt"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1582,19 +1582,19 @@
 
 <cross-action id="ND-68">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>clímax<s n="n"/><s n="m"/><s n="sp"/></l>
-				<r>clímax<s n="n"/><s n="m"/><s n="ND"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>clímax<s n="n"/><s n="m"/><s n="sp"/></l>
+        <r>clímax<s n="n"/><s n="m"/><s n="ND"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>clímax<s n="n"/><s n="m"/></l>
-				<r>climax<s n="n"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>clímax<s n="n"/><s n="m"/></l>
+        <r>climax<s n="n"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1605,19 +1605,19 @@
 
 <cross-action id="ND-69">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>clímax<s n="n"/><s n="m"/><s n="sp"/></l>
-				<r>clímax<s n="n"/><s n="m"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>clímax<s n="n"/><s n="m"/><s n="sp"/></l>
+        <r>clímax<s n="n"/><s n="m"/><s n="sg"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>clímax<s n="n"/><s n="m"/></l>
-				<r>climax<s n="n"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>clímax<s n="n"/><s n="m"/></l>
+        <r>climax<s n="n"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1628,19 +1628,19 @@
 
 <cross-action id="ND-70">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>clímax<s n="n"/><s n="m"/><s n="sp"/></l>
-				<r>clímax<s n="n"/><s n="m"/><s n="pl"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>clímax<s n="n"/><s n="m"/><s n="sp"/></l>
+        <r>clímax<s n="n"/><s n="m"/><s n="pl"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>clímax<s n="n"/><s n="m"/></l>
-				<r>climax<s n="n"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>clímax<s n="n"/><s n="m"/></l>
+        <r>climax<s n="n"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1651,19 +1651,19 @@
 
 <cross-action id="ND-71">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>diagnosis<s n="n"/><s n="f"/><s n="sp"/></l>
-				<r>diagnosi<s n="n"/><s n="f"/><s n="ND"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>diagnosis<s n="n"/><s n="f"/><s n="sp"/></l>
+        <r>diagnosi<s n="n"/><s n="f"/><s n="ND"/></r>
+      </p>
+    </e>
 
-		<e a="carmentano">
-			<p>
-				<l>diagnosi<s n="n"/><s n="f"/></l>
-				<r>diagnosis<s n="n"/></r>
-			</p>
-		</e>
+    <e a="carmentano">
+      <p>
+        <l>diagnosi<s n="n"/><s n="f"/></l>
+        <r>diagnosis<s n="n"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1674,19 +1674,19 @@
 
 <cross-action id="ND-72">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>diagnosis<s n="n"/><s n="f"/><s n="sp"/></l>
-				<r>diagnosi<s n="n"/><s n="f"/><s n="pl"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>diagnosis<s n="n"/><s n="f"/><s n="sp"/></l>
+        <r>diagnosi<s n="n"/><s n="f"/><s n="pl"/></r>
+      </p>
+    </e>
 
-		<e a="carmentano">
-			<p>
-				<l>diagnosi<s n="n"/><s n="f"/></l>
-				<r>diagnosis<s n="n"/></r>
-			</p>
-		</e>
+    <e a="carmentano">
+      <p>
+        <l>diagnosi<s n="n"/><s n="f"/></l>
+        <r>diagnosis<s n="n"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1697,19 +1697,19 @@
 
 <cross-action id="ND-73">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>diagnosis<s n="n"/><s n="f"/><s n="sp"/></l>
-				<r>diagnosi<s n="n"/><s n="f"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>diagnosis<s n="n"/><s n="f"/><s n="sp"/></l>
+        <r>diagnosi<s n="n"/><s n="f"/><s n="sg"/></r>
+      </p>
+    </e>
 
-		<e a="carmentano">
-			<p>
-				<l>diagnosi<s n="n"/><s n="f"/></l>
-				<r>diagnosis<s n="n"/></r>
-			</p>
-		</e>
+    <e a="carmentano">
+      <p>
+        <l>diagnosi<s n="n"/><s n="f"/></l>
+        <r>diagnosis<s n="n"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1720,19 +1720,19 @@
 
 <cross-action id="ND-74">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>dolor<g><b/>de<b/>cabeza</g><s n="n"/><s n="m"/><s n="sg"/></l>
-				<r>mal<g><b/>de<b/>cap</g><s n="n"/><s n="m"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>dolor<g><b/>de<b/>cabeza</g><s n="n"/><s n="m"/><s n="sg"/></l>
+        <r>mal<g><b/>de<b/>cap</g><s n="n"/><s n="m"/><s n="sg"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>mal<g><b/>de<b/>cap</g><s n="n"/><s n="m"/></l>
-				<r>headache<s n="n"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>mal<g><b/>de<b/>cap</g><s n="n"/><s n="m"/></l>
+        <r>headache<s n="n"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1743,20 +1743,20 @@
 
 <cross-action id="ND-75">
 	<pattern>
-		<e>
-			<p>
-				<l>manejable<s n="adj"/></l>
-				<r>manejable<s n="adj"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>manejable<s n="adj"/></l>
+        <r>manejable<s n="adj"/></r>
+      </p>
+    </e>
 
 
-		<e>
-			<p>
-				<l>manejable<s n="adj"/><s n="mf"/></l>
-				<r>handy<s n="adj"/><s n="sint"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>manejable<s n="adj"/><s n="mf"/></l>
+        <r>handy<s n="adj"/><s n="sint"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1767,19 +1767,19 @@
 
 <cross-action id="ND-76">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>a<b/>causa<b/>de<s n="pr"/></l>
-				<r>per<b/>causa<b/>de<s n="pr"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>a<b/>causa<b/>de<s n="pr"/></l>
+        <r>per<b/>causa<b/>de<s n="pr"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>per<b/>causa<b/>de<s n="pr"/></l>
-				<r>owing<b/>to<s n="pr"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>per<b/>causa<b/>de<s n="pr"/></l>
+        <r>owing<b/>to<s n="pr"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1790,20 +1790,20 @@
 
 <cross-action id="ND-77">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>perecedero<s n="adj"/><s n="m"/></l>
-				<r>perible<s n="adj"/><s n="mf"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>perecedero<s n="adj"/><s n="m"/></l>
+        <r>perible<s n="adj"/><s n="mf"/></r>
+      </p>
+    </e>
 
 
-		<e>
-			<p>
-				<l>perible<s n="adj"/><s n="mf"/></l>
-				<r>perishable<s n="adj"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>perible<s n="adj"/><s n="mf"/></l>
+        <r>perishable<s n="adj"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1814,20 +1814,20 @@
 
 <cross-action id="ND-78">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>perecedero<s n="adj"/><s n="f"/></l>
-				<r>perible<s n="adj"/><s n="mf"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>perecedero<s n="adj"/><s n="f"/></l>
+        <r>perible<s n="adj"/><s n="mf"/></r>
+      </p>
+    </e>
 
 
-		<e>
-			<p>
-				<l>perible<s n="adj"/><s n="mf"/></l>
-				<r>perishable<s n="adj"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>perible<s n="adj"/><s n="mf"/></l>
+        <r>perishable<s n="adj"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1838,20 +1838,20 @@
 
 <cross-action id="ND-79">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>perecedero<s n="adj"/><s n="GD"/></l>
-				<r>perible<s n="adj"/><s n="mf"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>perecedero<s n="adj"/><s n="GD"/></l>
+        <r>perible<s n="adj"/><s n="mf"/></r>
+      </p>
+    </e>
 
 
-		<e>
-			<p>
-				<l>perible<s n="adj"/><s n="mf"/></l>
-				<r>perishable<s n="adj"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>perible<s n="adj"/><s n="mf"/></l>
+        <r>perishable<s n="adj"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1862,19 +1862,19 @@
 
 <cross-action id="ND-80">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>que<s n="rel"/></l>
-				<r>què<s n="rel"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>que<s n="rel"/></l>
+        <r>què<s n="rel"/></r>
+      </p>
+    </e>
 
-		<e r="LR" c="en què - in which">
-			<p>
-				<l>què<s n="rel"/><s n="nn"/></l>
-				<r>which<s n="rel"/><s n="an"/></r>
-			</p>
-		</e>
+    <e r="LR" c="en què - in which">
+      <p>
+        <l>què<s n="rel"/><s n="nn"/></l>
+        <r>which<s n="rel"/><s n="an"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1885,19 +1885,19 @@
 
 <cross-action id="ND-81">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>quién<s n="prn"/><s n="itg"/><s n="mf"/><s n="ND"/></l>
-				<r>qui<s n="prn"/><s n="itg"/><s n="mf"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>quién<s n="prn"/><s n="itg"/><s n="mf"/><s n="ND"/></l>
+        <r>qui<s n="prn"/><s n="itg"/><s n="mf"/><s n="sp"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>qui<s n="prn"/><s n="itg"/><s n="mf"/></l>
-				<r>who<s n="prn"/><s n="itg"/><s n="m"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>qui<s n="prn"/><s n="itg"/><s n="mf"/></l>
+        <r>who<s n="prn"/><s n="itg"/><s n="m"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1908,19 +1908,19 @@
 
 <cross-action id="ND-82">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>quién<s n="prn"/><s n="itg"/><s n="mf"/><s n="pl"/></l>
-				<r>qui<s n="prn"/><s n="itg"/><s n="mf"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>quién<s n="prn"/><s n="itg"/><s n="mf"/><s n="pl"/></l>
+        <r>qui<s n="prn"/><s n="itg"/><s n="mf"/><s n="sp"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>qui<s n="prn"/><s n="itg"/><s n="mf"/></l>
-				<r>who<s n="prn"/><s n="itg"/><s n="m"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>qui<s n="prn"/><s n="itg"/><s n="mf"/></l>
+        <r>who<s n="prn"/><s n="itg"/><s n="m"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1931,19 +1931,19 @@
 
 <cross-action id="ND-83">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>quién<s n="prn"/><s n="itg"/><s n="mf"/><s n="sg"/></l>
-				<r>qui<s n="prn"/><s n="itg"/><s n="mf"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>quién<s n="prn"/><s n="itg"/><s n="mf"/><s n="sg"/></l>
+        <r>qui<s n="prn"/><s n="itg"/><s n="mf"/><s n="sp"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>qui<s n="prn"/><s n="itg"/><s n="mf"/></l>
-				<r>who<s n="prn"/><s n="itg"/><s n="m"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>qui<s n="prn"/><s n="itg"/><s n="mf"/></l>
+        <r>who<s n="prn"/><s n="itg"/><s n="m"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1954,20 +1954,20 @@
 
 <cross-action id="ND-84">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>tiroides<s n="adj"/><s n="mf"/><s n="sp"/></l>
-				<r>tiroide<s n="adj"/><s n="mf"/><s n="ND"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>tiroides<s n="adj"/><s n="mf"/><s n="sp"/></l>
+        <r>tiroide<s n="adj"/><s n="mf"/><s n="ND"/></r>
+      </p>
+    </e>
 
 
-		<e>
-			<p>
-				<l>tiroide<s n="adj"/><s n="mf"/></l>
-				<r>thyroid<s n="adj"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>tiroide<s n="adj"/><s n="mf"/></l>
+        <r>thyroid<s n="adj"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -1978,20 +1978,20 @@
 
 <cross-action id="ND-85">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>tiroides<s n="adj"/><s n="mf"/><s n="sp"/></l>
-				<r>tiroide<s n="adj"/><s n="mf"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>tiroides<s n="adj"/><s n="mf"/><s n="sp"/></l>
+        <r>tiroide<s n="adj"/><s n="mf"/><s n="sg"/></r>
+      </p>
+    </e>
 
 
-		<e>
-			<p>
-				<l>tiroide<s n="adj"/><s n="mf"/></l>
-				<r>thyroid<s n="adj"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>tiroide<s n="adj"/><s n="mf"/></l>
+        <r>thyroid<s n="adj"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -2002,20 +2002,20 @@
 
 <cross-action id="ND-86">
 	<pattern>
-		<e r="RL">
-			<p>
-				<l>tiroides<s n="adj"/><s n="mf"/><s n="sp"/></l>
-				<r>tiroide<s n="adj"/><s n="mf"/><s n="pl"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>tiroides<s n="adj"/><s n="mf"/><s n="sp"/></l>
+        <r>tiroide<s n="adj"/><s n="mf"/><s n="pl"/></r>
+      </p>
+    </e>
 
 
-		<e>
-			<p>
-				<l>tiroide<s n="adj"/><s n="mf"/></l>
-				<r>thyroid<s n="adj"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>tiroide<s n="adj"/><s n="mf"/></l>
+        <r>thyroid<s n="adj"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -2026,19 +2026,19 @@
 
 <cross-action id="ND-87">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>tos<s n="n"/><s n="f"/><s n="pl"/></l>
-				<r>tos<s n="n"/><s n="f"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>tos<s n="n"/><s n="f"/><s n="pl"/></l>
+        <r>tos<s n="n"/><s n="f"/><s n="sp"/></r>
+      </p>
+    </e>
 
-		<e>
-			<p>
-				<l>tos<s n="n"/><s n="f"/><s n="sg"/></l>
-				<r>cough<s n="n"/><s n="sg"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>tos<s n="n"/><s n="f"/><s n="sg"/></l>
+        <r>cough<s n="n"/><s n="sg"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -2049,19 +2049,19 @@
 
 <cross-action id="ND-88">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>tos<s n="n"/><s n="f"/><s n="pl"/></l>
-				<r>tos<s n="n"/><s n="f"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>tos<s n="n"/><s n="f"/><s n="pl"/></l>
+        <r>tos<s n="n"/><s n="f"/><s n="sp"/></r>
+      </p>
+    </e>
 
-		<e r="RL">
-			<p>
-				<l>tos<s n="n"/><s n="f"/><s n="sg"/></l>
-				<r>cough<s n="n"/><s n="pl"/></r>
-			</p>
-		</e>
+    <e r="RL">
+      <p>
+        <l>tos<s n="n"/><s n="f"/><s n="sg"/></l>
+        <r>cough<s n="n"/><s n="pl"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -2072,19 +2072,19 @@
 
 <cross-action id="ND-89">
 	<pattern>
-		<e r="LR">
-			<p>
-				<l>tos<s n="n"/><s n="f"/><s n="pl"/></l>
-				<r>tos<s n="n"/><s n="f"/><s n="sp"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>tos<s n="n"/><s n="f"/><s n="pl"/></l>
+        <r>tos<s n="n"/><s n="f"/><s n="sp"/></r>
+      </p>
+    </e>
 
-		<e r="LR">
-			<p>
-				<l>tos<s n="n"/><s n="f"/><s n="sp"/></l>
-				<r>cough<s n="n"/><s n="ND"/></r>
-			</p>
-		</e>
+    <e r="LR">
+      <p>
+        <l>tos<s n="n"/><s n="f"/><s n="sp"/></l>
+        <r>cough<s n="n"/><s n="ND"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>
@@ -2095,21 +2095,21 @@
 
 <cross-action id="ND-90">
 	<pattern>
-		<e>
-			<p>
-				<l>cero<s n="num"/></l>
-				<r>zero<s n="num"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>cero<s n="num"/></l>
+        <r>zero<s n="num"/></r>
+      </p>
+    </e>
 
 
 
-		<e>
-			<p>
-				<l>zero<s n="num"/><s n="mf"/></l>
-				<r>zero<s n="num"/></r>
-			</p>
-		</e>
+    <e>
+      <p>
+        <l>zero<s n="num"/><s n="mf"/></l>
+        <r>zero<s n="num"/></r>
+      </p>
+    </e>
 
 	</pattern>
 <action-set>

@@ -85,7 +85,7 @@
 <e r="RL"><p><l>ĉefe<s n="adv"/></l>                   <r>primarily<s n="adv"/></r></p></e>
 
 <!-- Already is <e><l>ĉiaokaze<adv></l><r>regardless<adv></r></e>-->
-<e c="añadir también 'regardless of' como 'a pesar de'"><p><l>ĉiakoste<s n="adv"/></l><r>regardless<s n="adv"/></r></p></e>
+<e r="LR" c="añadir también 'regardless of' como 'a pesar de'"><p><l>ĉiakoste<s n="adv"/></l><r>regardless<s n="adv"/></r></p></e>
 <e>       <p><l>ĉiusemajne<s n="adv"/></l>             <r>weekly<s n="adv"/></r></p></e>
 
   </section>
