@@ -38,7 +38,7 @@ public class English {
         Par paradigm = new Par(par);
         I ient = new I();
         e.lemma = lem;
-        e.comment = "Bitches don't know 'bout my stem guessing";
+        e.comment = "check";
         if (i.contains(" "))
             i.replaceAll(" ", "<b/>");
         ient.setValue(i);
