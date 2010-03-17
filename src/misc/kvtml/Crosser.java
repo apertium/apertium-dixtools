@@ -20,6 +20,8 @@
 package misc.kvtml;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 import dictools.AbstractDictTool;
 import dics.elements.dtd.E;
 import dics.elements.dtd.P;
@@ -62,13 +64,26 @@ public class Crosser extends AbstractDictTool {
         return e;
     }
 
+    Map<String, String> listToMap (List<Translation> l) {
+        Map<String, String> m = new HashMap<String, String>();
+        for (Translation t : l) {
+            m.put(t.original, t.translation);
+        }
+        return m;
+    }
+
     List<E> crossKvtml () throws Exception {
         List<E> list = new ArrayList<E>();
+        Map<String, String> lmap = new HashMap<String, String>();
+        Map<String, String> rmap = new HashMap<String, String>();
+
         List<Translation> llist = DataSet.getTranslatedWords(fileA);
         List<Translation> rlist = DataSet.getTranslatedWords(fileB);
+        lmap = listToMap(llist);
+        rmap = listToMap(rlist);
 
         for (Translation t : llist) {
-            if (rlist.contains(t.original)) {
+            if (rmap.contains(t.original)) {
                 
             }
         }
