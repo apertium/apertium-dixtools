@@ -115,4 +115,32 @@ public class Catalan {
         return list.toArray(new E[list.size()]);
     }
 
+    boolean isGroupStartN (String para) {
+        if (para.startsWith("d'")) {
+            return true;
+        } else if ("de".equals(para)) {
+            return true;
+        } else if ("en".equals(para)) {
+            return true;
+        } else if ("al".equals(para)) {
+            return true;
+        } else if ("del".equals(para)) {
+            return true;
+        } else if ("per".equals(para)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    boolean isGroupStartV (String para) {
+        if ("la".equals(para)) {
+            return true;
+        } else if ("el".equals(para)) {
+            return true;
+        } else {
+            return isGroupStartN(para);
+        }
+    }
+
 }
