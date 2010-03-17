@@ -81,10 +81,10 @@ public class DataSet {
 		return ret;
 	}
 
-	public static List<Translation> getTranslatedWords() throws Exception {
+	public static List<Translation> getTranslatedWords(String path) throws Exception {
 		List<Translation> ret = new LinkedList<Translation>();
 
-		File file = new File("kvtml/EnWikt-v1.0-eng-ita.kvtml");
+		File file = new File(path);
 
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		DocumentBuilder db = dbf.newDocumentBuilder();
