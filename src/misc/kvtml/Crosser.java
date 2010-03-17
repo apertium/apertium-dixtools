@@ -83,8 +83,9 @@ public class Crosser extends AbstractDictTool {
         rmap = listToMap(rlist);
 
         for (Translation t : llist) {
-            if (rmap.contains(t.original)) {
-                
+            if (rmap.containsKey(t.original)) {
+                String right = rmap.get(t.original);
+                list.add(genEntry(t.original, t.translation, right));
             }
         }
         return list;
