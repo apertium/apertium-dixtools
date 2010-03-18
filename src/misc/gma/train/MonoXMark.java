@@ -32,7 +32,7 @@ public class MonoXMark {
     private BigInteger INFINITY =  new BigInteger("9999999999");
     private double TINY = 0.0000001;
 
-    private List<Double> x;
+    private List<Double> x; // Not sure these are doubles; guess
     private List<Double> y;
 
     private MonoXMark () {
