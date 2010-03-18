@@ -40,7 +40,7 @@ public class TermCatReader extends XMLReader {
             String childElementName = childElement.getNodeName();
             if (childElementName.equals("cross-action")) {
                 Denominacio den = readDenominacio(childElement);
-                //crossModel.addCrossAction(crossAction);
+                f.denom.add(den);
             }
         }
         root = null;
