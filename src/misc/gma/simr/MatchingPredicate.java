@@ -46,5 +46,5 @@ abstract interface MatchingPredicate {
    * @return                      true if two words match
    */
 
-  public boolean isMatch(List wordForMatch, List wordToMatch, boolean isXAxis);
+  public boolean isMatch(List<?> wordForMatch, List<?> wordToMatch, boolean isXAxis);
 }

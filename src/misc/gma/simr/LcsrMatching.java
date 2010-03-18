@@ -47,6 +47,7 @@ public class LcsrMatching implements MatchingPredicate {
    * Sets properties.
    * @param properties            properties
    */
+  @Override
   public void setProperties(Properties properties) {
     lcsrThreshold = Float.parseFloat(properties.getProperty(LCSR_THRESHOLD));
     minimumWordLength = Integer.parseInt(properties.getProperty(MINIMUM_WORD_LENGTH));
@@ -58,7 +59,8 @@ public class LcsrMatching implements MatchingPredicate {
    * @param wordToMatch           word to match to
    * @return                      true if two words match
    */
-  public boolean isMatch(List wordForMatch, List wordToMatch, boolean isXAxis) {
+  @Override
+  public boolean isMatch(List<?> wordForMatch, List<?> wordToMatch, boolean isXAxis) {
 
     if (wordForMatch.equals(wordToMatch)) {
       return true;
@@ -85,7 +87,7 @@ public class LcsrMatching implements MatchingPredicate {
    * @param wordToMatch               word to match to
    * @return                          length of longest common string
    */
-  public int computeLcs(List wordForMatch, List wordToMatch) {
+  public int computeLcs(List<?> wordForMatch, List<?> wordToMatch) {
 
     int wordLengthForMatch = wordForMatch.size();
     int wordLengthToMatch = wordToMatch.size();
