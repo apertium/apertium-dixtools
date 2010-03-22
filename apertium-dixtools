@@ -433,6 +433,7 @@ function show_help() {
    echo "Usage: apertium-dixtools [task] [generic options] [task parameters] ..."
    echo "  Tasks:"
    echo "    autorestrict: automatically adds restrictions on a bidix so no ambiguity exitst"
+   echo "    autoconcord: automatically makes gender, number etc in bidix concord with the monodices"
    echo "    cross:              cross 2 language pairs (using linguistic res. XML file)"
    echo "    cross-param:        cross 2 language pairs (using command line parameters)"
   #echo "    merge-bil:          merges two bilingual dictionaries (bidix)"
@@ -490,6 +491,10 @@ function profileresult() {
 }
 
 function autorestrict() {
+   	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
+}
+
+function autoconcord() {
    	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
 }
 

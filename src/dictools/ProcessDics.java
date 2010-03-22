@@ -173,6 +173,9 @@ public class ProcessDics extends AbstractDictTool {
         else if (action.equals("autorestrict")) {
           new AutorestrictBidix().executeTool(opt, arguments);
         }
+        else if (action.equals("autoconcord")) {
+          new AutoconcordBidix().executeTool(opt, arguments);
+        }
         else if (action.equals("merge")) {
             this.process_merge();
         }

@@ -22,6 +22,7 @@ package dics.elements.dtd;
 import java.io.IOException;
 
 import dictools.utils.DicOpts;
+import java.util.Arrays;
 
 /**
  * 
@@ -104,4 +105,18 @@ public class Par extends DixElement {
   public String getStreamContent() {
     return toString();
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (! (obj instanceof Par)) return false;
+    Par p = (Par) obj;
+    return p.name.equals(name) && Arrays.equals(p.prm, prm) && (p.sa == sa || sa != null && sa.equals(p.sa));
+  }
+
+  @Override
+  public int hashCode() {
+    return name.hashCode();
+  }
+
 }

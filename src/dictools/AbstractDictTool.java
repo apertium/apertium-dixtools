@@ -22,6 +22,7 @@ package dictools;
 import dictools.utils.DicOpts;
 import dictools.utils.Msg;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -38,6 +39,16 @@ public class AbstractDictTool {
     protected Msg msg = Msg.inst();
     
     protected String[] arguments;
+
+  /** argument pair was removed, adjust rest of args accordingly
+   * @param i index
+   * @param n number of elements to remove
+   */
+  protected void removeArgs(int i, int n) {
+      ArrayList<String> a = new ArrayList<String>(Arrays.asList(this.arguments));
+      while (n-->0) a.remove(i);
+      this.arguments =  a.toArray(new String[a.size()]);
+  }
 
 
   public void executeTool(DicOpts opt, String[] arguments) throws IOException {

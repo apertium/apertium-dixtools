@@ -112,7 +112,6 @@ public class DicTools {
     }
 
     /**
-     * 
      * @param name
      * @return Undefined         
      */

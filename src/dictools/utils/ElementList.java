@@ -38,6 +38,10 @@ public class ElementList extends ArrayList<DixElement> implements Cloneable {
         super(6);
     }
 
+  public ElementList(ElementList children) {
+    super(children);
+  }
+
     
     @Override
     public Object clone() {
