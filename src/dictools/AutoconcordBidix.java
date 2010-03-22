@@ -30,7 +30,8 @@ public class AutoconcordBidix extends AbstractDictTool {
 
 
   public static void main(final String[] args) throws Exception {
-    new AutoconcordBidix().prepare(null, null, null, null, "/home/j/esperanto/a/apertium-sv-da/apertium-sv-da.sv-da.dix", null);
+    //new AutoconcordBidix().prepare(null, null, null, null, "/home/j/esperanto/a/apertium-sv-da/apertium-sv-da.sv-da.dix", null);
+    new AutoconcordBidix().prepare(null, null, null, null, "/home/j/esperanto/a/incubator/apertium-eo-fr/apertium-eo-fr.eo-fr.dix", null);
 
     //prepareMonodixPardefs("/home/j/esperanto/a/apertium-sv-da/apertium-sv-da.da.dix", symbolPrefix);
     //prepareMonodixPardefs("/home/j/esperanto/a/apertium-sv-da/apertium-sv-da.sv.dix", symbolPrefix);
@@ -309,14 +310,13 @@ public class AutoconcordBidix extends AbstractDictTool {
   }
 
   private static boolean startsWith(List<S> sym, List<S> symbolPrefix) {
-    boolean startsWith=true;
     if (sym.size()<symbolPrefix.size()) {
-      startsWith=false;
+      return false;
     }
     if (!sym.subList(0, symbolPrefix.size()).equals(symbolPrefix)) {
-      startsWith=false;
+      return false;
     }
-    return startsWith;
+    return true;
   }
 
   public void updateBidix(String prefix, String replace, String mon1Filename, String mon2Filename, String bilFilename, String bilOutFilename) throws IOException {
