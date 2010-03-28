@@ -65,42 +65,6 @@ public class DictionaryReader extends XMLReader {
     public DictionaryReader() {
     }
 
-    /** The line number in the file */
-    private int position_line = 0;
-    /** The column number in the line */
-    private int position_column = 0;
-    /** The absolute position (in characters) in the line */
-    private int position_character = 0;
-
-    /** Increments positions */
-    private void incrementPositon(String text) {
-      position_character += text.length();
-      String[] lines = text.split("\n");  // biig waste of CPU, but we don't care about that for now
-      position_column += lines.length-1;
-      if (lines.length==1) {
-        // no newlines - update
-        position_character+= text.length();
-      } else {
-        // a newline was encountered, so take no of chars of last line
-        position_character= lines[lines.length-1].length();
-      }
-    }
-
-    /** Increments positions for a DOM XML node */
-    private void incrementPositon(Node child) {
-        if (child instanceof Comment) {
-          String dat = "<!--" + child.getNodeValue() + "-->";
-          incrementPositon(dat);
-        } else
-        if (child instanceof CharacterData) {
-          incrementPositon(child.getNodeValue());
-        } else if (child instanceof ProcessingInstruction) {
-            	// System.err.println("Data pi: " + child);
-          incrementPositon(child.getNodeValue()); // check: Is this OK?
-        } else {
-          // TODO!
-        }
-    }
     /**
      * 
      * @return The Dictionary object
@@ -120,7 +84,7 @@ public class DictionaryReader extends XMLReader {
         NodeList children = root.getChildNodes();
         for (int i = 0; i < children.getLength(); i++) {
             Node child = children.item(i);
-            incrementPositon(child);
+
             /*
              * if (child instanceof Comment) { Comment comment =
              * (Comment)child; System.err.println("Comment: " +
@@ -201,15 +165,6 @@ public class DictionaryReader extends XMLReader {
                 System.err.println("Unknown node ignored: " + childElementName);
             }
         }
-
-        // GSoC Code Challenge: Keep track of line numbers when reading a DOM XML Tree
-
-        System.err.println("GSoC Code Challenge: Keep track of line numbers when reading a DOM XML Tree ");
-        System.err.println("position_line = " + position_line);
-        System.err.println("position_character = " + position_character);
-        System.err.println("GSoC Code Challenge: who can make the above numbers print correctly, at any point in the file?");
-
-
         root = null;
         if (dic.pardefs==null) dic.pardefs=new Pardefs();
         if (dic.sdefs==null) dic.sdefs=new Sdefs();
