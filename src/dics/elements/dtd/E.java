@@ -69,6 +69,9 @@ public class E extends DixElement implements Cloneable {
      */
     public transient String temp;
     
+    /** Line number from source file */
+    public int lineNo;
+    
     public E() {
       super("e");
     }

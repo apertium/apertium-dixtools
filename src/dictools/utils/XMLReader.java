@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.lang.StringBuilder;
+import java.util.LinkedHashMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -61,6 +62,10 @@ import dics.elements.dtd.Sdefs;
 import dics.elements.dtd.T;
 import dics.elements.dtd.TextElement;
 import dics.elements.dtd.V;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.InputStreamReader;
+import org.xml.sax.InputSource;
 
 /**
  * 
@@ -102,6 +107,18 @@ public class XMLReader {
     protected static final Sa saElementConstant = new Sa();
     protected static final Prm prmElementNonumberConstant = new Prm();
 
+    /** Map of DOM Nodes to line numbers. Might be emppty but is never null,
+     * so lineNumbers.get(node) will always suceed (bur perhaps return null)
+     */
+    protected LinkedHashMap<Node, Integer> lineNumbers = new LinkedHashMap<Node, Integer>();
+
+    protected int getLineNo(Element e) {
+      Integer res = lineNumbers.get(e);
+      if (res==null) return 0; // mask null
+      return res;
+    }
+
+
     
     
     
@@ -118,8 +135,42 @@ public class XMLReader {
 
 
 
-    
     protected void analize() {
+        // getFactory().setXIncludeAware(true);
+        try {
+            KeepTrackOfLocationDOMParser parser = new KeepTrackOfLocationDOMParser();
+            //parser.parse("test/sample.eo-en.dix" );
+            //parser.getDocument();
+
+            if (urlDic) {
+                // case: url
+                System.err.println("Reading URL");
+                parser.parse(new InputSource(is));
+            } else {
+                // case: standard input
+              if (dicFile.equals(new File("-"))) {
+                System.err.println("Reading from standard input");
+                parser.parse(new InputSource(System.in));
+              } else {
+                // case: file
+                System.err.println("Reading file " + dicFile);
+                //parser.parse(new InputSource(new InputStreamReader(new FileInputStream(dicFile), "UTF-8")));
+                parser.parse(dicFile.getPath());
+              }
+
+            }
+            this.document = parser.getDocument();
+            this.lineNumbers = parser.lineNumbers;
+        } catch (Exception e) {
+            System.err.println("Error (" + dicFile + "): " + e.getMessage());
+            System.exit(-1);
+        }
+    }
+
+
+
+    
+    protected void analize_old() {
 
   //    builder.setFeature( "http://apache.org/xml/features/dom/defer-node-expansion", false );
 
@@ -208,6 +259,7 @@ public class XMLReader {
 
         return sdefsElement;
     }
+
 
     /**
      * 
@@ -476,7 +528,7 @@ public class XMLReader {
      * 
      * @param e
      * @return Undefined         */
-    protected static E readEElement(Element e) {
+    protected E readEElement(Element e) {
         String a = getAttributeValue(e, "a");
         String c = getAttributeValue(e, "c");
         String ign = getAttributeValue(e, "i");
@@ -497,6 +549,7 @@ public class XMLReader {
         eElement.slr = (slr);
         eElement.srl = (srl);
         eElement.ignore=ign;
+        eElement.lineNo = getLineNo(e);
 
         if (e.hasChildNodes()) {
             NodeList children = e.getChildNodes();

@@ -184,7 +184,7 @@ public class TemplatesReader extends XMLReader {
      * 
      * @param e
      */
-    public static Templates readTemplates(Element e) {
+    public Templates readTemplates(Element e) {
         Templates tpl = new Templates();
 
         StringBuilder characterData = new StringBuilder();
@@ -223,7 +223,7 @@ public class TemplatesReader extends XMLReader {
      * 
      * @param e
      */
-    public static Left readLeft(Element e) {
+    public Left readLeft(Element e) {
         String id = getAttributeValue(e, "id");
         Left l = new Left(id);
 
@@ -265,7 +265,7 @@ public class TemplatesReader extends XMLReader {
      *
      * @param e
      */
-    public static Right readRight(Element e) {
+    public Right readRight(Element e) {
         String id = getAttributeValue(e, "id");
         Right r = new Right(id);
 
@@ -307,7 +307,7 @@ public class TemplatesReader extends XMLReader {
      *
      * @param e
      */
-    public static Template readTemplate(Element e) {
+    public Template readTemplate(Element e) {
         Template tpl = new Template();
 
         StringBuilder characterData = new StringBuilder();

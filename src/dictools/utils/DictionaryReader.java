@@ -167,6 +167,7 @@ public class DictionaryReader extends XMLReader {
         if (dic.pardefs==null) dic.pardefs=new Pardefs();
         if (dic.sdefs==null) dic.sdefs=new Sdefs();
         this.document = null;
+        this.lineNumbers = null;
         dic.fileName = ""+this.dicFile;
         return dic;
     }
@@ -240,7 +241,7 @@ public class DictionaryReader extends XMLReader {
      * 
      * @param e
      */
-    public static Pardefs readPardefs(Element e) {
+    public Pardefs readPardefs(Element e) {
         Pardefs pardefsElement = new Pardefs();
 
         StringBuilder characterData = new StringBuilder();
@@ -279,10 +280,12 @@ public class DictionaryReader extends XMLReader {
      * 
      * @param e
      */
-    public static Pardef readPardef(Element e) {
+    public Pardef readPardef(Element e) {
         String n = getAttributeValue(e, "n");
         Pardef pardefElement = new Pardef(n);
         pardefElement.comment = getAttributeValue(e, "c");
+        pardefElement.lineNo = getLineNo(e);
+
 
         StringBuilder characterData = new StringBuilder();
         dics.elements.dtd.CharacterDataNeighbour previousElement = new CharacterDataInsideTag(pardefElement);

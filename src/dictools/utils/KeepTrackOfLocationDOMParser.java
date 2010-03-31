@@ -12,6 +12,9 @@ import com.sun.org.apache.xerces.internal.xni.NamespaceContext;
 import com.sun.org.apache.xerces.internal.xni.QName;
 import com.sun.org.apache.xerces.internal.xni.XMLAttributes;
 import com.sun.org.apache.xerces.internal.xni.XMLLocator;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.E;
+import dics.elements.dtd.Section;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import org.w3c.dom.Node;
@@ -64,8 +67,8 @@ public class KeepTrackOfLocationDOMParser extends DOMParser  {
     if (locator==null) return;
     try {
       Node node=(Node) this.getProperty("http://apache.org/xml/properties/dom/current-element-node");
-      System.err.println("node = "+node);
-      System.err.println("locator = "+locator.getCharacterOffset()+" ln:"+locator.getLineNumber());
+      //System.err.println("node = "+node);
+      //System.err.println("locator = "+locator.getCharacterOffset()+" ln:"+locator.getLineNumber());
       
       // cache and reuse instances so we don't litter memory exceedingly much
       if (lastLineNo.intValue() != locator.getLineNumber()) lastLineNo = locator.getLineNumber();
@@ -79,10 +82,16 @@ public class KeepTrackOfLocationDOMParser extends DOMParser  {
 
 
    public static void main(String argv[]) throws Exception {
-      KeepTrackOfLocationDOMParser domAddExample = new KeepTrackOfLocationDOMParser();
-      domAddExample.parse("test/sample.eo-en.dix" );
+     /*
+      KeepTrackOfLocationDOMParser parser = new KeepTrackOfLocationDOMParser();
+      parser.parse("test/sample.eo-en.dix" );
+      parser.getDocument();
+      System.err.println("domAddExample.lineNumbers = " + parser.lineNumbers);
+*/
+      Dictionary dic=new DictionaryReader("test/sample.eo-en.dix").readDic();
+      for (Section s : dic.sections) for (E e : s.elements)
+        System.err.println("Line: " + e.lineNo+": "+e);
 
-      System.err.println("domAddExample.lineNumbers = " + domAddExample.lineNumbers);
    } 
 
 
