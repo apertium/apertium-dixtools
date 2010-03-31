@@ -86,10 +86,6 @@ public class XMLReader {
 }*/
 
     
-    protected DocumentBuilderFactory factory;
-    
-    protected DocumentBuilder builder;
-    
     protected Document document;
     
     protected File dicFile;
@@ -110,7 +106,6 @@ public class XMLReader {
     
     
     public XMLReader() {
-        init();
     }
 
     /**
@@ -119,26 +114,22 @@ public class XMLReader {
      */
     public XMLReader(String fileName) {      
         this.dicFile = new File(fileName);
-        init();
     }
 
-    
-    private void init() {
-        // getFactory().setXIncludeAware(true);
-        try {
-            this.factory = DocumentBuilderFactory.newInstance();
-            this.factory.setXIncludeAware(true);
-            this.builder = factory.newDocumentBuilder();
-        } catch (ParserConfigurationException pce) {
-            pce.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+
 
     
     protected void analize() {
+
+  //    builder.setFeature( "http://apache.org/xml/features/dom/defer-node-expansion", false );
+
+        // getFactory().setXIncludeAware(true);
         try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setFeature( "http://apache.org/xml/features/dom/defer-node-expansion", false );
+            factory.setXIncludeAware(true);
+            DocumentBuilder builder = factory.newDocumentBuilder();
+
             if (urlDic) {
                 // case: url
                 System.err.println("Reading URL");
@@ -156,21 +147,9 @@ public class XMLReader {
               }
                 
             }
-        } catch (FileNotFoundException fnfe) {
-            System.err.println("Error: could not find '" + dicFile + "' file.");
-            System.exit(-1);
-        } catch (SAXException saxE) {
-            System.err.println("Error: could not parse '" + dicFile + "'. " + saxE.getMessage());
-            System.exit(-1);
-        } catch (IOException ioE) {
-            System.err.println("I/O error (" + dicFile + "): " + ioE.getMessage());
-            System.exit(-1);
         } catch (Exception e) {
             System.err.println("Error (" + dicFile + "): " + e.getMessage());
             System.exit(-1);
-        } finally {
-            this.builder = null;
-            this.factory = null;
         }
     }
 

@@ -49,8 +49,6 @@ import dics.elements.dtd.Section;
 public class DictionaryReader extends XMLReader {
 
     
-	public Dictionary dic;
-    
 	public boolean readParadigms = true;
     
     /**
@@ -169,7 +167,6 @@ public class DictionaryReader extends XMLReader {
         if (dic.pardefs==null) dic.pardefs=new Pardefs();
         if (dic.sdefs==null) dic.sdefs=new Sdefs();
         this.document = null;
-        this.dic = dic;
         dic.fileName = ""+this.dicFile;
         return dic;
     }
