@@ -12,6 +12,7 @@ import java.util.LinkedHashSet;
 import java.util.Scanner;
 
 /**
+ * Vidu dokumentadon cxe: http://wiki.apertium.org/wiki/Kompletigi_vortaron
  * @author Jacob Nordfalk
  */
 public class Kompletigu  {
