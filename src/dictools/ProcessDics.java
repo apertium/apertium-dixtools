@@ -197,6 +197,9 @@ public class ProcessDics extends AbstractDictTool {
         else if (action.equals("fix")) {
             this.process_fix();
         }
+        else if (action.equals("stemcheck")) {
+            this.process_stem_check();
+        }
         else if (action.toLowerCase().startsWith("profilecreate")) {
             if (arguments.length<3) {
               msg.err(usage + "profilecreate language_dir direction [.dix files]\nF.eks: profilecreate apertium-eo-en eo-en\nprofilecreate apertium-eo-en en-eo apertium-eo-en.eo.dix.xml");
@@ -463,6 +466,19 @@ public class ProcessDics extends AbstractDictTool {
             tool.opt = opt;
             tool.arguments = arguments;
             tool.doFix();
+        }
+
+    }
+
+        private void process_stem_check() {
+        if (arguments.length != 2) {
+            msg.err("Usage: java -jar path/to/apertium-dixtools.jar stemcheck <dic>");
+            System.exit(-1);
+        } else {
+            DicStemCheck tool = new DicStemCheck();
+            tool.opt = opt;
+            tool.arguments = arguments;
+            tool.doCheck();
         }
 
     }
