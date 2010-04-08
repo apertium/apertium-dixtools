@@ -583,10 +583,9 @@ public class ProcessDics extends AbstractDictTool {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar speling <speling> <dic-out>");
             System.exit(-1);
         } else {
-            Speling speling = new Speling (arguments[1], arguments[2]);
-            Dictionary dic = new Dictionary();
-            dic = speling.read_speling();
-            speling.write(dic);
+            Speling speling = new Speling (arguments[1]);
+            Dictionary dic = speling.read_speling();
+            dic.printXMLToFile(arguments[2], opt);
         }
 
     }
@@ -596,9 +595,8 @@ public class ProcessDics extends AbstractDictTool {
             msg.err("Usage: java -jar path/to/apertium-dixtools.jar speling-pruned <speling> <dic-out>");
             System.exit(-1);
         } else {
-            Speling speling = new Speling (arguments[1], arguments[2]);
-            Dictionary dic = new Dictionary();
-            dic = speling.read_speling();
+            Speling speling = new Speling (arguments[1]);
+            Dictionary dic = speling.read_speling();
             DicFindEquivPar tool = new DicFindEquivPar(dic);
             Dictionary equiv = new Dictionary();
             //tool.outFileName = arguments[2];

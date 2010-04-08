@@ -116,7 +116,9 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
     public String toString() {
       try {
         StringBuilder b=new StringBuilder();
-        printXML(b, DicOpts.STD_COMPACT.setNowAlign(true));
+        DicOpts opts = DicOpts.STD_COMPACT.setNowAlign(true);
+        opts.stripEmptyLines = true;
+        printXML(b, opts);
         while (b.length()>0 && Character.isWhitespace(b.charAt(b.length()-1))) b.deleteCharAt(b.length()-1);
         return b.toString();
       } catch (IOException ex) {

@@ -69,11 +69,9 @@ public class Speling extends AbstractDictTool {
     @Override
     public void executeTool() throws IOException {
         if (arguments.length != 3) failWrongNumberOfArguments(arguments);
-
-        new Speling(arguments[1], arguments[2]);
-        Dictionary dic = new Dictionary();
-        dic = this.read_speling();
-        this.write(dic);
+        
+        Dictionary dic = new Speling(arguments[1]).read_speling();
+        dic.printXMLToFile(arguments[2], opt);
     }
     
 
@@ -90,10 +88,6 @@ public class Speling extends AbstractDictTool {
         this.fileName = fileName;
     }
 
-    public Speling (String fileName, String outName) {
-        this(fileName);
-        this.outFileName = outName;
-    }
 
     /**
      * Add to the list of symbols
@@ -240,9 +234,5 @@ public class Speling extends AbstractDictTool {
             e.printStackTrace();
         }
         return dic;
-    }
-
-    public void write(Dictionary dic) {
-        dic.printXMLToFile(outFileName, opt);
     }
 }

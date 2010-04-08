@@ -19,6 +19,7 @@
 
 package dictools.speling;
 
+import java.io.IOException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -26,13 +27,15 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import junit.framework.Assert;
 import dics.elements.dtd.Dictionary;
+import dictools.TestTools;
+import dictools.utils.DicOpts;
 import dictools.utils.DictionaryReader;
 
 /**
  *
  * @author jim
  */
-public class SpelingTest {
+public class SpelingTest extends TestTools {
 
     public SpelingTest() {
     }
@@ -57,20 +60,20 @@ public class SpelingTest {
      * Test of read_speling method, of class Speling.
      */
     @Test
-    public void testRead_speling() {
+    public void testRead_speling() throws Exception {
         System.out.println("read_speling");
         String infile = "regression_test_data/speling/speling-test";
-        String outfile = "regression_test_data/speling/speling_out.dix";
+        String outfilex = "regression_test_data/speling/speling_out.dix";
         String control = "regression_test_data/speling/expected-output.dix";
-        Speling instance = new Speling (infile, outfile);
-        Dictionary in = new Dictionary();
-        Dictionary out = new Dictionary();
-        DictionaryReader readin = new DictionaryReader(control);
-        in = readin.readDic();
-        out = instance.read_speling();
-        System.err.println(in.toString());
-        System.err.println(out.toString());
-        Assert.assertEquals(in.toString(), out.toString());
+        Speling instance = new Speling (infile);
+        Dictionary out = instance.read_speling();
+        DicOpts opt = DicOpts.STD;
+        opt.noHeaderAtTop = true;
+        out.printXMLToFile(outfilex, opt);
+
+        String diff=exec( "diff -bBw "+control+" "+outfilex);
+        Assert.assertEquals("Difference", "", diff);
+
     }
 
 }
