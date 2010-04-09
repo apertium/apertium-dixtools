@@ -1,0 +1,5 @@
+Reading file test/stem-checker-test.dix
+<e><i>baby</i><par n="bab/y__n"/></e>
+<e><i>ability</i><par n="bab/y__n"/></e>
+Total: 2 stem errors
+

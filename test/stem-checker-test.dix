@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dictionary>
+   <sdefs>
+     <sdef n="n"/>
+     <sdef n="sg"/>
+     <sdef n="pl"/>
+   </sdefs>
+   <pardefs>
+	<pardef n="bab/y__n">
+	   <e>
+		 <p>
+		   <l>y</l>
+		   <r><s n="n"/><s n="sg"/></r>
+		 </p>
+	   </e>
+	   <e>
+		 <p>
+		   <l>ies</l>
+		   <r><s n="n"/><s n="pl"/></r>
+		 </p>
+	   </e>
+	</pardef>
+		<pardef n="fish__n">
+	   <e>
+		 <p>
+		   <l/>
+		   <r><s n="n"/><s n="sg"/></r>
+		 </p>
+	   </e>
+	   <e>
+		 <p>
+		   <l/>
+		   <r><s n="n"/><s n="pl"/></r>
+		 </p>
+	   </e>
+	</pardef>
+	
+
+   </pardefs>
+   <section id="main" type="standard">
+		<!-- wrongly stemmed identity -->
+		<e lm="baby"><i>baby</i><par n="bab/y__n"/></e>
+		
+		<!-- correctly stemmed identity -->
+		<e lm="lady"><i>lad</i><par n="bab/y__n"/></e>
+		
+		<!-- wrongly stemmed identity -->
+		<e lm="ability"><i>ability</i><par n="bab/y__n"/></e>
+		
+		<!-- non-stemmed paradigms, should not be considered -->
+		<e lm="fish"><i>fish</i><par n="fish__n"/></e>
+		<e lm="deer"><i>deer</i><par n="fish__n"/></e>
+		
+		
+   </section>
+</dictionary>

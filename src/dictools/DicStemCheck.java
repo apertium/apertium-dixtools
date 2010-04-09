@@ -19,30 +19,17 @@
  */
 package dictools;
 
-import dictools.cross.DicCross;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-
-import dics.elements.dtd.ContentElement;
 import dics.elements.dtd.Dictionary;
-import dics.elements.dtd.DixElement;
 import dics.elements.dtd.E;
-import dics.elements.dtd.Par;
-import dics.elements.dtd.Pardef;
-import dics.elements.dtd.S;
-import dics.elements.dtd.Sdef;
+
 import dics.elements.dtd.Section;
-import dics.elements.dtd.TextElement;
-import dictools.utils.DicOpts;
+
 import dictools.utils.DictionaryReader;
-import java.util.ArrayList;
-import java.util.ListIterator;
-import java.util.Set;
+
 
 /**
  *
- * @author Enrique Benimeli Bofarull
+ * @author Björn Löfroth
  *
  */
 public class DicStemCheck extends AbstractDictTool {
@@ -61,14 +48,14 @@ public class DicStemCheck extends AbstractDictTool {
 
                 // only check stemmed paradigms
                 if(paradigm.contains("/") && ee.lemma.equals(identity)){
-                    msg.err("Lemma \"" + ee.lemma + "\" has equal identity, but paradigm is stemmed (" + paradigm + ")\n");
+                    msg.err(ee.toString());
                     wrongIds++;
                 }
               }
               
           }
       }
-      msg.err("In total,  " + wrongIds + " malformed lemmas were found. \n");
+      msg.err("Total: " + wrongIds + " stem errors\n");
     }
 
 
