@@ -165,7 +165,7 @@ public class DicSort  extends AbstractDictTool {
 
         Iterator<String> it=map.keySet().iterator();
         while (it.hasNext()) {
-            String cat=(String) it.next();
+            String cat=it.next();
             ArrayList<E> list=map.get(cat);
             msg.log(cat+": "+list.size());
             if (list.size()>1) {
