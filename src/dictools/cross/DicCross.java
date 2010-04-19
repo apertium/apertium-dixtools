@@ -511,6 +511,9 @@ public class DicCross  extends AbstractDictTool{
                 // alt attribute
                 actionE.alt = mergeAttributes(e1.alt, e2.alt);
 
+                // alt attribute
+                actionE.v = mergeAttributes(e1.v, e2.v);
+
                 actionE.addProcessingComment(actionID);
                 msg.log("Pattern (winner): " + actionID + "\n");
                 actionE.print("L", msg);
