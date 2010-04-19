@@ -171,6 +171,10 @@ public class Pattern {
             } else {
                 eList.add(new S("^LRRL"));
             }
+
+            if (ee.v != null && !ee.v.equals("")) {
+                eList.add(new S("^var"+ee.v));
+            }
         }
         return eList;
     }
