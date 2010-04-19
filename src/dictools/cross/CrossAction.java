@@ -232,7 +232,9 @@ public class CrossAction implements Comparable<CrossAction> {
                     rA.restriction=a.getE().restriction;
                 }
             }
-            rA.v = a.getE().v;
+            if (a.getE().v != null && !a.getE().v.equals("")) {
+                rA.v = a.getE().v;
+            }
             rA.children.add(new P(new L(rLeftA), new R(rRightA)));
             rActionSet.add(new Action(rA));
         }
