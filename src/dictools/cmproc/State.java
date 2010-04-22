@@ -25,7 +25,7 @@ import java.util.regex.Matcher;
 
 import dics.elements.dtd.DixElement;
 import dics.elements.dtd.S;
-import dictools.utils.ElementList;
+
 import dictools.cross.CrossAction;
 import java.util.HashMap;
 
@@ -62,7 +62,7 @@ public class State {
      * @param crossAction
      * @param i
      */
-    public void add(ElementList pattern, CrossAction crossAction, int i) {
+    public void add(ArrayList<DixElement> pattern, CrossAction crossAction, int i) {
         if (i < pattern.size()) {
             DixElement e = pattern.get(i);
             if (this.isConstant(e)) {
@@ -144,7 +144,7 @@ public class State {
      * @param cadl
      * @param varsSrc
      */
-    public final void getActionSetList(ElementList patternSequence, int i, CrossActionDataList cadl, Variables varsSrc) {
+    public final void getActionSetList(ArrayList<DixElement> patternSequence, int i, CrossActionDataList cadl, Variables varsSrc) {
         if (i < patternSequence.size()) {
             Variables vars = null;
             String v = (patternSequence.get(i)).getValue();
@@ -270,7 +270,7 @@ public class State {
      * @param cadl
      * @param vars
      */
-    private final void continue_processing(ElementList patternSequence, int i, CrossActionDataList cadl, Variables vars) {
+    private final void continue_processing(ArrayList<DixElement> patternSequence, int i, CrossActionDataList cadl, Variables vars) {
         Iterator<String> it = states.keySet().iterator();
         while (it.hasNext()) {
             State st = states.get(it.next());
@@ -309,7 +309,7 @@ public class State {
      * @param cadl
      * @return Index
      */
-    private int process_S(String state_v, String v, Variables vars, ElementList patternSequence, int i) {
+    private int process_S(String state_v, String v, Variables vars, ArrayList<DixElement> patternSequence, int i) {
         boolean continueProcessing = false;
         DixElement e = patternSequence.get(i);
         ArrayList<S> eList = new ArrayList<S>();

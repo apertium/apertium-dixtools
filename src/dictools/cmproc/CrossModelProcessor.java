@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import dics.elements.dtd.DixElement;
-import dictools.utils.ElementList;
+
 import dictools.utils.Msg;
 import dictools.cross.CrossAction;
 import dictools.cross.CrossModel;
@@ -54,7 +54,7 @@ public class CrossModelProcessor {
 
         for (CrossAction crossAction : crossModel.getCrossActions()) {
             crossAction.print(msg);
-            ElementList eList = crossAction.getPattern().getSequence();
+            ArrayList<DixElement> eList = crossAction.getPattern().getSequence();
             str = getElementListString(eList);
             if (!patterns.containsKey(str)) {
                 patterns.put(str, crossAction);
@@ -81,7 +81,7 @@ public class CrossModelProcessor {
      * @param eList
      * @param crossAction
      */
-    public void add(ElementList eList, CrossAction crossAction) {
+    public void add(ArrayList<DixElement> eList, CrossAction crossAction) {
         msg.log("Adding pattern '" + crossAction.getId() + "'...");
         printSequence(msg, eList);
         this.startState.add(eList, crossAction, 0);
@@ -93,7 +93,7 @@ public class CrossModelProcessor {
      * @return The best action set
      */
     public CrossActionData getBestActionSet(CrossAction entries) {
-        ElementList patternSequence = entries.getPattern().getSequence();
+        ArrayList<DixElement> patternSequence = entries.getPattern().getSequence();
         //patternSequence.print();
         Variables vars = new Variables();
         CrossActionDataList crossActionDataList = new CrossActionDataList();
@@ -123,7 +123,7 @@ public class CrossModelProcessor {
      * @param eList
      * @return A string of elements
      */
-    private String getElementListString(ElementList eList) {
+    private String getElementListString(ArrayList<DixElement> eList) {
         String str = "";
         for (DixElement e : eList) {
             str += "<" + e.getValue() + ">";

@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 import dictools.utils.DicOpts;
-import dictools.utils.ElementList;
 import dictools.utils.Msg;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,7 +35,7 @@ import java.util.logging.Logger;
  */
 public class E extends DixElement implements Cloneable {
 
-    public ElementList children = new ElementList();
+    public ArrayList<DixElement> children = new ArrayList<DixElement>();
 
     public String restriction;
 
@@ -782,8 +781,8 @@ public class E extends DixElement implements Cloneable {
       }
     }
 
-  ElementList children_copy() {
-    ElementList children_copy = new ElementList(children);
+  ArrayList<DixElement> children_copy() {
+    ArrayList<DixElement> children_copy = new ArrayList<DixElement>(children);
     for (int i = 0; i < children.size(); i++) {
         DixElement eCloned = children.get(i).copy();
         children_copy.set(i, eCloned);
@@ -857,7 +856,7 @@ public class E extends DixElement implements Cloneable {
                 L lE = ((P) e).l;
                 R rE = ((P) e).r;
 
-                ElementList auxChildren = lE.children;
+                ArrayList<DixElement> auxChildren = lE.children;
 
                 eRev.getFirstPart("L").children=rE.children;
                 eRev.getFirstPart("R").children=auxChildren;

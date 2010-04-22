@@ -19,13 +19,14 @@
  */
 package dictools.cross;
 
+import dics.elements.dtd.DixElement;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import dics.elements.dtd.S;
 import dictools.utils.DicOpts;
-import dictools.utils.ElementList;
+
 import dictools.utils.Msg;
 
 /**
@@ -44,7 +45,7 @@ public class ActionSet extends ArrayList<Action> {
     
     private Integer patternLength = 0;
     
-    private HashMap<String, ElementList> tails;
+    private HashMap<String, ArrayList<DixElement>> tails;
     
     private CrossAction crossAction;
 
@@ -193,7 +194,7 @@ public class ActionSet extends ArrayList<Action> {
     /**
      * @return the tails
      */
-    public HashMap<String, ElementList> getTails() {
+    public HashMap<String, ArrayList<DixElement>> getTails() {
         return tails;
     }
 
@@ -201,7 +202,7 @@ public class ActionSet extends ArrayList<Action> {
      * @param tails
      *                the tails to set
      */
-    public void setTails(HashMap<String, ElementList> tails) {
+    public void setTails(HashMap<String, ArrayList<DixElement>> tails) {
         this.tails = tails;
     }
 

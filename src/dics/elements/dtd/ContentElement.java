@@ -23,7 +23,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import dictools.utils.DicOpts;
-import dictools.utils.ElementList;
 
 /**
  * 
@@ -33,7 +32,7 @@ import dictools.utils.ElementList;
 public abstract class ContentElement extends DixElement implements Cloneable {
 
     
-    public ElementList children = new ElementList();
+    public ArrayList<DixElement> children = new ArrayList<DixElement>();
     
     
 /* TODO UCdetector: Remove unused code: 
@@ -295,8 +294,8 @@ public abstract class ContentElement extends DixElement implements Cloneable {
      * 
      * @return A sequence of elements (text and 's' elements)
      */
-    public ElementList getSequence() {
-        ElementList eList = new ElementList();
+    public ArrayList<DixElement> getSequence() {
+        ArrayList<DixElement> eList = new ArrayList<DixElement>();
         String str = "";
         boolean hasSElements = false;
         for (DixElement e : this.children) {
@@ -359,8 +358,8 @@ public abstract class ContentElement extends DixElement implements Cloneable {
         return str;
     }
 
-  ElementList children_copy() {
-    ElementList children_copy = new ElementList(children);
+  ArrayList<DixElement> children_copy() {
+    ArrayList<DixElement> children_copy = new ArrayList<DixElement>(children);
     for (int i = 0; i < children.size(); i++) {
         DixElement eCloned = children.get(i).copy();
         children_copy.set(i, eCloned);

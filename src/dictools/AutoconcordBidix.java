@@ -416,7 +416,7 @@ public class AutoconcordBidix extends AbstractDictTool {
 
           // OK, regenerate all paradigms to ensure concordance
         String e0 = e.toString();
-//        ElementList e_children = new ElementList(e.children);
+//        ArrayList<DixElement> e_children = new ArrayList<DixElement>(e.children);
 
         String slhint=getHint(sLemPardef, e, e.getLemmaForSide("L"), sldix, sPardefHint);
         String tlhint=getHint(tLemPardef, e, e.getLemmaForSide("R"), tldix, tPardefHint);
@@ -538,7 +538,7 @@ public class AutoconcordBidix extends AbstractDictTool {
 
 
 /*
-  private static Iterable<DixElement> flatList(final ElementList children) {
+  private static Iterable<DixElement> flatList(final ArrayList<DixElement> children) {
     return new Iterable<DixElement>() {
 
       @Override

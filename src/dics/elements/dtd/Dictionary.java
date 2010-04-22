@@ -31,7 +31,6 @@ import java.util.Set;
 
 import dictools.utils.DicOpts;
 import dictools.utils.DicTools;
-import dictools.utils.ElementList;
 
 /**
  *
@@ -449,7 +448,7 @@ public class Dictionary extends DixElement {
                         L lE = ((P) e).l;
                         R rE = ((P) e).r;
                         // String auxValue = lE.getValue();
-                        ElementList auxChildren = lE.children;
+                        ArrayList<DixElement> auxChildren = lE.children;
                         // lE.setValue(rE.getValue());
                         lE.children = rE.children;
                         // rE.setValue(auxValue);

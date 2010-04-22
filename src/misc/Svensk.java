@@ -66,7 +66,7 @@ public class Svensk {
                 System.err.println("e1 = " + sl1 + " " + sl2);
                 for (DixElement el2 : e2.children) {
                   if (el2 instanceof P) {
-                    ElementList elems = ((P) el2).r.children;
+                    ArrayList<DixElement> elems = ((P) el2).r.children;
                     int i = elems.indexOf(S.getInstance("pl"));
                     elems.set(i, S.getInstance("sp"));
                   }

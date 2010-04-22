@@ -490,7 +490,7 @@ public class DicCross  extends AbstractDictTool{
      * @return
      */
     private ArrayList<E> applyCrossAction(E e1, E e2, CrossActionData cad) {
-        ArrayList<E> elementList = new ArrayList<E>();
+        ArrayList<E> elist = new ArrayList<E>();
         CrossAction cA = cad.getCrossAction();
 
         for (Action action : cA.getActionSet()) {
@@ -518,10 +518,10 @@ public class DicCross  extends AbstractDictTool{
                 msg.log("Pattern (winner): " + actionID + "\n");
                 actionE.print("L", msg);
                 actionE.print("R", msg);
-                elementList.add(actionE);
+                elist.add(actionE);
             }
         }
-        return elementList;
+        return elist;
     }
 
     /**

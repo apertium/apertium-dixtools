@@ -28,8 +28,8 @@ import dics.elements.dtd.E;
 import dics.elements.dtd.S;
 import dics.elements.dtd.TextElement;
 import dictools.utils.DicOpts;
-import dictools.utils.ElementList;
 import dictools.utils.Msg;
+import java.util.ArrayList;
 
 /**
  * 
@@ -128,8 +128,8 @@ public class Pattern {
      * 
      * @return The list of elements
      */
-    public ElementList getElementList() {
-        ElementList list = new ElementList();
+    public ArrayList<DixElement> getElementList() {
+        ArrayList<DixElement> list = new ArrayList<DixElement>();
         list.add(e1.getFirstPartAsL());
         list.add(e1.getFirstPartAsR());
         list.add(e2.getFirstPartAsL());
@@ -141,8 +141,8 @@ public class Pattern {
      * 
      * @return Sequence of elements in pattern
      */
-    public ElementList getSequence() {
-        ElementList eList = new ElementList();
+    public ArrayList<DixElement> getSequence() {
+        ArrayList<DixElement> eList = new ArrayList<DixElement>();
 
         eList = this.getSequenceR(this.getAB(), eList);
         eList = this.getSequenceCE(this.getAB().getFirstPartAsL(), eList);
@@ -161,7 +161,7 @@ public class Pattern {
      * @param ee
      * @param eList
      */
-    private ElementList getSequenceR(E ee, ElementList eList) {
+    private ArrayList<DixElement> getSequenceR(E ee, ArrayList<DixElement> eList) {
         if (ee != null) {
             if (ee.hasRestriction()) {
                 String r = ee.restriction;
@@ -184,9 +184,9 @@ public class Pattern {
      * @param ce
      * @param eList
      */
-    private ElementList getSequenceCE(ContentElement ce, ElementList eList) {
+    private ArrayList<DixElement> getSequenceCE(ContentElement ce, ArrayList<DixElement> eList) {
         if (ce != null) {
-            ElementList ceSeq = ce.getSequence();
+            ArrayList<DixElement> ceSeq = ce.getSequence();
             eList.addAll(ceSeq);
         }
         eList.add(new S("^b"));
