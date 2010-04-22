@@ -177,12 +177,12 @@ public class DixElement implements Cloneable, CharacterDataNeighbour {
     }
 
     
-    @Override
-    public Object clone() {
+    public DixElement copy() {
         try {
             DixElement cloned = (DixElement) super.clone();
             return cloned;
         } catch (CloneNotSupportedException ex) {
+            ex.printStackTrace();
             return null;
         }
     }

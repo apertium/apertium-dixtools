@@ -457,8 +457,8 @@ public class DicCross  extends AbstractDictTool{
         this.incrementNCrossedElements();
         if (dir != 0) {
             E aux;
-            aux = (E) e2.clone();
-            e2 = (E) e1.clone();
+            aux = e2.copy();
+            e2 = e1.copy();
             e1 = aux;
         }
 

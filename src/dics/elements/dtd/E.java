@@ -26,6 +26,8 @@ import java.util.Comparator;
 import dictools.utils.DicOpts;
 import dictools.utils.ElementList;
 import dictools.utils.Msg;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * 
@@ -769,16 +771,25 @@ public class E extends DixElement implements Cloneable {
     }
 
     
-    @Override
-    public Object clone() {
-        try {
-            E cloned = (E) super.clone();
-            cloned.children = (ElementList) children.clone();
-            return cloned;
-        } catch (Exception ex) {
-            return null;
-        }
+    public E copy() {
+      try {
+        E cloned=(E) super.clone();
+        cloned.children= children_copy();
+        return cloned;
+      } catch (CloneNotSupportedException ex) {
+        ex.printStackTrace();
+        return null;
+      }
     }
+
+  ElementList children_copy() {
+    ElementList children_copy = new ElementList(children);
+    for (int i = 0; i < children.size(); i++) {
+        DixElement eCloned = children.get(i).copy();
+        children_copy.set(i, eCloned);
+    }
+    return children_copy;
+  }
 
 
     public static class EElementComparator implements Comparator<E> {

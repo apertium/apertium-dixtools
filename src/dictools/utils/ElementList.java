@@ -42,7 +42,7 @@ public class ElementList extends ArrayList<DixElement> implements Cloneable {
     super(children);
   }
 
-    
+   /*
     @Override
     public Object clone() {
         try {
@@ -59,7 +59,7 @@ public class ElementList extends ArrayList<DixElement> implements Cloneable {
             return null;
         }
     }
-
+*/
     
     @Override
     public String toString() {

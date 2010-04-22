@@ -51,7 +51,7 @@ public abstract class ContentElement extends DixElement implements Cloneable {
      */
     public ContentElement(String tagName, ContentElement cE) {
         super(tagName);
-        children = (ElementList) cE.children.clone();
+        children = cE.children_copy();
     }
 
 
@@ -279,16 +279,16 @@ public abstract class ContentElement extends DixElement implements Cloneable {
     }
 
     
-    @Override
-    public Object clone() {
-        ContentElement cloned = null;
+  @Override
+    public ContentElement copy() {
         try {
-            cloned = (ContentElement) super.clone();
-            cloned.children = (ElementList) children.clone();
+            ContentElement cloned = (ContentElement) super.clone();
+            cloned.children = children_copy();
+            return cloned;
         } catch (Exception ex) {
+            ex.printStackTrace();
             return null;
         }
-        return cloned;
     }
 
     /**
@@ -358,4 +358,13 @@ public abstract class ContentElement extends DixElement implements Cloneable {
         str += "</g>";
         return str;
     }
+
+  ElementList children_copy() {
+    ElementList children_copy = new ElementList(children);
+    for (int i = 0; i < children.size(); i++) {
+        DixElement eCloned = children.get(i).copy();
+        children_copy.set(i, eCloned);
+    }
+    return children_copy;
+  }
 }
