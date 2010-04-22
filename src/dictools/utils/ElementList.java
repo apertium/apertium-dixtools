@@ -64,7 +64,6 @@ public class ElementList extends ArrayList<DixElement> implements Cloneable {
     @Override
     public String toString() {
         String str = "";
-
         if (size() > 0) {
             for (DixElement e : this) {
                 String tmp = "";
@@ -75,22 +74,6 @@ public class ElementList extends ArrayList<DixElement> implements Cloneable {
         }
 
         return str;
-    }
-
-    /**
-     * 
-     * @param eList
-     * @return list1 + list2
-     */
-    public ElementList concat(ElementList eList) {
-        ElementList cList = new ElementList();
-        for (DixElement e1 : this) {
-            cList.add(e1);
-        }
-        for (DixElement e2 : eList) {
-            cList.add(e2);
-        }
-        return cList;
     }
 
 }

@@ -187,7 +187,7 @@ public class Pattern {
     private ElementList getSequenceCE(ContentElement ce, ElementList eList) {
         if (ce != null) {
             ElementList ceSeq = ce.getSequence();
-            eList = eList.concat(ceSeq);
+            eList.addAll(ceSeq);
         }
         eList.add(new S("^b"));
         return eList;
