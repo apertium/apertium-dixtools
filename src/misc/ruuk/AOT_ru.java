@@ -29,7 +29,7 @@ public class AOT_ru {
     private Hashtable<String, String> tagmap = new Hashtable<String, String> ();
 
     private void myput (String key, String val) {
-        tagmap.put (new String(key), new String (val));
+        tagmap.put (key, val);
     }
 
     private void fill_tags () {

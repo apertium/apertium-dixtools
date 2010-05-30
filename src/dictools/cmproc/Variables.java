@@ -56,7 +56,7 @@ public class Variables extends HashMap<String, Object> {
             }
             if (obj instanceof ArrayList<?>) {  // <S>
                 ArrayList<S> sEList = (ArrayList<S>) obj;
-                put(new String(key), new ArrayList<S>(sEList));
+                put(key, new ArrayList<S>(sEList));
             }
         }
     }

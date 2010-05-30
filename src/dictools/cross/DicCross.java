@@ -1029,7 +1029,7 @@ public class DicCross  extends AbstractDictTool{
                         bBC.rightLanguage = tl;
                         bBCok = true;
                         if (clBC == null) {
-                            clBC = new String(r.getTL());
+                            clBC = r.getTL();
                         }
                     }
                 }

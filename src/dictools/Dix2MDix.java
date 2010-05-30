@@ -226,7 +226,7 @@ public class Dix2MDix {
 
 
             content = first + "." + last + ".";
-            fileInfo.add(new String("@" + fileName + ":" + content + "$"));
+            fileInfo.add("@" + fileName + ":" + content + "$");
             metaInf.add("@" + this.outFileName + "_n:" + fileInfo.size() + "$");
             for (String c : fileInfo) {
                 metaInf.add(c);

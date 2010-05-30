@@ -584,7 +584,7 @@ public class Apertiumizer extends AbstractDictTool {
                         L left = new L();
                         left.children.add(new TextElement(replacePoS(new String(itemLeft))));
                         R right = new R();
-                        right.children.add(new TextElement(replacePoS(new String(itemRight))));
+                        right.children.add(new TextElement(replacePoS(itemRight)));
                         P pE = new P();
                         pE.l = left;
                         pE.r = (right);
