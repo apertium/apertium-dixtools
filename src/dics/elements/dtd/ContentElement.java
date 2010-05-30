@@ -74,33 +74,35 @@ public abstract class ContentElement extends DixElement implements Cloneable {
      */
     @Override
     public String getValueNoTags() {
-        String str = "";
+        StringBuffer sb = new StringBuffer();
         for (DixElement e : children) {
             if (!(e instanceof S)) {
                 if (e instanceof TextElement) {
                     TextElement tE = (TextElement) e;
-                    str += tE.text;
+                    sb.append(tE.text);
                 } else {
-                    str += e.getValueNoTags();
+                    sb.append(e.getValueNoTags());
                 }
             }
         }
-        return str;
+        return sb.toString();
     }
 
     @Override
     public String getValue() {
-        String str = "";
+        StringBuffer sb = new StringBuffer();
         for (DixElement e : children) {
             if (!(e instanceof S)) {
                 if (e instanceof G) {
-                    str += "<g>" + ((G) e).getValue() + "</g>";
+                    sb.append("<g>");
+                    sb.append(((G) e).getValue());
+                    sb.append("</g>");
                 } else {
-                    str += e.getValue();
+                	sb.append(e.getValue());
                 }
             }
         }
-        return str;
+        return sb.toString();
     }
 
     /**
@@ -224,30 +226,32 @@ public abstract class ContentElement extends DixElement implements Cloneable {
      * 
      * @return Undefined         */
     public String getSymbolsAsString() {
-        String str = "";
+        StringBuffer sb = new StringBuffer();
         for (S s : getSymbols()) {
-            str += s.toString();
+            sb.append(s.toString());
         }
-        return str;
+        return sb.toString();
     }
 
     /**
      * 
      * @return Undefined         */
     public String getInfo() {
-        String str = "(";
+        StringBuffer sb = new StringBuffer();
+        sb.append("(");
         int i = 0;
         for (S s : getSymbols()) {
             // para que no se considere la primera etiqueta, la de
             // categoria,
             // para encontrar paradigmas equivalentes.
             if (i != 0) {
-                str += s.getValue() + ",";
+                sb.append(s.getValue());
+                sb.append(",");
             }
             i++;
         }
-        str += ")";
-        return str;
+        sb.append(")");
+        return sb.toString();
     }
 
     
@@ -268,13 +272,11 @@ public abstract class ContentElement extends DixElement implements Cloneable {
 
 
     public String getStreamContent() {
-        String str = "";
-
+        StringBuffer sb = new StringBuffer();
         for (DixElement e : children) {
-            String v = e.getStreamContent();
-            str += v;
+            sb.append(e.getStreamContent());
         }
-        return str;
+        return sb.toString();
     }
 
     
