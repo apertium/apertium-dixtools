@@ -77,17 +77,17 @@ public class DicCross  extends AbstractDictTool{
     /**
      * Left-Right restriction
      */
-    private final int LR = 0;
+    private static final int LR = 0;
     /**
      * Right-Left restriction
      */
-    private final int RL = 1;
+    private static final int RL = 1;
     /**
      * Left-Right and Right-Left restrictions.
      */
-    private final int BOTH = 2;
+    private static final int BOTH = 2;
     
-    private final int NONE = 3;
+    private static final int NONE = 3;
     /**
      * Bilingual dictionary A-B
      */
