@@ -80,7 +80,7 @@ public class CompleteTranslation {
                             ee.getFirstP().r = (rE);
                         } else {
                             P pE = new P();
-                            pE.r = (rE);
+                            //pE.r = (rE);
                             pE.r = (ee.getFirstPartAsR());
                             I iE = ee.getFirstI();
                             ee.children.remove(iE);
