@@ -10,7 +10,7 @@ import java.util.regex.Matcher;
 
 public class LeguAliajn {
     public static void main(String[] args) {
-	LeguAliajn legualiajn = new LeguAliajn();
+	//LeguAliajn legualiajn = new LeguAliajn();
     }
 
 

@@ -511,7 +511,7 @@ public class DicMerge  extends AbstractDictTool {
         Dictionary bilAB1 = DicTools.readBilingual(sDicBilAB1, bilAB1Reverse);
         Dictionary monA1 = DicTools.readMonolingual(sDicMonA1);
         Dictionary monB1 = DicTools.readMonolingual(sDicMonB1);
-        DicSet dicSet1 = new DicSet(bilAB1, monA1, monB1);
+        //DicSet dicSet1 = new DicSet(bilAB1, monA1, monB1);
         //this.dicSet1 = dicSet1;
         this.bilAB1 =(bilAB1);
         this.monA1 = (monA1);

@@ -186,7 +186,7 @@ public class KompletiguEoDix {
   public static void mainx(final String[] args) throws IOException {
     //Dictionary eodix = new DictionaryReader("../apertium-eo-en/apertium-eo-en.eo.dix.xml").readDic();
 
-    Set<String> esperanto_nouns_with_gender = new HashSet<String>(Iloj.leguTekstDosieron("res/esperanto_nouns_with_gender.txt"));
+    //Set<String> esperanto_nouns_with_gender = new HashSet<String>(Iloj.leguTekstDosieron("res/esperanto_nouns_with_gender.txt"));
 
     
     //System.err.println("forprenindiajEtikedoj = " + forprenindiajEtikedoj);

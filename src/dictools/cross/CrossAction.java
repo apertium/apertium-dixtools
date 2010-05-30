@@ -162,9 +162,11 @@ public class CrossAction implements Comparable<CrossAction> {
         occurrences++;
     }
 
+    public boolean equals(CrossAction anotherEElement) {
+    	return compareTo(anotherEElement) == 0;
+    }
     
-    public int compareTo(CrossAction anotherEElement)
-            throws ClassCastException {
+    public int compareTo(CrossAction anotherEElement) {
         if (anotherEElement == null) {
             return -1;
         }

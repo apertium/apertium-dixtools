@@ -126,7 +126,7 @@ public class Iloj {
     BufferedReader br = new BufferedReader(new InputStreamReader(new
         URL(nopasteUrl).openStream()));
     System.out.println("Legas " + "URL");
-    ArrayList<String> words = new ArrayList<String>();
+    //ArrayList<String> words = new ArrayList<String>();
     String linio;
     while ((linio = br.readLine()) != null) {
         linio = linio.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
@@ -147,7 +147,7 @@ public class Iloj {
     {
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(nopasteUrl)));
         System.out.println("Legas " + "URL");
-        ArrayList<String> words = new ArrayList<String>();
+        //ArrayList<String> words = new ArrayList<String>();
         String linio;
         while ((linio = br.readLine()) != null) {
             if (linio.length()>0) linioj.add(linio);

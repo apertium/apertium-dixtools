@@ -41,6 +41,7 @@ import dics.elements.dtd.E;
 import dics.elements.dtd.S;
 import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
+import dictools.cross.CrossAction;
 import dictools.utils.DictionaryReader;
 
 /**
@@ -333,7 +334,10 @@ public class Dix2MDix {
     	public String value;
 
         
-
+        public boolean equals(Entry anotherEntry) {
+        	return compareTo(anotherEntry) == 0;
+        }
+    	
         public int compareTo(Entry anotherEntry) {
             String lemma2 = anotherEntry.key;
             String lemma1 = this.key;

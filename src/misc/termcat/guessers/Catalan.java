@@ -57,7 +57,7 @@ public class Catalan {
         e.comment = "check";
         e.restriction = "LR";
         if (right.contains(" "))
-            right.replaceAll(" ", "<b/>");
+            right = right.replaceAll(" ", "<b/>");
         if (left.contains(" "))
             left = left.replaceAll(" ", "<b/>");
         l.setValue(left);
