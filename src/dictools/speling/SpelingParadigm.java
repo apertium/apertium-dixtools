@@ -158,7 +158,7 @@ public class SpelingParadigm {
     public Pardef toPardef () {
         if (suffixes == null || suffixes.isEmpty()) {
             // Maybe there's a better exception...
-            throw new IndexOutOfBoundsException("Suffix array not set: " + suffixes.size());
+            throw new IndexOutOfBoundsException("Suffix array not set");
         }
 
         Pardef out = new Pardef(pardef_name());

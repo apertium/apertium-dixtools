@@ -127,6 +127,7 @@ public class Apertiumizer extends AbstractDictTool {
                     c++;
                 }
             }
+            br.close();
             in.close();
 
             dic.printXMLToFile(this.getOutFileName(), opt);

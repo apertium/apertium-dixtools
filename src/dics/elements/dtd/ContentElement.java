@@ -257,17 +257,18 @@ public abstract class ContentElement extends DixElement implements Cloneable {
     
     @Override
     public String toString() {
-        String str = "";
-
-        str += "<" + TAGNAME + ">";
+        StringBuffer sb = new StringBuffer();
+        sb.append("<");
+        sb.append(TAGNAME);
+        sb.append(">");
         for (DixElement e : children) {
           if (e==null) continue;
-            String v = e.toString();
-            str += v;
+            sb.append(e.toString());
         }
-        str += "</" + TAGNAME + ">";
-
-        return str;
+        sb.append("</");
+        sb.append(TAGNAME);
+        sb.append(">");
+        return sb.toString();
     }
 
 
@@ -345,19 +346,19 @@ public abstract class ContentElement extends DixElement implements Cloneable {
      */
     private String processGElement(DixElement e) {
         G gE = (G) e;
-        String str = "";
-        str += "<g>";
+        StringBuffer sb = new StringBuffer();
+        sb.append("<g>");
         for (DixElement e1 : gE.children) {
             if (e1 instanceof TextElement) {
                 TextElement tE = (TextElement) e1;
-                str += tE.text;
+                sb.append(tE.text);
             }
             if (e1 instanceof B) {
-                str += "<b/>";
+                sb.append("<b/>");
             }
         }
-        str += "</g>";
-        return str;
+        sb.append("</g>");
+        return sb.toString();
     }
 
   ArrayList<DixElement> children_copy() {

@@ -251,7 +251,7 @@ public class DicCross  extends AbstractDictTool{
      */
     private Alphabet crossAlphabets(Alphabet alphabet1, Alphabet alphabet2) {
         Alphabet alphabet = new Alphabet();
-        if (alphabet2 != null && alphabet2 != null) {
+        if (alphabet1 != null && alphabet2 != null) {
 
 
             String a1 = alphabet1.alphabet;
