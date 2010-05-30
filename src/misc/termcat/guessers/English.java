@@ -40,7 +40,7 @@ public class English {
         e.lemma = lem;
         e.comment = "check";
         if (i.contains(" "))
-            i.replaceAll(" ", "<b/>");
+            i = i.replaceAll(" ", "<b/>");
         ient.setValue(i);
         e.children.add(ient);
         e.children.add(paradigm);

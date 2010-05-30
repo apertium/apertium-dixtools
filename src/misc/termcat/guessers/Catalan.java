@@ -39,7 +39,7 @@ public class Catalan {
         e.lemma = lem;
         e.comment = "check";
         if (i.contains(" "))
-            i.replaceAll(" ", "<b/>");
+            i = i.replaceAll(" ", "<b/>");
         ient.setValue(i);
         e.children.add(ient);
         e.children.add(paradigm);
@@ -59,7 +59,7 @@ public class Catalan {
         if (right.contains(" "))
             right.replaceAll(" ", "<b/>");
         if (left.contains(" "))
-            left.replaceAll(" ", "<b/>");
+            left = left.replaceAll(" ", "<b/>");
         l.setValue(left);
         r.setValue(right);
         p.l = l;
@@ -75,7 +75,7 @@ public class Catalan {
         list.add(buildSimpleIEntry(lem, i, par));
         String left = i;
         if (left.contains("l·l")) {
-            left.replaceAll("l·l", "ŀl");
+            left = left.replaceAll("l·l", "ŀl");
             list.add(buildSimpleLREntry(lem, left, i, par));
         }
 
