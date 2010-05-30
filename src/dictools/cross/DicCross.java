@@ -439,9 +439,8 @@ public class DicCross  extends AbstractDictTool{
             usedPatterns.put(actionID, new Integer(1));
         } else {
             Integer times = usedPatterns.get(actionID);
-            int t = times.intValue();
-            t++;
-            usedPatterns.put(actionID, new Integer(t));
+            int t = times.intValue() + 1;
+            usedPatterns.put(actionID, t);
         }
     }
 

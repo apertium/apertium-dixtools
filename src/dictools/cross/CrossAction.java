@@ -168,9 +168,10 @@ public class CrossAction implements Comparable<CrossAction> {
         if (anotherEElement == null) {
             return -1;
         }
-        if (!(anotherEElement instanceof CrossAction)) {
-            throw new ClassCastException("A CrossAction object expected.");
-        }
+        // XXX: the following code always returns true
+        //if (!(anotherEElement instanceof CrossAction)) {
+        //    throw new ClassCastException("A CrossAction object expected.");
+        //}
         int occ1 = getOccurrences();
         int occ2 = (anotherEElement).getOccurrences();
         if (occ1 == occ2) {

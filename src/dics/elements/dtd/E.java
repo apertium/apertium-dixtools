@@ -802,7 +802,8 @@ public class E extends DixElement implements Cloneable {
         public int compare(E e1, E anotherEElement) {
             if (anotherEElement == null) return -1;
             if (e1.containsRegEx()) return 0;
-            if (!(anotherEElement instanceof E))  throw new ClassCastException("An EElement object expected.");
+            // XXX: the following code always returns true
+            //if (!(anotherEElement instanceof E))  throw new ClassCastException("An EElement object expected.");
 
 
             String lemma1 = e1.getValue(side);

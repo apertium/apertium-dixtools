@@ -150,7 +150,7 @@ public class ActionSet extends ArrayList<Action> {
             nTails++;
         }
 
-        return new Integer(nTails);
+        return nTails;
     }
 
     /**
