@@ -23,21 +23,25 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.DixElement;
 import dics.elements.dtd.E;
+import dics.elements.dtd.I;
 import dics.elements.dtd.L;
+import dics.elements.dtd.P;
+import dics.elements.dtd.Par;
 import dics.elements.dtd.Pardef;
 import dics.elements.dtd.Pardefs;
 import dics.elements.dtd.R;
-import dics.elements.dtd.S;
 import dics.elements.dtd.Sdef;
 import dics.elements.dtd.Sdefs;
 import dics.elements.dtd.Section;
 import dictools.utils.Msg;
 import dictools.utils.DictionaryReader;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * 
@@ -77,6 +81,57 @@ public class DicList {
         msg.err("# " + nLemmas + " lemmas");
     }
 
+    private void getListOfLexicalForms() {
+        int nLex=0;
+         for (Section section : dic.sections) {
+             List<StringBuilder> baseForms=new LinkedList<StringBuilder>();
+             baseForms.add(new StringBuilder(""));
+             List<String> lexForms=processListE(section.elements, baseForms);
+             for(String lexForm: lexForms)
+                 msg.out(lexForm+"\n");
+             nLex+=lexForms.size();
+         }
+        msg.err("# " + nLex + " lexical forms");
+    }
+
+    private List<String> processListE(List<E> elements, List<StringBuilder> currentLexicalForms)
+    {
+
+         List<String> localList=new LinkedList<String>();
+         for(E element: elements)
+         {
+             List<StringBuilder> listgeneratedByElement=new LinkedList<StringBuilder>();
+             listgeneratedByElement.add(new StringBuilder(""));
+             for (DixElement e: element.children)
+             {
+                 if( e instanceof I)
+                     for(StringBuilder b: listgeneratedByElement)
+                        b.append(e.getValue());
+                 else if (e instanceof P)
+                     for(StringBuilder b: listgeneratedByElement)
+                         b.append(((P)e).r.getStreamContent());
+                 else if (e instanceof Par)
+                 {
+                     List<E> parElements=dic.pardefs.getParadigmDefinition(((Par)e).name).elements;
+                     //msg.err("Paradigm "+((Par)e).name+" has "+parElements.size()+" elements");
+                     List<String> resultList=processListE(parElements, listgeneratedByElement);
+                     listgeneratedByElement.clear();
+                     for(String r: resultList)
+                         listgeneratedByElement.add(new StringBuilder(r));
+                 }
+             }
+             for(StringBuilder b: listgeneratedByElement)
+                 localList.add(b.toString());
+         }
+
+         //Combine lists
+         List<String> finalList = new LinkedList<String>();
+         for(StringBuilder lexHead: currentLexicalForms)
+             for(String lexTail: localList)
+                 finalList.add(lexHead+lexTail);
+
+         return finalList;
+    }
     
     public void getDefinitions() {
         Sdefs sdefs = dic.sdefs;
@@ -186,6 +241,10 @@ public class DicList {
         if (action.endsWith("expand")) {
             ltExpand();
         }
+        if(action.endsWith("lexicalforms"))
+        {
+            getListOfLexicalForms();
+        }
     }
 
     /**
@@ -219,4 +278,6 @@ public class DicList {
             System.exit(-1);
         }
     }
+
+    
 }
