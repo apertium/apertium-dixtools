@@ -31,7 +31,7 @@ public class AutoconcordBidix extends AbstractDictTool {
 
   public static void main(final String[] args) throws Exception {
     //new AutoconcordBidix().prepare(null, null, null, null, "/home/j/esperanto/a/apertium-sv-da/apertium-sv-da.sv-da.dix", null);
-    new AutoconcordBidix().prepare(null, null, null, null, "/home/j/esperanto/a/incubator/apertium-eo-fr/apertium-eo-fr.eo-fr.dix", null);
+    new AutoconcordBidix().prepareBidixAndMonodixes(null, null, null, null, "/home/j/esperanto/a/incubator/apertium-eo-fr/apertium-eo-fr.eo-fr.dix", null);
 
     //prepareMonodixPardefs("/home/j/esperanto/a/apertium-sv-da/apertium-sv-da.da.dix", symbolPrefix);
     //prepareMonodixPardefs("/home/j/esperanto/a/apertium-sv-da/apertium-sv-da.sv.dix", symbolPrefix);
@@ -104,11 +104,11 @@ public class AutoconcordBidix extends AbstractDictTool {
     if (!prepare) {
       updateBidix(prefix, replace, mon1Filename, mon2Filename, bilFilename, output);
     } else {
-      prepare(prefix, replace, mon1Filename, mon2Filename, bilFilename, output);
+      prepareBidixAndMonodixes(prefix, replace, mon1Filename, mon2Filename, bilFilename, output);
     }
   }
 
-  private void prepare(String prefix, String replace, String mon1Filename, String mon2Filename, String bilFilename, String output) throws IOException {
+  private void prepareBidixAndMonodixes(String prefix, String replace, String mon1Filename, String mon2Filename, String bilFilename, String output) throws IOException {
     if (mon1Filename == null) mon1Filename = guessMonFilenameFromBil(bilFilename, false);
     if (mon2Filename == null) mon2Filename = guessMonFilenameFromBil(bilFilename, true);
     ArrayList<S> symbolStartSequence=new ArrayList<S>();
