@@ -40,6 +40,7 @@ import dics.elements.dtd.Pardef;
 import dics.elements.dtd.Pardefs;
 import dics.elements.dtd.Sdefs;
 import dics.elements.dtd.Section;
+import dictools.utils.DicOpts;
 
 /**
  * 
@@ -57,6 +58,10 @@ public class DictionaryReader extends XMLReader {
      */
     public DictionaryReader(String fileName) {
         super(fileName);
+    }
+
+    public DictionaryReader(String fileName, DicOpts opt) {
+        super(fileName, opt);
     }
 
     

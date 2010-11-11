@@ -30,6 +30,7 @@ import dics.elements.dtd.Par;
 import dics.elements.dtd.Pardef;
 import dics.elements.dtd.Section;
 import dictools.utils.DictionaryReader;
+import dictools.utils.DicOpts;
 
 /**
  * 
@@ -50,6 +51,12 @@ public class DicFindEquivPar  extends AbstractDictTool {
     
     public DicFindEquivPar(String fileName) {
         DictionaryReader dicReader = new DictionaryReader(fileName);
+        Dictionary dic = dicReader.readDic();
+        this.dic = dic;
+    }
+    
+    public DicFindEquivPar(String fileName, DicOpts opt) {
+        DictionaryReader dicReader = new DictionaryReader(fileName, opt);
         Dictionary dic = dicReader.readDic();
         this.dic = dic;
     }

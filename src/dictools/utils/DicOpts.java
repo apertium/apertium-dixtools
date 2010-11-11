@@ -29,7 +29,7 @@ package dictools.utils;
 public class DicOpts implements Cloneable {
    
   /**
-   * Current (volatile) settings while traversiong a data structure.
+   * Current (volatile) settings while traversing a data structure.
    */
   public boolean nowAlign = false;
 
@@ -51,6 +51,9 @@ public class DicOpts implements Cloneable {
 
   /**  -noHeader           don't put header comment with a summary in the top */
   public boolean noHeaderAtTop = false;
+
+  /**  -discardComments           don't retain XML comments */
+  public boolean discardComments = false;
 
     public void copyAlignSettings(DicOpts source) {
         sectionElementsAligned = source.sectionElementsAligned;

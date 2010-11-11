@@ -7,7 +7,7 @@
  * published by the Free Software Foundation; either version 2 of the
  * License, or (at your option) any later version.
  *
- * This program isFirstSymbol distributed in the hope that it will be useful, but
+ * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
@@ -66,6 +66,7 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.InputStreamReader;
 import org.xml.sax.InputSource;
+import dictools.utils.DicOpts;
 
 /**
  * 
@@ -99,6 +100,7 @@ public class XMLReader {
     
     public boolean urlDic;
 
+    static boolean discardComments = false;
 
     // These tags have no internal data and can therefore be re-used
     protected static final B bElementConstant  = new B();
@@ -133,6 +135,14 @@ public class XMLReader {
         this.dicFile = new File(fileName);
     }
 
+    /**
+     * 
+     * @param fileName
+     */
+    public XMLReader(String fileName, DicOpts opt) {      
+        this.dicFile = new File(fileName);
+        if (opt.discardComments) this.discardComments = true;
+    }
 
 
     protected void analize() {
@@ -464,6 +474,7 @@ public class XMLReader {
      * @param eElement The element will got set its prependCharacterData.
      */
   public static void prependOrAppendCharacterData(StringBuilder characterData, dics.elements.dtd.CharacterDataNeighbour eElement, dics.elements.dtd.CharacterDataNeighbour previousElement) {
+    if (discardComments) return;
     if (characterData.length()==0) return;
 
     String txt=characterData.toString();
