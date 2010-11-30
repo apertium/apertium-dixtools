@@ -339,8 +339,15 @@ public class DicCross  extends AbstractDictTool{
      * @return Undefined     */
     private Section[] crossSections(Section section1, Section section2, Sdefs sdefs) {
 
-        msg.out("[" + (taskOrder++) + "] Crossing sections '" + section1.id + "' and '" + section2.id + "'\n");
         Section[] sections = new Section[2];
+
+        //new Exception().printStackTrace();
+        msg.out("[" + (taskOrder++) + "] Crossing sections '" + (section1==null?"NULL":section1.id) + "' and '" + (section2==null?"NULL":section2.id) + "'\n");
+        if (section1==null || section2==null) {
+          msg.out("ERROR NULL DICT. Try do delete the other one from the dict!\n");
+          new IllegalStateException().printStackTrace();
+          return sections;
+        }
 
         Section section = new Section();
         section.id = section1.id;
