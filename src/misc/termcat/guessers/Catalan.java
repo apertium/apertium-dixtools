@@ -31,44 +31,7 @@ import java.util.ArrayList;
  *
  * @author jimregan
  */
-public class Catalan {
-    private E buildSimpleIEntry (String lem, String i, String par) {
-        E e = new E();
-        Par paradigm = new Par(par);
-        I ient = new I();
-        e.lemma = lem;
-        e.comment = "check";
-        if (i.contains(" "))
-            i = i.replaceAll(" ", "<b/>");
-        ient.setValue(i);
-        e.children.add(ient);
-        e.children.add(paradigm);
-
-        return e;
-    }
-
-    private E buildSimpleLREntry (String lem, String left, String right, String par) {
-        E e = new E();
-        Par paradigm = new Par(par);
-        P p = new P();
-        L l = new L();
-        R r = new R();
-        e.lemma = lem;
-        e.comment = "check";
-        e.restriction = "LR";
-        if (right.contains(" "))
-            right = right.replaceAll(" ", "<b/>");
-        if (left.contains(" "))
-            left = left.replaceAll(" ", "<b/>");
-        l.setValue(left);
-        r.setValue(right);
-        p.l = l;
-        p.r = r;
-        e.children.add(p);
-        e.children.add(paradigm);
-
-        return e;
-    }
+public class Catalan extends Guesser {
 
     private ArrayList<E> buildSimpleEntry (String lem, String i, String par) {
         ArrayList<E> list = new ArrayList<E>();
@@ -82,6 +45,7 @@ public class Catalan {
         return list;
     }
 
+    @Override
     public E[] guess(String para, String tags) {
         ArrayList<E> list = new ArrayList<E>();
         String stem = "";
