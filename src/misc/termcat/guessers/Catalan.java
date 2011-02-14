@@ -46,37 +46,31 @@ public class Catalan extends Guesser {
     }
 
     @Override
-    public E[] guess(String para, String tags) {
-        ArrayList<E> list = new ArrayList<E>();
-        String stem = "";
+    public String guess(String para, String tags) {
 
         if ("ij".equals(tags)) {
-            list.addAll(buildSimpleEntry(para, para, "a_reveure__ij"));
+            return "a_reveure__ij";
         }
         if ("adv".equals(tags)) {
-            list.addAll(buildSimpleEntry(para, para, "sempre__adv"));
+            return "sempre__adv";
         }
 //        if ("adj".equals(tags)) {
-//            list.addAll(buildSimpleEntry(para, para, "expensive__adj"));
+//            return "expensive__adj";
 //        }
 
         if ("n.f".equals(tags)) {
             if (para.endsWith("ió")) {
-                stem = para.substring(0, para.length()-2);
-                list.addAll(buildSimpleEntry(para, stem, "acci/ó__n"));
+                return "acci/ó__n";
             } else if (para.endsWith("tat")) {
-                stem = para;
-                list.addAll(buildSimpleEntry(para, stem, "accessibilitat__n"));
+                return "accessibilitat__n";
             } else if (para.endsWith("a")) {
-                stem = para.substring(0, para.length()-2);
-                list.addAll(buildSimpleEntry(para, stem, "abell/a__n"));
+                return "abell/a__n";
 //            } else {
-//                stem = para;
-//                list.addAll(buildSimpleEntry(para, stem, "house__n"));
+//                return "house__n";
             }
         }
+        return "";
 
-        return list.toArray(new E[list.size()]);
     }
 
     boolean isGroupStartN (String para) {

@@ -90,8 +90,8 @@ public class Guesser {
         return e;
     }
 
-    public E[] guess(String para, String tags) {
-        return null;
+    public String guess(String para, String tags) {
+        return "";
     }
 
 }
