@@ -50,6 +50,23 @@ public class Guesser {
         return e;
     }
 
+    public String stemFromPardef(String lem, String par) {
+        String stem="";
+        String base=par.split("__")[0];
+        if(!base.contains("/")) {
+            stem=lem;
+        } else {
+            String sfx=base.split("/")[1];
+            if(!lem.endsWith(sfx)) {
+                System.err.println("Error: expected suffix '" + sfx + "'");
+                stem=lem;
+            } else {
+                stem=lem.substring(0, lem.lastIndexOf(sfx));
+            }
+        }
+        return stem;
+    }
+
     public E buildSimpleLREntry (String lem, String left, String right, String par) {
         E e = new E();
         Par paradigm = new Par(par);
