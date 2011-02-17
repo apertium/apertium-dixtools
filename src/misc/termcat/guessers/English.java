@@ -18,14 +18,6 @@
  */
 
 package misc.termcat.guessers;
-import dics.elements.dtd.E;
-import dics.elements.dtd.P;
-import dics.elements.dtd.L;
-import dics.elements.dtd.R;
-import dics.elements.dtd.G;
-import dics.elements.dtd.I;
-import dics.elements.dtd.Par;
-import java.util.ArrayList;
 
 /**
  *
@@ -47,13 +39,15 @@ public class English extends Guesser {
         }
 
         if ("n".equals(tags)) {
-            if (para.endsWith("[bcdfghjklmnpqrstvwxz]y")) {
+            // Ugh. Ought to fix this.
+            if (para.substring(para.length()-2).matches("[bcdfghjklmnpqrstvwxz]y")) {
                 return "bab/y__n";
-            } else if (para.endsWith("i[sz]ation")) {
+            } else if (para.endsWith("ization") || para.endsWith("isation")) {
                 return "globali/sation__n";
             } else if (para.endsWith("cs")) {
                 return "politics__n";
-            } else if (para.endsWith("([cs]h|[us]s)")) {
+            } else if (para.substring(para.length()-1).matches("[zsx]")
+                    || para.substring(para.length()-2).matches("[cs]h")) {
                 return "access__n";
             } else {
                 return "house__n";
