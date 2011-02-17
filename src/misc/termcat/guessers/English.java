@@ -40,14 +40,14 @@ public class English extends Guesser {
 
         if ("n".equals(tags)) {
             // Ugh. Ought to fix this.
-            if (para.substring(para.length()-2).matches("[bcdfghjklmnpqrstvwxz]y")) {
+            if (endsWithRegex(para, "[bcdfghjklmnpqrstvwxz]y", 2)) {
                 return "bab/y__n";
             } else if (para.endsWith("ization") || para.endsWith("isation")) {
                 return "globali/sation__n";
             } else if (para.endsWith("cs")) {
                 return "politics__n";
-            } else if (para.substring(para.length()-1).matches("[zsx]")
-                    || para.substring(para.length()-2).matches("[cs]h")) {
+            } else if (endsWithRegex(para, "[zsx]", 1)
+                    || endsWithRegex(para, "[cs]h", 2)) {
                 return "access__n";
             } else {
                 return "house__n";

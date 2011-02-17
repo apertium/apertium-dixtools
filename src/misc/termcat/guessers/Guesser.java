@@ -94,4 +94,12 @@ public class Guesser {
         return "";
     }
 
+    public boolean endsWithRegex (String word, String regex, int length) {
+        if (word.length() < length)
+            return false;
+        if (word.substring(word.length()-length).matches(regex))
+            return true;
+        return false;
+    }
+
 }
