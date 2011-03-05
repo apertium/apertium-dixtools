@@ -56,8 +56,9 @@ public class SpelingParadigm {
     public String getStem (String lemma, String flexion) {
         String mystem = "";
         int len;
-        if (lemma.charAt(0) != flexion.charAt(0))
+        if (lemma.charAt(0) != flexion.charAt(0)) {
             return "";
+        }
         if (lemma.length() <= flexion.length()) {
             len = lemma.length();
         } else {
@@ -66,6 +67,8 @@ public class SpelingParadigm {
         for (int i=0; i<len;i++) {
             if (lemma.charAt(i) == flexion.charAt(i)) {
                 mystem += lemma.charAt(i);
+            } else {
+                break;
             }
         }
         return mystem;
@@ -106,7 +109,7 @@ public class SpelingParadigm {
      * Remove the stem from a string
      * @param stem The stem
      * @param in The string to remove it from
-     * @return The string ith stem removed, or in unchanged
+     * @return The string with stem removed, or in unchanged
      */
     public String strip_stem (String stem, String in) {
         if (!in.startsWith(stem)) {
@@ -138,7 +141,6 @@ public class SpelingParadigm {
             throw new IndexOutOfBoundsException("Entries array not set: " + entries.size());
         }
         for (SpelingEntry e : entries) {
-            //System.err.println("Entry:" + stem +"/"+e.surface);
             suffixes.add(strip_stem (stem, e.surface));
         }
     }

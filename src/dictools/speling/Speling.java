@@ -94,7 +94,6 @@ public class Speling extends AbstractDictTool {
      * @param symbols
      */
     private void add_symbols (String symbols) {
-        //System.err.println("Symbols: " + symbols);
         for (String s : symbols.split("\\.")) {
             if (!this.symbols.contains(s)) {
                 this.symbols.add(s);
@@ -108,7 +107,6 @@ public class Speling extends AbstractDictTool {
             Sdef sdef = new Sdef(s);
             sdefs.elements.add(sdef);
         }
-        //System.err.println("sdefs: " + sdefs.toString());
         return sdefs;
     }
 
@@ -139,14 +137,13 @@ public class Speling extends AbstractDictTool {
     }
 
     private void proc_line(String line) {
-        //System.err.println("proc_line: " + line);
         String[] input = line.split(";");
         String lemma = input[0].trim();
         String flexion = input[1].trim();
         String tags = input[2].trim();
         String pos = input[3].trim();
-        //System.err.println(lemma + "/" + flexion + "/" + tags +"/" + pos);
         String full = pos + "." + tags;
+        System.out.println("Lemma: " + lemma);
         if (!lemma.equals("")) {
             collectAlpha(lemma);
         }
@@ -158,17 +155,13 @@ public class Speling extends AbstractDictTool {
         if (readfirst) {
             if (last_lemma.equals(lemma) && last_pos.equals(pos)) {
                 if (last_tags.equals(tags)) {
-                    //System.err.println ("Same tags as last: " + tags + "/" + last_tags);
                     current.entries.add(new SpelingEntry(flexion, full, true));
                     last_tags = tags;
                 } else {
-                    //System.err.println ("Same lemma/pos: " + lemma + "/" + pos);
                     current.entries.add(new SpelingEntry(flexion, full));
                     last_tags = tags;
                 }
             } else {
-                //System.err.println ("New lemma/pos: " + lemma + "/" + pos);
-                //System.err.println ("lemmata.add() " + current.lemma);
                 lemmata.add(current);
                 current = new SpelingParadigm();
                 current.lemma = lemma;
@@ -212,7 +205,6 @@ public class Speling extends AbstractDictTool {
                 proc_line(strLine);
             }
             // Don't forget the last one!
-            //System.err.println ("lemmata.add() " + current.lemma);
             lemmata.add(current);
 
             for (SpelingParadigm p : lemmata) {
@@ -220,13 +212,10 @@ public class Speling extends AbstractDictTool {
                 p.setSuffixes();
                 pardefs.elements.add(p.toPardef());
                 section.elements.add(p.toE());
-                //System.err.println("entries: " + " - " + p.toE().toString());
             }
             dic.alphabet = getAlpha();
             dic.pardefs = pardefs;
-            //System.err.println("pardefs: " + " - " + pardefs.toString());
             dic.sections.add(section);
-            //System.err.println("section: " + " - " + section.toString());
             dic.sdefs = build_sdefs();
 
         } catch (Exception e) {
