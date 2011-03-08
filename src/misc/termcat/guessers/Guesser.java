@@ -50,7 +50,7 @@ public class Guesser {
         return e;
     }
 
-    public String stemFromPardef(String lem, String par) {
+    public static String stemFromPardef(String lem, String par) {
         String stem="";
         String base=par.split("__")[0];
         if(!base.contains("/")) {
