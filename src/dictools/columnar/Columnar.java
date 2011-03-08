@@ -42,6 +42,7 @@ import dics.elements.dtd.TextElement;
 import dictools.AbstractDictTool;
 import dictools.DicSort;
 import dictools.utils.DicTools;
+import dictools.utils.DicOpts;
 import dictools.utils.DictionaryReader;
 import dictools.columnar.ParaConfigReader;
 import misc.termcat.guessers.Guesser;
@@ -87,6 +88,9 @@ public class Columnar extends AbstractDictTool {
 
     @Override
     public void executeTool() throws IOException {
+        String outLeft;
+        String outRight;
+        String outBil;
         if (arguments.length < 4 || arguments.length > 5) {
             failWrongNumberOfArguments(arguments);
         }
@@ -94,11 +98,22 @@ public class Columnar extends AbstractDictTool {
         if (arguments.length == 5) {
             Columnar c = new Columnar(arguments[0], arguments[1], arguments[2], arguments[3]);
             this.input = arguments[4];
+            outLeft = arguments[1] + "_new";
+            outRight = arguments[2] + "_new";
+            outBil = arguments[3] + "_new";
         } else {
             Columnar c = new Columnar(arguments[0], arguments[1], arguments[2]);
             this.input = arguments[3];
+            outLeft = arguments[0] + "_new";
+            outRight = arguments[1] + "_new";
+            outBil = arguments[2] + "_new";
         }
 
+        proc();
+
+        left.printXMLToFile(outLeft, opt);
+        right.printXMLToFile(outRight, opt);
+        bil.printXMLToFile(outBil, opt);
     }
 
     /**
@@ -194,10 +209,10 @@ public class Columnar extends AbstractDictTool {
 
     private E genMonoE(String lem, String par, String restrict) {
         E e = new E();
-        String rStem = Guesser.stemFromPardef(lem, par);
+        String stem = Guesser.stemFromPardef(lem, par);
         e.lemma = lem;
         I i = new I();
-        i.setValue(rStem);
+        i.setValue(stem);
         e.children.add(i);
         e.children.add(new Par(par));
         e.restriction = restrict;

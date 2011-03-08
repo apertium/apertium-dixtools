@@ -46,7 +46,7 @@ public class ParaConfigReader extends XMLReader {
         Element root = document.getDocumentElement();
         for (Element childElement : readChildren(root)) {
             String childElementName = childElement.getNodeName();
-            if (childElementName.equals("paradigms")) {
+            if (childElementName.equals("mapping")) {
                 pairs = readMappings(root);
             }
         }
