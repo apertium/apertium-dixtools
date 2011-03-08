@@ -40,7 +40,6 @@ import dics.elements.dtd.Par;
 import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
 import dictools.AbstractDictTool;
-import dictools.DicSort;
 import dictools.utils.DicTools;
 import dictools.utils.DicOpts;
 import dictools.utils.DictionaryReader;
@@ -54,6 +53,10 @@ public class Columnar extends AbstractDictTool {
     Dictionary right;
     Dictionary bil;
 
+    String outLeft;
+    String outRight;
+    String outBil;
+    
     ArrayList<E> leftElements;
     ArrayList<E> rightElements;
     ArrayList<E> bilElements;
@@ -62,22 +65,31 @@ public class Columnar extends AbstractDictTool {
 
     String input;
 
-    Columnar(){
-    }
-    Columnar(String l, String r, String bidix) {
-        this();
-        left = DicTools.readMonolingual(r);
-        right = DicTools.readMonolingual(l);
-        bil = DicTools.readBilingual(bidix, false);
+    public Columnar(){
+        String inLeft;
+        String inRight;
+        String inBil;
+        if (arguments.length == 5) {
+            ParaConfigReader paraconfig = new ParaConfigReader(arguments[0]);
+            config = paraconfig.readParaConfig();
+            this.input = arguments[4];
+            inLeft = arguments[1];
+            inRight = arguments[2];
+            inBil = arguments[3];
+        } else {
+            this.input = arguments[3];
+            inLeft = arguments[0];
+            inRight = arguments[1];
+            inBil = arguments[2];
+        }
+
+        left = DicTools.readMonolingual(inLeft);
+        right = DicTools.readMonolingual(inRight);
+        bil = DicTools.readBilingual(inBil, false);
 
         leftElements = left.getEntriesInMainSection();
         rightElements = right.getEntriesInMainSection();
         bilElements = bil.getEntriesInMainSection();
-    }
-    Columnar(String cfg, String l, String r, String bidix) {
-        this(l, r, bidix);
-        ParaConfigReader paraconfig = new ParaConfigReader(cfg);
-        config = paraconfig.readParaConfig();
     }
 
     @Override
@@ -86,29 +98,7 @@ public class Columnar extends AbstractDictTool {
                "Inserts entries from a tab-delimited text file\n";
     }
 
-    @Override
-    public void executeTool() throws IOException {
-        String outLeft;
-        String outRight;
-        String outBil;
-        if (arguments.length < 4 || arguments.length > 5) {
-            failWrongNumberOfArguments(arguments);
-        }
-
-        if (arguments.length == 5) {
-            Columnar c = new Columnar(arguments[0], arguments[1], arguments[2], arguments[3]);
-            this.input = arguments[4];
-            outLeft = arguments[1] + "_new";
-            outRight = arguments[2] + "_new";
-            outBil = arguments[3] + "_new";
-        } else {
-            Columnar c = new Columnar(arguments[0], arguments[1], arguments[2]);
-            this.input = arguments[3];
-            outLeft = arguments[0] + "_new";
-            outRight = arguments[1] + "_new";
-            outBil = arguments[2] + "_new";
-        }
-
+    public void doColumnar() {
         proc();
 
         left.printXMLToFile(outLeft, opt);

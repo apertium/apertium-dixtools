@@ -39,6 +39,7 @@ import dictools.apertiumizer.Apertiumizer;
 import dictools.dix2trie.Dix2Trie;
 import dictools.utils.DictionaryReader;
 import dictools.speling.Speling;
+import dictools.columnar.Columnar;
 import dictools.AutorestrictBidix;
 
 /**
@@ -196,6 +197,9 @@ public class ProcessDics extends AbstractDictTool {
         }
         else if (action.equals("fix")) {
             this.process_fix();
+        }
+        else if (action.equals("columnar")) {
+            this.process_columnar();
         }
         else if (action.equals("stemcheck")) {
             this.process_stem_check();
@@ -466,6 +470,19 @@ public class ProcessDics extends AbstractDictTool {
             tool.opt = opt;
             tool.arguments = arguments;
             tool.doFix();
+        }
+
+    }
+
+    private void process_columnar() {
+        if (arguments.length < 4|| arguments.length > 5) {
+            msg.err("Usage: java -jar path/to/apertium-dixtools.jar columnar [config] <monA> <monB> <bil> <input>");
+            System.exit(-1);
+        } else {
+            Columnar tool = new Columnar();
+            tool.opt = opt;
+            tool.arguments = arguments;
+            tool.doColumnar();
         }
 
     }
