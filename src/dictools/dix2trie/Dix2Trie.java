@@ -135,7 +135,6 @@ public class Dix2Trie {
                 }
             }
         }
-
     }
 
     /**
@@ -154,7 +153,6 @@ public class Dix2Trie {
         return this.outFileName;
     }
 
-    
     public void printXML() {
         this.printXML("UTF-8");
     }

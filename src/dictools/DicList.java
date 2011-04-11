@@ -50,19 +50,17 @@ import java.util.List;
  */
 public class DicList {
 
-    
-	public Dictionary dic;
-    
-	public String action;
-    
-	protected Msg msg = Msg.inst();
+    public Dictionary dic;
+
+    public String action;
+
+    protected Msg msg = Msg.inst();
     
     public DicList() {
     }
 
     public void getListOfParadigms() {
         Pardefs paradigms = dic.pardefs;
-
         for (Pardef paradigm : paradigms.elements) {
             msg.out(paradigm.name + "\n");
         }
@@ -106,10 +104,10 @@ public class DicList {
              {
                  if( e instanceof I)
                      for(StringBuilder b: listgeneratedByElement)
-                        b.append(e.getValue());
+                        b.append(e.getValueNoTags());
                  else if (e instanceof P)
                      for(StringBuilder b: listgeneratedByElement)
-                         b.append(((P)e).r.getStreamContent());
+                         b.append(((P)e).l.getValueNoTags());
                  else if (e instanceof Par)
                  {
                      List<E> parElements=dic.pardefs.getParadigmDefinition(((Par)e).name).elements;
