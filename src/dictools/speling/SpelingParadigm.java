@@ -53,7 +53,7 @@ public class SpelingParadigm {
      * @param flexion Inflected form
      * @return Common stem of both words
      */
-    public String getStem (String lemma, String flexion) {
+    public static String getStem (String lemma, String flexion) {
         String mystem = "";
         int len;
         if (lemma.charAt(0) != flexion.charAt(0)) {

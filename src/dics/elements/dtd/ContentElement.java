@@ -235,7 +235,8 @@ public abstract class ContentElement extends DixElement implements Cloneable {
 
     /**
      * 
-     * @return Undefined         */
+     * @return Undefined
+     */
     public String getInfo() {
         StringBuffer sb = new StringBuffer();
         sb.append("(");

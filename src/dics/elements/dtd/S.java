@@ -79,7 +79,8 @@ public class S extends DixElement {
     /**
      * 
      * @param value
-     * @return Undefined         */
+     * @return Undefined
+     */
     public boolean is(String value) {
         if (getValue().equals(value)) {
             return true;
@@ -97,7 +98,8 @@ public class S extends DixElement {
     /**
      * 
      * @param str
-     * @return Undefined         */
+     * @return Undefined
+     */
     public static S getInstance(String str) {
         S sE = S.sElementList.get(str);
         if (sE==null) {
@@ -111,7 +113,8 @@ public class S extends DixElement {
     /**
      *
      * @param str
-     * @return Undefined         */
+     * @return Undefined
+     */
     public static Set<String> getKnownSymbols() {
       return new HashSet(S.sElementList.keySet());
     }

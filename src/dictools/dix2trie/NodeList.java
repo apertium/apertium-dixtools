@@ -28,11 +28,11 @@ import java.util.HashMap;
 public class NodeList extends HashMap<String, Node> {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	/**
+    /**
      * 
      * @param node
      * @return The node

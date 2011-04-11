@@ -109,8 +109,9 @@ public class XMLReader {
     protected static final Sa saElementConstant = new Sa();
     protected static final Prm prmElementNonumberConstant = new Prm();
 
-    /** Map of DOM Nodes to line numbers. Might be emppty but is never null,
-     * so lineNumbers.get(node) will always suceed (bur perhaps return null)
+    /**
+     * Map of DOM Nodes to line numbers. Might be empty but is never null,
+     * so lineNumbers.get(node) will always succeed (bur perhaps return null)
      */
     protected LinkedHashMap<Node, Integer> lineNumbers = new LinkedHashMap<Node, Integer>();
 
@@ -244,7 +245,8 @@ public class XMLReader {
      * 
      * @param e
      * @param attrName
-     * @return Undefined         */
+     * @return Undefined
+     */
     protected static String getAttributeValue(Element e, String attrName) {      
       Attr attr = e.getAttributeNode(attrName);
       if (attr==null) return null;

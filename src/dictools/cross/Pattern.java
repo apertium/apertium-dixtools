@@ -63,14 +63,16 @@ public class Pattern {
 
     /**
      * 
-     * @return Undefined         */
+     * @return Undefined
+     */
     public E getAB() {
         return e1;
     }
 
     /**
      * 
-     * @return Undefined         */
+     * @return Undefined
+     */
     public E getBC() {
         return e2;
     }

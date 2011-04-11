@@ -28,11 +28,11 @@ import java.util.Properties;
 public class HeaderElement extends Properties {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	/**
+    /**
      * 
      * @return The type of dictionary: morph or bil
      */
