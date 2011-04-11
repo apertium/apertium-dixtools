@@ -21,7 +21,9 @@ package dictools;
  */
 
 import dictools.cross.DicCross;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -41,6 +43,16 @@ import dictools.utils.DictionaryReader;
 import dictools.speling.Speling;
 import dictools.columnar.Columnar;
 import dictools.AutorestrictBidix;
+import dictools.guessparadigm.questions.Questions;
+import dictools.guessparadigm.questions.SortedSetOfCandidates;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.OutputStreamWriter;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 
 /**
  *
@@ -167,7 +179,7 @@ public class ProcessDics extends AbstractDictTool {
         if (action.equals("help")) {
             this.show_help();
             System.exit(-1);
-        } 
+        }
         else if (action.equals("consistent")) {
             this.process_consistent();
         }
@@ -299,6 +311,9 @@ public class ProcessDics extends AbstractDictTool {
         else if (action.equals("speling-pruned")) {
             this.process_speling_pruned();
         }
+        else if (action.equals("guessparadigm")) {
+            this.process_guessparadigm();
+        }
         else {
             this.show_help();
             System.exit(-1);
@@ -324,6 +339,7 @@ public class ProcessDics extends AbstractDictTool {
         msg.err("   merge-morph:        merges two morphological dictionaries");
         //msg.err("   process-xincludes:  processes and expands all xincludes in the dictionary");
         msg.err("   reverse-bil:        reverses a bilingual dictionary");
+        msg.err("   sort:               sorts (and groups by category) a dictionary");
         msg.err("   sort:               sorts (and groups by category) a dictionary");
         msg.err("");
         msg.err("More information: http://wiki.apertium.org/wiki/Apertium-dixtools");
@@ -754,6 +770,106 @@ public class ProcessDics extends AbstractDictTool {
             Dix2CC tool = new Dix2CC();
             tool.arguments = this.arguments;
             tool.do_convert();
+        }
+    }
+
+    private void process_guessparadigm(){
+        if (arguments.length < 5) {
+            msg.err("Usage: java -jar path/to/apertium-dixtools.jar guessparadigm dix -f file_with_word_to_check wordlist logfile");
+            System.exit(-1);
+        }
+        else{
+            //Building the suffix tree
+            Dix2suffixtree d2s=new Dix2suffixtree();
+            d2s.setDic(arguments[1]);
+            SortedSetOfCandidates candidates=null;
+            BufferedWriter pWriter=null;
+            //If a file with words to insert is defined...
+            if(arguments[2].equals("-f")){
+                Set<String> words=new LinkedHashSet<String>();
+                BufferedReader br;
+                //Reading words to insert
+                try {
+                    br = new BufferedReader(new FileReader(arguments[3]));
+                    String word;
+                    while((word=br.readLine())!=null){
+                        words.add(word);
+                    }
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                    System.exit(-1);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    System.exit(-1);
+                }
+                //Generating lexical forms
+                d2s.getListOfLexicalForms();
+                try {
+                    pWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(arguments[5]), "UTF-8"));
+                } catch (UnsupportedEncodingException ex) {
+                    ex.printStackTrace();
+                    System.exit(-1);
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                    System.exit(-1);
+                }
+                for(String w: words){
+                    System.out.println("WORD "+w);
+                    candidates=d2s.CeckNewWord(w, arguments[4]);
+                    //System.out.println(candidates.GetNumberOfDifferentCandidates());
+                    try{
+                        pWriter.append(w);
+                        pWriter.append("\t");
+                        pWriter.append(Integer.toString(candidates.getCandidates().size()));
+                        Questions.AskQuestions(candidates,pWriter);
+                        pWriter.newLine();
+                        pWriter.flush();
+                    } catch(IOException ex){
+                        ex.printStackTrace();
+                        System.exit(-1);
+                    }
+                }
+                try {
+                    pWriter.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    System.exit(-1);
+                }
+            }
+            //If no file with words to insert is defined, the next argument is a word to be inserted
+            else{
+                try {
+                    pWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(arguments[4]), "UTF-8"));
+                } catch (UnsupportedEncodingException ex) {
+                    ex.printStackTrace();
+                    System.exit(-1);
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                    System.exit(-1);
+                }
+                //d2s.getFilteredListOfLexicalForms(""+arguments[2].charAt(arguments[2].length()-1));
+                d2s.getListOfLexicalForms();
+                candidates=d2s.CeckNewWord(arguments[2], arguments[3]);
+                try{
+                    pWriter.append(arguments[2]);
+                    pWriter.append("\t");
+                    pWriter.append(Integer.toString(candidates.getCandidates().size()));
+                    long start = System.currentTimeMillis();
+                    Questions.AskQuestions(candidates,pWriter);
+                    long elapsed = System.currentTimeMillis() - start;
+                    pWriter.append(Long.toString(elapsed));
+                    pWriter.append("\t");
+                    pWriter.newLine();
+                    pWriter.flush();
+                    pWriter.close();
+                } catch(IOException ex){
+                    ex.printStackTrace();
+                    System.exit(-1);
+                }
+                /*for(Candidate c:candidates.getCandidates()){
+                    System.out.println(c.getScore()+"\t"+c.getSfs().getSteam()+"-"+c.getSfs().getParadigm().getName());
+                }*/
+            }
         }
     }
 
