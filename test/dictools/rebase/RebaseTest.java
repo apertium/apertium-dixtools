@@ -20,6 +20,10 @@
 package dictools.rebase;
 
 import dics.elements.dtd.E;
+import dics.elements.dtd.P;
+import dics.elements.dtd.L;
+import dics.elements.dtd.R;
+import dics.elements.dtd.TextElement;
 import dics.elements.dtd.Pardef;
 import dics.elements.dtd.S;
 import java.util.ArrayList;
@@ -36,7 +40,32 @@ import static org.junit.Assert.*;
  */
 public class RebaseTest {
 
+    E base;
+    E check;
+
     public RebaseTest() {
+        base = new E();
+        check = new E();
+
+        L baseL = new L();
+        L checkL = new L();
+        R baseR = new R();
+        R checkR = new R();
+
+        baseL.children.add(new TextElement("i"));
+        baseR.children.add(new TextElement("a"));
+        baseR.children.add(new S("sg"));
+        baseR.children.add(new S("gen"));
+
+        checkL.children.add(new TextElement("ki"));
+        checkR.children.add(new TextElement("ka"));
+        checkR.children.add(new S("n"));
+        checkR.children.add(new S("f"));
+        checkR.children.add(new S("sg"));
+        checkR.children.add(new S("gen"));
+
+        base.children.add(new P(baseL, baseR));
+        check.children.add(new P(checkL, checkR));
     }
 
     @BeforeClass
@@ -58,18 +87,23 @@ public class RebaseTest {
     /**
      * Test of getEStem method, of class Rebase.
      */
-/*    @Test
+    @Test
     public void testGetEStem() {
         System.out.println("getEStem");
-        E in = null;
+        E in = new E();
+        L l = new L();
+        l.children.add(new TextElement("man"));
+        R r = new R();
+        r.children.add(new TextElement("men"));
+        r.children.add(new S("n"));
+        r.children.add(new S("pl"));
+        in.children.add(new P(l, r));
         Rebase instance = new Rebase();
-        String expResult = "";
+        String expResult = "m";
         String result = instance.getEStem(in);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
-*/
+
     /**
      * Test of pardefsRoughlyEquivalent method, of class Rebase.
      */
@@ -89,32 +123,26 @@ public class RebaseTest {
     /**
      * Test of entriesRoughlyEquivalent method, of class Rebase.
      */
-/*    @Test
+    @Test
     public void testEntriesRoughlyEquivalent_E_E() {
         System.out.println("entriesRoughlyEquivalent");
-        E base = null;
-        E check = null;
-        boolean expResult = false;
-        boolean result = Rebase.entriesRoughlyEquivalent(base, check);
+        boolean expResult = true;
+        boolean result = Rebase.entriesRoughlyEquivalent(this.base, this.check);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
-*/
+
     /**
      * Test of entriesRoughlyEquivalent method, of class Rebase.
      */
-/*    @Test
+    @Test
     public void testEntriesRoughlyEquivalent_EntryPair() {
         System.out.println("entriesRoughlyEquivalent");
-        EntryPair ep = null;
-        boolean expResult = false;
+        EntryPair ep = new EntryPair(this.base, this.check);
+        boolean expResult = true;
         boolean result = Rebase.entriesRoughlyEquivalent(ep);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
-*/
+
     /**
      * Test of sdefsRoughlyEquivalent method, of class Rebase.
      */
