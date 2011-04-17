@@ -148,12 +148,22 @@ public class Columnar extends AbstractDictTool {
         return bilEntries;
     }
 
+    /**
+     * Set input dix names
+     * @param l Left monodix
+     * @param r Right monodix
+     * @param b Bidix
+     */
     void setInFiles(String l, String r, String b) {
         inLeft = l;
         inRight = r;
         inBil = b;
     }
 
+    /**
+     * Set input TSV filename
+     * @param in file to read
+     */
     void setInput (String in) {
         this.input = in;
     }
@@ -170,6 +180,10 @@ public class Columnar extends AbstractDictTool {
         }
     }
 
+    /**
+     * Get the help string for command-line use
+     * @return Help string
+     */
     @Override
     public String toolHelp() {
         return "columnar [config] mono1 mono2 bil input\n\n" +
@@ -246,6 +260,14 @@ public class Columnar extends AbstractDictTool {
         bilElements.addAll(bilEntries);
     }
 
+    /**
+     * Generates a monodix entry, stemming the lemma and adding the
+     * direction restriction
+     * @param lem Lemma
+     * @param par Pardef
+     * @param restrict Restriction
+     * @return New monodix entry
+     */
     private E genMonoE(String lem, String par, String restrict) {
         E e = new E();
         String stem = Guesser.stemFromPardef(lem, par);
