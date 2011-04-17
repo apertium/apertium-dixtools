@@ -52,6 +52,7 @@ public class ParaConfigReader extends XMLReader {
             tmp = readMappings(childElement);
             if (tmp != null) {
                 pairs.addAll(tmp);
+                tmp.clear();
             }
         }
         for (ParadigmPair pair : pairs) {
