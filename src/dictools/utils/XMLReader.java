@@ -111,7 +111,7 @@ public class XMLReader {
 
     /**
      * Map of DOM Nodes to line numbers. Might be empty but is never null,
-     * so lineNumbers.get(node) will always succeed (bur perhaps return null)
+     * so lineNumbers.get(node) will always succeed (but perhaps return null)
      */
     protected LinkedHashMap<Node, Integer> lineNumbers = new LinkedHashMap<Node, Integer>();
 
