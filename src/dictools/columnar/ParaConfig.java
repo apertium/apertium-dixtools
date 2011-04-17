@@ -24,12 +24,15 @@ package dictools.columnar;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Collection;
+import dics.elements.dtd.E;
 
 /**
  *
  * @author jimregan
  */
 public class ParaConfig {
+
+    boolean DEBUGPRINT = true;
 
     private HashMap<String, ParadigmPair> pairs;
 
@@ -62,5 +65,32 @@ public class ParaConfig {
         for (ParadigmPair pp : pairs) {
             add(pp);
         }
+    }
+
+    boolean isSameAs (ParaConfig other) {
+        if (other.pairs.size() != pairs.size()) {
+            return false;
+        }
+        if (!other.pairs.keySet().equals(pairs.keySet())) {
+            return false;
+        }
+        for (String s : other.pairs.keySet()) {
+            ArrayList<E> otherE = other.get(s).getEntries();
+            ArrayList<E> ourE = get(s).getEntries();
+            if (otherE.size() != ourE.size()) {
+                return false;
+            }
+            for (int i=0; i < otherE.size(); i++) {
+                if (!otherE.get(i).toString().equals(ourE.get(i).toString())) {
+                    if (DEBUGPRINT) {
+                        System.out.println("Other: " + otherE.get(i).toString());
+                        System.out.println("Our: " + ourE.get(i).toString());
+                        System.out.println("Not E");
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
