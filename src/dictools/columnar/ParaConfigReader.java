@@ -45,9 +45,14 @@ public class ParaConfigReader extends XMLReader {
         analize();
         ParaConfig pc = new ParaConfig();
         ArrayList<ParadigmPair> pairs = new ArrayList<ParadigmPair>();
+
+        ArrayList<ParadigmPair> tmp = new ArrayList<ParadigmPair>();
         Element root = document.getDocumentElement();
         for (Element childElement : readChildren(root)) {
-            pairs = readMappings(childElement);
+            tmp = readMappings(childElement);
+            if (tmp != null) {
+                pairs.addAll(tmp);
+            }
         }
         for (ParadigmPair pair : pairs) {
             pc.add(pair);
