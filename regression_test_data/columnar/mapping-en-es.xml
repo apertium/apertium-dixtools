@@ -1,0 +1,42 @@
+<mappings>
+  <mapping>
+    <left>
+      <paradigm n="house__n"/>
+      <paradigm n="bab/y__n"/>
+    </left>
+    <right>
+      <paradigm n="alb/atros__n"/>
+      <paradigm n="t/oner__n"/>
+      <paradigm n="m/áster__n"/>
+    </right>
+    <entries>
+      <e><p><l><s n="n"/></l><r><s n="n"/><s n="m"/></r></p></e>
+    </entries>
+  </mapping>
+  <mapping>
+    <left>
+      <paradigm n="house__n"/>
+      <paradigm n="bab/y__n"/>
+    </left>
+    <right>
+      <paradigm n="abeja__n"/>
+    </right>
+    <entries>
+      <e><p><l><s n="n"/></l><r><s n="n"/><s n="f"/></r></p></e>
+    </entries>
+  </mapping>
+  <mapping>
+    <left>
+      <paradigm n="house__n"/>
+      <paradigm n="bab/y__n"/>
+    </left>
+    <right>
+      <paradigm n="señor__n"/>
+    </right>
+    <entries>
+      <e r="LR"><p><l><s n="n"/></l><r><s n="n"/><s n="GD"/></r></p></e>
+      <e r="RL"><p><l><s n="n"/></l><r><s n="n"/></r></p></e>
+    </entries>
+  </mapping>
+</mappings>
+
