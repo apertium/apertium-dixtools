@@ -71,8 +71,23 @@ public class Columnar extends AbstractDictTool {
 
     String input;
 
-    public Columnar(){
-        setupArgs();
+    boolean cliMode = true;
+
+    public Columnar () {
+        cliMode = true;
+        init();
+    }
+
+    Columnar (String l, String r, String bil) {
+        cliMode = false;
+        setInFiles (l, r, bil);
+        init();
+    }
+
+    private void init (){
+        if (cliMode) {
+            setupArgs();
+        }
 
         left = DicTools.readMonolingual(inLeft);
         right = DicTools.readMonolingual(inRight);
@@ -84,7 +99,7 @@ public class Columnar extends AbstractDictTool {
     }
 
     /**
-     * Get the parts of the template that apply with the current entry's
+     * Gets the parts of the template that apply with the current entry's
      * restrictions - if the input has no restrictions, template restrictions
      * apply; if it does, each template entry without a restriction is set to
      * match the entry and added; template entries with a restriction that
@@ -121,7 +136,7 @@ public class Columnar extends AbstractDictTool {
     }
 
     /**
-     * Populate the template with lemmas
+     * Populates the template with lemmas
      * FIXME: only handles simple l/r entries
      * @param tpl Template array
      * @param lemLeft Left lemma
@@ -149,29 +164,33 @@ public class Columnar extends AbstractDictTool {
     }
 
     /**
-     * Set input dix names
+     * Sets input dix names
      * @param l Left monodix
      * @param r Right monodix
      * @param b Bidix
      */
-    void setInFiles(String l, String r, String b) {
+    private void setInFiles(String l, String r, String b) {
         inLeft = l;
         inRight = r;
         inBil = b;
     }
 
     /**
-     * Set input TSV filename
+     * Sets input TSV filename
      * @param in file to read
      */
     void setInput (String in) {
         this.input = in;
     }
 
+    void setConfig (String cfg) {
+        paraconfig = new ParaConfigReader(cfg);
+        config = paraconfig.readParaConfig();
+    }
+
     void setupArgs() {
         if (arguments.length == 5) {
-            paraconfig = new ParaConfigReader(arguments[0]);
-            config = paraconfig.readParaConfig();
+            setConfig (arguments[0]);
             setInput (arguments[4]);
             setInFiles (arguments[1], arguments[2], arguments[3]);
         } else {
@@ -181,7 +200,7 @@ public class Columnar extends AbstractDictTool {
     }
 
     /**
-     * Get the help string for command-line use
+     * Gets the help string for command-line use
      * @return Help string
      */
     @Override
@@ -222,7 +241,7 @@ public class Columnar extends AbstractDictTool {
     }
 
     /**
-     * Process each line of input, creating relevant entries
+     * Processes each line of input, creating relevant entries
      * @param line Line of tab delimited text
      */
     private void proc_line(String line) {
@@ -237,9 +256,6 @@ public class Columnar extends AbstractDictTool {
 
         E lEntry = new E();
         E rEntry = new E();
-        E bilEntry = new E();
-
-        P bilPair = new P();
 
         if ("<".equals(restrictSym)) {
             lRestrict = "RL";
