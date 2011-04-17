@@ -1,0 +1,17 @@
+<mappings>
+  <mapping>
+    <left>
+      <paradigm n="house__n"/>
+      <paradigm n="bab/y__n"/>
+    </left>
+    <right>
+      <paradigm n="alb/atros__n"/>
+      <paradigm n="t/oner__n"/>
+      <paradigm n="m/áster__n"/>
+    </right>
+    <entries>
+      <e><p><l><s n="n"/></l><r><s n="n"/><s n="m"/></r></p></e>
+    </entries>
+  </mapping>
+</mappings>
+
