@@ -53,6 +53,17 @@ public class ParadigmPair {
     }
 
     /**
+     * Get text representation, for debugging
+     */
+    String toText() {
+        String ret = "";
+        for (E out : getEntries()) {
+          ret += getIndex() + ":" + out.toString() + "\n";
+        }
+        return ret;
+    }
+
+    /**
      * Filter the list of current entries based on
      * the restriction.
      * @param restrict Restriction to apply

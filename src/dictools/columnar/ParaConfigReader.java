@@ -47,10 +47,7 @@ public class ParaConfigReader extends XMLReader {
         ArrayList<ParadigmPair> pairs = new ArrayList<ParadigmPair>();
         Element root = document.getDocumentElement();
         for (Element childElement : readChildren(root)) {
-            String childElementName = childElement.getNodeName();
-            if (childElementName.equals("mapping")) {
-                pairs = readMappings(root);
-            }
+            pairs = readMappings(childElement);
         }
         for (ParadigmPair pair : pairs) {
             pc.add(pair);
@@ -67,28 +64,26 @@ public class ParaConfigReader extends XMLReader {
         ArrayList<String> rightPars = new ArrayList<String>();
         ArrayList<E> entries = new ArrayList<E>();
 
+        if (!e.getNodeName().equals("mapping"))
+            return null;
         for (Element childElement : readChildren(e)) {
             String childElementName = childElement.getNodeName();
             if (childElementName.equals("left")) {
-                for (Element grandchild : readChildren(e)) {
+                for (Element grandchild : readChildren(childElement)) {
                     if (grandchild.getNodeName().equals("paradigm")) {
-                        leftPars.add(getAttributeValue(e, "n"));
+                        leftPars.add(getAttributeValue(grandchild, "n"));
                     }
                 }
             }
             if (childElementName.equals("right")) {
-                for (Element grandchild : readChildren(e)) {
+                for (Element grandchild : readChildren(childElement)) {
                     if (grandchild.getNodeName().equals("paradigm")) {
-                        rightPars.add(getAttributeValue(e, "n"));
+                        rightPars.add(getAttributeValue(grandchild, "n"));
                     }
                 }
             }
             if (childElementName.equals("entries")) {
-                for (Element grandchild : readChildren(e)) {
-                    if (grandchild.getNodeName().equals("e")) {
-                        entries = readEntries(e);
-                    }
-                }
+                entries = readEntries(childElement);
             }
         }
 

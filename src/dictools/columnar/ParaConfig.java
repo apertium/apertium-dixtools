@@ -22,6 +22,8 @@
 package dictools.columnar;
 
 import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  *
@@ -40,8 +42,16 @@ public class ParaConfig {
     }
 
     ParadigmPair get(String left, String right) {
-        String name = left + "+" + right;
-        return pairs.get(name);
+        return pairs.get(left + "+" + right);
+    }
+
+    ArrayList<ParadigmPair> getAll () {
+        ArrayList<ParadigmPair> out = new ArrayList<ParadigmPair>();
+        Collection<ParadigmPair> col = pairs.values();
+        for (ParadigmPair pp : col) {
+            out.add(pp);
+        }
+        return out;
     }
 
     void add (ParadigmPair pair) {
