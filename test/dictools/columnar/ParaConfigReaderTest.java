@@ -43,12 +43,16 @@ public class ParaConfigReaderTest {
     ArrayList<ParadigmPair> pairs;
     E e, e2;
     ParaConfig pcTest;
+    ArrayList<E> test1;
+    ArrayList<E> test2;
 
     public ParaConfigReaderTest() {
         pairs = new ArrayList<ParadigmPair>();
         e = new E();
         e2 = new E();
         pcTest = new ParaConfig();
+        test1 = new ArrayList<E>();
+        test2 = new ArrayList<E>();
     }
 
     @BeforeClass
@@ -81,9 +85,7 @@ public class ParaConfigReaderTest {
         p2.r = r2;
         e2.children.add(p2);
 
-        ArrayList<E> test1 = new ArrayList<E>();
         test1.add(e);
-        ArrayList<E> test2 = new ArrayList<E>();
         test2.add(e2);
 
         pairs.add(new ParadigmPair("house__n", "alb/atros__n", test1));
@@ -92,9 +94,6 @@ public class ParaConfigReaderTest {
         pairs.add(new ParadigmPair("bab/y__n", "alb/atros__n", test1));
         pairs.add(new ParadigmPair("bab/y__n", "t/oner__n", test1));
         pairs.add(new ParadigmPair("bab/y__n", "m/áster__n", test1));
-
-        pairs.add(new ParadigmPair("house__n", "abeja__n", test2));
-        pairs.add(new ParadigmPair("bab/y__n", "abeja__n", test2));
 
         pcTest.addAll(pairs);
     }
@@ -110,14 +109,15 @@ public class ParaConfigReaderTest {
     public void testReadParaConfig() {
         System.out.println("readParaConfig");
         ParaConfigReader instance = new ParaConfigReader("regression_test_data/para_config/mapping-en-es.xml");
-        ParaConfig result = instance.readParaConfig();
-        System.out.println("Entries:");
-        for (ParadigmPair print : result.getAll()) {
-            System.out.println(print.toText());
-        }
-        System.out.println("Entries end");
+        ParaConfig pc = instance.readParaConfig();
 
-        boolean check = pcTest.isSameAs(result);
+        boolean check = pcTest.isSameAs(pc);
+        assertEquals(check, false);
+
+        pcTest.add(new ParadigmPair("house__n", "abeja__n", test2));
+        pcTest.add(new ParadigmPair("bab/y__n", "abeja__n", test2));
+
+        check = pcTest.isSameAs(pc);
         assertEquals(check, true);
     }
 
