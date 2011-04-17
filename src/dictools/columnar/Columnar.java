@@ -58,32 +58,21 @@ public class Columnar extends AbstractDictTool {
     String outLeft;
     String outRight;
     String outBil;
+    String inLeft;
+    String inRight;
+    String inBil;
     
     ArrayList<E> leftElements;
     ArrayList<E> rightElements;
     ArrayList<E> bilElements;
 
     ParaConfig config = null;
+    ParaConfigReader paraconfig = null;
 
     String input;
 
     public Columnar(){
-        String inLeft;
-        String inRight;
-        String inBil;
-        if (arguments.length == 5) {
-            ParaConfigReader paraconfig = new ParaConfigReader(arguments[0]);
-            config = paraconfig.readParaConfig();
-            this.input = arguments[4];
-            inLeft = arguments[1];
-            inRight = arguments[2];
-            inBil = arguments[3];
-        } else {
-            this.input = arguments[3];
-            inLeft = arguments[0];
-            inRight = arguments[1];
-            inBil = arguments[2];
-        }
+        setupArgs();
 
         left = DicTools.readMonolingual(inLeft);
         right = DicTools.readMonolingual(inRight);
@@ -92,6 +81,28 @@ public class Columnar extends AbstractDictTool {
         leftElements = left.getEntriesInMainSection();
         rightElements = right.getEntriesInMainSection();
         bilElements = bil.getEntriesInMainSection();
+    }
+
+    void setInFiles(String l, String r, String b) {
+        inLeft = l;
+        inRight = r;
+        inBil = b;
+    }
+
+    void setInput (String in) {
+        this.input = in;
+    }
+
+    void setupArgs() {
+        if (arguments.length == 5) {
+            paraconfig = new ParaConfigReader(arguments[0]);
+            config = paraconfig.readParaConfig();
+            setInput (arguments[4]);
+            setInFiles (arguments[1], arguments[2], arguments[3]);
+        } else {
+            setInput (arguments[3]);
+            setInFiles (arguments[0], arguments[1], arguments[2]);
+        }
     }
 
     @Override
