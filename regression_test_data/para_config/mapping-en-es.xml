@@ -13,5 +13,17 @@
       <e><p><l><s n="n"/></l><r><s n="n"/><s n="m"/></r></p></e>
     </entries>
   </mapping>
+  <mapping>
+    <left>
+      <paradigm n="house__n"/>
+      <paradigm n="bab/y__n"/>
+    </left>
+    <right>
+      <paradigm n="abeja__n"/>
+    </right>
+    <entries>
+      <e><p><l><s n="n"/></l><r><s n="n"/><s n="f"/></r></p></e>
+    </entries>
+  </mapping>
 </mappings>
 
