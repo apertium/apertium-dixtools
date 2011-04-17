@@ -83,6 +83,71 @@ public class Columnar extends AbstractDictTool {
         bilElements = bil.getEntriesInMainSection();
     }
 
+    /**
+     * Get the parts of the template that apply with the current entry's
+     * restrictions - if the input has no restrictions, template restrictions
+     * apply; if it does, each template entry without a restriction is set to
+     * match the entry and added; template entries with a restriction that
+     * doesn't match the input are omitted.
+     * @param parleft Left pardef name
+     * @param parright Right pardef name
+     * @param lRestrict Entry restriction
+     * @return List of entries to add to the bidix
+     */
+    ArrayList<E> getTemplate(String parleft, String parright, String lRestrict) {
+        ArrayList<E> tpl = new ArrayList<E>();
+        if (config == null) {
+            tpl.add(genEmptyE(parleft, parright, lRestrict));
+        } else {
+            ArrayList<E> cur = config.get(parleft, parright).getEntries(lRestrict);
+            if (cur == null) {
+                tpl.add(genEmptyE(parleft, parright, lRestrict));
+            } else {
+                if ("".equals(lRestrict)) {
+                    tpl.addAll(cur);
+                } else {
+                    for (E e : cur) {
+                        if (lRestrict.equals(e.restriction)) {
+                            tpl.add(e);
+                        } else if (e.restriction == null || "".equals(e.restriction)) {
+                            e.restriction = lRestrict;
+                            tpl.add(e);
+                        }
+                    }
+                }
+            }
+        }
+        return tpl;
+    }
+
+    /**
+     * Populate the template with lemmas
+     * FIXME: only handles simple l/r entries
+     * @param tpl Template array
+     * @param lemLeft Left lemma
+     * @param lemRight Right lemma
+     * @return Populated entries
+     */
+    ArrayList<E> populateEntries(ArrayList<E> tpl, String lemLeft, String lemRight) {
+        ArrayList<E> bilEntries = new ArrayList<E>();
+        for (E ent : tpl) {
+            E outE = new E();
+            outE.restriction = ent.restriction;
+            L outL = new L();
+            outL.children.add(new TextElement(lemLeft));
+            outL.children.addAll(ent.getFirstPartAsL().getSymbols());
+            R outR = new R();
+            outR.children.add(new TextElement(lemRight));
+            outR.children.addAll(ent.getFirstPartAsR().getSymbols());
+            P outP = new P();
+            outP.l = outL;
+            outP.r = outR;
+            outE.children.add(outP);
+            bilEntries.add(outE);
+        }
+        return bilEntries;
+    }
+
     void setInFiles(String l, String r, String b) {
         inLeft = l;
         inRight = r;
@@ -173,37 +238,8 @@ public class Columnar extends AbstractDictTool {
         lEntry = genMonoE(lemLeft, parleft, lRestrict);
         rEntry = genMonoE(lemRight, parright, rRestrict);
 
-        ArrayList<E> tpl = new ArrayList<E>();
-        if (config == null) {
-            tpl.add(genEmptyE(parleft, parright, lRestrict));
-        } else {
-            ArrayList<E> cur = config.get(parleft, parright).getEntries(lRestrict);
-            if (cur == null) {
-                tpl.add(genEmptyE(parleft, parright, lRestrict));
-            } else {
-                tpl = cur;
-            }
-        }
-
-        ArrayList<E> bilEntries = new ArrayList<E>();
-        for (E ent : tpl) {
-            E outE = new E();
-            outE.restriction = ent.restriction;
-
-            L outL = new L();
-            outL.children.add(new TextElement(lemLeft));
-            outL.children.addAll(ent.getFirstPartAsL().getSymbols());
-
-            R outR = new R();
-            outR.children.add(new TextElement(lemRight));
-            outR.children.addAll(ent.getFirstPartAsR().getSymbols());
-
-            P outP = new P();
-            outP.l = outL;
-            outP.r = outR;
-            outE.children.add(outP);
-            bilEntries.add(outE);
-        }
+        ArrayList<E> tpl = getTemplate(parleft, parright, lRestrict);
+        ArrayList<E> bilEntries = populateEntries(tpl, lemLeft, lemRight);
 
         leftElements.add(lEntry);
         rightElements.add(rEntry);
