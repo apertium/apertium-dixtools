@@ -57,4 +57,10 @@ public class ParaConfig {
     void add (ParadigmPair pair) {
         pairs.put(pair.getIndex(), pair);
     }
+
+    void addAll (ArrayList<ParadigmPair> pairs) {
+        for (ParadigmPair pp : pairs) {
+            add(pp);
+        }
+    }
 }
