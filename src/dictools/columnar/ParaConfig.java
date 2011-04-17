@@ -32,7 +32,7 @@ import dics.elements.dtd.E;
  */
 public class ParaConfig {
 
-    boolean DEBUGPRINT = true;
+    boolean DEBUGPRINT = false;
 
     private HashMap<String, ParadigmPair> pairs;
 
@@ -83,9 +83,9 @@ public class ParaConfig {
             for (int i=0; i < otherE.size(); i++) {
                 if (!otherE.get(i).toString().equals(ourE.get(i).toString())) {
                     if (DEBUGPRINT) {
-                        System.out.println("Other: " + otherE.get(i).toString());
-                        System.out.println("Our: " + ourE.get(i).toString());
-                        System.out.println("Not E");
+                        System.err.println("Other: " + otherE.get(i).toString());
+                        System.err.println("Our: " + ourE.get(i).toString());
+                        System.err.println("Not E");
                     }
                     return false;
                 }
