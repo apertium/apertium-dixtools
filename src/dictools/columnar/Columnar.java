@@ -138,19 +138,77 @@ public class Columnar extends AbstractDictTool {
         return tpl;
     }
 
+    /**
+     * Check if this is a simple p entry (contains only a single p element)
+     * @param e The entry to check
+     * @return True if only contains a single p, false otherwise
+     */
     boolean isSimplePEntry(E e) {
         return (e.children.size() == 1 &&
                 e.children.get(0) instanceof P);
     }
 
+    /**
+     * Check if this is a simple i entry (contains only a single i element)
+     * @param e The entry to check
+     * @return True if only contains a single i, false otherwise
+     */
     boolean isSimpleIEntry(E e) {
         return (e.children.size() == 1 &&
                 e.children.get(0) instanceof I);
     }
 
     /**
+     * Get the symbols from a simple I entry
+     * @param e The entry to extract from
+     * @return An ArrayList of symbols
+     */
+    ArrayList<S> getISymbols(E e) {
+        ArrayList<S> sym = new ArrayList<S>();
+        if (!isSimpleIEntry(e))
+            return null;
+        for (DixElement d : e.children) {
+            if (d instanceof S) {
+                sym.add((S) d);
+            }
+        }
+        return sym;
+    }
+    /**
+     * Get the symbols from the L part of a simple P entry
+     * @param e The entry to extract from
+     * @return An ArrayList of symbols
+     */
+    ArrayList<S> getLSymbols(E e) {
+        ArrayList<S> sym = new ArrayList<S>();
+        if (!isSimplePEntry(e))
+            return null;
+        for (DixElement d : e.getFirstPartAsL().getSymbols()) {
+            if (d instanceof S) {
+                sym.add((S) d);
+            }
+        }
+        return sym;
+    }
+    /**
+     * Get the symbols from the R part of a simple P entry
+     * @param e The entry to extract from
+     * @return An ArrayList of symbols
+     */
+    ArrayList<S> getRSymbols(E e) {
+        ArrayList<S> sym = new ArrayList<S>();
+        if (!isSimplePEntry(e))
+            return null;
+        for (DixElement d : e.getFirstPartAsR().getSymbols()) {
+            if (d instanceof S) {
+                sym.add((S) d);
+            }
+        }
+        return sym;
+    }
+
+    /**
      * Populates the template with lemmas
-     * FIXME: only handles simple l/r entries
      * @param tpl Template array
      * @param lemLeft Left lemma
      * @param lemRight Right lemma
@@ -161,16 +219,34 @@ public class Columnar extends AbstractDictTool {
         for (E ent : tpl) {
             E outE = new E();
             outE.restriction = ent.restriction;
-            L outL = new L();
-            outL.children.add(new TextElement(lemLeft));
-            outL.children.addAll(ent.getFirstPartAsL().getSymbols());
-            R outR = new R();
-            outR.children.add(new TextElement(lemRight));
-            outR.children.addAll(ent.getFirstPartAsR().getSymbols());
-            P outP = new P();
-            outP.l = outL;
-            outP.r = outR;
-            outE.children.add(outP);
+            if (isSimpleIEntry(ent) && lemLeft.equals(lemRight)) {
+                I outI = new I();
+                outI.children.add(new TextElement(lemLeft));
+                outI.children.addAll(getISymbols(ent));
+                outE.children.add(outI);
+            } else if (isSimplePEntry(ent)) {
+                L outL = new L();
+                outL.children.add(new TextElement(lemLeft));
+                outL.children.addAll(getLSymbols(ent));
+                R outR = new R();
+                outR.children.add(new TextElement(lemRight));
+                outR.children.addAll(getRSymbols(ent));
+                P outP = new P();
+                outP.l = outL;
+                outP.r = outR;
+                outE.children.add(outP);
+            } else if (isSimpleIEntry(ent) && !lemLeft.equals(lemRight)) {
+                L outL = new L();
+                outL.children.add(new TextElement(lemLeft));
+                outL.children.addAll(getISymbols(ent));
+                R outR = new R();
+                outR.children.add(new TextElement(lemRight));
+                outR.children.addAll(getISymbols(ent));
+                P outP = new P();
+                outP.l = outL;
+                outP.r = outR;
+                outE.children.add(outP);
+            }
             bilEntries.add(outE);
         }
         return bilEntries;
