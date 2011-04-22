@@ -34,9 +34,10 @@ import java.util.ArrayList;
 import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.E;
 import dics.elements.dtd.P;
-import dics.elements.dtd.L;
 import dics.elements.dtd.R;
+import dics.elements.dtd.L;
 import dics.elements.dtd.I;
+import dics.elements.dtd.DixElement;
 import dics.elements.dtd.S;
 import dics.elements.dtd.Par;
 import dics.elements.dtd.Section;
@@ -79,8 +80,10 @@ public class Columnar extends AbstractDictTool {
     }
 
     Columnar (String l, String r, String bil) {
+        inLeft = l;
+        inRight = r;
+        inBil = bil;
         cliMode = false;
-        setInFiles (l, r, bil);
         init();
     }
 
@@ -135,6 +138,16 @@ public class Columnar extends AbstractDictTool {
         return tpl;
     }
 
+    boolean isSimplePEntry(E e) {
+        return (e.children.size() == 1 &&
+                e.children.get(0) instanceof P);
+    }
+
+    boolean isSimpleIEntry(E e) {
+        return (e.children.size() == 1 &&
+                e.children.get(0) instanceof I);
+    }
+
     /**
      * Populates the template with lemmas
      * FIXME: only handles simple l/r entries
@@ -169,7 +182,7 @@ public class Columnar extends AbstractDictTool {
      * @param r Right monodix
      * @param b Bidix
      */
-    private void setInFiles(String l, String r, String b) {
+    void setInFiles(String l, String r, String b) {
         inLeft = l;
         inRight = r;
         inBil = b;
