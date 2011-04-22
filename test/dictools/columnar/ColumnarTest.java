@@ -138,13 +138,11 @@ public class ColumnarTest {
     }
 
     boolean checkSALists (ArrayList<S> l, ArrayList<S> r) {
-System.out.println("Size" + l.size() + ":" + r.size());
         if (l.size() != r.size()) {
             return false;
         }
         for (int i = 0; i < l.size(); i++) {
             if (!l.get(i).name.equals(r.get(i).name)) {
-System.out.print("Entry" + i + ":" + l.get(i).name + ":" + r.get(i).name);
                 return false;
             }
         }
