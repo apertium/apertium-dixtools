@@ -182,31 +182,65 @@ public class ColumnarTest {
     /**
      * Test of getLSymbols method, of class Columnar.
      */
-    //@Test
+    @Test
     public void testGetLSymbols() {
         System.out.println("getLSymbols");
-        E e = null;
+        E e = new E();
+        P p = new P();
+        L l = new L();
+        l.children.add(new TextElement("text"));
+        l.children.add(new S("n"));
+        l.children.add(new S("sg"));
+        p.l = l;
+        e.children.add(p);
+
         Columnar instance = new Columnar();
-        ArrayList expResult = null;
-        ArrayList result = instance.getLSymbols(e);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        ArrayList<S> expResult = new ArrayList<S>();
+        expResult.add(new S("n"));
+        expResult.add(new S("sg"));
+
+        ArrayList<S> expFail = new ArrayList<S>();
+        expFail.add(new S("vblex"));
+        expFail.add(new S("past"));
+
+        ArrayList<S> result = instance.getLSymbols(e);
+
+        boolean passCheck = checkSALists(result, expResult);
+        boolean failCheck = checkSALists(result, expFail);
+        assertEquals(true, passCheck);
+        assertEquals(false, failCheck);
     }
 
     /**
      * Test of getRSymbols method, of class Columnar.
      */
-    //@Test
+    @Test
     public void testGetRSymbols() {
         System.out.println("getRSymbols");
-        E e = null;
+        E e = new E();
+        P p = new P();
+        R r = new R();
+        r.children.add(new TextElement("text"));
+        r.children.add(new S("n"));
+        r.children.add(new S("sg"));
+        p.r = r;
+        e.children.add(p);
+
         Columnar instance = new Columnar();
-        ArrayList expResult = null;
-        ArrayList result = instance.getRSymbols(e);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        ArrayList<S> expResult = new ArrayList<S>();
+        expResult.add(new S("n"));
+        expResult.add(new S("sg"));
+
+        ArrayList<S> expFail = new ArrayList<S>();
+        expFail.add(new S("vblex"));
+        expFail.add(new S("past"));
+
+        ArrayList<S> result = instance.getRSymbols(e);
+
+        boolean passCheck = checkSALists(result, expResult);
+        boolean failCheck = checkSALists(result, expFail);
+        assertEquals(true, passCheck);
+        assertEquals(false, failCheck);
     }
 
     /**
