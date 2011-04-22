@@ -246,8 +246,14 @@ public class Columnar extends AbstractDictTool {
                 outP.l = outL;
                 outP.r = outR;
                 outE.children.add(outP);
+            } else {
+                outE = null;
             }
-            bilEntries.add(outE);
+
+            //null check
+            if (outE != null) {
+                bilEntries.add(outE);
+            }
         }
         return bilEntries;
     }
