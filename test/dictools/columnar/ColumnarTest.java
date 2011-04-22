@@ -64,7 +64,7 @@ public class ColumnarTest {
     /**
      * Test of doColumnar method, of class Columnar.
      */
-    @Test
+    //@Test
     public void testDoColumnar() {
         System.out.println("doColumnar");
         Columnar instance = new Columnar();
@@ -76,7 +76,7 @@ public class ColumnarTest {
     /**
      * Test of getTemplate method, of class Columnar.
      */
-    @Test
+    //@Test
     public void testGetTemplate() {
         System.out.println("getTemplate");
         String parleft = "";
@@ -93,7 +93,7 @@ public class ColumnarTest {
     /**
      * Test of isSimplePEntry method, of class Columnar.
      */
-    @Test
+    //@Test
     public void testIsSimplePEntry() {
         System.out.println("isSimplePEntry");
         E e = null;
@@ -184,7 +184,7 @@ public class ColumnarTest {
     /**
      * Test of getLSymbols method, of class Columnar.
      */
-    @Test
+    //@Test
     public void testGetLSymbols() {
         System.out.println("getLSymbols");
         E e = null;
@@ -199,7 +199,7 @@ public class ColumnarTest {
     /**
      * Test of getRSymbols method, of class Columnar.
      */
-    @Test
+    //@Test
     public void testGetRSymbols() {
         System.out.println("getRSymbols");
         E e = null;
@@ -214,7 +214,7 @@ public class ColumnarTest {
     /**
      * Test of populateEntries method, of class Columnar.
      */
-    @Test
+    //@Test
     public void testPopulateEntries() {
         System.out.println("populateEntries");
         ArrayList<E> tpl = null;
@@ -231,7 +231,7 @@ public class ColumnarTest {
     /**
      * Test of setInFiles method, of class Columnar.
      */
-    @Test
+    //@Test
     public void testSetInFiles() {
         System.out.println("setInFiles");
         String l = "";
@@ -246,7 +246,7 @@ public class ColumnarTest {
     /**
      * Test of setInput method, of class Columnar.
      */
-    @Test
+    //@Test
     public void testSetInput() {
         System.out.println("setInput");
         String in = "";
@@ -259,7 +259,7 @@ public class ColumnarTest {
     /**
      * Test of setConfig method, of class Columnar.
      */
-    @Test
+    //@Test
     public void testSetConfig() {
         System.out.println("setConfig");
         String cfg = "";
@@ -272,7 +272,7 @@ public class ColumnarTest {
     /**
      * Test of setupArgs method, of class Columnar.
      */
-    @Test
+    //@Test
     public void testSetupArgs() {
         System.out.println("setupArgs");
         Columnar instance = new Columnar();
@@ -284,7 +284,7 @@ public class ColumnarTest {
     /**
      * Test of toolHelp method, of class Columnar.
      */
-    @Test
+    //@Test
     public void testToolHelp() {
         System.out.println("toolHelp");
         Columnar instance = new Columnar();
