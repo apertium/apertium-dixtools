@@ -76,7 +76,6 @@ public class Columnar extends AbstractDictTool {
 
     public Columnar () {
         cliMode = true;
-        init();
     }
 
     Columnar (String l, String r, String bil) {
@@ -84,7 +83,6 @@ public class Columnar extends AbstractDictTool {
         inRight = r;
         inBil = bil;
         cliMode = false;
-        init();
     }
 
     private void init (){
@@ -165,11 +163,17 @@ public class Columnar extends AbstractDictTool {
      */
     ArrayList<S> getISymbols(E e) {
         ArrayList<S> sym = new ArrayList<S>();
+        if (e == null)
+            return null;
         if (!isSimpleIEntry(e))
             return null;
         for (DixElement d : e.children) {
-            if (d instanceof S) {
-                sym.add((S) d);
+            I i = (I) d;
+            for (Object o : i.children) {
+                if (o instanceof S) {
+                    S s = (S) o;
+                    sym.add(s);
+                }
             }
         }
         return sym;
@@ -321,7 +325,6 @@ public class Columnar extends AbstractDictTool {
             DataInputStream in = new DataInputStream(fstream);
             BufferedReader br = new BufferedReader(new InputStreamReader(in, "UTF-8"));
             String strLine = "";
-
 
             while ((strLine = br.readLine()) != null) {
                 if (!strLine.contains("\\t")) {
