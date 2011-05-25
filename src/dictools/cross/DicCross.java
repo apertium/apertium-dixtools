@@ -268,7 +268,7 @@ public class DicCross  extends AbstractDictTool{
             }
 
             int j = 0;
-            for (j = 0; j < a1.length(); j++) {
+            for (j = 0; j < a2.length(); j++) {
                 char c = a2.charAt(j);
                 if (!a3.containsKey(c)) {
                     a3.put(c, null);
