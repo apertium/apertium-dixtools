@@ -258,6 +258,9 @@ public class ProcessDics extends AbstractDictTool {
         else if (action.equals("list") || action.equals("dic-reader")) {
             this.process_list();
         }
+        else if (action.equals("expand-entry")) {
+            this.process_expandentry();
+        }
         else if (action.equals("equiv-paradigms")) {
             this.process_equivparadigms();
         }
@@ -606,6 +609,39 @@ public class ProcessDics extends AbstractDictTool {
                 System.err.println("URL: " + arguments[3]);
             } else {
                 tool.setDic(arguments[2]);
+            }
+            tool.doit();
+        }
+
+    }
+
+    private void process_expandentry() {
+        if (arguments.length != 5) {
+            msg.err("Wrong number of arguments: "+Arrays.toString(arguments));
+            msg.err("");
+            msg.err("Usage: java -jar path/to/apertium-dixtools.jar expand-entry <stem> <paradigm> <dic>");
+            msg.err("   where <action> can be:");
+            msg.err("   list-paradigms:   list of paradigms");
+            msg.err("   list-lemmas:      list of lemmas");
+            msg.err("   list-definitions: list of <sdef> elemenst");
+            msg.err("   list-pairs:       list of pairs (for bilingual dictionaries)");
+            msg.err("");
+            msg.err("   More information: http://wiki.apertium.org/wiki/Dictionary_reader");
+            msg.err("");
+            System.exit(-1);
+        } else {
+
+            DicElementsList tool = new DicElementsList();
+            tool.action = arguments[1];
+            if (arguments[2].equals("-url")) {
+                tool.setUrl(arguments[3]);
+                System.err.println("URL: " + arguments[3]);
+                tool.stem=arguments[4];
+                tool.paradigm=arguments[5];
+            } else {
+                tool.setDic(arguments[2]);
+                tool.stem=arguments[3];
+                tool.paradigm=arguments[4];
             }
             tool.doit();
         }
