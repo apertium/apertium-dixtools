@@ -62,9 +62,8 @@ public class Node implements Serializable{
         this.startingsuffix = startingsuffix;
     }
 
-    public void InsertWord(String word, int currentpos, boolean debug){
-
-        /*if(currentpos>=0){
+    /*public void InsertWord(String word, int currentpos, boolean debug){
+        if(currentpos>=0){
             Node n=getChild(word.charAt(currentpos));
             if(n!=null){
                 n.InsertWord(word, currentpos-1, debug);
@@ -78,8 +77,8 @@ public class Node implements Serializable{
                 n.InsertWord(word, currentpos-1, debug);
                 AddChild(word.charAt(currentpos),n);
             }
-        }*/
-    }
+        }
+    }*/
 
     public void InsertWord(String word, int currentpos, int startingsuffixpos, String paradigm, boolean debug){
         if(currentpos>=0){
@@ -91,7 +90,7 @@ public class Node implements Serializable{
                     if(debug)
                         System.out.println("it is an starting suffix position");
                     n.setStartingsuffix(true);
-                    n.InsertWord(word, currentpos-1, debug);
+                    //n.InsertWord(word, currentpos-1, debug);
                     n.addParadigmName(paradigm);
                 }
                 else{
@@ -102,15 +101,15 @@ public class Node implements Serializable{
                 if(debug)
                     System.out.println("node "+word.charAt(currentpos)+" not found");
                 Node newnode=new Node();
-                if(startingsuffixpos==0){
+                if(startingsuffixpos==currentpos){
                     if(debug)
                         System.out.println("it is an starting suffix position");
                     newnode.setStartingsuffix(true);
-                    newnode.InsertWord(word, currentpos-1, debug);
+                    //newnode.InsertWord(word, currentpos-1, debug);
                     newnode.addParadigmName(paradigm);
                 }
                 else{
-                    newnode.InsertWord(word, currentpos-1, startingsuffixpos-1, paradigm, debug);
+                    newnode.InsertWord(word, currentpos-1, startingsuffixpos, paradigm, debug);
                 }
                 AddChild(word.charAt(currentpos),newnode);
                 if(debug)

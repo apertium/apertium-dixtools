@@ -44,7 +44,7 @@ public class SuffixTree implements Serializable{
     public void AddWord(String word, int startingsuffixpos, String paradigm){
         if(startingsuffixpos==word.length()){
             rootnode.addParadigmName(paradigm);
-            rootnode.InsertWord(word, word.length()-1, false);
+            //rootnode.InsertWord(word, word.length()-1, false);
         }
         else
             rootnode.InsertWord(word, word.length()-1, startingsuffixpos, paradigm, false);
@@ -86,8 +86,7 @@ public class SuffixTree implements Serializable{
         Set<Pair<Paradigm,String>> exit=new LinkedHashSet<Pair<Paradigm,String>>();
         if(this.rootnode.getParadigmName()!=null){
             for(String s: this.rootnode.getParadigmName()){
-                Paradigm paradigm=new Paradigm(dic.pardefs.getParadigmDefinition(s), dic);
-                Pair<Paradigm,String> pair=new Pair<Paradigm, String>(paradigm, word);
+                Pair<Paradigm,String> pair=new Pair<Paradigm, String>(new Paradigm(dic.pardefs.getParadigmDefinition(s), dic), word);
                 exit.add(pair);
             }
         }
@@ -119,8 +118,7 @@ public class SuffixTree implements Serializable{
                         }
                         if(!inserted)
                             inflections.add(inf);*/
-                        steamparadigm.add(new Pair<Paradigm, String>(
-                                new Paradigm(dic.pardefs.getParadigmDefinition(s), dic), steam));
+                        steamparadigm.add(new Pair<Paradigm, String>(new Paradigm(dic.pardefs.getParadigmDefinition(s), dic), steam));
                     }
                 }
             }

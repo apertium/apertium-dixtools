@@ -757,6 +757,14 @@ public class E extends DixElement implements Cloneable {
         return false;
     }
 
+
+
+    public boolean isMultiWord() {
+        for (DixElement e : children)
+          if (e instanceof B) return true;
+        return false;
+    }
+
     /**
      * 
      * @return Undefined         */
