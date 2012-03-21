@@ -760,9 +760,7 @@ public class E extends DixElement implements Cloneable {
 
 
     public boolean isMultiWord() {
-        for (DixElement e : children)
-          if (e instanceof B) return true;
-        return false;
+        return this.toString().contains("<b/>");
     }
 
     /**
