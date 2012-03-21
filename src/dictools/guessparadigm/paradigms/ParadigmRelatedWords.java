@@ -13,6 +13,7 @@ import dics.elements.dtd.I;
 import dics.elements.dtd.P;
 import dics.elements.dtd.Par;
 import dics.elements.dtd.Section;
+import java.io.Serializable;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +29,7 @@ import java.util.TreeSet;
  * generate all the words which the paradigm can generate in the dictionary.
  * @author Miquel Esplà i Gomis
  */
-public class ParadigmRelatedWords {
+public class ParadigmRelatedWords implements Serializable{
     /**
      * Class which implements a comparator between instances of {@link DictionaryWord}.
      * It is used to compare these objects using the score assigned to them.
