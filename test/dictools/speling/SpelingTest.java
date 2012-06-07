@@ -1,5 +1,4 @@
 /*
- * Author: Jimmy O'Regan
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -31,10 +30,6 @@ import dictools.TestTools;
 import dictools.utils.DicOpts;
 import dictools.utils.DictionaryReader;
 
-/**
- *
- * @author jim
- */
 public class SpelingTest extends TestTools {
 
     public SpelingTest() {
