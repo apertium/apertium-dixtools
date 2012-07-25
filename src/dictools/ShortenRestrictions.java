@@ -98,9 +98,57 @@ public class ShortenRestrictions extends AbstractDictTool{
            rTags.add(rtags);
         }
         
-        int length=prevElements.size();
+        int numElements=prevElements.size();
         
+        boolean allCanBeRemoved=true;
         
+        while(allCanBeRemoved)
+        {
+        
+            //Compute longest length
+            int longestEntryLength=0;
+            for(int i=0; i<numElements; i++)
+            {
+                if(lTags.get(i).size()>longestEntryLength)
+                    longestEntryLength=lTags.get(i).size();
+            }
+
+            //Check if the last tag of all the entries with the longest length can be removed
+            allCanBeRemoved=false;
+            if(longestEntryLength>1)
+            {
+                allCanBeRemoved=true;
+                for(int i=0; i<numElements; i++)
+                {
+                    if(lTags.get(i).size()==longestEntryLength)
+                    {
+                        if(!lTags.get(i).get(longestEntryLength-1).getValue().equals( rTags.get(i).get( rTags.get(i).size() -1 ) ))
+                        {
+                            allCanBeRemoved=false;
+                            break;
+                        }
+                    }  
+                }
+            }
+
+            if(allCanBeRemoved)
+            {
+                for(int i=0; i<numElements; i++)
+                {
+                    if(lTags.get(i).size()==longestEntryLength)
+                    {
+                        lTags.get(i).remove(longestEntryLength-1);
+                    }
+                }
+            }
+        
+        }
+        
+        //Remove duplicated entries
+         for(int i=0; i<numElements; i++)
+         {
+             
+         }
         
         
         
