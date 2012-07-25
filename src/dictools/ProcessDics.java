@@ -317,6 +317,9 @@ public class ProcessDics extends AbstractDictTool {
         else if (action.equals("guessparadigm")) {
             this.process_guessparadigm();
         }
+        else if (action.equals("shortenrestrictions")) {
+            this.process_shortenrestrictions();
+        }
         else {
             this.show_help();
             System.exit(-1);
@@ -921,5 +924,12 @@ public class ProcessDics extends AbstractDictTool {
             tool.arguments = this.arguments;
             tool.do_tiny();
         }
+    }
+
+    private void process_shortenrestrictions() {
+        ShortenRestrictions tool = new ShortenRestrictions();
+        tool.opt = opt;
+        tool.arguments = arguments;
+        tool.doShorten();
     }
 }
