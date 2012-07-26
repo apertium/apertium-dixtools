@@ -5,9 +5,13 @@
 package dictools;
 
 import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.DixElement;
 import dics.elements.dtd.E;
+import dics.elements.dtd.L;
+import dics.elements.dtd.R;
 import dics.elements.dtd.S;
 import dics.elements.dtd.Section;
+import dics.elements.dtd.TextElement;
 import dictools.utils.DictionaryReader;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -77,6 +81,12 @@ public class ShortenRestrictions extends AbstractDictTool{
             }
         }
         
+        String reverseFileName = "short-dic.dix";
+        if (arguments.length == 3)
+                reverseFileName = arguments[2];
+            
+        this.dicOrig.printXMLToFile(reverseFileName,opt);
+        
     }
 
     private Collection<? extends E> reduceGroup(List<E> prevElements) {
@@ -144,10 +154,20 @@ public class ShortenRestrictions extends AbstractDictTool{
         
         }
         
-        //Remove duplicated entries
+        //TODO: Remove duplicated entries
          for(int i=0; i<numElements; i++)
          {
-             
+             E newElement= prevElements.get(i);
+             newElement.children.clear();
+             L l = new L();
+             l.children.add(new TextElement(lLemmas.get(i)));
+             l.children.addAll(lTags.get(i));
+             R r = new R();
+             r.children.add(new TextElement(rLemmas.get(i)));
+             r.children.addAll(rTags.get(i));
+             newElement.children.add(l);
+             newElement.children.add(r);
+             returnedElements.add(newElement);
          }
         
         
