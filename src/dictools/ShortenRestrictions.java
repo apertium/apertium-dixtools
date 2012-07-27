@@ -57,20 +57,24 @@ public class ShortenRestrictions extends AbstractDictTool{
             while(elementIterator.hasNext()) {
                 E e=elementIterator.next();
                 if (!e.containsRegEx() && e.is_LR_or_LRRL() && ("cat".equals(e.v) || "".equals(e.v) || null==e.v ) && ("std".equals(e.alt) || "".equals(e.alt) || null==e.alt )) {
-                       String lLemma=e.getLemmaForSide("L");
-                       String rLemma=e.getLemmaForSide("R");
+                       String lLemma=e.getLemmaWithBGForSide("L");
+                       String rLemma=e.getLemmaWithBGForSide("R");
                        List<S> ltags=e.getSymbols("L");
                        List<S> rtags=e.getSymbols("R");
                        
-                       if (!lLemma.equals(prevLemma) || !ltags.get(0).getValue().equals(prevPos))
+                       //ignore entries with no tags
+                       if(ltags.size()>0 && rtags.size()>0)
                        {
-                           elementsToAdd.addAll(reduceGroup(prevElements));
-                           prevElements.clear();
-                           prevLemma=lLemma;
-                           prevPos=ltags.get(0).getValue();
+                           if (!lLemma.equals(prevLemma) || !ltags.get(0).getValue().equals(prevPos))
+                           {
+                               elementsToAdd.addAll(reduceGroup(prevElements));
+                               prevElements.clear();
+                               prevLemma=lLemma;
+                               prevPos=ltags.get(0).getValue();
+                           }
+                           prevElements.add(e);
+                           elementIterator.remove();
                        }
-                       prevElements.add(e);
-                       elementIterator.remove();
                 }
             }
             elementsToAdd.addAll(reduceGroup(prevElements));
@@ -98,9 +102,9 @@ public class ShortenRestrictions extends AbstractDictTool{
         
         for(E e: prevElements)
         {
-           String lLemma=e.getLemmaForSide("L");
+           String lLemma=e.getLemmaWithBGForSide("L");
            lLemmas.add(lLemma);
-           String rLemma=e.getLemmaForSide("R");
+           String rLemma=e.getLemmaWithBGForSide("R");
            rLemmas.add(rLemma);
            List<S> ltags=e.getSymbols("L");
            lTags.add(ltags);
@@ -113,8 +117,7 @@ public class ShortenRestrictions extends AbstractDictTool{
         boolean allCanBeRemoved=true;
         
         while(allCanBeRemoved)
-        {
-        
+        {        
             //Compute longest length
             int longestEntryLength=0;
             for(int i=0; i<numElements; i++)
@@ -132,7 +135,7 @@ public class ShortenRestrictions extends AbstractDictTool{
                 {
                     if(lTags.get(i).size()==longestEntryLength)
                     {
-                        if(!lTags.get(i).get(longestEntryLength-1).getValue().equals( rTags.get(i).get( rTags.get(i).size() -1 ) ))
+                        if(!lTags.get(i).get(longestEntryLength-1).getValue().equals( rTags.get(i).get( rTags.get(i).size() -1 ).getValue() ))
                         {
                             allCanBeRemoved=false;
                             break;
@@ -140,6 +143,10 @@ public class ShortenRestrictions extends AbstractDictTool{
                     }  
                 }
             }
+            
+            //Check if, after removing the last tag from the longest entry, there are
+            //entries with the same left side and different right side
+            
 
             if(allCanBeRemoved)
             {
@@ -148,6 +155,7 @@ public class ShortenRestrictions extends AbstractDictTool{
                     if(lTags.get(i).size()==longestEntryLength)
                     {
                         lTags.get(i).remove(longestEntryLength-1);
+                        rTags.get(i).remove(rTags.get(i).size()-1);
                     }
                 }
             }
