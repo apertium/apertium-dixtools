@@ -8,6 +8,7 @@ import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.DixElement;
 import dics.elements.dtd.E;
 import dics.elements.dtd.L;
+import dics.elements.dtd.P;
 import dics.elements.dtd.R;
 import dics.elements.dtd.S;
 import dics.elements.dtd.Section;
@@ -222,8 +223,10 @@ public class ShortenRestrictions extends AbstractDictTool{
                  R r = new R();
                  r.children.add(new TextElement(rLemmas.get(i)));
                  r.children.addAll(rTags.get(i));
-                 newElement.children.add(l);
-                 newElement.children.add(r);
+                 P newP = new P(l, r);
+                 
+                 newElement.children.add(newP);
+                 
                  returnedElements.add(newElement);
              }
          }
