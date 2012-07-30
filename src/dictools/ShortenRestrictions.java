@@ -126,6 +126,7 @@ public class ShortenRestrictions extends AbstractDictTool{
                     longestEntryLength=lTags.get(i).size();
             }
 
+            
             //Check if the last tag of all the entries with the longest length can be removed
             allCanBeRemoved=false;
             if(longestEntryLength>1)
@@ -144,41 +145,89 @@ public class ShortenRestrictions extends AbstractDictTool{
                 }
             }
             
-            //Check if, after removing the last tag from the longest entry, there are
-            //entries with the same left side and different right side
             
-
             if(allCanBeRemoved)
             {
+                //Check if, after removing the last tag from the longest entry, there are
+                //entries with the same left side and different right side
+                List<List<S>> lTagsAfterRlastTag=new ArrayList<List<S>>();
+                List<List<S>> rTagsAfterRlastTag=new ArrayList<List<S>>();
                 for(int i=0; i<numElements; i++)
                 {
                     if(lTags.get(i).size()==longestEntryLength)
                     {
-                        lTags.get(i).remove(longestEntryLength-1);
-                        rTags.get(i).remove(rTags.get(i).size()-1);
+                        List<S> leftSide=lTags.get(i).subList(0, longestEntryLength-1);
+                        List<S> rightSide=rTags.get(i).subList(0, rTags.get(i).size()-1);
+                        
+                        lTagsAfterRlastTag.add(leftSide);
+                        rTagsAfterRlastTag.add(rightSide);
+                    }
+                    else
+                    {
+                        lTagsAfterRlastTag.add(lTags.get(i));
+                        rTagsAfterRlastTag.add(rTags.get(i));
+                    }
+                }
+                
+                for(int i=0; i<numElements; i++)
+                {
+                    List<S> curLeftSide=lTagsAfterRlastTag.get(i);
+                    for(int j=0; j<i; j++)
+                    {
+                        if(lTagsAfterRlastTag.get(j).equals(curLeftSide))
+                        {
+                            if(!rLemmas.get(i).equals(rLemmas.get(j)) || !rTagsAfterRlastTag.get(i).equals(rTagsAfterRlastTag.get(j)))
+                            {
+                                allCanBeRemoved=false;
+                                break;
+                            }
+                        }
+                    }
+                    if(!allCanBeRemoved)
+                        break;
+                }
+
+                
+                if(allCanBeRemoved)
+                {
+                    for(int i=0; i<numElements; i++)
+                    {
+                        if(lTags.get(i).size()==longestEntryLength)
+                        {
+                            lTags.get(i).remove(longestEntryLength-1);
+                            rTags.get(i).remove(rTags.get(i).size()-1);
+                        }
                     }
                 }
             }
-        
         }
         
-        //TODO: Remove duplicated entries
+        //Remove duplicated entries
          for(int i=0; i<numElements; i++)
          {
-             E newElement= prevElements.get(i);
-             newElement.children.clear();
-             L l = new L();
-             l.children.add(new TextElement(lLemmas.get(i)));
-             l.children.addAll(lTags.get(i));
-             R r = new R();
-             r.children.add(new TextElement(rLemmas.get(i)));
-             r.children.addAll(rTags.get(i));
-             newElement.children.add(l);
-             newElement.children.add(r);
-             returnedElements.add(newElement);
+             boolean isDuplicated=false;
+             for(int  j=0; j< i; j++)
+             {
+                 if(lTags.get(i).equals(lTags.get(j)))
+                     isDuplicated=true;
+             }
+             
+             if(!isDuplicated)
+             {
+                 E newElement= prevElements.get(i);
+                 newElement.children.clear();
+                 L l = new L();
+                 l.children.add(new TextElement(lLemmas.get(i)));
+                 l.children.addAll(lTags.get(i));
+                 R r = new R();
+                 r.children.add(new TextElement(rLemmas.get(i)));
+                 r.children.addAll(rTags.get(i));
+                 newElement.children.add(l);
+                 newElement.children.add(r);
+                 returnedElements.add(newElement);
+             }
          }
-        
-        
+               
         
         return returnedElements;
     }

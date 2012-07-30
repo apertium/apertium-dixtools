@@ -109,6 +109,20 @@ public class S extends DixElement {
         return sE;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof S)
+            return this.name.equals(((S)obj).name);
+        else
+            return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
+
+    
 
     /**
      *
