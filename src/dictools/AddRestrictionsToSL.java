@@ -65,7 +65,7 @@ class AddRestrictionsToSL extends AbstractDictTool {
                        R r = new R();
                        r.children.add(new TextElement(rLemma));
                        r.children.addAll(rtags);
-                       P newP = new P(null, null);
+                       P newP = new P(l, r);
                        e.children.add(newP);
                        
                 }
