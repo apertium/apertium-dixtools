@@ -209,7 +209,7 @@ public class ShortenRestrictions extends AbstractDictTool{
              boolean isDuplicated=false;
              for(int  j=0; j< i; j++)
              {
-                 if(lTags.get(i).equals(lTags.get(j)))
+                 if(lTags.get(i).equals(lTags.get(j)) && rLemmas.get(i).equals(rLemmas.get(j)) && rTags.get(i).equals(rTags.get(j)))
                      isDuplicated=true;
              }
              
