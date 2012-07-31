@@ -320,6 +320,9 @@ public class ProcessDics extends AbstractDictTool {
         else if (action.equals("shortenrestrictions")) {
             this.process_shortenrestrictions();
         }
+        else if (action.equals("addrestrictionstosl")) {
+            this.process_addrestrictionstosl();
+        }
         else {
             this.show_help();
             System.exit(-1);
@@ -932,4 +935,12 @@ public class ProcessDics extends AbstractDictTool {
         tool.arguments = arguments;
         tool.doShorten();
     }
+    
+    private void process_addrestrictionstosl()
+    {
+        AddRestrictionsToSL tool = new AddRestrictionsToSL();
+        tool.opt = opt;
+        tool.arguments = arguments;
+        tool.doAddRestrictions();
+    }        
 }
