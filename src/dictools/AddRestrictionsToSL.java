@@ -10,12 +10,14 @@ import dics.elements.dtd.L;
 import dics.elements.dtd.P;
 import dics.elements.dtd.R;
 import dics.elements.dtd.S;
+import dics.elements.dtd.Sdef;
 import dics.elements.dtd.Section;
 import dics.elements.dtd.TextElement;
 import dictools.utils.DictionaryReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  *
@@ -42,6 +44,13 @@ class AddRestrictionsToSL extends AbstractDictTool {
     
     void doAddRestrictions() {
         processArguments();
+        
+        ListIterator<Sdef> it=dicOrig.sdefs.elements.listIterator();
+        while(it.hasNext())
+        {
+            Sdef sdef=it.next();
+            it.add(new Sdef("RES"+sdef.getValue()));
+        }
         
         for (Section section : dicOrig.sections) {
             
