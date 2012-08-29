@@ -425,6 +425,16 @@ function fix() {
    fi
 }
 
+function speling() {
+   if [ $nparams -ge 3 ]
+   then
+   	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
+   else
+      echo "Usage: apertium-dixtools speling <speling> <dic-out>"
+      echo "";
+   fi
+}
+
 #
 #  show_help
 #
