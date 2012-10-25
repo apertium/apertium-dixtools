@@ -3,20 +3,58 @@
 # Heap space memory for JVM
 defaultMinMem=500
 defaultMaxMem=800
+
+script_path=$(dirname "$0")
 if [ "$CROSSDICS_PATH" = "" ];
 then
-	CROSSDICS_PATH="/usr/local/apertium-dixtools"
+	if [ -e "/usr/local/apertium-dixtools/dist/apertium-dixtools.jar" ]
+	then
+		CROSSDICS_PATH="/usr/local/apertium-dixtools"
+	else
+		CROSSDICS_PATH="$script_path"
+	fi
 fi
 library="$CROSSDICS_PATH/dist/apertium-dixtools.jar"
 java_options="-Xms${defaultMinMem}m -Xmx${defaultMaxMem}m -jar ${library}"
 
+echo $script_path
 
 #
 #	cross-param
 #
 function cross-param() {
-   if [ $nparams -ge 7 ] && [ $nparams -le 9  ]; then
-   	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
+   if [ $nparams -ge 7 ] && [ $nparams -le 9  ]
+   then
+        if [ "$8" == "default" ]
+        then
+            crossmodel="$CROSSDICS_PATH/schemas/cross-model.xml"
+        else
+            crossmodel="$8"
+        fi
+
+        if [ ! -e "$2" ]
+	then
+            echo "Problem loading monolingual dictionary A ($2)"
+        fi
+        if [ ! -e "$4" ]
+	then
+            echo "Problem loading bilingual dictionary AB ($4)"
+        fi
+        if [ ! -e "$6" ]
+	then
+            echo "Problem loading bilingual dictionary BC ($6)"
+        fi
+        if [ ! -e "$7" ]
+	then
+            echo "Problem loading monolingual dictionary C ($7)"
+        fi
+        if [ ! -e "$crossmodel" ]
+	then
+            echo "Problem loading cross-model ($8)"
+        fi
+
+
+   	java ${java_options} $task $2 $3 $4 $5 $6 $7 $crossmodel $9
 #   crossmodel="$CROSSDICS_PATH/schemas/cross-model.xml"
 #	read i
 #	   if [ $nparams -ge 8 ]
