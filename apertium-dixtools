@@ -23,7 +23,7 @@ echo $script_path
 #	cross-param
 #
 function cross-param() {
-   if [ $nparams -ge 7 ] && [ $nparams -le 9  ]
+   if [ $nparams -ge 7 ] && [ $nparams -le 8  ]
    then
         if [ "$8" == "default" ]
         then
@@ -54,7 +54,7 @@ function cross-param() {
         fi
 
 
-   	java ${java_options} $task -noalign $2 $3 $4 $5 $6 $7 $crossmodel $9
+   	java ${java_options} $task -noalign -monA $2 -bilAB $3 $4 -bilBC $5 $6 -monC $7 -cross-model $crossmodel
 #   crossmodel="$CROSSDICS_PATH/schemas/cross-model.xml"
 #	read i
 #	   if [ $nparams -ge 8 ]
