@@ -230,9 +230,13 @@ public class DicCross  extends AbstractDictTool{
         // sections
         for (Section section1 : dic1.sections) {
             Section section2 = dic2.getSection(section1.id);
-            Section[] sections = crossSections(section1, section2, sdefs);
-            Section section = sections[0];
-            dic.sections.add(section);
+            if (section2 != null) {
+              Section[] sections = crossSections(section1, section2, sdefs);
+              Section section = sections[0];
+              dic.sections.add(section);
+            } else {
+              msg.out("skipping section " + section1.id + ": absent from dicAC\n"); 
+            }
         }
 
         msg.out("[" + (taskOrder++) + "] Sorting crossed dictionary...\n");
