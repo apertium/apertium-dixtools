@@ -5,9 +5,15 @@
 
 package misc;
 
-import dics.elements.dtd.*;
-import dictools.utils.*;
-import java.io.*;
+import dics.elements.dtd.Dictionary;
+import dics.elements.dtd.DixElement;
+import dics.elements.dtd.E;
+import dics.elements.dtd.P;
+import dics.elements.dtd.Par;
+import dics.elements.dtd.Pardef;
+import dics.elements.dtd.S;
+import dictools.utils.DicOpts;
+import dictools.utils.DictionaryReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -60,7 +66,7 @@ public class Svensk {
 
              ArrayList<S> sl1 =   e1.getSymbols("R");
              ArrayList<S> sl2 =   e2.getSymbols("R");
-             
+
              if (sl1.contains(S.getInstance("ind")) && sl1.remove(S.getInstance("sg")) && sl2.remove(S.getInstance("pl")) && sl1.equals(sl2)) {
                 System.err.println("e1 = " + e1 + " " + e2);
                 System.err.println("e1 = " + sl1 + " " + sl2);

@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2008 Dana Esperanta Junulara Organizo http://dejo.dk/
  * Author: Jacob Nordfalk
- * 
+ *
  * This program hasSymbol free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
@@ -23,33 +23,22 @@ package misc.eoen;
 
 import dics.elements.dtd.ContentElement;
 import java.io.IOException;
-import dictools.AutorestrictBidix;
 
 import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.E;
 import dics.elements.dtd.DixElement;
-import dics.elements.dtd.L;
-import dics.elements.dtd.P;
-import dics.elements.dtd.Par;
-import dics.elements.dtd.R;
-import dics.elements.dtd.S;
 import dics.elements.dtd.Section;
-import dics.elements.dtd.TextElement;
 import dictools.utils.DictionaryReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import misc.DicFormatE1Line;
-import misc.eoen.DicFormatE1LineAligned;
 
 /**
  *
@@ -68,11 +57,11 @@ public class KompletiguEoDix {
 
   private static Set<String> vortKlasojUzataj = new TreeSet<String>();
   private static Set<String> vortKlasojNeUzataj = new TreeSet<String>();
-  
-  
+
+
   public static void aldonuLemon(String s, Map<String, String> monodixEoLemoj) {
     System.err.println("aldonuLemon(String s = " + s);
-    
+
     int i=s.indexOf('<');
     if (i==-1) return;
 
@@ -95,17 +84,17 @@ public class KompletiguEoDix {
   }
 
 
-  
+
   public static void main(final String[] args) throws IOException {
     Map<String, String> testvoc_mankas_eo_dix=new LinkedHashMap<String, String>();
     Map<String, String> testvoc_mankas_bidix=new LinkedHashMap<String, String>();
 
-    
+
     String antauxaStr="";
-    
-// XXXXXXXXXX HVORFOR KOMMER <e lm="vblex>"><i>vblex</i><par n="verb__vblex"/></e ????    
-    
-    
+
+// XXXXXXXXXX HVORFOR KOMMER <e lm="vblex>"><i>vblex</i><par n="verb__vblex"/></e ????
+
+
     for (String s : Iloj.exec("./testvoc2_en-eo.sh")) {
       char ch = s.charAt(0);
       if (ch != '#' && ch != '\\') continue;
@@ -118,7 +107,7 @@ public class KompletiguEoDix {
       //System.err.println("s = " + s);
       antauxaStr = s;
     }
-    
+
     System.err.println("vortKlasojUzataj = " + vortKlasojUzataj);
     System.err.println("vortKlasojNeUzataj = " + vortKlasojNeUzataj);
 
@@ -133,7 +122,7 @@ public class KompletiguEoDix {
       int i = str.indexOf('<');
       if (i==-1) {
         System.err.println("HM!!!! str = " + str);
-      } else {        
+      } else {
         Paro p = new Paro();
         p.rootEo = str.substring(0,i);
         String tags = str.substring(i);
@@ -142,7 +131,7 @@ public class KompletiguEoDix {
         else if (tags.equals("<adv>")) p.setKlasoTag(p.ADV);
         else if (tags.equals("<pr>")) p.setKlasoTag(p.PR);
         else if (tags.equals("<n><m>")) { p.setKlasoTag(p.N); p.gender = true; }
-        else if (tags.equals("<n>")) p.setKlasoTag(p.N);        
+        else if (tags.equals("<n>")) p.setKlasoTag(p.N);
         else if (tags.equals("<vblex>")) p.setKlasoTag(p.VBLEX);
         else if (tags.startsWith("<np>")) { p.setKlasoTag(p.NP); p.setAliajTag(tags.substring(4)); }
         //else if (tags.startsWith("<det><ord>")) { p.setEoPardef(""); }
@@ -150,45 +139,45 @@ public class KompletiguEoDix {
             System.err.println("neniu klaso por  " + tags);
             p.setKlasoTag(p.OTHER); p.setAliajTag(tags);
         }
-        
+
         if (p.noun() && esperanto_nouns_with_gender.contains(p.rootEo) && !p.gender) System.err.println("FEJL !p.gender " + p);
         if (p.noun() && !esperanto_nouns_with_gender.contains(p.rootEo) && p.gender) System.err.println("FEJL p.gender " + p);
-        
+
         String s = p.apertiumEo();
         int parpos = s.lastIndexOf("<par n=");
         String k = parpos>0? s.substring(parpos)+s : s;
-        
+
         System.err.println("k = " + k + "  antauxaStr="+antauxaStr);
         eodix_aldono.put(k, s);
       }
       antauxaStr = str;
     }
-    
+
     PrintWriter ald_eo = Iloj.ekskribuHtml("ald_eo.dix");
     for (String s : eodix_aldono.values()) {
       System.out.println(s);
       ald_eo.println(s);
     }
     ald_eo.close();
-    
-  }
-  
-  
 
-  
-  
-  
-  
-  
-  
-  
-  
+  }
+
+
+
+
+
+
+
+
+
+
+
   public static void mainx(final String[] args) throws IOException {
     //Dictionary eodix = new DictionaryReader("../apertium-eo-en/apertium-eo-en.eo.dix.xml").readDic();
 
     //Set<String> esperanto_nouns_with_gender = new HashSet<String>(Iloj.leguTekstDosieron("res/esperanto_nouns_with_gender.txt"));
 
-    
+
     //System.err.println("forprenindiajEtikedoj = " + forprenindiajEtikedoj);
     LinkedHashMap<String, ArrayList<String>> aperEoDix[] =Iloj.leguDix("lt-expand apertium-eo-en.eo.dixtmp1");
 
@@ -199,22 +188,22 @@ public class KompletiguEoDix {
       aldonuLemon(s, monodixEoLemoj);
     }
 
-    
+
     System.err.println("vortKlasoj = " + vortKlasoj);
     //System.err.println("monodixEoLemoj = " + monodixEoLemoj);
-    
+
     Dictionary bidix = new DictionaryReader("../apertium-eo-en/apertium-eo-en.eo-en.dix").readDic();
-    
+
     for (Section section : bidix.sections) {
       for (E ee : section.elements) {
         if (!ee.containsRegEx()) {
           ContentElement l=ee.getFirstPart("L");
           ContentElement r=ee.getFirstPart("R");
-        
+
           String str = "";
           for (DixElement e : l.children) {
               String v = e.toString();
-              
+
               //System.err.println("v = " + v+ "  " +e.getClass());
               str += v;
           }
@@ -225,23 +214,23 @@ public class KompletiguEoDix {
       }
     }
 
-    
+
     //System.err.println("bidixEoLemoj = " + bidixEoLemoj);
-    
+
     Set<String> inBidixNotInMonodix = new LinkedHashSet(bidixEoLemoj.keySet()); inBidixNotInMonodix.removeAll(monodixEoLemoj.keySet());
     Set<String> inMonodixNotInBidix = new LinkedHashSet(monodixEoLemoj.keySet()); inMonodixNotInBidix.removeAll(bidixEoLemoj.keySet());
-    
-    
+
+
     //System.err.println("inBidixNotInMonodix = " + inBidixNotInMonodix);
-    
+
     //System.err.println("inMonodixNotInBidix = " + inMonodixNotInBidix);
-  /*  
+  /*
     for (String str : inBidixNotInMonodix) {
 
       int i = str.indexOf('<');
       if (i==-1) {
         System.err.println("HM!!!! str = " + str);
-      } else {        
+      } else {
         Paro p = new Paro();
         p.rootEo = str.substring(0,i);
         String tags = str.substring(i);
@@ -250,13 +239,13 @@ public class KompletiguEoDix {
         else if (tags.equals("<n>")) p.setKlasoTag(p.N);
         else if (tags.equals("<vblex>")) p.setKlasoTag(p.VBLEX);
         else if (tags.startsWith("<np>")) { p.setKlasoTag(p.NP); p.setAliajTag(tags.substring(4)); }
-        else 
+        else
           System.err.println("FEJL tags = " + tags);
           System.out.println(p.apertiumEo() + "  fra "+str);
       }
     }
     */
-/*    
+/*
     for (Section section : bidix.sections) {
       Iterator<E> eei=section.getEElements().iterator();
       while (eei.hasNext()) {
