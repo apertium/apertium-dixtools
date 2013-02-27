@@ -20,6 +20,7 @@ package dictools;
  * 02111-1307, USA.
  */
 
+import dictools.enhancer.DictEnhancer;
 import dictools.cross.DicCross;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -323,6 +324,9 @@ public class ProcessDics extends AbstractDictTool {
         else if (action.equals("addrestrictionstosl")) {
             this.process_addrestrictionstosl();
         }
+        else if (action.equals("enhance")) {
+            this.process_enhanceDict();
+        }
         else {
             this.show_help();
             System.exit(-1);
@@ -350,6 +354,7 @@ public class ProcessDics extends AbstractDictTool {
         msg.err("   reverse-bil:        reverses a bilingual dictionary");
         msg.err("   sort:               sorts (and groups by category) a dictionary");
         msg.err("   sort:               sorts (and groups by category) a dictionary");
+        msg.err("   enhance:            allows to interactively add new words to the dictionary");
         msg.err("");
         msg.err("More information: http://wiki.apertium.org/wiki/Apertium-dixtools");
         msg.err("");
@@ -943,4 +948,17 @@ public class ProcessDics extends AbstractDictTool {
         tool.arguments = arguments;
         tool.doAddRestrictions();
     }        
+    
+    private void process_enhanceDict()
+    {
+         if (arguments.length != 3) {
+            msg.err("Usage: java -jar path/to/apertium-dixtools.jar enhance dict_to_enhance.dix new_name.dix");
+            System.exit(-1);
+        }
+         
+        DictEnhancer tool = new DictEnhancer();
+        tool.opt = opt;
+        tool.arguments = arguments;
+        tool.doEnhance();
+    }
 }
