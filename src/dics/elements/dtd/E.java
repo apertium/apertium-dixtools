@@ -828,22 +828,20 @@ public class E extends DixElement implements Cloneable {
 
         public boolean ignoreCase=false;
 
-        public int compare(E e1, E anotherEElement) {
-            if (anotherEElement == null) return -1;
-            if (e1.containsRegEx()) return 0;
-            // XXX: the following code always returns true
-            //if (!(anotherEElement instanceof E))  throw new ClassCastException("An EElement object expected.");
-
+        public int compare(E e1, E e2) {
+            if (e2 == null) return -1;
 
             String lemma1 = e1.getValue(side);
+            String lemma2 = e2.getValue(side);
 
-            String lemma2 = anotherEElement.getValue(side);
+            if (e1.containsRegEx() && !e2.containsRegEx()) return 1;
+            if (!e1.containsRegEx() && e2.containsRegEx()) return -1;
 
-            if (lemma1 == null || lemma2 == null)  return 0;
-
+            if (lemma1 == null && lemma2 != null) return 1;
+            if (lemma1 != null && lemma2 == null) return -1;
+            if (lemma1 == null && lemma2 == null) return 0;
             
             int cmp = ignoreCase?  lemma1.compareToIgnoreCase(lemma2) : lemma1.compareTo(lemma2);
-            if (cmp!=0) return cmp;
 
             // TODO equal lemma, check symbols
             return cmp;
