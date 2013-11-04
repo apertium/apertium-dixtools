@@ -19,11 +19,7 @@
  */
 package dictools.enhancer;
 
-import dics.elements.dtd.ContentElement;
-import dics.elements.dtd.Dictionary;
-import dics.elements.dtd.E;
-import dics.elements.dtd.I;
-import dics.elements.dtd.Section;
+import dics.elements.dtd.*;
 import dictools.AbstractDictTool;
 import dictools.guessparadigm.suffixtree.Pair;
 import dictools.utils.DictionaryReader;
@@ -86,6 +82,16 @@ public class DictEnhancer extends AbstractDictTool{
             }
             
             section.elements.add(element);
+
+            if(element.lemma.contains("l·")) {
+
+                String newStem = element.getFirstPartAsL().getValue().replace("l·", "ŀ");
+
+                E clonedElement = cloneElementForAnalysis(newStem, element);
+
+                section.elements.add(clonedElement);
+            }
+
             _texts.elementAdded(element);
         }
     }
@@ -186,6 +192,26 @@ public class DictEnhancer extends AbstractDictTool{
         l.children.get(0).setValue(newStem);
         _texts.printResult(newElement);
         
+        return newElement;
+    }
+
+    private E cloneElementForAnalysis(String newStem, E oldElement) {
+        E newElement = oldElement.copy();
+
+        R newR = new R(oldElement.getFirstPartAsR());
+        L newL = new L(oldElement.getFirstPartAsL());
+        newL.setValue(newStem);
+
+        P newP = new P();
+        newP.l = newL;
+        newP.r = newR;
+
+        newElement.children = new ArrayList<DixElement>();
+        newElement.children.add(newP);
+        newElement.children.add(oldElement.getFirstParadigm());
+
+        newElement.restriction = "LR";
+
         return newElement;
     }
 
