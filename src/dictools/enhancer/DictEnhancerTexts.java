@@ -21,6 +21,9 @@ package dictools.enhancer;
 
 import dics.elements.dtd.E;
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
 
 public class DictEnhancerTexts {
     
@@ -32,18 +35,25 @@ public class DictEnhancerTexts {
     
     public boolean askConfirmation() {
         System.out.println("Is this correct? (y/n)");
-        String answer;
-        while (_scanner.hasNextLine()) {
-            answer = _scanner.nextLine();
-            if (answer.equalsIgnoreCase("y")) {
-                return true;
-            }
-            if (answer.equalsIgnoreCase("n")) {
-                return false;
-            }
-            System.out.println("Incorrect answer");
-            System.out.println("Is this correct? (y/n)");
-        }
+        String answer = "";
+
+		// switch to BufferedReader
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		try {
+			answer = br.readLine();
+		}
+		catch(IOException e) {
+			System.out.println("Error");
+		}
+
+		if (answer.equalsIgnoreCase("y")) {
+			return true;
+		}
+		if (answer.equalsIgnoreCase("n")) {
+			return false;
+		}
+		System.out.println("Incorrect answer");
+		System.out.println("Is this correct? (y/n)");
         return false;
     }
 

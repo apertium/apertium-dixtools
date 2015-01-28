@@ -26,11 +26,13 @@ import dictools.utils.DictionaryReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class DictEnhancer extends AbstractDictTool{
     
     private Dictionary _dic;
-    private boolean interactive;
+    private boolean interactive, batch, confirm;
     private String out;
     private Scanner scanner;
     private boolean exit;
@@ -47,15 +49,17 @@ public class DictEnhancer extends AbstractDictTool{
     }
     
     private void actionEnhancement() {
-         enhance();
-         _dic.printXMLToFile(out,opt);
+        enhance(); 
+		_dic.printXMLToFile(out,opt);
     }
     
-    private void enhance() {
-        
-        System.out.println("'enhance' method");
+	private void enhance() {
+	 	System.out.println("'enhance' method");
 
-        _texts.askForNewWord();
+		if(!batch) {
+        	_texts.askForNewWord();
+		}
+
         while(scanner.hasNextLine()) {
             Pair<String,String> pair = handleNewOldWord();
             
@@ -71,7 +75,9 @@ public class DictEnhancer extends AbstractDictTool{
                 _texts.incorrectWordFormat();
             }
             
-            _texts.askForNewWord();
+			if(!batch) {
+	            _texts.askForNewWord();
+			}
         }
     }
     
@@ -128,10 +134,31 @@ public class DictEnhancer extends AbstractDictTool{
             } else break; // not recognized, must be file name then
             i++;
         }
-        
+
+		// format: enhance in_dix out_dix --batch in_file
+		batch = false;
+		if(arguments.length>3) {
+			if(arguments[3].startsWith("--batch")) {
+				batch = true;
+			}
+		}
+       		
         _dic = getDictionary(arguments[i]);
         out = arguments[i+1];
-        scanner = new Scanner(System.in);
+		if(!batch) {
+	        scanner = new Scanner(System.in);
+		}
+
+		// open file
+		else { 
+			try {
+				scanner = new Scanner(new File(arguments[4]));
+			}
+			catch (FileNotFoundException e) {
+				System.out.println("File not found");
+				System.exit(0);
+			}
+		}
         _texts = new DictEnhancerTexts(scanner);
         _stemGuesser = new StemGuesser(_dic, _texts);
     }
@@ -165,18 +192,33 @@ public class DictEnhancer extends AbstractDictTool{
         
         List<E> elements = findOldWord(oldWord);
         if(!elements.isEmpty()) {
-            for(E element : elements) {
-                
-                if(_texts.askForOldWord(element)) {
-                    String newStem = _stemGuesser.GetStem(newWord, element);
-                    
-                    if(newStem != null) {
-                        newElement = createElement(newWord, newStem, element);
-                    } else {
-                        newElement = null;
-                    }
-                }
-            }
+			
+			// if only one element
+			if(elements.size() < 2) {
+					E element = elements.get(0);
+					String newStem = _stemGuesser.GetStem(newWord, element);
+
+					if(newStem != null) {
+						newElement = createElement(newWord, newStem, element);
+					} else {
+						newElement = null;
+					}	
+			}
+			
+			else {
+				for(E element : elements) {
+					
+					if(_texts.askForOldWord(element)) {
+						String newStem = _stemGuesser.GetStem(newWord, element);
+						
+						if(newStem != null) {
+							newElement = createElement(newWord, newStem, element);
+						} else {
+							newElement = null;
+						}
+					}
+				}
+			}
         } else {
             _texts.wordNotFound();
         }

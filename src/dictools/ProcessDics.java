@@ -951,8 +951,9 @@ public class ProcessDics extends AbstractDictTool {
     
     private void process_enhanceDict()
     {
-         if (arguments.length != 3) {
-            msg.err("Usage: java -jar path/to/apertium-dixtools.jar enhance dict_to_enhance.dix new_name.dix");
+		 // changed arg lengths
+         if (arguments.length != 3 && arguments.length != 5) {
+            msg.err("Usage: java -jar path/to/apertium-dixtools.jar enhance dict_to_enhance.dix new_name.dix\nor\njava -jar path/to/apertium-dixtools.jar enhance dict_to_enhance.dix new_name.dix --batch word_file");
             System.exit(-1);
         }
          

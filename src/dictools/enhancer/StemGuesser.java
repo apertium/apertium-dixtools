@@ -35,15 +35,17 @@ public class StemGuesser {
         _dic = dic;
         _texts = texts;
     }
-    
+	
+	// added boolean for expanded display	
     public String GetStem(String newWord, E existingElement) {
         
         String paradigm = existingElement.getMainParadigmName();
         
         String newStem = suggestStem(newWord, existingElement);
         
-        if (newStem != null) {
-            expandElement(newStem, paradigm);
+        
+		/*if (newStem != null) {
+			expandElement(newStem, paradigm);
             if (_texts.askConfirmation()) {
                 return newStem;
             } 
@@ -54,16 +56,18 @@ public class StemGuesser {
         do{
             expandElement(newStem, paradigm);
             
-            if (_texts.askConfirmation()) {
-              return newStem;  
-            } 
+			if (_texts.askConfirmation()) {
+			    return newStem;  
+        	} 
             
-            newStem = newStem.substring(0, newStem.length() - 1);
+           	newStem = newStem.substring(0, newStem.length() - 1);
             
         } while (newStem.length() > 0);
         
         return null;
-    }
+    	*/
+		return newStem;
+	}
     
     private String suggestStem(String newWord, E element) {
         
@@ -86,7 +90,7 @@ public class StemGuesser {
         Pardef pardef = new Pardef("pere");
         E element = new E();
         Paradigm p = new Paradigm(pardef,_dic);
-        p.getSuffixes();
+        //p.getSuffixes();
         
         
     }
