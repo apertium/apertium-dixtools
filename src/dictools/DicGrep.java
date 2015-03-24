@@ -22,18 +22,9 @@ package dictools;
 
 import dics.elements.dtd.*;
 import dics.elements.dtd.Par;
-import dics.elements.dtd.S;
-import dictools.frequency.HitParade;
 import dictools.utils.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
 import java.util.regex.Pattern;
 
 /**

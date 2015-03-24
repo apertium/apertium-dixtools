@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Dictionary:
+	Sections: 1
+	Entries: 4
+	Sdefs: 13
+	Paradigms: 1
+	Last processed by: apertium-dixtools grep --par MF_GD test/sample.eo-en.dix regression_test_data/grep/actual_output.dix
+
+-->
+<dictionary>
+  <alphabet></alphabet>
+  <sdefs>
+    <sdef n="pron" /> 
+    <sdef n="web" /> 
+    <sdef n="GD" /> 
+    <sdef n="f" /> 
+    <sdef n="m" /> 
+    <sdef n="num" /> 
+    <sdef n="np" /> 
+    <sdef n="al" /> 
+    <sdef n="ant" /> 
+    <sdef n="n" /> 
+    <sdef n="vblex" /> 
+    <sdef n="adv" /> 
+    <sdef n="guio" /> 
+  </sdefs>
+  <pardefs>
+<pardef n="MF_GD">
+  <e r="RL"><p><l><s n="GD"/></l><r></r></p></e>
+
+  <e r="LR"><p><l><s n="f"/></l><r></r></p></e>
+
+  <e r="LR"><p><l><s n="m"/></l><r></r></p></e>
+</pardef>
+  </pardefs>
+
+  <section id="main" type="standard">
+
+
+    <!-- Nouns with gender in Esperanto but not in English -->
+
+<e>       <p><l>islamano<s n="n"/></l>                 <r>Muslim<s n="n"/></r></p><par n="MF_GD"/></e>
+<e>       <p><l>katoliko<s n="n"/></l>                 <r>Catholic<s n="n"/></r></p><par n="MF_GD"/></e>
+<e>       <p><l>kristano<s n="n"/></l>                 <r>Christian<s n="n"/></r></p><par n="MF_GD"/></e>
+<e>       <p><l>protestanto<s n="n"/></l>              <r>Protestant<s n="n"/></r></p><par n="MF_GD"/></e>
+  </section>
+</dictionary>
