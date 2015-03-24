@@ -289,6 +289,9 @@ public class ProcessDics extends AbstractDictTool {
         else if (action.equals("filter")) {
             this.process_filter();
         }
+        else if (action.equals("grep")) {
+          new DicGrep().executeTool(opt, arguments);
+        }
         else if (action.equals("format-1line")) {
             this.process_format1line();
             //opt.copyAlignSettings(DicOpts.STD_1_LINE);

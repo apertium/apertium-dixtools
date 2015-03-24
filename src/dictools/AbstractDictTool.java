@@ -63,7 +63,7 @@ public class AbstractDictTool {
   }
 
   protected void failWrongNumberOfArguments(String[] remainingarguments) {
-    msg.err("Usage: apertium-dixtools "+toolHelp());
+    msg.err("Usage: apertium-dixtools "+toolHelp()+"\n");
     if (remainingarguments.length==1)
       throw new IllegalArgumentException("Missing some more arguments.");
     else

@@ -17,7 +17,7 @@ fi
 library="$CROSSDICS_PATH/dist/apertium-dixtools.jar"
 java_options="-Xms${defaultMinMem}m -Xmx${defaultMaxMem}m -jar ${library}"
 
-echo $script_path
+#echo $script_path
 
 #
 #	cross-param
@@ -473,6 +473,11 @@ function speling() {
    fi
 }
 
+
+function grep() {
+ 	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
+}
+
 #
 #  show_help
 #
@@ -488,6 +493,7 @@ function show_help() {
    echo "    merge-morph:        merges two morphological dictionaries (monodix)"
    echo "    equiv-paradigms:    finds equivalent paradigms and updates references"
    echo "    list:               lists entries in a dictionary"
+   echo "    grep:               makes grep-like regexp search to filter a dictionary"
    echo "    dix2trie:           create a Trie from an existing bilingual dictionary"
    echo "    dix2tiny:           create data for mobile platforms (j2me, palm) from bidix"
   #echo "    process-xincludes:  processes and expands all xincludes in the dictionary"
