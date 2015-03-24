@@ -120,8 +120,8 @@ public class Templates extends DixElement {
      */
     public void printXMLToFile(String fileName,DicOpts opt) {
         if (opt.detectAlignmentFromSource) {
-          System.err.println("Note: You didnt specify any alignment options, so a good alignment will be detected from the data.\n"+
-                                    "      (use -noalign to get the old unaligned multiline-XML-ish behaviour)");
+          //System.err.println("Note: You didnt specify any alignment options, so a good alignment will be detected from the data.\n"+
+          //                          "      (use -noalign to get the old unaligned multiline-XML-ish behaviour)");
           opt = opt.copy();
           opt.detectAlignmentFromSource = false;
         }

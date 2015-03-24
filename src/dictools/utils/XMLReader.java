@@ -164,7 +164,7 @@ public class XMLReader {
                 parser.parse(new InputSource(System.in));
               } else {
                 // case: file
-                System.err.println("Reading file " + dicFile);
+                System.err.println("Reading file '" + dicFile+"'");
                 //parser.parse(new InputSource(new InputStreamReader(new FileInputStream(dicFile), "UTF-8")));
                 parser.parse(dicFile.getPath());
               }
@@ -174,46 +174,12 @@ public class XMLReader {
             this.lineNumbers = parser.lineNumbers;
         } catch (Exception e) {
             System.err.println("Error (" + dicFile + "): " + e.getMessage());
+						e.printStackTrace();
             System.exit(-1);
         }
     }
-
-
 
     
-    protected void analize_old() {
-
-  //    builder.setFeature( "http://apache.org/xml/features/dom/defer-node-expansion", false );
-
-        // getFactory().setXIncludeAware(true);
-        try {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            factory.setFeature( "http://apache.org/xml/features/dom/defer-node-expansion", false );
-            factory.setXIncludeAware(true);
-            DocumentBuilder builder = factory.newDocumentBuilder();
-
-            if (urlDic) {
-                // case: url
-                System.err.println("Reading URL");
-                this.document = builder.parse(is);
-
-            } else {
-                // case: standard input
-              if (dicFile.equals(new File("-"))) {
-                System.err.println("Reading from standard input");
-                this.document = builder.parse(System.in);
-              } else {
-                // case: file
-                System.err.println("Reading file " + dicFile);
-                this.document = builder.parse(dicFile);
-              }
-                
-            }
-        } catch (Exception e) {
-            System.err.println("Error (" + dicFile + "): " + e.getMessage());
-            System.exit(-1);
-        }
-    }
 
     /**
      * 
