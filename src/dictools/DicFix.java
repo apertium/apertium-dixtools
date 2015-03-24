@@ -51,7 +51,7 @@ public class DicFix extends AbstractDictTool {
     public void fix(Dictionary dic) {
       if (dic.isMonol()) DicCross.addMissingLemmas(dic);
 
-      Set<String> missingSymbols = S.getKnownSymbols();
+      Set<String> missingSymbols = new HashSet<String>(S.getKnownSymbols());
       for (Sdef sdef : dic.sdefs.elements) { missingSymbols.remove(sdef.getValue()); }
       if (!missingSymbols.isEmpty()) msg.err("Adding missing symbols: "+missingSymbols);
       for (String s : missingSymbols) {
@@ -78,8 +78,40 @@ public class DicFix extends AbstractDictTool {
       }
     }
 
-    
+
+			/*
+	private void findMissingSymbols(Set<String> missingSymbols, DixElement c) {
+		if (c instanceof S) missingSymbols.add( ((S)c).name );
+		else if (c instanceof P) {
+			findMissingSymbols(missingSymbols, ((P)c).l);
+			findMissingSymbols(missingSymbols, ((P)c).r);
+		}
+		else if (c instanceof ContentElement) {
+			for (DixElement e : ((ContentElement)c).children)
+			 findMissingSymbols(missingSymbols, e);
+		} else {
+			System.err.println(c.getClass()+ " "+c);
+		}
+	}
+
+      Set<String> missingSymbols = new HashSet<String>();
+			for (Pardef s: dic.pardefs.elements) for (E e : s.elements) for (DixElement c : e.children)
+				findMissingSymbols(missingSymbols, c);
+			for (Section s: dic.sections) for (E e : s.elements) for (DixElement c : e.children)
+				findMissingSymbols(missingSymbols, c);
+
+			System.out.println(missingSymbols);
+			System.out.println(S.getKnownSymbols());
+      for (Sdef sdef : dic.sdefs.elements) { missingSymbols.remove(sdef.getValue()); }
+      if (!missingSymbols.isEmpty()) msg.err("Adding xxxx missing symbols: "+missingSymbols);
+
+	*/
+
     public void doFix() {
+				// S has a static list of known symbols which needs to be reset for fix to work correctly.
+			  // alternatively we'd need code as above to build up a symbol list
+				S.getKnownSymbols().clear();
+
         Dictionary dic = new DictionaryReader(arguments[1]).readDic();
 
         String out = arguments[2];

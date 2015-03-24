@@ -62,7 +62,7 @@ public class SpelingTest extends TestTools {
         String control = "regression_test_data/speling/expected-output.dix";
         Speling instance = new Speling (infile);
         Dictionary out = instance.read_speling();
-        DicOpts opt = DicOpts.STD;
+        DicOpts opt = DicOpts.STD.copy();
         opt.noHeaderAtTop = true;
         out.printXMLToFile(outfilex, opt);
 

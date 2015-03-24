@@ -130,7 +130,7 @@ public class S extends DixElement {
      * @return Undefined
      */
     public static Set<String> getKnownSymbols() {
-      return new HashSet(S.sElementList.keySet());
+      return S.sElementList.keySet();
     }
 
   @Override
