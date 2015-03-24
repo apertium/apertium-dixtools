@@ -67,6 +67,7 @@ import java.io.FileReader;
 import java.io.InputStreamReader;
 import org.xml.sax.InputSource;
 import dictools.utils.DicOpts;
+import java.util.Map;
 
 /**
  * 
@@ -113,7 +114,7 @@ public class XMLReader {
      * Map of DOM Nodes to line numbers. Might be empty but is never null,
      * so lineNumbers.get(node) will always succeed (but perhaps return null)
      */
-    protected LinkedHashMap<Node, Integer> lineNumbers = new LinkedHashMap<Node, Integer>();
+    protected Map<Node, Integer> lineNumbers;
 
     protected int getLineNo(Element e) {
       Integer res = lineNumbers.get(e);
@@ -172,6 +173,7 @@ public class XMLReader {
             }
             this.document = parser.getDocument();
             this.lineNumbers = parser.lineNumbers;
+						System.err.println("parser.lineNumbers="+parser.lineNumbers.size());
         } catch (Exception e) {
             System.err.println("Error (" + dicFile + "): " + e.getMessage());
 						e.printStackTrace();

@@ -17,6 +17,7 @@ import dics.elements.dtd.E;
 import dics.elements.dtd.Section;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import org.w3c.dom.Node;
 
 /**
@@ -60,8 +61,9 @@ public class KeepTrackOfLocationDOMParser extends DOMParser  {
       recordLocation(locator);
    }
 
-  public LinkedHashMap<Node,Integer> lineNumbers = new LinkedHashMap<Node,Integer> ();
-  private Integer lastLineNo = 1;
+  public final Map<Node,Integer> lineNumbers = new HashMap<Node,Integer>(10000);
+  private int lastLineNo = -2;
+  private Integer lastLineNoInteger;
 
   private void recordLocation(XMLLocator locator) {
     if (locator==null) return;
@@ -71,8 +73,9 @@ public class KeepTrackOfLocationDOMParser extends DOMParser  {
       //System.err.println("locator = "+locator.getCharacterOffset()+" ln:"+locator.getLineNumber());
       
       // cache and reuse instances so we don't litter memory exceedingly much
-      if (lastLineNo.intValue() != locator.getLineNumber()) lastLineNo = locator.getLineNumber();
-      lineNumbers.put(node, lastLineNo);
+			int lineNo = locator.getLineNumber();
+      if (lastLineNo != lineNo) lastLineNoInteger = lastLineNo = lineNo;
+      lineNumbers.put(node, lastLineNoInteger);
       
     } catch (Exception ex) {
       ex.printStackTrace();
