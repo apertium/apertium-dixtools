@@ -173,7 +173,6 @@ public class XMLReader {
             }
             this.document = parser.getDocument();
             this.lineNumbers = parser.lineNumbers;
-						System.err.println("parser.lineNumbers="+parser.lineNumbers.size());
         } catch (Exception e) {
             System.err.println("Error (" + dicFile + "): " + e.getMessage());
 						e.printStackTrace();

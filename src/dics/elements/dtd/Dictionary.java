@@ -223,9 +223,12 @@ public class Dictionary extends DixElement {
                   dos.append("\tParadigms: " + pardefs.elements.size() + "\n");
               }
               if (opt.originalArguments != null) {
-                  dos.append("\tLast processed by: apertium-dixtools");
-                  for (String s : opt.originalArguments) dos.append(' ').append(s);
-                  dos.append("\n");
+									StringBuilder sb = new StringBuilder();
+                  for (String s : opt.originalArguments) sb.append(' ').append(s);
+									String args = sb.toString();
+									if (!args.contains("--")) { // -- is not allowed in an XML comment, so skip it
+	                  dos.append("\tLast processed by: apertium-dixtools").append(args).append("\n");
+									}
               }
               dos.append(processingComments);
 

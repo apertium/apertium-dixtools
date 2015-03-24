@@ -35,13 +35,17 @@ public class DicGrep extends AbstractDictTool {
 
 
   public static void main(final String[] args) throws Exception {
+		long start = System.currentTimeMillis();
     //new AutoconcordBidix().prepare(null, null, null, null, "/home/j/esperanto/a/apertium-sv-da/apertium-sv-da.sv-da.dix", null);
     new DicGrep().executeTool(DicOpts.STD, new String[] {
 			"grep", 
 //				"--lm", "óxido",
 				"--par", "abismo__n",
-				"../apertium-eo-es/apertium-eo-es.es.dix" });
+				"../apertium-eo-es/apertium-eo-es.es.dix",
+				"/tmp/apertium-eo-es.es-filtreret.dix",
+		});
 
+		System.out.println("tid: "+(System.currentTimeMillis() - start));;
   }
 	private Pattern par;
 	private Pattern lemma;
@@ -63,7 +67,6 @@ public class DicGrep extends AbstractDictTool {
 
   @Override
   public void executeTool() throws IOException {
-//		System.err.println("arguments.length="+arguments.length);
 		if (arguments.length==1) {
 			failWrongNumberOfArguments(arguments);
 			return;
