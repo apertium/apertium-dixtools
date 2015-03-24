@@ -81,10 +81,10 @@ public class E extends DixElement implements Cloneable {
       this();
         this.restriction = r;
 
-        // JimRegan's dubious fix.
+        // JimRegan's dubious fix - moved to DicFix by Jacob Nordfalk 24 match 2015
         // Should really be in DicFix or somewhere else, and not in the DTD code.
       // don't replace("\'", "&apos;")  - we want entries like  <r>that's<b/>why , not <r>that&apos;s<b/>why
-        if (lm != null) lm = lm.replaceAll("\\&", "\\&amp;").replaceAll("\"", "\\&quot;");
+//      if (lm != null) lm = lm.replaceAll("\\&", "\\&amp;").replaceAll("\"", "\\&quot;");
 
         this.lemma = lm;
         this.author = a;

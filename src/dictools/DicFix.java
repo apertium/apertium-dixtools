@@ -132,6 +132,11 @@ public class DicFix extends AbstractDictTool {
 
 
     public static void replaceSpaceWithB(E ee) {
+        // JimRegan's dubious fix - moved from E class to here by Jacob Nordfalk 24 match 2015
+      // don't replace("\'", "&apos;")  - we want entries like  <r>that's<b/>why , not <r>that&apos;s<b/>why
+			if (ee.lemma != null) ee.lemma = ee.lemma.replaceAll("\\&", "\\&amp;").replaceAll("\"", "\\&quot;");
+
+
       for (DixElement irlelem : ee.children) {
         if (irlelem instanceof ContentElement) {
           for (DixElement child : ((ContentElement) irlelem).children) {
