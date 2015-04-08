@@ -5,7 +5,6 @@
 	Entries: 4
 	Sdefs: 13
 	Paradigms: 1
-	Last processed by: apertium-dixtools grep --par MF_GD test/sample.eo-en.dix regression_test_data/grep/actual_output.dix
 
 -->
 <dictionary>
