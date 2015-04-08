@@ -89,3 +89,5 @@ felo/hide
 ĉefe/primarily
 ĉiakoste/regardless
 ĉiusemajne/weekly
+AT&T/AT&T
+AT"T/AT"T

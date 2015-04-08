@@ -14,6 +14,10 @@ mv -f tmp_testprintXML_std.xml test/correct_output_DicFormat.xml
 mv -f dix/* regression_test_data/crossdict/expected_output/
 
 cd regression_test_data/
+mv dix2trie/actual_output.txt dix2trie/expected_output.txt
+cd dix2tiny
+mv -f actual_output/* expected_output/
+cd ..
 cd dic-reader/
 mv -f actual_output.txt expected_output.txt 
 cd ..

@@ -66,6 +66,18 @@
         	<r>Gerardo<s n="np"/><s n="ant"/></r>
         </w>
        </n>
+    <n v="AT&amp;T">
+     <w v="AT&T">
+     	<l>AT&T<s n="n"/></l>
+     	<r>AT&T<s n="n"/></r>
+     </w>
+    </n>
+    <n v="AT&quot;T">
+     <w v="AT"T">
+     	<l>AT"T<s n="n"/></l>
+     	<r>AT"T<s n="n"/></r>
+     </w>
+    </n>
         <n v="ABC News">
          <w v="ABC News">
          	<l>ABC News<s n="np"/><s n="al"/></l>

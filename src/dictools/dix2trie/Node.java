@@ -19,6 +19,7 @@
  */
 package dictools.dix2trie;
 
+import dics.elements.dtd.E;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.Iterator;
@@ -140,7 +141,7 @@ public class Node {
                 osw.write(sTabs + "<root v=\"\">\n");
             } else {
                 if (wordList.size() > 0) {
-                    osw.write(sTabs + "<n v=\"" + this.getValue() + "\">\n");
+                    osw.write(sTabs + "<n v=\"" + E.escapeXmlAttr(this.getValue()) + "\">\n");
                 }
             }
 

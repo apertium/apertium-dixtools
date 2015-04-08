@@ -1,5 +1,7 @@
-@size:34$
+@size:36$
 [abc news]ABC News:np.al.?ABC News:np.al.;$
+[at"t]AT"T:n.?AT"T:n.;$
+[at&t]AT&T:n.?AT&T:n.;$
 [catholic]Catholic:n.?katoliko:n.;$
 [christian]Christian:n.?kristano:n.;$
 [eleven]eleven:num.?dek unu:num.;$

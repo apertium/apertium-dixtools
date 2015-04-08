@@ -81,8 +81,8 @@ public class E extends DixElement implements Cloneable {
       this();
         this.restriction = r;
 
-        // JimRegan's dubious fix - moved to DicFix by Jacob Nordfalk 24 match 2015
-        // Should really be in DicFix or somewhere else, and not in the DTD code.
+        // JimRegan's dubious fix - moved from reading (parsing) side to writing side (XML printing)
+				// by Jacob Nordfalk 8 april 2015
       // don't replace("\'", "&apos;")  - we want entries like  <r>that's<b/>why , not <r>that&apos;s<b/>why
 //      if (lm != null) lm = lm.replaceAll("\\&", "\\&amp;").replaceAll("\"", "\\&quot;");
 
@@ -259,13 +259,18 @@ public class E extends DixElement implements Cloneable {
         }
     }
 
+  public static String escapeXmlAttr(String attrValue) {
+		return attrValue.replaceAll("\\&", "\\&amp;").replaceAll("\"", "\\&quot;");
+	}
+
   static void appendXmlAttr(StringBuilder sb, String attrName, String attrValue) {
         if (attrValue != null) {
             //sb.append(" "+attrName+"=\"" + attrValue + "\"");
-            sb.append(' ').append(attrName).append("=\"").append(attrValue).append('"');
+            sb.append(' ').append(attrName).append("=\"")
+								.append(escapeXmlAttr(attrValue))
+								.append('"');
         }
   }
-
     
     /**
      * 

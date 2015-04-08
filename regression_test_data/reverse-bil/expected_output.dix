@@ -2,7 +2,7 @@
 <!--
 	Dictionary:
 	Sections: 1
-	Entries: 42
+	Entries: 44
 	Sdefs: 13
 	Paradigms: 1
 	Last processed by: apertium-dixtools reverse-bil test/sample.eo-en.dix regression_test_data/reverse-bil/actual_output.dix
@@ -97,5 +97,8 @@
 <e r="RL" c="añadir también 'regardless of' como 'a pesar de'"><p><l>regardless<s n="adv"/></l><r>ĉiakoste<s n="adv"/></r></p></e>
 <e>       <p><l>weekly<s n="adv"/></l>                 <r>ĉiusemajne<s n="adv"/></r></p></e>
 
+<!-- Some checks for special characters, like & and " -->
+<e lm="AT&amp;T" c="AT&amp;T"><p><l>AT&amp;T<s n="n"/></l><r>AT&amp;T<s n="n"/></r></p></e>
+<e lm="AT&quot;T" c="AT&quot;T"><p><l>AT&quot;T<s n="n"/></l><r>AT&quot;T<s n="n"/></r></p></e>
   </section>
 </dictionary>

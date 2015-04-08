@@ -1,5 +1,7 @@
-@size:41$
+@size:43$
 [abc news]ABC News:np.al.?ABC News:np.al.;$
+[at"t]AT"T:n.?AT"T:n.;$
+[at&t]AT&T:n.?AT&T:n.;$
 [defii]defii:vblex.?face:vblex.;$
 [dek du]dek du:num.?twelve:num.;$
 [dek kvar]dek kvar:num.?fourteen:num.;$

@@ -39,3 +39,5 @@ felo {n} :: hide {n}
 ?efe {adv} :: primarily {adv} 
 ?iakoste {adv} :: regardless {adv} 
 ?iusemajne {adv} :: weekly {adv} 
+AT&T {n} :: AT&T {n} 
+AT"T {n} :: AT"T {n} 

@@ -2,7 +2,7 @@
 <!--
 	Dictionary:
 	Sections: 1
-	Entries: 42
+	Entries: 44
 	Sdefs: 13
 	Paradigms: 1
 	Last processed by: apertium-dixtools sort -mon test/sample.eo-en.dix regression_test_data/sort/actual_output/bil.dix
@@ -89,6 +89,10 @@
     <!-- ******************************
           group n_symbol
       ****************************** -->
+<e lm="AT&quot;T" c="AT&quot;T"><p><l>AT&quot;T<s n="n"/></l><r>AT&quot;T<s n="n"/></r></p></e>
+
+<!-- Some checks for special characters, like & and " -->
+<e lm="AT&amp;T" c="AT&amp;T"><p><l>AT&amp;T<s n="n"/></l><r>AT&amp;T<s n="n"/></r></p></e>
 <e>       <p><l>felo<s n="n"/></l>                     <r>hide<s n="n"/></r></p></e>
 <e r="LR"><p><l>supraĵo<s n="n"/></l>                  <r>face<s n="n"/></r></p></e>
 
@@ -114,6 +118,5 @@
 <!-- Already is <e><l>ĉiaokaze<adv></l><r>regardless<adv></r></e>-->
 <e r="LR" c="añadir también 'regardless of' como 'a pesar de'"><p><l>ĉiakoste<s n="adv"/></l><r>regardless<s n="adv"/></r></p></e>
 <e>       <p><l>ĉiusemajne<s n="adv"/></l>             <r>weekly<s n="adv"/></r></p></e>
-
   </section>
 </dictionary>
