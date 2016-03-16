@@ -172,7 +172,7 @@ public class DictionaryReader extends XMLReader {
         if (dic.pardefs==null) dic.pardefs=new Pardefs();
         if (dic.sdefs==null) dic.sdefs=new Sdefs();
         this.document = null;
-        this.lineNumbers = null;
+//         this.lineNumbers = null;  // this line appears to crash the program in JRE 1.8.0
         dic.fileName = ""+this.dicFile;
         return dic;
     }
