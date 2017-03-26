@@ -19,12 +19,7 @@
  */
 package dictools;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.E;
@@ -163,9 +158,9 @@ public class DicSort  extends AbstractDictTool {
         EElementComparator eElementComparator = new EElementComparator(sortAccordingToRightSide ? "R":"L");
         eElementComparator.ignoreCase = ignoreCaseWhenSorting;
 
-        Iterator<String> it=map.keySet().iterator();
-        while (it.hasNext()) {
-            String cat=it.next();
+        SortedSet<String> keys = new TreeSet<String>(map.keySet());
+
+        for(String cat : keys) {
             ArrayList<E> list=map.get(cat);
             msg.log(cat+": "+list.size());
             if (list.size()>1) {
