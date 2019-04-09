@@ -521,6 +521,7 @@ public class XMLReader {
         String v = getAttributeValue(e, "v");
         String vl = getAttributeValue(e, "vl");
         String vr = getAttributeValue(e, "vr");
+        String w = getAttributeValue(e, "w");
 
         StringBuilder characterData = new StringBuilder();
         dics.elements.dtd.DixElement previousElement = null;
@@ -534,6 +535,7 @@ public class XMLReader {
         eElement.v = (v);
         eElement.vl = (vl);
         eElement.vr = (vr);
+        eElement.w = w;
         eElement.ignore=ign;
         eElement.lineNo = getLineNo(e);
 

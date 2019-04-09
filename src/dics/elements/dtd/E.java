@@ -61,6 +61,8 @@ public class E extends DixElement implements Cloneable {
 
     public String v;
 
+    public String w;
+
     public boolean shared = false;
     
     public String patternApplied;
@@ -290,6 +292,7 @@ public class E extends DixElement implements Cloneable {
         appendXmlAttr(attributes, "vl", vl);
         appendXmlAttr(attributes, "vr", vr);
         appendXmlAttr(attributes, "v", v);
+        appendXmlAttr(attributes, "w", w);
         return attributes.toString();
     }
 
