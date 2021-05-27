@@ -56,7 +56,7 @@ public class AutoconcordBidix extends AbstractDictTool {
         "autoconcord -prefix n -replace ut,nt,un apertium-sv-da.sv-da.dix apertium-sv-da.sv-da.dix.new\n"+
         "autoconcord -prepare -prefix n -replace m,f,mf,ut,nt,NUMBER:sgpl{sg+pl},NUMBER:sp apertium-sv-da.sv-da.dix\n"+
         "\n" +
-        "There is much more info on http://wiki.apertium.org/wiki/Autoconcord\n" +
+        "There is much more info on https://wiki.apertium.org/wiki/Autoconcord\n" +
         ""
         ;
   }

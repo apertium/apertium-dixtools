@@ -359,7 +359,7 @@ public class ProcessDics extends AbstractDictTool {
         msg.err("   sort:               sorts (and groups by category) a dictionary");
         msg.err("   enhance:            allows to interactively add new words to the dictionary");
         msg.err("");
-        msg.err("More information: http://wiki.apertium.org/wiki/Apertium-dixtools");
+        msg.err("More information: https://wiki.apertium.org/wiki/Apertium-dixtools");
         msg.err("");
     }
 
@@ -612,7 +612,7 @@ public class ProcessDics extends AbstractDictTool {
             msg.err("   list-definitions: list of <sdef> elemenst");
             msg.err("   list-pairs:       list of pairs (for bilingual dictionaries)");
             msg.err("");
-            msg.err("   More information: http://wiki.apertium.org/wiki/Dictionary_reader");
+            msg.err("   More information: https://wiki.apertium.org/wiki/Dictionary_reader");
             msg.err("");
             System.exit(-1);
         } else {
@@ -640,7 +640,7 @@ public class ProcessDics extends AbstractDictTool {
             msg.err("   list-definitions: list of <sdef> elemenst");
             msg.err("   list-pairs:       list of pairs (for bilingual dictionaries)");
             msg.err("");
-            msg.err("   More information: http://wiki.apertium.org/wiki/Dictionary_reader");
+            msg.err("   More information: https://wiki.apertium.org/wiki/Dictionary_reader");
             msg.err("");
             System.exit(-1);
         } else {

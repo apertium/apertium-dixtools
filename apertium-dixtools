@@ -72,7 +72,7 @@ function cross-param() {
 #	show_help2();
    	echo "Usage: apertium-dixtools cross-param <monA> <-r|-n> <bilAB> <-r|-n> <bilBC> <monC> crossmodel";
    	echo "";
-   	echo "More information in http://wiki.apertium.org/wiki/Crossdics";
+   	echo "More information in https://wiki.apertium.org/wiki/Crossdics";
    	echo "";
    fi
 }
@@ -91,7 +91,7 @@ function cross() {
    else
    	echo "Usage: apertium-dixtools cross -f <ling-resources.xml> <sl-tl>";
    	echo "";
-   	echo "More information in http://wiki.apertium.org/wiki/Crossdics";
+   	echo "More information in https://wiki.apertium.org/wiki/Crossdics";
    	echo "";
    fi
 }
@@ -110,7 +110,7 @@ function format() {
    else
       echo "Usage: apertium-dixtools format <dic> <out>"
       echo "";
-      echo "More information: http://wiki.apertium.org/wiki/Format_dictionaries";
+      echo "More information: https://wiki.apertium.org/wiki/Format_dictionaries";
       echo "";
    fi
 }
@@ -127,7 +127,7 @@ function merge-morph() {
    else
       echo "Usage: apertium-dixtools merge-morph <monA1> <monA2> <merged>"
       echo "";
-      echo "More information: http://wiki.apertium.org/wiki/Merge_dictionaries";
+      echo "More information: https://wiki.apertium.org/wiki/Merge_dictionaries";
       echo "";
    fi
 }
@@ -161,7 +161,7 @@ function reverse-bil() {
    else
       echo "Usage: apertium-dixtools reverse-bil <dic> <out>";
       echo "";
-      echo "More information: http://wiki.apertium.org/wiki/Reverse_a_dictionary";
+      echo "More information: https://wiki.apertium.org/wiki/Reverse_a_dictionary";
       echo "";
    fi
 }
@@ -188,7 +188,7 @@ function sort() {
       echo "     -group n,n_symbol,adj,adv,vblex,vblex_symbol ";
       echo "     will sort all nouns, adj, adv and verbs together. Other entries will be sorted separately";
       echo "";
-      echo "More information: http://wiki.apertium.org/wiki/Sort_a_dictionary";
+      echo "More information: https://wiki.apertium.org/wiki/Sort_a_dictionary";
       echo "";
    fi
 }
@@ -220,7 +220,7 @@ function get-bil-omegawiki() {
    else
       echo "Usage: apertium-dixtools get-bil-omegawiki <source-lang> <target-lang> <dic-out>"
       echo "";
-      echo "More information: http://wiki.apertium.org/wiki/Getting_bilingual_dictionaries_from_OmegaWiki";
+      echo "More information: https://wiki.apertium.org/wiki/Getting_bilingual_dictionaries_from_OmegaWiki";
       echo "";
    fi
 }
@@ -248,7 +248,7 @@ function format-1line() {
       echo "Example: ' format-1line 10 0 old.dix new.dix '   will give indent a la"
       echo '<e>       <p><l>dum<s n="cnjadv"/></l><r>whereas<s n="cnjadv"/></r></p></e>'
       echo "";
-      echo "More information: http://wiki.apertium.org/wiki/Format_dictionaries";
+      echo "More information: https://wiki.apertium.org/wiki/Format_dictionaries";
       echo "";
    fi
 }
@@ -268,7 +268,7 @@ function list() {
       echo "   definitions: list of <sdef> elemenst";
       echo "   pairs:       list of pairs (for bilingual dictionaries)";
       echo "";
-      echo "More information: http://wiki.apertium.org/wiki/Dictionary_reader";
+      echo "More information: https://wiki.apertium.org/wiki/Dictionary_reader";
       echo "";
    fi
 }
@@ -287,7 +287,7 @@ function equiv-paradigms() {
    else
       echo "Usage: apertium-dixtools equiv-paradigms <dic> <out>"
       echo "";
-      echo "More information: http://wiki.apertium.org/wiki/Equivalent_paradigms";
+      echo "More information: https://wiki.apertium.org/wiki/Equivalent_paradigms";
       echo "";
    fi
 }
@@ -400,7 +400,7 @@ function prepare-dic() {
    else
       echo "Usage: apertium-dixtools prepare-dic <bil> <missing-entries>>"
       echo "";
-      #echo "More information: http://wiki.apertium.org/wiki/Equivalent_paradigms";
+      #echo "More information: https://wiki.apertium.org/wiki/Equivalent_paradigms";
       #echo "";
    fi
 }
@@ -440,7 +440,7 @@ function format() {
    	java ${java_options} $task $2 $3 $4 $5 $6 $7 $8 $9
    else
       echo "Usage: apertium-dixtools format <input-dic> <output-dic>"
-      echo "See Generic options and http://wiki.apertium.org/wiki/Format_dictionaries";
+      echo "See Generic options and https://wiki.apertium.org/wiki/Format_dictionaries";
       echo "";
       echo "Example ";
    fi
@@ -519,7 +519,7 @@ function show_help() {
    echo ""
    echo "  Use - as file name for piping (read/write .dix files on standard input/output)"
    echo ""
-   echo "More info: http://wiki.apertium.org/wiki/Apertium-dixtools"
+   echo "More info: https://wiki.apertium.org/wiki/Apertium-dixtools"
    echo ""
    exit 127
 }

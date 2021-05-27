@@ -28,7 +28,7 @@ import dictools.utils.DicOpts;
 t = template, v = variable
 t matches any single tag, v is like + in regexes (0 or more)
 
- * http://wiki.apertium.org/wiki/List_of_symbols#XML_tags
+ * https://wiki.apertium.org/wiki/List_of_symbols#XML_tags
  * @author Enrique Benimeli Bofarull
  * 
  */
