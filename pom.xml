@@ -6,16 +6,16 @@
 
 	<name>apertium-dixtools</name>
 	<version>1.0.0-SNAPSHOT</version>
-	<url>http://wiki.apertium.org/wiki/Apertium-dixtools</url>
+	<url>https://wiki.apertium.org/wiki/Apertium-dixtools</url>
 
 	<organization>
 		<name>The Apertium Project</name>
-		<url>http://www.apertium.org</url>
+		<url>http://apertium.org</url>
 	</organization>
 
 	<issueManagement>
 		<system>Apertium Bug Tracker</system>
-		<url>http://wiki.apertium.org/wiki/Bugzilla</url>
+		<url>https://wiki.apertium.org/wiki/Bugzilla</url>
 	</issueManagement>
 
 	<developers>
