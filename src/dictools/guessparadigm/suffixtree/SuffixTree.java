@@ -33,7 +33,7 @@ public class SuffixTree implements Serializable{
     static public Character GetCharObject(char character){
         Character c=chars.get(character);
         if(c==null){
-            c=new Character(character);
+            c= character;
             chars.put(c,c);
             return c;
         }

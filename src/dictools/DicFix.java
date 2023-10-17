@@ -155,6 +155,12 @@ public class DicFix extends AbstractDictTool {
 
         StringBuilder str = new StringBuilder(50);
 
+        if (e.alt != null) {
+            str.append("<alt alt=\"");
+            str.append(e.alt);
+            str.append("\" />");
+        }
+
         if (hackyRemoval) {
           str.append(e.lemma);
           if (e.comment != null) continue;
