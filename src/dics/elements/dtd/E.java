@@ -616,6 +616,7 @@ public class E extends DixElement implements Cloneable {
     public String toString() {
         StringBuilder str = new StringBuilder(50);
         str.append("<e");
+        appendXmlAttr(str, "alt", alt);
         appendXmlAttr(str, "i", ignore);
         appendXmlAttr(str, "r", restriction);
 

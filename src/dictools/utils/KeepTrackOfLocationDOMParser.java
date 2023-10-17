@@ -5,13 +5,12 @@
 
 package dictools.utils;
 
-
-import com.sun.org.apache.xerces.internal.parsers.DOMParser;
-import com.sun.org.apache.xerces.internal.xni.Augmentations;
-import com.sun.org.apache.xerces.internal.xni.NamespaceContext;
-import com.sun.org.apache.xerces.internal.xni.QName;
-import com.sun.org.apache.xerces.internal.xni.XMLAttributes;
-import com.sun.org.apache.xerces.internal.xni.XMLLocator;
+import org.apache.xerces.parsers.DOMParser;
+import org.apache.xerces.xni.Augmentations;
+import org.apache.xerces.xni.NamespaceContext;
+import org.apache.xerces.xni.QName;
+import org.apache.xerces.xni.XMLAttributes;
+import org.apache.xerces.xni.XMLLocator;
 import dics.elements.dtd.Dictionary;
 import dics.elements.dtd.E;
 import dics.elements.dtd.Section;

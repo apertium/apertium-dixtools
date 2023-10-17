@@ -289,6 +289,7 @@ public class DictionaryReader extends XMLReader {
         String n = getAttributeValue(e, "n");
         Pardef pardefElement = new Pardef(n);
         pardefElement.comment = getAttributeValue(e, "c");
+        pardefElement.alt = getAttributeValue(e, "alt");
         pardefElement.lineNo = getLineNo(e);
 
 

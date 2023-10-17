@@ -39,6 +39,8 @@ public class Pardef extends DixElement {
 
     public String comment;
 
+    public String alt;
+
     /** Line number from source file */
     public int lineNo;
 
